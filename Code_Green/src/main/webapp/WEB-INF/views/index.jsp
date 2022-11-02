@@ -9,6 +9,8 @@
 </head>
 <body>
 정민이가 적음 하이!!! 하이!!!!!! 하이!!!!하이!.......
+
+seowoo 잘되는지 확인이용~~~
 	<header>
 		<!-- Login, Join 링크 표시 영역(inc/top.jsp 페이지 삽입) -->
 <%-- 		<jsp:include page="inc/top.jsp"></jsp:include> --%>
