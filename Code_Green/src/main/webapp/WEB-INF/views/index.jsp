@@ -8,6 +8,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/top.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+정민이가 적음 하이!!!
 	<header>
 		<!-- Login, Join 링크 표시 영역(inc/top.jsp 페이지 삽입) -->
 <%-- 		<jsp:include page="inc/top.jsp"></jsp:include> --%>
