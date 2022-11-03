@@ -66,7 +66,7 @@
             }, function (rsp) { // callback
                 if (rsp.success) {
                     alert("결제가 완료되었습니다.");
-                    location.href="payment_success_card.jsp";
+                    location.href="payment_success_card";
                 } else {
                     alert("결제가 완료되지 않았습니다.");
                     history.back();
@@ -225,7 +225,7 @@
                                                             <input class="form-control" type="text" placeholder="입금할 계좌번호를 입력하세요.">
                                                         </div>
 	                                                     <div class="form-group submit">
-	                                                           <button class="ps-btn ps-btn--fullwidth" onclick="location.href='payment_success_account.jsp'">주문하기</button>
+	                                                           <button class="ps-btn ps-btn--fullwidth" onclick="location.href='payment_success_account'">주문하기</button>
 	                                                     </div>
 	                                                </div>
                                             </div>
