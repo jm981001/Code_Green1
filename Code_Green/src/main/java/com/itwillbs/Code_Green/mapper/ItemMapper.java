@@ -27,9 +27,18 @@ public interface ItemMapper {
 			@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType") String searchType, 
 			@Param("item_idx")int item_idx);
 
+	//리뷰 갯수 조회
 	int selectReviewListCount(String searchType);
+
 	
+	//상품 갯수 조회
+	int selectItemListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
+	//상품 목록
+	List<ItemVO> selectItemList(@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+
 	
 
 }

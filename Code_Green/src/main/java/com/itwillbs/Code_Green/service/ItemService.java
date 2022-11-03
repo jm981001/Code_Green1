@@ -46,5 +46,15 @@ public class ItemService {
 	public List<ItemVO> select_fish() {
 		return mapper.select_fish();
 	}
+
+	//상품 리스트
+	public List<ItemVO> itemList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectItemList(startRow, listLimit, searchType, keyword);
+	}
+
+	//상품 갯수
+	public int getItemListCount(String searchType, String keyword) {
+		return mapper.selectItemListCount(searchType, keyword);
+	}
 	
 }
