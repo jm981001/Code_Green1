@@ -99,7 +99,7 @@
                     <p>내 브랜드 팔로워 리스트</p>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
+                    <form class="ps-form--search-bar" action="index" method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
@@ -109,7 +109,7 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="index" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Search..." />
@@ -155,7 +155,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>1</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-10-27</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -171,7 +171,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>5</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>Jul 21, 2020</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -187,7 +187,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>10</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-01-09</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -203,7 +203,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>9</td>
 <!--                                     <td><span class="ps-badge gray">block</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-10-11</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -219,7 +219,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>3</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-09-01</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -235,7 +235,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>2</td>
 <!--                                     <td><span class="ps-badge gray">block</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-05-08</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -251,7 +251,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>8</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2022-07-15</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -267,7 +267,8 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>10</td>
 <!--                                     <td><span class="ps-badge gray">block</span> -->
-                                    </td>
+<!--                                     </td> -->
+                                    
                                     <td>2022-10-09</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -283,7 +284,7 @@
 <!--                                     <td>$211.00</td> -->
                                     <td>10</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
-                                    </td>
+<!--                                     </td> -->
                                     <td>2021-09-14</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

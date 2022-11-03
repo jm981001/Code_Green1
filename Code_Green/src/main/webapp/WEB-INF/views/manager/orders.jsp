@@ -127,7 +127,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="ps-section__actions"><a class="ps-btn success" href="order-detail.jsp"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="products.jsp"><i class="icon icon-download2 mr-2"></i>상품목록</a></div>
+                    <div class="ps-section__actions"><a class="ps-btn success" href="order_detail"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="products"><i class="icon icon-download2 mr-2"></i>상품목록</a></div>
                 </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">
@@ -145,9 +145,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a href="order-detail.jsp">#A580</a></td>
+                                    <td><a href="order-detail">#A580</a></td>
                                     <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.jsp"><strong>Unero Black Military</strong></a></td>
+                                    <td><a href="order-detail"><strong>Unero Black Military</strong></a></td>
                                     <td><span class="ps-badge success">결제</span>
                                     </td>
                                     <td><span class="ps-fullfillment success">배송</span>
@@ -155,14 +155,14 @@
                                     <td><strong>$56.00</strong></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage.jsp">수정</a><a class="dropdown-item" href="#">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="order-detail.jsp">#B260</a></td>
+                                    <td><a href="order-detail">#B260</a></td>
                                     <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.jsp"><strong>Marsh Speaker</strong></a></td>
+                                    <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td>
                                     <td><span class="ps-badge gray">미결제</span>
                                     </td>
                                     <td><span class="ps-fullfillment success">배송 접수</span>
@@ -170,14 +170,14 @@
                                     <td><strong>$56.00</strong></td>
                                     <td>
                                                      <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage.jsp">수정</a><a class="dropdown-item" href="#">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="order-detail.jsp">#A583</a></td>
+                                    <td><a href="order-detail">#A583</a></td>
                                     <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.jsp"><strong>Lined Blend T-Shirt</strong></a></td>
+                                    <td><a href="order-detail"><strong>Lined Blend T-Shirt</strong></a></td>
                                     <td><span class="ps-badge success">결제</span>
                                     </td>
                                     <td><span class="ps-fullfillment warning">주문 접수</span>
@@ -190,9 +190,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="order-detail.jsp">#A583</a></td>
+                                    <td><a href="order-detail">#A583</a></td>
                                     <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.jsp"><strong>DJI MAcvic Quadcopter</strong></a></td>
+                                    <td><a href="order-detail"><strong>DJI MAcvic Quadcopter</strong></a></td>
                                     <td><span class="ps-badge gray">미결제</span>
                                     </td>
                                     <td><span class="ps-fullfillment success">배송 접수</span>
@@ -207,7 +207,7 @@
                                 <tr>
                                     <td>#A112</td>
                                     <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.jsp"><strong>Black T-Shirt</strong></a></td>
+                                    <td><a href="order-detail"><strong>Black T-Shirt</strong></a></td>
                                     <td><span class="ps-badge success">결제</span>
                                     </td>
                                     <td><span class="ps-fullfillment danger">주문 취소</span>

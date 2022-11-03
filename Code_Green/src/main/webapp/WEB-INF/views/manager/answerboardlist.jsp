@@ -103,7 +103,7 @@
                         <button><i class="icon-magnifier"></i></button>
                     </form>
                 </div>
-                <div class="header__right"><a class="header__site-link" href="#"><span>View your store</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -126,7 +126,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage.jsp""><i class="icon icon-plus mr-2"></i>답변관리</a></div>
+                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
                 </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">
@@ -145,7 +145,7 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><a href="review_board_manage.jsp"><strong>냉동보관하면 되나요?</strong></td>
+                                    <td><a href="review_board_manage"><strong>냉동보관하면 되나요?</strong></a></td>
                                     <td>홍길동</td>
                                     <td>상품문의</td>
                                     <td><span class="ps-badge success">답변대기</span>

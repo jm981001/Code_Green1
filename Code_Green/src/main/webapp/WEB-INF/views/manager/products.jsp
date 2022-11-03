@@ -108,7 +108,7 @@
             </header>
             <section class="ps-items-listing">
    
-                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register.jsp"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_manage.jsp"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
+                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_manage"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
@@ -117,13 +117,14 @@
                                 <div class="form-group">
                                     <select class="ps-select">
                                         <option value="1">상품 카테고리</option>
+                                        <option value="1">특가상품</option>
                                         <option value="2">과일/채소</option>
                                         <option value="3">유제품/음료</option>
                                         <option value="4">냉동식품</option>
                                          <option value="5">식물성 단백질</option>
                                         <option value="6">해산물</option>
                                         <option value="7">간식류</option>
-                                        <option value="8">기타</option>
+<!--                                         <option value="8">기타</option> -->
 <!--                                         <option value=7">콩고기&식물성단백질</option> -->
 <!--                                         <option value="8">생선</option> -->
 <!--                                         <option value="9">과자류</option> -->
@@ -152,7 +153,7 @@
                         </form>
                     </div>
                     <div class="ps-section__search">
-                        <form class="ps-form--search-simple" action="index.jsp" method="get">
+                        <form class="ps-form--search-simple" action="index" method="get">
                             <input class="form-control" type="text" placeholder="Search product" />
                             <button><i class="icon icon-magnifier"></i></button>
                         </form>
