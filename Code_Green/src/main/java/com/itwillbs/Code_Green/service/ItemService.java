@@ -37,5 +37,14 @@ public class ItemService {
 		return mapper.selectReviewListCount(searchType);
 	}
 	
+	//음료 카테고리
+	public List<ItemVO> select_dairy_drink() {
+		return mapper.select_dairy_drink();
+	}
+
+	//생선 카테고리
+	public List<ItemVO> select_fish() {
+		return mapper.select_fish();
+	}
 	
 }

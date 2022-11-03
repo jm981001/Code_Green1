@@ -29,9 +29,9 @@
 				<if test="searchType.equals('subject')">
 					ORDER BY board_date DESC
 				</if>
-				
 	</select>
 	
+	<!-- 상품 후기 갯수-->
 	<select id="selectReviewListCount" resultType="integer">
 		SELECT 
 				COUNT(*) 
@@ -40,5 +40,19 @@
 					board_item_idx = #{item_idx}
 	</select>
 	
+	
+		<!-- 유제품/음료 카테고리 -->
+	<select id="select_dairy_drink" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		FROM item 
+		WHERE item_category = "유제품/음료";
+	</select>
+	
+	<!-- 해산물 카테고리 -->
+	<select id="select_fish" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		FROM item 
+		WHERE item_category = "해산물";
+	</select>
 	
 </mapper>

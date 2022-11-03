@@ -1,21 +1,48 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.itwillbs.Code_Green.service.ItemService;
+import com.itwillbs.Code_Green.vo.ItemVO;
 
 @Controller
 public class ItemCategoryController {
 	
+	@Autowired
+	private ItemService service;
+	
+	List<ItemVO> itemList;
+	
 	// 유제품 / 음료
 	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)
-	public String category_dairy_drink() {
+	public String category_dairy_drink(Model model) {
+		
+		itemList = service.select_dairy_drink();
+		
+		model.addAttribute("itemList", itemList);
+		
+		System.out.println(itemList);
+		
 		return "item/category_dairy_drink";
 	}
 	
 	// 해산물
 	@RequestMapping(value = "category_fish", method = RequestMethod.GET)
-	public String category_fish() {
+	public String category_fish(Model model) {
+		
+		itemList = service.select_fish();
+		
+		model.addAttribute("itemList", itemList);
+		
+		System.out.println(itemList);
+		
 		return "item/category_fish";
 	}
 	
