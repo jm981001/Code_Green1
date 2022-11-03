@@ -41,20 +41,6 @@
 	</select>
 	
 	
-		<!-- 유제품/음료 카테고리 -->
-	<select id="select_dairy_drink" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "유제품/음료";
-	</select>
-	
-	<!-- 해산물 카테고리 -->
-	<select id="select_fish" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "해산물";
-	</select>
-	
 	<!-- 전체 상품 갯수 조회(검색 기능 추가 아직) -->
 	<select id="selectItemListCount" resultType="integer">
 		SELECT 

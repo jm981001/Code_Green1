@@ -36,16 +36,7 @@ public class ItemService {
 	public int getReviewListCount(String searchType) {
 		return mapper.selectReviewListCount(searchType);
 	}
-	
-	//음료 카테고리
-	public List<ItemVO> select_dairy_drink() {
-		return mapper.select_dairy_drink();
-	}
 
-	//생선 카테고리
-	public List<ItemVO> select_fish() {
-		return mapper.select_fish();
-	}
 
 	//상품 리스트
 	public List<ItemVO> itemList(int startRow, int listLimit, String searchType, String keyword) {

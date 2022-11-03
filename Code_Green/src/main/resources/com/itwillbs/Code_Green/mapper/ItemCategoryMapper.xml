@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.ItemCategoryMapper">
+
+	<!-- 유제품/음료 카테고리 -->
+	<select id="select_dairy_drink" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		FROM item 
+		WHERE item_category = "유제품/음료";
+	</select>
+	
+	<!-- 해산물 카테고리 -->
+	<select id="select_fish" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		FROM item 
+		WHERE item_category = "해산물";
+	</select>
+	
+</mapper>

@@ -58,11 +58,11 @@ public class ItemController {
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("itemList", itemList);
 		return "item/item_list";
 	}
+	
 	
 	//------------ 신상품리스트 -------------------------------------------
 	

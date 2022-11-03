@@ -8,13 +8,6 @@ import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 
 public interface ItemMapper {
-
-	//카테고리 음료
-	List<ItemVO> select_dairy_drink();
-
-	//카테고리 해산물
-	List<ItemVO> select_fish();
-
 	
 	//상품 조회수 증가
 	void updateReadcount(int item_idx);
