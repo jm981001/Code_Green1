@@ -1,5 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+	String clientId = "ilgdXbcRH89unvY3t9Dz";//애플리케이션 클라이언트 아이디값";
+	String redirectURI = URLEncoder.encode("http://localhost:8081/Code_Green/main", "UTF-8");
+	SecureRandom random = new SecureRandom();
+	String state = new BigInteger(130, random).toString();
+	String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+	apiURL += "&client_id=" + clientId;
+	apiURL += "&redirect_uri=" + redirectURI;
+	apiURL += "&state=" + state;
+	session.setAttribute("state", state);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +39,7 @@
 	<link rel="stylesheet" href="/Code_Green/resources/plugins/nouislider/nouislider.min.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-	
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 	<style type="text/css">
 	h5{
 		text-align: center;
@@ -71,7 +84,9 @@
                             <h5><a href="">아이디 / 비밀번호 찾기</a> </h5>
                             <div class="ps-form__footer">
                                 <div class="form-group submtit">
-                                    <button class="ps-btn ps-btn--fullwidth" style="background-color: #19ce60">네이버 로그인</button>
+<!--                                 네이버 로그인 버튼(이미지) -->
+                                <div id="naver_id_login" style="text-align:center"><a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+                                 
                                     <button class="ps-btn ps-btn--fullwidth" style="background-color: #fae100">카카오 로그인</button>
                                 </div>
                             </div>
