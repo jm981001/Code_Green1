@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.ItemMapper">
+
+
+	<!-- 상품 조회수 증가 -->
+	<update id="updateReadcount">
+		UPDATE item
+			SET
+				item_readcount = item_readcount + 1
+			WHERE
+				item_idx = #{item_idx}
+	</update>
+
+	<!-- 상품 상세 정보 조회 -->
+	<select id="selectItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+				FROM item
+				WHERE
+					item_idx = #{item_idx}
+	</select>
+	
+	<!-- 상품 후기 -->
+	<select id="selectReview" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT * 
+				FROM board
+				WHERE
+					board_item_idx = #{item_idx}
+				<if test="searchType.equals('subject')">
+					ORDER BY board_date DESC
+				</if>
+				
+	</select>
+	
+	<select id="selectReviewListCount" resultType="integer">
+		SELECT 
+				COUNT(*) 
+				FROM board
+				WHERE
+					board_item_idx = #{item_idx}
+	</select>
+	
+	
+</mapper>

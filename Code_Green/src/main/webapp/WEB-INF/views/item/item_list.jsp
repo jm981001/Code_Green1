@@ -80,7 +80,7 @@
                 <div class="ps-section__content">
                     <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2" data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/electronic/3.jpg" alt="" /></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=120"><img src="/Code_Green/resources/img/products/electronic/3.jpg" alt="" /></a>
                                 <div class="ps-product__badge">-5%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/electronic/11.jpg" alt="" /></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=120"><img src="/Code_Green/resources/img/products/electronic/11.jpg" alt="" /></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/electronic/13.jpg" alt="" /></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=120"><img src="/Code_Green/resources/img/products/electronic/13.jpg" alt="" /></a>
                                 <div class="ps-product__badge">-24%</div>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/electronic/4.jpg" alt="" /></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=120"><img src="/Code_Green/resources/img/products/electronic/4.jpg" alt="" /></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>

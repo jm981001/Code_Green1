@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,9 +111,9 @@
                                 </figure>
                             </div>
                             <div class="ps-product__info">
-                                <h1  class="ps-product__price">유기농 가지</h1>
-                                <p>삶으면 할머니의, 튀기면 나의 밥도둑 (한줄소개)</p>
-                                <h4 class="ps-product__price">40000원</h4>
+                                <h1  class="ps-product__price">${item.item_name }</h1>
+                                <p>${item.item_info }</p>
+                                <h4 class="ps-product__price">${item.item_price }원</h4>
                                 <div class="ps-product__meta">
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                     <div class="ps-product__rating" >
@@ -129,10 +131,10 @@
                                 <div class="ps-product__desc">
                                     <ul class="ps-list--dot">
                                         <li>판매자 </li>
-                                        <li>포장타입 </li>
-                                        <li>판매단위 </li>
-                                        <li>원산지 </li>
-                                        <li>포장타입 </li>
+                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
+                                        <li>판매단위 &nbsp; ${item.item_packing }</li>
+                                        <li>원산지   &nbsp;&nbsp; ${item.item_packing }</li>
+                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
                                     </ul>
                                 </div>
 <!--                                 <div class="ps-product__variations"> -->
@@ -263,109 +265,53 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
-                                            <form class="ps-form--review" method="get">
+                                            <form class="ps-form--review" method="get" >
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
-												<select>    
-													<option>최근등록순</option>    
-													<option>좋아요 많은순</option>    
-												</select>
+													<select name="searchType">    
+														<option value="new">최근등록순</option>    
+														<option value="best">좋아요 많은순</option>    
+														<option value="worst">별점 낮은 순</option>    
+														<option value="good">별점 높은 순</option>    
+													</select>
 												<table cellspacing="0" border="1" class="recruit" >
 												        <colgroup>  
-												            <col width="10%">  
-												            <col width="60%">  
+<%-- 												            <col width="10%">   --%>
+												            <col width="70%">  
 												            <col width="10%">  
 												            <col width="10%">  
 												            <col width="10%">  
 												        </colgroup>  
 												        <thead align="center">  
 												            <tr class="" >  
-												                <th scope="col">번호</th>  
+<!-- 												                <th scope="col">번호</th>   -->
 												                <th scope="col">제목</th>  
 												                <th scope="col">작성자</th>  
 												                <th scope="col">작성일</th>  
 												                <th scope="col">도움</th>  
 												            </tr>  
 												        </thead>  
-												        <tbody>  
-												            <tr class="item">  
-												                <td>1</td>  
-												                <td>오늘 처음 시켜봤어요!!!</td>  
-												                <td>정민이</td>  
-												                <td>2022.10.24</td>  
-												                <td>12</td>  
-												            </tr>  
-												            <tr class="hide">  
-												                <td colspan="5"> 
-												                   (회원글 내용)<br> 
-												                   가격도 저렴하고 중량에 비해 칼로리도 적당한 편이라 너무 좋았어요!<br>
-																	하루 샐러드 하나는 꼭 먹고 있는데 여러가지 맛 시켰는데<br>
-																	스윗밸런스 닭가슴살 고구마 샐러드 너무 맛있네요!<br>
-																	닭가슴살은 엄청 촉촉하고 약간 짭쪼름하게 간이 되어 있어요.<br>
-																	저는 빨간 토마토 보다 다른색 토마토를 더 좋아하는데 기분탓일지 모르겠지만 비린맛이 덜 하다고 해야할까? 그래서 더 좋았어용<br>
-																	메추리알이 물릴 때쯤 새로운 맛으로 입안에 씹혀지는게 너무 맛있고 매력적 이였는데요.<br>
-																	병아리콩이랑 샐러드가 적절히 섞여 있어서 너무 맛있었어요!<br>
-																	이거 하나 먹었는데 포만감이 아주 상당해요 든든합니다. 좀 부족하신 분들은 채소를 따로 추가해서 드셔도 될 것 같아료.<br>
-																	시저 드레싱 소스가 은근 양이 많고 맛도 있어서 아주 굿이거든용! 스윗밸런스 기억해뒀다가 자주 시켜먹어야 겠어요!<br>
-																	사진<br>
-												                    
-																	<div align="right">
-																	    <button>좋아용</button>
-																	 </div>
-												                </td>  
-												            </tr>  
-												            <tr class="item">  
-												                <td>2</td>  
-												                <td>한끼 식사로 훌륭합니다</td>  
-												                <td>하동이</td>  
-												                <td>2022.10.24</td>  
-												                <td>12</td>  
-												            </tr>  
-												            <tr class="hide">  
-												                <td colspan="5">  
-												                   (회원글 내용)<br>
-												                    가격도 저렴하고 중량에 비해 칼로리도 적당한 편이라 너무 좋았어요!<br>
-																	하루 샐러드 하나는 꼭 먹고 있는데 여러가지 맛 시켰는데<br>
-																	스윗밸런스 닭가슴살 고구마 샐러드 너무 맛있네요!<br>
-																	닭가슴살은 엄청 촉촉하고 약간 짭쪼름하게 간이 되어 있어요.<br>
-																	저는 빨간 토마토 보다 다른색 토마토를 더 좋아하는데 기분탓일지 모르겠지만 비린맛이 덜 하다고 해야할까? 그래서 더 좋았어용<br>
-																	메추리알이 물릴 때쯤 새로운 맛으로 입안에 씹혀지는게 너무 맛있고 매력적 이였는데요.<br>
-																	병아리콩이랑 샐러드가 적절히 섞여 있어서 너무 맛있었어요!<br>
-																	이거 하나 먹었는데 포만감이 아주 상당해요 든든합니다. 좀 부족하신 분들은 채소를 따로 추가해서 드셔도 될 것 같아료.<br>
-																	시저 드레싱 소스가 은근 양이 많고 맛도 있어서 아주 굿이거든용! 스윗밸런스 기억해뒀다가 자주 시켜먹어야 겠어요!<br>
-																	사진<br>
-												                    <div align="right">
-																	    <button>좋아용</button>
-																	 </div>
-												                </td>  
-												            </tr>  
-												            <tr class="item">  
-												                <td>3</td>  
-												                <td>든든한 식단!!</td>  
-												                <td>도토리</td>  
-												                <td>2022.10.24</td>  
-												                <td>12</td>  
-												            </tr>  
-												            <tr class="hide">  
-												                <td colspan="5">  
-												                   (회원글 내용)<br>
-												                    가격도 저렴하고 중량에 비해 칼로리도 적당한 편이라 너무 좋았어요!<br>
-																	하루 샐러드 하나는 꼭 먹고 있는데 여러가지 맛 시켰는데<br>
-																	스윗밸런스 닭가슴살 고구마 샐러드 너무 맛있네요!<br>
-																	닭가슴살은 엄청 촉촉하고 약간 짭쪼름하게 간이 되어 있어요.<br>
-																	저는 빨간 토마토 보다 다른색 토마토를 더 좋아하는데 기분탓일지 모르겠지만 비린맛이 덜 하다고 해야할까? 그래서 더 좋았어용<br>
-																	메추리알이 물릴 때쯤 새로운 맛으로 입안에 씹혀지는게 너무 맛있고 매력적 이였는데요.<br>
-																	병아리콩이랑 샐러드가 적절히 섞여 있어서 너무 맛있었어요!<br>
-																	이거 하나 먹었는데 포만감이 아주 상당해요 든든합니다. 좀 부족하신 분들은 채소를 따로 추가해서 드셔도 될 것 같아료.<br>
-																	시저 드레싱 소스가 은근 양이 많고 맛도 있어서 아주 굿이거든용! 스윗밸런스 기억해뒀다가 자주 시켜먹어야 겠어요!<br>
-																	사진<br>
-												                    <div align="right">
-																	    <button>좋아용</button>
-																	 </div> 
-												                </td>  
-												            </tr>  
-												        </tbody>  
+												        <c:forEach var="board" items="${itemList }">
+													        <tbody>  
+													            <tr class="item">  
+	<%-- 												                <td>${board.board_idx }</td>   --%>
+													                <td>${board.board_subject }</td>  
+													                <td>${board.board_id }</td>  
+													                <td>${board.board_date }</td>  
+													                <td>12</td>  
+													            </tr>  
+													            <tr class="hide">  
+													                <td colspan="5"> 
+													                   ${board.board_content }
+													                    
+																		<div align="right">
+																		    <button>좋아용</button>
+																		 </div>
+													                </td>  
+													            </tr>  
+													        </tbody>  
+												        </c:forEach>
 												    </table>  
 												    <script type="text/javascript">  
 												        $(function(){  
@@ -394,6 +340,43 @@
 				                                        </ul>
 				                                    </div>
 				                                    <!-- 페이징 버튼들 끝 -->
+				                                    
+				                                    
+				                                    
+<!-- 				                                    <section id="pageList"> -->
+<%-- 															<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
+<%-- 															<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"<%} %>> --%>
+<!-- 															시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+<!-- 															&nbsp; -->
+<%-- 															<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
+<!-- 																현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+<!-- 																아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+<%-- 																<c:choose> --%>
+<%-- 																	<c:when test="${i eq pageInfo.pageNum }">${i }</c:when> --%>
+<%-- 																	<c:otherwise><a href="BoardList.bo">${i }</a></c:otherwise> --%>
+<%-- 																</c:choose> --%>
+<!-- 																&nbsp; -->
+<%-- 															</c:forEach> --%>
+<!-- 														현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+<%-- 														<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum + 1}'"<%} %>> --%>
+<!-- 													</section> -->
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
+				                                    
 				                                    
 													<!--리뷰작성 버튼 -->
 												   <div align="right">
