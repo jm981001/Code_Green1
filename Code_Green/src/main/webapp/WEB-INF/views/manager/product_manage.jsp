@@ -142,7 +142,7 @@
                             <h4>상품수정 & 삭제</h4>
                         </div>
                         <div class="card" style="width: 18rem;">
-						  <img src="img/삼색이.jpg"class="card-img-top" alt="삼색이.jpg">
+						  <img src="/Code_Green/resources/img/삼색이.jpg" class="card-img-top"alt="">
 						  <div class="card-body">
 						    <h5 class="card-title">상품명</h5>
 						    <p class="card-text">상품소개 어쩌고 저쩌고</p>

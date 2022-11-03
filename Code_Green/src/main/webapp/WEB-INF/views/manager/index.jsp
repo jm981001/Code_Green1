@@ -298,13 +298,13 @@ var myChart = new Chart(chartArea, {
     // ②차트의 데이터(Object)
     data: {
         // ③x축에 들어갈 이름들(Array)
-        labels: ['잇츠베러', '매일유업', '왕만두', '먹고', '싶다', 'Orange'],
+        labels: ['베지가든', '매일유업', '풀무원', '이츠리얼', '삼삼물산', '그릭데이'],
         // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
         datasets: [{
             // ⑤dataset의 이름(String)
             label: '# of Votes',
             // ⑥dataset값(Array)
-            data: [364, 19, 3, 5, 2, 3],
+            data: [364, 150, 30, 50, 22, 80],
             // ⑦dataset의 배경색(rgba값을 String으로 표현)
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             // ⑧dataset의 선 색(rgba값을 String으로 표현)

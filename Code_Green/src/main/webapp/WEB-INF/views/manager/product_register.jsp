@@ -66,7 +66,7 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>Earning</small>
+                    <div class="ps-block--earning-count"><small>수익</small>
                         <h3>$12,560.55</h3>
                     </div>
                 </div>
@@ -169,18 +169,13 @@
                                      <div class="form-group">
                                     <select class="ps-select">
                                         <option value="1">상품 카테고리</option>
-                                        <option value="2">과일</option>
-                                        <option value="2">과일</option>
-                                        <option value="3">채소</option>
-                                         <option value="3">채소</option>
-                                        <option value="4">우유&치즈</option>
-                                        <option value="5">신선식품</option>
-                                        <option value="6">냉동식품</option>
-                                        <option value=7">콩고기&식물성단백질</option>
-                                        <option value="8">생선</option>
-                                        <option value="9">과자류</option>
-                                        <option value="10">주방&청소</option>
-                                        <option value="11">바디&헤어</option>
+                                        <option value="1">특가상품</option>
+                                        <option value="2">과일/채소</option>
+                                        <option value="3">유제품/음료</option>
+                                        <option value="4">냉동식품</option>
+                                         <option value="5">식물성 단백질</option>
+                                        <option value="6">해산물</option>
+                                        <option value="7">간식류</option>
                                     </select>
                                 </div>
                                     </div>

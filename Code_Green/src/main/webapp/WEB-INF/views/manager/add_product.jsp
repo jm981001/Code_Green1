@@ -101,7 +101,7 @@
                     <p>상품 추가</p>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
+                    <form class="ps-form--search-bar" action="index" method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
