@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ItemController {
 
-	//------------ 상품리스트 -------------------------------------------
+	//------------ 신상품리스트 -------------------------------------------
 	@RequestMapping(value = "item_list", method = RequestMethod.GET)
 	public String item_list() {
 		return "item/item_list";
+	}
+	
+	//------------ 베스트리스트 -------------------------------------------
+	@RequestMapping(value = "item_best", method = RequestMethod.GET)
+	public String item_best() {
+		return "item/item_best";
 	}
 	
 	//------------ 상품 상세 페이지 -------------------------------------------
