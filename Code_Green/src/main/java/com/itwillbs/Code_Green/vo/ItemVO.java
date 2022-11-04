@@ -15,6 +15,7 @@ public class ItemVO {
 	private String item_status;
 	private String item_readcount;
 	private String item_date;
+	private String file;
 	
 	public String getItem_idx() {
 		return item_idx;
@@ -89,11 +90,16 @@ public class ItemVO {
 		this.item_date = item_date;
 	}
 	
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
 	public ItemVO() {}
-	
 	public ItemVO(String item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
 			String item_category, String item_price, String item_sale, String item_stock, String item_status,
-			String item_readcount, String item_date) {
+			String item_readcount, String item_date, String file) {
 		super();
 		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
@@ -107,16 +113,10 @@ public class ItemVO {
 		this.item_status = item_status;
 		this.item_readcount = item_readcount;
 		this.item_date = item_date;
+		this.file = file;
 	}
 	
-	@Override
-	public String toString() {
-		return "ItemVO [item_idx=" + item_idx + ", re_manager_idx=" + re_manager_idx + ", item_name=" + item_name
-				+ ", item_info=" + item_info + ", item_packing=" + item_packing + ", item_category=" + item_category
-				+ ", item_price=" + item_price + ", item_sale=" + item_sale + ", item_stock=" + item_stock
-				+ ", item_status=" + item_status + ", item_readcount=" + item_readcount + ", item_date=" + item_date
-				+ "]";
-	}
+	
 	
 	
 }

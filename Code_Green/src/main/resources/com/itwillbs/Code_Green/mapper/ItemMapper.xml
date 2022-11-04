@@ -54,6 +54,24 @@
 			FROM item
 			ORDER BY
 				item_idx DESC
+				
+<!-- 		select i.item_idx,  -->
+<!-- 			   i.re_manager_idx, -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_info, -->
+<!-- 			   i.item_packing,  -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale,  -->
+<!-- 			   i.item_stock,  -->
+<!-- 			   i.item_status,   -->
+<!-- 			   i.item_readcount,   -->
+<!-- 			   i.item_date,  -->
+<!-- 			   f.file -->
+<!-- 			from item i join file_item f -->
+<!-- 			on i.item_idx = f.rf_item_idx -->
+<!-- 			ORDER BY -->
+<!-- 				i.item_idx DESC	 -->
 	</select>
 	
 	

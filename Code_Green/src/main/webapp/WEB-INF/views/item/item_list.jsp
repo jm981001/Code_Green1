@@ -37,70 +37,93 @@
     <!-- 헤더 삽입 -->
     
     <!-- 바디시작 -->
-    <div id="homepage-9">
-        	<div class="ps-page--single ps-page--vendor">
-      			  <section class="ps-store-list">
-         			   <div class="container">
-			      			<aside class="ps-block--store-banner-newitemlist">
-			                	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-			                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/신상품샘플.jpg">
-			                    </div>
-			                </aside>
-			            </div>
-			       </section>
-			  </div>
-			    
-        <!-- ---------------------------------------------- 신상품------------------------------------------------------------------- -->
-           <div class="ps-product-list ps-product-list--2">
+    <div class="ps-page--single ps-page--vendor">
+        <section class="ps-store-list">
             <div class="container">
-                <div class="ps-section__header">
-                    <h3>신상품</h3>
-                    <ul class="ps-section__links">
-                        <li><a href="shop-grid.html">신상품순</a></li>
-                        <li><a href="shop-grid.html">판매량순 </a></li>
-                        <li><a href="shop-grid.html">낮은 가격순</a></li>
-                        <li><a href="shop-grid.html">높은 가격순</a></li>
-                    </ul>
-                </div>
-            
-                <div class="ps-section__content">
-                    <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2" data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
-                        <c:forEach var="item" items="${itemList }">
-                         
-	                        <div class="ps-product">
-	                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/img/products/electronic/3.jpg" alt="" /></a>
-	<!--                                 <div class="ps-product__badge">-5%</div> -->
-	                                <ul class="ps-product__actions">
-	                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-	                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-	                                </ul>
-	                            </div>
-	                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.item_name}</a>
-	                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">브랜드명</a>
-	                                    <div class="ps-product__rating">
-	                                        <select class="ps-rating" data-read-only="true">
-	                                            <option value="1">1</option>
-	                                            <option value="1">2</option>
-	                                            <option value="1">3</option>
-	                                            <option value="1">4</option>
-	                                            <option value="2">5</option>
-	                                        </select><span>01</span>
-	                                    </div>
-	<!--                                     <p class="ps-product__price sale">$100.99(할인된 가격 빨간색) <del>$105.00 </del></p> -->
-	                                    <p class="ps-product__price sale"><del>${item.item_price}원</del></p>
-	                                </div>
-	                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">브랜드명</a>
-	                                    <p class="ps-product__price sale"><del>${item.item_price}원</del></p>
-	                                </div>
-	                            </div>
-	                        </div>
-               			</c:forEach>
+      			<aside class="ps-block--store-banner-newitemlist">
+                	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
+                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/신상품샘플.jpg">
+                    </div>
+                </aside>
+                        <!-- ---------------------------------------------- 신상품------------------------------------------------------------------- -->
+				<div class="ps-product-list ps-product-list--2">
+					<div class="container">
+						<div class="ps-section__header">
+							<h3>신상품</h3>
+							<ul class="ps-section__links">
+								<li><a href="shop-grid.html">신상품순</a></li>
+								<li><a href="shop-grid.html">판매량순 </a></li>
+								<li><a href="shop-grid.html">낮은 가격순</a></li>
+								<li><a href="shop-grid.html">높은 가격순</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="ps-section__wrapper">
+                    <div class="ps-section__right">
+                         <div class="ps-shopping ps-tab-root">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="item" items="${itemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/img/item/덴마크드링킹요구르트_플레인.png" alt="" /></a>
+                                                        <ul class="ps-product__actions">
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
+                                             </c:forEach>	
                         <div class="ps-product">
                         </div>   
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        </section>
          <!-- ---------------------------------------------- 상품 목록 끝------------------------------------------------------------------- -->
   
         
