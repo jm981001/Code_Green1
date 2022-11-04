@@ -52,7 +52,7 @@
                                 <li><a href="category_sale">특가 상품</a> </li>
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
-                                <li><a href="category_protein">식물성 단백질</a></li>
+                                <li><a href="category_iced_easy">냉동 식품 / 간편 식품</a></li>
                                 <li><a href="category_fish">해산물 </a></li>
                                 <li><a href="category_snack">간식류</a></li>
                             </ul>
