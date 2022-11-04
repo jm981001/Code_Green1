@@ -132,7 +132,7 @@
                                     <ul class="ps-list--dot">
                                         <li>판매자 </li>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
-                                        <li>판매단위 &nbsp; ${item.item_packing }</li>
+                                        <li>카테고리 &nbsp; ${item.item_category }</li>
                                         <li>원산지   &nbsp;&nbsp; ${item.item_packing }</li>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
@@ -276,7 +276,8 @@
 														<option value="worst">별점 낮은 순</option>    
 														<option value="good">별점 높은 순</option>    
 													</select>
-												<table cellspacing="0" border="1" class="recruit" >
+<!-- 												<table cellspacing="0" border="1" class="recruit" > -->
+												<table border="1" class="recruit" >
 												        <colgroup>  
 <%-- 												            <col width="10%">   --%>
 												            <col width="70%">  
@@ -296,13 +297,13 @@
 												        <c:forEach var="board" items="${itemList }">
 													        <tbody>  
 													            <tr class="item">  
-	<%-- 												                <td>${board.board_idx }</td>   --%>
+	<%-- 												            <td>${board.board_idx }</td>   --%>
 													                <td>${board.board_subject }</td>  
 													                <td>${board.board_id }</td>  
 													                <td>${board.board_date }</td>  
 													                <td>12</td>  
 													            </tr>  
-													            <tr class="hide">  
+													            <tr class="hide" style="height:300px">  
 													                <td colspan="5"> 
 													                   ${board.board_content }
 													                    
@@ -471,13 +472,9 @@
 	                                                <sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 													<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
 												</p>
-												<select>    
-													<option>최근등록순</option>    
-													<option>좋아요 많은순</option>    
-												</select>
-													<table cellspacing="0" border="1" class="recruit" >
+<!-- 													<table cellspacing="0" border="1" class="recruit" > -->
+													<table border="1" class="recruit" >
 													        <colgroup>  
-													            <col width="7%">  
 													            <col width="63%">  
 													            <col width="10%">  
 													            <col width="10%">  
@@ -485,91 +482,48 @@
 													        </colgroup>  
 													        <thead align="center">  
 													            <tr class="" >  
-													                <th scope="col">번호</th>  
+<!-- 													                <th scope="col">번호</th>   -->
 													                <th scope="col">제목</th>  
 													                <th scope="col">작성자</th>  
 													                <th scope="col">작성일</th>  
 													                <th scope="col">답변상태</th>  
 													            </tr>  
 													        </thead>  
-													        <tbody>  
-													            <tr class="item">  
-													                <td>1</td>  
-													                <td>상품이 터져서 왔어요 ㅜ</td>  
-													                <td>정민이</td>  
-													                <td>2022.10.24</td>  
-													                <td>-</td>  
-													            </tr>  
-													            <tr class="hide">  
-													                <td colspan="5">  
-													                	(관리자의 답글)<br>
-													                    안녕하세요 ㅇㅇㅇ 입니다. <br>
-																		순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																		<br>
-																		먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																		상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																		<br>
-																		문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																		<br>
-																		추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																		<br>
-																		앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																		<br>
-																		감사합니다.
-													                    
-													                </td>  
-													            </tr>  
-													            <tr class="item">  
-													                <td>2</td>  
-													                <td>이게 맞는지 저는 모르겠네요</td>  
-													                <td>하동이</td>  
-													                <td>2022.10.24</td>  
-													                <td>답변완료</td>  
-													            </tr>  
-													            <tr class="hide">  
-													                <td colspan="5">  
-													                   (관리자의 답글)<br>
-													                   안녕하세요 ㅇㅇㅇ 입니다. <br>
-																		순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																		<br>
-																		먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																		상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																		<br>
-																		문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																		<br>
-																		추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																		<br>
-																		앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																		<br>
-																		감사합니다.  
-													                </td>  
-													            </tr>  
-													            <tr class="item">  
-													                <td>3</td>  
-													                <td>배달이 안왔습니다</td>  
-													                <td>도토리</td>  
-													                <td>2022.10.24</td>  
-													                <td>답변완료</td>  
-													            </tr>  
-													            <tr class="hide">  
-													                <td colspan="5">  
-													                   (관리자의 답글)<br>
-													                   안녕하세요 ㅇㅇㅇ 입니다. <br>
-																		순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																		<br>
-																		먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																		상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																		<br>
-																		문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																		<br>
-																		추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																		<br>
-																		앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																		<br>
-																		감사합니다.
-													                </td>  
-													            </tr>  
-													        </tbody>  
+													        
+													        
+													        <c:forEach var="qna" items="${qnaList }">
+														        <tbody>  
+														            <tr class="item">  
+<!-- 														                <td>1</td>   -->
+														                <td>${qna.qna_subject }</td>  
+														                <td>${qna.qna_id }</td>  
+														                <td>${qna.qna_date }</td>  
+														                <td>${qna.qna_category }</td>  
+														            </tr>  
+														            <tr class="hide">  
+														                <td colspan="4"><br>
+														            		${qna.qna_content }
+														            		<br><br><br>
+														            	
+														                	(관리자의 답글)<br>
+														                    안녕하세요 ㅇㅇㅇ 입니다. <br>
+																			순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
+																			<br>
+																			먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
+																			상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
+																			<br>
+																			문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
+																			<br>
+																			추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
+																			<br>
+																			앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
+																			<br>
+																			감사합니다.
+														                    <br><br><br>
+														                </td>  
+														            </tr>  
+														        </tbody>  
+													        </c:forEach>
 													    </table>  
 												    <br>
 												    

@@ -86,5 +86,30 @@
 				i.item_idx DESC	
 	</select>
 	
+	<!-- 상세페이지안 관련상품 6개 -->
+	<select id="selectItemList6" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_category,
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%' 
+<!-- 			and i.item_category = #{i.item_category} -->
+			ORDER BY
+				i.item_idx  LIMIT 6
+	</select>
+	
+<!-- 	상품 문의 리스트 -->
+	<select id="selectQna" resultType="com.itwillbs.Code_Green.vo.QnaVO">
+		SELECT * 
+				FROM qna
+				WHERE
+					qna_item_idx = #{item_idx}
+
+	</select>
 	
 </mapper>

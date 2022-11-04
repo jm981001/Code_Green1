@@ -83,8 +83,8 @@
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">풀무원</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
                                                             
                                                             <!-- 별점 -->
                                                             <!-- 
@@ -104,7 +104,7 @@
                                                             <!-- 가격 -->
                                                             <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
                                                             <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
                                                     </div>

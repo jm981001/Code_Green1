@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.Code_Green.mapper.ItemMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
+import com.itwillbs.Code_Green.vo.QnaVO;
 
 
 @Service
@@ -46,6 +47,16 @@ public class ItemService {
 	//상품 갯수
 	public int getItemListCount(String searchType, String keyword) {
 		return mapper.selectItemListCount(searchType, keyword);
+	}
+
+	//상세상세페이지 안 관련상품 6개
+	public List<ItemVO> itemList6() {
+		return mapper.selectItemList6();
+	}
+
+	//상품 문의 리스트
+	public List<QnaVO> getQna(int startRow, int listLimit, int item_idx) {
+		return mapper.selectQna(startRow, listLimit, item_idx);
 	}
 	
 }
