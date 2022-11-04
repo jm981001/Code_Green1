@@ -70,7 +70,7 @@
 			   f.file
 			from item i join file_item f
 			on i.item_idx = f.rf_item_idx
-<!-- 			Where i.item_idx = #{item_idx} -->
+<!-- 			Where f.file not  in ('상세'); -->
 			ORDER BY
 				i.item_idx DESC	
 	</select>
