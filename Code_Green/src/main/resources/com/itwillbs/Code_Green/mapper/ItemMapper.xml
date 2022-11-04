@@ -50,28 +50,29 @@
 	
 	<!-- 상품 목록 조회(검색 기능 추가 아직) -->
 	<select id="selectItemList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-			FROM item
-			ORDER BY
-				item_idx DESC
-				
-<!-- 		select i.item_idx,  -->
-<!-- 			   i.re_manager_idx, -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_info, -->
-<!-- 			   i.item_packing,  -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale,  -->
-<!-- 			   i.item_stock,  -->
-<!-- 			   i.item_status,   -->
-<!-- 			   i.item_readcount,   -->
-<!-- 			   i.item_date,  -->
-<!-- 			   f.file -->
-<!-- 			from item i join file_item f -->
-<!-- 			on i.item_idx = f.rf_item_idx -->
+<!-- 		SELECT *  -->
+<!-- 			FROM item -->
 <!-- 			ORDER BY -->
-<!-- 				i.item_idx DESC	 -->
+<!-- 				item_idx DESC -->
+				
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_info,
+			   i.item_packing, 
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_stock, 
+			   i.item_status,  
+			   i.item_readcount,  
+			   i.item_date, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+<!-- 			Where i.item_idx = #{item_idx} -->
+			ORDER BY
+				i.item_idx DESC	
 	</select>
 	
 	
