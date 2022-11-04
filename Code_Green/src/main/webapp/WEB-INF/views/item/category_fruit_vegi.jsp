@@ -52,7 +52,6 @@
                                 <li><a href="category_sale">특가 상품</a> </li>
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
-                                <li><a href="category_iced_easy">냉동 식품 / 간편 식품</a></li>
                                 <li><a href="category_protein">식물성 단백질</a></li>
                                 <li><a href="category_fish">해산물 </a></li>
                                 <li><a href="category_snack">간식류</a></li>
@@ -75,7 +74,7 @@
 							
                         <div class="ps-shopping ps-tab-root">
 <!--                             <div class="ps-shopping__header"> -->
-<!--                                 <p>총<strong> 6</strong> 개의 상품</p> -->
+<!--                               <p>총<strong> 6</strong> 개의 상품</p> -->
 <!--                                 <div class="ps-shopping__actions"> -->
                                 	<!-- 이건혹시 만약 뷰 종류할거면 재활용 -->
                                 	
@@ -87,23 +86,47 @@
 <!--                                         </ul> -->
 <!--                                     </div> -->
 <!--                                 </div> -->
-                            </div>
+<!--                             </div> -->
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-shopping-product">
                                         <div class="row">
                                         
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="item" items="${itemList }">
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
                                                         <ul class="ps-product__actions">
+                                                        	
+                                                        	
+                                                        	<!-- 장바구니 및 찜 -->
+                                                        	<!-- 
+                                                        	* 장바구니 페이지로 이동
+                                                        	* 찜 페이지로 이동
+                                                        	 -->
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">나주</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">배</a>
+                                                    
+                                                    
+                                                    <!-- 브랜드명 및 상품명 -->
+                                                    <!-- 
+                                                    * 브랜드명은 서브쿼리 사용하여 불러오기
+                                                     -->
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${item.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
                                                             <div class="ps-product__rating">
                                                                 <select class="ps-rating" data-read-only="true">
                                                                     <option value="1">1</option>
@@ -113,182 +136,182 @@
                                                                     <option value="2">5</option>
                                                                 </select><span>02</span>
                                                             </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
                                                         </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">배</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${item.item_name }</a>
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- 상품 1개당 끝 -->
+                                             </c:forEach>	
+
+                                        
+<!--                                         	상품 1개당 시작 -->
+<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
+<!--                                                 <div class="ps-product"> -->
+<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
+<!--                                                         <ul class="ps-product__actions"> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a> -->
+<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">풀무원 우유</a> -->
+<!--                                                             <div class="ps-product__rating"> -->
+<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
+<!--                                                                     <option value="1">1</option> -->
+<!--                                                                     <option value="1">2</option> -->
+<!--                                                                     <option value="1">3</option> -->
+<!--                                                                     <option value="1">4</option> -->
+<!--                                                                     <option value="2">5</option> -->
+<!--                                                                 </select><span>02</span> -->
+<!--                                                             </div> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">풀무원 우유</a> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             상품 1개당 끝 -->
                                             
                                             
                                             
                                         
-                                        	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                                <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                        <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">제주</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">한라봉</a>
-                                                            <div class="ps-product__rating">
-                                                                <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
-                                                                </select><span>02</span>
-                                                            </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">한라봉</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 1개당 끝 -->
+<!--                                         	상품 1개당 시작 -->
+<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
+<!--                                                 <div class="ps-product"> -->
+<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
+<!--                                                         <ul class="ps-product__actions"> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">상하목장</a> -->
+<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상하목장 우유</a> -->
+<!--                                                             <div class="ps-product__rating"> -->
+<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
+<!--                                                                     <option value="1">1</option> -->
+<!--                                                                     <option value="1">2</option> -->
+<!--                                                                     <option value="1">3</option> -->
+<!--                                                                     <option value="1">4</option> -->
+<!--                                                                     <option value="2">5</option> -->
+<!--                                                                 </select><span>02</span> -->
+<!--                                                             </div> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상하목장 우유</a> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             상품 1개당 끝 -->
                                             
                                             
                                             
                                         
-                                        	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                                <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                        <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">김해</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">단감</a>
-                                                            <div class="ps-product__rating">
-                                                                <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
-                                                                </select><span>02</span>
-                                                            </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">단감</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 1개당 끝 -->
+<!--                                         	상품 1개당 시작 -->
+<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
+<!--                                                 <div class="ps-product"> -->
+<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
+<!--                                                         <ul class="ps-product__actions"> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">매일우유</a> -->
+<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">매일 우유</a> -->
+<!--                                                             <div class="ps-product__rating"> -->
+<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
+<!--                                                                     <option value="1">1</option> -->
+<!--                                                                     <option value="1">2</option> -->
+<!--                                                                     <option value="1">3</option> -->
+<!--                                                                     <option value="1">4</option> -->
+<!--                                                                     <option value="2">5</option> -->
+<!--                                                                 </select><span>02</span> -->
+<!--                                                             </div> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">매일 우유</a> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             상품 1개당 끝 -->
                                             
                                             
                                             
                                         
-                                        	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                                <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                        <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">진주</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">복숭아</a>
-                                                            <div class="ps-product__rating">
-                                                                <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
-                                                                </select><span>02</span>
-                                                            </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">복숭아</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 1개당 끝 -->
+<!--                                         	상품 1개당 시작 -->
+<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
+<!--                                                 <div class="ps-product"> -->
+<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
+<!--                                                         <ul class="ps-product__actions"> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">빙그레</a> -->
+<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">바나나 우유</a> -->
+<!--                                                             <div class="ps-product__rating"> -->
+<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
+<!--                                                                     <option value="1">1</option> -->
+<!--                                                                     <option value="1">2</option> -->
+<!--                                                                     <option value="1">3</option> -->
+<!--                                                                     <option value="1">4</option> -->
+<!--                                                                     <option value="2">5</option> -->
+<!--                                                                 </select><span>02</span> -->
+<!--                                                             </div> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">바나나 우유</a> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             상품 1개당 끝 -->
                                             
                                             
                                             
                                         
-                                        	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                                <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                        <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">경주</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">딸기</a>
-                                                            <div class="ps-product__rating">
-                                                                <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
-                                                                </select><span>02</span>
-                                                            </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">딸기</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 1개당 끝 -->
-                                            
-                                            
-                                            
-                                        
-                                        	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                                <div class="ps-product">
-                                                    <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                        <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">춘천</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">멜론</a>
-                                                            <div class="ps-product__rating">
-                                                                <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
-                                                                </select><span>02</span>
-                                                            </div>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">멜론</a>
-                                                            <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 1개당 끝 -->
-                                            
-                                            
+<!--                                         	상품 1개당 시작 -->
+<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
+<!--                                                 <div class="ps-product"> -->
+<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
+<!--                                                         <ul class="ps-product__actions"> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
+<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
+<!--                                                         </ul> -->
+<!--                                                     </div> -->
+<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">빙그레</a> -->
+<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">딸기 우유</a> -->
+<!--                                                             <div class="ps-product__rating"> -->
+<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
+<!--                                                                     <option value="1">1</option> -->
+<!--                                                                     <option value="1">2</option> -->
+<!--                                                                     <option value="1">3</option> -->
+<!--                                                                     <option value="1">4</option> -->
+<!--                                                                     <option value="2">5</option> -->
+<!--                                                                 </select><span>02</span> -->
+<!--                                                             </div> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">딸기 우유</a> -->
+<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
+<!--                                                         </div> -->
+<!--                                                     </div> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             상품 1개당 끝 -->
                                         </div>
                                     </div>
                                     

@@ -53,7 +53,6 @@
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
                                 <li><a href="category_iced_easy">냉동 식품 / 간편 식품</a></li>
-                                <li><a href="category_protein">식물성 단백질</a></li>
                                 <li><a href="category_fish">해산물 </a></li>
                                 <li><a href="category_snack">간식류</a></li>
                             </ul>
@@ -73,7 +72,7 @@
 							</select>
                         </nav>
 							
-                         <div class="ps-shopping ps-tab-root">
+                          <div class="ps-shopping ps-tab-root">
 <!--                             <div class="ps-shopping__header"> -->
 <!--                               <p>총<strong> 6</strong> 개의 상품</p> -->
 <!--                                 <div class="ps-shopping__actions"> -->
@@ -315,6 +314,28 @@
 <!--                                             상품 1개당 끝 -->
                                         </div>
                                     </div>
+                                    
+                                    
+                                    
+                                    <!-- 페이징 버튼들 시작 -->
+                                    <div class="ps-pagination">
+                                        <ul class="pagination">
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- 페이징 버튼들 끝 -->
+                                    
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</div>
                                    
                                     
                                     
