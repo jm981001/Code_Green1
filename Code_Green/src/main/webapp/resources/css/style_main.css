@@ -11910,6 +11910,15 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   padding: 0 24px;
   border-radius: 0 4px 4px 0;
 }
+/* 지영 */
+.ps-form--quick-search--com button {
+  background-color: #5FA30F;
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 0 4px 4px 0;
+}
 
 /* 지영 */
 .ps-form--widget-search {

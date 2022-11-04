@@ -97,9 +97,8 @@
                 <div class="navigation__right">
                     <ul class="menu menu--organic">
                     
-                        <li class="menu-item-has-children"><a href="ItemList.bo">신상품</a><span class="sub-toggle"></span> </li>                     
-          
-                        <li class="menu-item-has-children has-mega-menu"><a href="item_best">베스트</a><span class="sub-toggle"></span></li>   
+                        <li class="menu-item-has-children has-mega-menu"><a href="ItemList.bo">신상품</a><span class="sub-toggle"></span> </li>                     
+                        <li class="menu-item-has-children has-mega-menu"><a href="BestItemList.bo">베스트</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun">어서와, 비건은 처음이지?</a></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="brand_main">브랜드별</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="recipe_main">레시피</a></li>   

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,181 +30,100 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
 <body>
-    
+													<!--   여기 아직 수정 필요한 파일임  -->
     
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
     
     <!-- 바디시작 -->
-    <div id="homepage-9">
-        	<div class="ps-page--single ps-page--vendor">
-      			  <section class="ps-store-list">
-         			   <div class="container">
-			      			<aside class="ps-block--store-banner-newitemlist">
-			                	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-			                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources//img/신상품샘플.jpg">
-			                    </div>
-			                </aside>
-			            </div>
-			       </section>
-			  </div>
-			    
-        <!-- ---------------------------------------------- 새롭게 만나는 상품들------------------------------------------------------------------- -->
-           <div class="ps-product-list ps-product-list--2">
+    <div class="ps-page--single ps-page--vendor">
+        <section class="ps-store-list">
             <div class="container">
-                <div class="ps-section__header">
-                    <h3>베스트</h3>
-                    <ul class="ps-section__links">
-                        <li><a href="shop-grid.html">판매량순 </a></li>
-                        <li><a href="shop-grid.html">신상품순</a></li>
-                        <li><a href="shop-grid.html">낮은 가격순</a></li>
-                        <li><a href="shop-grid.html">높은 가격순</a></li>
-                    </ul>
-                </div>
-                <div class="ps-section__content">
-                    <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2" data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
+      			<aside class="ps-block--store-banner-newitemlist">
+                	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
+                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/팥팥콩콩.jpg">
+                    </div>
+                </aside>
+                        <!-- ---------------------------------------------- 신상품------------------------------------------------------------------- -->
+				<div class="ps-product-list ps-product-list--2">
+					<div class="container">
+						<div class="ps-section__header">
+							<h3>베스트</h3>
+							<ul class="ps-section__links">
+								<li><a href="shop-grid.html">신상품순</a></li>
+								<li><a href="shop-grid.html">판매량순 </a></li>
+								<li><a href="shop-grid.html">낮은 가격순</a></li>
+								<li><a href="shop-grid.html">높은 가격순</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="ps-section__wrapper">
+                    <div class="ps-section__right">
+                         <div class="ps-shopping ps-tab-root">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                      <c:forEach var="item" items="${itemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=아이템번호올자리&pageNum=페이지번호자리" ><img src="/Code_Green/resources/img/팥팥콩콩.jpg" /></a>
+                                                        <ul class="ps-product__actions">
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=아이템번호올자리&pageNum=페이지번호자리">상품명 오는 자리</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">8800원 <del>8800원 </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=아이템번호자리&pageNum=페이지번호자리">상품명 오는 자리</a>
+                                                            <p class="ps-product__price sale">8800원 <del>8800원 </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
+                                     </c:forEach>	
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail.jsp"><img src="/Code_Green/resources//img/products/electronic/3.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-5%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Go Pro</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Sound Intone I65 Earphone White Version</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$100.99 <del>$105.00 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Sound Intone I65 Earphone White Version</a>
-                                    <p class="ps-product__price sale">$100.99 <del>$105.00 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources//img/products/electronic/11.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Global Office</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price">$322.38</p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
-                                    <p class="ps-product__price">$322.38</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources//img/products/electronic/13.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-24%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Young Shop</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12”</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>02</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$625.00 <del>$760.00 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12”</a>
-                                    <p class="ps-product__price sale">$625.00 <del>$760.00 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources//img/products/electronic/4.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Global Office</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Samsung Gear VR Virtual Reality Headset</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price">$64.00</p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Samsung Gear VR Virtual Reality Headset</a>
-                                    <p class="ps-product__price">$64.00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources//img/products/electronic/16.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="icon-chart-bars"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Global Office</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Apple iPhone Retina 6s Plus 64GB</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price">$999.59</p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Apple iPhone Retina 6s Plus 64GB</a>
-                                    <p class="ps-product__price">$999.59</p>
-                                </div>
-                            </div>
-                        </div>
+                        </div>   
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        </section>
          <!-- ---------------------------------------------- 새롭게 만나는 상품들 끝------------------------------------------------------------------- -->
   
         
