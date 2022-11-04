@@ -68,10 +68,12 @@ public class ItemController {
 	
 	
 	//------------ 베스트리스트 -------------------------------------------
-	@RequestMapping(value = "item_best", method = RequestMethod.GET)
-	public String item_best() {
+	@GetMapping(value = "/BestItemList.bo")
+	public String bestItemList() {
+		// 판매량 집계 후 리스트진행예정 
 		return "item/item_best";
 	}
+	
 	
 	//----------- 브랜드별 상품리스트 -------------------------------------------
 	@RequestMapping(value = "brand_main", method = RequestMethod.GET)
