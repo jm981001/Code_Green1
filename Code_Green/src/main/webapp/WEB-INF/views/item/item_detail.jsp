@@ -105,7 +105,7 @@
                                 <figure>
                                     <div class="ps-wrapper">
                                         <div class="ps-product__gallery" data-arrow="true">
-                                            <div class="item"><a href="/Code_Green/resources/img/products/detail/fullwidth/1.jpg"><img src="/Code_Green/resources/img/products/detail/fullwidth/1.jpg" alt=""></a></div>
+                                            <div class="item"><a href="/Code_Green/resources/img/products/detail/fullwidth/1.jpg"><img  src="/Code_Green/resources/img/item/${item.file } " alt=""></a></div>
                                         </div>
                                     </div>
                                 </figure>
@@ -134,6 +134,7 @@
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
                                         <li>판매단위 &nbsp; ${item.item_packing }</li>
                                         <li>원산지   &nbsp;&nbsp; ${item.item_packing }</li>
+                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
                                     </ul>
                                 </div>
