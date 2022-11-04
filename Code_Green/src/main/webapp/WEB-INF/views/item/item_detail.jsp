@@ -173,7 +173,7 @@
                                     <div class="ps-document">
                                         <h5>Embodying the Raw, Wayward Spirit of Rock 'N' Roll</h5>
                                         <p>Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn portable active stereo speaker takes the unmistakable look and sound of Marshall, unplugs the chords, and takes the show on the road.</p>
-                                        <p>Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish travel.</p><img class="mb-30" src="img/products/detail/content/description.jpg" alt="">
+                                        <p>Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish travel.</p><img class="mb-30" src="/Code_Green/resources/img/products/shop/5.jpg" alt="">
                                         <h5>What do you get</h5>
                                         <p>Sound of Marshall, unplugs the chords, and takes the show on the road.</p>
                                         <p>Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish travel.</p>
@@ -717,16 +717,19 @@
                     <h3>Related products</h3>
                 </div>
                 <div class="ps-section__content">
-                    <div class="ps-carousel--nav owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="10000" data-owl-gap="30" data-owl-nav="true" data-owl-dots="true" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
+                    <div class="ps-carousel--nav owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="2500" data-owl-gap="30" data-owl-nav="true" data-owl-dots="true" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
+                       
+                       <c:forEach var="item" items="${itemList6 }">
+                       
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/11.jpg" alt="" /></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}"><img  src="/Code_Green/resources/img/item/${item.file } " alt=""></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">1번스토어</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Men’s Sports Runnning Swim Board Shorts</a>
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
                                             <option value="1">1</option>
@@ -736,166 +739,14 @@
                                             <option value="2">5</option>
                                         </select><span>01</span>
                                     </div>
-                                    <p class="ps-product__price">$13.43</p>
+                                   <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">Men’s Sports Runnning Swim Board Shorts</a>
-                                    <p class="ps-product__price">$13.43</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/shop/12.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Global Office</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">Paul’s Smith Sneaker InWhite Color</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price">$75.44</p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Paul’s Smith Sneaker InWhite Color</a>
-                                    <p class="ps-product__price">$75.44</p>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                     <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/13.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-7%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Young Shop</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">MVMTH Classical Leather Watch In Black</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$57.99 <del>$62.99 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">MVMTH Classical Leather Watch In Black</a>
-                                    <p class="ps-product__price sale">$57.99 <del>$62.99 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/14.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-7%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Global Office</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Beat Spill 2.0 Wireless Speaker – White</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$57.99 <del>$62.99 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Beat Spill 2.0 Wireless Speaker – White</a>
-                                    <p class="ps-product__price sale">$57.99 <del>$62.99 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/15.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Young Shop</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$332.38</p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
-                                    <p class="ps-product__price sale">$332.38</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/16.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-7%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">Young Shop</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12&quot;</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$1200.00 <del>$1362.99 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12&quot;</a>
-                                    <p class="ps-product__price sale">$1200.00 <del>$1362.99 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/17.jpg" alt="" /></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-     						<div class="ps-product__container"><a class="ps-product__vendor" href="#">Young Shop</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12&quot;</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">$1200.00 <del>$1362.99 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Apple Macbook Retina Display 12&quot;</a>
-                                    <p class="ps-product__price sale">$1200.00 <del>$1362.99 </del></p>
-                                </div>
-                            </div>
-                        </div>
+                       </c:forEach>
                     </div>
                 </div>
             </div>

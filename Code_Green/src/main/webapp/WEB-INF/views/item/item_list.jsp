@@ -102,10 +102,10 @@
                                                             
                                                             
                                                             <!-- 가격 -->
-                                                            <p class="ps-product__price">${item.item_price }원 </p>
+                                                            <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
-                                                            <p class="ps-product__price">${item.item_price }원 </p>
+                                                            <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
                                                     </div>
                                                 </div>
