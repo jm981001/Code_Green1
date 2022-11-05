@@ -86,7 +86,7 @@ public class ItemController {
 			List<QnaVO> qnaList = service.getQna(startRow, listLimit, item_idx);
 			
 			//상세상세페이지 안 관련상품 5개
-			List<ItemVO> itemList6 = service.itemList6();
+//			List<ItemVO> itemList6 = service.itemList6();
 			
 			
 			int listCount = service.getReviewListCount(searchType);
@@ -110,7 +110,7 @@ public class ItemController {
 			model.addAttribute("item", item);
 			model.addAttribute("itemList", itemList);
 			model.addAttribute("qnaList", qnaList);
-			model.addAttribute("itemList6", itemList6);
+//			model.addAttribute("itemList6", itemList6);
 			return "item/item_detail";
 		}
 		
