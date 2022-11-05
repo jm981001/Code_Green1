@@ -15,13 +15,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.itwillbs.Code_Green.service.AdminService;
+import com.itwillbs.Code_Green.service.ManagerService;
 import com.itwillbs.Code_Green.service.MemberService;
+import com.itwillbs.Code_Green.vo.AdminVO;
+import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class LoginController {
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private ManagerService service2;
+	@Autowired
+	private AdminService service3;
+	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -41,13 +50,46 @@ public class LoginController {
 	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		MemberVO memberResult = service.loginMember(member);
-
+		
+		
 		if (memberResult == null) {
 			model.addAttribute("msg", "로그인 실패! 힝~");
 			System.out.println(member.getMember_id() + ", " + member.getMember_pass());
 			return "member/fail_back";
 		} else {
 			session.setAttribute("sId", memberResult.getMember_id());
+			return "redirect:/";
+		}
+		
+
+	}
+	@PostMapping(value = "/ManagerLoginPro.me")
+	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
+		ManagerVO managerResult = service2.loginManager(manager);
+		
+		
+		if (managerResult == null) {
+			model.addAttribute("msg", "기업 로그인 실패! 힝~");
+			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
+			return "member/fail_back";
+		} else {
+			session.setAttribute("sId", managerResult.getManager_id());
+			return "redirect:/";
+		}
+
+	}
+	
+	@PostMapping(value = "/AdminLoginPro.me")
+	public String adminloginPro(@ModelAttribute AdminVO admin, Model model, HttpSession session) {
+		AdminVO adminResult = service3.loginAdmin(admin);
+		
+		
+		if (adminResult == null) {
+			model.addAttribute("msg", "관리자 로그인 실패! 힝~");
+			System.out.println(admin.getAdmin_id() + ", " + admin.getAdmin_pass());
+			return "member/fail_back";
+		} else {
+			session.setAttribute("sId", adminResult.getAdmin_id());
 			return "redirect:/";
 		}
 
