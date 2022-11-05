@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -30,6 +31,24 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
+    <style type="text/css">
+    	#cheapDairyDrinkList{
+     		display: none; 
+    	}
+    </style>
+    
+    <script type="text/javascript">
+    	var sortItemList = function(value) {
+    		if(value == 3){
+	    		$('#dairyDrinklist').hide(); 
+	        	$('#cheapDairyDrinkList').show();
+	    	} else {
+	    		$('#cheapDairyDrinkList').hide(); 
+	        	$('#dairyDrinklist').show();
+			}
+    	}
+    
+    </script>
     
 </head>
 <body>
@@ -66,7 +85,7 @@
 							<h2>유제품 / 음료</h2>
 						</div>                    
                         <nav class="ps-store-link">
-                        	<select class="form-select" aria-label="Default select example">
+                        	<select class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
 							  <option value="1">신상품순</option>
 							  <option value="2">후기 많은순</option>
 							  <option value="3">낮은 가격순</option>
@@ -75,21 +94,7 @@
                         </nav>
 							
 						
-                        <div class="ps-shopping ps-tab-root">
-<!--                             <div class="ps-shopping__header"> -->
-<!--                               <p>총<strong> 6</strong> 개의 상품</p> -->
-<!--                                 <div class="ps-shopping__actions"> -->
-                                	<!-- 이건혹시 만약 뷰 종류할거면 재활용 -->
-                                	
-<!--                                     <div class="ps-shopping__view"> -->
-<!--                                         <p>View</p> -->
-<!--                                         <ul class="ps-tab-list"> -->
-<!--                                             <li class="active"><a href="#tab-1"><i class="icon-grid"></i></a></li> -->
-<!--                                             <li><a href="#tab-2"><i class="icon-list4"></i></a></li> -->
-<!--                                         </ul> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
+                        <div class="ps-shopping ps-tab-root" id="dairyDrinklist">
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-shopping-product">
@@ -97,6 +102,76 @@
                                         
                                         	<!-- 반복문 시작 -->
                                         	<c:forEach var="item" items="${itemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                                        <ul class="ps-product__actions">
+                                                        	
+                                                        	
+                                                        	<!-- 장바구니 및 찜 -->
+                                                        	<!-- 
+                                                        	* 장바구니 페이지로 이동
+                                                        	* 찜 페이지로 이동
+                                                        	 -->
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- 브랜드명 및 상품명 -->
+                                                    <!-- 
+                                                    * 브랜드명은 서브쿼리 사용하여 불러오기
+                                                     -->
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
+                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
+                                             </c:forEach>	
+                                        </div>
+                                    </div>
+                           		</div>
+                          	</div>
+                         </div>  
+<!-- --------------------------------------낮은 가격순 (낮은 가격순 페이징 필요)----------------------------------------------------- -->
+                                   
+                        <div class="ps-shopping ps-tab-root" id="cheapDairyDrinkList">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="cheapItem" items="${cheapItemList }">
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
@@ -124,7 +199,7 @@
                                                     * 브랜드명은 서브쿼리 사용하여 불러오기
                                                      -->
                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${item.item_name }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${cheapItem.item_name }</a>
                                                             
                                                             <!-- 별점 -->
                                                             <!-- 
@@ -142,217 +217,58 @@
                                                             
                                                             
                                                             <!-- 가격 -->
-                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                            <p class="ps-product__price sale">${cheapItem.item_price } <del>${cheapItem.item_price } </del></p>
                                                         </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${item.item_name }</a>
-                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${cheapItem.item_name }</a>
+                                                            <p class="ps-product__price sale">${cheapItem.item_price } <del>${cheapItem.item_price } </del></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- 상품 1개당 끝 -->
                                              </c:forEach>	
-
-                                        
-<!--                                         	상품 1개당 시작 -->
-<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
-<!--                                                 <div class="ps-product"> -->
-<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
-<!--                                                         <ul class="ps-product__actions"> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
-<!--                                                         </ul> -->
-<!--                                                     </div> -->
-<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a> -->
-<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">풀무원 우유</a> -->
-<!--                                                             <div class="ps-product__rating"> -->
-<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
-<!--                                                                     <option value="1">1</option> -->
-<!--                                                                     <option value="1">2</option> -->
-<!--                                                                     <option value="1">3</option> -->
-<!--                                                                     <option value="1">4</option> -->
-<!--                                                                     <option value="2">5</option> -->
-<!--                                                                 </select><span>02</span> -->
-<!--                                                             </div> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">풀무원 우유</a> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                             상품 1개당 끝 -->
-                                            
-                                            
-                                            
-                                        
-<!--                                         	상품 1개당 시작 -->
-<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
-<!--                                                 <div class="ps-product"> -->
-<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
-<!--                                                         <ul class="ps-product__actions"> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
-<!--                                                         </ul> -->
-<!--                                                     </div> -->
-<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">상하목장</a> -->
-<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상하목장 우유</a> -->
-<!--                                                             <div class="ps-product__rating"> -->
-<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
-<!--                                                                     <option value="1">1</option> -->
-<!--                                                                     <option value="1">2</option> -->
-<!--                                                                     <option value="1">3</option> -->
-<!--                                                                     <option value="1">4</option> -->
-<!--                                                                     <option value="2">5</option> -->
-<!--                                                                 </select><span>02</span> -->
-<!--                                                             </div> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상하목장 우유</a> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                             상품 1개당 끝 -->
-                                            
-                                            
-                                            
-                                        
-<!--                                         	상품 1개당 시작 -->
-<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
-<!--                                                 <div class="ps-product"> -->
-<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
-<!--                                                         <ul class="ps-product__actions"> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
-<!--                                                         </ul> -->
-<!--                                                     </div> -->
-<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">매일우유</a> -->
-<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">매일 우유</a> -->
-<!--                                                             <div class="ps-product__rating"> -->
-<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
-<!--                                                                     <option value="1">1</option> -->
-<!--                                                                     <option value="1">2</option> -->
-<!--                                                                     <option value="1">3</option> -->
-<!--                                                                     <option value="1">4</option> -->
-<!--                                                                     <option value="2">5</option> -->
-<!--                                                                 </select><span>02</span> -->
-<!--                                                             </div> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">매일 우유</a> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                             상품 1개당 끝 -->
-                                            
-                                            
-                                            
-                                        
-<!--                                         	상품 1개당 시작 -->
-<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
-<!--                                                 <div class="ps-product"> -->
-<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
-<!--                                                         <ul class="ps-product__actions"> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
-<!--                                                         </ul> -->
-<!--                                                     </div> -->
-<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">빙그레</a> -->
-<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">바나나 우유</a> -->
-<!--                                                             <div class="ps-product__rating"> -->
-<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
-<!--                                                                     <option value="1">1</option> -->
-<!--                                                                     <option value="1">2</option> -->
-<!--                                                                     <option value="1">3</option> -->
-<!--                                                                     <option value="1">4</option> -->
-<!--                                                                     <option value="2">5</option> -->
-<!--                                                                 </select><span>02</span> -->
-<!--                                                             </div> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">바나나 우유</a> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                             상품 1개당 끝 -->
-                                            
-                                            
-                                            
-                                        
-<!--                                         	상품 1개당 시작 -->
-<!--                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 "> -->
-<!--                                                 <div class="ps-product"> -->
-<!--                                                     <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a> -->
-<!--                                                         <ul class="ps-product__actions"> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li> -->
-<!--                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li> -->
-<!--                                                         </ul> -->
-<!--                                                     </div> -->
-<!--                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">빙그레</a> -->
-<!--                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">딸기 우유</a> -->
-<!--                                                             <div class="ps-product__rating"> -->
-<!--                                                                 <select class="ps-rating" data-read-only="true"> -->
-<!--                                                                     <option value="1">1</option> -->
-<!--                                                                     <option value="1">2</option> -->
-<!--                                                                     <option value="1">3</option> -->
-<!--                                                                     <option value="1">4</option> -->
-<!--                                                                     <option value="2">5</option> -->
-<!--                                                                 </select><span>02</span> -->
-<!--                                                             </div> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">딸기 우유</a> -->
-<!--                                                             <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p> -->
-<!--                                                         </div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
-<!--                                             </div> -->
-<!--                                             상품 1개당 끝 -->
                                         </div>
                                     </div>
-                                   
-                                    
-                                    
-                                    <!-- 페이징 버튼들 시작 -->
-                                    <!-- 
-                                    * 페이징 하기
-                                     -->
-                                    <div class="ps-pagination">
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- 페이징 버튼들 끝 -->
-                                    
+                                 </div>     
+                               </div>     
+                             </div>
+                             
+                             
+                              <!-- 페이징 버튼들 시작 -->
+                            <div class="ps-pagination">
+                              	<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+								<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='category_dairy_drink?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+								<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+								&nbsp;
+								<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+									<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+									<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+									<c:choose>
+										<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+										<c:otherwise><a href="category_dairy_drink?pageNum=${i }">${i }</a></c:otherwise>
+									</c:choose>
+									&nbsp;
+								</c:forEach>
+								<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+								<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='category_dairy_drink?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
                                 </div>
+                                <!-- 페이징 버튼들 끝 -->
+                                
                            </div>
                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-	</div>
-   
-    
-   
- 
-   <!-- 푸터 삽입 -->
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!-- 푸터 삽입 -->
+       		 </section>
+		</div>
+
+	
+	
+	    <!-- 푸터 삽입 -->
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
+		<!-- 푸터 삽입 -->
    
     
     
-    
+   
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
