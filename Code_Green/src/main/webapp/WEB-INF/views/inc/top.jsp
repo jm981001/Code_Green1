@@ -103,7 +103,7 @@
                         <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun">어서와, 비건은 처음이지?</a></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="brand_main">브랜드별</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="recipe_main">레시피</a></li>   
-                        <li class="menu-item-has-children has-mega-menu"><a href="community_main">커뮤니티</a></li>   
+                        <li class="menu-item-has-children has-mega-menu"><a href="CommunityList.bo">커뮤니티</a></li>   
                     </ul>
                 </div>
             </div>

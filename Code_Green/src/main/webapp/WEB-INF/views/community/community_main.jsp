@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,7 @@
             <div class="ps-section__content">
                 <ul class="ps-section__links">
                     <li><a href="welcome_vegun">어서와,비건은 처음이지?</a></li>
-                    <li class="active"><a href="community_main">커뮤니티</a></li>
+                    <li class="active"><a href="CommunityList.bo">커뮤니티</a></li>
                     <li><a href="#">캠페인</a></li>
                 </ul>
                 <div class="ps-block--vendor-dashboard">
@@ -80,55 +81,16 @@
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
+		                               	 <c:forEach var="board" items="${communityList }">
 		                                    <tr>
-		                                        <td>7</td>
-		                                        <td>[공지]</td>
-		                                        <td><a href="community_detail">[안내] 자유롭게 의견 나누시는 곳입니다.</a></td>
-		                                        <td>관리자</td>
-		                                        <td>2022-09-21</td>
-		                                        <td>321546</td>
+		                                        <td>${board.board_idx }</td>
+		                                        <td>[${board.board_category }]</td>
+		                                        <td><a href="communityDetail.bo">${board.board_subject }</a></td>
+		                                        <td>${board.board_id }</td>
+		                                        <td>${board.board_date }</td>
+		                                        <td>${board.board_readcount }</td>
 		                                    </tr>
-		                                    <tr>
-		                                        <td>5</td>
-		                                        <td>[맛집]</td>
-		                                        <td><a href="community_detail">여기 저희동네 비건베이커리 맛집추천해봅니다! (45)</a></td>
-		                                        <td>도토리</td>
-		                                        <td>2022-10-25</td>
-		                                        <td>654</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <td>4</td>
-		                                        <td>[사담]</td>
-		                                        <td><a href="community_detail">평소에 알러지있어서 비건으로 드시는분 계세요? (8)</a></td>
-		                                        <td>너구리</td>
-		                                        <td>2022-10-25</td>
-		                                        <td>325</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <td>3</td>
-		                                        <td>[사담]</td>
-		                                        <td><a href="community_detail">여행가셔서 다들 어떻게 드세요? (32)</a></td>
-		                                        <td>비둘기</td>
-		                                        <td>2022-10-25</td>
-		                                        <td>458</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <td>2</td>
-		                                        <td>[추천]</td>
-		                                        <td><a href="community_detail">마트에 비건양념 많아졌어요! (77)</a></td>
-		                                        <td>토마토마토</td>
-		                                        <td>2022-10-24</td>
-		                                        <td>337</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <td>1</td>
-		                                        <td>[맛집]</td>
-		                                        <td><a href="community_detail">한식뷔페인데 비건요리로만 되있는곳 추천드려요!!</a></td>
-		                                        <td>가지가지</td>
-		                                        <td>2022-10-23</td>
-		                                        <td>752</td>
-		                                    </tr>
-		                                    
+		                                 </c:forEach>
 		                                </tbody>
 		                            </table>
 		                        </div>
@@ -136,26 +98,27 @@
                          
                          
                          
-                        <!-- 검색 카테고리  -->
-                        <div id="widget-search-select" align="right">
+                      
                        
                         
-                        <!-- 검색 부분  -->
-                         <select class="search-category">
+                   <!-- 검색 부분  -->
+                  <div id="widget-search-select" align="right">
+	                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
+                         <select name="searchType">
                                <option value="">카테고리</option>
-                               <option value="head">말머리</option>
-                               <option value="writer">작성자</option>
+                               <option value="category">말머리</option>
+                               <option value="id">작성자</option>
                                <option value="subject">제목</option>
                                <option value="content">내용</option>
-                               <option value="content">제목&내용</option>
+                               <option value="subject_content">제목&내용</option>
                           </select>
                           <aside class="widget widget--blog widget--search">
-	                        <form class="ps-form--widget-search" action="do_action" method="get">
-	                            <input class="form-control" type="text" placeholder="검색">
+	                            <input class="form-control" type="text"  name="keyword" placeholder="검색">
 	                            <button><i class="icon-magnifier"></i></button>
-	                        </form>
                    		 </aside>
-                   		  </div>
+	                  </form>
+                  </div>
+                   	
                    		<!-- 글작성 버튼 -->
                    		<div class="ps-form--quick-search--com">
                    			<button>글쓰기</button>
