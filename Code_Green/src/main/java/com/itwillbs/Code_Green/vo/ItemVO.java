@@ -3,7 +3,7 @@ package com.itwillbs.Code_Green.vo;
 public class ItemVO {
 	
 	
-
+	private int item_idx;
 	private String re_manager_idx;
 	private String item_name;
 	private String item_info;
@@ -16,8 +16,8 @@ public class ItemVO {
 	private String item_readcount;
 	private String item_date;
 	private String file;
+	private String manager_brandname;
 	
-	private int item_idx;
 	public int getItem_idx() {
 		return item_idx;
 	}
@@ -97,12 +97,19 @@ public class ItemVO {
 		this.file = file;
 	}
 	
+	public String getManager_brandname() {
+		return manager_brandname;
+	}
+	public void setManager_brandname(String manager_brandname) {
+		this.manager_brandname = manager_brandname;
+	}
+	
 	public ItemVO() {
 		// TODO Auto-generated constructor stub
 	}
 	public ItemVO(String re_manager_idx, String item_name, String item_info, String item_packing, String item_category,
 			String item_price, String item_sale, String item_stock, String item_status, String item_readcount,
-			String item_date, String file, int item_idx) {
+			String item_date, String file, int item_idx, String manager_brandname) {
 		super();
 		this.re_manager_idx = re_manager_idx;
 		this.item_name = item_name;
@@ -117,15 +124,17 @@ public class ItemVO {
 		this.item_date = item_date;
 		this.file = file;
 		this.item_idx = item_idx;
+		this.manager_brandname = manager_brandname;
 	}
 	@Override
 	public String toString() {
 		return "ItemVO [re_manager_idx=" + re_manager_idx + ", item_name=" + item_name + ", item_info=" + item_info
 				+ ", item_packing=" + item_packing + ", item_category=" + item_category + ", item_price=" + item_price
 				+ ", item_sale=" + item_sale + ", item_stock=" + item_stock + ", item_status=" + item_status
-				+ ", item_readcount=" + item_readcount + ", item_date=" + item_date + ", file=" + file + ", item_idx="
-				+ item_idx + "]";
+				+ ", item_readcount=" + item_readcount + ", item_date=" + item_date + ", file=" + file
+				+ ", manager_brandname=" + manager_brandname + ", item_idx=" + item_idx + "]";
 	}
+	
 	
 	
 
