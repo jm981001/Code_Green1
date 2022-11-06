@@ -77,15 +77,20 @@ public class ItemCategoryService {
 		return mapper.selectIcedEasyListCount();
 	}
 
-	// 전체 글 목록 갯수 조회(특가 상품)
+	// 전체 글 목록 갯수 조회(간식류)
 	public int selectSnackListCount() {
 		return mapper.selectSnackListCount();
 	}
+	
+	
 
 	// 낮은 가격순(유제품/음료)
 	public List<ItemVO> selectCheapDairyDrinkList(int startRow, int listLimit) {
 		return mapper.selectCheapDairyDrinkList(startRow, listLimit);
 	}
+
+
+	
 
 
 }

@@ -205,7 +205,7 @@ public class ItemCategoryController {
 	
 	// 특가 상품
 	@RequestMapping(value = "category_sale", method = RequestMethod.GET)
-	public String category_sale(Model model) {
+	public String category_sale(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
 		itemList = service.select_sale();
 		

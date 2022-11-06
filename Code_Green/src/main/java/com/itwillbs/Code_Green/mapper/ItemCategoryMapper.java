@@ -46,9 +46,6 @@ public interface ItemCategoryMapper {
 	// 전체 글 목록 갯수 조회(냉동/간편식품)
 	int selectIcedEasyListCount();
 
-	// 전체 글 목록 갯수 조회(특가 상품)
-//	int selectSaleListCount();
-
 	// 전체 글 목록 갯수 조회(간식류)
 	int selectSnackListCount();
 

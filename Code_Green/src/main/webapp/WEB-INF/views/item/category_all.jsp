@@ -63,7 +63,7 @@
                     </div>
                     <div class="ps-section__right">
                     	<div id="category_h3">
-							<h2>특가 상품</h2>
+							<h2>전체 상품</h2>
 						</div> 
                         <nav class="ps-store-link">
                             <select class="form-select" aria-label="Default select example">

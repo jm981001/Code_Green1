@@ -86,8 +86,8 @@
 			LIMIT #{startRow}, #{listLimit}
 	</select>
 
-	<!-- 특가상품 -->
-	<!-- 만원 이하 상품(만원까지) -->
+	<!-- 특가 상품 카테고리 -->
+	<!-- 5000원 이하 상품(5000원까지) -->
 	<select id="select_sale" resultType="com.itwillbs.Code_Green.vo.ItemVO">
 		select i.item_idx, 
 			   i.item_name,
@@ -98,10 +98,10 @@
 			from item i join file_item f
 			on i.item_idx = f.rf_item_idx
 			WHERE f.file NOT LIKE '%상세%'
-			  AND i.item_price &lt; 10000
+			  AND i.item_price &lt; 5000
 			ORDER BY
 				i.item_idx DESC
-			LIMIT #{startRow}, #{listLimit}
+<!-- 			LIMIT #{startRow}, #{listLimit} -->
 		
 		
 <!-- 		SELECT *  -->
@@ -129,7 +129,7 @@
 	
 	
 	
-	<!-- 전체 게시물 목록 갯수 조회(유제품/음료) -->
+	<!-- 전체 게시물 목록 갯수 조회(전체 상품) -->
 	<select id="selectAllListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
@@ -144,7 +144,7 @@
 		WHERE item_category = "유제품/음료"
 	</select>
 	
-	<!-- 전체 게시물 목록 갯수 조회(유제품/음료) -->
+	<!-- 전체 게시물 목록 갯수 조회(해산물) -->
 	<select id="selectFishListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
@@ -168,7 +168,7 @@
 		WHERE item_category = "냉동/간편식품"
 	</select>
 
-	<!-- 전체 게시물 목록 갯수 조회(냉동/간편식품) -->
+	<!-- 전체 게시물 목록 갯수 조회(간식류) -->
 	<select id="selectSnackListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 

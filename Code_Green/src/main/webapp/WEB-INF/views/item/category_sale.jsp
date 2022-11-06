@@ -161,14 +161,17 @@
                                     
                                     
                                    <!-- 페이징 버튼들 시작 -->
-                                    <div class="ps-pagination">
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
+                                   <!-- 
+                                   *5000원 이하 상품 목록 - 페이징x
+                                    -->
+<!--                                     <div class="ps-pagination"> -->
+<!--                                         <ul class="pagination"> -->
+<!--                                             <li class="active"><a href="#">1</a></li> -->
+<!--                                             <li><a href="#">2</a></li> -->
+<!--                                             <li><a href="#">3</a></li> -->
+<!--                                             <li><a href="#">Next<i class="icon-chevron-right"></i></a></li> -->
+<!--                                         </ul> -->
+<!--                                     </div> -->
                                     <!-- 페이징 버튼들 끝 -->
                                     
                                 </div>
