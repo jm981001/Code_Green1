@@ -429,7 +429,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 ">
-                                            <form class="ps-form--review" action="index.html" method="get">
+                                            <form class="ps-form--review" action="ReviewWritePro.bo" method="post" name="reviewForm">
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
@@ -445,11 +445,15 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <textarea class="form-control" rows="6" placeholder="Write your review here"></textarea>
+                                                	<input type="hidden" name="board_id" value="${sessionScope.sId}" />
+                                                	<input type="hidden" name="item_idx" value="${item.item_idx}" />
+                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="Write your review here"></textarea>
+                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="Write your review here"></textarea>
+                                                    
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">
-	                                                    <button class="ps-btn">Submit Review</button>
+	                                                    <button class="ps-btn" type="submit">Submit Review</button>
 	                                                </div>
                                                 </div>
                                             </form>

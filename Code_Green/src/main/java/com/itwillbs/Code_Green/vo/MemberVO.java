@@ -3,7 +3,7 @@ package com.itwillbs.Code_Green.vo;
 public class MemberVO {
 
 
-	private String  member_idx;
+	private int  member_idx;
 	private String  member_id ;
 	private String  member_pass;
 	private String  member_name;
@@ -14,12 +14,10 @@ public class MemberVO {
 	private String  member_address;
 	private String  member_del_yn;
 	private String  member_date;
-	
-	
-	public String getMember_idx() {
+	public int getMember_idx() {
 		return member_idx;
 	}
-	public void setMember_idx(String member_idx) {
+	public void setMember_idx(int member_idx) {
 		this.member_idx = member_idx;
 	}
 	public String getMember_id() {
@@ -82,11 +80,12 @@ public class MemberVO {
 	public void setMember_date(String member_date) {
 		this.member_date = member_date;
 	}
-	
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public MemberVO(String member_idx, String member_id, String member_pass, String member_name, String member_phone,
+	
+	
+	public MemberVO(int member_idx, String member_id, String member_pass, String member_name, String member_phone,
 			String member_email, String member_email_auth, String member_postcode, String member_address,
 			String member_del_yn, String member_date) {
 		super();
@@ -110,6 +109,11 @@ public class MemberVO {
 				+ ", member_address=" + member_address + ", member_del_yn=" + member_del_yn + ", member_date="
 				+ member_date + "]";
 	}
+
+	
+	
+	
+	
 	
 	
 }

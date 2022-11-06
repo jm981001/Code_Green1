@@ -2,8 +2,8 @@ package com.itwillbs.Code_Green.vo;
 
 public class BoardVO {
 
-	private String board_idx;
-	private String board_item_idx; //상품번호 (없으면 N)
+	private int board_idx;
+	private int board_item_idx; //상품번호 (없으면 N)
 	private String board_type; //게시판 타입 (커뮤, 후기)
 	private String board_id; //아이디
 	private String board_category; //말머리
@@ -11,17 +11,17 @@ public class BoardVO {
 	private String board_content; //내용
 	private String board_readcount; //조회수
 	private String board_date; //날짜
-	
-	public String getBoard_idx() {
+	private String item_idx; //상품번호
+	public int getBoard_idx() {
 		return board_idx;
 	}
-	public void setBoard_idx(String board_idx) {
+	public void setBoard_idx(int board_idx) {
 		this.board_idx = board_idx;
 	}
-	public String getBoard_item_idx() {
+	public int getBoard_item_idx() {
 		return board_item_idx;
 	}
-	public void setBoard_item_idx(String board_item_idx) {
+	public void setBoard_item_idx(int board_item_idx) {
 		this.board_item_idx = board_item_idx;
 	}
 	public String getBoard_type() {
@@ -66,11 +66,18 @@ public class BoardVO {
 	public void setBoard_date(String board_date) {
 		this.board_date = board_date;
 	}
+	public String getItem_idx() {
+		return item_idx;
+	}
+	public void setItem_idx(String item_idx) {
+		this.item_idx = item_idx;
+	}
 	
-	public BoardVO() {}
-	
-	public BoardVO(String board_idx, String board_item_idx, String board_type, String board_id, String board_category,
-			String board_subject, String board_content, String board_readcount, String board_date) {
+	public BoardVO() {
+		// TODO Auto-generated constructor stub
+	}
+	public BoardVO(int board_idx, int board_item_idx, String board_type, String board_id, String board_category,
+			String board_subject, String board_content, String board_readcount, String board_date, String item_idx) {
 		super();
 		this.board_idx = board_idx;
 		this.board_item_idx = board_item_idx;
@@ -81,15 +88,16 @@ public class BoardVO {
 		this.board_content = board_content;
 		this.board_readcount = board_readcount;
 		this.board_date = board_date;
+		this.item_idx = item_idx;
 	}
-	
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", board_item_idx=" + board_item_idx + ", board_type=" + board_type
 				+ ", board_id=" + board_id + ", board_category=" + board_category + ", board_subject=" + board_subject
 				+ ", board_content=" + board_content + ", board_readcount=" + board_readcount + ", board_date="
-				+ board_date + "]";
+				+ board_date + ", item_idx=" + item_idx + "]";
 	}
 	
+	 
 	
 }
