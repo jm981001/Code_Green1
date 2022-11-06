@@ -98,6 +98,7 @@ public class ItemCategoryController {
 		// 낮은 가격순
 		cheapItemList = service.selectCheapDairyDrinkList(startRow, listLimit);
 //		cheapItemListCount = service.selectCheapDairyDrinkListCount();
+		System.out.println(cheapItemList);
 		
 		model.addAttribute("cheapItemList", cheapItemList);
 		

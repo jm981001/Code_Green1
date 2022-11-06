@@ -16,6 +16,7 @@ public class ItemVO {
 	private String item_readcount;
 	private String item_date;
 	private String file;
+	private String manager_brandname;
 	
 	public String getItem_idx() {
 		return item_idx;
@@ -96,10 +97,18 @@ public class ItemVO {
 	public void setFile(String file) {
 		this.file = file;
 	}
+	
+	public String getManager_brandname() {
+		return manager_brandname;
+	}
+	public void setManager_brandname(String manager_brandname) {
+		this.manager_brandname = manager_brandname;
+	}
+	
 	public ItemVO() {}
 	public ItemVO(String item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
 			String item_category, String item_price, String item_sale, String item_stock, String item_status,
-			String item_readcount, String item_date, String file) {
+			String item_readcount, String item_date, String file, String manager_brandname) {
 		super();
 		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
@@ -114,6 +123,7 @@ public class ItemVO {
 		this.item_readcount = item_readcount;
 		this.item_date = item_date;
 		this.file = file;
+		this.manager_brandname = manager_brandname;
 	}
 	
 	

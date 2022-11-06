@@ -124,7 +124,7 @@
                                                     <!-- 
                                                     * 브랜드명은 서브쿼리 사용하여 불러오기
                                                      -->
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
                                                         <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
                                                             
                                                             <!-- 별점 -->

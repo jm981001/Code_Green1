@@ -132,7 +132,7 @@
                                                     <!-- 
                                                     * 브랜드명은 서브쿼리 사용하여 불러오기
                                                      -->
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
                                                         <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
                                                             
                                                             <!-- 별점 -->
@@ -185,7 +185,9 @@
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="product-default.html"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                                    	<a href="ItemDetail.bo?item_idx=${cheapItem.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${cheapItem.file }" alt="" />
+                                                    	</a>
                                                         <ul class="ps-product__actions">
                                                         	
                                                         	
