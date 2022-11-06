@@ -70,7 +70,8 @@
                     <div class="ps-section__left">
                         <aside class="widget widget--vendor">
                             <h3 class="widget-title">카테고리</h3>
-                            <ul class="ps-list--arrow">
+                            <ul class="menu--dropdown">
+                                <li><a href="category_all">전체 상품</a> </li>
                                 <li><a href="category_sale">특가 상품</a> </li>
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
@@ -101,7 +102,8 @@
                                         <div class="row">
                                         
                                         	<!-- 반복문 시작 -->
-                                        	<c:forEach var="item" items="${itemList }">
+                                        	<c:forEach var="item" items="${itemList }" varStatus="status">
+<%--                                         		<c:forEach var="image" items="${imageList }"> --%>
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
@@ -109,7 +111,9 @@
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${item.file }" alt="" />
+                                                    	</a>
                                                         <ul class="ps-product__actions">
                                                         	
                                                         	
@@ -156,7 +160,9 @@
                                                 </div>
                                             </div>
                                             <!-- 상품 1개당 끝 -->
-                                             </c:forEach>	
+												                                     
+<%--                                              </c:forEach>  --%>
+                                           </c:forEach>      	
                                         </div>
                                     </div>
                            		</div>
@@ -251,7 +257,7 @@
 								</c:forEach>
 								<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
 								<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='category_dairy_drink?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
-                                </div>
+                             </div>
                                 <!-- 페이징 버튼들 끝 -->
                                 
                            </div>

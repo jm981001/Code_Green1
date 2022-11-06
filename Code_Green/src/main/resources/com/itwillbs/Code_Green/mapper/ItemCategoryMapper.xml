@@ -2,58 +2,138 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.ItemCategoryMapper">
 
+	<!-- 전체 상품 카테고리 -->
+	<select id="select_all" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}		
+	</select>
+
 	<!-- 유제품/음료 카테고리 -->
 	<select id="select_dairy_drink" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "유제품/음료"
-		ORDER BY item_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_category = "유제품/음료"
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}		
 	</select>
-	
+		
 	<!-- 해산물 카테고리 -->
 	<select id="select_fish" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "해산물"
-		ORDER BY item_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_category = "해산물"
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}	
 	</select>
 	
 	<!-- 과일/채소 카테고리 -->
 	<select id="select_fruit_vegi" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "과일/채소"
-		ORDER BY item_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_category = "과일/채소"
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}
 	</select>
 
 	<!-- 냉동/간편식품 카테고리 -->
 	<select id="select_iced_easy" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "냉동/간편식품"
-		ORDER BY item_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_category = "냉동/간편식품"
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}
 	</select>
 
 	<!-- 특가상품 -->
 	<!-- 만원 이하 상품(만원까지) -->
 	<select id="select_sale" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_price &lt; 10000
-		ORDER BY item_idx DESC
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_price &lt; 10000
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}
+		
+		
+<!-- 		SELECT *  -->
+<!-- 		FROM item  -->
+<!-- 		WHERE item_price &lt; 10000 -->
+<!-- 		ORDER BY item_idx DESC -->
 	</select>
 	
 	<!-- 간식류 카테고리 -->
 	<select id="select_snack" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT * 
-		FROM item 
-		WHERE item_category = "간식류"
-		ORDER BY item_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		select i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%'
+			  AND i.item_category = "간식류"
+			ORDER BY
+				i.item_idx DESC
+			LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	
+	
+	<!-- 전체 게시물 목록 갯수 조회(유제품/음료) -->
+	<select id="selectAllListCount" resultType="integer">
+		SELECT 
+		COUNT(*) 
+		FROM item
 	</select>
 	
 	<!-- 전체 게시물 목록 갯수 조회(유제품/음료) -->
@@ -88,13 +168,6 @@
 		WHERE item_category = "냉동/간편식품"
 	</select>
 
-	<!-- 전체 게시물 목록 갯수 조회(특가 상품) -->
-<!-- 	<select id="selectIcedEasyListCount" resultType="integer"> -->
-<!-- 		SELECT  -->
-<!-- 		COUNT(*)  -->
-<!-- 		FROM item -->
-<!-- 	</select> -->
-
 	<!-- 전체 게시물 목록 갯수 조회(냉동/간편식품) -->
 	<select id="selectSnackListCount" resultType="integer">
 		SELECT 
@@ -102,6 +175,9 @@
 		FROM item
 		WHERE item_category = "간식류"
 	</select>
+	
+	
+	
 	
 	<!-- 낮은 가격순(유제품/음료) -->
 	<select id="selectCheapDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
@@ -112,12 +188,5 @@
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
-<!-- 	<select id="selectSnackListCount" resultType="integer"> -->
-<!-- 		SELECT  -->
-<!-- 		COUNT(*)  -->
-<!-- 		FROM item -->
-<!-- 		WHERE item_category = "유제품/음료" -->
-<!-- 		ORDER BY CAST(item_price AS UNSIGNED) -->
-<!-- 	</select>	 -->
 		
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ItemCategoryMapper;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 
 @Service
@@ -13,6 +14,11 @@ public class ItemCategoryService {
 	
 	@Autowired
 	private ItemCategoryMapper mapper;
+	
+	// 전체 상품
+	public List<ItemVO> select_all(int startRow, int listLimit) {
+		return mapper.select_all(startRow, listLimit);
+	}
 	
 	// 유제품/음료
 	public List<ItemVO> select_dairy_drink(int startRow, int listLimit) {
@@ -44,6 +50,13 @@ public class ItemCategoryService {
 		return mapper.select_snack(startRow, listLimit);
 	}
 
+	
+	
+	// 전체 글 목록 갯수 조회(전체 상품)
+	public int selectAllListCount() {
+		return mapper.selectAllListCount();
+	}
+	
 	// 전체 글 목록 갯수 조회(유제품/음료)
 	public int selectDairyDrinkListCount() {
 		return mapper.selectDairyDrinkListCount();
@@ -64,12 +77,6 @@ public class ItemCategoryService {
 		return mapper.selectIcedEasyListCount();
 	}
 
-
-	// 전체 글 목록 갯수 조회(특가 상품)
-//	public int selectSaleListCount() {
-//		return mapper.selectSaleListCount();
-//	}
-
 	// 전체 글 목록 갯수 조회(특가 상품)
 	public int selectSnackListCount() {
 		return mapper.selectSnackListCount();
@@ -80,9 +87,5 @@ public class ItemCategoryService {
 		return mapper.selectCheapDairyDrinkList(startRow, listLimit);
 	}
 
-	// 낮은 가격순(유제품/음료) 페이징 - 갯수 카운트
-//	public int selectCheapDairyDrinkListCount() {
-//		return mapper.selectCheapDairyDrinkListCount();
-//	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.ItemCategoryService;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 
@@ -29,6 +30,39 @@ public class ItemCategoryController {
 	int endPage;
 	List<ItemVO> cheapItemList;
 //	int cheapItemListCount;
+	
+	// 전체 상품
+	@RequestMapping(value = "category_all", method = RequestMethod.GET)
+	public String category_all(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+		
+		listLimit = 16; 
+		
+		pageListLimit = 10; 
+
+		startRow = (pageNum - 1) * listLimit;
+		
+		itemList = service.select_all(startRow, listLimit);
+		
+		listCount = service.selectAllListCount();
+		
+		maxPage = (int)Math.ceil((double)listCount / listLimit);
+		
+		startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		
+		endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "item/category_all";
+	}
 	
 	// 유제품 / 음료
 	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)

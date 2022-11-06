@@ -49,7 +49,8 @@
                     <div class="ps-section__left">
                         <aside class="widget widget--vendor">
                             <h3 class="widget-title">카테고리</h3>
-                            <ul class="ps-list--arrow">
+                            <ul class="menu--dropdown">
+                                <li><a href="category_all">전체 상품</a> </li>
                                 <li><a href="category_sale">특가 상품</a> </li>
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
@@ -102,7 +103,9 @@
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${item.file }" alt="" />
+                                                    	</a>
                                                         <ul class="ps-product__actions">
                                                         	
                                                         	

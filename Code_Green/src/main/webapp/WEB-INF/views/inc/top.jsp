@@ -81,6 +81,7 @@
                         <div class="menu__toggle"><i class="icon-menu"></i><span>카테고리</span></div>
                         <div class="menu__content">
                             <ul class="menu--dropdown">
+                                <li><a href="category_all">전체 상품</a> </li>
                                 <li><a href="category_sale">특가 상품</a> </li>
                                 <li><a href="category_fruit_vegi">과일 / 채소</a> </li>
                                 <li><a href="category_dairy_drink">유제품 / 음료</a></li>
