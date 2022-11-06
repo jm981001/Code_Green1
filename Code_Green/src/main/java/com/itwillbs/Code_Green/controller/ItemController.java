@@ -31,7 +31,7 @@ public class ItemController {
 			@RequestParam(defaultValue = "") String keyword, 
 			@RequestParam(defaultValue = "1") int pageNum, Model model) {
 	
-		int listLimit = 30; // 한 페이지 당 표시할 게시물 목록 갯수 
+		int listLimit = 16; // 한 페이지 당 표시할 게시물 목록 갯수 
 		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
 		
 		// 조회 시작 게시물 번호(행 번호) 계산
@@ -45,6 +45,7 @@ public class ItemController {
 		// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 		// => 파라미터 : 없음, 리턴타입 : int(listCount)
 		int listCount = service.getItemListCount(searchType, keyword);
+
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		// 시작 페이지 번호 계산
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
@@ -55,7 +56,10 @@ public class ItemController {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-
+//		System.out.println(listCount);//140
+//		System.out.println(maxPage);//9
+//		System.out.println(startPage);//1
+//		System.out.println(endPage);//9
 		// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
@@ -86,7 +90,7 @@ public class ItemController {
 			List<QnaVO> qnaList = service.getQna(startRow, listLimit, item_idx);
 			
 			//상세상세페이지 안 관련상품 5개
-//			List<ItemVO> itemList6 = service.itemList6();
+			List<ItemVO> itemList6 = service.itemList6();
 			
 			
 			int listCount = service.getReviewListCount(searchType);
@@ -110,7 +114,7 @@ public class ItemController {
 			model.addAttribute("item", item);
 			model.addAttribute("itemList", itemList);
 			model.addAttribute("qnaList", qnaList);
-//			model.addAttribute("itemList6", itemList6);
+			model.addAttribute("itemList6", itemList6);
 			return "item/item_detail";
 		}
 		

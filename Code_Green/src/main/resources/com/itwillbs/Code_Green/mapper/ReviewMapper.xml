@@ -34,4 +34,12 @@
 <!-- 					"20221106") -->
 	</insert>
 	
+	
+<!-- 	리뷰삭제 -->
+	<delete id="deleteReview">
+		DELETE
+			FROM board
+			WHERE 
+				board_idx = #{board_idx}
+	</delete>
 </mapper>

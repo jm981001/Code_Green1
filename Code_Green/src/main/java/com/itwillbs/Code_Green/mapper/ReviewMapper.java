@@ -7,5 +7,8 @@ public interface ReviewMapper {
 	//리뷰 등록
 	int insertReview(BoardVO board);
 
+	//리뷰 삭제
+	int deleteReview(String board_idx);
+
 	
 }

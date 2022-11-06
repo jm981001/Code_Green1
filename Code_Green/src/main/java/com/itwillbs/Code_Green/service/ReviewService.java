@@ -16,4 +16,9 @@ public class ReviewService {
 	public int registReview(BoardVO board) {
 		return mapper.insertReview(board);
 	}
+
+	//리뷰 삭제
+	public int removeReview(String board_idx) {
+		return mapper.deleteReview(board_idx);
+	}
 }

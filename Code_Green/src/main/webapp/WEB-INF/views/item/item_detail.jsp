@@ -22,13 +22,13 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins/nouislider/nouislider.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 
+	
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>  
   <style type="text/css">  
     table {
@@ -130,7 +130,7 @@
                                 
                                 <div class="ps-product__desc">
                                     <ul class="ps-list--dot">
-                                        <li>판매자 </li>
+                                        <li>판매자 &nbsp;${item.manager_brandname }</li>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
                                         <li>카테고리 &nbsp; ${item.item_category }</li>
                                         <li>원산지   &nbsp;&nbsp; ${item.item_packing }</li>
@@ -265,8 +265,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-lg-8">
-                                            <form class="ps-form--review" method="get" >
+                                            <form class="ps-form--review" action=""  method="get"  >
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
@@ -308,13 +309,27 @@
 													                   ${board.board_content }
 													                    
 																		<div align="right">
+																		
 																		    <button>좋아용</button>
+																			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
 																		 </div>
 													                </td>  
 													            </tr>  
 													        </tbody>  
 												        </c:forEach>
 												    </table>  
+												    <script type="text/javascript">
+														function confirmDelete(board_idx) {
+															// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+															// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+															let result = confirm("삭제하시겠습니까?");
+															
+															if(result) {
+																location.href="ReviewDelete.bo?board_idx=" + board_idx+"&item_idx=" + ${item.item_idx};
+															}
+														}
+													</script>
 												    <script type="text/javascript">  
 												        $(function(){  
 												            var article = (".recruit .show");  

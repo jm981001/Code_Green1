@@ -54,7 +54,7 @@
 										<li><a href="myPage_qnaDetail"><i class="icon-store"></i>문의내역</a></li>
 										<li><a href="myPage_board"><i class="icon-store"></i>작성글</a></li>
 										<li><a href="myPage_userInfo"><i class="icon-user"></i>개인정보 수정</a></li>
-										<li><a href="#"><i class="icon-power-switch"></i>Logout</a></li>
+										<li><a href="MemberLogout.me"><i class="icon-power-switch"></i>Logout</a></li>
 									</ul>
 								</div>
 							</aside>

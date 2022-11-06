@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -20,7 +21,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins/nouislider/nouislider.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
@@ -83,7 +83,7 @@
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">풀무원</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.manager_brandname }</a>
                                                         <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
                                                             
                                                             <!-- 별점 -->
@@ -112,23 +112,46 @@
                                             </div>
                                             <!-- 상품 1개당 끝 -->
                                              </c:forEach>	
-                        <div class="ps-product">
-                        </div>   
-                    </div>
-                </div>
-            </div>
+				                        <div class="ps-product">
+				                        </div>   
+				                    </div>
+				                    
+				                       <!-- 페이징 버튼들 시작 -->
+                                   <div class="ps-pagination">
+                                   		<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+										<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ItemList.bo?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+										<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+										&nbsp;
+										<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+											<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+											<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+											<c:choose>
+												<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+												<c:otherwise><a href="ItemList.bo?pageNum=${i }">${i }</a></c:otherwise>
+											</c:choose>
+											&nbsp;
+										</c:forEach>
+									<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+									<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ItemList.bo?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+                                    </div>
+                                    <!-- 페이징 버튼들 끝 -->
+				                    
+				                    
+				                    
+				                </div>
+				            </div>
+				        </div>
+			        </div>
+		        </div>
+		        
+	        </div>
         </div>
-        </div>
-        </div>
-        
-        </div>
-        </div>
-        </section>
+       </section>
          <!-- ---------------------------------------------- 상품 목록 끝------------------------------------------------------------------- -->
   
         
       
-	    </div>
+    </div>
     
         <!-- ---------------------------------------------------------- 푸터푸터 ---------------------------------------------------------- -->
      	<jsp:include page="../inc/footer.jsp"></jsp:include>
