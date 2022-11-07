@@ -89,8 +89,18 @@ public class CommunityController {
 	
 	
 	//------------ 커뮤니티 글 상세보기 페이지 -------------------------------------------
-	@RequestMapping(value = "community_detail", method = RequestMethod.GET)
-	public String community_detail() {
+	@GetMapping(value = "/CommunityDetail.bo")
+	public String communityDetail(@RequestParam int board_idx,Model model) {
+		// service 객체의 increaseReadcount() 메서드 호출하여 게시물 조회 증가
+		service.increaseReadcount(board_idx);
+		
+		// service 객체의 getBoardDetail() 메서드를 호출하여 게시물 상세정보 조회 
+		// => 파라미터 : 글번호, 리턴타입 : BoardVO(board)
+		BoardVO cBoard = service.getBoardDetail(board_idx);
+		
+		// Model 객체에 BoardVO 객체 추가
+		model.addAttribute("cBoard", cBoard);
+	
 		return "community/community_detail";
 	}
 	

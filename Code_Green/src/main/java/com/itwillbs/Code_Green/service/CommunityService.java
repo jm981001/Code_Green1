@@ -25,6 +25,16 @@ public class CommunityService {
 		return mapper.selectCommunityListCount(searchType, keyword);
 	}
 
+	// 게시글 조회수 증가 
+	public void increaseReadcount(int board_idx) {
+		mapper.updateReadcount(board_idx);
+	}
+	
+	// 게시글 상세조회
+	public BoardVO getBoardDetail(int board_idx) {
+		return mapper.selectBoardDetail(board_idx);
+	}
+
 	
 	
 	

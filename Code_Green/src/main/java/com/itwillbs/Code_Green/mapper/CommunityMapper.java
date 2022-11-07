@@ -16,6 +16,12 @@ public interface CommunityMapper {
 
 	// 전체 글 목록 갯수 조회 
 	int selectCommunityListCount(
-			@Param("searchType") String searchType, @Param("keyword") String keyword);;
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+	// 게시글 조회수 증가 
+	void updateReadcount(int board_idx);
+
+	// 게시글 상세조회
+	BoardVO selectBoardDetail(int board_idx);
 	
 }

@@ -1,6 +1,8 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,9 +87,11 @@
 		                                    <tr>
 		                                        <td>${board.board_idx }</td>
 		                                        <td>[${board.board_category }]</td>
-		                                        <td><a href="communityDetail.bo">${board.board_subject }</a></td>
+		                                        <td><a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a></td>
 		                                        <td>${board.board_id }</td>
-		                                        <td>${board.board_date }</td>
+		                                        <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
+		                                        <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
+		                                        
 		                                        <td>${board.board_readcount }</td>
 		                                    </tr>
 		                                 </c:forEach>
@@ -101,38 +105,44 @@
                       
                        
                         
-                   <!-- 검색 부분  -->
-                  <div id="widget-search-select" align="right">
-	                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
-                         <select name="searchType">
-                               <option value="">카테고리</option>
-                               <option value="category">말머리</option>
-                               <option value="id">작성자</option>
-                               <option value="subject">제목</option>
-                               <option value="content">내용</option>
-                               <option value="subject_content">제목&내용</option>
-                          </select>
-                          <aside class="widget widget--blog widget--search">
-	                            <input class="form-control" type="text"  name="keyword" placeholder="검색">
-	                            <button><i class="icon-magnifier"></i></button>
-                   		 </aside>
-	                  </form>
-                  </div>
+                  <!-- 검색 부분  -->
+                    <div id="widget-search-select">
+		                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
+	                         <select name="searchType">
+	                               <option value="">카테고리</option>
+	                               <option value="category">말머리</option>
+	                               <option value="id">작성자</option>
+	                               <option value="subject">제목</option>
+	                               <option value="content">내용</option>
+	                               <option value="subject_content">제목&내용</option>
+	                          </select>
+	                          <aside class="widget widget--blog widget--search">
+		                            <input class="form-control" type="text"  name="keyword" placeholder="검색">
+		                            <button><i class="icon-magnifier"></i></button>
+	                   		 </aside>
+		                  </form>
+               		<!-- 글작성 버튼 -->
+               		<div class="ps-form--quick-search--com" align="left">
+               			<button>글쓰기</button>
+               		</div>
+                    </div>
                    	
-                   		<!-- 글작성 버튼 -->
-                   		<div class="ps-form--quick-search--com">
-                   			<button>글쓰기</button>
-                   		</div>
-                   		 			<!-- 페이징 버튼들 시작 -->
-                                    <div class="ps-pagination">
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- 페이징 버튼들 끝 -->
+   		 			<!-- 페이징 버튼들 시작 -->
+   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+                    <div class="ps-pagination">
+                        <ul class="pagination">
+                           
+                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+                            	<c:choose>
+                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+                            		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+                            	</c:choose>
+                            </c:forEach>
+                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- 페이징 버튼들 끝 -->
                                     
                     </div>
                 </div>
