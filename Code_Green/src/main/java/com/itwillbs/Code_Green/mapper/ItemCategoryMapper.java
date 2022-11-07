@@ -10,7 +10,7 @@ import com.itwillbs.Code_Green.vo.ItemVO;
 public interface ItemCategoryMapper {
 
 	// 전체 상품
-	List<ItemVO> select_all(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_all(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	
 	// 유제품/음료
 	List<ItemVO> select_dairy_drink(@Param("startRow")int startRow, @Param("listLimit")int listLimit);

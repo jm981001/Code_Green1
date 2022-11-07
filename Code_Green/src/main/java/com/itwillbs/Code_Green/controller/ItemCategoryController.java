@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.ItemCategoryService;
-import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 
@@ -33,7 +32,10 @@ public class ItemCategoryController {
 	
 	// 전체 상품
 	@RequestMapping(value = "category_all", method = RequestMethod.GET)
-	public String category_all(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+	public String category_all(
+			@RequestParam(defaultValue = "") String searchType, 
+			@RequestParam(defaultValue = "") String keyword,  
+			@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
 		listLimit = 16; 
 		
@@ -41,7 +43,7 @@ public class ItemCategoryController {
 
 		startRow = (pageNum - 1) * listLimit;
 		
-		itemList = service.select_all(startRow, listLimit);
+		itemList = service.select_all(startRow, listLimit, searchType, keyword);
 		
 		listCount = service.selectAllListCount();
 		
