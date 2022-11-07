@@ -65,7 +65,18 @@
                     	<div id="category_h3">
 							<h2>전체 상품</h2>
 						</div> 
-                        <nav class="ps-store-link">
+                        <nav class="ps-store-link" style="margin-top: 100px;">
+                        	<section id="buttonArea">
+							<!-- 검색 기능 구현을 위한 form 태그 -->
+								<form action="category_all" method="get" style="margin-left: 20px">
+									<select name="searchType">
+										<option value="item_name">상품명</option>
+										<option value="brand_name">상호명</option>
+									</select>
+									<input type="text" name="keyword">
+									<input type="submit" value="검색">
+								</form>
+							</section>
                             <select class="form-select" aria-label="Default select example">
 							  <option value="1">신상품순</option>
 							  <option value="2">후기 많은순</option>
@@ -99,7 +110,7 @@
                                         	<!-- 반복문 시작 -->
                                         	<c:forEach var="item" items="${itemList }">
                                         	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
                                                     <div class="ps-product__thumbnail">
                                                     	
