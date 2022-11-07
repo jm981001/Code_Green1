@@ -113,6 +113,10 @@
                 </div>
                 <div class="header__right"><a class="header__site-link" href="#"><span>브랜드페이지로 이동하기(나중에 링크걸기)</span><i class="icon-exit-right"></i></a></div>
             </header>
+            
+<!--    상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회-->
+<!--    상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회-->
+            
             <section class="ps-items-listing">
                 
                 <div class="ps-section__content">
@@ -121,11 +125,6 @@
                             <thead>
                             </thead>
                             <tbody>
-
-                                
-                           
-<!--    상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회-->
-<!--    상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회-->
                                
 			    <div class="container">
 			    <div class="input-form-backgroud row">
@@ -138,12 +137,12 @@
 			          
 			          <div class="col-md-6 mb-3">
 			              <label for="name">브랜드명</label>
-			              <input type="text" class="form-control" id="name" placeholder="" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="brandname" name="brandname" value="${manager.manager_brandname }" readonly="readonly">
 			            </div>
 			            
 			            <div class="col-md-6 mb-3">
-			              <label for="name">법인명</label>
-			              <input type="text" class="form-control" id="name" placeholder="" value="" readonly="readonly">
+			              <label for="name">가입승인여부</label>
+			              <input type="text" class="form-control" id="auth" value="${manager.manager_adminauth }" readonly="readonly">
 			            </div>
 			         </div>
 			<!--아래 사업자번호 -->
@@ -151,13 +150,15 @@
 			        
 			         <div class="mb-3">
 			            <label for="email">사업자 번호</label>
-			            <input type="text" class="form-control" id="email" placeholder="534895-23874928" readonly="readonly">
+			            <input type="text" class="form-control" id="storecode" value="${manager.manager_storecode }" readonly="readonly">
 			          </div>
+			          
+			          
 			          
 			<!-- 이름 -->
 			         <div class="mb-3">
 			            <label for="email">이름</label>
-			            <input type="text" class="form-control" id="name" placeholder="체리맛" readonly="readonly">
+			            <input type="text" class="form-control" id="name" value="${manager.manager_name }" readonly="readonly">
 			          </div> 
 			        
 			<!-- 아디,비번 -->
@@ -165,45 +166,36 @@
 			          
 			          <div class="col-md-6 mb-3">
 			              <label for="name">아이디</label>
-			              <input type="text" class="form-control" id="id" placeholder="cherry" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="id" value="${manager.manager_id }" readonly="readonly">
 			            </div>
 			            
 			            <div class="col-md-6 mb-3">
 			              <label for="name">비밀번호</label>
-			              <input type="text" class="form-control" id="passwd" placeholder="12341234" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="passwd" value="${manager.manager_pass }" readonly="readonly">
 			            </div>
 			            
 			            
 		 	<!-- 전화번호,이메일,주소 -->    
 			            <div class="col-md-6 mb-3">
 			              <label for="name">전화번호</label>
-			              <input type="tel" class="form-control" id="name" placeholder="010-1111-2345" value="" readonly="readonly">
+			              <input type="tel" class="form-control" id="phone" value="${manager.manager_phone }" readonly="readonly">
 			            </div>
 			            <div class="col-md-6 mb-3">
 			              <label for="nickname">이메일</label>
-			              <input type="text" class="form-control" id="nickname" placeholder="" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="email" value="${manager.manager_email }" readonly="readonly">
 			            </div>
 			          </div>
 			
 			          <div class="mb-3">
 			            <label for="address">주소</label>
-			            <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" readonly="readonly">
+			            <input type="text" class="form-control" id="address" value="${manager.manager_postcode }" readonly="readonly">
 			          </div>
-			
-<!-- 			      		 <button class="btn btn-primary btn-lg btn-block" type="button">주소 검색(이건 수정시에 근데 이것도 수정하남?)</button> -->
-<!-- 						<div><input type="button" class="btn btn-primary btn-lg btn-block" value="와랄라" ></div> -->
-						
 						
 			          <div class="mb-3">
 			            <label for="address2">상세주소<span class="text-muted">&nbsp;</span></label>
-			            <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요." readonly="readonly">
+			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
-			
-			          
-			          <hr class="mb-4">
-			          
-			          <div class="mb-4"></div>
-			          <button class="btn btn-primary btn-lg btn-block" type="submit">수정하러가기</button>
+
 			        </form>
 			      </div>
 			    </div>

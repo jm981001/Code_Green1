@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,17 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+     <script type="text/javascript">
+	function confirmDelete(id) {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		let result = confirm(id + "을 추방하시겠습니까?");
+		
+		if(result) {
+			location.href="ad_ManagerDelete?id=" + id;
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -126,48 +138,28 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="mgList" items="${managerList }">
                                 <tr>
 <!-- A태그 추가 클릭시 - 상세 정보 조회 페이지로 이동  -->
                                 
-                                    <td><a href="ad_Manager_detail"><strong>잇츠베러</strong></a></td>
-                                    <td>아이디 자리</td>
-                                    <td>나로 말할 것 같으면</td>
-                                    <td>010-1234-1234</td>
-                                    <td>여기는 이메일이메일왜웅</td>
+                                    <td><a href="ad_Manager_detail?id=${mgList.manager_id }"><strong>${mgList.manager_brandname }</strong></a></td>
+                                    <td>${mgList.manager_id }</td>
+                                    <td>${mgList.manager_name }</td>
+                                    <td>${mgList.manager_phone }</td>
+                                    <td>${mgList.manager_email }</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
 <!--                                     </td> -->
-                                    <td>Jul 21, 2020</td>
+                                    <td>${mgList.manager_date }</td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>미승인</strong></button></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#">상품목록</a>
-                                            <a class="dropdown-item" href="#">정보수정</a>
-                                            <a class="dropdown-item" href="#">탈퇴시키기</a></div>
+                                            <a class="dropdown-item" onclick="confirmDelete('${mgList.manager_id}')">탈퇴시키기</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                               <tr>
-<!-- A태그 추가 클릭시 - 상세 정보 조회 페이지로 이동  -->
-                                
-                                    <td><a href="ad_Manager_detail"><strong>잇츠베러</strong></a></td>
-                                    <td>아이디 자리</td>
-                                    <td>나로 말할 것 같으면</td>
-                                    <td>010-1234-1234</td>
-                                    <td>여기는 이메일이메일왜웅</td>
-<!--                                     <td><span class="ps-badge success">active</span> -->
-<!--                                     </td> -->
-                                    <td>Jul 21, 2020</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>승인</strong></button></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               
-                                        
-                                  
+                             </c:forEach>
                                    
                             </tbody>
                         </table>

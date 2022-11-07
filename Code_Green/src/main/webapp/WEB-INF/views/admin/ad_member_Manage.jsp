@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>Martfury - Orders</title>
+    <title>회원관리 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -24,6 +24,17 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    <script type="text/javascript">
+	function confirmDelete(id) {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		let result = confirm("추방하시겠습니까?");
+		
+		if(result) {
+			location.href="ad_memberDelete?id=" + id;
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -117,35 +128,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="member" items="${memberList }">
                                 <tr>
-                                    <td><a href="ad_member_Detail"><strong>sodaa</strong></a></td>
-                                    <td>소다맛</td>
-                                    <td>211-32-1145</td>
-                                    <td>soda@aaaaaa</td>
+                                    <td><a href="ad_member_Detail?id=${member.member_id }"><strong>${member.member_id }</strong></a></td>
+                                    <td>${member.member_name }</td>
+                                    <td>${member.member_phone }</td>
+                                    <td>${member.member_email }</td>
                                    
-                                    <td>Jul 21, 2020</td>
+                                    <td>${member.member_date }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_Member_Activity.jsp">활동내역</a><a class="dropdown-item" href="#">강제탈퇴</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="ad_Member_Activity.jsp">활동내역</a>
+                                            <a class="dropdown-item" onclick="confirmDelete('${member.member_id}')">강제탈퇴</a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
+                            </c:forEach>   
                                
-                                <tr>
-                                    <td><a href="ad_member_Detail"><strong>lalala</strong></a></td>
-                                    <td>소다맛</td>
-                                    <td>291-32-145</td>
-                                    <td>lalala@skskkk</td>
-                                    
-<!--                                     <td><span class="ps-badge success">active</span> -->
-<!--                                     </td> -->
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

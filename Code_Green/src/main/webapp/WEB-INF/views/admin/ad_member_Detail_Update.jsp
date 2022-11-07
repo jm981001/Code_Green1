@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,14 +120,14 @@
 			    <div class="container">
 			    <div class="input-form-backgroud row">
 			      <div class="input-form col-md-12 mx-auto">
-			        <h4 class="mb-3">상세정보조회</h4>
-			        <form class="validation-form" novalidate>
+			        <h4 class="mb-3">상세정보수정</h4>
+			        <form class="validation-form" novalidate action="ad_member_Detail_UpdatePro" method="post">
 			        
 			          
 			<!-- 이름 -->
 			         <div class="mb-3">
 			            <label for="email">이름</label>
-			            <input type="text" class="form-control" id="name" placeholder="체리맛" required="required">
+			            <input type="text" class="form-control" id="name" name="newName" value="${member.member_name }">
 			          </div> 
 			        
 			<!-- 아디,비번 -->
@@ -134,29 +135,29 @@
 			          
 			          <div class="col-md-6 mb-3">
 			              <label for="name">아이디</label>
-			              <input type="text" class="form-control" id="id" placeholder="cherry" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="id" name="id" value="${member.member_id }" readonly="readonly">
 			            </div>
 			            
 			            <div class="col-md-6 mb-3">
 			              <label for="name">비밀번호</label>
-			              <input type="text" class="form-control" id="passwd" placeholder="12341234" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="passwd" value="${member.member_pass }" readonly="readonly">
 			            </div>
 			            
 			            
 			          
 			            <div class="col-md-6 mb-3">
 			              <label for="name">전화번호</label>
-			              <input type="tel" class="form-control" id="name" placeholder="010-1111-2345" value="" readonly="readonly">
+			              <input type="tel" class="form-control" id="name" value="${member.member_phone }" readonly="readonly">
 			            </div>
 			            <div class="col-md-6 mb-3">
 			              <label for="nickname">이메일</label>
-			              <input type="text" class="form-control" id="nickname" placeholder="" value="" readonly="readonly">
+			              <input type="text" class="form-control" id="nickname" value="${member.member_email }" readonly="readonly">
 			            </div>
 			          </div>
 			
 			          <div class="mb-3">
 			            <label for="address">주소</label>
-			            <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" readonly="readonly">
+			            <input type="text" class="form-control" id="address" value="${member.member_postcode }" readonly="readonly">
 			          </div>
 			
 <!-- 			      		 <button class="btn btn-primary btn-lg btn-block" type="button">주소 검색(이건 수정시에 근데 이것도 수정하남?)</button> -->
@@ -165,7 +166,7 @@
 						
 			          <div class="mb-3">
 			            <label for="address2">상세주소<span class="text-muted">&nbsp;</span></label>
-			            <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요." readonly="readonly">
+			            <input type="text" class="form-control" id="address2" value="${member.member_address }" readonly="readonly">
 			          </div>
 			
 			          
