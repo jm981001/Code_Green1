@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.QnaMapper">
+
+<!-- 상품 후기 작성  -->
+	<insert id="insertQna">
+		<selectKey keyProperty="qna_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(qna_idx) FROM qna
+		</selectKey>
+		INSERT 
+			INTO qna
+			VALUES (
+					#{qna_idx}+ 1,   
+					#{item_idx}, 
+					"상품문의", 
+					"N", 
+					#{qna_id}, 
+					"N", 
+					#{qna_subject}, 
+					#{qna_content}, 
+					#{qna_idx}+ 1,  
+					"0", 
+					"0", 
+					"0", 
+					"20221107")
+	</insert>
+
+
+<!-- 상품 후기 삭제 -->
+	<delete id="deleteQna">
+		DELETE
+			FROM qna
+			WHERE 
+				qna_idx = #{qna_idx}
+	</delete>
+	
+</mapper>
