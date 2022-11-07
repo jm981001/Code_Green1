@@ -14,20 +14,20 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE f.file NOT LIKE '%상세%'
-		 ORDER BY i.item_idx DESC
-		 LIMIT #{startRow}, #{listLimit}
-
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale,  -->
-<!-- 			   f.file -->
-<!-- 		  FROM item i join file_item f -->
-<!-- 			ON i.item_idx = f.rf_item_idx -->
-<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
-<!-- 	  ORDER BY i.item_idx DESC -->
-<!-- 		 LIMIT #{startRow}, #{listLimit}		 -->
+		 	<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('item_name')">
+						 AND i.item_name LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('brand_name')">
+						 AND m.manager_brandname LIKE '%${keyword}%' 
+					</when>
+				</choose>
+			</if>
+	 ORDER BY i.item_idx DESC
+	    LIMIT #{startRow}, #{listLimit}
+		 
 	</select>
 
 	<!-- 유제품/음료 카테고리 -->
@@ -42,7 +42,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '유제품/음료'
-		 ORDER BY i.item_idx DESC
+	  ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->

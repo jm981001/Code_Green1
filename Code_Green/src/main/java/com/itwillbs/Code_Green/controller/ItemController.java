@@ -92,6 +92,8 @@ public class ItemController {
 			//상세상세페이지 안 관련상품 5개
 			List<ItemVO> itemList6 = service.itemList6();
 			
+			//상세상세페이지 같은 브랜드상품 2개
+			List<ItemVO> sameBrand = service.sameBrand();
 			
 			int listCount = service.getReviewListCount(searchType);
 			int maxPage = (int)Math.ceil((double)listCount / listLimit);
@@ -115,6 +117,7 @@ public class ItemController {
 			model.addAttribute("itemList", itemList);
 			model.addAttribute("qnaList", qnaList);
 			model.addAttribute("itemList6", itemList6);
+			model.addAttribute("sameBrand", sameBrand);
 			return "item/item_detail";
 		}
 		

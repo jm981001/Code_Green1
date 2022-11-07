@@ -311,6 +311,7 @@
 																		<div align="right">
 																		
 																		    <button>좋아용</button>
+																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
 																		 </div>
@@ -347,53 +348,16 @@
 												    </script>  
 												    <br>
 												    
-												     <!-- 페이징 버튼들 시작 -->
-				                                    <div class="ps-pagination">
-				                                        <ul class="pagination">
-				                                            <li class="active"><a href="#">1</a></li>
-				                                            <li><a href="#">2</a></li>
-				                                            <li><a href="#">3</a></li>
-				                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-				                                        </ul>
-				                                    </div>
-				                                    <!-- 페이징 버튼들 끝 -->
-				                                    
-				                                    
-				                                    
-<!-- 				                                    <section id="pageList"> -->
-<%-- 															<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
-<%-- 															<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"<%} %>> --%>
-<!-- 															시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
-<!-- 															&nbsp; -->
-<%-- 															<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
-<!-- 																현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
-<!-- 																아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
-<%-- 																<c:choose> --%>
-<%-- 																	<c:when test="${i eq pageInfo.pageNum }">${i }</c:when> --%>
-<%-- 																	<c:otherwise><a href="BoardList.bo">${i }</a></c:otherwise> --%>
-<%-- 																</c:choose> --%>
-<!-- 																&nbsp; -->
-<%-- 															</c:forEach> --%>
-<!-- 														현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
-<%-- 														<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum + 1}'"<%} %>> --%>
-<!-- 													</section> -->
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
-				                                    
+				                                     <!-- 페이징 버튼들 시작 -->
+								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+								                    <div class="ps-pagination">
+								                        <ul class="pagination">
+								                           
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                        </ul>
+								                    </div>
+								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
 												   <div align="right">
@@ -462,8 +426,8 @@
                                                 <div class="form-group">
                                                 	<input type="hidden" name="board_id" value="${sessionScope.sId}" />
                                                 	<input type="hidden" name="item_idx" value="${item.item_idx}" />
-                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="Write your review here"></textarea>
-                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="Write your review here"></textarea>
+                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요"></textarea>
+                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?"></textarea>
                                                     
                                                 </div>
                                                 <div align="right">
@@ -539,6 +503,12 @@
 																			<br>
 																			감사합니다.
 														                    <br><br><br>
+														                  <div align="right">
+																		    <button>좋아용</button>
+																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}')">
+																		 </div>
 														                </td>  
 														            </tr>  
 														        </tbody>  
@@ -546,16 +516,16 @@
 													    </table>  
 												    <br>
 												    
-												    <!-- 페이징 버튼들 시작 -->
-				                                    <div class="ps-pagination">
-				                                        <ul class="pagination">
-				                                            <li class="active"><a href="#">1</a></li>
-				                                            <li><a href="#">2</a></li>
-				                                            <li><a href="#">3</a></li>
-				                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-				                                        </ul>
-				                                    </div>
-				                                    <!-- 페이징 버튼들 끝 -->
+												     <!-- 페이징 버튼들 시작 -->
+								                   <%PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo"); %>
+								                    <div class="ps-pagination">
+								                        <ul class="pagination">
+								                           
+								                            <li><%if(pageInfo1.getPageNum() > pageInfo1.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo1.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+								                            <li><%if(pageInfo1.getPageNum() < pageInfo1.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                        </ul>
+								                    </div>
+								                    <!-- 페이징 버튼들 끝 -->
 												    
 												    <!-- 문의작성 버튼 -->
 												   <div align="right">
@@ -567,7 +537,17 @@
                                             </form>
                                         </div>
    								</div>
- 
+  								<script type="text/javascript">
+									function qnaDelete(qna_idx) {
+										// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+										// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+										let result = confirm("삭제하시겠습니까잉?");
+										
+										if(result) {
+											location.href="QnaDelete.bo?qna_idx=" + qna_idx+"&item_idx=" + ${item.item_idx};
+										}
+									}
+								</script>
  <!-- ==========상품문의 목록 끝=========================================================================================================     -->   
   
   
@@ -577,15 +557,16 @@
   							  <div class="ps-tab" id="tab-4-1">
                                     <div class="row">
                                         <div class="col-xl-10 col-lg-7 col-md-12 col-sm-12 col-12 ">
-                                            <form class="ps-form--review" action="index.html" method="get">
+                                            <form class="ps-form--review" action="QnaWritePro.bo" method="post" name="QnaForm">
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
                                                 <div class="form-group">
-                                                    <textarea class="form-control" rows="15" cols="60" placeholder=
-"상품문의 작성 전 확인해주세요 
-
-* 답변은 영업일 기준 2~3일 소요됩니다
+                                                	<input type="hidden" name="qna_id" value="${sessionScope.sId}" />
+                                                	<input type="hidden" name="item_idx" value="${item.item_idx}" />
+                                                    <textarea class="form-control" id="qna_subject" name="qna_subject" rows="1" placeholder="상품문의 작성 전 확인해주세요 "></textarea>
+                                                    <textarea class="form-control" id="qna_content" name="qna_content" rows="15" cols="60" placeholder=
+"* 답변은 영업일 기준 2~3일 소요됩니다
 * 해당 게시판의 성격과 다른 글은 사전동이 없이 담당 게시판으로 이동될 수 있습니다.
 * 배송관련, 주문(취소, 교환, 환불) 관련 문의 및 요청사항은 마이컬리 내 1:1 문의에 남겨주세요.
 
@@ -607,7 +588,7 @@
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">
-	                                                    <button class="ps-btn">Submit Review</button>
+	                                                    <button class="ps-btn" type="submit">Submit Review</button>
 	                                                </div>
 	                                            </div>
                                             </form>
@@ -625,58 +606,33 @@
                 <div class="ps-page__right">
                         <h3> Same Brand</h3>
                         <div class="widget__content">
-                            <div class="ps-product">
-                                <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/5.jpg" alt="" /></a>
-                                    <div class="ps-product__badge">-37%</div>
-                                    <ul class="ps-product__actions">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    </ul>
+						 <c:forEach var="item" items="${sameBrand }">
+                         <div class="ps-product">
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}"><img  src="/Code_Green/resources/img/item/${item.file } " alt=""></a>
+                                <ul class="ps-product__actions">
+                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                    <div class="ps-product__rating">
+                                        <select class="ps-rating" data-read-only="true">
+                                            <option value="1">1</option>
+                                            <option value="1">2</option>
+                                            <option value="1">3</option>
+                                            <option value="1">4</option>
+                                            <option value="2">5</option>
+                                        </select><span>01</span>
+                                    </div>
+                                   <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__container"><a class="ps-product__vendor" href="#">Robert's Store</a>
-                                    <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Grand Slam Indoor Of Show Jumping Novel</a>
-                                        <div class="ps-product__rating">
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select><span>01</span>
-                                        </div>
-                                        <p class="ps-product__price sale">$32.99 <del>$41.00 </del></p>
-                                    </div>
-                                    <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">Grand Slam Indoor Of Show Jumping Novel</a>
-                                        <p class="ps-product__price sale">$32.99 <del>$41.00 </del></p>
-                                    </div>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                     <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
-                            <div class="ps-product">
-                                <div class="ps-product__thumbnail"><a href="../product-default.html"><img src="/Code_Green/resources/img/products/shop/6.jpg" alt="" /></a>
-                                    <div class="ps-product__badge">-5%</div>
-                                    <ul class="ps-product__actions">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="ps-product__container"><a class="ps-product__vendor" href="#">Youngshop</a>
-                                    <div class="ps-product__content"><a class="ps-product__title" href="../product-default.html">Sound Intone I65 Earphone White Version</a>
-                                        <div class="ps-product__rating">
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select><span>01</span>
-                                        </div>
-                                        <p class="ps-product__price sale">$100.99 <del>$106.00 </del></p>
-                                    </div>
-                                    <div class="ps-product__content hover"><a class="ps-product__title" href="../product-default.html">Sound Intone I65 Earphone White Version</a>
-                                        <p class="ps-product__price sale">$100.99 <del>$106.00 </del></p>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                       </c:forEach>
                         </div>
                 </div>
             </div>
@@ -701,7 +657,7 @@
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
                                 <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">

@@ -98,7 +98,7 @@
                     <p>정보 수정 & 등록</p>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
+                    <form class="ps-form--search-bar" action="index" method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
@@ -127,19 +127,40 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>회사이름
+                                            <label>기업번호
                                             </label>
                                             <input class="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>브랜드이름
+                                            <label>기업아이디
                                             </label>
                                             <input class="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업비밀번호
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업이름
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>브랜드이름
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                      <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>사업자번호
                                             </label>
@@ -148,21 +169,70 @@
                                     </div>
                                        <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>이메일주소
+                                            <label>기업 전화번호
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업이메일
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업이메일인증 여부
                                             </label>
                                             <input class="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>주소
+                                            <label>기업 우편번호
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업주소
                                             </label>
                                             <input class="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>상세주소
+                                            <label>관리자 승인여부
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업파일
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업원본파일
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                         <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>기업탈퇴유무
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                        <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>가입날짜
                                             </label>
                                             <input class="form-control" type="text" placeholder="" />
                                         </div>

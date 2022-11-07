@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.ItemCategoryService;
-import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 
@@ -33,15 +32,18 @@ public class ItemCategoryController {
 	
 	// 전체 상품
 	@RequestMapping(value = "category_all", method = RequestMethod.GET)
-	public String category_all(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+	public String category_all(
+			@RequestParam(defaultValue = "") String searchType, 
+			@RequestParam(defaultValue = "") String keyword,  
+			@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 
 		startRow = (pageNum - 1) * listLimit;
 		
-		itemList = service.select_all(startRow, listLimit);
+		itemList = service.select_all(startRow, listLimit, searchType, keyword);
 		
 		listCount = service.selectAllListCount();
 		
@@ -68,7 +70,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)
 	public String category_dairy_drink(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 
@@ -109,7 +111,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_fish", method = RequestMethod.GET)
 	public String category_fish(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -142,7 +144,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_fruit_vegi", method = RequestMethod.GET)
 	public String category_fruit_vegi(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -175,7 +177,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_iced_easy", method = RequestMethod.GET)
 	public String category_iced_easy(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -219,7 +221,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_snack", method = RequestMethod.GET)
 	public String category_snack(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		

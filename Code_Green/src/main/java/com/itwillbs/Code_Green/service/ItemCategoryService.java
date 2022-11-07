@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ItemCategoryMapper;
-import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 
 @Service
@@ -16,8 +15,8 @@ public class ItemCategoryService {
 	private ItemCategoryMapper mapper;
 	
 	// 전체 상품
-	public List<ItemVO> select_all(int startRow, int listLimit) {
-		return mapper.select_all(startRow, listLimit);
+	public List<ItemVO> select_all(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_all(startRow, listLimit, searchType, keyword);
 	}
 	
 	// 유제품/음료

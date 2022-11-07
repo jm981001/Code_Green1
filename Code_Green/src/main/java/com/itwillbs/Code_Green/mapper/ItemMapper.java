@@ -38,6 +38,9 @@ public interface ItemMapper {
 	//상품 문의 리스트
 	List<QnaVO> selectQna(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
 
+	//상세상세페이지 같은 브랜드상품 2개
+	List<ItemVO> selectSameBrand();
+
 
 	
 
