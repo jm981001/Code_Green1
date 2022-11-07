@@ -64,16 +64,22 @@ public class LoginController {
 
 	}
 	@PostMapping(value = "/ManagerLoginPro.me")
-	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
+	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session, String manager_id) {
 		ManagerVO managerResult = service2.loginManager(manager);
+		ManagerVO selectManager = service2.getManagerInfo(manager_id);
+//		System.out.println(selectManager);
 		
 		
 		if (managerResult == null) {
 			model.addAttribute("msg", "기업 로그인 실패! 힝~");
-			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
+//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
 			return "member/fail_back";
 		} else {
-			session.setAttribute("sId", managerResult.getManager_id());
+			if(selectManager.getManager_storecode()!= null) {
+				session.setAttribute("sId", managerResult.getManager_id());
+				session.setAttribute("sCode", selectManager.getManager_storecode());
+				return "redirect:/";
+			} 
 			return "redirect:/";
 		}
 
