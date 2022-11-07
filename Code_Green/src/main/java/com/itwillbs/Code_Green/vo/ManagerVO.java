@@ -5,7 +5,7 @@ public class ManagerVO {
 	private int         manager_idx; 
 	private String  	manager_id;
 	private String  	manager_pass;
-	private String  	manager_storename; 
+	private String  	manager_name; 
 	private String  	manager_brandname; 
 	private String  	manager_storecode; 
 	private String  	manager_phone; 
@@ -36,11 +36,11 @@ public class ManagerVO {
 	public void setManager_pass(String manager_pass) {
 		this.manager_pass = manager_pass;
 	}
-	public String getManager_storename() {
-		return manager_storename;
+	public String getManager_name() {
+		return manager_name;
 	}
-	public void setManager_storename(String manager_storename) {
-		this.manager_storename = manager_storename;
+	public void setManager_name(String manager_name) {
+		this.manager_name = manager_name;
 	}
 	public String getManager_brandname() {
 		return manager_brandname;
@@ -120,7 +120,7 @@ public class ManagerVO {
 	public ManagerVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_storename,
+	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
 			String manager_brandname, String manager_storecode, String manager_phone, String manager_email,
 			String manager_email_auth, String manager_postcode, String manager_address, String manager_adminauth,
 			String manager_realfile, String manager_original_file, String manager_del_yn, String manager_date) {
@@ -128,7 +128,7 @@ public class ManagerVO {
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
 		this.manager_pass = manager_pass;
-		this.manager_storename = manager_storename;
+		this.manager_name = manager_name;
 		this.manager_brandname = manager_brandname;
 		this.manager_storecode = manager_storecode;
 		this.manager_phone = manager_phone;
@@ -145,7 +145,7 @@ public class ManagerVO {
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_idx=" + manager_idx + ", manager_id=" + manager_id + ", manager_pass=" + manager_pass
-				+ ", manager_storename=" + manager_storename + ", manager_brandname=" + manager_brandname
+				+ ", manager_name=" + manager_name + ", manager_brandname=" + manager_brandname
 				+ ", manager_storecode=" + manager_storecode + ", manager_phone=" + manager_phone + ", manager_email="
 				+ manager_email + ", manager_email_auth=" + manager_email_auth + ", manager_postcode="
 				+ manager_postcode + ", manager_address=" + manager_address + ", manager_adminauth=" + manager_adminauth

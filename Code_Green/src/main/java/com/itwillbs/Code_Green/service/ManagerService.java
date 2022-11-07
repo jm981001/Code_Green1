@@ -19,8 +19,9 @@ public class ManagerService {
 
 //	 브랜드 정보 조회 수행 getManagerInfo()
 //	=> 파라미터 : 아이디, 리턴타입 : ManagerVO(manager)
-	public ManagerVO getMemberInfo(String manager_id) {
+	public ManagerVO getManagerInfo(String manager_id) {
 		return mapper.selectManagerInfo(manager_id);
 	}
+
 
 }

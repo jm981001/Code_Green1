@@ -117,16 +117,37 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>브랜드명
+                                            <label>기업번호
                                             </label>
                                             <input class="form-control" type="text" placeholder="코드그린" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>법인명
+                                            <label>기업아이디
                                             </label>
-                                            <input class="form-control" type="text" placeholder="(주)코드그린" />
+                                            <input class="form-control" type="text" placeholder="codegreen" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>기업비밀번호
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="1234" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>기업이름
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="잇츠리얼" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>브랜드이름
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="vegilove" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -136,31 +157,10 @@
                                             <input class="form-control" type="text" placeholder="10000584-45413-4564665" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>이름
-                                            </label>
-                                            <input class="form-control" type="text" placeholder="최비건" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>아이디
-                                            </label>
-                                            <input class="form-control" type="text" placeholder="vegilove" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label>비밀번호
-                                            </label>
-                                            <input class="form-control" type="text" placeholder="1234" />
-                                        </div>
-                                    </div>
                                 
                                   <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>전화번호
+                                            <label>기업 전화번호
                                             </label>
                                              <input class="form-control" type="text" placeholder="010-5555-5464" />
                                         </div>
@@ -168,15 +168,31 @@
                                 
                                   <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>이메일
+                                            <label>기업이메일
                                             </label>
                                             <input class="form-control" type="text" placeholder="vegilove@codegreen.com" />
                                         </div>
                                     </div>
+                                     <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업이메일인증 여부
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>기업 우편번호
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                    
+                                    
                                 
                                   <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>주소
+                                            <label>기업주소
                                             </label>
                                              <input class="form-control" type="text" placeholder="부산광역시 부산진구" />
                                         </div>
@@ -188,6 +204,54 @@
                                              <input class="form-control" type="text" placeholder="동천로109,7층" />
                                         </div>
                                     </div>
+                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>관리자 승인여부
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업파일
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>기업원본파일
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                         <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>기업탈퇴유무
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                        <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>가입날짜
+                                            </label>
+                                            <input class="form-control" type="text" placeholder="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>브랜드소개
+                                            </label>
+                                            <textarea class="form-control" rows="6" placeholder=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                    
+                                    
+                                    
+                                    
                                 
                                 <div class="ps-form__submit text-center	">
                                     <button class="ps-btn ps-btn--gray mr-3">취소</button>
