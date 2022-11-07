@@ -62,11 +62,22 @@
 	                            <div class="ps-block__right"><a href="login">Login</a><a href="join">Join</a></div>
 	                        </div>
 	                       </c:when>
-	                       <c:otherwise>
-	                        <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                   	   		<c:if test="${sessionScope.sId eq 'admin' }">| <a href="AdminMain.me">관리자페이지</a></c:if>
+	                       
+	                       <c:when test="${sessionScope.sId eq 'admin' }">
+	                         <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                   	   		 <a href="AdminMain.me">관리자페이지</a>
+                   	   		</c:when>
+                   	   		
+                   	   		<c:when test="${not empty sessionScope.sCode}">
+                   	   		 <a href="brand_mypage?manager_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                   	   		 <a href="manager_index">기업관리자페이지</a>
+                   	   		</c:when>
+                   	   		
+                   	   		<c:otherwise>
+                   	   		  <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
                    	   		</c:otherwise>
                    	    </c:choose>
+                   	    
                     </div>
                 </div>
             </div>
