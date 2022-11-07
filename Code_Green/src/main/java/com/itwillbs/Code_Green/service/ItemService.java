@@ -58,5 +58,10 @@ public class ItemService {
 	public List<QnaVO> getQna(int startRow, int listLimit, int item_idx) {
 		return mapper.selectQna(startRow, listLimit, item_idx);
 	}
+
+	//상세상세페이지 같은 브랜드상품 2개
+	public List<ItemVO> sameBrand() {
+		return mapper.selectSameBrand();
+	}
 	
 }

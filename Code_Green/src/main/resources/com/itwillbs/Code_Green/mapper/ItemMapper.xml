@@ -37,7 +37,6 @@
 
 	<!-- 상품 상세 정보 조회 -->
 	<select id="selectItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-
 			select i.item_idx, 
 			   i.re_manager_idx,
 			   i.item_name,
@@ -60,6 +59,7 @@
 				i.item_idx DESC		
 	</select>
 	
+	
 	<!-- 상품 후기 -->
 	<select id="selectReview" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT * 
@@ -69,8 +69,10 @@
 				<if test="searchType.equals('subject')">
 					ORDER BY board_idx DESC
 				</if>
-				ORDER BY board_idx DESC
+				ORDER BY board_idx  desc
+<!-- 				LIMIT #{startRow}, #{listLimit} -->
 	</select>
+	
 	
 	<!-- 상품 후기 갯수-->
 	<select id="selectReviewListCount" resultType="integer">
@@ -82,6 +84,7 @@
 	</select>
 	
 	
+	
 	<!-- 전체 상품 갯수 조회(검색 기능 추가 아직) -->
 	<select id="selectItemListCount" resultType="integer">
 		SELECT 
@@ -89,6 +92,7 @@
 			FROM item
 	</select>
 	
+
 
 	
 	<!-- 상세페이지안 관련상품 6개 -->
@@ -108,13 +112,35 @@
 				i.item_idx  LIMIT 6
 	</select>
 	
+	
+	
+	
 <!-- 	상품 문의 리스트 -->
 	<select id="selectQna" resultType="com.itwillbs.Code_Green.vo.QnaVO">
 		SELECT * 
 				FROM qna
 				WHERE
 					qna_item_idx = #{item_idx}
-
+				ORDER BY qna_idx DESC
 	</select>
 	
+	
+	
+	
+		<!--상세상세페이지 같은 브랜드상품 2개 -->
+	<select id="selectSameBrand" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_category,
+			   f.file
+			from item i join file_item f
+			on i.item_idx = f.rf_item_idx
+			WHERE f.file NOT LIKE '%상세%' 
+<!-- 			and i.item_category = #{i.item_category} -->
+			ORDER BY
+				i.item_idx  LIMIT 2
+	</select>
 </mapper>

@@ -14,6 +14,7 @@ public class QnaVO {
     private String qna_re_seq;
     private String qna_readcount;
     private String qna_date;
+    private String item_idx; //상품번호
 	public int getQna_idx() {
 		return qna_idx;
 	}
@@ -92,16 +93,19 @@ public class QnaVO {
 	public void setQna_date(String qna_date) {
 		this.qna_date = qna_date;
 	}
-	
-	public QnaVO() {
-		// TODO Auto-generated constructor stub
+	public String getItem_idx() {
+		return item_idx;
+	}
+	public void setItem_idx(String item_idx) {
+		this.item_idx = item_idx;
 	}
 	
-	
-	
+    public QnaVO() {
+		// TODO Auto-generated constructor stub
+	}
 	public QnaVO(int qna_idx, String qna_item, String qna_type, String qna_category, String qna_id, String qna_pass,
 			String qna_subject, String qna_content, String qna_re_ref, String qna_re_lev, String qna_re_seq,
-			String qna_readcount, String qna_date) {
+			String qna_readcount, String qna_date, String item_idx) {
 		super();
 		this.qna_idx = qna_idx;
 		this.qna_item = qna_item;
@@ -116,15 +120,17 @@ public class QnaVO {
 		this.qna_re_seq = qna_re_seq;
 		this.qna_readcount = qna_readcount;
 		this.qna_date = qna_date;
+		this.item_idx = item_idx;
 	}
 	@Override
 	public String toString() {
 		return "QnaVO [qna_idx=" + qna_idx + ", qna_item=" + qna_item + ", qna_type=" + qna_type + ", qna_category="
 				+ qna_category + ", qna_id=" + qna_id + ", qna_pass=" + qna_pass + ", qna_subject=" + qna_subject
 				+ ", qna_content=" + qna_content + ", qna_re_ref=" + qna_re_ref + ", qna_re_lev=" + qna_re_lev
-				+ ", qna_re_seq=" + qna_re_seq + ", qna_readcount=" + qna_readcount + ", qna_date=" + qna_date + "]";
+				+ ", qna_re_seq=" + qna_re_seq + ", qna_readcount=" + qna_readcount + ", qna_date=" + qna_date
+				+ ", item_idx=" + item_idx + "]";
 	}
-	
+    
     
     
     
