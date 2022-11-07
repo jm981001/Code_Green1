@@ -37,7 +37,7 @@ public class ItemCategoryController {
 			@RequestParam(defaultValue = "") String keyword,  
 			@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 
@@ -70,7 +70,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)
 	public String category_dairy_drink(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 
@@ -111,7 +111,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_fish", method = RequestMethod.GET)
 	public String category_fish(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -144,7 +144,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_fruit_vegi", method = RequestMethod.GET)
 	public String category_fruit_vegi(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -177,7 +177,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_iced_easy", method = RequestMethod.GET)
 	public String category_iced_easy(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		
@@ -221,7 +221,7 @@ public class ItemCategoryController {
 	@RequestMapping(value = "category_snack", method = RequestMethod.GET)
 	public String category_snack(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		listLimit = 16; 
+		listLimit = 12; 
 		
 		pageListLimit = 10; 
 		

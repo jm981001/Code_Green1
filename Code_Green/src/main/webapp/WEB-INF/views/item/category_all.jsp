@@ -65,7 +65,7 @@
                     	<div id="category_h3">
 							<h2>전체 상품</h2>
 						</div> 
-                        <nav class="ps-store-link" style="margin-top: 50px;">
+                        <nav class="ps-store-link" style="margin-top: 100px;">
                         	<section id="buttonArea">
 							<!-- 검색 기능 구현을 위한 form 태그 -->
 								<form action="category_all" method="get" style="margin-left: 20px">
@@ -110,7 +110,7 @@
                                         	<!-- 반복문 시작 -->
                                         	<c:forEach var="item" items="${itemList }">
                                         	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
                                                     <div class="ps-product__thumbnail">
                                                     	
