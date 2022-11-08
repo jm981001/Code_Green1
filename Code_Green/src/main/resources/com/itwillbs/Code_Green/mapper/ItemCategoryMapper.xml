@@ -13,15 +13,14 @@
 			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file1 NOT LIKE '%상세%'
 		 	<if test="!keyword.equals('')">
 				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 				<choose>
 					<when test="searchType.equals('item_name')">
-						 AND i.item_name LIKE '%${keyword}%'
+					 WHERE i.item_name LIKE '%${keyword}%'
 					</when>
 					<when test="searchType.equals('brand_name')">
-						 AND m.manager_brandname LIKE '%${keyword}%' 
+					 WHERE m.manager_brandname LIKE '%${keyword}%' 
 					</when>
 				</choose>
 			</if>
