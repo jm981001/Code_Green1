@@ -15,7 +15,8 @@ public class ItemVO {
 	private String item_status;
 	private String item_readcount;
 	private String item_date;
-	private String file;
+	private String file1;
+	private String file2;
 	private String manager_brandname;
 	
 	public int getItem_idx() {
@@ -90,13 +91,19 @@ public class ItemVO {
 	public void setItem_date(String item_date) {
 		this.item_date = item_date;
 	}
-	public String getFile() {
-		return file;
+	public String getFile1() {
+		return file1;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setFile1(String file1) {
+		this.file1 = file1;
 	}
 	
+	public String getFile2() {
+		return file2;
+	}
+	public void setFile2(String file2) {
+		this.file2 = file2;
+	}
 	public String getManager_brandname() {
 		return manager_brandname;
 	}
@@ -107,10 +114,11 @@ public class ItemVO {
 	public ItemVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public ItemVO(String re_manager_idx, String item_name, String item_info, String item_packing, String item_category,
-			String item_price, String item_sale, String item_stock, String item_status, String item_readcount,
-			String item_date, String file, int item_idx, String manager_brandname) {
+	public ItemVO(int item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
+			String item_category, String item_price, String item_sale, String item_stock, String item_status,
+			String item_readcount, String item_date, String file1, String file2, String manager_brandname) {
 		super();
+		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
 		this.item_name = item_name;
 		this.item_info = item_info;
@@ -122,18 +130,19 @@ public class ItemVO {
 		this.item_status = item_status;
 		this.item_readcount = item_readcount;
 		this.item_date = item_date;
-		this.file = file;
-		this.item_idx = item_idx;
+		this.file1 = file1;
+		this.file2 = file2;
 		this.manager_brandname = manager_brandname;
 	}
 	@Override
 	public String toString() {
-		return "ItemVO [re_manager_idx=" + re_manager_idx + ", item_name=" + item_name + ", item_info=" + item_info
-				+ ", item_packing=" + item_packing + ", item_category=" + item_category + ", item_price=" + item_price
-				+ ", item_sale=" + item_sale + ", item_stock=" + item_stock + ", item_status=" + item_status
-				+ ", item_readcount=" + item_readcount + ", item_date=" + item_date + ", file=" + file
-				+ ", manager_brandname=" + manager_brandname + ", item_idx=" + item_idx + "]";
+		return "ItemVO [item_idx=" + item_idx + ", re_manager_idx=" + re_manager_idx + ", item_name=" + item_name
+				+ ", item_info=" + item_info + ", item_packing=" + item_packing + ", item_category=" + item_category
+				+ ", item_price=" + item_price + ", item_sale=" + item_sale + ", item_stock=" + item_stock
+				+ ", item_status=" + item_status + ", item_readcount=" + item_readcount + ", item_date=" + item_date
+				+ ", file1=" + file1 + ", file2=" + file2 + ", manager_brandname=" + manager_brandname + "]";
 	}
+	
 	
 	
 	

@@ -16,11 +16,11 @@
 			   i.item_status,  
 			   i.item_readcount,  
 			   i.item_date, 
-			   f.file,
+			   f.file1,
 			   m.manager_brandname
 		 FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		 JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%'
+		 WHERE f.file1 NOT LIKE '%상세%'
 		 ORDER BY i.item_idx 
 		 LIMIT #{startRow}, #{listLimit}
 	</select>
@@ -49,11 +49,12 @@
 			   i.item_status,  
 			   i.item_readcount,  
 			   i.item_date, 
-			   f.file,
+			   f.file1,
+			   f.file2,
 			   m.manager_brandname
 			 FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		 	JOIN manager m ON i.re_manager_idx =  m.manager_idx
-			WHERE f.file NOT LIKE '%상세%'
+			WHERE f.file1 NOT LIKE '%상세%'
 			and i.item_idx = #{i.item_idx}
 			ORDER BY
 				i.item_idx DESC		
@@ -103,10 +104,10 @@
 			   i.item_price,
 			   i.item_sale, 
 			   i.item_category,
-			   f.file
+			   f.file1
 			from item i join file_item f
 			on i.item_idx = f.rf_item_idx
-			WHERE f.file NOT LIKE '%상세%' 
+			WHERE f.file1 NOT LIKE '%상세%' 
 <!-- 			and i.item_category = #{i.item_category} -->
 			ORDER BY
 				i.item_idx  LIMIT 6
@@ -135,10 +136,10 @@
 			   i.item_price,
 			   i.item_sale, 
 			   i.item_category,
-			   f.file
+			   f.file1
 			from item i join file_item f
 			on i.item_idx = f.rf_item_idx
-			WHERE f.file NOT LIKE '%상세%' 
+			WHERE f.file1 NOT LIKE '%상세%' 
 <!-- 			and i.item_category = #{i.item_category} -->
 			ORDER BY
 				i.item_idx  LIMIT 2

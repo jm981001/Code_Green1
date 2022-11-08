@@ -77,7 +77,7 @@
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/img/item/${item.file }" alt="" /></a>
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
                                                         <ul class="ps-product__actions">
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>

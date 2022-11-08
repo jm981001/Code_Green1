@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.CartMapper">
+
+
+	<!-- 장바구니 추가 -->
+	<insert id="addCart">
+		INSERT INTO cart(rf_item_idx,rf_member_idx,cart_amount)
+			VALUES(#{rf_item_idx},{rf_member_idx},{cart_amount})
+	</insert>
+
+
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart">
+		DELETE FROM cart WHERE cart_idx = #{cart_idx}
+	</delete>
+
+
+	<!-- 장바구니 수량 변경 -->
+	<update id="updateCart">
+		UPDATE cart SET cart_amount = #{cart_amount} where cart_idx = #{cart_idx} 
+	</update>
+
+	<!-- 장바구니 목록 -->	
+	<select id="getCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
+		
+	</select>
+	
+	
+	<!-- 카트확인 -->
+	<select id="checkCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
+		SELECT * FROM cart 
+		WHERE rf_member_idx = #{rf_member_idx} and rf_item_idx = #{rf_item_idx}
+	</select>
+
+
+</mapper>
