@@ -60,21 +60,20 @@
                                         
                                             <thead>
                                                 <tr align="center">
-                                                    <th width="5%"></th>
-                                                    <th>게시판 종류</th>
+                                                    <th colspan="2">말머리</th>
                                                     <th>제목</th>
                                                     <th>조회수</th>
-                                                    <th>조회수</th>
+                                                    <th>날짜</th>
                                                 </tr>
                                             </thead>
                                              <c:forEach var="board" items="${BoardList }">
 										        <tbody>  
 										            <tr class="item">  
-										           		<td>${board.board_idx }</td>  
-										                <td>${board.board_type }</td>  
-										                <td>${board.board_subject }</td>  
-										                <td>${board.board_readcount }</td>  
-										                <td>${board.board_date }</td>  
+										           		<td width="5%">${board.board_idx }</td>  
+										                <td>${board.board_category }</td>  
+										                <td><a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a></td>  
+										                <td width="12%">${board.board_readcount }</td>  
+										                <td width="5%">${board.board_date }</td>  
 										            </tr>  
 										        </tbody>  
 									        </c:forEach>
@@ -85,14 +84,14 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageBoard.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="myPageBoard.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${i }">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageBoard.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
 				                    <!-- 페이징 버튼들 끝 -->

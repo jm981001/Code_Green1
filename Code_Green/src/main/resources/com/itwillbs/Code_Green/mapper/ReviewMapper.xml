@@ -32,11 +32,11 @@
 	</delete>
 	
 	
-		<!-- 마이페이지 작성글 -->
+		<!-- 마이페이지 작성글 목록-->
 	<select id="selectBoardList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		 SELECT *
 		 FROM board
-		 WHERE board_id = #{member_id}
+		 WHERE board_id = #{member_id} and board_type NOT LIKE '%후기%'
 		 ORDER BY board_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 	</select>
@@ -47,6 +47,7 @@
 		SELECT 
 			COUNT(*) 
 			FROM board
+			 WHERE board_id = #{member_id} and board_type NOT LIKE '%후기%'
 	</select>
 	
 	

@@ -114,11 +114,9 @@ public class MypageController {
 	
 	//------------마이페이지 작성글-------------------------------------------
 	@GetMapping(value = "/myPageBoard.bo")
-	public String myPageBoard(@RequestParam(defaultValue = "1") int pageNum, Model model, @RequestParam String member_id, HttpSession session,@ModelAttribute BoardVO board) {
-		String sId = (String)session.getAttribute("sId");
-		System.out.println(member_id + "랑 " + sId);
+	public String myPageBoard(@RequestParam(defaultValue = "1") int pageNum, Model model, @RequestParam String member_id,@ModelAttribute BoardVO board) {
 		
-		int listLimit = 16; // 한 페이지 당 표시할 게시물 목록 갯수 
+		int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
 		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
 		
 		// 조회 시작 게시물 번호(행 번호) 계산

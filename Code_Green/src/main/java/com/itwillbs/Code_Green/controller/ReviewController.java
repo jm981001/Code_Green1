@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.ReviewService;
@@ -40,6 +42,10 @@ public class ReviewController {
 	
 	
 	//------------리뷰 수정 (할...꺼야..?)-------------------------------------------
+	@GetMapping(value = "/ReviewModify.bo")
+	public String brand_main() {
+		return "item/review_modify";
+	}
 	
 	
 	

@@ -298,7 +298,7 @@
 																		
 																		    <button>좋아용</button>
 																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
 																		 </div>
 													                </td>  
