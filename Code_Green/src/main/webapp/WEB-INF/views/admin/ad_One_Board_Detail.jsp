@@ -118,7 +118,7 @@
 				  <thead>
 				    <tr>
 				      <td scope="col">제목</td>
-				      <td scope="col" colspan="3">어쩌구 저쩌구</td>
+				      <td scope="col" colspan="3">${oneQnaInfo.qna_subject }</td>
 <!-- 					<th scope="col">작성일</th> -->
 <!-- 					<th scope="col">Handle</th> -->
 				    </tr>
@@ -126,9 +126,9 @@
 				  <tbody>
 				    <tr>
 				      <td scope="row">작성자</td>
-				      <td>설탕노움</td>
+				      <td>${oneQnaInfo.qna_id }</td>
 				      <td>작성일</td>
-				      <td>22.10.21</td>
+				      <td>${oneQnaInfo.qna_date }</td>
 				    </tr>
 				    <tr>
 				      <td scope="row" rowspan="2">내용</td>
@@ -138,7 +138,7 @@
 				    </tr>
 				    <tr>
 <!-- 					 <th scope="row">3</th> -->
-				      <td colspan="4">솰라솰라</td>
+				      <td colspan="4">${oneQnaInfo.qna_content }</td>
 <!-- 				     <td>@twitter</td> -->
 				    </tr>
 				  </tbody>
@@ -148,7 +148,7 @@
                      
                      <form action="" method="post">
                      		<div class="mb-3">
-		            	<label for="email">답변 제목</label>
+		            	<label>답변 제목</label>
 		            	<input type="text" class="form-control" id="name" placeholder="답변 제목" required="required">
 		          	</div> 
                      	<textarea id="summernote" name="content"></textarea>

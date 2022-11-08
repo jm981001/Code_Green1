@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +32,14 @@
 </head>
 
 <body>
+
+	<!-- 세션 아이디가 null 일 경우 메인페이지로 돌려보내기 -->
+	<c:if test="${sessionScope.sId eq null or sessionScope.sId ne'admin'}">
+		<script>
+			alert("잘못된 접근입니다!");
+			location.href = "./";
+		</script>
+	</c:if>
     <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
@@ -93,31 +102,8 @@
                 <div class="ps-section__left">
                     <div class="row">
                         <div class="col-md-11">
-                        
-                        
                         <canvas id="myChart" width="800" height="400"></canvas>
-                        
-<!-- 원래차트 원래차트 원래차트 원래차트 원래차트 원래차트-->
-<!--                             <div class="ps-card ps-card--sale-report"> -->
-<!--                                 <div class="ps-card__header"> -->
-<!--                                     <h4>Sales Reports</h4> -->
-<!--                                 </div> -->
-<!--                                 <div class="ps-card__content"> -->
-<!--                                     <div id="chart"></div> -->
-<!--                                 </div> -->
-<!--                                 <div class="ps-card__footer"> -->
-<!--                                     <div class="row"> -->
-<!--                                         <div class="col-md-8"> -->
-<!--                                             <p>Items Earning Sales ($)</p> -->
-<!--                                         </div> -->
-<!--                                         <div class="col-md-4"><a href="#">Export Report<i class="icon icon-cloud-download ml-2"></i></a></div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
                         </div>
-                        
-<!-- 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트-->
-
                     </div>
                     <div class="ps-card">
                         <div class="ps-card__header">

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.itwillbs.Code_Green.vo.AdminVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.QnaVO;
 
 public interface AdminMapper {
 
@@ -19,7 +20,7 @@ public interface AdminMapper {
 	
 	
 	//회원 목록 전체 조회
-		List<MemberVO> selectMemberList();
+		List<MemberVO> selectMemberList(int startrow, int listLimit, String searchType, String keyword);
 
 		//회원 상세정보 조회
 		MemberVO selectMemberInfo(String id);
@@ -31,8 +32,8 @@ public interface AdminMapper {
 		int deleteMember(String id);
 		
 		
-		//회원 페이지 검색
-		
+		//회원 목록 갯수 조회
+		public int selectMemberListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 		
 		
 		//----------------------------------------------------------
@@ -48,6 +49,18 @@ public interface AdminMapper {
 
 		//기업 삭제
 		public int deleteManager(String id);
+
+		//1:1 문의 게시판 목록
+		public List<QnaVO> selectOneQnaList();
+
+		//1:1 문의 상세 내용
+		public QnaVO selectOneQnaInFo(@Param("subject") String subject, @Param("id") String id);
+
+		//1:1 문의글 삭제
+		public int deleteOneQnaBoard(String id);
+
+
+		
 	
 	
 	

@@ -155,12 +155,22 @@
                     <p>Show 10 in 30 items.</p>
                     <ul class="pagination">
                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
+                        <li class="active"><a href="#">이전</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">다음</a></li>
                         <li><a href="#"><i class="icon-chevron-right"></i></a></li>
                     </ul>
                 </div>
+<!--                 <div class="ps-section__footer"> -->
+<!--                     <p>Show 10 in 30 items.</p> -->
+<!--                     <ul class="pagination"> -->
+<!--                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
+<!--                         <li class="active"><a href="#">1</a></li> -->
+<!--                         <li><a href="#">2</a></li> -->
+<!--                         <li><a href="#">3</a></li> -->
+<!--                         <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
+<!--                     </ul> -->
+<!--                 </div> -->
             </section>
         </div>
     </main>

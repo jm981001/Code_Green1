@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,41 +116,29 @@
                         <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
+                                    <th>커뮤니티</th>
                                     <th>제목</th>
                                     <th>작성자(아이디)</th>
                                     <th>작성일</th>
                                     <th>답변상태</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody >
+                            <c:forEach var="qnaList" items="${OneQnaList }">
                                 <tr>
-                                    <td onclick="location.href='ad_One_Board_Detail'"><strong>아니 이거 너무한 거 아닙니까???</strong></td>
-                                    <td>설탕노움</td>
-                                    <td>22.10.21</td>
+                                	<td>${qnaList.qna_type }</td>
+                                    <td onclick="location.href='ad_One_Board_Detail?subject=${qnaList.qna_subject }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
+                                    <td>${qnaList.qna_id }</td>
+                                    <td>${qnaList.qna_date }</td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><strong>주 4일제 도입이 시급합니다!!!!!!</strong></td>
-                                    <td>설탕노움</td>
-                                    <td>22.10.21</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               
-                               
-                               
+                               </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -164,7 +152,7 @@
                         <li><a href="#">3</a></li>
                         <li><a href="#"><i class="icon-chevron-right"></i></a></li>
                     </ul>
-                </div>
+            	</div>
             </section>
         </div>
     </main>

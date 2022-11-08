@@ -9,6 +9,7 @@ import com.itwillbs.Code_Green.mapper.AdminMapper;
 import com.itwillbs.Code_Green.vo.AdminVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.QnaVO;
 
 @Service
 public class AdminService {
@@ -23,10 +24,10 @@ public class AdminService {
 	//----------------------
 	
 	
-	//전체 회원목록 조회
-		public List<MemberVO> getMemberList() {
+		//전체 회원목록 조회
+		public List<MemberVO> getMemberList(int startrow, int listLimit, String searchType, String keyword) {
 			// TODO Auto-generated method stub
-			return mapper.selectMemberList();
+			return mapper.selectMemberList(startrow, listLimit, searchType, keyword);
 		}
 
 		//회원 상세정보 조회(1개)
@@ -48,6 +49,13 @@ public class AdminService {
 		}
 		
 		
+
+		//회원관리 검색기능
+		public int getBoardListCount(String searchType, String keyword) {
+			// TODO Auto-generated method stub
+			return mapper.selectMemberListCount(searchType, keyword);
+		}
+		
 		
 		
 		//여기부터는 기업
@@ -64,11 +72,34 @@ public class AdminService {
 			// TODO Auto-generated method stub
 			return mapper.selectManagerInfo(id);
 		}
-
+		//기업 삭제(1개)
 		public int removeManager(String id) {
 			// TODO Auto-generated method stub
 			return mapper.deleteManager(id);
 		}
+		
+		
+		//여기부터는 1:1 게시글
+		
+		
+		//1:1게시글 목록 조회(1개)
+		public List<QnaVO> getOneQnaBoardList() {
+			// TODO Auto-generated method stub
+			return mapper.selectOneQnaList();
+		}
+		//1:1게시글 상세정보 조회(1개)
+		public QnaVO getOneQnaInfo(String subject, String id) {
+			// TODO Auto-generated method stub
+			return mapper.selectOneQnaInFo(subject, id);
+		}
+		
+		//1:1 게시글 삭제
+		public int removeOneQnaRemove(String id) {
+			// TODO Auto-generated method stub
+			return mapper.deleteOneQnaBoard(id);
+		}
+		
+		
 	
 	
 	
