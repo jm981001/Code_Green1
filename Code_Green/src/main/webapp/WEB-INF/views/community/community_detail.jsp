@@ -49,8 +49,7 @@
                             <p>
 	                            [${cBoard.board_category }] 
 	                    		<fmt:parseDate var="dateString" value="${cBoard.board_date}" pattern="yyyyMMdd" />
-		                        /<fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" />
-		                        / ${dateString }
+		                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
 	                            / ${cBoard.board_id }
 	                            / 조회수 ${cBoard.board_readcount }
 	                            / 댓글(45) 

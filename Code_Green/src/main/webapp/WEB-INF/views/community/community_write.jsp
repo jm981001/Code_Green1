@@ -26,7 +26,25 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+    
+    
+    <!-- HTML 에디터 소스 // 수정예정 //  -->
+<!--     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
+<!-- 	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script> -->
+	<script src="/resources/plugins_community/summernote-lite.js"></script>
+	<script src="/resources/plugins_community/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/plugins_community/summernote-lite.css">
+	<!-- HTML 에디터 소스 // 수정예정 //  -->
 </head>
+ <!-- HTML 에디터 소스 // 수정예정 //  -->
+<script>
+	$('.summernote').summernote({
+	height: 150,
+	lang: "ko-KR"
+	});
+</script>
+ <!-- HTML 에디터 소스 // 수정예정 //  -->
 <body>
     
     <!-- 헤더 삽입 -->
@@ -53,36 +71,48 @@
 				                    	<div class="ps-block__content">
 					                        <div class="table-responsive">
 					                        	
-	                       						<form action="community_write.me" method="get">
+	                       						<form action="community_write.me" method="post">
 					                           		 <table class="table ps-table ps-table--vendor">
 							                                    <tr>
-							                                        <td>작성자</td>
-							                                        <td><input type="text" id="writer" name="writer"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>비밀번호</td>
-							                                        <td><input type="password" id="passwd" name="passwd"></td>
-							                                    </tr>
-							                                    <tr>
 							                                        <td>말머리</td>
-							                                        <td><select class="search-category">
+							                                        <td><select class="board_category">
 											                                <option value="">말머리선택</option>
-											                                <option value="head">맛집</option>
-											                                <option value="subject">사담</option>
-											                                <option value="writer">추천</option>
+											                                <option value="맛집">맛집</option>
+											                                <option value="정보">정보</option>
+											                                <option value="사담">사담</option>
+											                                <option value="추천">추천</option>
 											                            </select>
 											                        </td>
 							                                    </tr>
 							                                    <tr>
-							                                        <td>제목</td>
-							                                        <td><input type="text" id="writer" name="subject"></td>
+							                                        <td>작성자</td>
+							                                        <td><input type="text" id="board_id" name="writer" style="width: 50%"></td>
 							                                    </tr>
 							                                    <tr>
-							                                    	<td>내용</td>
-							                                        <td><textarea id="content"></textarea></td>
+							                                        <td>비밀번호</td>
+							                                        <td><input type="password" id="board_pass" name="passwd" style="width: 50%"></td>
 							                                    </tr>
+							                                    <tr>
+							                                        <td>제목</td>
+							                                        <td><input type="text" id="board_subject" name="subject" style="width: 100%"></td>
+							                                    </tr>
+							                                    <tr>
+							                                    	
+							                                        <td colspan="2">
+																		<textarea class="summernote" name="content"></textarea>
+							                                        </td>
+							                                    </tr>
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택1"></td>
+							                                    </tr>
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택2"></td>
+							                                    </tr>
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택3"></td>
+							                                    </tr>
+													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
 					                            	</table>
-							                        <input type="submit" value="글 등록">
 	                        					</form> 
 				                       		</div>
 				                        </div>
@@ -99,7 +129,7 @@
                     <aside class="widget widget--blog widget--recent-post">
 	                        <div class="widget__content">
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
-		                        <a href="community_main"><i class="fi fi-rr-list"></i> 목록 보기</a>
+		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
 	                        </div>
                     </aside>
                 </div>
@@ -119,7 +149,7 @@
     <!-- 푸터 삽입 -->
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 삽입 -->
-    
+   
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
@@ -141,3 +171,4 @@
 </body>
 
 </html>
+
