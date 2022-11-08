@@ -10,10 +10,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%'
+		 WHERE f.file1 NOT LIKE '%상세%'
 		 	<if test="!keyword.equals('')">
 				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 				<choose>
@@ -38,10 +38,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '유제품/음료'
+		 WHERE i.item_category = '유제품/음료'
 	  ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
@@ -67,10 +67,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '해산물'
+		 WHERE i.item_category = '해산물'
 		 ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
@@ -96,10 +96,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '과일/채소'
+		 WHERE i.item_category = '과일/채소'
 		 ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
@@ -125,10 +125,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '냉동/간편식품'
+		 WHERE i.item_category = '냉동/간편식품'
 		 ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
@@ -155,10 +155,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_price &lt; 5000
+		 WHERE i.item_price &lt; 5000
 		 ORDER BY i.item_idx DESC
 
 <!-- 		select i.item_idx,  -->
@@ -182,10 +182,10 @@
 			   i.item_price,
 			   i.item_sale,
                m.manager_brandname,
-			   f.file
+			   f.file1
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-		 WHERE f.file NOT LIKE '%상세%' AND i.item_category = '간식류'
+		 WHERE i.item_category = '간식류'
 		 ORDER BY i.item_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 
@@ -252,7 +252,25 @@
 		WHERE item_category = "간식류"
 	</select>
 	
-	
+	<!-- 낮은 가격순 유제품/음료 게시물 갯수 조회 -->
+<!-- 	<select id="selectCheapDairyDrinkListCount" resultType="integer"> -->
+<!-- 		SELECT  -->
+<!-- 		COUNT(*) -->
+<!-- 		FROM item -->
+<!-- 		WHERE item_category = "유제품/음료" -->
+<!-- 		ORDER BY  -->
+<!-- 			<choose> -->
+<!--     			<when test="test=searchType.equals('newDate')"> -->
+<!-- 		      		ORDER BY item_date DESC -->
+<!-- 		    	</when> -->
+<!-- 		   		<when test="searchType.equals('cheap')"> -->
+<!-- 		     		ORDER BY CAST(item_price AS UNSIGNED) -->
+<!-- 		   		</when> -->
+<!-- 		    	<otherwise> -->
+<!-- 		      		ORDER BY CAST(item_price AS UNSIGNED) DESC -->
+<!-- 		    	</otherwise>   -->
+<!-- 		  </choose> -->
+<!-- 	</select> -->
 	
 	
 	<!-- 낮은 가격순(유제품/음료) -->
@@ -261,19 +279,23 @@
 			   i.item_name,
 			   i.item_category, 
 			   i.item_price,
-			   i.item_sale, 
-			   f.file
-		  FROM item i join file_item f
-			ON i.item_idx = f.rf_item_idx
-		 WHERE f.file NOT LIKE '%상세%'
-	  	   AND i.item_category = "유제품/음료"
+			   i.item_sale,
+			   m.manager_brandname, 
+			   f.file1
+	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
+		 WHERE i.item_category = "유제품/음료"
 	  ORDER BY CAST(item_price AS UNSIGNED)
-<!-- 		SELECT *  -->
-<!-- 		FROM item  -->
-<!-- 		WHERE item_category = "유제품/음료" -->
-<!-- 		ORDER BY CAST(item_price AS UNSIGNED) -->
-<!-- 		LIMIT #{startRow}, #{listLimit} -->
+	     LIMIT #{startRow}, #{listLimit}   
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
 	</select>
+	
+	
 	
 		
 </mapper>

@@ -38,17 +38,48 @@
     </style>
     
     <script type="text/javascript">
+    
     	var sortItemList = function(value) {
-    		if(value == 3){
-	    		$('#dairyDrinklist').hide(); 
+    		if(value == "cheap"){
+	    		$('#dairyDrinkList').hide(); 
 	        	$('#cheapDairyDrinkList').show();
+	    		
 	    	} else {
 	    		$('#cheapDairyDrinkList').hide(); 
-	        	$('#dairyDrinklist').show();
+	        	$('#dairyDrinkList').show();
 			}
-    	}
-    
+    	};
+    	
+//     	function cheapPageNum() {
+
+//     		var tmp = $("#cheapPageNum").attr("href");
+    		
+//     		window.location.href = tmp + "&value=" + value;
+// 		}
+    	
     </script>
+    
+<!--     <script type="text/javascript"> 
+ 		function cheapPageNum() {
+ 			var tmp = $("#cheapPageNum").attr("href");
+			
+ 		}
+ </script> -->
+<!--
+ <script th:inline="javascript">    
+    화면 전환 후 select box 고정
+    var selectedYear = [[${selectedYear}]]; // 화면전환 하면서 값을 받아온다
+    
+    if(selectedYear == 2018){
+        $('#2018').attr('selected','selected');
+    } else if(selectedYear == 2017){
+        $('#2017').attr('selected','selected');
+    } else{
+        $('#2019').attr('selected','selected');
+    }
+</script>-->
+
+    
     
 </head>
 <body>
@@ -86,23 +117,25 @@
 							<h2>유제품 / 음료</h2>
 						</div>                    
                         <nav class="ps-store-link">
-                        	<select class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
-							  <option value="1">신상품순</option>
-							  <option value="2">후기 많은순</option>
-							  <option value="3">낮은 가격순</option>
-							  <option value="4">높은 가격순</option>
-							</select>
+                        	<section id="buttonArea">
+	                        	<select name="filterType" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+								  <option value="newDate" id="newDate">신상품순</option>
+								  <option value="review" id="review">후기 많은순</option>
+								  <option value="cheap" id="cheap" >낮은 가격순</option>
+								  <option value="expensive" id="expensive">높은 가격순</option>
+								</select>
+							</section>
                         </nav>
 							
 						
-                        <div class="ps-shopping ps-tab-root" id="dairyDrinklist">
+                        <div class="ps-shopping ps-tab-root" id="dairyDrinkList">
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-shopping-product">
                                         <div class="row">
                                         
                                         	<!-- 반복문 시작 -->
-                                        	<c:forEach var="item" items="${itemList }" varStatus="status">
+                                        	<c:forEach var="item" items="${itemList }">
 <%--                                         		<c:forEach var="image" items="${imageList }"> --%>
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
@@ -112,7 +145,7 @@
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
-                                                    		<img src="/Code_Green/resources/img/item/${item.file }" alt="" />
+                                                    		<img src="/Code_Green/resources/item/${item.file1 }" alt="" />
                                                     	</a>
                                                         <ul class="ps-product__actions">
                                                         	
@@ -179,14 +212,14 @@
                                         	<!-- 반복문 시작 -->
                                         	<c:forEach var="cheapItem" items="${cheapItemList }">
                                         	<!-- 상품 1개당 시작 -->
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
                                                     <div class="ps-product__thumbnail">
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${cheapItem.item_idx }">
-                                                    		<img src="/Code_Green/resources/img/item/${cheapItem.file }" alt="" />
+                                                    		<img src="/Code_Green/resources/img/item/${cheapItem.file1 }" alt="" />
                                                     	</a>
                                                         <ul class="ps-product__actions">
                                                         	
@@ -206,7 +239,7 @@
                                                     <!-- 
                                                     * 브랜드명은 서브쿼리 사용하여 불러오기
                                                      -->
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${cheapItem.manager_brandname }</a>
                                                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${cheapItem.item_name }</a>
                                                             
                                                             <!-- 별점 -->
@@ -246,12 +279,11 @@
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
-				                           
 				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="category_dairy_drink?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="category_dairy_drink?pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="category_dairy_drink?pageNum=${i }" onclick="cheapPageNum()" id="cheapPageNum">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
 				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="category_dairy_drink?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>

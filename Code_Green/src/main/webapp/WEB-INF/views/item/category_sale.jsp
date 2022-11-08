@@ -106,7 +106,7 @@
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
-                                                    		<img src="/Code_Green/resources/img/item/${item.file }" alt="" />
+                                                    		<img src="/Code_Green/resources/img/item/${item.file1 }" alt="" />
                                                     	</a>
                                                         <ul class="ps-product__actions">
                                                         	
