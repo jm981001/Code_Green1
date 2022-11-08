@@ -1,5 +1,7 @@
 package com.itwillbs.Code_Green.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,15 @@ public class ReviewService {
 	//리뷰 삭제
 	public int removeReview(String board_idx) {
 		return mapper.deleteReview(board_idx);
+	}
+
+	//마이페이지 작성글 리스트 
+	public List<BoardVO> boardList(int startRow, int listLimit, String member_id) {
+		return  mapper.selectBoardList(startRow, listLimit, member_id);
+	}
+
+	//마이페이지 작성글 갯수
+	public int getBoardListCount() {
+		return mapper.selectItemListCount();
 	}
 }

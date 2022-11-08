@@ -20,18 +20,6 @@
 					#{board_content}, 
 					"0", 
 					"20221107")
-<!-- 		INSERT  -->
-<!-- 			INTO board -->
-<!-- 			VALUES ( -->
-<!-- 					"1031",   -->
-<!-- 					"93", -->
-<!-- 					"후기",  -->
-<!-- 					"아이디",  -->
-<!-- 					'N',  -->
-<!-- 					"제목",  -->
-<!-- 					"내용",  -->
-<!-- 					"0",  -->
-<!-- 					"20221106") -->
 	</insert>
 	
 	
@@ -42,4 +30,30 @@
 			WHERE 
 				board_idx = #{board_idx}
 	</delete>
+	
+	
+		<!-- 마이페이지 작성글 -->
+	<select id="selectBoardList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		 SELECT *
+		 FROM board
+		 WHERE board_id = #{member_id}
+		 ORDER BY board_idx DESC
+		 LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	
+		<!-- 마이페이지 작성글 갯수 -->
+	<select id="selectItemListCount" resultType="integer">
+		SELECT 
+			COUNT(*) 
+			FROM board
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

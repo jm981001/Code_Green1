@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 
@@ -36,7 +38,7 @@
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
-
+<input type="hidden" name="member_id" value="${sessionScope.sId}" />
 	<!-- ==========왼쪽 사이드바=========================================================================================================     -->
 	<main class="ps-page--my-account">
 		<section class="ps-section--account">
@@ -55,52 +57,45 @@
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
                                         <table class="table ps-table ps-table--notification">
+                                        
                                             <thead>
                                                 <tr align="center">
-                                                    <th width="75%">제목</th>
-                                                    <th>작성일</th>
+                                                    <th width="5%"></th>
+                                                    <th>게시판 종류</th>
+                                                    <th>제목</th>
+                                                    <th>조회수</th>
                                                     <th>조회수</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</td>
-                                                    <td>20-1-2020</td>
-                                                    <td>1414
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</td>
-                                                    <td>21-1-2020</td>
-                                                    <td>121
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> Et harum quidem rerum</td>
-                                                    <td>21-1-2020</td>
-                                                    <td>1211
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</td>
-                                                    <td>21-1-2020</td>
-                                                    <td>98
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                             <c:forEach var="board" items="${BoardList }">
+										        <tbody>  
+										            <tr class="item">  
+										           		<td>${board.board_idx }</td>  
+										                <td>${board.board_type }</td>  
+										                <td>${board.board_subject }</td>  
+										                <td>${board.board_readcount }</td>  
+										                <td>${board.board_date }</td>  
+										            </tr>  
+										        </tbody>  
+									        </c:forEach>
                                         </table>
                                         
-	                                    <!-- 페이징 버튼들 시작 -->
-	                                    <div class="ps-pagination">
-	                                        <ul class="pagination">
-	                                       		<li><a href="#"><i class="icon-chevron-left"></i></a></li>
-	                                            <li class="active"><a href="#">1</a></li>
-	                                            <li><a href="#">2</a></li>
-	                                            <li><a href="#">3</a></li>
-	                                            <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-	                                        </ul>
-	                                    </div>
-	                                    <!-- 페이징 버튼들 끝 -->
+ 								 <!-- 페이징 버튼들 시작 -->
+				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
+				                           
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageBoard.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				                               <c:choose>
+				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+				                                  <c:otherwise><li><a href="myPageBoard.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+				                               </c:choose>
+				                            </c:forEach>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageBoard.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
+				                    <!-- 페이징 버튼들 끝 -->
                                     </div>
                                 </div>
                             </div>

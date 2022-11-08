@@ -1,11 +1,13 @@
 package com.itwillbs.Code_Green.vo;
 
+
 public class File_ItemVO {
  
  private int  file_item_idx;
  private String  file;
  private String  real_file;
  private int  rf_item_idx;
+ 
 public int getFile_item_idx() {
 	return file_item_idx;
 }
@@ -46,6 +48,7 @@ public File_ItemVO(int file_item_idx, String file, String real_file, int rf_item
 	this.real_file = real_file;
 	this.rf_item_idx = rf_item_idx;
 }
+
  
 	
 }

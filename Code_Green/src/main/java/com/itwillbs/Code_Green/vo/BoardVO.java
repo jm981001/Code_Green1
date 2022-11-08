@@ -12,6 +12,18 @@ public class BoardVO {
 	private String board_readcount; //조회수
 	private String board_date; //날짜
 	private String item_idx; //상품번호
+	private String member_id; 
+	
+	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	
+	
+	
 	public int getBoard_idx() {
 		return board_idx;
 	}
