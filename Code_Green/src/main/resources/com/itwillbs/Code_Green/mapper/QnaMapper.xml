@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.QnaMapper">
 
+	<!-- 상품 문의 상세 정보 조회 -->
+	<select id="selectQna1" resultType="com.itwillbs.Code_Green.vo.QnaVO">
+		SELECT * 
+			FROM qna
+			WHERE
+				qna_idx = #{qna_idx}
+	</select>
+	
+	
 <!-- 상품 후기 작성  -->
 	<insert id="insertQna">
 		<selectKey keyProperty="qna_idx" resultType="integer" order="BEFORE">
@@ -34,5 +43,20 @@
 			WHERE 
 				qna_idx = #{qna_idx}
 	</delete>
+	
+	
+<!-- 상품 후기 수정 -->
+	<update id="updateQna">
+		UPDATE qna
+			SET
+				qna_subject = #{qna_subject},
+				qna_content = #{qna_content}
+			WHERE
+				qna_idx = #{qna_idx}
+	</update>
+	
+	
+
+	
 	
 </mapper>

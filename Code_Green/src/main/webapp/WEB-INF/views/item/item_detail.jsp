@@ -491,8 +491,8 @@
 														                    <br><br><br>
 														                  <div align="right">
 																		    <button>좋아용</button>
-																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?qna_idx=${qna.qna_idx }'">
+																			<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&pageNum=${param.pageNum}'">
 																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}')">
 																		 </div>
 														                </td>  

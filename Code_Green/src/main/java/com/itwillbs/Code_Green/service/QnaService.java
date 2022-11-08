@@ -11,6 +11,10 @@ public class QnaService {
 	@Autowired
 	private QnaMapper mapper;
 	
+	//상품 상세정보 조회
+	public QnaVO getQna(int qna_idx) {
+		return mapper.selectQna1(qna_idx);
+	}
 	
 	//상품 문의 등록
 	public int registQna(QnaVO qna) {
@@ -18,8 +22,16 @@ public class QnaService {
 	}
 
 	//상품 문의 삭제
-	public int removeReview(String qna_idx) {
+	public int removeQna(String qna_idx) {
 		return mapper.deleteQna(qna_idx);
 	}
+
+	//상품 문의 수정
+	public int modifyQna(QnaVO qna) {
+		return mapper.updateQna(qna);
+	}
+
+	
+
 
 }

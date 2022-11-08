@@ -2,7 +2,7 @@ package com.itwillbs.Code_Green.vo;
 
 public class QnaVO {
 	private int qna_idx;
-	private String qna_item;
+	private int qna_item;
 	private String qna_type;
 	private String qna_category;
 	private String qna_answer;
@@ -22,10 +22,10 @@ public class QnaVO {
 	public void setQna_idx(int qna_idx) {
 		this.qna_idx = qna_idx;
 	}
-	public String getQna_item() {
+	public int getQna_item() {
 		return qna_item;
 	}
-	public void setQna_item(String qna_item) {
+	public void setQna_item(int qna_item) {
 		this.qna_item = qna_item;
 	}
 	public String getQna_type() {
@@ -106,7 +106,10 @@ public class QnaVO {
 	public void setItem_idx(String item_idx) {
 		this.item_idx = item_idx;
 	}
-	public QnaVO(int qna_idx, String qna_item, String qna_type, String qna_category, String qna_answer, String qna_id,
+	public QnaVO() {
+		// TODO Auto-generated constructor stub
+	}
+	public QnaVO(int qna_idx, int qna_item, String qna_type, String qna_category, String qna_answer, String qna_id,
 			String qna_pass, String qna_subject, String qna_content, String qna_re_ref, String qna_re_lev,
 			String qna_re_seq, String qna_readcount, String qna_date, String item_idx) {
 		super();
@@ -126,11 +129,6 @@ public class QnaVO {
 		this.qna_date = qna_date;
 		this.item_idx = item_idx;
 	}
-
-    
-    public QnaVO() {
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public String toString() {
 		return "QnaVO [qna_idx=" + qna_idx + ", qna_item=" + qna_item + ", qna_type=" + qna_type + ", qna_category="
@@ -139,7 +137,7 @@ public class QnaVO {
 				+ ", qna_re_lev=" + qna_re_lev + ", qna_re_seq=" + qna_re_seq + ", qna_readcount=" + qna_readcount
 				+ ", qna_date=" + qna_date + ", item_idx=" + item_idx + "]";
 	}
-    
+
     
     
     

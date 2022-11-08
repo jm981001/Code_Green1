@@ -33,12 +33,12 @@ public class QnaController {
 		
 	}	
 	
-	//------------리뷰 삭제-------------------------------------------
+	//------------상품문의 삭제-------------------------------------------
 	@GetMapping(value = "/QnaDelete.bo")
 	public String deletePro(@RequestParam String qna_idx, Model model, HttpSession session,@RequestParam String item_idx) {
 		// Service - removeBoard() 메서드 호출하여 삭제 작업 요청
 		// => 파라미터 : BoardVO 객체, 리턴타입 : int(deleteCount)
-			int deleteCount = service.removeReview(qna_idx);
+			int deleteCount = service.removeQna(qna_idx);
 			model.addAttribute("item_idx", item_idx);
 			System.out.println("야야야야양"+item_idx);
 			// 삭제 실패 시 "패스워드 틀림!" 메세지 저장 후 fail_back.jsp 페이지로 포워딩
@@ -49,4 +49,32 @@ public class QnaController {
 			}
 		return "member/fail_back";
 	}	
+	
+	
+	//------------상품문의 수정-------------------------------------------
+	@GetMapping(value = "/QnaModify.bo")
+	public String qna_modify(@RequestParam int qna_idx, Model model, String item_idx) {
+		QnaVO qna = service.getQna(qna_idx);
+		model.addAttribute("qna",qna);
+		return "item/qna_modify";
+	}	
+	@PostMapping(value = "/QnaModifyPro.bo")
+	public String modifyPro(@ModelAttribute QnaVO qna, Model model, String item_idx) {
+		// Service - modifyBoard() 메서드 호출하여 수정 작업 요청
+		// => 파라미터 : BoardVO 객체, 리턴타입 : int(updateCount)
+		int updateCount = service.modifyQna(qna);
+		model.addAttribute("item_idx", item_idx);
+		// 수정 실패 시 "패스워드 틀림!" 메세지 저장 후 fail_back.jsp 페이지로 포워딩
+		// 아니면, BoardDetail.bo 서블릿 요청(글번호, 페이지번호 전달)
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정 실패!");
+			return "member/fail_back";
+		}
+		
+		return "redirect:/ItemDetail.bo" ;
+	}
+	
+	
+	
+	
 }
