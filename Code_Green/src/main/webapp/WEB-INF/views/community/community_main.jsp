@@ -106,7 +106,7 @@
                        
                         
                   <!-- 검색 부분  -->
-                    <div id="widget-search-select">
+                    <div id="widget-search-select-together">
 		                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
 	                         <select name="searchType">
 	                               <option value="">카테고리</option>
@@ -121,10 +121,10 @@
 		                            <button><i class="icon-magnifier"></i></button>
 	                   		 </aside>
 		                  </form>
-               		<!-- 글작성 버튼 -->
-               		<div class="ps-form--quick-search--com" align="left">
-               			<button>글쓰기</button>
-               		</div>
+	               		<!-- 글작성 버튼 -->
+	               		<div class="ps-form--quick-search--com" align="left">
+	               			<button onclick="location.href='CommunityWrite.bo'">글쓰기</button>
+	               		</div>
                     </div>
                    	
    		 			<!-- 페이징 버튼들 시작 -->

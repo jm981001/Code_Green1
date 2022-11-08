@@ -50,7 +50,7 @@
                         
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
-                           <form action="delete_board.me" method="post">
+                           <form action="deleteBoard.bo" method="post">
 	                           <p>글 비밀번호</p> 
 	                           <p><input type="password" name="passwd" id="passwd"></p>
 	                           <p><input type="submit" value="삭제하기"></p>

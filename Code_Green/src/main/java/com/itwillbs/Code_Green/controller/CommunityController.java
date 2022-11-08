@@ -2,10 +2,13 @@ package com.itwillbs.Code_Green.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -105,23 +108,44 @@ public class CommunityController {
 	}
 	
 	//------------ 커뮤니티 새글 작성 페이지 -------------------------------------------
-	@RequestMapping(value = "community_write", method = RequestMethod.GET)
-	public String community_write() {
+	@RequestMapping(value = "/CommunityWrite.bo", method = RequestMethod.GET)
+	public String communityWrite() {
 		return "community/community_write";
 	}
 		
 	//------------ 커뮤니티 글 수정 페이지------------------------------------------- 
-	@RequestMapping(value = "community_modify", method = RequestMethod.GET)
-	public String community_modify() {
+	@RequestMapping(value = "CommunityModify.bo", method = RequestMethod.GET)
+	public String communityModify() {
+		return "community/community_modify";
+	}
+	
+	//------------ 커뮤니티 글 수정 페이지------------------------------------------- 
+	@RequestMapping(value = "/CommunityModifyPro.bo", method = RequestMethod.GET)
+	public String communityModifyPro() {
 		return "community/community_modify";
 	}
 
+	
+	
 	//------------ 커뮤니티 글 삭제 페이지------------------------------------------- 
-	@RequestMapping(value = "community_delete", method = RequestMethod.GET)
-	public String community_delete() {
-		return "community/community_delete";
+	@GetMapping(value = "/CommunityDelete.bo")
+	public String communityDelete(@ModelAttribute BoardVO board,@RequestParam int pageNum, Model model) {
+		int deleteCount = service.removeBoard(board);
+		
+		if(deleteCount == 0) {
+
+			model.addAttribute("msg", "글 삭제 실패!<br>다시 확인해주세요");
+			return "member/fail_back";
+			
+		} else {
+			
+			return "redirect:/CommunityList.bo?pageNum=" + pageNum;
+		}
+		
 	}
 		
+	
+	
 		
 		
 		

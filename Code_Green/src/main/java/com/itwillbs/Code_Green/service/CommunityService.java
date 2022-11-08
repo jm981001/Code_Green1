@@ -35,6 +35,11 @@ public class CommunityService {
 		return mapper.selectBoardDetail(board_idx);
 	}
 
+	// 게시글 삭제 
+	public int removeBoard(BoardVO board) {
+		return mapper.deleteBoard(board);
+	}
+
 	
 	
 	

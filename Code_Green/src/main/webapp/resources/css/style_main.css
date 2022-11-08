@@ -1758,6 +1758,55 @@ button {
   cursor: pointer;
 }
 
+/* 지영 _ 커뮤 _ 버튼*/
+.ps-btn, button.ps-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  border: none;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: #5FA30F;
+  transition: all .4s ease;
+  cursor: pointer;
+}
+
+/* 지영 _ 커뮤 _ 신고하기*/
+.ps-btn-report {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #ffffff;
+  border: none;
+  font-weight: 400;
+  border-radius: 4px;
+  background-color: #ff0000c7;
+  transition: all .4s ease;
+  cursor: pointer;
+  background-image: url("/Code_Green/resources/img/icons/report_icon.png");
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+}
+
+/* 지영 _ 커뮤 _ 추천하기 */
+.ps-btn, button.ps-btn-best {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #ffffff;
+  border: none;
+  font-weight: 400;
+  border-radius: 4px;
+  background-color: #007bffa6;
+  transition: all .4s ease;
+  cursor: pointer;
+}
+
 /* 로그인 */
 .ps-btn, button.ps-btn {
   display: inline-block;
@@ -2465,6 +2514,12 @@ textarea.form-control {
   margin-bottom: 2.5rem;
 }
 
+/* 지영 _ 커뮤 _ 신고추천버튼두개 */
+.form-group-comm {
+  margin-bottom: 6rem;
+  text-align: right;
+}
+
 .form-group > label {
   margin-bottom: 1.5rem;
   font-weight: 400;
@@ -3090,7 +3145,12 @@ textarea.form-control {
 .ps-post--detail .ps-post__header {
   padding-top: 110px;
   padding-bottom: 90px;
-/*   text-align: center; */
+}
+
+/* 지영 */
+.colorheaderhead{
+  border-left: 4px solid #5fa30f;;
+  padding-left: 60px;
 }
 
 .ps-post--detail .ps-post__header h1 {
@@ -5049,8 +5109,10 @@ textarea.form-control {
   max-width: 100px;
 }
 
+/* 지영 */
 .ps-block--comment > .ps-block__thumbnail img {
   max-width: 70px;
+  border-radius: 50px;
 }
 
 .ps-block--comment > .ps-block__content {
@@ -11917,7 +11979,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   border: none;
   font-weight: 700;
   padding: 10px 24px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 4px;
 }
 
 /* 지영 */
@@ -11925,19 +11987,26 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   position: relative;
 /*   margin-bottom: 20px; */
   display: inline-block;
+  display: -webkit-box;
+  float: right;
 }
 
+/* 지영 */
 .ps-form--widget-search input {
   height: 34px;
+  width: 200px;
   background-color: #ffffff;
   border-radius: 0;
+  margin-left: 15px;
+  
 }
 
+/* 지영 */
 .ps-form--widget-search button {
   border: none;
   background-color: transparent;
   position: absolute;
-  top: 50%;
+  top: 35%;
   transform: translateY(-50%);
   right: 10px;
 }
@@ -13334,9 +13403,11 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #000;
 }
 
+/* 지영 */
 .ps-post-comments {
   max-width: 770px;
   margin: 0 auto;
+  display: contents;
 }
 
 .ps-post-comments h3 {

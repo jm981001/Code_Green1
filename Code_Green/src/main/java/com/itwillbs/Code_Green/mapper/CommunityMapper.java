@@ -24,4 +24,7 @@ public interface CommunityMapper {
 	// 게시글 상세조회
 	BoardVO selectBoardDetail(int board_idx);
 	
+	// 게시글 삭제 
+	int deleteBoard(BoardVO board);
+	
 }

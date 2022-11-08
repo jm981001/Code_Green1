@@ -1,7 +1,9 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,30 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
+<script type="text/javascript">
+
+	function deleteCheck(){
+		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
+	}
+
+	
+	function forwardReply(){
+		var sId = ;
+		// 세션 아이디가 있을 경우에만 쓰기 동작 수행 -> 세션 아이디 없으면 경고 출력 후 중단
+		if(${sessionScope.sId} != null){
+		
+		var content = document.getElementById("reply_content").value;
+		
+		// notice_content_reply_writePro.jsp 페이지로 포워딩
+		// => 파라미터 : 글번호,작성자(세션아이디), 댓글내용, 댓글게시판 타입(driver)
+		location.href = "#";
+		
+		} else {
+			alert("댓글은 로그인 후 사용가능합니다!");
+		}
+		
+	}
+</script>
 <body>
     
     <!-- 헤더 삽입 -->
@@ -45,6 +71,7 @@
                     
                         <!-- 블로그 헤더 시작  -->
                         <div class="ps-post__header">
+                        	<div class="colorheaderhead">
                             <h2>${cBoard.board_subject }</h2>
                             <p>
 	                            [${cBoard.board_category }] 
@@ -54,6 +81,7 @@
 	                            / 조회수 ${cBoard.board_readcount }
 	                            / 댓글(45) 
                             </p>
+                            </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
                         
@@ -61,36 +89,71 @@
                         <div class="ps-post__content">
                         	<p>${cBoard.board_content }
                         	<p><img src="/Code_Green/resources/img/홍콩센트럴소호비건레스토랑.jpg">
-<!--                             <h4>On the off chance that you have an escalated stop, mull over a short taking a gander at outing. This especially is shrewd in urban areas with brilliant open transportation decisions.</h4> -->
-<!--                             <p>Today most people get on average 4 to 6 hours of exercise every day, and make sure that everything they put in their mouths is not filled with sugars or preservatives, but they pay no attention to their mental health, no vacations, not even the occasional long weekend. All of this for hopes of one day getting that big promotion.This response is important for our ability to learn from mistakes, but it also gives rise to self-criticism, because it is part of the threat-protection system. In other words, what keeps us safe can go too far, and keep us too safe. In fact, it can trigger self-censoring. Coven try is a city with a thousand years of history that has plenty to offer the visiting tourist. Located in the heart of Warwickshire. One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p> -->
-<!--                             <blockquote class="ps-blockquote"> -->
-<!--                                 <p>“When you think ‘I know’ and ‘it is,’ you have the illusion of knowing, the illusion of certainty, and then you’re mindless”</p><span class="ps-blockquote__author">JELLY CRISTIANA</span> -->
-<!--                             </blockquote> -->
-<!--                             <p>That immediately brought to mind one of my fondest memories, involving my daughter when she was just a toddler of one: taking her with me on the short walk to check the mail. I live in a small enclave of homes in which all the mailboxes are together in a central location, less than a minute’s walk from my front door</p> -->
-<!--                             <div class="row"> -->
-<!--                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 "><img class="mb-30" src="/Code_Green/resources/img/blog/detail/2.jpg" alt=""> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 "><img class="mb-30" src="/Code_Green/resources/img/blog/detail/3.jpg" alt=""> -->
-<!--                                 </div> -->
-<!--                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 "><img class="mb-30" src="/Code_Green/resources/img/blog/detail/4.jpg" alt=""> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                             <h4>Defaulting to Mindfulness: The Third Person Effect</h4> -->
-<!--                             <p>Cray post-ironic plaid, Helvetica keffiyeh tousled Carles banjo before they sold out blog photo booth Marfa semiotics Truffaut. Mustache Schlitz next level blog Williamsburg, deep v typewriter tote bag Banksy +1 literally.</p> -->
-<!--                             <ul> -->
-<!--                                 <li>Welsh novelist Sarah Waters sums it up eloquently</li> -->
-<!--                                 <li>In their classic book, Creativity in Business, based on a popular course they co-taught</li> -->
-<!--                                 <li>Novelist and screenwriter Steven Pressfield</li> -->
-<!--                                 <li>A possible off-the-wall idea or solution appears like a blip and disappears without us even realizing</li> -->
-<!--                             </ul> -->
-<!--                             <p>The short answer is yes. <strong>According to Kross</strong>, when you think of yourself as another person, it allows you give yourself more objective, helpful feedback.</p> -->
-<!--                             <h4>Recommended Items</h4> -->
-<!--                             <p>Both of these assumptions, of course, could be entirely false. Self-censoring is firmly rooted in our experiences with mistakes in the past and not the present</p> -->
                         </div>
                        	<!-- 태그를...쓸건가? -->
 <!--                         <div class="ps-post__footer"> -->
 <!--                             <p class="ps-post__tags">Tags:<a href="#">business</a><a href="#">technology</a></p> -->
 <!--                         </div> -->
+
+
+
+			   <!-- 신고하기 / 추천하기 버튼 시작 -->
+				
+				
+				<div class="form-group-comm">
+                        <button class="ps-btn-report">신고하기</button>
+                        <button class="ps-btn-best">추천하기</button>
+                </div>
+				
+			   <!-- 신고하기 / 추천하기 버튼 끝 -->
+			   <!-- ========================================= 댓글 영역 ========================================= -->
+			   
+			   
+               <div class="ps-post-comments">
+                <h4> 댓글 (3) </h4>
+                <div class="ps-block--comment">
+                    <div class="ps-block__thumbnail">
+                    	<img src="http://1.gravatar.com/avatar/af7935f33b10cec23f77b8d9717641df?s=70&amp;d=mm&amp;r=g">
+                    </div>
+                    <div class="ps-block__content">
+                        <h5>고리라<small>2022년 11월 08일 오후 6시 43분</small></h5>
+                        <p>오늘 저녁메뉴는 맥도날드구요. 아직 메뉴는 못정했는데, 세트먹고 감자튀김은 소금빼서 받을생각 입니다. 이의있으신가요?</p>
+                        <a class="ps-block__reply" href="#">답글</a>
+                    </div>
+                </div>
+                
+                <div class="ps-block--comment">
+                    <div class="ps-block__thumbnail"><img src="http://2.gravatar.com/avatar/b2c1febfd11117eef66c351c1d4c10f1?s=70&amp;d=mm&amp;r=g"></div>
+                    <div class="ps-block__content">
+                        <h5>김춘배<small>2022년 11월 05일 오후 2시 4분</small></h5>
+                        <p>마!니 이정도면 고양이 중독이담ㅁ ㅏ!!!!!!!!!!</p><a class="ps-block__reply" href="#">답글</a>
+                        
+                        <div class="ps-block--comment">
+                            <div class="ps-block__thumbnail"><img src="http://2.gravatar.com/avatar/25df3939b2e33bd19783411afd5bc6e3?s=70&amp;d=mm&amp;r=g"></div>
+                            <div class="ps-block__content">
+                                <h5>황애옹<small>2022년 11월 08일 오후 6시 43분</small></h5>
+                                <p>심각한고양이중독입니다. 마음의준비애옹</p><a class="ps-block__reply" href="#">답글</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <!-- 댓글쓰기 영역 -->
+                <form class="ps-form--post-comment" action="do_action" method="post">
+                    <h4>댓글 쓰기</h4>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="댓글을 입력하세요" required></textarea>
+                    </div>
+                    <div class="form-group submit">
+                        <button class="ps-btn"> 댓글입력</button>
+                    </div>
+                </form>
+            </div>
+             <!-- ========================================= 댓글 영역 ========================================= -->
+             <hr>
+                        
                         
                     </div>
                 </div>
@@ -100,10 +163,12 @@
                     <aside class="widget widget--blog widget--recent-post">
 	                        <div class="widget__content">
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
-		                        <a href="community_main"><i class="fi fi-rr-list"></i> 목록 보기</a>
-		                        <a href="community_write"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
-		                        <a href="community_modify"><i class="fi fi-rr-scissors"></i> 글 수정</a>
-		                        <a href="community_delete"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>
+		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
+		                        <a href="CommunityWrite.bo"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
+		                        <c:if test="${cBoard.board_id eq sessionScope.sId }">
+			                        <a href="CommunityModify.bo"><i class="fi fi-rr-scissors"></i> 글 수정</a>
+			                        <a href="CommunityDelete.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }" onclick="return deleteCheck();"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>
+		                        </c:if>
 	                        </div>
                     </aside>
                 </div>

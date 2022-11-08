@@ -42,15 +42,20 @@
         <section class="ps-store-list">
             <div class="container">
                 <aside class="ps-block--store-banner">
+                	
                 	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
                     <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/브랜드이미지샘플.jpg">
                         <h3>브랜드 이름</h3><a class="ps-block__inquiry" href="#"><i class="#"></i>Follow</a>
                     </div>
+                    
+                    <!-- 까만설명부분 -->
                     <div class="ps-block__user">
                         <div class="ps-block__user-content">
                            <i>여기에 브랜드별 상세정보 및 간단한 소개 넣으면 되지않을까.</i>
                         </div>
                     </div>
+                    
+                    
                 </aside>
                 
                 

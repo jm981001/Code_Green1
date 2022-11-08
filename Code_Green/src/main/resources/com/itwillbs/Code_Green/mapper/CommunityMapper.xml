@@ -88,4 +88,16 @@
 	</select>	
 		
 		
+		
+		
+	<!-- 글 삭제  -->
+	<delete id="deleteBoard">
+		DELETE 
+			FROM board
+			WHERE 
+				board_type = '커뮤' 
+				AND 
+				board_idx = #{board_idx}
+	</delete>
+		
 </mapper>
