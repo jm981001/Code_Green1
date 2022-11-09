@@ -71,7 +71,7 @@
                                 <tr>
                                     <td data-label="Product">
                                         <div class="ps-product--cart">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="../img/products/shop/1.jpg" alt="" /></a></div>
+                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/shop/1.jpg" alt="" /></a></div>
                                             <div class="ps-product__content"><a href="product-default.html">귤</a>
                                                 <p><strong> 풀무원 </strong></p>
                                             </div>
@@ -86,46 +86,6 @@
                                         </div>
                                     </td>
                                     <td data-label="Total">갯수랑해서 총합</td>
-                                    <td data-label="Actions"><a href="#"></a><input type="checkbox" value="cart"></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Product">
-                                        <div class="ps-product--cart">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="../img/products/shop/1.jpg" alt="" /></a></div>
-                                            <div class="ps-product__content"><a href="product-default.html">토마토</a>
-                                                <p><strong> 풀무원 </strong></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="price" data-label="Price">2500원</td>
-                                    <td data-label="Quantity">
-                                        <div class="form-group--number">
-                                            <button class="up">+</button>
-                                            <button class="down">-</button>
-                                            <input class="form-control" type="text" placeholder="1" value="1">
-                                        </div>
-                                    </td>
-                                    <td data-label="Total">2500원</td>
-                                    <td data-label="Actions"><a href="#"></a><input type="checkbox" value="cart"></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Product">
-                                        <div class="ps-product--cart">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="../img/products/shop/2.jpg" alt="" /></a></div>
-                                            <div class="ps-product__content"><a href="product-default.html">샐러드</a>
-                                                <p><strong> 풀먼</strong></p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="price" data-label="Price">5000원</td>
-                                    <td data-label="Quantity">
-                                        <div class="form-group--number">
-                                            <button class="up">+</button>
-                                            <button class="down">-</button>
-                                            <input class="form-control" type="text" placeholder="1" value="1">
-                                        </div>
-                                    </td>
-                                    <td data-label="Total">5000원</td>
                                     <td data-label="Actions"><a href="#"></a><input type="checkbox" value="cart"></td>
                                 </tr>
                             </tbody>

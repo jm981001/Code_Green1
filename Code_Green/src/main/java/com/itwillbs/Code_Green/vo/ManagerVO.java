@@ -1,5 +1,7 @@
 package com.itwillbs.Code_Green.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ManagerVO {
 	
 	private int         manager_idx; 
@@ -18,6 +20,8 @@ public class ManagerVO {
 	private String     	manager_original_file; 
 	private String     	manager_del_yn; 
 	private String		manager_date;
+	private MultipartFile file;// 파일 처리(input type="file")를 위한 MultipartFile 타입 선언 s
+
 	public int getManager_idx() {
 		return manager_idx;
 	}
@@ -115,15 +119,20 @@ public class ManagerVO {
 		this.manager_date = manager_date;
 	}
 	
-	
-	
-	public ManagerVO() {
-		// TODO Auto-generated constructor stub
+	public MultipartFile getFile() {
+		return file;
 	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	public ManagerVO() {}
+
+	
 	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
 			String manager_brandname, String manager_storecode, String manager_phone, String manager_email,
 			String manager_email_auth, String manager_postcode, String manager_address, String manager_adminauth,
-			String manager_realfile, String manager_original_file, String manager_del_yn, String manager_date) {
+			String manager_realfile, String manager_original_file, String manager_del_yn, String manager_date,
+			MultipartFile file) {
 		super();
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
@@ -141,16 +150,17 @@ public class ManagerVO {
 		this.manager_original_file = manager_original_file;
 		this.manager_del_yn = manager_del_yn;
 		this.manager_date = manager_date;
+		this.file = file;
 	}
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_idx=" + manager_idx + ", manager_id=" + manager_id + ", manager_pass=" + manager_pass
-				+ ", manager_name=" + manager_name + ", manager_brandname=" + manager_brandname
-				+ ", manager_storecode=" + manager_storecode + ", manager_phone=" + manager_phone + ", manager_email="
-				+ manager_email + ", manager_email_auth=" + manager_email_auth + ", manager_postcode="
-				+ manager_postcode + ", manager_address=" + manager_address + ", manager_adminauth=" + manager_adminauth
+				+ ", manager_name=" + manager_name + ", manager_brandname=" + manager_brandname + ", manager_storecode="
+				+ manager_storecode + ", manager_phone=" + manager_phone + ", manager_email=" + manager_email
+				+ ", manager_email_auth=" + manager_email_auth + ", manager_postcode=" + manager_postcode
+				+ ", manager_address=" + manager_address + ", manager_adminauth=" + manager_adminauth
 				+ ", manager_realfile=" + manager_realfile + ", manager_original_file=" + manager_original_file
-				+ ", manager_del_yn=" + manager_del_yn + ", manager_date=" + manager_date + "]";
+				+ ", manager_del_yn=" + manager_del_yn + ", manager_date=" + manager_date + ", file=" + file + "]";
 	}
 	
 	

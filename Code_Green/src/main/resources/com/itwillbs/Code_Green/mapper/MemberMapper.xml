@@ -4,26 +4,83 @@
 
 
 	<!-- 로그인 -->
-	<select id="loginMember" resultType="com.itwillbs.Code_Green.vo.MemberVO">
+	<select id="loginMember"
+		resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id} AND MEMBER_PASS=#{member_pass}
+		WHERE MEMBER_ID=#{member_id} AND
+		MEMBER_PASS=#{member_pass}
 	</select>
 
-	
-<!-- 	3. 회원 정보 조회 수행을 위한 select 태그 작성 -->
-<!-- 	=> MemberMapper 객체의 selectMemberInfo() 메서드명을 id 속성값으로 지정 -->
-<!-- 	=> 파라미터는 메서드 전달된 파라미터 변수명과 동일한 이름 사용 -->
-<!-- 	=> 결과 타입은 1개 레코드 정보를 저장할 MemberVO 타입 지정 -->
-	
-	<select id="selectMemberInfo" resultType="com.itwillbs.Code_Green.vo.MemberVO">
+
+	<!-- 3. 회원 정보 조회 수행을 위한 select 태그 작성 -->
+	<!-- => MemberMapper 객체의 selectMemberInfo() 메서드명을 id 속성값으로 지정 -->
+	<!-- => 파라미터는 메서드 전달된 파라미터 변수명과 동일한 이름 사용 -->
+	<!-- => 결과 타입은 1개 레코드 정보를 저장할 MemberVO 타입 지정 -->
+
+	<select id="selectMemberInfo"
+		resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member
 		WHERE MEMBER_ID=#{member_id}
 	</select>
 
 
-
-
-
+	<insert id="insertMember">
+		INSERT INTO member
+		VALUES (
+				#{member_id},		<!-- 	MEMBER_ID VARCHAR(16) UNIQUE NOT NULL, 		-->
+				#{member_pass},		<!-- 	MEMBER_PASS VARCHAR(20) UNIQUE NOT NULL, 	-->
+				#{member_name},		<!--    MEMBER_NAME VARCHAR(10) NOT NULL, 			-->
+				#{member_phone},	<!-- 	MEMBER_PHONE VARCHAR(12) UNIQUE NOT NULL, 	-->
+				#{member_email},    <!-- 	MEMBER_EMAIL VARCHAR(30) UNIQUE NOT NULL, 	-->
+				'N',				<!-- 	MEMBER_EMAIL_AUTH VARCHAR(1) DEFAULT 'N', 	-->
+				#{member_postcode},	<!-- 	MEMBER_POSTCODE VARCHAR(6) NOT NULL, 		-->
+				#{member_address},	<!-- 	MEMBER_ADDRESS VARCHAR(100) NOT NULL, 		-->
+				'N',				<!--	MEMBER_DEL_YN VARCHAR(1) DEFAULT 'N',		-->
+				date_format(now(),'%Y%m%d%T')<!--MEMBER_DATE VARCHAR(14) NOT NULL	 		-->
+				)
+	</insert>
+	
+	
+	<insert id="insertManager">
+		INSERT INTO manager
+		VALUES (
+				#{manager_id},		 		<!-- 	MANAGER_ID VARCHAR(16)UNIQUE NOT NULL, 			-->
+				#{manager_pass},	 		<!-- 	MANAGER_PASS VARCHAR(20)UNIQUE NOT NULL, 		-->
+				#{manager_name},	 		<!-- 	MANAGER_NAME VARCHAR(10) NOT NULL, 				-->
+				#{manager_brandname},		<!-- 	MANAGER_BRANDNAME VARCHAR(20) NOT NULL,	 		-->
+				#{manager_storecode},		<!-- 	MANAGER_STORECODE VARCHAR(20) NOT NULL, 		-->
+				#{manager_phone},	 		<!-- 	MANAGER_PHONE VARCHAR(12) NOT NULL UNIQUE, 		-->
+				#{manager_email},	 		<!-- 	MANAGER_EMAIL VARCHAR(30) NOT NULL UNIQUE, 		-->
+				'N',						<!-- 	MANAGER_EMAIL_AUTH VARCHAR(1) DEFAULT 'N', 		-->
+				#{manager_postcode}, 		<!-- 	MANAGER_POSTCODE VARCHAR(6) NOT NULL, 			-->
+				#{manager_address},	 		<!-- 	MANAGER_ADDRESS VARCHAR(100) NOT NULL, 			-->
+				'N',						<!-- 	MANAGER_ADMINAUTH VARCHAR(1) DEFAULT 'N', 		-->
+				#{manager_realfile}, 		<!-- 	MANAGER_REALFILE VARCHAR(30) NOT NULL, 			-->
+				#{manager_original_file},	<!--	MANAGER_ORIGINAL_FILE VARCHAR(30) NOT NULL, 	-->
+				'N',						<!-- 	MANAGER_DEL_YN VARCHAR(1) DEFAULT 'N',		 	-->
+				date_format(now(),'%Y%m%d%T')<!--MANAGER_DATE VARCHAR(14) NOT NULL 				-->
+				)
+				
+	</insert>
 
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

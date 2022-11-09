@@ -3,7 +3,7 @@ package com.itwillbs.Code_Green.vo;
 public class MemberVO {
 
 
-	private int  member_idx;
+	private int  	member_idx;
 	private String  member_id ;
 	private String  member_pass;
 	private String  member_name;
