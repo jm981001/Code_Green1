@@ -28,29 +28,18 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
     
-    <!-- HTML 에디터 소스 // 수정예정 //  -->
-<!--     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
-<!-- 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
-<!-- 	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script> -->
-	<script src="/resources/plugins_community/summernote-lite.js"></script>
-	<script src="/resources/plugins_community/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/resources/plugins_community/summernote-lite.css">
-	<!-- HTML 에디터 소스 // 수정예정 //  -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
- <!-- HTML 에디터 소스 // 수정예정 //  -->
-<script>
-	$('.summernote').summernote({
-	height: 150,
-	lang: "ko-KR"
-	});
-</script>
- <!-- HTML 에디터 소스 // 수정예정 //  -->
+<style>
+	.ck-editor__editable { height: 300px; }
+	.ck-content { font-size: 12px; }
+</style>
 <body>
     
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
-    
     
    <!-- 블로그 바디 시작  -->
     <div class="ps-page--blog">
@@ -61,7 +50,9 @@
                     
                         <!-- 블로그 헤더 시작  -->
                         <div class="ps-post__header">
-                            <h2>새 글 작성</h2>
+                       		<div class="colorheaderhead">
+                            	<h2>새 글 작성</h2>
+                            </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
                         
@@ -97,10 +88,9 @@
 							                                        <td><input type="text" id="board_subject" name="subject" style="width: 100%"></td>
 							                                    </tr>
 							                                    <tr>
-							                                    	
 							                                        <td colspan="2">
-																		<textarea class="summernote" name="content"></textarea>
-							                                        </td>
+																		 <textarea name="board_content" id="editor"></textarea>
+																	</td>
 							                                    </tr>
 							                                    <tr>
 							                                    	<td colspan="2"><input type="file" id="파일선택1"></td>
@@ -114,12 +104,13 @@
 													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
 					                            	</table>
 	                        					</form> 
+	                        					
 				                       		</div>
 				                        </div>
                       			</div>
                       		</div>
                       
-                       
+                    
                         
                     </div>
                 </div>
@@ -168,6 +159,16 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
+    <script>
+    ClassicEditor
+      .create( document.querySelector( '#editor' ) ,{
+    	  language: "ko"
+      })
+      .catch( error => {
+        console.error( error );
+      } );
+  </script>
+     
 </body>
 
 </html>

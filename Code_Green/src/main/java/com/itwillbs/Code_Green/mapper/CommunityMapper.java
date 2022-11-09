@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 
 public interface CommunityMapper {
 
@@ -26,5 +27,8 @@ public interface CommunityMapper {
 	
 	// 게시글 삭제 
 	int deleteBoard(BoardVO board);
+
+	// 신고하기 (신고테이블에 입력하기)
+	int insertReport(ReportVO report);
 	
 }

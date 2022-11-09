@@ -1777,25 +1777,33 @@ button {
 /* 지영 _ 커뮤 _ 신고하기*/
 .ps-btn-report {
   display: inline-block;
+  text-align: left;
   padding: 10px 20px;
+  width: 80px;
   font-size: 13px;
+  font-weight: bold;
   line-height: 20px;
   color: #ffffff;
   border: none;
   font-weight: 400;
   border-radius: 4px;
-  background-color: #ff0000c7;
+  background-color: rgb(192, 192, 192);
   transition: all .4s ease;
   cursor: pointer;
   background-image: url("/Code_Green/resources/img/icons/report_icon.png");
   background-repeat: no-repeat;
-  background-size: 25px 25px;
+  background-size: 23px 23px;
+  background-position: 82% 38%;
+  
 }
 
 /* 지영 _ 커뮤 _ 추천하기 */
-.ps-btn, button.ps-btn-best {
+.ps-btn-best {
   display: inline-block;
   padding: 10px 20px;
+  text-align: left;
+  width: 80px;
+  font-weight: bold;
   font-size: 13px;
   line-height: 20px;
   color: #ffffff;
@@ -1805,6 +1813,10 @@ button {
   background-color: #007bffa6;
   transition: all .4s ease;
   cursor: pointer;
+  background-image: url("/Code_Green/resources/img/icons/like.png");
+  background-repeat: no-repeat;
+  background-size: 23px 23px;
+  background-position: 82% 26%;
 }
 
 /* 로그인 */
@@ -17679,3 +17691,66 @@ html .bg--parallax {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+
+/* 지영 추가내용 */
+#modal {
+      display: none; 
+	  position:fixed;
+	  width:100%; height:100%;
+	  background:rgba(0, 0, 0, 0.5);
+	  top:0; left:0;
+	  z-index:1;
+	}
+	
+#modal h3 {
+  margin:0;
+  margin-bottom: 40px;   
+  text-align: center;
+}
+
+#modal button, btn {
+  display:inline-block;
+  width:100px;
+  margin-left:calc(100% - 100px - -30px);
+  border: none;
+  background-color: transparent;
+  font-size: 30px;
+}
+
+#modal .modal_content {
+  
+  width:400px; height:500px;
+  background:#fff; border-radius:10px;
+  position:relative; 
+  top:30%; left:50%;
+  margin-top:-100px; 
+  margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; padding:40px 40px;
+  line-height:30px; cursor:pointer;
+}
+
+#modal #modal_close_btn {
+	
+	border-color: none;
+	background-color: none;
+
+}
+
+#modal input[type=text]{
+	width: 250px;
+}
+
+#modal input[type=submit]{
+	width: 100px;
+	border: none;
+	border-radius: 10px;
+	background-color: #ff0000c7;
+	color: white;
+	margin-top: 25px;
+}
+
+

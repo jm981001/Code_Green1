@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.CommunityMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 
 @Service
 public class CommunityService {
@@ -38,6 +39,12 @@ public class CommunityService {
 	// 게시글 삭제 
 	public int removeBoard(BoardVO board) {
 		return mapper.deleteBoard(board);
+	}
+
+	
+	// 관리자에게 신고글 제출(신고테이블에 입력)
+	public int reportBoard(ReportVO report) {
+		return mapper.insertReport(report);
 	}
 
 	

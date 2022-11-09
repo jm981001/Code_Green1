@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>커뮤니티 - 글 상세</title>
+    <title>커뮤니티</title>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -30,30 +30,52 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <script type="text/javascript">
+	
+	$(function() {
+		
+		$(".ps-btn-report").click(function(){
+			$("#modal").fadeIn();
+		});
+
+		$("#modal_close_btn").click(function(){
+			$("#modal").fadeOut();
+		});
+		
+	});
+		
+	
+	function checkS() {
+
+		alert("신고가 완료되었습니다!\n관리자의 확인 후 처리됩니다. 감사합니다.");
+		
+	};
+	
 
 	function deleteCheck(){
 		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
 	}
 
 	
-	function forwardReply(){
-		var sId = ;
-		// 세션 아이디가 있을 경우에만 쓰기 동작 수행 -> 세션 아이디 없으면 경고 출력 후 중단
-		if(${sessionScope.sId} != null){
+// 	function forwardReply(){
+// 		var sId = ;
+// 		// 세션 아이디가 있을 경우에만 쓰기 동작 수행 -> 세션 아이디 없으면 경고 출력 후 중단
+// 		if(${sessionScope.sId} != null){
 		
-		var content = document.getElementById("reply_content").value;
+// 		var content = document.getElementById("reply_content").value;
 		
-		// notice_content_reply_writePro.jsp 페이지로 포워딩
-		// => 파라미터 : 글번호,작성자(세션아이디), 댓글내용, 댓글게시판 타입(driver)
-		location.href = "#";
+// 		// notice_content_reply_writePro.jsp 페이지로 포워딩
+// 		// => 파라미터 : 글번호,작성자(세션아이디), 댓글내용, 댓글게시판 타입(driver)
+// 		location.href = "#";
 		
-		} else {
-			alert("댓글은 로그인 후 사용가능합니다!");
-		}
+// 		} else {
+// 			alert("댓글은 로그인 후 사용가능합니다!");
+// 		}
 		
-	}
+// 	}
+	
 </script>
 <body>
     
@@ -101,8 +123,40 @@
 				
 				
 				<div class="form-group-comm">
-                        <button class="ps-btn-report">신고하기</button>
-                        <button class="ps-btn-best">추천하기</button>
+					<button class="ps-btn-report" >신고</button>
+						<div id="modal">
+						   <div class="modal_content">
+						   	  <button type="button" id="modal_close_btn">X</button><br>
+						   	   <h3>신고하기</h3>
+						   	  <form action="ReportBoard.re" method="post" onsubmit="checkS()">
+						   	  	<input type="hidden" value="${cBoard.board_idx }" name="board_idx" id="board_idx">
+						   	  	<input type="hidden" value="${param.pageNum }" name="pageNum" id="pageNum">
+						   	  	<table>
+						   	  		<tr>
+						   	  			<td>게시판</td>
+						   	  			<td><input type="text" value="커뮤니티" disabled="disabled" ></td>
+						   	  		</tr>
+						   	  		<tr>
+						   	  			<td>신고글</td>
+						   	  			<td><input type="text" value="${cBoard.board_subject }" name="report_subject" readonly="readonly"></td>
+						   	  		</tr>
+						   	  		<tr>
+						   	  			<td>신고자</td>
+						   	  			<td><input type="text" value="${sessionScope.sId }" name="reporter"  readonly="readonly"></td>
+						   	  		</tr>
+						   	  		<tr>
+						   	  			<td>신고사유</td>
+						   	  			<td><textarea name="report_content" id="report_content" cols="30" rows="3" placeholder="신고사유를 입력해주세요."></textarea></td>
+						   	  		</tr>
+						   	  		<tr>
+						   	  			<td colspan="2"><input type="submit" value="신고서 제출"></td>
+						   	  		</tr>
+							   	  </table>
+						   	  </form>
+						   </div>	
+						</div>
+							
+                    <button class="ps-btn-best">추천</button>
                 </div>
 				
 			   <!-- 신고하기 / 추천하기 버튼 끝 -->
@@ -189,6 +243,7 @@
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 삽입 -->
     
+    ﻿
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
@@ -207,6 +262,7 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
+   ﻿
 </body>
 
 </html>

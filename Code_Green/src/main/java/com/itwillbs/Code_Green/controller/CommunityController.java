@@ -1,14 +1,14 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwillbs.Code_Green.service.CommunityService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
+import com.itwillbs.Code_Green.vo.ReportVO;
 
 @Controller
 public class CommunityController {
@@ -145,9 +146,27 @@ public class CommunityController {
 	}
 		
 	
+	//------------ 커뮤니티 글 신고 기능 (신고테이블에 입력) ------------------------------------------- 
+		
+	@PostMapping(value = "/ReportBoard.re")	
+	public String reportBoard(@ModelAttribute ReportVO report,Model model,@RequestParam int pageNum) {
+		
+		int reportCount = service.reportBoard(report);
+		
+		if(reportCount == 0) {
+			
+			model.addAttribute("msg", "신고글 제출 실패!<br>확인 후 다시 시도해주세요.");
+			return "member/fail_back";
+			
+		} else {
+			
+			return "redirect:/CommunityDetail.bo?board_idx=" + report.getBoard_idx() + "&pageNum=" + pageNum;
+			
+		}
+		
+		
+	}
 	
-		
-		
 		
 		
 		
