@@ -28,6 +28,15 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
+<style>
+	.heart_icon_brand {
+		width: 40px; height:40px;
+		position: absolute;
+	    top: 370px;
+	    left: 1070px;
+	}
+
+</style>
 <body>
     
     
@@ -44,16 +53,18 @@
                 <aside class="ps-block--store-banner">
                 	
                 	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/브랜드이미지샘플.jpg">
-                        <h3>브랜드 이름</h3><a class="ps-block__inquiry" href="#"><i class="#"></i>Follow</a>
+                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/forzero/lettuce.jpg">
+                        <h3>풀무원</h3>
+                        <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
+                        <a class="ps-block__inquiry" href="#"><i class="#"></i>Follow</a>
+                    </div>
+                    <div class="ps-block__user">
+                     	<div class="ps-block__user-avatar">
+                     		   <img src="/Code_Green/resources/img/forzero/나뽀얌쓰.jpg">
+	                           <div class="brand_info">여기에 브랜드별 상세정보 및 간단한 소개 넣으면 되지않을까.</div>
+                    	</div>
                     </div>
                     
-                    <!-- 까만설명부분 -->
-                    <div class="ps-block__user">
-                        <div class="ps-block__user-content">
-                           <i>여기에 브랜드별 상세정보 및 간단한 소개 넣으면 되지않을까.</i>
-                        </div>
-                    </div>
                     
                     
                 </aside>

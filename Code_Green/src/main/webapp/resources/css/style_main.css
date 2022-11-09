@@ -6524,11 +6524,13 @@ textarea.form-control {
 
 /* 지영 */
 .ps-block--store-banner .ps-block__content {
+	
   position: relative;
-  min-height: 400px;
+  min-height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 /* 지영 */
@@ -6559,38 +6561,47 @@ textarea.form-control {
   background-color: #fff;
 }
 
+/* 지영 */
 .ps-block--store-banner .ps-block__inquiry {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: -103px;
+  right: 74px;
   padding: 5px 10px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.9);
-  color: #17a2b8;
+  color: rgb(0, 128, 64);
 }
 
+
+
+/* 지영 */
 .ps-block--store-banner .ps-block__inquiry:hover {
-  background-color: #17a2b8;
-  color: #ffffff;
+  background-color: rgb(170, 255, 170);
+  color: rgb(0, 128, 64);
 }
 
 /* 지영 */
 .ps-block--store-banner .ps-block__user {
-  background-color: #000000d1;
+  background-color: #2c5704;
   padding: 30px 5%;
+  color: white;
 }
 
+/* 지영 */
 .ps-block--store-banner .ps-block__user .ps-block__user-avatar {
-  display: block;
+  display: flex;
   text-align: center;
   margin-bottom: 30px;
+  align-items: center;
 }
 
+/* 지영 */
 .ps-block--store-banner .ps-block__user .ps-block__user-avatar img {
   width: 150px;
   height: 150px;
   margin-bottom: 10px;
   border-radius: 50%;
+  margin-right: 15px;
 }
 
 .ps-block--store-banner .ps-block__user .ps-block__user-avatar .br-wrapper {
@@ -6636,10 +6647,13 @@ textarea.form-control {
   }
 }
 
+/* 지영 */
 @media (min-width: 992px) {
   .ps-block--store-banner .ps-block__content h3 {
     font-size: 70px;
+    font-weight: bold;
     color: #ffffff;
+    text-shadow: 3px 3px #031804;
   }
 }
 

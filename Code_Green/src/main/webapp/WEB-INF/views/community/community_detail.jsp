@@ -34,16 +34,27 @@
 </head>
 <script type="text/javascript">
 	
+	
+	$(function(){
+		$(":button").click(function(){
+			
+			if(${sessionScope.sId == null}){
+				alert("로그인 후 사용가능합니다!");
+				return false;
+			}
+		});
+	});	
+	
+	
 	$(function() {
-		
-		$(".ps-btn-report").click(function(){
-			$("#modal").fadeIn();
-		});
-
-		$("#modal_close_btn").click(function(){
-			$("#modal").fadeOut();
-		});
-		
+		if(${sessionScope.sId != null}){
+			$(".ps-btn-report").click(function(){
+				$("#modal").fadeIn();
+			});
+			$("#modal_close_btn").click(function(){
+				$("#modal").fadeOut();
+			});
+		}
 	});
 		
 	
@@ -53,28 +64,9 @@
 		
 	};
 	
-
 	function deleteCheck(){
 		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
 	}
-
-	
-// 	function forwardReply(){
-// 		var sId = ;
-// 		// 세션 아이디가 있을 경우에만 쓰기 동작 수행 -> 세션 아이디 없으면 경고 출력 후 중단
-// 		if(${sessionScope.sId} != null){
-		
-// 		var content = document.getElementById("reply_content").value;
-		
-// 		// notice_content_reply_writePro.jsp 페이지로 포워딩
-// 		// => 파라미터 : 글번호,작성자(세션아이디), 댓글내용, 댓글게시판 타입(driver)
-// 		location.href = "#";
-		
-// 		} else {
-// 			alert("댓글은 로그인 후 사용가능합니다!");
-// 		}
-		
-// 	}
 	
 </script>
 <body>
@@ -158,12 +150,21 @@
 							
                     <button class="ps-btn-best">추천</button>
                 </div>
-				
 			   <!-- 신고하기 / 추천하기 버튼 끝 -->
-			   <!-- ========================================= 댓글 영역 ========================================= -->
-			   
+			   <!-- ========================================= 댓글 영역 시작 ========================================= -->
 			   
                <div class="ps-post-comments">
+			   <!-- 댓글쓰기 영역 -->
+	                <form class="ps-form--post-comment" action="do_action" method="post">
+	                    <h4>댓글 쓰기</h4>
+	                    <div class="form-group">
+	                        <textarea class="form-control" rows="3" placeholder="댓글을 입력하세요" required></textarea>
+	                    </div>
+	                    <div class="form-group submit">
+	                        <button class="ps-btn"> 댓글입력</button>
+	                    </div>
+	                </form>
+	            <!-- 댓글쓰기 영역 -->
                 <h4> 댓글 (3) </h4>
                 <div class="ps-block--comment">
                     <div class="ps-block__thumbnail">
@@ -193,19 +194,8 @@
                 </div>
                 
                 
-                
-                <!-- 댓글쓰기 영역 -->
-                <form class="ps-form--post-comment" action="do_action" method="post">
-                    <h4>댓글 쓰기</h4>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4" placeholder="댓글을 입력하세요" required></textarea>
-                    </div>
-                    <div class="form-group submit">
-                        <button class="ps-btn"> 댓글입력</button>
-                    </div>
-                </form>
-            </div>
-             <!-- ========================================= 댓글 영역 ========================================= -->
+	            </div>
+             <!-- ========================================= 댓글 영역 끝 ========================================= -->
              <hr>
                         
                         
