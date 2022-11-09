@@ -88,7 +88,20 @@ public class ItemCategoryService {
 		return mapper.selectCheapDairyDrinkList(startRow, listLimit);
 	}
 
+	// 높은 가격순(유제품/음료)
+	public List<ItemVO> selectExpensiveDairyDrinkList(int startRow, int listLimit) {
+		return mapper.selectExpensiveDairyDrinkList(startRow, listLimit);
+	}
 
+	// 낮은 가격순(전체 상품)
+	public List<ItemVO> selectCheapAllList(int startRow, int listLimit) {
+		return mapper.selectCheapAllList(startRow, listLimit);
+	}
+
+	// 높은 가격순(전체 상품)
+	public List<ItemVO> selectExpensiveAllList(int startRow, int listLimit) {
+		return mapper.selectExpensiveAllList(startRow, listLimit);
+	}
 	
 
 

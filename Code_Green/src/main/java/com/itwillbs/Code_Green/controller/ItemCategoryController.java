@@ -28,6 +28,7 @@ public class ItemCategoryController {
 	int startPage;
 	int endPage;
 	List<ItemVO> cheapItemList;
+	List<ItemVO> expensiveItemList;
 //	int cheapItemListCount;
 	
 	// 전체 상품
@@ -35,7 +36,8 @@ public class ItemCategoryController {
 	public String category_all(
 			@RequestParam(defaultValue = "") String searchType, 
 			@RequestParam(defaultValue = "") String keyword,  
-			@RequestParam(defaultValue = "1") int pageNum, Model model) {
+			@RequestParam(defaultValue = "1") int pageNum,
+			 @RequestParam(defaultValue = "newDate") String sort, Model model) {
 		
 		listLimit = 12; 
 		
@@ -62,13 +64,24 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("sort", sort);
+		
+		// 낮은 가격순
+		cheapItemList = service.selectCheapAllList(startRow, listLimit);
+		model.addAttribute("cheapItemList", cheapItemList);
+				
+		// 높은 가격순
+		expensiveItemList = service.selectExpensiveAllList(startRow, listLimit);
+		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_all";
 	}
 	
 	// 유제품 / 음료
 	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)
-	public String category_dairy_drink(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+	public String category_dairy_drink(@RequestParam(defaultValue = "1") int pageNum, 
+									   @RequestParam(defaultValue = "newDate") String sort, Model model) {
+		System.out.println(sort);
 		
 		listLimit = 12; 
 		
@@ -95,14 +108,15 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
-		
+		model.addAttribute("sort", sort);
 		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapDairyDrinkList(startRow, listLimit);
-//		cheapItemListCount = service.selectCheapDairyDrinkListCount();
-		System.out.println(cheapItemList);
-		
 		model.addAttribute("cheapItemList", cheapItemList);
+		
+		// 높은 가격순
+		expensiveItemList = service.selectExpensiveDairyDrinkList(startRow, listLimit);
+		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_dairy_drink";
 	}

@@ -1,7 +1,8 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,84 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/autopart.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+    
+    <style type="text/css">
+    	#cheapAllItemList{
+     		display: none; 
+    	}
+    	#expensiveAllItemList{
+    		display: none;
+    	}
+    </style>
+    
+    <script type="text/javascript">
+    
+    	window.onload = function(){
+    		
+    		$('#sort').val('${sort}')
+    		sortItemList($('#sort').val());
+//     		$('#dairyDrinkList').hide(); 
+//     		$('#cheapDairyDrinkList').show();
+    		
+    	}	
+    
+    	var sortItemList = function(value) {
+    		
+    		var aLinks = $('.pageLink');
+    		for(var i=0; i<aLinks.length; i++){
+	    		var str = aLinks[i].href.split('sort=')[0] + 'sort=';
+	    		aLinks[i].href = str + value;
+    		}
+    		
+    		if(value == "cheap"){
+	    		$('#allItemList').hide(); 
+	    		$('#expensiveAllItemList').hide();
+	        	$('#cheapAllItemList').show();
+	    	} else if(value == "expensive") {
+	    		$('#cheapAllItemList').hide(); 
+	        	$('#allItemList').hide();
+	    		$('#expensiveAllItemList').show();
+			}
+    	};
+    	
+//     	function cheapPageNum() {
+
+//     		var tmp = $("#cheapPageNum").attr("href");
+    		
+//     		window.location.href = tmp + "&value=" + value;
+// 		}
+
+// 		function cheapPageNum() {
+// 			window.onload = function () {
+// 				$(sortItemList).val('selected');
+// 				$("#form-select").val().attr("selected","selected");
+// 			}
+// 		}
+    	
+    </script>
+    
+<!--     <script type="text/javascript"> 
+ 		function cheapPageNum() {
+ 			var tmp = $("#cheapPageNum").attr("href");
+			
+ 		}
+ </script> -->
+<!--
+ <script th:inline="javascript">    
+    화면 전환 후 select box 고정
+    var selectedYear = [[${selectedYear}]]; // 화면전환 하면서 값을 받아온다
+    
+    if(selectedYear == 2018){
+        $('#2018').attr('selected','selected');
+    } else if(selectedYear == 2017){
+        $('#2017').attr('selected','selected');
+    } else{
+        $('#2019').attr('selected','selected');
+    }
+</script>-->
+
+    
+    
 </head>
 <body>
     
@@ -59,13 +138,13 @@
                                 <li><a href="category_snack">간식류</a></li>
                             </ul>
                         </aside>
-                       
                     </div>
                     <div class="ps-section__right">
-                    	<div id="category_h3">
+						<div id="category_h3">
 							<h2>전체 상품</h2>
-						</div> 
-                        <nav class="ps-store-link" style="margin-top: 100px;">
+						</div>                    
+
+						 <nav class="ps-store-link" style="margin-top: 100px;">
                         	<section id="buttonArea">
 							<!-- 검색 기능 구현을 위한 form 태그 -->
 								<form action="category_all" method="get" style="margin-left: 20px">
@@ -77,31 +156,16 @@
 									<input type="submit" value="검색">
 								</form>
 							</section>
-                            <select class="form-select" aria-label="Default select example">
-							  <option value="1">신상품순</option>
-							  <option value="2">후기 많은순</option>
-							  <option value="3">낮은 가격순</option>
-							  <option value="4">높은 가격순</option>
+                            <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+							  <option value="newDate">신상품순</option>
+							  <option value="review">후기 많은순</option>
+							  <option value="cheap">낮은 가격순</option>
+							  <option value="expensive">높은 가격순</option>
 							</select>
                         </nav>
 							
-                        
-                                        
-                        <div class="ps-shopping ps-tab-root">
-<!--                             <div class="ps-shopping__header"> -->
-<!--                               <p>총<strong> 6</strong> 개의 상품</p> -->
-<!--                                 <div class="ps-shopping__actions"> -->
-                                	<!-- 이건혹시 만약 뷰 종류할거면 재활용 -->
-                                	
-<!--                                     <div class="ps-shopping__view"> -->
-<!--                                         <p>View</p> -->
-<!--                                         <ul class="ps-tab-list"> -->
-<!--                                             <li class="active"><a href="#tab-1"><i class="icon-grid"></i></a></li> -->
-<!--                                             <li><a href="#tab-2"><i class="icon-list4"></i></a></li> -->
-<!--                                         </ul> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
+						
+                        <div class="ps-shopping ps-tab-root" id="allItemList">
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-shopping-product">
@@ -109,6 +173,7 @@
                                         
                                         	<!-- 반복문 시작 -->
                                         	<c:forEach var="item" items="${itemList }">
+<%--                                         		<c:forEach var="image" items="${imageList }"> --%>
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
@@ -117,7 +182,7 @@
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
-                                                    		<img src="/Code_Green/resources/img/item/${item.file1 }" alt="" />
+                                                    		<img src="/Code_Green/resources/item/${item.file1 }" alt="" />
                                                     	</a>
                                                         <ul class="ps-product__actions">
                                                         	
@@ -165,49 +230,192 @@
                                                 </div>
                                             </div>
                                             <!-- 상품 1개당 끝 -->
+												                                     
+                                           </c:forEach>      	
+                                        </div>
+                                    </div>
+                           		</div>
+                          	</div>
+                         </div>  
+<!-- --------------------------------------낮은 가격순 (낮은 가격순 페이징 필요)----------------------------------------------------- -->
+                                   
+                        <div class="ps-shopping ps-tab-root" id="cheapAllItemList">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="cheapItem" items="${cheapItemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=${cheapItem.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${cheapItem.file1 }" alt="" />
+                                                    	</a>
+                                                        <ul class="ps-product__actions">
+                                                        	
+                                                        	
+                                                        	<!-- 장바구니 및 찜 -->
+                                                        	<!-- 
+                                                        	* 장바구니 페이지로 이동
+                                                        	* 찜 페이지로 이동
+                                                        	 -->
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- 브랜드명 및 상품명 -->
+                                                    <!-- 
+                                                    * 브랜드명은 서브쿼리 사용하여 불러오기
+                                                     -->
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${cheapItem.manager_brandname }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${cheapItem.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${cheapItem.item_price } <del>${cheapItem.item_price } </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${cheapItem.item_name }</a>
+                                                            <p class="ps-product__price sale">${cheapItem.item_price } <del>${cheapItem.item_price } </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
                                              </c:forEach>	
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
-                                    <!-- 페이징 버튼들 시작 -->
+                                 </div>     
+                               </div>     
+                             </div>
+                             
+<!-- -------------------------------------높은 가격순 (높은 가격순 페이징 필요)----------------------------------------------------- -->
+                                   
+                        <div class="ps-shopping ps-tab-root" id="expensiveAllItemList">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="expensiveItem" items="${expensiveItemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=${expensiveItem.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${expensiveItem.file1 }" alt="" />
+                                                    	</a>
+                                                        <ul class="ps-product__actions">
+                                                        	
+                                                        	
+                                                        	<!-- 장바구니 및 찜 -->
+                                                        	<!-- 
+                                                        	* 장바구니 페이지로 이동
+                                                        	* 찜 페이지로 이동
+                                                        	 -->
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- 브랜드명 및 상품명 -->
+                                                    <!-- 
+                                                    * 브랜드명은 서브쿼리 사용하여 불러오기
+                                                     -->
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${expensiveItem.manager_brandname }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${expensiveItem.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${expensiveItem.item_price } <del>${expensiveItem.item_price } </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${expensiveItem.item_name }</a>
+                                                            <p class="ps-product__price sale">${expensiveItem.item_price } <del>${expensiveItem.item_price } </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
+                                             </c:forEach>	
+                                        </div>
+                                    </div>
+                                 </div>     
+                               </div>     
+                             </div>
+                                      
+
+                   
+                             <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="category_all?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="category_all?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="category_all?pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a class="pageLink" href="category_all?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="category_all?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="category_all?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
-				                    <!-- 페이징 버튼들 끝 -->
-                                    
-                                </div>
+				                <!-- 페이징 버튼들 끝 -->
+                                
                            </div>
                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-	</div>
-   
-    
-   
- 
+       		 </section>
+		</div>
+
+	
+	
 	    <!-- 푸터 삽입 -->
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 		<!-- 푸터 삽입 -->
    
     
     
-    
-
+   
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>

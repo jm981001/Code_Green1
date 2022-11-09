@@ -3,6 +3,7 @@
 <mapper namespace="com.itwillbs.Code_Green.mapper.ItemCategoryMapper">
 
 	<!-- 전체 상품 카테고리 -->
+	<!-- 카테고리 정렬 기본값 신상품순이라서 order by item_date desc -->
 	<select id="select_all" resultType="com.itwillbs.Code_Green.vo.ItemVO">
 		SELECT i.item_idx, 
 			   i.item_name,
@@ -24,7 +25,7 @@
 					</when>
 				</choose>
 			</if>
-	 ORDER BY i.item_idx DESC
+	 ORDER BY item_date DESC
 	    LIMIT #{startRow}, #{listLimit}
 		 
 	</select>
@@ -41,7 +42,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = '유제품/음료'
-	  ORDER BY i.item_idx DESC
+	  ORDER BY item_date DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -70,7 +71,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = '해산물'
-		 ORDER BY i.item_idx DESC
+		 ORDER BY item_date DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -99,7 +100,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = '과일/채소'
-		 ORDER BY i.item_idx DESC
+		 ORDER BY item_date DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -128,7 +129,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = '냉동/간편식품'
-		 ORDER BY i.item_idx DESC
+		 ORDER BY item_date DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -158,7 +159,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_price &lt; 5000
-		 ORDER BY i.item_idx DESC
+		 ORDER BY item_date DESC
 
 <!-- 		select i.item_idx,  -->
 <!-- 			   i.item_name, -->
@@ -185,7 +186,7 @@
 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = '간식류'
-		 ORDER BY i.item_idx DESC
+		 ORDER BY item_date DESC
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		select i.item_idx,  -->
@@ -201,6 +202,7 @@
 <!-- 	  ORDER BY i.item_idx DESC -->
 <!-- 		 LIMIT #{startRow}, #{listLimit} -->
 	</select>
+	
 	
 	
 	
@@ -272,6 +274,51 @@
 <!-- 	</select> -->
 	
 	
+	
+	
+	
+	<!-- 낮은 가격순(전체 상품) -->
+	<select id="selectCheapAllList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale,
+			   m.manager_brandname, 
+			   f.file1
+	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
+	  ORDER BY CAST(item_price AS UNSIGNED)
+	     LIMIT #{startRow}, #{listLimit}   
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 높은 가격순(전체 상품) -->
+	<select id="selectExpensiveAllList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale,
+			   m.manager_brandname, 
+			   f.file1
+	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	     LIMIT #{startRow}, #{listLimit}   
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
 	<!-- 낮은 가격순(유제품/음료) -->
 	<select id="selectCheapDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
 		SELECT i.item_idx, 
@@ -294,7 +341,26 @@
 <!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
 	</select>
 	
-	
-	
+	<!-- 높은 가격순(유제품/음료) -->
+	<select id="selectExpensiveDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT i.item_idx, 
+			   i.item_name,
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale,
+			   m.manager_brandname, 
+			   f.file1
+	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
+		 WHERE i.item_category = "유제품/음료"
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	     LIMIT #{startRow}, #{listLimit}   
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
 		
 </mapper>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 
 public interface ItemCategoryMapper {
@@ -54,9 +53,14 @@ public interface ItemCategoryMapper {
 	// 낮은 가격순(유제품/음료)
 	List<ItemVO> selectCheapDairyDrinkList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
 
-	// 낮은 가격순(유제품/음료) 페이징 - 갯수 카운트
-//	int selectCheapDairyDrinkListCount();
-	
+	// 높은 가격순(유제품/음료)
+	List<ItemVO> selectExpensiveDairyDrinkList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 낮은 가격순(전체 상품)
+	List<ItemVO> selectCheapAllList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 높은 가격순(전체 상품)
+	List<ItemVO> selectExpensiveAllList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
 	
 
 }
