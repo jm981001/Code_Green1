@@ -62,17 +62,20 @@
 	
 	
 	<!-- 상품 후기 -->
-	<select id="selectReview" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT * 
-				FROM board
-				WHERE
-					board_item_idx = #{item_idx}
-				<if test="searchType.equals('subject')">
-					ORDER BY board_idx DESC
-				</if>
-				ORDER BY board_idx  desc
-<!-- 				LIMIT #{startRow}, #{listLimit} -->
-	</select>
+   <select id="selectReview" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+              SELECT  
+		  		b.BOARD_IDX,
+                b.BOARD_SUBJECT,
+                b.BOARD_CONTENT,
+                b.BOARD_ID,
+                b.BOARD_DATE,
+                f.FILE1,
+                f.FILE2
+			FROM board b left join file_board f 
+               on b.BOARD_IDX = f.RF_BOARD_IDX
+            WHERE  board_item_idx = #{item_idx}
+			ORDER BY b.board_idx  desc;     
+   </select>
 	
 	
 	<!-- 상품 후기 갯수-->

@@ -292,10 +292,10 @@
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
 													                <td colspan="5"> 
-													                   ${board.board_content }
-													                    
+													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;">
+																			<br><br>${board.board_content }
+																			
 																		<div align="right">
-																		
 																		    <button>좋아용</button>
 																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
@@ -394,7 +394,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 ">
-                                            <form class="ps-form--review" action="ReviewWritePro.bo" method="post" name="reviewForm">
+                                            <form class="ps-form--review" action="ReviewWritePro.bo" method="post" name="reviewForm" enctype="multipart/form-data">
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
@@ -412,12 +412,13 @@
                                                 <div class="form-group">
                                                 	<input type="hidden" name="board_id" value="${sessionScope.sId}" />
                                                 	<input type="hidden" name="item_idx" value="${item.item_idx}" />
-                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요"></textarea>
-                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?"></textarea>
-                                                    
+                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요" required="required"></textarea>
+                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?" required="required"></textarea>
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">
+	                                                     <input type="file" name="file" id="file">
+<!-- 	                                                     <input type="file" name="file2" id="file2"> -->
 	                                                    <button class="ps-btn" type="submit">Submit Review</button>
 	                                                </div>
                                                 </div>

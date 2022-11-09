@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 
 public interface ReviewMapper {
 
@@ -19,6 +21,10 @@ public interface ReviewMapper {
 
 	//마이페이지 작성글 갯수
 	int selectItemListCount();
+
+	//리뷰 파일업로드
+	int insertFile(File_boardVO file);
+
 
 	
 }

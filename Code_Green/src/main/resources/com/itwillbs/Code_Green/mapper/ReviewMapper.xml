@@ -19,8 +19,27 @@
 					#{board_subject}, 
 					#{board_content}, 
 					"0", 
-					"20221107")
+					date_format(now(),'%Y%m%d')
+					)
 	</insert>
+	
+<!-- 	리뷰 파일업로드 -->
+	<insert id="insertFile">
+		<selectKey keyProperty="file_board_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(file_board_idx) FROM file_board
+		</selectKey>
+		INSERT 
+			INTO file_board
+			VALUES (
+					#{file_board_idx} + 1, 
+					#{file1}, 
+					"N", 
+					"N", 
+ 					(SELECT MAX(board_idx) FROM board)
+					)
+	</insert>
+	
+	
 	
 	
 <!-- 	리뷰삭제 -->

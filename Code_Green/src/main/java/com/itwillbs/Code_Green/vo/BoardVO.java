@@ -13,17 +13,9 @@ public class BoardVO {
 	private String board_date; //날짜
 	private String item_idx; //상품번호
 	private String member_id; 
-	
-	
-	public String getMember_id() {
-		return member_id;
-	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
-	}
-	
-	
-	
+	private String file1;
+	private String file2;
+	private String file3;
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -84,12 +76,37 @@ public class BoardVO {
 	public void setItem_idx(String item_idx) {
 		this.item_idx = item_idx;
 	}
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public String getFile1() {
+		return file1;
+	}
+	public void setFile1(String file1) {
+		this.file1 = file1;
+	}
+	public String getFile2() {
+		return file2;
+	}
+	public void setFile2(String file2) {
+		this.file2 = file2;
+	}
 	
+	public String getFile3() {
+		return file3;
+	}
+	public void setFile3(String file3) {
+		this.file3 = file3;
+	}
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
 	public BoardVO(int board_idx, int board_item_idx, String board_type, String board_id, String board_category,
-			String board_subject, String board_content, String board_readcount, String board_date, String item_idx) {
+			String board_subject, String board_content, String board_readcount, String board_date, String item_idx,
+			String member_id, String file1, String file2) {
 		super();
 		this.board_idx = board_idx;
 		this.board_item_idx = board_item_idx;
@@ -101,15 +118,19 @@ public class BoardVO {
 		this.board_readcount = board_readcount;
 		this.board_date = board_date;
 		this.item_idx = item_idx;
+		this.member_id = member_id;
+		this.file1 = file1;
+		this.file2 = file2;
 	}
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", board_item_idx=" + board_item_idx + ", board_type=" + board_type
 				+ ", board_id=" + board_id + ", board_category=" + board_category + ", board_subject=" + board_subject
 				+ ", board_content=" + board_content + ", board_readcount=" + board_readcount + ", board_date="
-				+ board_date + ", item_idx=" + item_idx + "]";
+				+ board_date + ", item_idx=" + item_idx + ", member_id=" + member_id + ", file1=" + file1 + ", file2="
+				+ file2 + "]";
 	}
 	
-	 
+	
 	
 }

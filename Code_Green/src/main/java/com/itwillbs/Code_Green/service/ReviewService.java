@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ReviewMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 
 @Service
 public class ReviewService {
@@ -33,4 +35,10 @@ public class ReviewService {
 	public int getBoardListCount() {
 		return mapper.selectItemListCount();
 	}
+
+	//리뷰 파일업로드
+	public int registReview_file(File_boardVO file) {
+		return mapper.insertFile(file);
+	}
+
 }
