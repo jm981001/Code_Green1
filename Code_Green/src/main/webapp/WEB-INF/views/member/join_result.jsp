@@ -42,7 +42,7 @@
 	<div class="welcome">	
 		<h4>환영합니다!</h4>
 		<input type="button" value="홈으로" onclick="location.href='./'" id="btn">
-		<input type="button" value="로그인" onclick="location.href='login.me'" id="btn">
+		<input type="button" value="로그인" onclick="location.href='login'" id="btn">
 	</div>	
 	
 	 <jsp:include page="../inc/footer.jsp"></jsp:include>

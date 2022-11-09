@@ -10,6 +10,10 @@ import com.itwillbs.Code_Green.vo.QnaVO;
 
 public interface ManagerMapper {
 
+	// 1. 기업 가입에 필요한 insertManager() 메서드 정의
+	// => 파라미터 : ManagerVO 객체(member), 리턴타입 : int
+	public int insertManager(ManagerVO manager);
+	
 	// 2. 로그인에 필요한 loginManager() 메서드 정의
 	// => 파라미터 : MemberVO 객체(manager), 리턴타입 : managerVO
 	public ManagerVO loginManager(ManagerVO manager);
@@ -33,8 +37,6 @@ public interface ManagerMapper {
 	
 	//문의글 상세 조회
 	public QnaVO selectQnaInfo(@Param ("subject") String subject, @Param("id") String id);
-
-
 
 
 

@@ -35,7 +35,7 @@ function checkId(id) {
 }
 
 function checkName(Member_name) {
-	let regex = /^[가-힣]{2,10}$/;
+	let regex = /^[가-힣]{1,10}$/; //2,10
 	if(!regex.exec(name)) {
 		alert("이름이 올바르지 않습니다!");
 		$("#name").select();

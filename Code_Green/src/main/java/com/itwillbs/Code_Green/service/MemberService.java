@@ -33,9 +33,6 @@ public class MemberService {
 	}
 
 
-	public int joinManager(ManagerVO manager) {
-		return mapper.insertManager(manager);
-	}
 	
 	
 }

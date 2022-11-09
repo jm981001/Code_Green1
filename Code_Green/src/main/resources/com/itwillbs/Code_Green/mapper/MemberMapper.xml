@@ -25,8 +25,12 @@
 
 
 	<insert id="insertMember">
+		<selectKey keyProperty="member_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(member_idx) FROM member
+		</selectKey>
 		INSERT INTO member
 		VALUES (
+				#{member_idx} + 1, 
 				#{member_id},		<!-- 	MEMBER_ID VARCHAR(16) UNIQUE NOT NULL, 		-->
 				#{member_pass},		<!-- 	MEMBER_PASS VARCHAR(20) UNIQUE NOT NULL, 	-->
 				#{member_name},		<!--    MEMBER_NAME VARCHAR(10) NOT NULL, 			-->
@@ -41,27 +45,6 @@
 	</insert>
 	
 	
-	<insert id="insertManager">
-		INSERT INTO manager
-		VALUES (
-				#{manager_id},		 		<!-- 	MANAGER_ID VARCHAR(16)UNIQUE NOT NULL, 			-->
-				#{manager_pass},	 		<!-- 	MANAGER_PASS VARCHAR(20)UNIQUE NOT NULL, 		-->
-				#{manager_name},	 		<!-- 	MANAGER_NAME VARCHAR(10) NOT NULL, 				-->
-				#{manager_brandname},		<!-- 	MANAGER_BRANDNAME VARCHAR(20) NOT NULL,	 		-->
-				#{manager_storecode},		<!-- 	MANAGER_STORECODE VARCHAR(20) NOT NULL, 		-->
-				#{manager_phone},	 		<!-- 	MANAGER_PHONE VARCHAR(12) NOT NULL UNIQUE, 		-->
-				#{manager_email},	 		<!-- 	MANAGER_EMAIL VARCHAR(30) NOT NULL UNIQUE, 		-->
-				'N',						<!-- 	MANAGER_EMAIL_AUTH VARCHAR(1) DEFAULT 'N', 		-->
-				#{manager_postcode}, 		<!-- 	MANAGER_POSTCODE VARCHAR(6) NOT NULL, 			-->
-				#{manager_address},	 		<!-- 	MANAGER_ADDRESS VARCHAR(100) NOT NULL, 			-->
-				'N',						<!-- 	MANAGER_ADMINAUTH VARCHAR(1) DEFAULT 'N', 		-->
-				#{manager_realfile}, 		<!-- 	MANAGER_REALFILE VARCHAR(30) NOT NULL, 			-->
-				#{manager_original_file},	<!--	MANAGER_ORIGINAL_FILE VARCHAR(30) NOT NULL, 	-->
-				'N',						<!-- 	MANAGER_DEL_YN VARCHAR(1) DEFAULT 'N',		 	-->
-				date_format(now(),'%Y%m%d%T')<!--MANAGER_DATE VARCHAR(14) NOT NULL 				-->
-				)
-				
-	</insert>
 
 
 </mapper>

@@ -17,6 +17,11 @@ public class ManagerService {
 	@Autowired
 	private ManagerMapper mapper;
 
+//	가입
+	public int joinManager(ManagerVO manager) {
+		return mapper.insertManager(manager);
+	}
+	
 //	로그인
 	public ManagerVO loginManager(ManagerVO manager) {
 		return mapper.loginManager(manager);

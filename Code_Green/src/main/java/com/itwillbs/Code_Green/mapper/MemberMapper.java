@@ -17,7 +17,5 @@ public interface MemberMapper {
 	// => 파라미터 : MemberVO 객체(member), 리턴타입 : int
 	public int insertMember(MemberVO member);
 	
-	// 5. 기업 가입에 필요한 insertManager() 메서드 정의
-	// => 파라미터 : ManagerVO 객체(member), 리턴타입 : int
-	public int insertManager(ManagerVO manager);
+	
 }
