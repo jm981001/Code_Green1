@@ -74,7 +74,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>커뮤니티 <a href="ad_Board_Review">| 후기 </a><a href="ad_Board_Recipe">| 레시피</a></h3>
+                    <h3><a href="ad_Board_Management">커뮤니티</a><a href="ad_Board_Review">| 후기 </a>| 레시피</h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="ps-select">
-                                        <option value="1">정보</option>
+                                        <option value="1">후기는 없어도..?</option>
                                         <option value="2">맛집</option>
                                         <option value="3">사담</option>
                                         <option value="4">후기</option>
@@ -123,7 +123,7 @@
                         <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
-                                	<th>말머리</th>
+                                	<th>게시판</th>
                                     <th>제목</th>
                                     <th>작성자(아이디)</th>
                                     <th>작성일</th>
@@ -134,7 +134,7 @@
                             <tbody >
                             <c:forEach var="bList" items="${boardList }">
                                 <tr>
-                                	<td>${bList.board_category }</td>
+                                	<td>${bList.board_type }</td>
                                     <td onclick="location.href='ad_Board_Detail'"><strong>${bList.board_subject }</strong></td>
                                     <td>${bList.board_id }</td>
                                     <td>${bList.board_date }</td>

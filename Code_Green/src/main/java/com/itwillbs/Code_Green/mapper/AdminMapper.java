@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.AdminVO;
+import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 
 public interface AdminMapper {
 
@@ -18,9 +20,14 @@ public interface AdminMapper {
 	
 	//----------------------------------------------------------
 	
+		//회원 목록 갯수 조회
+		public int selectMemberListCount(
+				@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
-	//회원 목록 전체 조회
-		List<MemberVO> selectMemberList(int startrow, int listLimit, String searchType, String keyword);
+		//회원 목록 전체 조회
+		List<MemberVO> selectMemberList(
+				@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+				@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 		//회원 상세정보 조회
 		MemberVO selectMemberInfo(String id);
@@ -32,8 +39,6 @@ public interface AdminMapper {
 		int deleteMember(String id);
 		
 		
-		//회원 목록 갯수 조회
-		public int selectMemberListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 		
 		
 		//----------------------------------------------------------
@@ -49,6 +54,10 @@ public interface AdminMapper {
 
 		//기업 삭제
 		public int deleteManager(String id);
+		
+		
+		//----------------------------------------------------------
+		
 
 		//1:1 문의 게시판 목록
 		public List<QnaVO> selectOneQnaList();
@@ -58,6 +67,22 @@ public interface AdminMapper {
 
 		//1:1 문의글 삭제
 		public int deleteOneQnaBoard(String id);
+
+		
+		
+		//----------------------------------------------------------
+		
+		
+		//게시판 목록
+		public List<BoardVO> selectBoardList();
+
+		
+		
+		//----------------------------------------------------------
+		
+		
+		//신고글 목록
+		public List<ReportVO> selectReportList();
 
 
 		

@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.AdminService;
+import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 
 @Controller
 public class AdminController {
@@ -65,14 +67,15 @@ public class AdminController {
 		int listLimit = 10;
 		int pageListLimit = 10;
 		
-		int startrow = (pageNum - 1) * listLimit;
+		int startRow = (pageNum - 1) * listLimit;
 		
 		
-		List<MemberVO> memberList = service.getMemberList(startrow, listLimit, searchType, keyword);
+		List<MemberVO> memberList = service.getMemberList(startRow, listLimit, searchType, keyword);
 		//model 객체에 조회 데이터를 가리키는 변수 memberList 저장
 		
 		
 		int listCount = service.getBoardListCount(searchType, keyword);
+		System.out.println("검색 결과(목록 수)" + listCount);
 		// 페이지 계산 작업 수행
 		// 전체 페이지 수 계산
 		// Math 클래스의 ceil() 메서드를 활용하여 소수점 올림 처리를 통해 전체 페이지 수 계산
@@ -269,6 +272,8 @@ public class AdminController {
 		}
 		
 		List<QnaVO> OneQnaList = service.getOneQnaBoardList();
+		model.addAttribute("OneQnaList", OneQnaList);
+//		System.out.println("야야야야야" + OneQnaList);
 		
 			return "admin/ad_One_Board";
 	}
@@ -322,9 +327,34 @@ public class AdminController {
 //==============================================여기부터는 게시판관리행 열차입니다=====================================================
 	
 	
-	//------------전체관리자 게시판 관리----------------------------
+	
+	
+	
+	//------------전체관리자 후기 게시판 ----------------------------
+	@RequestMapping(value = "/ad_Board_Review", method = RequestMethod.GET)
+	public String ad_Board_Review() {
+		return "admin/ad_Board_Review";
+	}
+		
+		
+		
+		
+	//------------전체관리자 커뮤니티 게시판 관리----------------------------
 	@RequestMapping(value = "/ad_Board_Management", method = RequestMethod.GET)
-	public String ad_Board_Management() {
+	public String ad_Board_Management(Model model, HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId= " + sId);
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "admin/ad_fail_back";
+		}
+		
+		List<BoardVO> boardList = service.getBoardList();
+		model.addAttribute("boardList", boardList);
+//		System.out.println(boardList);
+		
 		return "admin/ad_Board_Management";
 	}	
 	
@@ -337,15 +367,33 @@ public class AdminController {
 	}
 	
 	
-	//------------전체관리자 신고글 관리----------------------------
+	
+	
+	//==============================================여기부터는 신고글관리행 열차입니다=====================================================
+	//==============================================여기부터는 신고글관리행 열차입니다=====================================================
+		
+	
+	
+	
+	//------------ 신고글 관리----------------------------
 	@RequestMapping(value = "/ad_Report_Management", method = RequestMethod.GET)
-	public String ad_Report_Management() {
-		System.out.println("ad_Report_Management");
+	public String ad_Report_Management(Model model, HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId= " + sId);
+		
+		if(sId == null || !sId.equals("admin")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "admin/ad_fail_back";
+		}
+		List<ReportVO> reportList = service.getReportList();
+		model.addAttribute("reportList", reportList);
+//		System.out.println(reportList);
 		return "admin/ad_Report_Management";
 	}
 	
 	
-	//------------전체관리자 신고글 상세조회----------------------------
+	//------------ 신고글 상세조회----------------------------
 	@RequestMapping(value = "/ad_Report_Detail", method = RequestMethod.GET)
 	public String ad_Report_Detail() {
 		return "admin/ad_Report_Detail";
@@ -353,7 +401,24 @@ public class AdminController {
 	
 	
 	
-	
+	//------------ 신고글 삭제----------------------------
+		@RequestMapping(value = "/ad_ReportRemove", method = RequestMethod.GET)
+		public String ad_Report_Remove(@RequestParam String id, Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+//			int deleteCount = service.removeReportBoard();
+			//신고된 원글이 삭제되면 데이터가 사라지므로 목록에 사용X
+			//처리완료된 글은 처리완료 게시판으로 이동됨.
+			
+			
+			return "admin/ad_Report_Management";
+		}	
 	
 	
 	

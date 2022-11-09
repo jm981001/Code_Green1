@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +24,13 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    
+    <script type="text/javascript">
+    	function statusChange() {
+    		confirm("상대처리 하시겠습니까?");
+    	}
+    </script>
 </head>
-
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -119,8 +124,8 @@
                         <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
-                                	<th>게시판</th>
-                                    <th>신고글 제목</th>
+                                	<th>번호</th>
+                                    <th>신고사유</th>
                                     <th>신고자(아이디)</th>
                                     <th>신고일</th>
                                     <th>처리상태</th>
@@ -128,32 +133,21 @@
                                 </tr>
                             </thead>
                             <tbody >
+                            <c:forEach var="rList" items="${reportList }">
                                 <tr>
-                                	<td>커뮤니티</td>
-                                    <td onclick="location.href='ad_Report_Detail'"><strong>여태 이 세상에 존재하지 않았던 이 맛은?!</strong></td>
-                                    <td>폭주기관차</td>
-                                    <td>22.10.21</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>처리대기</strong></button>
+                                	<td>${rList.report_idx }</td>
+                                    <td onclick="location.href='ad_Report_Detail'"><strong>${rList.report_content }</strong></td>
+                                    <td>${rList.reporter }</td>
+                                    <td>${rList.report_date }</td>
+                                    <td><button onclick="statusChange()" class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_ReportRemove?idx=${rList.report_idx }">삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                	<td>커뮤니티</td>
-                                    <td><strong>음~~~~녀미~~~츄베릅</strong></td>
-                                    <td>대왕돈가스</td>
-                                    <td>22.10.21</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>처리완료</strong></button>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                           </c:forEach>
                                
                                
                                

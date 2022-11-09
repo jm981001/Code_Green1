@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
@@ -94,21 +95,21 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="ad_member_Manage" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Search..." />
+                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." >
                                 </div>
                                 <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">Status</option>
-                                        <option value="2">Active</option>
-                                        <option value="3">Inactive</option>
+                                    <select class="ps-select" name="searchType">
+                                        <option value="id">아이디</option>
+                                        <option value="name">이름</option>
+                                        <option value="email">이메일</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
+                                <button class="ps-btn ps-btn--gray" type="submit"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
                     </div>
@@ -130,7 +131,7 @@
                             <tbody>
                             <c:forEach var="member" items="${memberList }">
                                 <tr>
-                                    <td><a href="ad_member_Detail?id=${member.member_id }"><strong>${member.member_id }</strong></a></td>
+                                    <td><a href="ad_member_Detail?id=${member.member_id }&pageNum=${pageInfo.pageNum}"><strong>${member.member_id }</strong></a></td>
                                     <td>${member.member_name }</td>
                                     <td>${member.member_phone }</td>
                                     <td>${member.member_email }</td>
@@ -161,6 +162,10 @@
                         <li><a href="#"><i class="icon-chevron-right"></i></a></li>
                     </ul>
                 </div>
+                
+                
+                
+                
 <!--                 <div class="ps-section__footer"> -->
 <!--                     <p>Show 10 in 30 items.</p> -->
 <!--                     <ul class="pagination"> -->
@@ -172,6 +177,33 @@
 <!--                     </ul> -->
 <!--                 </div> -->
             </section>
+            <section id="pageList">
+		<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${pageInfo.pageNum > pageInfo.startPage }"> --%>
+<%-- 				<input type="button" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"> --%>
+<%-- 			</c:when> --%>
+<%-- 			<c:otherwise> --%>
+<!-- 				<input type="button" value="이전"> -->
+<%-- 			</c:otherwise> --%>
+<%-- 		</c:choose> --%>
+			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+			&nbsp;
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+				<c:choose>
+					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+					<c:otherwise><a href="ad_member_Manage?pageNum=${i }">${i }</a></c:otherwise>
+				</c:choose>
+				&nbsp;
+			</c:forEach>
+		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+	</section>
+</body>
         </div>
     </main>
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>
