@@ -1,17 +1,24 @@
 package com.itwillbs.Code_Green.controller;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.ManagerService;
+import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
+import com.itwillbs.Code_Green.vo.PageInfo;
+import com.itwillbs.Code_Green.vo.QnaVO;
 
 @Controller
 public class ManagerController {
@@ -40,13 +47,12 @@ public class ManagerController {
 	}
 	
 	
-		//------------매니저페이지 내브랜드정보-------------------------------------------
-			@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
-			public String brand_mypage() {
-				return "manager/brand_mypage";
-			}
-	
-	
+	//------------매니저페이지 내브랜드정보-------------------------------------------
+	@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
+	 public String brand_mypage() {
+		return "manager/brand_mypage";
+	}
+			
 	
 	
 	//------------매니저페이지 메인-------------------------------------------
@@ -55,17 +61,67 @@ public class ManagerController {
 		return "manager/index";
 	}
 	
-	//------------매니저페이지 상품목록-------------------------------------------
-		@RequestMapping(value = "products", method = RequestMethod.GET)
-		public String products() {
+		
+		
+		
+		//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
+
+		
+		@GetMapping(value = "/products")
+		public String itemList ( Model model, HttpSession session,
+								@RequestParam(defaultValue = "1")int pageNum,
+								@RequestParam(defaultValue = "")String searchType,
+								@RequestParam(defaultValue = "")String keyword) {
+			
+			String id = (String)session.getAttribute("sId");
+			System.out.println(id);
+			
+			//페이징처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startrow = (pageNum -1) * listLimit;
+			
+			List<ItemVO> itemList = service.itemList(id, startrow, listLimit, searchType, keyword);
+			
+			int listCount = service.getItemListCount(searchType, keyword);
+			
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			int endPage = startPage + pageListLimit -1;
+			
+			if(endPage >  maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		
+			model.addAttribute("itemList", itemList);
+			model.addAttribute("pageInfo", pageinfo);
+			
 			return "manager/products";
 		}
 		
-	//------------매니저페이지 상품관리-------------------------------------------
+		
+	
+		
+		
+		//------------매니저페이지 상품목록 불러오기-------------------------------------------
 		@RequestMapping(value = "product_manage", method = RequestMethod.GET)
 		public String product_manage() {
 			return "manager/product_manage";
 		}
+		
+		
+		
+		
+		
+		
+		
 		
    //------------매니저페이지 상품수정-------------------------------------------
 		@RequestMapping(value = "edit_product", method = RequestMethod.GET)
@@ -108,23 +164,69 @@ public class ManagerController {
 
 
 	//------------매니저페이지 답변관리-------------------------------------------
-		@RequestMapping(value = "answerboardlist", method = RequestMethod.GET)
-		public String answerboardlist() {
-			return "manager/answerboardlist";
+//		@RequestMapping(value = "answerboardlist", method = RequestMethod.GET)
+//		public String answerboardlist() {
+//			return "manager/answerboardlist";
+//		}
+//		
+		
+	//------------ 문의글 목록 불러오기-------------------------------------------	
+		
+		@RequestMapping(value = "/answerboardlist", method = RequestMethod.GET)
+		public String qna_Board(Model model, HttpSession session) {
+			String sId = (String)session.getAttribute("sId");
+		
+			
+			List<QnaVO> QnaBoardList = service.getQnaBoardList();
+			model.addAttribute("QnaBoardList", QnaBoardList);
+			System.out.println(QnaBoardList);
+			
+				return "manager/answerboardlist";
+		}
+		
+	//------------ 문의글 상세정보 불러오기-------------------------------------------	
+		@RequestMapping(value = "/review_board_manage", method = RequestMethod.GET)
+		public String qna_Board_Detail(Model model, HttpSession session, String subject, String id) {
+//			String sId = (String)session.getAttribute("sId");
+			System.out.println("subject : " + subject + " " +" id : "  + id );
+		
+			QnaVO QnaInfo = service.getQnaInfo(subject, id);
+			System.out.println("문의글 상세 : " + QnaInfo);
+			
+			model.addAttribute("QnaInfo", QnaInfo);
+			
+			return "manager/review_board_manage";
 		}
 		
 		
-	//------------매니저페이지 답글달기-------------------------------------------
-		@RequestMapping(value = "review_board_manage", method = RequestMethod.GET)
-		public String review_board_manage() {
-			return "manager/review_board_manage";
-		}		
 		
+		
+		
+		
+	//------------매니저페이지 답글달기-------------------------------------------
+//		@RequestMapping(value = "review_board_manage", method = RequestMethod.GET)
+//		public String review_board_manage() {
+//			return "manager/review_board_manage";
+//		}		
+//		
 	//------------매니저페이지 팔로워-------------------------------------------
 		@RequestMapping(value = "follower_list", method = RequestMethod.GET)
 		public String follower_list() {
 			return "manager/follower_list";
 		}
+		
+		//------------매니저페이지 팔로워 목록 불러오기 -------------------------------------------
+//		
+//@GetMapping(value = "/follower_list")
+//public String follower_list(@RequestParam String idx, Model model) {
+//	
+//	followVO follow = service.followInfo(idx);
+//	//조회된 회원 1명의 데이터를 model 객체에 저장 (팔로우)
+//	model.addAttribute("follow", follow);
+//	
+//	
+//	return "manager/follower_list";
+//}		
 		
 		
 	//------------매니저페이지 정산-------------------------------------------

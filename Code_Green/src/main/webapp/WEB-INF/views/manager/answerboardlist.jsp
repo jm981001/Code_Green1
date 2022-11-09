@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -134,147 +136,187 @@
                             <thead>
                                 <tr>
                                 	<th>번호</th>
+                                    <th>질문분류</th>
                                    	<th>제목</th>
                                     <th>작성자</th>
-                                    <th>질문분류</th>
                                      <th>처리상태</th>
+                                     <th>답변유무</th>
                                     <th>작성일</th>
                                    
                                 </tr>
                             </thead>
                             <tbody>
+                            
+                              <c:forEach var="qnaList" items="${QnaBoardList }">
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="review_board_manage"><strong>냉동보관하면 되나요?</strong></a></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
+                                	<td>${qnaList.qna_idx }</td>
+<%--                                 	<td>${qnaList.qna_item_idx }</td> --%>
+                                	<td>${qnaList.qna_type }</td>
+                                    <td onclick="location.href='review_board_manage?subject=${qnaList.qna_subject }&id=${qnaList.qna_id }&qna_idx=${qnaList.qna_idx }'"><strong>${qnaList.qna_subject }</strong></td>
+                                    <td>${qnaList.qna_id }</td>
+                                    <td>${qnaList.qna_category }</td>
+                                    <td>${qnaList.qna_answer }</td>
+<!--                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button> -->
                                     
-<!--아코디언 -->
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
+                                    <td>${qnaList.qna_date }</td>
                                     </td>
-                                </tr>
-                                   <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?<a href=""></a></strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                                   <tr>
-                                    <td>1</td>
-                                    <td><strong>오늘 결제했는데 언제 배송되나요</strong></td>
-                                    <td>홍길동</td>
-                                    <td>배송문의</td>
-                                    <td><span class="ps-badge success">답변완료</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                   <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변중</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>          
-                                      	 <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td>1</td>
-                                    <td><strong>상품 안에 몇개들어있나요??</strong></td>
-                                    <td>김길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변중</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변완료</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                   <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                               </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+<!--                                 <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><a href="review_board_manage"><strong>냉동보관하면 되나요?</strong></a></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+                                    
+<!-- <!--아코디언 --> 
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                    <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?<a href=""></a></strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                    <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>오늘 결제했는데 언제 배송되나요</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>배송문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변완료</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                    <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변중</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td>           -->
+<!--                                       	 <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                     <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>상품 안에 몇개들어있나요??</strong></td> -->
+<!--                                     <td>김길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변중</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                     <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변완료</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                     <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                     <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                    <tr> -->
+<!--                                     <td>1</td> -->
+<!--                                     <td><strong>냉동보관하면 되나요?</strong></td> -->
+<!--                                     <td>홍길동</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                             </tbody> -->
+<!--                         </table> -->
+<!--                     </div> -->
+<!--                 </div> -->
                 <div class="ps-section__footer">
                     <p>Show 10 in 30 items.</p>
                     <ul class="pagination">

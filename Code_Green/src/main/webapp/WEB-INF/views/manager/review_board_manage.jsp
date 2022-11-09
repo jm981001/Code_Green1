@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,15 +25,19 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-</head>
+<!-- 글쓰기  API -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
+<!-- 글쓰기  API -->
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- 글쓰기  API -->
+
+</head>
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -104,96 +109,17 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>답변관리</h3>
-<!--                     <p></p> -->
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
+                    <form class="ps-form--search-bar" action="index method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
-<!--             <section class="ps-dashboard ps-items-listing"> -->
-<!--                 <div class="ps-section__left"> -->
-<!--                     <div class="table-responsive"> -->
-                    
-<!--                         <table class="table ps-table"> -->
-<!--                             <thead> -->
-<!--                                 <tr> -->
-<!--                                     <th>게시판</th> -->
-<!--                                     <th>제목</th> -->
-<!--                                     <th>날짜</th> -->
-<!--                                     <th></th> -->
-<!--                                 </tr> -->
-<!--                             </thead> -->
-<!--                             <tbody> -->
-<!--                                 <tr> -->
-<!--                                     <td><strong>배송문의</strong></td> -->
-<!--                                     <td>배송문의 드려요</td> -->
-<!--                                     <td>Jul 21, 2020</td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><strong>상품문의</strong></td> -->
-<!--                                     <td>물건이 좀 이상하네요</td> -->
-<!--                                     <td>Jul 21, 2020</td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><strong>환불문의</strong></td> -->
-<!--                                     <td>환불했는데... 언제쯤 카드사 취소되는지 궁금...</td> -->
-<!--                                     <td>Jul 21, 2020</td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><strong>배송문의</strong></td> -->
-<!--                                     <td>방금 주문했는데 언제받을수 있는지궁금해요</td> -->
-<!--                                     <td>Jul 21, 2020</td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><strong>상품문의</strong></td> -->
-<!--                                     <td>재입고 언제 되나요??</td> -->
-<!--                                     <td>Jul 21, 2020</td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                             </tbody> -->
-<!--                         </table> -->
-<!--                     </div> -->
-<!--                     <div class="ps-section__footer"> -->
-<!--                         <p>Show 5 in 30 items.</p> -->
-<!--                         <ul class="pagination"> -->
-<!--                             <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
-<!--                             <li class="active"><a href="#">1</a></li> -->
-<!--                             <li><a href="#">2</a></li> -->
-<!--                             <li><a href="#">3</a></li> -->
-<!--                             <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
-<!--                         </ul> -->
-<!--                     </div> -->
-<!--                 </div> -->
+
  <div class="ps-main__wrapper">
-<!--      <header class="header--dashboard"> -->
   <div class="header__center">
   <form class="ps-form--search-bar" action="index.html" method="get">
 
@@ -203,113 +129,124 @@
                     </form>
                     <h2>게시판 답글 관리</h2>
                     <hr>
-                            <thead>
+                       <thead>
                                 <tr>
-                                   	<th>번호</th>
+                                	<th>번호</th>
+                                    <th>질문분류</th>
                                    	<th>제목</th>
                                     <th>작성자</th>
-                                    <th>질문분류</th>
                                      <th>처리상태</th>
+                                     <th>답변유무</th>
                                     <th>작성일</th>
+                                   
                                 </tr>
-                            </thead>    
-                      <tr>
-                                    <td>1</td>
-                                    <td><strong>냉동보관하면 되나요?</strong></td>
-                                    <td>홍길동</td>
-                                    <td>상품문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>        
-                               <tr>
-                                    <td>2</td>
-                                    <td><strong>배송언제되나요?</strong></td>
-                                    <td>김김김</td>
-                                    <td>배송문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                   <tr>
-                                   <td>3</td>
-                                   <td><strong>배송문의 드려요</strong></td>
-                                   <td>김김김</td>
-                                    <td>배송문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                            </thead>
+                            <tbody>
+                            
                                 <tr>
-                                <td>4</td>
-                                <td><strong>물건이 좀 이상하네요</strong></td>
-                                 <td>김김김</td>
-                                    <td>상품문의</td>
-                                      <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
+                                	<td>${QnaInfo.qna_idx }</td>
+                                	<td>${QnaInfo.qna_type }</td>
+                                    <td>${QnaInfo.qna_subject }</td>
+                                    <td>${QnaInfo.qna_id }</td>
+                                    <td>${QnaInfo.qna_category }</td>
+                                    <td>${QnaInfo.qna_answer }</td>
+                                 </tr>   
+<!--                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
+                                    
+                                    <td>${QnaInfo.qna_date }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                <td>5</td>
-                                   <td><strong>환불했는데... 언제쯤 카드사 취소되는지 궁금...</strong></td>
-                                   <td>김김김</td>
-                                    <td>환불문의</td>
-                                    <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>6</td>
-                                <td><strong>방금 주문했는데 언제받을수 있는지궁금해요</strong></td>
-                                   <td>김김김</td>
-                                    <td>배송문의</td>
-                                      <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>7</td>
-                                <td><strong>재입고 언제 되나요??</strong></td>
-                                <td>김김김</td>
-                                    <td>상품문의</td>
-                                     <td><span class="ps-badge success">답변대기</span>
-                                    </td>
-                                    <td>Jul 21, 2020</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
                             </tbody>
+                        </table>
+                    </div>
+                </div>
+<!--                                <tr> -->
+<!--                                     <td>2</td> -->
+<!--                                     <td><strong>배송언제되나요?</strong></td> -->
+<!--                                     <td>김김김</td> -->
+<!--                                     <td>배송문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                    <tr> -->
+<!--                                    <td>3</td> -->
+<!--                                    <td><strong>배송문의 드려요</strong></td> -->
+<!--                                    <td>김김김</td> -->
+<!--                                     <td>배송문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                 <td>4</td> -->
+<!--                                 <td><strong>물건이 좀 이상하네요</strong></td> -->
+<!--                                  <td>김김김</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                       <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                 <td>5</td> -->
+<!--                                    <td><strong>환불했는데... 언제쯤 카드사 취소되는지 궁금...</strong></td> -->
+<!--                                    <td>김김김</td> -->
+<!--                                     <td>환불문의</td> -->
+<!--                                     <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                 <td>6</td> -->
+<!--                                 <td><strong>방금 주문했는데 언제받을수 있는지궁금해요</strong></td> -->
+<!--                                    <td>김김김</td> -->
+<!--                                     <td>배송문의</td> -->
+<!--                                       <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                 <td>7</td> -->
+<!--                                 <td><strong>재입고 언제 되나요??</strong></td> -->
+<!--                                 <td>김김김</td> -->
+<!--                                     <td>상품문의</td> -->
+<!--                                      <td><span class="ps-badge success">답변대기</span> -->
+<!--                                     </td> -->
+<!--                                     <td>Jul 21, 2020</td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                             </tbody> -->
                             
                             
                             
@@ -317,16 +254,16 @@
                             
                             
                      
-  		</table>
+<!--   		</table> -->
   				
-  		</div>
+<!--   		</div> -->
                      
                
                        <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Search..." />
                                 </div>
-                             
+                             </div>
                                 <div class="form-group">
                                     <select class="ps-select">
                                         <option value="1">주문/결제/반품/교환문의</option>
@@ -339,20 +276,20 @@
                                  <div class="ps-form__right">
                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
-                        </form>
                     </div>
                     <br>
                     
-<!--                 ---게시판글쓰기api -->
-
+				<!-- ---게시판글쓰기api -->
                 <textarea id="summernote" name="editordata"></textarea>
+                <!-- ---게시판글쓰기api -->
+                
                      <div class="ps-form__submit text-center">
-                     				<br>
-                                    <button class="ps-btn ps-btn--gray mr-3">취소</button>
+                     	<br>
+                          <button class="ps-btn ps-btn--gray mr-3">취소</button>
                                     <button class="ps-btn success">답변달기</button>
-                                </div>
+                    </div>
 
-        </div>
+       
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

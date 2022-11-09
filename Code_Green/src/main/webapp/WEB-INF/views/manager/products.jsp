@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 
 <head>
@@ -73,7 +75,7 @@
                     <div class="ps-sidebar__center">
                         <ul class="menu">
                             	<li><a class="active" href="index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="products?manager_id=${sessionScope.sId} "><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
@@ -112,7 +114,7 @@
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="index" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select">
@@ -165,168 +167,56 @@
                                     <th>상품분류</th>
                                     <th>등록일</th>
                                     <th>포장분류</th>
+                                    <th>브랜드이름</th>
                                     
-                                    <th></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>ABH-0</td>
-                                    <td><strong>친환경고사리</strong></td>
-                                    <td>편하게 요리하는 고소한 나물</td>
-                                    <td><span class="ps-badge success">재고있음</span>
-                                    </td>
-                                    <td><strong>7,800원  </strong>
-                                     <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">정상가</option>
-                                        <option value="2">할인적용</option>
-                                   </select>
-                                   
-                                </div></td>
-                              
-                                    <td>
-                                        <p class="ps-item-categories"><a href="#">과일/채소</a>
-                                        </p>
-                                    </td>
-                                    <td>2019/11/06</td>
-                                    <td><span class="ps-badge success">냉장</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ABH-1</td>
-                                    <td><a href="#"><strong>비건마들렌</strong></a></td>
-                                    <td>식물성 재료로 만들어 담백한 맛</td>
-                                    <td><span class="ps-badge success">재고있음</span>
-                                    </td>
-                                    <td><strong>7,800원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">간식류</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉동</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ABH-2</td>
-                                <td><a href="#"><strong>비건마요</strong></a></td>
-                                    <td>두유로 만든 저당 마요네즈</td>
-                                    <td><span class="ps-badge success">재고있음</span>
-                                    </td>
-                                    <td><strong>4,980원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">기타</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉장</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ABH-3</td>
-                                  <td><a href="#"><strong>한입 완자</strong></a></td>
-                                    <td>도시락용 또는 반찬으로 제격</td>
-                                    <td><span class="ps-badge success">재고있음</span>
-                                    </td>
-                                    <td><strong>10,880원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">냉동식품</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉동</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ABH-4</td>
-                                   <td><a href="#"><strong>비건 김치</strong></a></td>
-                                    <td>젓갈을 넣지않고 만든 김치</td>
-                                    <td><span class="ps-badge success">재고있음</span>
-                                    </td>
-                                    <td><strong>6,880원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">기타</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉장</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               
-                                <tr>
-                                    <td>ABH-5</td>
-                                      <td><a href="#"><strong>비건 떡볶이</strong></a></td>
-                                    <td>비건을 위한 반가운 소식</td>
-<!--                                     <td><span class="ps-badge success">재고있음</span> -->
-                                    <td><span class="ps-badge gray">재고없음</span>
-                                    </td>
-                                    <td><strong>7,500원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">기타</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉동</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                       <tr>
-                                    <td>ABH-6</td>
-                                      <td><a href="#"><strong>유기농 햇밤 800g</strong></a></td>
-                                    <td>2022년 수확한 노랗고 포근한 단맛의 유혹</td>
-<!--                                     <td><span class="ps-badge success">재고있음</span> -->
-                                    <td><span class="ps-badge gray">재고없음</span>
-                                    </td>
-                                    <td><strong>10,500원</strong></td>
-                                      <td>
-                                        <p class="ps-item-categories"><a href="#">과일/채소</a>
-                                        </p>
-                                    </td>
-                                    <td>2018/12/11</td>
-                                     <td><span class="ps-badge success">냉장</span>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+					<c:forEach items="${itemList}" var="item">
+						    <tr>
+						     <td>${item.item_idx}</td>
+						     <td>${item.item_name}</td>
+						     <td>${item.item_info}</td>
+						     <td>${item.item_stock}</td>
+						     <td>${item.item_price}</td>
+						     <td>${item.item_category}</td>
+						     <td>${item.item_date}</td>
+						     <td>${item.item_packing}</td>
+						     <td>${item.manager_brandname}</td>
+						    </tr>     
+					</c:forEach>
+						</tbody>
+						</table>
+                            
+                          
+                       
                     </div>
                 </div>
                 <div class="ps-section__footer">
+                   <!-- 페이징 버튼들 시작 -->
+				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
+				                           
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="products?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				                               <c:choose>
+				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+				                                  <c:otherwise><li><a href="products?pageNum=${i }">${i }</a></li></c:otherwise>
+				                               </c:choose>
+				                            </c:forEach>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="products?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
+				                    <!-- 페이징 버튼들 끝 -->
+                
+                
+                
+                
+                
+                
+                
                     <p>Show 10 in 30 items.</p>
                     <ul class="pagination">
                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
