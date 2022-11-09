@@ -30,47 +30,70 @@
 
 
 <body>
-                                
-<!-- ==========상품후기 작성=========================================================================================================     -->                                 
+    <!-- 헤더 삽입 -->
+    <jsp:include page="../inc/top.jsp"></jsp:include>
+    <!-- 헤더 삽입 -->
+                                    
+<!-- ==========상품후기 작성=========================================================================================================     -->	<div class="ps-page--product">
+		<div class="ps-container">
+			<div class="ps-page__container">
+				<div class="row">
+					<div class="col-xl-2 col-lg-5 col-md-12 col-sm-12 col-12 "></div>
 
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 ">
-                                            <form class="ps-form--review" action="QnaModifyPro.bo" method="post" name="modifyForm">
-                                                <h4>PRODUCT REVIEW</h4>
-                                                <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
-                                                <div class="form-group form-group__rating">
-                                                    <label>별점을 매겨주세요</label>
-                                                    <select class="ps-rating" data-read-only="false">
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-<%--                                                 	<input type="text" id="qna_id" name="qna_id" value="${sessionScope.sId}" /> --%>
-                                                	<input type="hidden" id="qna_idx" name="qna_idx" value="${qna.qna_idx}" />
-                                                	<input type="hidden" id="item_idx" name="item_idx" value="${param.item_idx}" />
-                                                    <input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
-                                                    <textarea class="form-control" id="qna_subject" name="qna_subject" rows="1" >${qna.qna_subject  }</textarea>
-                                                    <textarea class="form-control" id="qna_content" name="qna_content" rows="6" >${qna.qna_content}</textarea>
-                                                    
-                                                </div>
-                                                <div align="right">
-	                                                <div class="form-group submit">
-	                                                    <button class="ps-btn" type="submit">Submit Review</button>
-	                                                </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                
- <!-- ==========상품후기 작성 끝=========================================================================================================     -->  
+					<div class="col-xl-9 col-lg-7 col-md-12 col-sm-12 col-12 ">
+						<form class="ps-form--review" action="QnaModifyPro.bo"
+							method="post" name="modifyForm">
+							<br>
+							<br>
+							<br>
+							<h4>PRODUCT REVIEW</h4>
+							<p>
+								<sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당
+								게시판으로 이동될 수 있습니다.<br> <sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및
+								요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
+							</p>
+							<div class="form-group form-group__rating">
+								<label>별점을 매겨주세요</label> <select class="ps-rating"
+									data-read-only="false">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<%--                                                 	<input type="text" id="qna_id" name="qna_id" value="${sessionScope.sId}" /> --%>
+								<input type="hidden" id="qna_idx" name="qna_idx"
+									value="${qna.qna_idx}" /> <input type="hidden" id="item_idx"
+									name="item_idx" value="${param.item_idx}" /> <input
+									type="hidden" id="pageNum" name="pageNum"
+									value="${param.pageNum }" />
+								<textarea class="form-control" id="qna_subject"
+									name="qna_subject" rows="1">${qna.qna_subject  }</textarea>
+								<textarea class="form-control" id="qna_content"
+									name="qna_content" rows="6">${qna.qna_content}</textarea>
+
+							</div>
+							<div align="right">
+								<div class="form-group submit">
+									<button class="ps-btn" type="submit">Submit Review</button>
+									<br>
+									<br>
+									<br>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- ==========상품후기 작성 끝=========================================================================================================     -->  
             
-    
+    <!-- ---------------------------------------------------------- 푸터푸터 ---------------------------------------------------------- -->
+     	<jsp:include page="../inc/footer.jsp"></jsp:include>
+    	<!-- ---------------------------------------------------------- 푸터푸터 끝 ---------------------------------------------------------- -->
     
 
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>

@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 
-	
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>  
   <style type="text/css">  
     table {
@@ -291,8 +290,8 @@
 													                <td>12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
-													                <td colspan="5"> 
-													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;">
+													                <td colspan="5">  
+													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
