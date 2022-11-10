@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,7 +117,7 @@ public class MypageController {
 		
 		model.addAttribute("mantomanList", mantomanList);
 		
-		return "member/myPage_qnaDetail";
+		return "redirect:/myPageQnaDetail.my?qna_id=" + qna_id;
 	}
 	
 	//------------마이페이지 작성글-------------------------------------------

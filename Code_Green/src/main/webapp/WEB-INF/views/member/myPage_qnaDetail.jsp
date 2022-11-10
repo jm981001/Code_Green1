@@ -111,8 +111,8 @@
                                                 <tr>
                                                     <td>${mtmList.qna_category }</td>
                                                     <td onclick="location.href='#'" style="font-weight: bold">${mtmList.qna_subject }</td>
-                                                    <fmt:parseDate var="dateString" value="${mtmList.qna_date}" pattern="yyyyMMddHHmm" />
-                                                    <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm" /></td>
+                                                    <fmt:parseDate var="dateString" value="${mtmList.qna_date}" pattern="yyyyMMdd" />
+                                                    <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
                                                     <td><span class="badge badge-primary">답변대기</span></td>
                                                 </tr>
                                                 </c:forEach>

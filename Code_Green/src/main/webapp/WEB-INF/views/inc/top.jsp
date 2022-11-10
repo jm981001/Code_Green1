@@ -112,7 +112,7 @@
                         <li class="menu-item-has-children has-mega-menu"><a href="ItemList.bo">신상품</a><span class="sub-toggle"></span> </li>                     
                         <li class="menu-item-has-children has-mega-menu"><a href="BestItemList.bo">베스트</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun">어서와, 비건은 처음이지?</a></li>   
-                        <li class="menu-item-has-children has-mega-menu"><a href="brand_main">브랜드별</a><span class="sub-toggle"></span></li>   
+                        <li class="menu-item-has-children has-mega-menu"><a href="BrandMain.mo">브랜드별</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="recipe_main">레시피</a></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="CommunityList.bo">커뮤니티</a></li>   
                     </ul>
