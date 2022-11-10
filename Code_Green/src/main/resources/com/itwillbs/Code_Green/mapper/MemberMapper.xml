@@ -2,28 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.MemberMapper">
 
-
-	<!-- 로그인 -->
-	<select id="loginMember"
-		resultType="com.itwillbs.Code_Green.vo.MemberVO">
-		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id} AND
-		MEMBER_PASS=#{member_pass}
-	</select>
-
-
-	<!-- 3. 회원 정보 조회 수행을 위한 select 태그 작성 -->
-	<!-- => MemberMapper 객체의 selectMemberInfo() 메서드명을 id 속성값으로 지정 -->
-	<!-- => 파라미터는 메서드 전달된 파라미터 변수명과 동일한 이름 사용 -->
-	<!-- => 결과 타입은 1개 레코드 정보를 저장할 MemberVO 타입 지정 -->
-
-	<select id="selectMemberInfo"
-		resultType="com.itwillbs.Code_Green.vo.MemberVO">
-		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id}
-	</select>
-
-
+	<!-- 가입 -->
 	<insert id="insertMember">
 		<selectKey keyProperty="member_idx" resultType="integer" order="BEFORE">
 			SELECT MAX(member_idx) FROM member
@@ -43,27 +22,38 @@
 				date_format(now(),'%Y%m%d%T')<!--MEMBER_DATE VARCHAR(14) NOT NULL	 		-->
 				)
 	</insert>
+
+	<!-- 
+	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
+	암호문으로 저장되어 있는 패스워드 조회하기 위한 SELECT 구문 작성
+	=> 이 때, MemberVO 타입을 resultType 으로 선언해도 되지만
+	   패스워드 컬럼 1개의 문자 데이터이므로 string(String) 타입으로 선언해도 된다!
+	-->
+	<!-- 로그인 -->
+	<select id="selectPasswd" resultType="string">
+		SELECT member_pass 
+		FROM member
+		WHERE member_id = #{member_id}
+	</select>
 	
+<!-- 	<select id="loginMember" -->
+<!-- 		resultType="com.itwillbs.Code_Green.vo.MemberVO"> -->
+<!-- 		SELECT * FROM member -->
+<!-- 		WHERE MEMBER_ID=#{member_id} AND -->
+<!-- 		MEMBER_PASS=#{member_pass} -->
+<!-- 	</select> -->
+
+	<!-- 3. 회원 정보 조회 수행을 위한 select 태그 작성 -->
+	<!-- => MemberMapper 객체의 selectMemberInfo() 메서드명을 id 속성값으로 지정 -->
+	<!-- => 파라미터는 메서드 전달된 파라미터 변수명과 동일한 이름 사용 -->
+	<!-- => 결과 타입은 1개 레코드 정보를 저장할 MemberVO 타입 지정 -->
+
+	<select id="selectMemberInfo"
+		resultType="com.itwillbs.Code_Green.vo.MemberVO">
+		SELECT * FROM member
+		WHERE MEMBER_ID=#{member_id}
+	</select>
 	
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

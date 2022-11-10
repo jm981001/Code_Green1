@@ -20,6 +20,17 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+function setDisplay() {
+	if ($('input:radio[id=memberJoin]').is(':checked')) {
+		$('#companyDiv').hide();
+		$('#memberDiv').show();
+	} else {
+		$('#memberDiv').hide();
+		$('#companyDiv').show();
+	}
+}
+
+var checkNameResult = false, checkIdResult = false, checkPasswdResult = false;
 
 function checkId(id) {
 	let regex = /^[\w-.]{4,16}$/;
@@ -34,14 +45,81 @@ function checkId(id) {
 	}
 }
 
-function checkName(Member_name) {
+function checkName(name) {
 	let regex = /^[가-힣]{1,10}$/; //2,10
 	if(!regex.exec(name)) {
-		alert("이름이 올바르지 않습니다!");
+		$("#checkNameResult").html("이름이 올바르지 않습니다!");
+		$("#checkIdResult").css("color", "red");
 		$("#name").select();
 		checkNameResult = false;
 	} else {
+		$("#checkNameResult").html("사용가능");
+		$("#checkNameResult").css("color", "green");
 		checkNameResult = true;
+	}
+}
+function checkPasswd(pass) {
+	let regex = /^[A-Za-z0-9!@#$%^&*]{8,20}$/;
+	if(!regex.exec(pass)) {
+		$("#checkPasswdResult").html("8 ~ 20자리 영문자, 숫자, 특수문자(!@#$%^&*) 필수!");
+		$("#checkPasswdResult").css("color", "red");
+		checkPasswdResult = false;
+	} else {
+
+		// 패스워드 복잡도 검사 추가 => 패스워드 부분 검사
+		// 영문 대문자, 소문자, 숫자, 특수문자 조합에 대한 점수 계산 후 
+		// 안전, 보통, 위험, 사용불가의 4등급으로 분류하여 결과 출력
+		// => 각각의 검사 패턴을 별도로 생성해야함
+		let upperCaseRegex = /[A-Z]/; // 대문자
+		let lowerCaseRegex = /[a-z]/; // 소문자
+		let numRegex = /[0-9]/; // 숫자
+		let specialCharRegex = /[!@#$%^&*]/; // 특수문자
+		
+		let count = 0; // 부분 검사 항목에 대한 점수를 계산하기 위한 변수
+		// => 각 검사 항목이 포함되어 있으면 count 값을 1 증가시키기
+		// => 주의! 각 항목에 대한 검사는 if 문을 각각 적용해야함! (else if 사용 금지!)
+		if(upperCaseRegex.exec(pass)) {
+			count++;
+		} 
+
+		if(lowerCaseRegex.exec(pass)) {
+			count++;
+		} 
+		
+		if(numRegex.exec(pass)) {
+			count++;
+		} 
+		
+		if(specialCharRegex.exec(pass)) {
+			count++;
+		} 
+		
+		// 부분 검사 결과에 대한 출력
+		// => 4점 : "안전" 출력(blue)
+		// => 3점 : "보통" 출력(green)
+		// => 2점 : "위험" 출력(orange)
+		// => 1점 이하 : "사용 불가능한 패스워드" 출력(red)
+		switch(count) {
+			case 4 : 
+				$("#checkPasswdResult").html("안전");
+				$("#checkPasswdResult").css("color", "blue");
+				checkPasswdResult = true;
+				break;
+			case 3 : 
+				$("#checkPasswdResult").html("보통");
+				$("#checkPasswdResult").css("color", "green");
+				checkPasswdResult = true;
+				break;
+			case 2 : 
+				$("#checkPasswdResult").html("위험");
+				$("#checkPasswdResult").css("color", "orange");
+				checkPasswdResult = true;
+				break;
+			default :
+				$("#checkPasswdResult").html("사용 불가능한 패스워드");
+				$("#checkPasswdResult").css("color", "red");
+				checkPasswdResult = false;
+		}
 	}
 }
 </script>
@@ -168,14 +246,14 @@ memberType div {
 }
 
 .userpw {
-	background: url(./images/images2/icon-01.png) no-repeat center right
+/* 	background: url(./images/images2/icon-01.png) no-repeat center right */
 		15px;
 	background-size: 20px;
 	background-color: #fff;
 }
 
 .userpw-confirm {
-	background: url(./images/images2/icon-02.png) no-repeat center right
+/* 	background: url(./images/images2/icon-02.png) no-repeat center right */
 		15px;
 	background-size: 20px;
 	background-color: #fff;
@@ -260,40 +338,41 @@ button {
 				<div class="field">
 					<b>아이디</b>
 					<span class="placehold-text">
-					<input type="text" name="member_id" id="member_id" onchange="checkId(this.value)">
+					<input type="text" name="member_id" id="member_id" onchange="checkId(this.value)" maxlength='16'>
 					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 					</span>
 				</div>
 				
 				<div class="field">
 					<b>비밀번호</b>
-					<input type="password" name="member_pass" class="userpw" id="member_pass" onchange="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합">
+					<input type="password" name="member_pass" class="userpw" id="member_pass" onchange="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='20'>
 					<span id="checkPasswdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="field">
 					<b>이름</b>
-					<input type="text" name="member_name" onchange="checkName(this.value)" id="member_name">
+					<input type="text" name="member_name" onchange="checkName(this.value)" id="member_name" maxlength='10'>
+					<span id="checkNameResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="field">
 					<b>본인 확인 이메일</b> 
-					<input type="email" placeholder="선택입력" name="member_email" required="required" id="member_email">
+					<input type="email" placeholder="선택입력" name="member_email" required="required" id="member_email" maxlength='30'>
 				</div>
 				
 				<div class="field post-code">
 					<b>주소</b>
 					<div>
-						<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호" >
+						<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호"  maxlength='6'>
 						<input type="button" value="주소검색" name="">
 					</div>
-					<input type="text" name="member_address" id="member_address" placeholder="주소">
+					<input type="text" name="member_address" id="member_address" placeholder="주소"  maxlength='100'>
 				</div>
 				
 				<div class="field tel-number">
 					<b>전화</b>
 					<div>
-						<input type="tel" placeholder="전화번호 입력" name="member_phone"  id="member_phone">
+						<input type="tel" placeholder="전화번호 입력" name="member_phone"  id="member_phone"  maxlength='11'>
 					</div>
 				</div>
 				<input type="submit" value="가입하기">
@@ -310,46 +389,48 @@ button {
 			<div id="companyDiv">
 				<div class="field">
 					<b>아이디</b> <span class="placehold-text">
-					<input type="text" id="manager_id" name="manager_id"></span>
+					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="checkId(this.value)"></span>
+					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				<div class="field">
 					<b>비밀번호</b> 
-					<input class="userpw" type="password" id="manager_pass" name="manager_pass">
+					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19'>
+					<span id="checkPasswdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="field">
 					<b>기업관리자 이름</b> 
-					<input type="text" id="manager_name" name="manager_name">
+					<input type="text" id="name" name="manager_name" maxlength="10" onchange="checkName(this.value)">
 				</div>
 
 				<div class="field">
 					<div>
 						<b>브랜드이름</b>
-						<input type="text" id="manager_brandname" name="manager_brandname">
+						<input type="text" id="manager_brandname" name="manager_brandname" maxlength="20">
 						<b>로고</b>
 						<input type="file" name="file" required="required" style="background-color: white; padding: 0px" /> 
 					</div>
 				</div>
 				<div class="field">
 					<b>사업자번호</b>
-					<input type="number" name="manager_storecode" id="manager_storecode">
+					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20">
 				</div>
 
 				<div class="field">
 					<b>본인 확인 이메일</b>
-					<input type="email" placeholder="선택입력" name="manager_email" id="manager_email">
+					<input type="email" placeholder="선택입력" name="manager_email" id="manager_email" maxlength="30">
 				</div>
 				<div class="field post-code">
 					<b>주소</b>
 					<div>
-						<input type="text" name="manager_postcode" id="manager_postcode" placeholder="우편번호"> <input type="button" value="주소검색">
+						<input type="text" name="manager_postcode" id="manager_postcode" placeholder="우편번호" maxlength="6"> <input type="button" value="주소검색">
 					</div>
-						<input type="text" name="manager_address" id="manager_address" placeholder="주소">
+						<input type="text" name="manager_address" id="manager_address" placeholder="주소" maxlength="100">
 				</div>
 				<div class="field tel-number">
 					<b>전화</b>
 					<div>
-						<input type="tel" placeholder="전화번호 입력" id="manager_phone" name="manager_phone">
+						<input type="tel" placeholder="전화번호 입력" id="manager_phone" name="manager_phone" maxlength="11">
 					</div>
 				</div>
 				<input type="submit" value="가입하기">

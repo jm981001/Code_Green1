@@ -1,18 +1,23 @@
 package com.itwillbs.Code_Green.controller;
 
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.ManagerService;
 import com.itwillbs.Code_Green.vo.ItemVO;
@@ -25,6 +30,101 @@ public class ManagerController {
 	
 	@Autowired
 	private ManagerService service;
+
+	@PostMapping(value = "/ManagerLoginPro")
+	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session,
+			String manager_id) {
+
+		ManagerVO selectManager = service.getManagerInfo(manager_id);
+//		System.out.println(selectManager);
+
+		// ------------------ BCryptPasswordEncoder 활용한 로그인 판별 ----------------------
+		// 1. BCryptPasswordEncoder 객체 생성
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		// 2. member 테이블에서 id 에 해당하는 패스워드 조회 후 리턴값 저장(getPasswd())
+		// => 파라미터 : 아이디 리턴타입 : String(passwd)
+		String passwd = service.getPasswd(manager.getManager_id());
+//				System.out.println(passwd);
+
+		// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
+		// 1) 아이디가 없을 경우(passwd 값이 null) 실패
+		// 2) 패스워드 비교(BCryptPasswordEncoder 객체의 matches() 메서드 활용)
+		// 2-1) 다를 경우 실패
+		// 2-2) 같을 경우 성공
+
+		if (passwd == null || !encoder.matches(manager.getManager_pass(), passwd)) {
+			model.addAttribute("msg", "기업 로그인 실패! 힝~");
+//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
+			return "member/fail_back";
+		} else {
+			session.setAttribute("sId", manager.getManager_id());
+			if (selectManager.getManager_storecode() != null) {
+				session.setAttribute("sCode", selectManager.getManager_storecode());
+			}
+			return "redirect:/";
+		}
+
+	}
+
+	@PostMapping(value = "/ManagerJoinPro")
+	public String joinManagerPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
+		
+		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------
+		
+		// 1. BCryptPasswordEncoder 객체 생성
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		// 2. BCryptPasswordEncoder 객체의 encode() 메서드를 호출하여 해싱 결과 리턴
+		String securePasswd = encoder.encode(manager.getManager_pass());
+		// 3. MemberVO 객체의 패스워드에 암호문 저장
+		manager.setManager_pass(securePasswd);
+		
+		
+		String uploadDir = "/resources/brand_logo"; // 가상의 업로드 경로
+		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : " + saveDir);
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		MultipartFile mFile = manager.getFile();
+		
+		String originalFileName = mFile.getOriginalFilename();
+		long fileSize = mFile.getSize();
+		System.out.println("파일명 : " + originalFileName);
+		System.out.println("파일크기 : " + fileSize + " Byte");
+		
+		// 파일명 중복 방지를 위한 대책
+		// 시스템에서 랜덤ID 값을 추출하여 파일명 앞에 붙여 "랜덤ID값_파일명" 형식으로 설정
+		// 랜덤ID 는 UUID 클래스 활용(UUID : 범용 고유 식별자)
+		String uuid = UUID.randomUUID().toString();
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+		
+		// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+		// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+		//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+		//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+		manager.setManager_realfile(originalFileName); // 실제로는 불필요한 컬럼
+		manager.setManager_original_file(uuid + "_" + originalFileName);
+		
+		
+		
+		int insertCount = service.joinManager(manager);
+
+		if (insertCount > 0) { // 가입 성공
+			System.out.println("가입 성공!");
+			return "redirect:/join_result";
+		} else { // 가입 실패
+			model.addAttribute("msg", "가입 실패!");
+			return "member/fail_back";
+		}
+	}
 	
 	//------------매니저페이지 메인(로그인시 각 브랜드별 페이지)-------------------------------------------
 		@GetMapping(value = "/ManagerInfo.me")

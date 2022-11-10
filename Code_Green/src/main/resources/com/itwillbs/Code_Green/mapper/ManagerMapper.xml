@@ -5,7 +5,7 @@
 	<!-- 가입 -->
 	<insert id="insertManager">
 		<selectKey keyProperty="manager_idx" resultType="integer" order="BEFORE">
-				SELECT MAX(member_idx) FROM member
+				SELECT MAX(manager_idx) FROM manager
 			</selectKey>
 			INSERT INTO manager
 			VALUES (
@@ -29,10 +29,23 @@
 	</insert>
 
 
+<!-- 	<select id="loginManager" resultType="com.itwillbs.Code_Green.vo.ManagerVO"> -->
+<!-- 		SELECT * FROM manager -->
+<!-- 		WHERE MANAGER_ID=#{manager_id} AND -->
+<!-- 		MANAGER_PASS=#{manager_pass} -->
+<!-- 	</select> -->
+
+<!-- 
+	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
+	암호문으로 저장되어 있는 패스워드 조회하기 위한 SELECT 구문 작성
+	=> 이 때, MemberVO 타입을 resultType 으로 선언해도 되지만
+	   패스워드 컬럼 1개의 문자 데이터이므로 string(String) 타입으로 선언해도 된다!
+	-->
 	<!-- 로그인 -->
-	<select id="loginManager" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT * FROM manager
-		WHERE MANAGER_ID=#{manager_id} AND MANAGER_PASS=#{manager_pass}
+	<select id="selectPasswd" resultType="string">
+		SELECT manager_pass 
+		FROM manager
+		WHERE manager_id = #{manager_id}
 	</select>
 
 	

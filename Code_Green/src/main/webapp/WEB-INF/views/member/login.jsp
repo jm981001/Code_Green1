@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
 	String clientId = "ilgdXbcRH89unvY3t9Dz";//애플리케이션 클라이언트 아이디값";
-	String redirectURI = URLEncoder.encode("http://localhost:8081/Code_Green/main", "UTF-8");
+	String redirectURI = URLEncoder.encode("http://localhost:8081/Code_Green/member/callback", "UTF-8");
 	SecureRandom random = new SecureRandom();
 	String state = new BigInteger(130, random).toString();
 	String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -60,19 +60,19 @@
 	</style>
 	<script type="text/javascript">
 	
-	function setDisplay(){    
+	function setDisplay(){    
 		if($('input:radio[id=memberLogin]').is(':checked')){
-			$('#adminDiv').hide(); 
-			$('#managerDiv').hide(); 
-	     	$('#memberDiv').show();
+			$('#adminDiv').hide(); 
+			$('#managerDiv').hide(); 
+	     	$('#memberDiv').show();
 		} else if($('input:radio[id=managerLogin]').is(':checked')){
-			$('#adminDiv').hide(); 
-			$('#memberDiv').hide(); 
-	     	$('#managerDiv').show();
+			$('#adminDiv').hide(); 
+			$('#memberDiv').hide(); 
+	     	$('#managerDiv').show();
 		} else {
-			$('#adminDiv').show(); 
-			$('#memberDiv').hide(); 
-	     	$('#managerDiv').hide();
+			$('#adminDiv').show(); 
+			$('#memberDiv').hide(); 
+	     	$('#managerDiv').hide();
 		}
 }
 	</script>
@@ -88,7 +88,7 @@
             <div class="container">
            
             <div id="memberDiv">
-                <form class="ps-form--account ps-tab-root" action="MemberLoginPro.me" method="post">
+                <form class="ps-form--account ps-tab-root" action="MemberLoginPro" method="post">
                     <ul class="ps-tab-list">
                         <li class="active"><a href="login">로그인</a></li>
                         <li><a href="join">회원가입</a></li>
@@ -130,7 +130,7 @@
             </div>
                
            <div id="managerDiv">
-                <form class="ps-form--account ps-tab-root" action="ManagerLoginPro.me" method="post">
+                <form class="ps-form--account ps-tab-root" action="ManagerLoginPro" method="post">
                     <ul class="ps-tab-list">
                         <li class="active"><a href="login">로그인</a></li>
                         <li><a href="join">회원가입</a></li>

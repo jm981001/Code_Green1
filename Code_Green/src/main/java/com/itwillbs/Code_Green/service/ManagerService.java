@@ -21,12 +21,13 @@ public class ManagerService {
 	public int joinManager(ManagerVO manager) {
 		return mapper.insertManager(manager);
 	}
-	
 //	로그인
-	public ManagerVO loginManager(ManagerVO manager) {
-		return mapper.loginManager(manager);
+	// BCryptPasswordEncoder 활용한 로그인을 위해 패스워드 조회 - getPasswd()
+	// => 파라미터 : 아이디, 리턴타입 : String
+	public String getPasswd(String manager_id) {
+		return mapper.selectPasswd(manager_id);
 	}
-
+	
 //	 브랜드 정보 조회 수행 getManagerInfo()
 //	=> 파라미터 : 아이디, 리턴타입 : ManagerVO(manager)
 	public ManagerVO getManagerInfo(String manager_id) {
@@ -59,6 +60,8 @@ public class ManagerService {
 		
 		return mapper.selectQnaInfo(subject, id);
 	}
+
+	
 
 
 
