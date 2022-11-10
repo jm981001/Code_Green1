@@ -16,11 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.itwillbs.Code_Green.service.AdminService;
-import com.itwillbs.Code_Green.service.ManagerService;
-import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.vo.AdminVO;
-import com.itwillbs.Code_Green.vo.ManagerVO;
-import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class LoginController {
@@ -91,7 +87,8 @@ public class LoginController {
 
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 
-		
+		System.out.println("code: " + code);
+		System.out.println("oauthToken: " + oauthToken);
 		
 //		 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken);
@@ -103,7 +100,7 @@ public class LoginController {
 		System.out.println("result" + apiResult);
 		/* 네이버 로그인 성공 페이지 View 호출 */
 
-		return "main/main";
+		return "member/naverLogin_result";
 	}
 
 }

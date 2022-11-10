@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
@@ -6,12 +7,14 @@
 	String clientId = "ilgdXbcRH89unvY3t9Dz";//애플리케이션 클라이언트 아이디값";
 	String redirectURI = URLEncoder.encode("http://localhost:8081/Code_Green/member/callback", "UTF-8");
 	SecureRandom random = new SecureRandom();
-	String state = new BigInteger(130, random).toString();
+	//String state = new BigInteger(130, random).toString();
+	String state = session.getAttribute("oauth_state").toString();
+	out.print(state);
 	String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
 	apiURL += "&client_id=" + clientId;
 	apiURL += "&redirect_uri=" + redirectURI;
 	apiURL += "&state=" + state;
-	session.setAttribute("state", state);
+	//session.setAttribute("state", state);
 %>
 <!DOCTYPE html>
 <html>
@@ -78,6 +81,7 @@
 	</script>
 </head>
 <body>
+
 	<!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
