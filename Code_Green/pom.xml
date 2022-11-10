@@ -114,7 +114,14 @@
 		    <version>5.7.5</version>
 		</dependency>
 <!-- 		해싱에 사용할 BCryptPasswordEncoder 클래스 활용을 위한 라이브러리 221110 추가 끝-->
-
+<!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
+		</dependency>
+<!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
 
 
 		<!-- AspectJ -->

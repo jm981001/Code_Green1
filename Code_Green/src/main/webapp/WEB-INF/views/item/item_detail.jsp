@@ -76,6 +76,17 @@
    </style>  
    
 </head>
+<script type="text/javascript">
+$(function(){
+	$(":button").click(function(){
+		
+		if(${sessionScope.sId == null}){
+			alert("로그인 후 사용가능합니다!");
+			return history.back();
+		}
+	});
+});	
+</script>
 <style>
 	select {
 		width: 130px; padding: .5em .5em; border: 1px solid #999; font-family: inherit;  

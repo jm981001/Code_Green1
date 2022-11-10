@@ -34,7 +34,7 @@
 						<div class="ps-section__left">
 							<aside class="ps-widget--account-dashboard">
 								<div class="ps-widget__header">
-<!-- 									<img src="/Code_Green/resources/img/users/3.jpg" alt="" /> -->
+									<img src="/Code_Green/resources/img/users/3.jpg" alt="" />
 									<figure>
 										<figcaption>${sessionScope.sId}</figcaption>
 										<p>
