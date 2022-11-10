@@ -146,6 +146,12 @@ public class ManagerController {
 		}
 	}
 	
+		//------------매니저페이지 메인-------------------------------------------
+		@RequestMapping(value = "manager_index", method = RequestMethod.GET)
+		public String index() {
+			return "manager/index";
+		}
+		
 	
 	//------------매니저페이지 내브랜드정보-------------------------------------------
 	@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
@@ -155,56 +161,73 @@ public class ManagerController {
 			
 	
 	
-	//------------매니저페이지 메인-------------------------------------------
-	@RequestMapping(value = "manager_index", method = RequestMethod.GET)
-	public String index() {
-		return "manager/index";
-	}
-	
 		
 		
 		
 		//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
 
 		
-		@GetMapping(value = "/products")
-		public String itemList ( Model model, HttpSession session,
-								@RequestParam(defaultValue = "1")int pageNum,
-								@RequestParam(defaultValue = "")String searchType,
-								@RequestParam(defaultValue = "")String keyword) {
-			
-			String id = (String)session.getAttribute("sId");
-			System.out.println(id);
-			
-			//페이징처리
-			int listLimit = 10;
-			int pageListLimit = 10;
-			
-			int startrow = (pageNum -1) * listLimit;
-			
-			List<ItemVO> itemList = service.itemList(id, startrow, listLimit, searchType, keyword);
-			
-			int listCount = service.getItemListCount(searchType, keyword);
-			
-			int maxPage = (int)Math.ceil((double)listCount / listLimit);
-			
-			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-			
-			int endPage = startPage + pageListLimit -1;
-			
-			if(endPage >  maxPage) {
-				endPage = maxPage;
-			}
-			
-			PageInfo pageinfo = new PageInfo(
-					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+	
+	@GetMapping(value = "/products")
+	public String itemList ( Model model, HttpSession session,
+							@RequestParam(defaultValue = "1")int pageNum,
+							@RequestParam(defaultValue = "")String searchType,
+							@RequestParam(defaultValue = "")String keyword) {
+		
+		String id = (String)session.getAttribute("sId");
+		System.out.println("id : " + id );
+		System.out.println("searchType : " + searchType);
+		System.out.println("keyword : " + keyword);
+		
+		//페이징처리
+		int listLimit = 10;// 한 페이지 당 표시할 게시물 목록 갯수 
+		int pageListLimit = 10;// 한 페이지 당 표시할 페이지 목록 갯수
+		
+		// 조회 시작 게시물 번호(행 번호) 계산
+		int startRow = (pageNum -1) * listLimit;
+		
+		// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
+		// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
+		// => 리턴타입 : List<ItemVO>(itemList)
+		List<ItemVO> itemList = service.getItemList(id, startRow, listLimit, searchType, keyword);
+		
+		// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
+		// => 파라미터 : 없음, 리턴타입 : int(listCount)
+		int listCount = service.getItemListCount(searchType, keyword);
+//		System.out.println("검색결과(목록 수)" + listCount);
+		// 페이지 계산 작업 수행
+		// 전체 페이지 수 계산
+		// Math 클래스의 ceil() 메서드를 활용하여 소수점 올림 처리를 통해 전체 페이지 수 계산
+		// => listCount / listLimit 를 실수 연산으로 수행하여 소수점까지 계산하고
+		//    Math.ceil() 메서드를 통해 올림 처리 후 결과값을 정수로 변환
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
 		
-			model.addAttribute("itemList", itemList);
-			model.addAttribute("pageInfo", pageinfo);
-			
-			return "manager/products";
+		// 시작 페이지 번호 계산
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		
+		// 끝 페이지 번호 계산
+		int endPage = startPage + pageListLimit - 1;
+		
+		// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
+		// 끝 페이지 번호를 최대 페이지 번호로 교체
+		if(endPage > maxPage) {
+			endPage = maxPage;
 		}
+		
+		// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
+		PageInfo pageinfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+	
+		// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("pageInfo", pageinfo);
+//		System.out.println("상품목록" + itemList);
+		
+		return "manager/products";
+	}
+	
+	
 		
 		
 	
@@ -263,16 +286,11 @@ public class ManagerController {
 		}
 
 
-	//------------매니저페이지 답변관리-------------------------------------------
-//		@RequestMapping(value = "answerboardlist", method = RequestMethod.GET)
-//		public String answerboardlist() {
-//			return "manager/answerboardlist";
-//		}
-//		
+
 		
-	//------------ 문의글 목록 불러오기-------------------------------------------	
+//	//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
 		
-		@RequestMapping(value = "/answerboardlist", method = RequestMethod.GET)
+		@RequestMapping(value = "/qnaboard_list", method = RequestMethod.GET)
 		public String qna_Board(Model model, HttpSession session) {
 			String sId = (String)session.getAttribute("sId");
 		
@@ -281,23 +299,101 @@ public class ManagerController {
 			model.addAttribute("QnaBoardList", QnaBoardList);
 			System.out.println(QnaBoardList);
 			
-				return "manager/answerboardlist";
+				return "manager/qnaboard_list";
 		}
 		
-	//------------ 문의글 상세정보 불러오기-------------------------------------------	
-		@RequestMapping(value = "/review_board_manage", method = RequestMethod.GET)
-		public String qna_Board_Detail(Model model, HttpSession session, String subject, String id) {
+//		//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
+	
+//		@GetMapping(value = "/qnaboard_list")
+//		public String qna_Board ( Model model, HttpSession session,
+//								@RequestParam(defaultValue = "1")int pageNum,
+//								@RequestParam(defaultValue = "")String searchType,
+//								@RequestParam(defaultValue = "")String keyword) {
+//			
+//		
+//			// -------------------------------------------------------------------
+//			// 페이징 처리를 위한 계산 작업
+//			int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
+//			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+//			
+//			// 조회 시작 게시물 번호(행 번호) 계산
+//			int startRow = (pageNum - 1) * listLimit;
+//			
+//			// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
+//			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
+//			// => 리턴타입 : List<BoardVO>(boardList)
+//			List<QnaVO> QnaBoardList = service.getQnaBoardList(startRow, listLimit, searchType, keyword);
+//			
+//			// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
+//			// => 파라미터 : 없음, 리턴타입 : int(listCount)
+//			int listCount = service.getQnaBoardListCount(searchType, keyword);
+//		
+//			// 페이지 계산 작업 수행
+//			// 전체 페이지 수 계산
+//			// Math 클래스의 ceil() 메서드를 활용하여 소수점 올림 처리를 통해 전체 페이지 수 계산
+//			// => listCount / listLimit 를 실수 연산으로 수행하여 소수점까지 계산하고
+//			//    Math.ceil() 메서드를 통해 올림 처리 후 결과값을 정수로 변환
+//			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+//			
+//			// 시작 페이지 번호 계산
+//			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//			
+//			// 끝 페이지 번호 계산
+//			int endPage = startPage + pageListLimit - 1;
+//			
+//			// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
+//			// 끝 페이지 번호를 최대 페이지 번호로 교체
+//			if(endPage > maxPage) {
+//				endPage = maxPage;
+//			}
+//			
 //			String sId = (String)session.getAttribute("sId");
-			System.out.println("subject : " + subject + " " +" id : "  + id );
+//		
+//			// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
+//			PageInfo pageInfo = new PageInfo(
+//					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+////			System.out.println(pageInfo);
+//			// --------------------------------------------------------------------------------
+//			// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
+//			model.addAttribute("QnaBoardList", QnaBoardList);
+//			model.addAttribute("pageInfo", pageInfo);
+//
+//			System.out.println(QnaBoardList);
+//			
+//				return "manager/qnaboard_list";
+//		}
+//		
+//		
+//		
 		
-			QnaVO QnaInfo = service.getQnaInfo(subject, id);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//------------ 문의글 상세 조회-------------------------------------------	
+		@RequestMapping(value = "/qnaboard_detail", method = RequestMethod.GET)
+		public String qna_Board_Detail( Model model, HttpSession session, String qna_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			System.out.println("qna_idx : " + qna_idx  );
+			
+		
+			QnaVO QnaInfo = service.getQnaInfo(qna_idx);
 			System.out.println("문의글 상세 : " + QnaInfo);
 			
 			model.addAttribute("QnaInfo", QnaInfo);
 			
-			return "manager/review_board_manage";
+			return "manager/qnaboard_detail";
 		}
-		
 		
 		
 		

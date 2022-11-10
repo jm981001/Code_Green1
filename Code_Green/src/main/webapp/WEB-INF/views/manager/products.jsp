@@ -42,12 +42,12 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-               				    <li><a class="active" href="index"><i class="icon-home"></i>관리자메인페이지</a></li>
+               				    <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="answerboardlist"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
@@ -74,12 +74,12 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	<li><a class="active" href="index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId} "><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="answerboardlist"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
@@ -106,6 +106,21 @@
                         <button><i class="icon-magnifier"></i></button>
                     </form>
                 </div>
+                	<!-- 검색 기능 구현을 위한 form 태그 -->
+								<form action="product" method="get" style="margin-left: 20px">
+									<select name="searchType">
+										<option value="item_name">상품명</option>
+										<option value="brand_name">상호명</option>
+									</select>
+									<input type="text" name="keyword">
+									<input type="submit" value="검색">
+								</form>
+                            <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+							  <option value="newDate">신상품순</option>
+							  <option value="review">후기 많은순</option>
+<!-- 							  <option value="cheap">낮은 가격순</option> -->
+<!-- 							  <option value="expensive">높은 가격순</option> -->
+							</select>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
@@ -199,18 +214,20 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="products?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="products?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="products?pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="products?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="products?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="products?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
-				                    <!-- 페이징 버튼들 끝 -->
-                
+				  <!-- 페이징 버튼들 끝 -->
+				  
+				  
+			
                 
                 
                 

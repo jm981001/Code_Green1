@@ -23,22 +23,26 @@ public interface ManagerMapper {
 	public ManagerVO selectManagerInfo(String id);
 
 	
-	//상품 목록 조회
+	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 //	public List<ItemVO> selectItemList(String sId);
 	
-	public List<ItemVO> selectItemList(@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
-										@Param("searchType") String searchType,@Param("keyword") String keyword);
+	public List<ItemVO> selectItemList(
+			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
 	//상품 갯수 조회
-	public int selectItemListCount(@Param("searchType") String searchType,@Param("keyword")  String keyword);
+	public int selectItemListCount(
+			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 	
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList();
 	
 	//문의글 상세 조회
-	public QnaVO selectQnaInfo(@Param ("subject") String subject, @Param("id") String id);
-
+	public QnaVO selectQnaInfo(@Param ("qna_idx") String qna_idx);
 	
+	//문의글 갯수 조회
+//	public int selectQnaBoardListCount(
+//			@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 
 

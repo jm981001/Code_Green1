@@ -28,6 +28,7 @@ public class ManagerService {
 		return mapper.selectPasswd(manager_id);
 	}
 	
+
 //	 브랜드 정보 조회 수행 getManagerInfo()
 //	=> 파라미터 : 아이디, 리턴타입 : ManagerVO(manager)
 	public ManagerVO getManagerInfo(String manager_id) {
@@ -38,11 +39,12 @@ public class ManagerService {
 //		return mapper.selectFollowInfo(idx);
 //	}
 	
-	//상품 리스트
-	public List<ItemVO> itemList(String id, int startRow, int listLimit, String searchType, String keyword) {
+	//상품 목록 조회
+	
+	public List<ItemVO> getItemList(String id, int startRow, int listLimit, String searchType, String keyword) {
 		return mapper.selectItemList (id, startRow, listLimit, searchType, keyword);
 	}
-	// 상품 갯수
+	// 상품 갯수 조회
 	public int getItemListCount(String searchType, String keyword) {
 		return mapper.selectItemListCount(searchType, keyword);
 	}
@@ -51,17 +53,33 @@ public class ManagerService {
 	
 	
 	// 문의글 리스트
+//	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
+//		return mapper.selectQnaBoardList();
+//	}
+//	
+	// 문의글 상세조회
+//	public QnaVO getQnaInfo(String qna_idx) {
+//		return mapper.selectQnaInfo(qna_idx);
+//	}
+	
+	//문의글 갯수 조회
+//	public int getQnaBoardListCount(String searchType, String keyword) {
+//		return mapper.selectQnaBoardListCount(searchType, keyword);
+//	}
+
+	// 문의글 리스트
 	public List<QnaVO> getQnaBoardList() {
 		return mapper.selectQnaBoardList();
 	}
 	
 	// 문의글 상세조회
-	public QnaVO getQnaInfo(String subject, String id) {
-		
-		return mapper.selectQnaInfo(subject, id);
+	public QnaVO getQnaInfo(String qna_idx) {
+		return mapper.selectQnaInfo(qna_idx);
 	}
 
+
 	
+
 
 
 
