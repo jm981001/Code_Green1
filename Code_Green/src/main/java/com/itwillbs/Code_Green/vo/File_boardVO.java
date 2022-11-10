@@ -13,6 +13,7 @@ public class File_boardVO {
  private MultipartFile file_2;
  private MultipartFile file_3;
  private String item_idx;
+ 
 public int getFile_board_idx() {
 	return file_board_idx;
 }
