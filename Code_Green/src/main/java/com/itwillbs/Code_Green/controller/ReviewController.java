@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.ReviewService;
+import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 
@@ -26,7 +28,7 @@ public class ReviewController {
 	
 	//------------리뷰작성-------------------------------------------
 	@PostMapping(value = "/ReviewWritePro.bo")
-	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session ) {
+	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star) {
 //		@RequestParam String board_idx
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
@@ -42,30 +44,20 @@ public class ReviewController {
 		}
 		
 		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
-		MultipartFile mFile = file.getFile();
+		MultipartFile mFile = file.getFile_1();
+		MultipartFile mFile2 = file.getFile_2();
 		
 		String originalFileName = mFile.getOriginalFilename();
-		long fileSize = mFile.getSize();
-		System.out.println("파일명 : " + originalFileName);
-		System.out.println("파일크기 : " + fileSize + " Byte");
-		
-		// 파일명 중복 방지를 위한 대책
-		// 시스템에서 랜덤ID 값을 추출하여 파일명 앞에 붙여 "랜덤ID값_파일명" 형식으로 설정
-		// 랜덤ID 는 UUID 클래스 활용(UUID : 범용 고유 식별자)
+		String originalFileName2 = mFile2.getOriginalFilename();
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
 		
-		// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
-		// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
-		//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
-		//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-//		board.setBoard_file(originalFileName); // 실제로는 불필요한 컬럼
 		file.setFile1(uuid + "_" + originalFileName);
-//		file.setFile2(uuid + "_" + originalFileName);
+		file.setFile2(uuid + "_" + originalFileName2);
 		
 		int insertCount = service.registReview(board);
 		int file_insertCount = service.registReview_file(file);
-		
+		int starCount= service.StarScore(star);
 		model.addAttribute("item_idx", item_idx);
 		System.out.println("상품번호 " +item_idx);
 //		model.addAttribute("board_idx", board_idx);
@@ -75,6 +67,7 @@ public class ReviewController {
 			if(file_insertCount > 0) {
 				try {
 					mFile.transferTo(new File(saveDir, file.getFile1()));
+					mFile2.transferTo(new File(saveDir, file.getFile2()));
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ReviewMapper;
+import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
@@ -39,6 +40,12 @@ public class ReviewService {
 	//리뷰 파일업로드
 	public int registReview_file(File_boardVO file) {
 		return mapper.insertFile(file);
+	}
+
+	//별점 등록
+	public int StarScore(BoardStarVO star) {
+		return mapper.insertStar(star);
+		
 	}
 
 }

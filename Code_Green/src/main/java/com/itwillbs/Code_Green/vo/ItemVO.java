@@ -18,6 +18,8 @@ public class ItemVO {
 	private String file1;
 	private String file2;
 	private String manager_brandname;
+	private String board_star_score;
+	private String count;
 	
 	public int getItem_idx() {
 		return item_idx;
@@ -111,6 +113,20 @@ public class ItemVO {
 		this.manager_brandname = manager_brandname;
 	}
 	
+	
+	public String getBoard_star_score() {
+		return board_star_score;
+	}
+	public void setBoard_star_score(String board_star_score) {
+		this.board_star_score = board_star_score;
+	}
+	
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
 	public ItemVO() {
 		// TODO Auto-generated constructor stub
 	}

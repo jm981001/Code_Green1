@@ -133,7 +133,7 @@ $(function(){
                                             <option value="1">3</option>
                                             <option value="1">4</option>
                                             <option value="2">5</option>
-                                        </select><span>(1 review)</span>
+                                        </select><span>(${item.count } review)</span>
                                     </div>
                                 </div>
                                 
@@ -172,7 +172,7 @@ $(function(){
                             <ul class="ps-tab-list">
                                 <li class="active"><a href="#tab-1">상품설명</a></li>
                                 <li><a href="#tab-2">상세정보</a></li>
-                                <li><a href="#tab-3">후기9999+</a></li><!--tab-3-1은 작성폼 -->
+                                <li><a href="#tab-3">후기 ${item.count }</a></li><!--tab-3-1은 작성폼 -->
                                 <li><a href="#tab-4">문의</a></li> <!--tab-4-1은 작성폼 -->
                             </ul>
                             <div class="ps-tabs">
@@ -235,17 +235,17 @@ $(function(){
                                         <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 ">
                                             <div class="ps-block--average-rating">
                                                 <div class="ps-block__header">
-                                                    <h3>4.00</h3>
+                                                    <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
                                                         <option value="1">2</option>
                                                         <option value="1">3</option>
                                                         <option value="1">4</option>
                                                         <option value="2">5</option>
-                                                    </select><span>1 Review</span>
+                                                    </select><span>${item.count } review</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>5 Star</span>
-                                                    <div class="ps-progress" data-value="100"><span></span></div><span>100%</span>
+                                                    <div class="ps-progress" data-value="10"><span></span></div><span>100%</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>4 Star</span>
                                                     <div class="ps-progress" data-value="0"><span></span></div><span>0</span>
@@ -267,7 +267,7 @@ $(function(){
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
-													<select name="searchType">    
+													<select name="searchType"id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
 														<option value="new">최근등록순</option>    
 														<option value="best">좋아요 많은순</option>    
 														<option value="worst">별점 낮은 순</option>    
@@ -295,7 +295,7 @@ $(function(){
 													        <tbody>  
 													            <tr class="item">  
 	<%-- 												            <td>${board.board_idx }</td>   --%>
-													                <td>${board.board_subject }</td>  
+													                <td>${board.board_subject } (별점:${board.board_star_score })</td>  
 													                <td>${board.board_id }</td>  
 													                <td>${board.board_date }</td>  
 													                <td>12</td>  
@@ -303,11 +303,11 @@ $(function(){
 													            <tr class="hide" style="height:300px">  
 													                <td colspan="5">  
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
 																		    <button>좋아용</button>
-																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
 																		 </div>
@@ -348,9 +348,8 @@ $(function(){
 								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
-								                           
-								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} '"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li>
 								                        </ul>
 								                    </div>
 								                    <!-- 페이징 버튼들 끝 -->
@@ -377,14 +376,14 @@ $(function(){
                                         <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 ">
                                             <div class="ps-block--average-rating">
                                                 <div class="ps-block__header">
-                                                    <h3>4.00</h3>
+                                                    <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
                                                         <option value="1">2</option>
                                                         <option value="1">3</option>
                                                         <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>1 Review</span>
+                                                        <option value="1">5</option>
+                                                    </select><span>${item.count } review</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>5 Star</span>
                                                     <div class="ps-progress" data-value="100"><span></span></div><span>100%</span>
@@ -410,7 +409,7 @@ $(function(){
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
                                                 <div class="form-group form-group__rating">
                                                     <label>별점을 매겨주세요</label>
-                                                    <select class="ps-rating" data-read-only="false">
+                                                    <select class="ps-rating" data-read-only="false" id="board_star_score" name="board_star_score" required="required">
                                                         <option value="0">0</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -427,8 +426,8 @@ $(function(){
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">
-	                                                     <input type="file" name="file" id="file">
-<!-- 	                                                     <input type="file" name="file2" id="file2"> -->
+	                                                     <input type="file" name="file_1" id="file_1">
+	                                                     <input type="file" name="file_2" id="file_2">
 	                                                    <button class="ps-btn" type="submit">Submit Review</button>
 	                                                </div>
                                                 </div>
@@ -502,7 +501,6 @@ $(function(){
 														                    <br><br><br>
 														                  <div align="right">
 																		    <button>좋아용</button>
-																			<input type="button" value="신고" onclick="location.href='ReviewModifyForm.bo?qna_idx=${qna.qna_idx }'">
 																			<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&pageNum=${param.pageNum}'">
 																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}')">
 																		 </div>
@@ -620,7 +618,7 @@ $(function(){
                                             <option value="1">3</option>
                                             <option value="1">4</option>
                                             <option value="2">5</option>
-                                        </select><span>01</span>
+                                        </select><span>${item.board_star_score }</span>
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
@@ -663,7 +661,7 @@ $(function(){
                                             <option value="1">3</option>
                                             <option value="1">4</option>
                                             <option value="2">5</option>
-                                        </select><span>01</span>
+                                        </select><span>${item.board_star_score }</span>
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>

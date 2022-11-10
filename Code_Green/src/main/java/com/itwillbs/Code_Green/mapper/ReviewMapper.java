@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
-import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 
 public interface ReviewMapper {
@@ -24,6 +24,9 @@ public interface ReviewMapper {
 
 	//리뷰 파일업로드
 	int insertFile(File_boardVO file);
+
+	//별점등록
+	int insertStar(BoardStarVO star);
 
 
 	

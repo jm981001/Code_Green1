@@ -16,6 +16,9 @@ public class BoardVO {
 	private String file1;
 	private String file2;
 	private String file3;
+	private String board_star_score;
+	
+	
 	public int getBoard_idx() {
 		return board_idx;
 	}
@@ -100,6 +103,13 @@ public class BoardVO {
 	}
 	public void setFile3(String file3) {
 		this.file3 = file3;
+	}
+	
+	public String getBoard_star_score() {
+		return board_star_score;
+	}
+	public void setBoard_star_score(String board_star_score) {
+		this.board_star_score = board_star_score;
 	}
 	public BoardVO() {
 		// TODO Auto-generated constructor stub

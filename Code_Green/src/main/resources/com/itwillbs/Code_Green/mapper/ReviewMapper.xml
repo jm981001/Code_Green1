@@ -33,13 +33,27 @@
 			VALUES (
 					#{file_board_idx} + 1, 
 					#{file1}, 
-					"N", 
+					#{file2}, 
 					"N", 
  					(SELECT MAX(board_idx) FROM board)
 					)
 	</insert>
 	
 	
+	<!-- 별점 등록 -->
+	<insert id="insertStar">
+		<selectKey keyProperty="board_star_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(board_star_idx) FROM board_star
+		</selectKey>
+		INSERT 
+			INTO board_star
+			VALUES (
+					#{board_star_idx} + 1, 
+					(SELECT MAX(board_idx) FROM board), 
+					#{board_star_score}
+					)
+	</insert>
+		
 	
 	
 <!-- 	리뷰삭제 -->
@@ -70,9 +84,7 @@
 	</select>
 	
 	
-	
-	
-	
+
 	
 	
 	
