@@ -100,12 +100,12 @@
                     <h3>상품관리</h3>
 <!--                     <p>Product Listings</p> -->
                 </div>
-                <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
-                        <input class="form-control" type="text" placeholder="Search something" />
-                        <button><i class="icon-magnifier"></i></button>
-                    </form>
-                </div>
+<!--                 <div class="header__center"> -->
+<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
+<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
+<!--                         <button><i class="icon-magnifier"></i></button> -->
+<!--                     </form> -->
+<!--                 </div> -->
                 	<!-- 검색 기능 구현을 위한 form 태그 -->
 								<form action="product" method="get" style="margin-left: 20px">
 									<select name="searchType">
@@ -115,12 +115,12 @@
 									<input type="text" name="keyword">
 									<input type="submit" value="검색">
 								</form>
-                            <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
-							  <option value="newDate">신상품순</option>
-							  <option value="review">후기 많은순</option>
+<!--                             <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)"> -->
+<!-- 							  <option value="newDate">신상품순</option> -->
+<!-- 							  <option value="review">후기 많은순</option> -->
 <!-- 							  <option value="cheap">낮은 가격순</option> -->
 <!-- 							  <option value="expensive">높은 가격순</option> -->
-							</select>
+<!-- 							</select> -->
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
@@ -162,7 +162,9 @@
                             </div>
                         </form>
                     </div>
+                    <br>
                     <div class="ps-section__search">
+              
                         <form class="ps-form--search-simple" action="index" method="get">
                             <input class="form-control" type="text" placeholder="Search product" />
                             <button><i class="icon icon-magnifier"></i></button>

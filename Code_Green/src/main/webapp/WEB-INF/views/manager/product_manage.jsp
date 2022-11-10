@@ -39,7 +39,7 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-               				  	 <li><a class="active" href="index"><i class="icon-home"></i>관리자메인페이지</a></li>
+               				  	 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -72,7 +72,7 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	 <li><a class="active" href="index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            	 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -197,19 +197,13 @@
                                             </label>
                                    <div class="form-group">
                                     <select class="ps-select">
-                                        <option value="1">상품 카테고리</option>
-                                        <option value="2">과일</option>
-                                        <option value="2">과일</option>
-                                        <option value="3">채소</option>
-                                         <option value="3">채소</option>
-                                        <option value="4">우유&치즈</option>
-                                        <option value="5">신선식품</option>
-                                        <option value="6">냉동식품</option>
-                                        <option value=7">콩고기&식물성단백질</option>
-                                        <option value="8">생선</option>
-                                        <option value="9">과자류</option>
-                                        <option value="10">주방&청소</option>
-                                        <option value="11">바디&헤어</option>
+                                             <option value="1">상품 카테고리</option>
+                                        <option value="1">특가상품</option>
+                                        <option value="2">과일/채소</option>
+                                        <option value="3">유제품/음료</option>
+                                        <option value="4">냉동식품/ 간편식품</option>
+                                        <option value="5">해산물</option>
+                                        <option value="6">간식류</option>
                                     </select>
                                 </div>
                                     </div>
