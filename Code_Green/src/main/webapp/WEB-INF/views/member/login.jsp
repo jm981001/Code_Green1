@@ -9,7 +9,7 @@
 	SecureRandom random = new SecureRandom();
 	//String state = new BigInteger(130, random).toString();
 	String state = session.getAttribute("oauth_state").toString();
-	out.print(state);
+// 	out.print(state);
 	String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
 	apiURL += "&client_id=" + clientId;
 	apiURL += "&redirect_uri=" + redirectURI;
@@ -92,7 +92,7 @@
             <div class="container">
            
             <div id="memberDiv">
-                <form class="ps-form--account ps-tab-root" action="MemberLoginPro" method="post">
+                <form class="ps-form--account ps-tab-root" action="MemberLoginPro.me" method="post">
                     <ul class="ps-tab-list">
                         <li class="active"><a href="login">로그인</a></li>
                         <li><a href="join">회원가입</a></li>
@@ -134,7 +134,7 @@
             </div>
                
            <div id="managerDiv">
-                <form class="ps-form--account ps-tab-root" action="ManagerLoginPro" method="post">
+                <form class="ps-form--account ps-tab-root" action="ManagerLoginPro.me" method="post">
                     <ul class="ps-tab-list">
                         <li class="active"><a href="login">로그인</a></li>
                         <li><a href="join">회원가입</a></li>

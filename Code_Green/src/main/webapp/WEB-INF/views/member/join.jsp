@@ -1,3 +1,6 @@
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +20,11 @@
 <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+</script>
 <script type="text/javascript">
 function setDisplay() {
 	if ($('input:radio[id=memberJoin]').is(':checked')) {
@@ -121,6 +127,24 @@ function checkPasswd(pass) {
 				checkPasswdResult = false;
 		}
 	}
+}
+//멤버 주소
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.getElementById("member_postcode").value = data.zonecode;
+            document.getElementById("member_address").value = data.roadAddress;
+        }
+    }).open();
+}
+//매니저 주소
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.getElementById("manager_postcode").value = data.zonecode;
+            document.getElementById("manager_address").value = data.roadAddress;
+        }
+    }).open();
 }
 </script>
 
@@ -319,7 +343,7 @@ button {
 	</div>
 
 	<!-- ----------------------------------바디 시작------------------------------------  -->
-	<form action="MemberJoinPro" method="post" name="joinForm" id="signup"
+	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup"
 		onsubmit="return checkForm()">
 		<!--------------------------------개인----------------------------------->
 		<div class="member">
@@ -351,7 +375,7 @@ button {
 				
 				<div class="field">
 					<b>이름</b>
-					<input type="text" name="member_name" onchange="checkName(this.value)" id="member_name" maxlength='10'>
+					<input type="text" name="member_name" onchange="checkName(this.value)" id="member_name" maxlength='10' required="required"> 
 					<span id="checkNameResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
@@ -363,16 +387,16 @@ button {
 				<div class="field post-code">
 					<b>주소</b>
 					<div>
-						<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호"  maxlength='6'>
-						<input type="button" value="주소검색" name="">
+						<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호"  maxlength='6' required="required">
+						<input type="button" value="주소검색" onclick="execDaumPostcode()">
 					</div>
-					<input type="text" name="member_address" id="member_address" placeholder="주소"  maxlength='100'>
+					<input type="text" name="member_address" id="member_address" placeholder="주소"  maxlength='100' required="required">
 				</div>
 				
 				<div class="field tel-number">
 					<b>전화</b>
 					<div>
-						<input type="tel" placeholder="전화번호 입력" name="member_phone"  id="member_phone"  maxlength='11'>
+						<input type="tel" placeholder="전화번호 입력" name="member_phone"  id="member_phone"  maxlength='11' required="required">
 					</div>
 				</div>
 				<input type="submit" value="가입하기">
@@ -384,7 +408,7 @@ button {
 
 	<!--------------------------------기업----------------------------------->
 
-	<form action="ManagerJoinPro" method="post" name="joinForm" id="signup" onsubmit="return checkForm()" enctype="multipart/form-data">
+	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup" onsubmit="return checkForm()" enctype="multipart/form-data">
 		<div class="member">
 			<div id="companyDiv">
 				<div class="field">

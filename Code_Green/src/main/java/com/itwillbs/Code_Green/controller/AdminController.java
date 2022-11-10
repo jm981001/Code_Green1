@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.AdminService;
+import com.itwillbs.Code_Green.vo.AdminVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
@@ -27,6 +28,24 @@ public class AdminController {
 
 	@Autowired
 	private AdminService service;
+
+	//관리자 로그인
+	@PostMapping(value = "/AdminLoginPro.me")
+	public String adminloginPro(@ModelAttribute AdminVO admin, Model model, HttpSession session) {
+		AdminVO adminResult = service.loginAdmin(admin);
+		
+		
+		if (adminResult == null) {
+			model.addAttribute("msg", "관리자 로그인 실패! 힝~");
+//			System.out.println(admin.getAdmin_id() + ", " + admin.getAdmin_pass());
+			return "member/fail_back";
+		} else {
+			session.setAttribute("sId", adminResult.getAdmin_id());
+			return "redirect:/";
+		}
+
+	}
+	
 
 	//------------전체관리자 메인----------------------------
 	@RequestMapping(value = "index", method = RequestMethod.GET)

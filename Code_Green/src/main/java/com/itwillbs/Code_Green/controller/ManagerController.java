@@ -31,7 +31,7 @@ public class ManagerController {
 	@Autowired
 	private ManagerService service;
 
-	@PostMapping(value = "/ManagerLoginPro")
+	@PostMapping(value = "/ManagerLoginPro.me")
 	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session,
 			String manager_id) {
 
@@ -67,7 +67,7 @@ public class ManagerController {
 
 	}
 
-	@PostMapping(value = "/ManagerJoinPro")
+	@PostMapping(value = "/ManagerJoinPro.me")
 	public String joinManagerPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
 		
 		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------

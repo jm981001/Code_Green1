@@ -8,20 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.itwillbs.Code_Green.service.AdminService;
-import com.itwillbs.Code_Green.vo.AdminVO;
 
 @Controller
 public class LoginController {
-	@Autowired
-	private AdminService service3;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -32,34 +26,6 @@ public class LoginController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
-//	 "/MemberLoginForm.me" 요청에 대해 member/member_login_form.jsp 페이지 실행
-//	@GetMapping(value = "/login")
-//	public String login() {
-//		return "member/login";
-//	}
-
-
-//	}
-	@GetMapping(value = "/MemberLoginForm")
-	public String login() {
-		return "member/login";
-	}
-	
-	@PostMapping(value = "/AdminLoginPro.me")
-	public String adminloginPro(@ModelAttribute AdminVO admin, Model model, HttpSession session) {
-		AdminVO adminResult = service3.loginAdmin(admin);
-		
-		
-		if (adminResult == null) {
-			model.addAttribute("msg", "관리자 로그인 실패! 힝~");
-//			System.out.println(admin.getAdmin_id() + ", " + admin.getAdmin_pass());
-			return "member/fail_back";
-		} else {
-			session.setAttribute("sId", adminResult.getAdmin_id());
-			return "redirect:/";
-		}
-
-	}
 
 //	 로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
@@ -99,7 +65,6 @@ public class LoginController {
 
 		System.out.println("result" + apiResult);
 		/* 네이버 로그인 성공 페이지 View 호출 */
-
 		return "member/naverLogin_result";
 	}
 

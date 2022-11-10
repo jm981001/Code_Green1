@@ -29,7 +29,7 @@ public class MemberController {
 	
 	
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
-	@PostMapping(value = "/MemberLoginPro")
+	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		
 		
@@ -61,7 +61,7 @@ public class MemberController {
 
 	// "/MemberJoinPro.me" 요청에 대해 비즈니스 로직 처리할 joinPro() 메서드 정의 - POST
 	// => 파라미터 : 회원 가입 정보(MemberVO), Model 객체
-	@PostMapping(value = "/MemberJoinPro")
+	@PostMapping(value = "/MemberJoinPro.me")
 	public String joinMemberPro(@ModelAttribute MemberVO member, Model model) {
 		
 		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------
