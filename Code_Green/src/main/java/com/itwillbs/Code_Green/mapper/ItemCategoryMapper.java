@@ -85,6 +85,26 @@ public interface ItemCategoryMapper {
 
 	// 높은 가격순(간식류)
 	List<ItemVO> selectExpensiveSnackList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	
+	
+	
+	// 후기 많은순(전체 상품)
+	List<ItemVO> selectReviewAllList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 후기 많은순(유제품/음료)
+	List<ItemVO> selectReviewDairyDrinkList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 후기 많은순(해산물)
+	List<ItemVO> selectReviewFishList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 후기 많은순(과일/채소)
+	List<ItemVO> selectReviewFruitVegiList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 후기 많은순(냉동/간편식품)
+	List<ItemVO> selectReviewIcedEasyList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	List<ItemVO> selectReviewSnackList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
 	
 
 }

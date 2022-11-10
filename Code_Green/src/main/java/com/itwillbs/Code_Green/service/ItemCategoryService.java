@@ -142,6 +142,39 @@ public class ItemCategoryService {
 	public List<ItemVO> selectExpensiveSnackList(int startRow, int listLimit) {
 		return mapper.selectExpensiveSnackList(startRow, listLimit);
 	}
+
+	
+	
+	// 후기 많은순(전체 상품)
+	public List<ItemVO> selectReviewAllList(int startRow, int listLimit) {
+		return mapper.selectReviewAllList(startRow, listLimit);
+
+	}
+
+	// 후기 많은순(유제품/음료)
+	public List<ItemVO> selectReviewDairyDrinkList(int startRow, int listLimit) {
+		return mapper.selectReviewDairyDrinkList(startRow, listLimit);
+	}
+
+	// 후기 많은순(해산물)
+	public List<ItemVO> selectReviewFishList(int startRow, int listLimit) {
+		return mapper.selectReviewFishList(startRow, listLimit);
+	}
+
+	// 후기 많은순(과일/채소)
+	public List<ItemVO> selectReviewFruitVegiList(int startRow, int listLimit) {
+		return mapper.selectReviewFruitVegiList(startRow, listLimit);
+	}
+
+	// 후기 많은순(냉동/간편식품)
+	public List<ItemVO> selectReviewIcedEasyList(int startRow, int listLimit) {
+		return mapper.selectReviewIcedEasyList(startRow, listLimit);
+	}
+
+	// 후기 맣은순(간식류)
+	public List<ItemVO> selectReviewSnackList(int startRow, int listLimit) {
+		return mapper.selectReviewSnackList(startRow, listLimit);
+	}
 	
 
 

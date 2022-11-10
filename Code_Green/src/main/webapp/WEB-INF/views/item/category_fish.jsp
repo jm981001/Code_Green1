@@ -38,6 +38,9 @@
     	#expensiveDairyDrinkList{
     		display: none;
     	}
+    	#reviewFishList{
+    		display: none;
+    	}
     </style>
     
     <script type="text/javascript">
@@ -61,14 +64,22 @@
     		
     		if(value == "newDate"){
     			$('#fishList').show(); 
+	  			$('#reviewFishList').hide();
 	    		$('#expensiveFishList').hide();
 	        	$('#cheapFishList').hide();
-    		} else if(value == "cheap"){
-	    		$('#fishList').hide(); 
-	    		$('#expensiveFishList').hide();
-	        	$('#cheapFishList').show();
-	    	} else if(value == "expensive") {
+    		} else if(value == "review") {
+	        	$('#fishList').hide();
+	  		 	$('#reviewFishList').show();
 	    		$('#cheapFishList').hide(); 
+	    		$('#expensiveFishList').hide();
+    		} else if(value == "cheap"){
+	    		$('#fishList').hide();
+	    		$('#reviewFishList').hide(); 
+	        	$('#cheapFishList').show();
+	    		$('#expensiveFishList').hide();
+	    	} else {
+	    		$('#cheapFishList').hide();
+	    		$('#reviewFishList').hide();  
 	        	$('#fishList').hide();
 	    		$('#expensiveFishList').show();
 			}
@@ -158,16 +169,16 @@
 							<h2>해산물</h2>
 						</div>                    
 
-						 <nav class="ps-store-link" style="margin-top: 100px;">
+						 <nav class="ps-store-link" >
                         	<section id="buttonArea">
 							<!-- 검색 기능 구현을 위한 form 태그 -->
-								<form action="category_fish" method="get" style="margin-left: 20px">
+								<form action="category_fish" method="get">
 									<select name="searchType">
 										<option value="item_name">상품명</option>
 										<option value="brand_name">상호명</option>
 									</select>
 									<input type="text" name="keyword">
-									<input type="submit" value="검색">
+									<input type="submit" value="검색" id="typeSearch">
 								</form>
 							</section>
                             <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
@@ -250,7 +261,81 @@
                                     </div>
                            		</div>
                           	</div>
-                         </div>  
+                         </div>
+                         
+<!-- --------------------------------------후기 많은순 (후기 많은순 페이징 필요)----------------------------------------------------- -->
+                                   
+                        <div class="ps-shopping ps-tab-root" id="reviewFishList">
+                            <div class="ps-tabs">
+                                <div class="ps-tab active" id="tab-1">
+                                    <div class="ps-shopping-product">
+                                        <div class="row">
+                                        
+                                        	<!-- 반복문 시작 -->
+                                        	<c:forEach var="reviewItem" items="${reviewItemList }">
+                                        	<!-- 상품 1개당 시작 -->
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                                <div class="ps-product">
+                                                    <div class="ps-product__thumbnail">
+                                                    	
+                                                    	
+                                                    	<!-- 상품 이미지 -->
+                                                    	<a href="ItemDetail.bo?item_idx=${reviewItem.item_idx }">
+                                                    		<img src="/Code_Green/resources/img/item/${reviewItem.file1 }" alt="" />
+                                                    	</a>
+                                                        <ul class="ps-product__actions">
+                                                        	
+                                                        	
+                                                        	<!-- 장바구니 및 찜 -->
+                                                        	<!-- 
+                                                        	* 장바구니 페이지로 이동
+                                                        	* 찜 페이지로 이동
+                                                        	 -->
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    
+                                                    
+                                                    <!-- 브랜드명 및 상품명 -->
+                                                    <!-- 
+                                                    * 브랜드명은 서브쿼리 사용하여 불러오기
+                                                     -->
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${reviewItem.manager_brandname }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">${reviewItem.item_name }</a>
+                                                            
+                                                            <!-- 별점 -->
+                                                            <!-- 
+                                                            *별점 카운트 하기
+                                                             -->
+                                                            <div class="ps-product__rating">
+                                                                <select class="ps-rating" data-read-only="true">
+                                                                    <option value="1">1</option>
+                                                                    <option value="1">2</option>
+                                                                    <option value="1">3</option>
+                                                                    <option value="1">4</option>
+                                                                    <option value="2">5</option>
+                                                                </select><span>02</span>
+                                                            </div>
+                                                            
+                                                            
+                                                            <!-- 가격 -->
+                                                            <p class="ps-product__price sale">${reviewItem.item_price } <del>${reviewItem.item_price } </del></p>
+                                                        </div>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">${reviewItem.item_name }</a>
+                                                            <p class="ps-product__price sale">${reviewItem.item_price } <del>${reviewItem.item_price } </del></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 1개당 끝 -->
+                                             </c:forEach>	
+                                        </div>
+                                    </div>
+                                 </div>     
+                               </div>     
+                             </div>                         
+                           
 <!-- --------------------------------------낮은 가격순 (낮은 가격순 페이징 필요)----------------------------------------------------- -->
                                    
                         <div class="ps-shopping ps-tab-root" id="cheapFishList">

@@ -14531,8 +14531,34 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 /* 보슬 */
 .ps-store-list .ps-store-link {
 	height: 50px;
-	margin-right: 25px;
+	margin: 50px 25px 50px 0;
 }
+
+/* 보슬 */
+.ps-store-list select{
+	height: 25px;
+	border: 1px solid silver;
+}
+
+/* 보슬 */
+.ps-store-list input{
+	height: 25px;
+	border: 1px solid silver;
+}
+
+/* 보슬 */
+#buttonArea{
+	margin-left: 20px; 
+	float: left;	
+}
+
+/* 보슬 */
+#typeSearch{
+	height: 27px;
+	background: #5FA30F;
+	color: white;
+}
+
 
 /* 보슬 */
 #category_h3{

@@ -5,15 +5,17 @@
 	<!-- 전체 상품 카테고리 -->
 	<!-- 카테고리 정렬 기본값 신상품순이라서 order by item_date desc -->
 	<select id="select_all" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		SELECT i.item_idx, 
-			   i.item_name,
-			   i.item_category, 
-			   i.item_price,
-			   i.item_sale,
-               m.manager_brandname,
-			   f.file1
-		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
-		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
+		 SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 	<if test="!keyword.equals('')">
 				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 				<choose>
@@ -25,13 +27,38 @@
 					</when>
 				</choose>
 			</if>
-	 ORDER BY item_date DESC
-	    LIMIT #{startRow}, #{listLimit}
+		ORDER BY item_date DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit}
+	
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!--                m.manager_brandname, -->
+<!-- 			   f.file1 -->
+<!-- 		  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 	<if test="!keyword.equals('')"> -->
+<!-- 				2. 검색타입(search)에 따른 WHERE 변경 -->
+<!-- 				<choose> -->
+<!-- 					<when test="searchType.equals('item_name')"> -->
+<!-- 					 WHERE i.item_name LIKE '%${keyword}%' -->
+<!-- 					</when> -->
+<!-- 					<when test="searchType.equals('brand_name')"> -->
+<!-- 					 WHERE m.manager_brandname LIKE '%${keyword}%'  -->
+<!-- 					</when> -->
+<!-- 				</choose> -->
+<!-- 			</if> -->
+<!-- 	 ORDER BY item_date DESC -->
+<!-- 	    LIMIT #{startRow}, #{listLimit} -->
 		 
 	</select>
 
 	<!-- 유제품/음료 카테고리 -->
 	<select id="select_dairy_drink" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -53,8 +80,8 @@
 					</when>
 				</choose>
 			</if>
-	  ORDER BY item_date DESC
-		 LIMIT #{startRow}, #{listLimit}
+	  ORDER BY item_date DESC) AS c	
+	 	 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
 <!-- 			   i.item_name, -->
@@ -72,6 +99,8 @@
 		
 	<!-- 해산물 카테고리 -->
 	<select id="select_fish" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -93,7 +122,7 @@
 					</when>
 				</choose>
 			</if>
-		 ORDER BY item_date DESC
+		 ORDER BY item_date DESC) AS c
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -112,6 +141,8 @@
 	
 	<!-- 과일/채소 카테고리 -->
 	<select id="select_fruit_vegi" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -133,7 +164,7 @@
 					</when>
 				</choose>
 			</if>
-		 ORDER BY item_date DESC
+		 ORDER BY item_date DESC) AS c
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -152,6 +183,8 @@
 
 	<!-- 냉동/간편식품 카테고리 -->
 	<select id="select_iced_easy" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -173,7 +206,7 @@
 					</when>
 				</choose>
 			</if>
-		 ORDER BY item_date DESC
+		 ORDER BY item_date DESC) AS c
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		SELECT i.item_idx,  -->
@@ -220,6 +253,8 @@
 	
 	<!-- 간식류 카테고리 -->
 	<select id="select_snack" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -241,7 +276,7 @@
 					</when>
 				</choose>
 			</if>
-		 ORDER BY item_date DESC
+		 ORDER BY item_date DESC) AS c
 		 LIMIT #{startRow}, #{listLimit}
 
 <!-- 		select i.item_idx,  -->
@@ -334,6 +369,8 @@
 	
 	<!-- 낮은 가격순(전체 상품) -->
 	<select id="selectCheapAllList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -343,7 +380,7 @@
 			   f.file1
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -355,6 +392,8 @@
 	
 	<!-- 높은 가격순(전체 상품) -->
 	<select id="selectExpensiveAllList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -364,7 +403,7 @@
 			   f.file1
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -376,6 +415,8 @@
 	
 	<!-- 낮은 가격순(유제품/음료) -->
 	<select id="selectCheapDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -386,7 +427,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "유제품/음료"
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -398,6 +439,8 @@
 	
 	<!-- 높은 가격순(유제품/음료) -->
 	<select id="selectExpensiveDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -408,7 +451,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "유제품/음료"
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -420,6 +463,8 @@
 	
 	<!-- 낮은 가격순(해산물) -->
 	<select id="selectCheapFishList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -430,7 +475,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "해산물"
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -442,6 +487,8 @@
 	
 	<!-- 높은 가격순(해산물) -->
 	<select id="selectExpensiveFishList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -452,7 +499,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "해산물"
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -464,6 +511,8 @@
 	
 	<!-- 낮은 가격순(과일/채소) -->
 	<select id="selectCheapFruitVegiList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -474,7 +523,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "과일/채소"
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -486,6 +535,8 @@
 		
 	<!-- 높은 가격순(과일/채소) -->
 	<select id="selectExpensiveFruitVegiList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -496,7 +547,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "과일/채소"
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -508,6 +559,8 @@
 	
 	<!-- 낮은 가격순(냉동/간편식품) -->
 	<select id="selectCheapIcedEasyList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -518,7 +571,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "냉동/간편식품"
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -530,6 +583,8 @@
 	
 	<!-- 높은 가격순(냉동/간편식품) -->
 	<select id="selectExpensiveIcedEasyList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -540,7 +595,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "냉동/간편식품"
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -552,6 +607,8 @@
 	
 	<!-- 낮은 가격순(간식류) -->
 	<select id="selectCheapSnackList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -562,7 +619,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "간식류"
-	  ORDER BY CAST(item_price AS UNSIGNED)
+	  ORDER BY CAST(item_price AS UNSIGNED)) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -574,6 +631,8 @@
 	
 	<!-- 높은 가격순(간식류) -->
 	<select id="selectExpensiveSnackList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		 FROM(
 		SELECT i.item_idx, 
 			   i.item_name,
 			   i.item_category, 
@@ -584,7 +643,7 @@
 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx
 		 WHERE i.item_category = "간식류"
-	  ORDER BY CAST(item_price AS UNSIGNED) DESC
+	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c
 	     LIMIT #{startRow}, #{listLimit}   
 			   
 <!-- 		  FROM item i join file_item f -->
@@ -593,4 +652,264 @@
 <!-- 	  	   AND i.item_category = "유제품/음료" -->
 <!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
 	</select>		
+	
+	
+	<!-- 후기 많은순(전체 상품) -->
+	<select id="selectReviewAllList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' 
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 후기 많은순(유제품/음료) -->
+	<select id="selectReviewDairyDrinkList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' AND i.item_category = '유제품/음료'
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 후기 많은순(해산물) -->
+	<select id="selectReviewFishList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' AND i.item_category = '해산물'
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 후기 많은순(과일/채소) -->
+	<select id="selectReviewFruitVegiList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' AND i.item_category = '과일/채소'
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 후기 많은순(냉동/간편식품) -->
+	<select id="selectReviewIcedEasyList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' AND i.item_category = '냉동/간편식품'
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+	
+	<!-- 후기 많은순(간식류) -->
+	<select id="selectReviewSnackList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT * 
+		  FROM(
+		 SELECT i.item_idx, 
+		 	    i.item_name,
+			    i.item_category, 
+			    i.item_price,
+			    i.item_sale,
+                m.manager_brandname,
+			    f.file1,
+                count(b.board_item_idx) as count
+		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx 
+		   JOIN manager m ON i.re_manager_idx =  m.manager_idx
+           JOIN board b ON i.item_idx = b.board_item_idx
+		  WHERE b.board_type = '후기' AND i.item_category = '간식류'
+	   GROUP BY board_item_idx 
+       ORDER BY item_date DESC, count DESC) AS c	
+	 	   LIMIT #{startRow}, #{listLimit} 
+	
+	
+<!-- 		SELECT *  -->
+<!-- 		 FROM( -->
+<!-- 		SELECT i.item_idx,  -->
+<!-- 			   i.item_name, -->
+<!-- 			   i.item_category,  -->
+<!-- 			   i.item_price, -->
+<!-- 			   i.item_sale, -->
+<!-- 			   m.manager_brandname,  -->
+<!-- 			   f.file1, -->
+<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
+<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
+<!-- 		 WHERE i.item_category = "간식류" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
+<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
+			   
+<!-- 		  FROM item i join file_item f -->
+<!-- 			ON i.item_idx = f.rf_item_idx -->
+<!-- 		 WHERE f.file NOT LIKE '%상세%' -->
+<!-- 	  	   AND i.item_category = "유제품/음료" -->
+<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) -->
+	</select>
+		
 </mapper>

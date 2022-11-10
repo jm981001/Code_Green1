@@ -27,6 +27,7 @@ public class ItemCategoryController {
 	int maxPage;
 	int startPage;
 	int endPage;
+	List<ItemVO> reviewItemList;
 	List<ItemVO> cheapItemList;
 	List<ItemVO> expensiveItemList;
 //	int cheapItemListCount;
@@ -66,6 +67,10 @@ public class ItemCategoryController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
 		
+		// 후기 많은순
+		reviewItemList = service.selectReviewAllList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
+		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapAllList(startRow, listLimit);
 		model.addAttribute("cheapItemList", cheapItemList);
@@ -83,7 +88,6 @@ public class ItemCategoryController {
 									   @RequestParam(defaultValue = "") String keyword,  
 									   @RequestParam(defaultValue = "1") int pageNum, 
 									   @RequestParam(defaultValue = "newDate") String sort, Model model) {
-		System.out.println(sort);
 		
 		listLimit = 12; 
 		
@@ -111,6 +115,10 @@ public class ItemCategoryController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
+		
+		// 후기 많은순
+		reviewItemList = service.selectReviewDairyDrinkList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapDairyDrinkList(startRow, listLimit);
@@ -157,6 +165,10 @@ public class ItemCategoryController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
 		
+		// 후기 많은순
+		reviewItemList = service.selectReviewFishList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
+		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapFishList(startRow, listLimit);
 		model.addAttribute("cheapItemList", cheapItemList);
@@ -202,6 +214,10 @@ public class ItemCategoryController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
 		
+		// 후기 많은순
+		reviewItemList = service.selectReviewFruitVegiList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
+		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapFruitVegiList(startRow, listLimit);
 		model.addAttribute("cheapItemList", cheapItemList);
@@ -246,6 +262,10 @@ public class ItemCategoryController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
+		
+		// 후기 많은순
+		reviewItemList = service.selectReviewIcedEasyList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapIcedEasyList(startRow, listLimit);
@@ -302,6 +322,10 @@ public class ItemCategoryController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("sort", sort);
+		
+		// 후기 많은순
+		reviewItemList = service.selectReviewSnackList(startRow, listLimit);
+		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
 		cheapItemList = service.selectCheapSnackList(startRow, listLimit);
