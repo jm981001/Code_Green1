@@ -136,14 +136,14 @@
                             <c:forEach var="rList" items="${reportList }">
                                 <tr>
                                 	<td>${rList.report_idx }</td>
-                                    <td onclick="location.href='ad_Report_Detail'"><strong>${rList.report_content }</strong></td>
+                                    <td onclick="location.href='ad_Report_Detail?report_idx=${rList.report_idx }'"><strong>${rList.report_content }</strong></td>
                                     <td>${rList.reporter }</td>
                                     <td>${rList.report_date }</td>
                                     <td><button onclick="statusChange()" class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_ReportRemove?idx=${rList.report_idx }">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_ReportRemove?report_idx=${rList.report_idx }">삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>

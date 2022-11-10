@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +17,7 @@
     <title>신고글 상세조회</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Font/demo-files/demo.css">
+    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/owl-carousel/assets/owl.carousel.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/select2/dist/css/select2.min.css">
@@ -35,7 +35,8 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!--   글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API-->    
+<!--   글쓰기 게시판 API 
+글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API-->    
     
     
 </head>
@@ -113,43 +114,51 @@
 <!--   <tbody>  가운데 정렬 넣음   <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음-->
 
 
-				 <div style="margin-left: 800px" ></div>                   
-			 <table class="table table-bordered" style="text-align: center;">
+				 <div style="margin-left: 800px" ></div>  
+				                  
+			 <table class="table table-bordered" style="text-align: center; height: 200px">
 				  <thead>
+				 	<tr>
+				    	<td scope="row" rowspan="2"><strong>신고자</strong></td>
+				    </tr>
 				    <tr>
-				      <td scope="col">제목</td>
-				      <td scope="col" colspan="3">어쩌구 저쩌구</td>
-<!-- 					<th scope="col">작성일</th> -->
-<!-- 					<th scope="col">Handle</th> -->
+				    	<td colspan="4">${reportInfo.reporter }</td>
+				    </tr>
+				    
+				 	<tr>
+				    	<td scope="row" rowspan="2"><strong>신고사유</strong></td>
+				    </tr>
+				    <tr>
+				    	<td colspan="4"><strong>${reportInfo.report_content }</strong></td>
+				    </tr>
+				    <tr>
+				    	<td scope="col">제목</td>
+				    	<td scope="col" colspan="3">${originBoard.board_subject }</td>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td scope="row">작성자</td>
-				      <td>설탕노움</td>
-				      <td>작성일</td>
-				      <td>22.10.21</td>
+				    	<td scope="row">작성자</td>
+				    	<td>${originBoard.board_id }</td>
+				    	<td>작성일</td>
+				    	<td>${originBoard.board_date }</td>
 				    </tr>
 				    <tr>
-				      <td scope="row" rowspan="2">내용</td>
-<!-- 					<td>Jacob</td> -->
-<!-- 					<td>Thornton</td> -->
-<!-- 					<td>@fat</td> -->
+				    	<td scope="row" rowspan="2">내용</td>
 				    </tr>
 				    <tr>
-<!-- 					 <th scope="row">3</th> -->
-				      <td colspan="4">솰라솰라</td>
-<!-- 				     <td>@twitter</td> -->
+				    	<td colspan="4">${originBoard.board_content }</td>
 				    </tr>
 				  </tbody>
 				</table>
-                     
+                     <div style="margin-left: 1300px">
+                     <button type="button" onclick="location.href='ad_RemoveOriginboard?board_idx=${originBoard.board_idx }&report_idx=${reportInfo.report_idx }'" class="btn btn-info" style="font-size: 13px">
+                     <strong>삭제하기</strong></button></div>
                     
                        
                        
                     </div>
                 </div>
-                
             </section>
         </div>
     </main>

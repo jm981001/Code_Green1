@@ -161,6 +161,14 @@
 				board_type='커뮤'
 	</select>
 	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard">
+		DELETE FROM board
+		WHERE
+			board_idx={board_idx }
+		
+	</delete>
+	
 	
 	
 	
@@ -170,6 +178,33 @@
 		SELECT * FROM report
 		
 	</select>
+	
+	
+	<select id="selectReportInfo" resultType="com.itwillbs.Code_Green.vo.ReportVO">
+		SELECT * FROM report
+		WHERE report_idx=#{report_idx}
+	</select>
+	
+	
+	
+	<!-- 신고된 원본글 조회! -->
+	<select id="selectOriginBoard" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT 
+			   *
+			from board b JOIN report r
+			ON 
+				b.board_idx = r.board_idx 
+			where
+				 r.report_idx=#{report_idx}
+	</select>
+	
+	
+	<!-- 신고글 삭제 -->
+	<delete id="deleteReport">
+		DELETE FROM report
+		WHERE
+			report_idx=#{report_idx}
+	</delete>
 	
 	
 	

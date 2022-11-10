@@ -27,6 +27,10 @@
 </head>
 
 <body>
+
+
+
+
     <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
@@ -141,7 +145,7 @@
                                     <td>${bList.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_BoardRemove?board_idx=${bList.board_idx }">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
