@@ -19,6 +19,7 @@ import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
+import com.itwillbs.Code_Green.vo.QnaVO;
 
 
 @Controller
@@ -107,8 +108,14 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 문의내역-------------------------------------------
-	@RequestMapping(value = "myPage_qnaDetail", method = RequestMethod.GET)
-	public String myPage_qnaDetail() {
+	@GetMapping(value = "/myPageQnaDetail.my")
+	public String myPageQnaDetail(Model model, @RequestParam String qna_id) {
+		
+		System.out.println("아이디 : " + qna_id);
+		List<QnaVO> mantomanList = Qservice.getMantomanList(qna_id);
+		
+		model.addAttribute("mantomanList", mantomanList);
+		
 		return "member/myPage_qnaDetail";
 	}
 	

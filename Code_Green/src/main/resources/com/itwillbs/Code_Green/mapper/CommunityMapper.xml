@@ -106,13 +106,10 @@
 		
 	<!-- 신고글 입력 -->	
 	<insert id="insertReport">
-		<selectKey keyProperty="report_idx" resultType="integer" order="BEFORE">
-			SELECT MAX(report_idx) FROM report
-		</selectKey>
 		INSERT 
 			INTO report
 			VALUES (
-					#{report_idx} + 1,   
+					IFNULL(SELECT MAX(report_idx) FROM report,0) + 1,   
 					#{board_idx}, 
 					#{report_subject}, 
 					#{report_content}, 

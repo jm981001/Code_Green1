@@ -6572,10 +6572,25 @@ textarea.form-control {
   color: rgb(0, 128, 64);
 }
 
-
+/* 지영 */
+.brandfollowbtn .ps-block__inquiry {
+  position: absolute;
+  top: 15px;
+  right: 8px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #d6f1b5;
+  color: rgb(0, 128, 64);
+}
 
 /* 지영 */
 .ps-block--store-banner .ps-block__inquiry:hover {
+  background-color: rgb(170, 255, 170);
+  color: rgb(0, 128, 64);
+}
+
+/* 지영 */
+.brandfollowbtn .ps-block__inquiry:hover {
   background-color: rgb(170, 255, 170);
   color: rgb(0, 128, 64);
 }
@@ -6593,6 +6608,7 @@ textarea.form-control {
   text-align: center;
   margin-bottom: 30px;
   align-items: center;
+  
 }
 
 /* 지영 */
@@ -13048,8 +13064,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   padding-left: 40px;
 }
 
+/* 지영 */
 .ps-shopping .ps-shopping__header {
   margin-bottom: 40px;
+  margin-top: 36px;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;

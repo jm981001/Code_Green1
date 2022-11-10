@@ -1,5 +1,7 @@
 package com.itwillbs.Code_Green.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class QnaService {
 	//상품 문의 수정
 	public int modifyQna(QnaVO qna) {
 		return mapper.updateQna(qna);
+	}
+
+	// 1:1문의 목록 출력(첫출력)
+	public List<QnaVO> getMantomanList(String qna_id) {
+		return mapper.selectMantomanList(qna_id);
 	}
 
 	

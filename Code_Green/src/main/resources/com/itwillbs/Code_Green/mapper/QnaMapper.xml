@@ -11,7 +11,7 @@
 	</select>
 	
 	
-<!-- 상품 후기 작성  -->
+	<!-- 상품 후기 작성  -->
 	<insert id="insertQna">
 		<selectKey keyProperty="qna_idx" resultType="integer" order="BEFORE">
 			SELECT MAX(qna_idx) FROM qna
@@ -37,7 +37,7 @@
 	</insert>
 
 
-<!-- 상품 후기 삭제 -->
+	<!-- 상품 후기 삭제 -->
 	<delete id="deleteQna">
 		DELETE
 			FROM qna
@@ -46,7 +46,7 @@
 	</delete>
 	
 	
-<!-- 상품 후기 수정 -->
+	<!-- 상품 후기 수정 -->
 	<update id="updateQna">
 		UPDATE qna
 			SET
@@ -57,6 +57,13 @@
 	</update>
 	
 	
+	<!-- 1:1 문의 목록출력(첫화면) -->
+	<select id="selectMantomanList" resultType="com.itwillbs.Code_Green.vo.QnaVO">
+		SELECT *
+			FROM qna
+			WHERE qna_type='1:1문의' 
+			AND   qna_id=#{qna_id}
+	</select>
 
 	
 	

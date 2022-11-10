@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <!-- headers-->
-<html lang="en">
+<html>
 
 <head>
 <meta charset="utf-8">
@@ -29,9 +31,30 @@
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
-    
 </head>
+<style>
+	.btnbtnbtn .statusBtn1,.statusBtn2 {
+		
+		border: none;
+		border-radius: 0.25rem;
+		color: white;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		padding: 3px 10px;
+		
+	}
+	
+	.btnbtnbtn .statusBtn1 {
+		background-color: #007bff;
+	}
 
+	.btnbtnbtn .statusBtn2 {
+		background-color: #f34a4a;
+	}
+	
+	
+	
+</style>
 <body>
 
     <!-- 헤더 삽입 -->
@@ -47,54 +70,60 @@
 
 <!-- ==========Q&A=========================================================================================================     -->
 					<div class="col-lg-8">
-                        <div class="ps-section__right">
+                       <div class="ps-section__right">
                             <div class="ps-section--account-setting">
+                            
                                 <div class="ps-section__header">
                                     <h3>1:1 문의</h3>
                                 </div>
+                                
+                                
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
+                                    	<div class="ps-section__right">
+                                    	
+                                    		<div class="settingForqna" style="float: right">
+		                                    	<select>    
+													<option value="">기간선택</option>
+													<option value="1">1개월</option>    
+													<option value="3">3개월</option>    
+													<option value="6">6개월</option>
+													<option value="">기간지정</option>
+												</select>
+											</div>
+											
+											<div class="btnbtnbtn">
+												<input type="button" class="statusBtn1" name="answerStatus" value="답변대기">
+												<input type="button" class="statusBtn2" name="answerStatus" value="답변완료">
+											</div>
+										<hr>	
                                         <table class="table ps-table ps-table--notification">
                                             <thead>
                                                 <tr>
-                                                    <th width="70%">제목</th>
+                                                    <th>종류</th>
+                                                    <th>제목</th>
                                                     <th>작성일</th>
-                                                    <th>작성상태</th>
+                                                    <th>답변상태</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            	<c:forEach var="mtmList" items="${mantomanList }">
                                                 <tr>
-                                                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</td>
-                                                    <td>20-1-2020</td>
-                                                    <td><span class="badge badge-primary">sale</span>
-                                                    </td>
+                                                    <td>${mtmList.qna_category }</td>
+                                                    <td onclick="location.href='#'" style="font-weight: bold">${mtmList.qna_subject }</td>
+                                                    <fmt:parseDate var="dateString" value="${mtmList.qna_date}" pattern="yyyyMMddHHmm" />
+                                                    <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm" /></td>
+                                                    <td><span class="badge badge-primary">답변대기</span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><span class="badge badge-success">new</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> Et harum quidem rerum</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><span class="badge badge-success">new</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><span class="badge badge-primary">sale</span>
-                                                    </td>
-                                                </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
+                     </div>
+                  </div> 
 <!-- ==========Q&A 끝=========================================================================================================     -->					
 					
 				</div>

@@ -1,5 +1,7 @@
 package com.itwillbs.Code_Green.mapper;
 
+import java.util.List;
+
 import com.itwillbs.Code_Green.vo.QnaVO;
 
 public interface QnaMapper {
@@ -15,6 +17,9 @@ public interface QnaMapper {
 
 	//상품 문의 수정
 	int updateQna(QnaVO qna);
+
+	// 1:1문의 목록출력(첫화면)
+	List<QnaVO> selectMantomanList(String qna_id);
 
 
 }
