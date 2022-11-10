@@ -59,7 +59,11 @@
 	    		aLinks[i].href = str + value;
     		}
     		
-    		if(value == "cheap"){
+    		if(value == "newDate"){
+    			$('#dairyDrinkList').show(); 
+	    		$('#expensiveDairyDrinkList').hide();
+	        	$('#cheapDairyDrinkList').hide();
+    		} else if(value == "cheap"){
 	    		$('#dairyDrinkList').hide(); 
 	    		$('#expensiveDairyDrinkList').hide();
 	        	$('#cheapDairyDrinkList').show();
@@ -68,6 +72,16 @@
 	        	$('#dairyDrinkList').hide();
 	    		$('#expensiveDairyDrinkList').show();
 			}
+    		
+//     		if(value == "cheap"){
+// 	    		$('#dairyDrinkList').hide(); 
+// 	    		$('#expensiveDairyDrinkList').hide();
+// 	        	$('#cheapDairyDrinkList').show();
+// 	    	} else if(value == "expensive") {
+// 	    		$('#cheapDairyDrinkList').hide(); 
+// 	        	$('#dairyDrinkList').hide();
+// 	    		$('#expensiveDairyDrinkList').show();
+// 			}
     	};
     	
 //     	function cheapPageNum() {
@@ -144,8 +158,19 @@
 							<h2>유제품 / 음료</h2>
 						</div>                    
 
-						<nav class="ps-store-link">
-	                       	<select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+						 <nav class="ps-store-link" style="margin-top: 100px;">
+                        	<section id="buttonArea">
+							<!-- 검색 기능 구현을 위한 form 태그 -->
+								<form action="category_dairy_drink" method="get" style="margin-left: 20px">
+									<select name="searchType">
+										<option value="item_name">상품명</option>
+										<option value="brand_name">상호명</option>
+									</select>
+									<input type="text" name="keyword">
+									<input type="submit" value="검색">
+								</form>
+							</section>
+                            <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
 							  <option value="newDate">신상품순</option>
 							  <option value="review">후기 많은순</option>
 							  <option value="cheap">낮은 가격순</option>

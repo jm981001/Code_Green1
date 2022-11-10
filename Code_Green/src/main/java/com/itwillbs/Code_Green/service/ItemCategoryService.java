@@ -20,23 +20,23 @@ public class ItemCategoryService {
 	}
 	
 	// 유제품/음료
-	public List<ItemVO> select_dairy_drink(int startRow, int listLimit) {
-		return mapper.select_dairy_drink(startRow, listLimit);
+	public List<ItemVO> select_dairy_drink(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_dairy_drink(startRow, listLimit, searchType, keyword);
 	}
 
 	// 생선
-	public List<ItemVO> select_fish(int startRow, int listLimit) {
-		return mapper.select_fish(startRow, listLimit);
+	public List<ItemVO> select_fish(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_fish(startRow, listLimit, searchType, keyword);
 	}
 
 	// 과일/채소
-	public List<ItemVO> select_fruit_vegi(int startRow, int listLimit) {
-		return mapper.select_fruit_vegi(startRow, listLimit);
+	public List<ItemVO> select_fruit_vegi(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_fruit_vegi(startRow, listLimit, searchType, keyword);
 	}
 
 	// 냉동/간편식품
-	public List<ItemVO> select_iced_easy(int startRow, int listLimit) {
-		return mapper.select_iced_easy(startRow, listLimit);
+	public List<ItemVO> select_iced_easy(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_iced_easy(startRow, listLimit, searchType, keyword);
 	}
 	
 	// 특가 상품
@@ -45,8 +45,8 @@ public class ItemCategoryService {
 	}
 
 	// 간식류
-	public List<ItemVO> select_snack(int startRow, int listLimit) {
-		return mapper.select_snack(startRow, listLimit);
+	public List<ItemVO> select_snack(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.select_snack(startRow, listLimit, searchType, keyword);
 	}
 
 	
@@ -101,6 +101,46 @@ public class ItemCategoryService {
 	// 높은 가격순(전체 상품)
 	public List<ItemVO> selectExpensiveAllList(int startRow, int listLimit) {
 		return mapper.selectExpensiveAllList(startRow, listLimit);
+	}
+
+	// 낮은 가격순(해산물)
+	public List<ItemVO> selectCheapFishList(int startRow, int listLimit) {
+		return mapper.selectCheapFishList(startRow, listLimit);
+	}
+
+	// 높은 가격순(해산물)
+	public List<ItemVO> selectExpensiveFishList(int startRow, int listLimit) {
+		return mapper.selectExpensiveFishList(startRow, listLimit);
+	}
+
+	// 낮은 가격순(과일/채소)
+	public List<ItemVO> selectCheapFruitVegiList(int startRow, int listLimit) {
+		return mapper.selectCheapFruitVegiList(startRow, listLimit);
+	}
+
+	// 높은 가격순(과일/채소)
+	public List<ItemVO> selectExpensiveFruitVegiList(int startRow, int listLimit) {
+		return mapper.selectExpensiveFruitVegiList(startRow, listLimit);
+	}
+
+	// 낮은 가격순(냉동/간편식품)
+	public List<ItemVO> selectCheapIcedEasyList(int startRow, int listLimit) {
+		return mapper.selectCheapIcedEasyList(startRow, listLimit);
+	}
+
+	// 높은 가격순(냉동/간편식품)
+	public List<ItemVO> selectExpensiveIcedEasyList(int startRow, int listLimit) {
+		return mapper.selectExpensiveIcedEasyList(startRow, listLimit);
+	}
+
+	// 낮은 가격순(간식류)
+	public List<ItemVO> selectCheapSnackList(int startRow, int listLimit) {
+		return mapper.selectCheapSnackList(startRow, listLimit);
+	}
+
+	// 높은 가격순(간식류)
+	public List<ItemVO> selectExpensiveSnackList(int startRow, int listLimit) {
+		return mapper.selectExpensiveSnackList(startRow, listLimit);
 	}
 	
 

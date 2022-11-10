@@ -12,22 +12,22 @@ public interface ItemCategoryMapper {
 	List<ItemVO> select_all(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	
 	// 유제품/음료
-	List<ItemVO> select_dairy_drink(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_dairy_drink(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 해산물
-	List<ItemVO> select_fish(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_fish(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 과일/채소
-	List<ItemVO> select_fruit_vegi(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_fruit_vegi(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 냉동/간편식품
-	List<ItemVO> select_iced_easy(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_iced_easy(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 특가 상품
 	List<ItemVO> select_sale();
 
 	// 간식류 
-	List<ItemVO> select_snack(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+	List<ItemVO> select_snack(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	
 	
 	// 전체 글 목록 갯수 조회(전체 상품)
@@ -61,6 +61,30 @@ public interface ItemCategoryMapper {
 
 	// 높은 가격순(전체 상품)
 	List<ItemVO> selectExpensiveAllList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 낮은 가격순(해산물)
+	List<ItemVO> selectCheapFishList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 높은 가격순(해산물)
+	List<ItemVO> selectExpensiveFishList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 낮은 가격순(과일/채소)
+	List<ItemVO> selectCheapFruitVegiList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 높은 가격순(과일/채소)
+	List<ItemVO> selectExpensiveFruitVegiList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 낮은 가격순(냉동/간편식품)
+	List<ItemVO> selectCheapIcedEasyList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 높은 가격순(냉동/간편식품)
+	List<ItemVO> selectExpensiveIcedEasyList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 낮은 가격순(간식류)
+	List<ItemVO> selectCheapSnackList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
+
+	// 높은 가격순(간식류)
+	List<ItemVO> selectExpensiveSnackList(@Param("startRow")int startRow, @Param("listLimit")int listLimit);
 	
 
 }

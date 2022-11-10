@@ -59,7 +59,11 @@
 	    		aLinks[i].href = str + value;
     		}
     		
-    		if(value == "cheap"){
+    		if(value == "newDate"){
+    			$('#allItemList').show(); 
+	    		$('#expensiveAllItemList').hide();
+	        	$('#cheapAllItemList').hide();
+    		} else if(value == "cheap"){
 	    		$('#allItemList').hide(); 
 	    		$('#expensiveAllItemList').hide();
 	        	$('#cheapAllItemList').show();

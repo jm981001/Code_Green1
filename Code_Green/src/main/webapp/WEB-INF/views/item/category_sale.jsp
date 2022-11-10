@@ -65,12 +65,24 @@
                     	<div id="category_h3">
 							<h2>특가 상품</h2>
 						</div> 
-                        <nav class="ps-store-link">
-                            <select class="form-select" aria-label="Default select example">
-							  <option value="1">신상품순</option>
-							  <option value="2">후기 많은순</option>
-							  <option value="3">낮은 가격순</option>
-							  <option value="4">높은 가격순</option>
+                       
+                       <nav class="ps-store-link" style="margin-top: 100px;">
+                        	<section id="buttonArea">
+							<!-- 검색 기능 구현을 위한 form 태그 -->
+								<form action="category_all" method="get" style="margin-left: 20px">
+									<select name="searchType">
+										<option value="item_name">상품명</option>
+										<option value="brand_name">상호명</option>
+									</select>
+									<input type="text" name="keyword">
+									<input type="submit" value="검색">
+								</form>
+							</section>
+                            <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+							  <option value="newDate">신상품순</option>
+							  <option value="review">후기 많은순</option>
+							  <option value="cheap">낮은 가격순</option>
+							  <option value="expensive">높은 가격순</option>
 							</select>
                         </nav>
 							
