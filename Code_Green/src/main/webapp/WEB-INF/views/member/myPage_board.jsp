@@ -60,7 +60,7 @@
                                         
                                             <thead>
                                                 <tr align="center">
-                                                    <th colspan="2">말머리</th>
+                                                    <th>말머리</th>
                                                     <th>제목</th>
                                                     <th>조회수</th>
                                                     <th>날짜</th>
@@ -69,7 +69,6 @@
                                              <c:forEach var="board" items="${BoardList }">
 										        <tbody>  
 										            <tr class="item">  
-										           		<td width="5%">${board.board_idx }</td>  
 										                <td>${board.board_category }</td>  
 										                <td><a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a></td>  
 										                <td width="12%">${board.board_readcount }</td>  

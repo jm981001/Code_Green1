@@ -20,6 +20,11 @@ public class ItemVO {
 	private String manager_brandname;
 	private String board_star_score;
 	private String count;
+	private String star1;
+	private String star2;
+	private String star3;
+	private String star4;
+	private String star5;
 	
 	public int getItem_idx() {
 		return item_idx;
@@ -126,6 +131,39 @@ public class ItemVO {
 	}
 	public void setCount(String count) {
 		this.count = count;
+	}
+	
+	
+	public String getStar1() {
+		return star1;
+	}
+	public void setStar1(String star1) {
+		this.star1 = star1;
+	}
+	public String getStar2() {
+		return star2;
+	}
+	public void setStar2(String star2) {
+		this.star2 = star2;
+	}
+	public String getStar3() {
+		return star3;
+	}
+	public void setStar3(String star3) {
+		this.star3 = star3;
+	}
+	
+	public String getStar4() {
+		return star4;
+	}
+	public void setStar4(String star4) {
+		this.star4 = star4;
+	}
+	public String getStar5() {
+		return star5;
+	}
+	public void setStar5(String star5) {
+		this.star5 = star5;
 	}
 	public ItemVO() {
 		// TODO Auto-generated constructor stub

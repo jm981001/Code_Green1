@@ -1,3 +1,6 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="java.util.List"%>
+<%@page import="com.itwillbs.Code_Green.vo.ItemVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -69,12 +72,18 @@
                                         <div class="row">
                                         
                                         	<!-- 반복문 시작 -->
+                                                <%
+//                                                 	List<ItemVO> itemList = (List<ItemVO>) request.getAttribute("item");
+//                                                 	int score = (int)Math.round(Double.parseDouble(item.board_star_score));
+//                                                 	pageContext.setAttribute("score", score);
+													
+                                                %>
                                         	<c:forEach var="item" items="${itemList }">
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
                                                     <div class="ps-product__thumbnail">
-                                                    	
+
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
@@ -85,18 +94,19 @@
                                                     </div>
                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.manager_brandname }</a>
                                                         <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
-                                                            
-                                                            <!-- 별점 -->
-                                                            <!-- 
-                                                            *별점 카운트 하기
-                                                             -->
+                                                            <!--  *별점 카운트 하기  -->
                                                             <div class="ps-product__rating">
                                                                 <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
+			              										 	<c:forEach var="i" begin="1" end="5">
+						                                             	<c:choose>
+						                                             		<c:when test="${i <= score}">
+						                                             			<option value="1">${i }</option>
+						                                             		</c:when>
+						                                             		<c:otherwise>
+						                                             			<option value="2">${i }</option>
+						                                             		</c:otherwise>
+						                                             	</c:choose>
+						                                             </c:forEach>
                                                                 </select><span>${item.board_star_score }</span>
                                                             </div>
                                                             
