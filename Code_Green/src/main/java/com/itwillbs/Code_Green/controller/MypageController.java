@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,14 +109,14 @@ public class MypageController {
 	
 	//------------마이페이지 문의내역-------------------------------------------
 	@GetMapping(value = "/myPageQnaDetail.my")
-	public String myPageQnaDetail(Model model, @RequestParam String qna_id) {
+	public String myPageQnaDetail(Model model,HttpSession session) {
 		
-		System.out.println("아이디 : " + qna_id);
+		String qna_id = (String)session.getAttribute("sId");
+		
 		List<QnaVO> mantomanList = Qservice.getMantomanList(qna_id);
 		
 		model.addAttribute("mantomanList", mantomanList);
-		
-		return "redirect:/myPageQnaDetail.my?qna_id=" + qna_id;
+		return "member/myPage_qnaDetail";
 	}
 	
 	//------------마이페이지 작성글-------------------------------------------

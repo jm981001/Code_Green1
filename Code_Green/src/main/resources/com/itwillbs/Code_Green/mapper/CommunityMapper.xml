@@ -109,7 +109,7 @@
 		INSERT 
 			INTO report
 			VALUES (
-					IFNULL(SELECT MAX(report_idx) FROM report,0) + 1,   
+					IFNULL((SELECT MAX(report_idx) FROM report r),0) + 1,   
 					#{board_idx}, 
 					#{report_subject}, 
 					#{report_content}, 

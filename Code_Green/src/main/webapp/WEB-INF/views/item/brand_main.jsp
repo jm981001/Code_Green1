@@ -54,6 +54,7 @@
 	}
 	
 	#brandlist-header {
+		height: 30px;
 		margin-top: 30px;
 		margin-bottom: 50px;
 	    font-weight: 500;
@@ -105,16 +106,12 @@
     <div class="ps-page--single ps-page--vendor">
         <section class="ps-store-list">
             <div class="container">
-                <aside class="ps-block--store-banner">
-                	
-                	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/forzero/lettuce.jpg">
-                    </div>
-                    
-                    
-                    
-                    
-                </aside>
+					 <!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
+<!--                 <aside class="ps-block--store-banner"> -->
+<!--                     <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/forzero/lettuce.jpg"> -->
+<!--                     </div> -->
+<!--                 </aside> -->
+                
                 <input type="button" id="brandlist-header" value="입점브랜드 목록 ▼" onclick="togglefun(this.value)">
                 <div id="listlist">
                 	<ul class="brandlist-ul">
@@ -149,7 +146,74 @@
 		                           </div>
 		                    	</div>
 		                    </div>
-                            
+<!-- =========================================== 수정중 사이드바!!!======================================================== -->
+
+			<aside class="widget widget_shop">
+                <h4 class="widget-title">BY BRANDS</h4>
+                <form class="ps-form--widget-search" action="do_action" method="get">
+                    <input class="form-control" type="text" placeholder="">
+                    <button><i class="icon-magnifier"></i></button>
+                </form>
+                <figure class="ps-custom-scrollbar" data-height="250">
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-1" name="brand" />
+                        <label for="m-brand-1">Adidas (3)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-2" name="brand" />
+                        <label for="m-brand-2">Amcrest (1)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-3" name="brand" />
+                        <label for="m-brand-3">Apple (2)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-4" name="brand" />
+                        <label for="m-brand-4">Asus (19)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-5" name="brand" />
+                        <label for="m-brand-5">Baxtex (20)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-6" name="brand" />
+                        <label for="m-brand-6">Adidas (11)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-7" name="brand" />
+                        <label for="m-brand-7">Casio (9)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-8" name="brand" />
+                        <label for="m-brand-8">Electrolux (0)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-9" name="brand" />
+                        <label for="m-brand-9">Gallaxy (0)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="m-brand-10" name="brand" />
+                        <label for="m-brand-10">Samsung (0)</label>
+                    </div>
+                    <div class="ps-checkbox">
+                        <input class="form-control" type="checkbox" id="brand-11" name="brand" />
+                        <label for="brand-11">Sony (0)</label>
+                    </div>
+                </figure>
+                <figure>
+                    <h4 class="widget-title">By Price</h4>
+                    <div class="leftbar_searchbyprice">
+                            <form action="SearchByPrice.mo" method="get">
+	                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
+	                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
+	                            <input type="submit" value="검색" >
+                            </form>
+                            </div>
+                    
+                </figure>
+			</aside>
+
+<!-- =========================================== 수정중 사이드바!!!======================================================== -->
                             
                             <!-- 카테고리화 목록 -->
                             <hr>
