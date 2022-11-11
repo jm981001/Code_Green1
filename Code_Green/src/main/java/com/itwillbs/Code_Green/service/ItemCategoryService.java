@@ -84,96 +84,96 @@ public class ItemCategoryService {
 	
 
 	// 낮은 가격순(유제품/음료)
-	public List<ItemVO> selectCheapDairyDrinkList(int startRow, int listLimit) {
-		return mapper.selectCheapDairyDrinkList(startRow, listLimit);
+	public List<ItemVO> selectCheapDairyDrinkList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapDairyDrinkList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(유제품/음료)
-	public List<ItemVO> selectExpensiveDairyDrinkList(int startRow, int listLimit) {
-		return mapper.selectExpensiveDairyDrinkList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveDairyDrinkList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveDairyDrinkList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 낮은 가격순(전체 상품)
-	public List<ItemVO> selectCheapAllList(int startRow, int listLimit) {
-		return mapper.selectCheapAllList(startRow, listLimit);
+	public List<ItemVO> selectCheapAllList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapAllList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(전체 상품)
-	public List<ItemVO> selectExpensiveAllList(int startRow, int listLimit) {
-		return mapper.selectExpensiveAllList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveAllList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveAllList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 낮은 가격순(해산물)
-	public List<ItemVO> selectCheapFishList(int startRow, int listLimit) {
-		return mapper.selectCheapFishList(startRow, listLimit);
+	public List<ItemVO> selectCheapFishList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapFishList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(해산물)
-	public List<ItemVO> selectExpensiveFishList(int startRow, int listLimit) {
-		return mapper.selectExpensiveFishList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveFishList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveFishList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 낮은 가격순(과일/채소)
-	public List<ItemVO> selectCheapFruitVegiList(int startRow, int listLimit) {
-		return mapper.selectCheapFruitVegiList(startRow, listLimit);
+	public List<ItemVO> selectCheapFruitVegiList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapFruitVegiList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(과일/채소)
-	public List<ItemVO> selectExpensiveFruitVegiList(int startRow, int listLimit) {
-		return mapper.selectExpensiveFruitVegiList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveFruitVegiList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveFruitVegiList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 낮은 가격순(냉동/간편식품)
-	public List<ItemVO> selectCheapIcedEasyList(int startRow, int listLimit) {
-		return mapper.selectCheapIcedEasyList(startRow, listLimit);
+	public List<ItemVO> selectCheapIcedEasyList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapIcedEasyList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(냉동/간편식품)
-	public List<ItemVO> selectExpensiveIcedEasyList(int startRow, int listLimit) {
-		return mapper.selectExpensiveIcedEasyList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveIcedEasyList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveIcedEasyList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 낮은 가격순(간식류)
-	public List<ItemVO> selectCheapSnackList(int startRow, int listLimit) {
-		return mapper.selectCheapSnackList(startRow, listLimit);
+	public List<ItemVO> selectCheapSnackList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectCheapSnackList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 높은 가격순(간식류)
-	public List<ItemVO> selectExpensiveSnackList(int startRow, int listLimit) {
-		return mapper.selectExpensiveSnackList(startRow, listLimit);
+	public List<ItemVO> selectExpensiveSnackList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectExpensiveSnackList(startRow, listLimit, searchType, keyword);
 	}
 
 	
 	
 	// 후기 많은순(전체 상품)
-	public List<ItemVO> selectReviewAllList(int startRow, int listLimit) {
-		return mapper.selectReviewAllList(startRow, listLimit);
+	public List<ItemVO> selectReviewAllList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewAllList(startRow, listLimit, searchType, keyword);
 
 	}
 
 	// 후기 많은순(유제품/음료)
-	public List<ItemVO> selectReviewDairyDrinkList(int startRow, int listLimit) {
-		return mapper.selectReviewDairyDrinkList(startRow, listLimit);
+	public List<ItemVO> selectReviewDairyDrinkList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewDairyDrinkList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 후기 많은순(해산물)
-	public List<ItemVO> selectReviewFishList(int startRow, int listLimit) {
-		return mapper.selectReviewFishList(startRow, listLimit);
+	public List<ItemVO> selectReviewFishList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewFishList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 후기 많은순(과일/채소)
-	public List<ItemVO> selectReviewFruitVegiList(int startRow, int listLimit) {
-		return mapper.selectReviewFruitVegiList(startRow, listLimit);
+	public List<ItemVO> selectReviewFruitVegiList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewFruitVegiList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 후기 많은순(냉동/간편식품)
-	public List<ItemVO> selectReviewIcedEasyList(int startRow, int listLimit) {
-		return mapper.selectReviewIcedEasyList(startRow, listLimit);
+	public List<ItemVO> selectReviewIcedEasyList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewIcedEasyList(startRow, listLimit, searchType, keyword);
 	}
 
 	// 후기 맣은순(간식류)
-	public List<ItemVO> selectReviewSnackList(int startRow, int listLimit) {
-		return mapper.selectReviewSnackList(startRow, listLimit);
+	public List<ItemVO> selectReviewSnackList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectReviewSnackList(startRow, listLimit, searchType, keyword);
 	}
 	
 

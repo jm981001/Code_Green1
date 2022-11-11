@@ -68,15 +68,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewAllList(startRow, listLimit);
+		reviewItemList = service.selectReviewAllList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapAllList(startRow, listLimit);
+		cheapItemList = service.selectCheapAllList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 				
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveAllList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveAllList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_all";
@@ -117,15 +117,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewDairyDrinkList(startRow, listLimit);
+		reviewItemList = service.selectReviewDairyDrinkList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapDairyDrinkList(startRow, listLimit);
+		cheapItemList = service.selectCheapDairyDrinkList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 		
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveDairyDrinkList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveDairyDrinkList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_dairy_drink";
@@ -166,15 +166,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewFishList(startRow, listLimit);
+		reviewItemList = service.selectReviewFishList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapFishList(startRow, listLimit);
+		cheapItemList = service.selectCheapFishList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 		
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveFishList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveFishList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_fish";
@@ -215,15 +215,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewFruitVegiList(startRow, listLimit);
+		reviewItemList = service.selectReviewFruitVegiList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapFruitVegiList(startRow, listLimit);
+		cheapItemList = service.selectCheapFruitVegiList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 		
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveFruitVegiList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveFruitVegiList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_fruit_vegi";
@@ -264,15 +264,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewIcedEasyList(startRow, listLimit);
+		reviewItemList = service.selectReviewIcedEasyList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapIcedEasyList(startRow, listLimit);
+		cheapItemList = service.selectCheapIcedEasyList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 		
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveIcedEasyList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveIcedEasyList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_iced_easy";
@@ -324,15 +324,15 @@ public class ItemCategoryController {
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
-		reviewItemList = service.selectReviewSnackList(startRow, listLimit);
+		reviewItemList = service.selectReviewSnackList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("reviewItemList", reviewItemList);
 		
 		// 낮은 가격순
-		cheapItemList = service.selectCheapSnackList(startRow, listLimit);
+		cheapItemList = service.selectCheapSnackList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("cheapItemList", cheapItemList);
 		
 		// 높은 가격순
-		expensiveItemList = service.selectExpensiveSnackList(startRow, listLimit);
+		expensiveItemList = service.selectExpensiveSnackList(startRow, listLimit, searchType, keyword);
 		model.addAttribute("expensiveItemList",expensiveItemList);
 		
 		return "item/category_snack";

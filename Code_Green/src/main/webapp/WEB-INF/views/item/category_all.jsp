@@ -228,7 +228,7 @@
                                                                     <option value="1">3</option>
                                                                     <option value="1">4</option>
                                                                     <option value="2">5</option>
-                                                                </select><span>02</span>
+                                                                </select><span>${item.board_star_score }</span>
                                                             </div>
                                                             
                                                             
@@ -303,7 +303,7 @@
                                                                     <option value="1">3</option>
                                                                     <option value="1">4</option>
                                                                     <option value="2">5</option>
-                                                                </select><span>02</span>
+                                                                </select><span>${reviewItem.board_star_score }</span>
                                                             </div>
                                                             
                                                             
@@ -377,7 +377,7 @@
                                                                     <option value="1">3</option>
                                                                     <option value="1">4</option>
                                                                     <option value="2">5</option>
-                                                                </select><span>02</span>
+                                                                </select><span>${cheapItem.board_star_score }</span>
                                                             </div>
                                                             
                                                             
@@ -450,7 +450,7 @@
                                                                     <option value="1">3</option>
                                                                     <option value="1">4</option>
                                                                     <option value="2">5</option>
-                                                                </select><span>02</span>
+                                                                </select><span>${expensiveItem.board_star_score }</span>
                                                             </div>
                                                             
                                                             
