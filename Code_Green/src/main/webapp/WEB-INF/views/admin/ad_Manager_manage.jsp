@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +17,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>Martfury - Orders</title>
+    <title>기업관리 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -87,7 +89,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>기업 관리</h3>
+                    <h3>기업 관리 | <a href="ad_Manager_auth">승인 대기</a></h3>
                     <p>Business Management</p>
                 </div>
                 <div class="header__center">
@@ -142,15 +144,16 @@
                                 <tr>
 <!-- A태그 추가 클릭시 - 상세 정보 조회 페이지로 이동  -->
                                 
-                                    <td><a href="ad_Manager_detail?id=${mgList.manager_id }"><strong>${mgList.manager_brandname }</strong></a></td>
+                                    <td><a href="ad_Manager_detail?id=${mgList.manager_id }&auth=${mgList.manager_adminauth }"><strong>${mgList.manager_brandname }</strong></a></td>
                                     <td>${mgList.manager_id }</td>
                                     <td>${mgList.manager_name }</td>
                                     <td>${mgList.manager_phone }</td>
                                     <td>${mgList.manager_email }</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
 <!--                                     </td> -->
-                                    <td>${mgList.manager_date }</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>미승인</strong></button></td>
+										<fmt:parseDate var="dateString" value="${mgList.manager_date }" pattern="yyyyMMdd" />	
+                                    <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
+                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${fn:replace(mgList.manager_adminauth, 'Y', '승인완료')}</strong></button></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

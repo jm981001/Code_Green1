@@ -9,8 +9,19 @@
 <body>
 <script type="text/javascript">
 	// 전달받은 오류 메세지(msg) 출력 후 이전페이지로 돌아가기
-	alert("${msg}");
-	location.href ="main";
+	
+	let result = "${msg}";
+	
+	if(result){
+		alert(result);
+		location.href ="main";
+	} else if("${fail}") {
+		alert("${fail}");
+		history.back();
+	} 
+	
+// 	alert("${msg}");
+// 	location.href ="main";
 // 	history.back();
 </script>
 </body>

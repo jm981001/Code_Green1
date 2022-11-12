@@ -25,11 +25,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
     
-    <script type="text/javascript">
-    	function statusChange() {
-    		confirm("상대처리 하시겠습니까?");
-    	}
-    </script>
 </head>
 <body>
     <header class="header--mobile">
@@ -79,7 +74,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>신고글 관리</h3>
+                    <h3>신고글 <a href="ad_Report_Management">처리대기</a> | <a href="ad_Report_Success">처리완료</a></h3>
                     <p>Report Management</p>
                 </div>
                 <div class="header__center">
@@ -139,7 +134,7 @@
                                     <td onclick="location.href='ad_Report_Detail?report_idx=${rList.report_idx }'"><strong>${rList.report_content }</strong></td>
                                     <td>${rList.reporter }</td>
                                     <td>${rList.report_date }</td>
-                                    <td><button onclick="statusChange()" class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
+                                    <td><button class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

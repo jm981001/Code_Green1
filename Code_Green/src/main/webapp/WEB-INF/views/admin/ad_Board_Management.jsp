@@ -78,7 +78,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>커뮤니티 <a href="ad_Board_Review">| 후기 </a><a href="ad_Board_Recipe">| 레시피</a></h3>
+                    <h3>커뮤니티 |<a href="ad_Board_Review"> 후기 </a>|<a href="ad_Board_Recipe"> 레시피</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">

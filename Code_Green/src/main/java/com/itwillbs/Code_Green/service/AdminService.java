@@ -63,11 +63,18 @@ public class AdminService {
 	//여기부터는 기업
 	
 
-	// 기업 목록 조회
+	// 기업 목록 조회(승인완료)
 	public List<ManagerVO> getManagerList() {
 		// TODO Auto-generated method stub
 		return mapper.selectManagerList();
 	}
+	
+	// 기업 목록 조회(미승인)
+	public List<ManagerVO> getManagerAuthList() {
+		// TODO Auto-generated method stub
+		return mapper.selectManagerAuthList();
+	}
+	
 
 	//기업 상세정보 조회(1개)
 	public ManagerVO getManagerInfo(String id) {
@@ -127,28 +134,28 @@ public class AdminService {
 	//여기부터는 신고글 관리
 	
 	
-	//신고글  목록
+	//신고글 목록(처리대기)
 	public List<ReportVO> getReportList() {
 		// TODO Auto-generated method stub
 		return mapper.selectReportList();
 	}
 
-//	public List<BoardVO> getOriginBoard(int report_idx) {
-//		// TODO Auto-generated method stub
-//		return mapper.selectOriginBoard(report_idx);
-//	}
+	
+	//신고글 목록 조회(처리완료)
+	public List<ReportVO> getReportSuccessList() {
+		// TODO Auto-generated method stub
+		return mapper.selectReportSuccessList();
+	}
 	
 	
-	
-	
-	//신고글 조회(reporter)
+	//신고글 상세조회(reporter)
 	public ReportVO getReportInfo(int report_idx) {
 		// TODO Auto-generated method stub
 		return mapper.selectReportInfo(report_idx);
 	}
 	
 	
-	//신고된 원본글 조회
+	//신고된 원본글 상세조회
 	public BoardVO getOriginBoard(int report_idx) {
 		// TODO Auto-generated method stub
 		return mapper.selectOriginBoard(report_idx);
@@ -159,11 +166,15 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.deleteReport(report_idx);
 	}
-
-	public ReportVO changeStatus(int report_idx) {
+	
+	//신고글 상태 변경(처리대기 => 처리완료)
+	public int changeStatus(int board_idx, ReportVO report) {
 		// TODO Auto-generated method stub
-		return mapper.updateReportStatus(report_idx);
+		return mapper.updateReportStatus(board_idx, report);
 	}
+	
+	
+
 	
 	
 	

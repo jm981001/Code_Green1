@@ -56,7 +56,7 @@
 					</when>
 				</choose>
 			</if>
-		ORDER BY member_idx
+		ORDER BY member_idx DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 
@@ -66,7 +66,8 @@
 	<!--회원 상세 정보 조회 -->
 	<select id="selectMemberInfo" resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id}
+		WHERE 
+			MEMBER_ID=#{member_id}
 	</select>
 	
 	<!--회원 정보 수정 -->
@@ -88,22 +89,30 @@
 
 
 
+<!-- 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다-->
 
 
-
-
-
-
-
-
-
-
-
-<!-- 전체 기업체 목록 조회 -->
+	<!--기업체 목록 조회(승인완료) -->
 	<select id="selectManagerList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT * FROM manager
+		WHERE
+			manager_adminauth='Y'
+		ORDER BY 
+				manager_idx DESC
 		
 	</select>
+	
+	
+	<!--기업체 목록 조회(미승인) -->
+	<select id="selectManagerAuthList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT * FROM manager
+		WHERE
+			manager_adminauth='N'
+		ORDER BY 
+				manager_idx DESC
+		
+	</select>
+	
 
 	<!--기업 상세 정보 조회 -->
 	<select id="selectManagerInfo" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
@@ -121,9 +130,7 @@
 
 
 
-
-
-
+<!-- 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다-->
 
 
 	<!--1:1 문의글 목록 조회 -->
@@ -131,6 +138,8 @@
 		SELECT * FROM qna
 		WHERE
 			qna_type='1:1문의'
+		ORDER BY 
+				qna_idx DESC
 	</select>
 
 	<!--1:1 문의글 상세 조회 -->
@@ -149,7 +158,7 @@
 	
 	
 	
-	
+<!-- 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다-->
 	
 	
 	
@@ -159,43 +168,60 @@
 		SELECT * FROM board
 			WHERE 
 				board_type='커뮤'
+			ORDER BY 
+				board_idx DESC
 	</select>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
 		DELETE FROM board
 		WHERE
-			board_idx={board_idx }
-		
+			board_idx=#{board_idx }
+			
 	</delete>
 	
 	
+<!-- 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다-->
 	
 	
-	
-	<!-- 신고글 목록 -->
+	<!-- 신고글 목록(처리대기) -->
 	<select id="selectReportList" resultType="com.itwillbs.Code_Green.vo.ReportVO">
 		SELECT * FROM report
+		WHERE 
+			report_status='처리대기'
+		ORDER BY 
+			report_idx DESC
 		
 	</select>
 	
-	
-	<select id="selectReportInfo" resultType="com.itwillbs.Code_Green.vo.ReportVO">
+	<!-- 신고글 목록(처리완료) -->	
+	<select id="selectReportSuccessList" resultType="com.itwillbs.Code_Green.vo.ReportVO">
 		SELECT * FROM report
-		WHERE report_idx=#{report_idx}
+		WHERE
+			report_status='처리완료'
+		ORDER BY 
+			report_idx DESC
 	</select>
 	
+	
+	<!-- 신고글 조회 -->
+	<select id="selectReportInfo" resultType="com.itwillbs.Code_Green.vo.ReportVO">
+		SELECT * FROM report
+		WHERE
+			report_idx=#{report_idx}
+	</select>
 	
 	
 	<!-- 신고된 원본글 조회! -->
 	<select id="selectOriginBoard" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT 
-			   *
-			from board b JOIN report r
-			ON 
-				b.board_idx = r.board_idx 
-			where
-				 r.report_idx=#{report_idx}
+			*
+		from 
+			board b JOIN report r
+		ON 
+			b.board_idx = r.board_idx 
+		where
+			r.report_idx=#{report_idx}
 	</select>
 	
 	
@@ -207,7 +233,24 @@
 	</delete>
 	
 	
+	<!-- 신고글 상태처리 -->
+<!-- 	<update id="updateReportStatus"> -->
+<!-- 		UPDATE  -->
+<!-- 			report -->
+<!-- 		SET -->
+<!-- 			report_status = '처리완료' -->
+<!-- 		WHERE -->
+<!-- 			report_idx=#{report_idx} -->
+<!-- 	</update> -->
 	
+	<update id="updateReportStatus">
+		UPDATE 
+			report
+		SET
+			report_status = '처리완료'
+		WHERE
+			board_idx=#{board_idx}
+	</update>
 	
 
 </mapper>

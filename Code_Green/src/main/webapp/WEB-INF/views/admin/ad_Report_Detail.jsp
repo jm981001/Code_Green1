@@ -151,7 +151,7 @@
 				    </tr>
 				  </tbody>
 				</table>
-                     <div style="margin-left: 1300px">
+                     <div style="margin-left: 1080px">
                      <button type="button" onclick="location.href='ad_RemoveOriginboard?board_idx=${originBoard.board_idx }&report_idx=${reportInfo.report_idx }'" class="btn btn-info" style="font-size: 13px">
                      <strong>삭제하기</strong></button></div>
                     

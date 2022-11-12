@@ -39,18 +39,17 @@ public interface AdminMapper {
 			int deleteMember(String id);
 			
 			
-			
-			
 			//----------------------------------------------------------
 
 			
-			
-			//기업 목록 전체 조회
+			//기업 목록(승인완료) 조회
 			List<ManagerVO> selectManagerList();
+			
+			//기업 목록(미승인) 조회
+			public List<ManagerVO> selectManagerAuthList();
 
 			//기업 상세정보 조회
 			public ManagerVO selectManagerInfo(String id);
-
 
 			//기업 삭제
 			public int deleteManager(String id);
@@ -69,7 +68,6 @@ public interface AdminMapper {
 			public int deleteOneQnaBoard(String id);
 
 			
-			
 			//----------------------------------------------------------
 			
 			
@@ -83,27 +81,27 @@ public interface AdminMapper {
 			//----------------------------------------------------------
 			
 			
-			//신고글 목록
+			//신고글 목록(처리대기)
 			public List<ReportVO> selectReportList();
 
-
-//			public List<BoardVO> selectOriginBoard(int report_idx);
-
+			//신고글 목록(처리완료)
+			public List<ReportVO> selectReportSuccessList();
 			
-			
-			
-			//신고글 조회(reporter)
+			//신고글 상세조회(reporter)
 			public ReportVO selectReportInfo(int report_idx);
 			
-			
-			//신고된 원본글 조회!
+			//신고된 원본글 상세조회!
 			public BoardVO selectOriginBoard(int board_idx);
 
 			//신고글 삭제(리포터)
 			public int deleteReport(int report_idx);
 
-			//신고글 상태 처리
-			public ReportVO updateReportStatus(int report_idx);
+			//신고글 상태 변경(처리대기 => 처리완료)
+			public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
+
+
+			
+
 
 
 			

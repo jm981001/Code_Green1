@@ -49,7 +49,7 @@ public class AdminController {
 
 	//------------전체관리자 메인----------------------------
 		@RequestMapping(value = "index", method = RequestMethod.GET)
-		public String index(Model model,HttpSession session) {  //httpsession 추가 해야함
+		public String index(Model model,HttpSession session) { 
 
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
@@ -177,7 +177,7 @@ public class AdminController {
 			if(updateCount > 0) {
 				return "redirect:/ad_member_Detail?id=" + member.getMember_id();
 			}
-			model.addAttribute("msg", "회원정보 수정에 실패했습니다!");
+			model.addAttribute("fail", "회원정보 수정에 실패했습니다!");
 			return "admin/ad_fail_back";
 //			return "redirect:/ad_member_Detail?id=" + member.getMember_id();
 		}
@@ -199,23 +199,24 @@ public class AdminController {
 			int deleteCount = service.removeMember(id);
 			System.out.println(deleteCount);
 			if(deleteCount > 0) {
-//				return "admin/ad_member_Manage";
+				
 				return "redirect:/ad_member_Manage";
+	
 			}
-				model.addAttribute("msg", "회원 추방 실패!");
+				model.addAttribute("fail", "회원 추방 실패!"); 
 				return "admin/ad_fail_back";
 //				return "admin/ad_memberDelete";
 			
 		}
 		
 
-	//==============================================여기부터는 기업행 열차입니다=====================================================
-	//==============================================여기부터는 기업행 열차입니다=====================================================
+	//======================================여기부터는 기업행 열차입니다=====================================================
+	//======================================여기부터는 기업행 열차입니다=====================================================
 
 		
 		
 		
-		//------------전체관리자 기업관리----------------------------
+		//------------전체관리자 기업관리(승인완료)----------------------------
 		@GetMapping(value = "/ad_Manager_manage")
 		public String ad_Manager_manage(Model model, HttpSession session) {
 			
@@ -228,10 +229,28 @@ public class AdminController {
 			
 			List<ManagerVO> managerList = service.getManagerList();
 			model.addAttribute("managerList", managerList);
-//			System.out.println("ad_Manager_manage");
+			System.out.println(managerList);
 			return "admin/ad_Manager_manage";
 		}
 		
+		
+		//------------전체관리자 기업관리(승인대기)----------------------------
+		@GetMapping(value = "/ad_Manager_auth")
+		public String ad_ad_Manager_auth(Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			List<ManagerVO> managerAuthList = service.getManagerAuthList();
+			model.addAttribute("managerAuthList", managerAuthList);
+			System.out.println(managerAuthList);
+			return "admin/ad_Manager_auth";
+		}
+
 		
 		//------------전체관리자 기업상세정보 조회----------------------------
 		@GetMapping(value = "/ad_Manager_detail")
@@ -250,7 +269,7 @@ public class AdminController {
 		}
 			
 		
-		//------------전체관리자 기업삭제 조회----------------------------
+		//------------전체관리자 기업삭제----------------------------
 			@GetMapping(value = "/ad_ManagerDelete")
 			public String ad_Manager_remove(@RequestParam String id, Model model, HttpSession session) {
 				
@@ -262,20 +281,22 @@ public class AdminController {
 				}
 				
 				int delectCount = service.removeManager(id);
+				
 				System.out.println(delectCount);
 				
 				if(delectCount > 0) {
 					return "redirect:/ad_Manager_manage";
 				}
-				
-				model.addAttribute("msg", "기업 삭제에 실패 했습니다!");
+				//삭제를 누를 때 manager_adminauth 데이터 받아와서 Y이냐 N이냐에 따라 포워딩 주소를 달라지게
+				//if문을 사용해 나눠야 할듯... 일이 많네ㅎ
+				model.addAttribute("fail", "기업 삭제에 실패 했습니다!");
 				return "admin/ad_fail_back";
 			}
 		
 		
 		
-	//==============================================여기부터는 문의게시판행 열차입니다=====================================================
-	//==============================================여기부터는 문의게시판행 열차입니다=====================================================
+	//======================================여기부터는 문의게시판행 열차입니다=====================================================
+	//======================================여기부터는 문의게시판행 열차입니다=====================================================
 			
 		
 		
@@ -336,14 +357,14 @@ public class AdminController {
 					return "redirect:/ad_One_Board";
 				}
 				
-				model.addAttribute("msg", "1:1문의글 삭제에 실패 했습니다!");
+				model.addAttribute("fail", "1:1문의글 삭제에 실패 했습니다!");
 				return "admin/ad_fail_back";
 			}
 		
 		
 		
-	//==============================================여기부터는 게시판관리행 열차입니다=====================================================
-	//==============================================여기부터는 게시판관리행 열차입니다=====================================================
+	//======================================여기부터는 게시판관리행 열차입니다=====================================================
+	//======================================여기부터는 게시판관리행 열차입니다=====================================================
 		
 		
 		
@@ -359,7 +380,7 @@ public class AdminController {
 			
 			
 		//------------전체관리자 커뮤니티 게시판 관리----------------------------
-		@RequestMapping(value = "/ad_Board_Management", method = RequestMethod.GET)
+		@GetMapping(value = "/ad_Board_Management")
 		public String ad_Board_Management(Model model, HttpSession session) {
 			
 			String sId = (String)session.getAttribute("sId");
@@ -380,7 +401,7 @@ public class AdminController {
 		
 		
 		//------------전체관리자 게시글 상세조회----------------------------
-		@RequestMapping(value = "/ad_Board_Detail", method = RequestMethod.GET)
+		@GetMapping(value = "/ad_Board_Detail")
 		public String ad_Board_Detail() {
 			return "admin/ad_Board_Detail";
 		}
@@ -388,39 +409,39 @@ public class AdminController {
 		
 		
 		//------------전체관리자 게시글 삭제----------------------------
-			@RequestMapping(value = "/ad_BoardRemove", method = RequestMethod.GET)
-			public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
-				
-				String sId = (String)session.getAttribute("sId");
-				System.out.println("sId= " + sId);
-				
-				if(sId == null || !sId.equals("admin")) {
-					model.addAttribute("msg", "잘못된 접근입니다!");
-					return "admin/ad_fail_back";
-				}
-				
-				int deleteCount = service.removeBoard(board_idx);
-				System.out.println("게시글 삭제" + deleteCount);
-				if(deleteCount > 0 ) {
-					return "redirect:/ad_Board_Management";
-					
-				}
-				
-				model.addAttribute("msg", "게시글 삭제에 실패했습니다");
-				return "admin/ad_Board_Management";
+		@GetMapping(value = "/ad_BoardRemove")
+		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
 			}
+			
+			int deleteCount = service.removeBoard(board_idx);
+			System.out.println("게시글 삭제" + deleteCount);
+			if(deleteCount > 0 ) {
+				return "redirect:/ad_Board_Management";
+				
+			}
+			
+			model.addAttribute("fail", "게시글 삭제에 실패했습니다");
+			return "admin/ad_fail_back";
+		}
 		
 		
 		
 		
-		//==============================================여기부터는 신고글관리행 열차입니다=====================================================
-		//==============================================여기부터는 신고글관리행 열차입니다=====================================================
+		//======================================여기부터는 신고글관리행 열차입니다=====================================================
+		//======================================여기부터는 신고글관리행 열차입니다=====================================================
 			
 		
 		
 		
-		//------------ 신고글 관리----------------------------
-		@RequestMapping(value = "/ad_Report_Management", method = RequestMethod.GET)
+		//------------ 신고글 관리(처리대기 목록만 출력)----------------------------
+		@GetMapping(value = "/ad_Report_Management")
 		public String ad_Report_Management(Model model, HttpSession session) {
 			
 			String sId = (String)session.getAttribute("sId");
@@ -437,8 +458,28 @@ public class AdminController {
 		}
 		
 		
+		
+		//------------ 신고글 관리(처리완료 목록만 출력)----------------------------
+		@GetMapping(value = "/ad_Report_Success")
+		public String ad_Report_Success(Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			List<ReportVO> reportSuccessList = service.getReportSuccessList();
+			model.addAttribute("reportSuccessList", reportSuccessList);
+					System.out.println(reportSuccessList);
+			return "admin/ad_Report_Success";
+		}
+	
+		
+		
 		//------------ 신고글 상세조회----------------------------
-		@RequestMapping(value = "/ad_Report_Detail", method = RequestMethod.GET)
+		@GetMapping(value = "/ad_Report_Detail")
 		public String ad_Report_Detail(Model model, HttpSession session, int report_idx) {
 			
 			String sId = (String)session.getAttribute("sId");
@@ -472,61 +513,59 @@ public class AdminController {
 		
 		
 		//------------ 신고글 삭제----------------------------
-			@RequestMapping(value = "/ad_ReportRemove", method = RequestMethod.GET)
-			public String ad_Report_Remove(Model model, HttpSession session, int report_idx) {
-				
-				String sId = (String)session.getAttribute("sId");
-				
-				if(sId == null || !sId.equals("admin")) {
-					model.addAttribute("msg", "잘못된 접근입니다!");
-					return "admin/ad_fail_back";
-				}
-				
-				int deleteCount = service.removeReportBoard(report_idx);
-				//신고된 원글이 삭제되면 데이터가 사라지므로 목록에 사용X
-				//처리완료된 글은 처리완료 게시판으로 이동됨.
-				
-				if(deleteCount > 0) {
-//					ReportVO reportStatus = service.changeStatus(report_idx);
-					model.addAttribute("msg", "원본글 삭제에 성공했습니다!");
-					return "redirect:/ad_Report_Management";
-				}
-				
-				
-				return "admin/ad_Report_Management";
-			}	
+		@GetMapping(value = "/ad_ReportRemove")
+		public String ad_Report_Remove(Model model, HttpSession session, int report_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			int deleteCount = service.removeReportBoard(report_idx);
+			//신고된 원글이 삭제되면 데이터가 사라지므로 목록에 사용X
+			//처리완료된 글은 처리완료 게시판으로 이동되게끔 만들기
+			
+			if(deleteCount > 0) {
+
+				return "redirect:/ad_Report_Management";
+			}
+			
+			model.addAttribute("fail", "신고글 삭제에 실패했습니다");
+			return "admin/ad_fail_back";
+		}	
 		
 		
 			
-			//------------ 신고된 원본글(board) 삭제 및 상태처리----------------------------
-			@RequestMapping(value = "/ad_RemoveOriginboard", method = RequestMethod.GET)
-			public String ad_Report_RemoveOriginboard(Model model, HttpSession session, int board_idx,int report_idx) {
-				
-				System.out.println(board_idx + " ");
-				String sId = (String)session.getAttribute("sId");
-				System.out.println("sId= " + sId);
-				
-				if(sId == null || !sId.equals("admin")) {
-					model.addAttribute("msg", "잘못된 접근입니다!");
-					return "admin/ad_fail_back";
-				}
-				
-				int deleteCount = service.removeBoard(board_idx);
-				System.out.println("게시글 삭제" + deleteCount);
-				if(deleteCount > 0 ) {
-					System.out.println("뭐가 문제야?");
-					ReportVO reportStatus = service.changeStatus(report_idx);
-//					model.addAttribute("msg", "신고글 삭제에 성공했습니다!");
-					return "admin/ad_Report_Management";
-					
-				}
-				
-				model.addAttribute("msg", "게시글 삭제에 실패했습니다");
-				
-				System.out.println("왜 안나오는데?");
-//				System.out.println(reportList);
-				return "admin/ad_Report_Management";
+		//------------ 신고된 원본글(board) 삭제 및 상태처리----------------------------
+		@GetMapping(value = "/ad_RemoveOriginboard")
+		public String ad_Report_RemoveOriginboard(
+				Model model, HttpSession session,
+				int board_idx, ReportVO report) {
+			
+			System.out.println(board_idx + " ");
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
 			}
+			
+			int deleteCount = service.removeBoard(board_idx);
+			System.out.println("게시글 삭제" + deleteCount);
+			int updateCount = service.changeStatus(board_idx, report);
+			System.out.println("처리상태 : " + updateCount);
+			//게시글 삭제와 처리상태가 변경되면 포워딩 실행
+			if(deleteCount > 0 && updateCount > 0) {
+				
+				return "redirect:/ad_Report_Management";
+			}
+			
+			model.addAttribute("msg", "게시글 삭제에 실패했습니다");
+			return "admin/ad_Report_Management";
+		}
 			
 			
 			

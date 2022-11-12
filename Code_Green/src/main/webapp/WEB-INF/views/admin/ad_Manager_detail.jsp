@@ -52,8 +52,25 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    
+   
+	#btn1{
+		display: none;
+	}
   </style>
+  
+<script type="text/javascript">
+// $("#btn1").hide();
+// document.getElementById("btn1").style.display="none";
+let auth = '${manager.manager_adminauth }';
 
+if(auth === "N") {
+	alert("ddd");
+	document.getElementById("btn1").style.display = "";
+}
+
+
+</script>
     
 </head>
 
@@ -195,6 +212,8 @@
 			            <label for="address2">상세주소<span class="text-muted">&nbsp;</span></label>
 			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
+			          <div id="tlqkf">
+			          <button class="btn btn-primary btn-lg btn-block" type="submit">가입승인하기</button></div>
 
 			        </form>
 			      </div>
