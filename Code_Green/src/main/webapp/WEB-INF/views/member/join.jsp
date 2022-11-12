@@ -21,6 +21,43 @@
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+$('#mail-Check-Btn').click(function() {
+	const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기
+	console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+	const checkInput = $('.mail-check-input') // 인증번호 입력하는곳 
+	
+	$.ajax({
+		type : 'get',
+		url : 'mailCheck?email='+eamil,
+		success : function (data) {
+			console.log("data : " +  data);
+			checkInput.attr('disabled',false);
+			code =data;
+			alert('인증번호가 전송되었습니다.')
+		}			
+	});
+});
+
+//인증번호 비교 
+$('.mail-check-input').blur(function () {
+	const inputCode = $(this).val();
+	const $resultMsg = $('#mail-check-warn');
+	
+	if(inputCode === code){
+		$resultMsg.html('인증번호가 일치합니다.');
+		$resultMsg.css('color','green');
+		$('#mail-Check-Btn').attr('disabled',true);
+		$('#userEamil1').attr('readonly',true);
+		$('#userEamil2').attr('readonly',true);
+		$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+	}else{
+		$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+		$resultMsg.css('color','red');
+	}
+});
+</script>
 <!-- 주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -379,29 +416,68 @@ button {
 					<span id="checkNameResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
-				<div class="field">
-					<b>본인 확인 이메일</b> 
-					<input type="email" placeholder="선택입력" name="member_email" required="required" id="member_email" maxlength='30'>
-				</div>
-				
-				<div class="field post-code">
-					<b>주소</b>
-					<div>
-						<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호"  maxlength='6' required="required">
-						<input type="button" value="주소검색" onclick="execDaumPostcode()">
+<!-- 				<div class="field"> -->
+<!-- 					<b>본인 확인 이메일</b>  -->
+<!-- 					<input type="email" placeholder="선택입력" name="member_email" required="required" id="member_email" maxlength='30'> -->
+<!-- 				</div> -->
+
+
+				<div class="form-group email-form">
+					<label for="email">이메일</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="userEmail1"
+							id="userEmail1" placeholder="이메일"> <select
+							class="form-control" name="userEmail2" id="userEmail2">
+							<option>@naver.com</option>
+							<option>@daum.net</option>
+							<option>@gmail.com</option>
+							<option>@hanmail.com</option>
+							<option>@yahoo.co.kr</option>
+						</select> </div>
+						<div class="input-group-addon">
+							<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+						</div>
+						<div class="mail-check-box">
+							<input class="form-control mail-check-input"
+								placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled"
+								maxlength="6">
+						</div>
+						<span id="mail-check-warn"></span>
 					</div>
-					<input type="text" name="member_address" id="member_address" placeholder="주소"  maxlength='100' required="required">
-				</div>
-				
-				<div class="field tel-number">
-					<b>전화</b>
-					<div>
-						<input type="tel" placeholder="전화번호 입력" name="member_phone"  id="member_phone"  maxlength='11' required="required">
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="field post-code">
+						<b>주소</b>
+						<div>
+							<input type="text" name="member_postcode" id="member_postcode"
+								placeholder="우편번호" maxlength='6' required="required"> <input
+								type="button" value="주소검색" onclick="execDaumPostcode()">
+						</div>
+						<input type="text" name="member_address" id="member_address"
+							placeholder="주소" maxlength='100' required="required">
 					</div>
+
+					<div class="field tel-number">
+						<b>전화</b>
+						<div>
+							<input type="tel" placeholder="전화번호 입력" name="member_phone"
+								id="member_phone" maxlength='11' required="required">
+						</div>
+					</div>
+					<input type="submit" value="가입하기">
 				</div>
-				<input type="submit" value="가입하기">
 			</div>
-		</div>
 	</form>
 	<!--------------------------------개인----------------------------------->
 
@@ -443,6 +519,7 @@ button {
 				<div class="field">
 					<b>본인 확인 이메일</b>
 					<input type="email" placeholder="선택입력" name="manager_email" id="manager_email" maxlength="30">
+					<input type="button" onclick="location.href='sendMail'">
 				</div>
 				<div class="field post-code">
 					<b>주소</b>

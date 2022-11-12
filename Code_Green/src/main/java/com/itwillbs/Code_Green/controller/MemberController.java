@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.Code_Green.service.MailSendService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class MemberController {
-	
+	@Autowired
+	private MailSendService mailService;
 	@Autowired
 	private MemberService service;
 
@@ -96,5 +99,24 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+
+	// 이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(@ModelAttribute MemberVO member, Model model, HttpSession session,String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailService.joinEmail(email);
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
