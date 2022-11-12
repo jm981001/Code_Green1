@@ -11,6 +11,7 @@ public class BoardVO {
 	private String board_content; //내용
 	private String board_readcount; //조회수
 	private String board_date; //날짜
+	private int best_cnt;	  // 추천(좋아요) 수 집계컬럼(default 0) 
 	private String item_idx; //상품번호
 	private String member_id; 
 	private String file1;
@@ -73,6 +74,14 @@ public class BoardVO {
 	public void setBoard_date(String board_date) {
 		this.board_date = board_date;
 	}
+	
+	public int getBest_cnt() {
+		return best_cnt;
+	}
+	public void setBest_cnt(int best_cnt) {
+		this.best_cnt = best_cnt;
+	}
+	
 	public String getItem_idx() {
 		return item_idx;
 	}
@@ -111,35 +120,17 @@ public class BoardVO {
 	public void setBoard_star_score(String board_star_score) {
 		this.board_star_score = board_star_score;
 	}
-	public BoardVO() {
-		// TODO Auto-generated constructor stub
-	}
-	public BoardVO(int board_idx, int board_item_idx, String board_type, String board_id, String board_category,
-			String board_subject, String board_content, String board_readcount, String board_date, String item_idx,
-			String member_id, String file1, String file2) {
-		super();
-		this.board_idx = board_idx;
-		this.board_item_idx = board_item_idx;
-		this.board_type = board_type;
-		this.board_id = board_id;
-		this.board_category = board_category;
-		this.board_subject = board_subject;
-		this.board_content = board_content;
-		this.board_readcount = board_readcount;
-		this.board_date = board_date;
-		this.item_idx = item_idx;
-		this.member_id = member_id;
-		this.file1 = file1;
-		this.file2 = file2;
-	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", board_item_idx=" + board_item_idx + ", board_type=" + board_type
 				+ ", board_id=" + board_id + ", board_category=" + board_category + ", board_subject=" + board_subject
 				+ ", board_content=" + board_content + ", board_readcount=" + board_readcount + ", board_date="
-				+ board_date + ", item_idx=" + item_idx + ", member_id=" + member_id + ", file1=" + file1 + ", file2="
-				+ file2 + "]";
+				+ board_date + ", best_cnt=" + best_cnt + ", item_idx=" + item_idx + ", member_id=" + member_id
+				+ ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3 + ", board_star_score="
+				+ board_star_score + "]";
 	}
+	
 	
 	
 	
