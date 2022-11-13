@@ -32,6 +32,21 @@ public class ItemService {
 	public List<BoardVO> getReview(int startRow, int listLimit, String searchType,int item_idx) {
 		return mapper.selectReview(startRow, listLimit,searchType,item_idx);
 	}
+	
+	//상품 후기 별점높은순
+	public List<BoardVO> selectGoodList(int startRow, int listLimit, int item_idx) {
+		return mapper.selectGoodList(startRow, listLimit, item_idx);
+	}
+	
+	//상품 후기 추천 많은순
+	public List<BoardVO> selectBestList(int startRow, int listLimit, int item_idx) {
+		return mapper.selectBestList(startRow, listLimit, item_idx);
+	}
+
+	//상품 후기 별점낮은순
+	public List<BoardVO> selectWorstList(int startRow, int listLimit, int item_idx) {
+		return mapper.selectWorstList(startRow, listLimit, item_idx);
+	}
 
 	// 상품 후기 갯수 조회
 	public int getReviewListCount(String searchType) {
@@ -63,5 +78,9 @@ public class ItemService {
 	public List<ItemVO> sameBrand() {
 		return mapper.selectSameBrand();
 	}
+
+
+
+
 	
 }

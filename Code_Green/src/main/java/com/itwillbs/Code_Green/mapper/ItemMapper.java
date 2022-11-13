@@ -20,7 +20,18 @@ public interface ItemMapper {
 	List<BoardVO> selectReview(
 			@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("searchType") String searchType, 
 			@Param("item_idx")int item_idx);
+	
+	//상품 후기 별점높은순
+	List<BoardVO> selectGoodList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
 
+
+	//상품 후기 추천 많은순
+	List<BoardVO> selectBestList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
+
+	//상품 후기 별점낮은순
+	List<BoardVO> selectWorstList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
+
+	
 	//리뷰 갯수 조회
 	int selectReviewListCount(String searchType);
 
@@ -40,6 +51,8 @@ public interface ItemMapper {
 
 	//상세상세페이지 같은 브랜드상품 2개
 	List<ItemVO> selectSameBrand();
+
+
 
 
 	

@@ -155,7 +155,63 @@
                on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY b.board_idx  desc;     
+			ORDER BY b.board_date  desc;     
+   </select>
+	
+<!-- 	상품 후기 별점높은순 -->
+	 <select id="selectGoodList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+              SELECT  
+		  		b.BOARD_IDX,
+                b.BOARD_SUBJECT,
+                b.BOARD_CONTENT,
+                b.BOARD_ID,
+                b.BOARD_DATE,
+                f.FILE1,
+                f.FILE2,
+                s.board_star_score
+			FROM board b left join file_board f 
+               on b.BOARD_IDX = f.RF_BOARD_IDX
+			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+            WHERE  board_item_idx = #{item_idx}
+			ORDER BY s.board_star_score  desc;   
+   </select>
+	
+	
+	<!-- 	상품 후기 추천 많은순 -->
+	 <select id="selectBestList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+              SELECT  
+		  		b.BOARD_IDX,
+                b.BOARD_SUBJECT,
+                b.BOARD_CONTENT,
+                b.BOARD_ID,
+                b.BOARD_DATE,
+                f.FILE1,
+                f.FILE2,
+                s.board_star_score
+			FROM board b left join file_board f 
+               on b.BOARD_IDX = f.RF_BOARD_IDX
+			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+            WHERE  board_item_idx = #{item_idx}
+			ORDER BY s.board_star_score  desc;   
+   </select>
+   
+   
+   <!-- 	상품 후기 별점낮은순 -->
+	 <select id="selectWorstList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+              SELECT  
+		  		b.BOARD_IDX,
+                b.BOARD_SUBJECT,
+                b.BOARD_CONTENT,
+                b.BOARD_ID,
+                b.BOARD_DATE,
+                f.FILE1,
+                f.FILE2,
+                s.board_star_score
+			FROM board b left join file_board f 
+               on b.BOARD_IDX = f.RF_BOARD_IDX
+			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+            WHERE  board_item_idx = #{item_idx}
+			ORDER BY s.board_star_score  ASC;   
    </select>
 	
 	

@@ -121,42 +121,57 @@ public class MypageController {
 	
 	//------------마이페이지 작성글-------------------------------------------
 	@GetMapping(value = "/myPageBoard.bo")
-	public String myPageBoard(@RequestParam(defaultValue = "1") int pageNum, Model model, @RequestParam String member_id,@ModelAttribute BoardVO board) {
+	public String myPageBoard(@RequestParam(defaultValue = "1") int pageNum, Model model, @RequestParam String member_id,@ModelAttribute BoardVO board, HttpSession session) {
 		
-		int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
-		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
-		
-		// 조회 시작 게시물 번호(행 번호) 계산
-		int startRow = (pageNum - 1) * listLimit;
-		
-		// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
-		// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
-		// => 리턴타입 : List<BoardVO>(boardList)
-		List<BoardVO> BoardList = Rservice.boardList(startRow, listLimit, member_id );
-		// -------------------------------------------
-		// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
-		// => 파라미터 : 없음, 리턴타입 : int(listCount)
-		int listCount = Rservice.getBoardListCount();
+		String sId = (String)session.getAttribute("sId");
+		System.out.println(member_id + ", " + sId);
+		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "member/fail_back";
+		} 
+			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
+			// Model 객체에 "member" 속성명으로 MemberVO 객체 저장
+			System.out.println(member);
+			model.addAttribute("member", member);
+			
+			int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
+			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+			
+			// 조회 시작 게시물 번호(행 번호) 계산
+			int startRow = (pageNum - 1) * listLimit;
+			
+			// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
+			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
+			// => 리턴타입 : List<BoardVO>(boardList)
+			List<BoardVO> BoardList = Rservice.boardList(startRow, listLimit, member_id );
+			// -------------------------------------------
+			// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
+			// => 파라미터 : 없음, 리턴타입 : int(listCount)
+			int listCount = Rservice.getBoardListCount();
 
-		int maxPage = (int)Math.ceil((double)listCount / listLimit);
-		// 시작 페이지 번호 계산
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		// 끝 페이지 번호 계산
-		int endPage = startPage + pageListLimit - 1;
-		// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
-		// 끝 페이지 번호를 최대 페이지 번호로 교체
-		if(endPage > maxPage) {
-			endPage = maxPage;
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			// 시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			// 끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
+			// 끝 페이지 번호를 최대 페이지 번호로 교체
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo pageInfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("BoardList", BoardList);
+			model.addAttribute("member_id", member_id);
+			
+			// member/member_info.jsp 페이지로 이동
+			return "member/myPage_board";
 		}
-		PageInfo pageInfo = new PageInfo(
-				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
-		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("BoardList", BoardList);
-		model.addAttribute("member_id", member_id);
 		
-		return "member/myPage_board";
-	}
+	
 	
 	//------------마이페이지 개인정보 수정-------------------------------------------
 	@RequestMapping(value = "myPage_userInfo", method = RequestMethod.GET)

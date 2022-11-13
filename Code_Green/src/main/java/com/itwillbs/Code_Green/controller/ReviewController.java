@@ -60,8 +60,8 @@ public class ReviewController {
 		int starCount= service.StarScore(star);
 		model.addAttribute("item_idx", item_idx);
 		System.out.println("상품번호 " +item_idx);
-//		model.addAttribute("board_idx", board_idx);
-//		System.out.println("게시판번호 " +board_idx);
+
+		
 		
 		if(insertCount > 0) {
 			if(file_insertCount > 0) {

@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>item_detail</title>
+    <title>베지터틀-${item.item_name }</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>  
+<!--   아코디언게시판 -->
   <style type="text/css">  
     table {
   	  width:100%;
@@ -39,7 +40,6 @@
     table thead tr th{
 		font-weight: 500;
 		color: #000;
-/* 		border-bottom:none; */
 		border-top: none;
 		border-left: none;
 		border-right: none;
@@ -50,7 +50,6 @@
     table tbody tr td  {
 	    font-weight: 500;
 	    color: #000;
-/* 	    border-bottom:none; */
 	    border-top: none;
 	    border-left: none;
 	    border-right: none;
@@ -60,9 +59,6 @@
 	    
 	}  
 	
-/* 	.item table tr:hover{ */
-/* 		background-color: #f2f2f2; */
-/* 	} */
     .hide {
    	 display:none;
     }  
@@ -76,18 +72,70 @@
     
    </style>  
    
+ 	<style type="text/css">
+    	#goodList{
+     		display: none; 
+    	}
+    	#bestList{
+    		display: none;
+    	}
+    	#worstList{
+    		display: none;
+    	}
+    </style>
+     <script type="text/javascript">
+// 	 	window.onload = function(){
+			
+// 			$('#sort').val('${sort}')
+// 			sortItemList($('#sort').val());
+			
+// 		}	
+
+    
+    	var sortItemList = function(value) {
+    		
+    		var aLinks = $('.pageLink');
+    		for(var i=0; i<aLinks.length; i++){
+	    		var str = aLinks[i].href.split('sort=')[0] + 'sort=';
+	    		aLinks[i].href = str + value;
+    		}
+    		
+    		if(value == "worst"){
+    			$('#itemList').hide();
+    			$('#goodList').hide(); 
+	        	$('#bestList').hide();
+	    		$('#worstList').show();
+    		} else if(value == "good") {
+	    		$('#itemList').hide();
+	    		$('#goodList').show();  
+	        	$('#bestList').hide();
+	    		$('#worstList').hide();
+    		} else if(value == "best"){
+	    		$('#itemList').hide();
+	    		$('#goodList').hide(); 
+	        	$('#bestList').show();
+	    		$('#worstList').hide();
+	    	} else {
+	    		$('#itemList').show(); 
+	    		$('#goodList').hide();
+	        	$('#bestList').hide();
+	    		$('#worstList').hide();
+			}
+    	};
+    	
+    </script>  
+	<script type="text/javascript">
+		$(function(){
+			$(":button").click(function(){
+				
+				if(${sessionScope.sId == null}){
+					alert("로그인 후 사용가능합니다!");
+					return history.back();
+				}
+			});
+		});	
+	</script>
 </head>
-<script type="text/javascript">
-$(function(){
-	$(":button").click(function(){
-		
-		if(${sessionScope.sId == null}){
-			alert("로그인 후 사용가능합니다!");
-			return history.back();
-		}
-	});
-});	
-</script>
 <style>
 	select {
 		width: 130px; padding: .5em .5em; border: 1px solid #999; font-family: inherit;  
@@ -116,7 +164,7 @@ $(function(){
                                 <figure>
                                     <div class="ps-wrapper">
                                         <div class="ps-product__gallery" data-arrow="true">
-                                            <div class="item"><a href="/Code_Green/resources/img/products/detail/fullwidth/1.jpg"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a></div>
+                                            <div class="item"><a href="/Code_Green/resources/item/${item.file1 } "><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a></div>
                                         </div>
                                     </div>
                                 </figure>
@@ -161,13 +209,6 @@ $(function(){
                                         <li>포장타입 &nbsp; ${item.item_packing }</li>
                                     </ul>
                                 </div>
-<!--                                 <div class="ps-product__variations"> -->
-<!--                                     <figure> -->
-<!--                                         <figcaption>Color</figcaption> -->
-<!--                                         <div class="ps-variant ps-variant--color color--1"><span class="ps-variant__tooltip">Black</span></div> -->
-<!--                                         <div class="ps-variant ps-variant--color color--2"><span class="ps-variant__tooltip"> Gray</span></div> -->
-<!--                                     </figure> -->
-<!--                                 </div> -->
                                 <div class="ps-product__shopping">
                                     <figure>
                                         <figcaption>상품선택</figcaption>
@@ -194,7 +235,7 @@ $(function(){
  <!-- ==========상품설명=========================================================================================================     -->                          
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-document" align="center">
-                                    <img  src="/Code_Green/resources/item/${item.file2} " alt="">
+                                    <a href="/Code_Green/resources/item/${item.file2 } "><img  src="/Code_Green/resources/item/${item.file2} " alt=""></a>
                                     </div>
                                 </div>
 
@@ -292,16 +333,14 @@ $(function(){
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
-													<select name="searchType"id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
-														<option value="new">최근등록순</option>    
-														<option value="best">좋아요 많은순</option>    
-														<option value="worst">별점 낮은 순</option>    
-														<option value="good">별점 높은 순</option>    
+													<select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
+													  <option value="new">최근 등록순</option>
+													  <option value="best">추천 많은순</option>
+													  <option value="good">별점 높은순</option>
+													  <option value="worst">별점 낮은순</option>
 													</select>
-<!-- 												<table cellspacing="0" border="1" class="recruit" > -->
 												<table border="1" class="recruit" >
 												        <colgroup>  
-<%-- 												            <col width="10%">   --%>
 												            <col width="70%">  
 												            <col width="10%">  
 												            <col width="10%">  
@@ -309,21 +348,26 @@ $(function(){
 												        </colgroup>  
 												        <thead align="center">  
 												            <tr class="" >  
-<!-- 												                <th scope="col">번호</th>   -->
 												                <th scope="col">제목</th>  
 												                <th scope="col">작성자</th>  
 												                <th scope="col">작성일</th>  
 												                <th scope="col">도움</th>  
 												            </tr>  
-												        </thead>  
+												        </thead>
+												  </table>
+												  
+												  
+												  
+												  
+<!-------------------------------------------리뷰) 최근등록순 정렬------------------------------------------->
+												  <table border="1" class="recruit" id="itemList">
 												        <c:forEach var="board" items="${itemList }">
 													        <tbody>  
 													            <tr class="item">  
-	<%-- 												            <td>${board.board_idx }</td>   --%>
-													                <td>${board.board_subject } (별점:${board.board_star_score })</td>  
-													                <td>${board.board_id }</td>  
-													                <td>${board.board_date }</td>  
-													                <td>12</td>  
+													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="10%">${board.board_id }</td>  
+													                <td width="10%">${board.board_date }</td>  
+													                <td width="10%">12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
 													                <td colspan="5">  
@@ -341,6 +385,91 @@ $(function(){
 													        </tbody>  
 												        </c:forEach>
 												    </table>  
+
+<!-------------------------------------------리뷰) 별점 높은 순 정렬------------------------------------------->												    
+											<table border="1" class="recruit" id="goodList">
+
+												        <c:forEach var="board" items="${goodList }">
+													        <tbody>  
+													            <tr class="item">  
+													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="10%">${board.board_id }</td>  
+													                <td width="10%">${board.board_date }</td>  
+													                <td width="10%">12</td>  
+													            </tr>  
+													            <tr class="hide" style="height:300px">  
+													                <td colspan="5">  
+													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+																			<br><br>${board.board_content }
+																			
+																		<div align="right">
+																		    <button>좋아용</button>
+																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																		 </div>
+													                </td>  
+													            </tr>  
+													        </tbody>  
+												        </c:forEach>
+												    </table>  
+												    
+<!-------------------------------------------리뷰) 추천 많은 순 정렬------------------------------------------->
+												  <table border="1" class="recruit" id="bestList">
+												        <c:forEach var="board" items="${bestList }">
+													        <tbody>  
+													            <tr class="item">  
+													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="10%">${board.board_id }</td>  
+													                <td width="10%">${board.board_date }</td>  
+													                <td width="10%">12</td>  
+													            </tr>  
+													            <tr class="hide" style="height:300px">  
+													                <td colspan="5">  
+													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+																			<br><br>${board.board_content }
+																			
+																		<div align="right">
+																		    <button>좋아용</button>
+																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																		 </div>
+													                </td>  
+													            </tr>  
+													        </tbody>  
+												        </c:forEach>
+												    </table>  			
+												    									    
+<!-------------------------------------------리뷰) 최근등록순 정렬------------------------------------------->
+												  <table border="1" class="recruit" id="worstList">
+												        <c:forEach var="board" items="${worstList }">
+													        <tbody>  
+													            <tr class="item">  
+													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="10%">${board.board_id }</td>  
+													                <td width="10%">${board.board_date }</td>  
+													                <td width="10%">12</td>  
+													            </tr>  
+													            <tr class="hide" style="height:300px">  
+													                <td colspan="5">  
+													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
+																			<br><br>${board.board_content }
+																			
+																		<div align="right">
+																		    <button>좋아용</button>
+																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																		 </div>
+													                </td>  
+													            </tr>  
+													        </tbody>  
+												        </c:forEach>
+												    </table>  												    
+<!-------------------------------------------게시판 끝------------------------------------------->
+
+
 												    <script type="text/javascript">
 														function confirmDelete(board_idx) {
 															// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
