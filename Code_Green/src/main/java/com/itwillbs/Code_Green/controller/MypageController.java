@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.QnaService;
 import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
@@ -31,6 +33,8 @@ public class MypageController {
 	private ReviewService Rservice;
 	@Autowired
 	private QnaService Qservice;
+	@Autowired
+	private ItemService Iservice;
 	
 	//------------마이페이지 메인-------------------------------------------
 	@GetMapping(value = "/MemberInfo.me")
@@ -53,22 +57,52 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 찜한상품-------------------------------------------
-	@GetMapping(value = "/myPage_heart")
-	public String myPage_heart(@RequestParam String member_id, Model model, HttpSession session) {
+	@GetMapping(value = "/myPage_wishList")
+	public String myPage_heart(@RequestParam(defaultValue = "1") int pageNum,
+			Model model, @RequestParam String member_id,
+			@ModelAttribute ItemVO item, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
-		System.out.println(member_id + ", " + sId);
 		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "member/fail_back";
-		} else {
-			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
-			// Model 객체에 "member" 속성명으로 MemberVO 객체 저장
-			System.out.println(member);
-			model.addAttribute("member", member);
-			// member/member_info.jsp 페이지로 이동
-		return "member/myPage_heart";
 		}
+			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
+			model.addAttribute("member", member);
+			
+			
+			int listLimit = 7; // 한 페이지 당 표시할 게시물 목록 갯수 
+			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+			int startRow = (pageNum - 1) * listLimit;
+			
+			//마이페이지 찜한 상품 리스트
+			List<ItemVO> WishList = Iservice.wishList(startRow, listLimit, member_id );
+			
+			//마이페이지 찜한 상품 리스트 갯수
+			int listCount = Iservice.getWishListCount(member_id);
+			session.setAttribute("listCount", listCount);
+			
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			// 시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			// 끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
+			// 끝 페이지 번호를 최대 페이지 번호로 교체
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo pageInfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("WishList", WishList);
+			model.addAttribute("listCount", listCount);
+			model.addAttribute("member_id", member_id);
+			
+			
+			return "member/myPage_wishList";
+		
 	}
 	
 	//------------마이페이지 팔로우-------------------------------------------
@@ -147,7 +181,7 @@ public class MypageController {
 			// -------------------------------------------
 			// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
-			int listCount = Rservice.getBoardListCount();
+			int listCount = Rservice.getBoardListCount(member_id);
 
 			int maxPage = (int)Math.ceil((double)listCount / listLimit);
 			// 시작 페이지 번호 계산
@@ -165,6 +199,7 @@ public class MypageController {
 			model.addAttribute("pageInfo", pageInfo);
 			model.addAttribute("BoardList", BoardList);
 			model.addAttribute("member_id", member_id);
+			model.addAttribute("listCount", listCount);
 			
 			// member/member_info.jsp 페이지로 이동
 			return "member/myPage_board";

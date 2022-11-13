@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>베지터틀</title>
+    <title>베지터틀 -신상품</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -86,14 +86,14 @@
 
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
                                                         <ul class="ps-product__actions">
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.manager_brandname }</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                                             <!--  *별점 카운트 하기  -->
                                                             <div class="ps-product__rating">
                                                                 <select class="ps-rating" data-read-only="true">
@@ -108,12 +108,13 @@
 						                                             	</c:choose>
 						                                             </c:forEach>
                                                                 </select><span>${item.board_star_score }</span>
+                                                               
                                                             </div>
                                                             
                                                             <!-- 가격 -->
                                                             <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&item_category=${item.item_category}">${item.item_name }</a>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                                             <h4 class="ps-product__price">${item.item_price }원</h4>
                                                         </div>
                                                     </div>

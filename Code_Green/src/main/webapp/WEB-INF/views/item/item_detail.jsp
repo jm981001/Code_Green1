@@ -90,7 +90,6 @@
 // 			sortItemList($('#sort').val());
 			
 // 		}	
-
     
     	var sortItemList = function(value) {
     		
@@ -102,23 +101,23 @@
     		
     		if(value == "worst"){
     			$('#itemList').hide();
-    			$('#goodList').hide(); 
-	        	$('#bestList').hide();
+    			$('#goodList').hide(); 
+	        	$('#bestList').hide();
 	    		$('#worstList').show();
     		} else if(value == "good") {
 	    		$('#itemList').hide();
-	    		$('#goodList').show();  
-	        	$('#bestList').hide();
+	    		$('#goodList').show();  
+	        	$('#bestList').hide();
 	    		$('#worstList').hide();
     		} else if(value == "best"){
 	    		$('#itemList').hide();
-	    		$('#goodList').hide(); 
-	        	$('#bestList').show();
+	    		$('#goodList').hide(); 
+	        	$('#bestList').show();
 	    		$('#worstList').hide();
 	    	} else {
-	    		$('#itemList').show(); 
+	    		$('#itemList').show(); 
 	    		$('#goodList').hide();
-	        	$('#bestList').hide();
+	        	$('#bestList').hide();
 	    		$('#worstList').hide();
 			}
     	};
@@ -144,7 +143,7 @@
 		  float: right; padding-bottom: 3px; font-size: 1em;
 	}
 	select::-ms-expand {
-	        display: none;
+	        display: none;
 	    }
 </style>
 <body>
@@ -218,7 +217,7 @@
                                             <input class="form-control" type="text" placeholder="1">
                                         </div>
                                     </figure><a class="ps-btn ps-btn--black" href="#">Add to cart</a>
-                                    <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a></div>
+                                    <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i>${item.heart }</a></div>
                                 </div>
                             </div>
                         </div>
@@ -376,9 +375,9 @@
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
-																		    <button>좋아용</button>
+																		    <button>좋아용</button>
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -404,9 +403,9 @@
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
-																		    <button>좋아용</button>
+																		    <button>좋아용</button>
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -431,9 +430,9 @@
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
-																		    <button>좋아용</button>
+																		    <button>좋아용</button>
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -458,9 +457,9 @@
 																			<br><br>${board.board_content }
 																			
 																		<div align="right">
-																		    <button>좋아용</button>
+																		    <button>좋아용</button>
 																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
-																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}')">
+																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -575,6 +574,9 @@
                                                 <div class="form-group">
                                                 	<input type="hidden" name="board_id" value="${sessionScope.sId}" />
                                                 	<input type="hidden" name="item_idx" value="${item.item_idx}" />
+                                                	<input type="hidden" name="item_category" value="${item.item_category}" />
+                                                	<input type="hidden" name="manager_brandname" value="${item.manager_brandname}" />
+                                                	<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
                                                     <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요" required="required"></textarea>
                                                     <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?" required="required"></textarea>
                                                 </div>
@@ -639,7 +641,7 @@
 														            		<br><br><br>
 														            	
 														                	(관리자의 답글)<br>
-														                    안녕하세요 ㅇㅇㅇ 입니다. <br>
+														                    안녕하세요 베지터틀 입니다. <br>
 																			순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
 																			<br>
 																			먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
@@ -654,9 +656,9 @@
 																			감사합니다.
 														                    <br><br><br>
 														                  <div align="right">
-																		    <button>좋아용</button>
-																			<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&pageNum=${param.pageNum}'">
-																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}')">
+																		    <button>좋아용</button>
+																			<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
+																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 														                </td>  
 														            </tr>  
@@ -707,28 +709,29 @@
                                     <div class="row">
                                         <div class="col-xl-10 col-lg-7 col-md-12 col-sm-12 col-12 ">
                                             <form class="ps-form--review" action="QnaWritePro.bo" method="post" name="QnaForm">
+                                                
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
 												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
                                                 <div class="form-group">
                                                 	<input type="hidden" name="qna_id" value="${sessionScope.sId}" />
                                                 	<input type="hidden" name="item_idx" value="${item.item_idx}" />
+                                                	<input type="hidden" name="item_category" value="${item.item_category}" />
+                                                	<input type="hidden" name="manager_brandname" value="${item.manager_brandname}" />
+                                                	<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
                                                     <textarea class="form-control" id="qna_subject" name="qna_subject" rows="1" placeholder="상품문의 작성 전 확인해주세요 "></textarea>
                                                     <textarea class="form-control" id="qna_content" name="qna_content" rows="15" cols="60" placeholder=
 "* 답변은 영업일 기준 2~3일 소요됩니다
 * 해당 게시판의 성격과 다른 글은 사전동이 없이 담당 게시판으로 이동될 수 있습니다.
 * 배송관련, 주문(취소, 교환, 환불) 관련 문의 및 요청사항은 마이컬리 내 1:1 문의에 남겨주세요.
-
 제품
 * 제품 상세정보 : 영양성분 및 함량, 용량, 보관 및 취급 방법 등 제품 정보는 상세이미지, 또는 상세정보에서
 확인가능합니다
-
 주문취소
 * 배송 단계별로 주문취소 방법이 상이합니다. 
 * [입금확인] 단계 : [ㅇㅇㅇㅇ > 주문내역 상세페이지] 에서 직접 취소 가능
 * [입금확인] 이후 단계 : 고객센터로 문의
 * 주문상품의 부분 취소는 불가능합니다. 전체 주문 취소 후 재구매 해주세요.
-
 배송
 * 주문 완료 후 변경은 불가능합니다.
 * 배송일 배송시간 지정은 불가능합니다.
@@ -757,14 +760,14 @@
                         <div class="widget__content">
 						 <c:forEach var="item" items="${sameBrand }">
                          <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
                                             <option value="1">1</option>
@@ -776,7 +779,7 @@
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                      <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
@@ -800,14 +803,14 @@
                        <c:forEach var="item" items="${itemList6 }">
                        
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
                                             <option value="1">1</option>
@@ -819,7 +822,7 @@
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}">${item.item_name }</a>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                      <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>

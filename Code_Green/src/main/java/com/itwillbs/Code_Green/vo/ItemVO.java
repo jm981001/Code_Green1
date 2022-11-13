@@ -2,7 +2,6 @@ package com.itwillbs.Code_Green.vo;
 
 public class ItemVO {
 	
-	
 	private int item_idx;
 	private String re_manager_idx;
 	private String item_name;
@@ -25,6 +24,8 @@ public class ItemVO {
 	private String star3;
 	private String star4;
 	private String star5;
+	private String heart;
+	private String member_id;
 	
 	public int getItem_idx() {
 		return item_idx;
@@ -164,6 +165,21 @@ public class ItemVO {
 	}
 	public void setStar5(String star5) {
 		this.star5 = star5;
+	}
+	
+	public String getHeart() {
+		return heart;
+	}
+	public void setHeart(String heart) {
+		this.heart = heart;
+	}
+	
+	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	public ItemVO() {
 		// TODO Auto-generated constructor stub

@@ -16,6 +16,9 @@ public class QnaVO {
     private String qna_readcount;
     private String qna_date;
     private String item_idx; //상품번호
+    private String manager_brandname;
+    private String item_category;
+    
 	public int getQna_idx() {
 		return qna_idx;
 	}
@@ -105,6 +108,19 @@ public class QnaVO {
 	}
 	public void setItem_idx(String item_idx) {
 		this.item_idx = item_idx;
+	}
+	
+	public String getManager_brandname() {
+		return manager_brandname;
+	}
+	public void setManager_brandname(String manager_brandname) {
+		this.manager_brandname = manager_brandname;
+	}
+	public String getItem_category() {
+		return item_category;
+	}
+	public void setItem_category(String item_category) {
+		this.item_category = item_category;
 	}
 	public QnaVO() {
 		// TODO Auto-generated constructor stub

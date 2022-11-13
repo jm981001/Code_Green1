@@ -45,7 +45,7 @@
 								<div class="ps-widget__content">
 									<ul>
 									 	<li><a href="MemberInfo.me?member_id=${sessionScope.sId }"><i class="icon-store"></i> 마이페이지</a></li>
-										<li><a href="myPage_heart?member_id=${sessionScope.sId }"><i class="icon-heart"></i>찜한 상품</a></li>
+										<li><a href="myPage_wishList?member_id=${sessionScope.sId }"><i class="icon-heart"></i>찜한 상품</a></li>
 										<li><a href="myPage_following"><i class="icon-store"></i>팔로우한 브랜드</a></li>
 										<li><a href="myPage_emoney"><i class="icon-store"></i>적립금내역</a></li>
 										<li><a href="myPage_buyListNull"><i class="icon-papers"></i>주문목록</a></li>

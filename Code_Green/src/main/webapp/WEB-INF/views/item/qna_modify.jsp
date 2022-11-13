@@ -64,12 +64,11 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<%--                                                 	<input type="text" id="qna_id" name="qna_id" value="${sessionScope.sId}" /> --%>
-								<input type="hidden" id="qna_idx" name="qna_idx"
-									value="${qna.qna_idx}" /> <input type="hidden" id="item_idx"
-									name="item_idx" value="${param.item_idx}" /> <input
-									type="hidden" id="pageNum" name="pageNum"
-									value="${param.pageNum }" />
+								<input type="hidden" id="qna_idx" name="qna_idx"value="${qna.qna_idx}" /> 
+								<input type="hidden" id="item_idx" name="item_idx" value="${param.item_idx}" /> 
+								<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
+								<input type="hidden" name="item_category" value="${param.item_category}" />
+                                <input type="hidden" name="manager_brandname" value="${param.manager_brandname}" />
 								<textarea class="form-control" id="qna_subject"
 									name="qna_subject" rows="1">${qna.qna_subject  }</textarea>
 								<textarea class="form-control" id="qna_content"

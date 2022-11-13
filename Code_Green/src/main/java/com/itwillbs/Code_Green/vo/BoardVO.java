@@ -18,6 +18,7 @@ public class BoardVO {
 	private String file2;
 	private String file3;
 	private String board_star_score;
+	private String item_category;
 	
 	
 	public int getBoard_idx() {
@@ -121,6 +122,13 @@ public class BoardVO {
 		this.board_star_score = board_star_score;
 	}
 	
+	
+	public String getItem_category() {
+		return item_category;
+	}
+	public void setItem_category(String item_category) {
+		this.item_category = item_category;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", board_item_idx=" + board_item_idx + ", board_type=" + board_type

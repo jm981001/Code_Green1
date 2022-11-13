@@ -116,11 +116,14 @@
 							on s.rf_board_idx = b.BOARD_IDX
 					where b.BOARD_ITEM_IDX=#{item_idx}
 					group by board_star_score
-					having  s.board_star_score=5),0) as star5
+					having  s.board_star_score=5),0) as star5,
+			ifnull((select count(*) from heart
+				where rf_item_idx = #{item_idx}
+                group by rf_item_idx),0)as heart
 		 FROM item i 
 			LEFT JOIN file_item f 
 				ON i.item_idx = f.rf_item_idx 
-			JOIN manager m 
+			LEFT JOIN manager m 
 				ON i.re_manager_idx =  m.manager_idx
 			 LEFT JOIN (SELECT board_item_idx
 							 , count(*) as count 
@@ -244,13 +247,16 @@
 			   i.item_price,
 			   i.item_sale, 
 			   i.item_category,
-			   f.file1
-			from item i join file_item f
-			on i.item_idx = f.rf_item_idx
-			WHERE f.file1 NOT LIKE '%상세%' 
-<!-- 			and i.item_category = #{i.item_category} -->
+			   f.file1,
+			   m.manager_brandname
+			from item i 
+				LEFT JOIN file_item f
+					ON i.item_idx = f.rf_item_idx
+				LEFT JOIN manager m 
+					ON i.re_manager_idx =  m.manager_idx
+			WHERE i.item_category = #{i.item_category}
 			ORDER BY
-				i.item_idx  LIMIT 6
+				i.item_category  LIMIT 6
 	</select>
 	
 	
@@ -270,18 +276,53 @@
 	
 		<!--상세상세페이지 같은 브랜드상품 2개 -->
 	<select id="selectSameBrand" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-		select i.item_idx, 
+		SELECT i.item_idx, 
 			   i.re_manager_idx,
 			   i.item_name,
 			   i.item_price,
 			   i.item_sale, 
 			   i.item_category,
-			   f.file1
-			from item i join file_item f
-			on i.item_idx = f.rf_item_idx
-			WHERE f.file1 NOT LIKE '%상세%' 
-<!-- 			and i.item_category = #{i.item_category} -->
+			   f.file1,
+			   m.manager_brandname
+			FROM item i
+				LEFT JOIN  file_item f
+					ON i.item_idx = f.rf_item_idx
+				LEFT JOIN manager m 
+					ON i.re_manager_idx =  m.manager_idx
+			WHERE  m.manager_brandname = #{ m.manager_brandname}
 			ORDER BY
-				i.item_idx  LIMIT 2
+				m.manager_brandname  LIMIT 2
+	</select>
+	
+	
+<!-- 	마이페이지 찜한 상품 리스트 -->
+	<select id="wishList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT i.item_name
+			 , i.item_price
+			 , f.file1
+			 , i.item_idx
+			 , i.item_category
+			 , a.manager_brandname
+	 		FROM heart h 
+	 			LEFT JOIN item i 
+					ON h.rf_item_idx = i.item_idx
+	    		LEFT JOIN member m
+	    			ON h.rf_member_idx = m.member_idx
+	  		    LEFT JOIN file_item f
+					ON i.item_idx = f.file_item_idx
+				LEFT JOIN manager a 
+					ON i.re_manager_idx =  a.manager_idx
+			 WHERE m.member_id = #{member_id}
+			 order by h.heart_date desc LIMIT #{startRow}, #{listLimit};
+	</select>
+	
+	
+<!-- 	마이페이지 찜한 상품 갯수-->
+	<select id="selectWishListCount" resultType="integer">
+		SELECT count(*)
+			 FROM heart h
+			    LEFT JOIN member m
+			    ON h.rf_member_idx = m.member_idx
+			 WHERE m.member_id = #{member_id};
 	</select>
 </mapper>

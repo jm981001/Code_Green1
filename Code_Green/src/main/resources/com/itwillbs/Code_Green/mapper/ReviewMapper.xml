@@ -19,8 +19,7 @@
 					#{board_subject}, 
 					#{board_content}, 
 					"0", 
-					date_format(now(),'%Y%m%d'),
-					"0"
+					date_format(now(),'%Y%m%d')
 					)
 	</insert>
 	
@@ -66,6 +65,7 @@
 	</delete>
 	
 	
+	
 		<!-- 마이페이지 작성글 목록-->
 	<select id="selectBoardList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		 SELECT *
@@ -74,6 +74,7 @@
 		 ORDER BY board_idx DESC
 		 LIMIT #{startRow}, #{listLimit}
 	</select>
+	
 	
 	
 		<!-- 마이페이지 작성글 갯수 -->

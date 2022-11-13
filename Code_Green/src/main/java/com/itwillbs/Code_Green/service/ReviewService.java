@@ -33,8 +33,8 @@ public class ReviewService {
 	}
 
 	//마이페이지 작성글 갯수
-	public int getBoardListCount() {
-		return mapper.selectItemListCount();
+	public int getBoardListCount(String member_id) {
+		return mapper.selectItemListCount(member_id);
 	}
 
 	//리뷰 파일업로드

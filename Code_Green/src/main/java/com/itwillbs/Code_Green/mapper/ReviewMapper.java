@@ -20,7 +20,7 @@ public interface ReviewMapper {
 	List<BoardVO> selectBoardList(@Param("startRow") int startRow,@Param("listLimit") int listLimit, @Param("member_id") String member_id);
 
 	//마이페이지 작성글 갯수
-	int selectItemListCount();
+	int selectItemListCount(String member_id);
 
 	//리뷰 파일업로드
 	int insertFile(File_boardVO file);

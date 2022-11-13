@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,8 @@ public class ReviewController {
 	
 	//------------리뷰작성-------------------------------------------
 	@PostMapping(value = "/ReviewWritePro.bo")
-	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star) {
+	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star
+								 ,@RequestParam String item_category,@RequestParam String manager_brandname) {
 //		@RequestParam String board_idx
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
@@ -59,7 +59,8 @@ public class ReviewController {
 		int file_insertCount = service.registReview_file(file);
 		int starCount= service.StarScore(star);
 		model.addAttribute("item_idx", item_idx);
-		System.out.println("상품번호 " +item_idx);
+		model.addAttribute("item_category", item_category);
+		model.addAttribute("manager_brandname", manager_brandname);
 
 		
 		
@@ -105,13 +106,16 @@ public class ReviewController {
 
 	
 	@GetMapping(value = "/ReviewDelete.bo")
-	public String deletePro(@RequestParam String board_idx, Model model, HttpSession session,@RequestParam String item_idx) {
+	public String deletePro(@RequestParam String board_idx, Model model, HttpSession session,@RequestParam String item_idx
+			,@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam String item_category,@RequestParam String manager_brandname) {
 		// Service - removeBoard() 메서드 호출하여 삭제 작업 요청
 		// => 파라미터 : BoardVO 객체, 리턴타입 : int(deleteCount)
 			int deleteCount = service.removeReview(board_idx);
 			model.addAttribute("item_idx", item_idx);
-			// 삭제 실패 시 "패스워드 틀림!" 메세지 저장 후 fail_back.jsp 페이지로 포워딩
-			// 아니면, BoardList.bo 서블릿 요청(페이지번호 전달)
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("manager_brandname",manager_brandname);
+			model.addAttribute("item_category",item_category);
 			if(deleteCount > 0) {
 				return "redirect:/ItemDetail.bo";
 //				return "redirect:/ItemList.bo?";

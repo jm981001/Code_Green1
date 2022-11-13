@@ -65,8 +65,8 @@ public class ItemService {
 	}
 
 	//상세상세페이지 안 관련상품 6개
-	public List<ItemVO> itemList6() {
-		return mapper.selectItemList6();
+	public List<ItemVO> itemList6(String item_category) {
+		return mapper.selectItemList6(item_category);
 	}
 
 	//상품 문의 리스트
@@ -75,8 +75,19 @@ public class ItemService {
 	}
 
 	//상세상세페이지 같은 브랜드상품 2개
-	public List<ItemVO> sameBrand() {
-		return mapper.selectSameBrand();
+	public List<ItemVO> sameBrand(String manager_brandname) {
+		return mapper.selectSameBrand(manager_brandname);
+	}
+
+
+	//마이페이지 찜한 상품 리스트
+	public List<ItemVO> wishList(int startRow, int listLimit, String member_id) {
+		return mapper.wishList(startRow, listLimit, member_id);
+	}
+
+	//마이페이지 찜한 상품 리스트 갯수
+	public int getWishListCount(String member_id) {
+		return mapper.selectWishListCount(member_id);
 	}
 
 

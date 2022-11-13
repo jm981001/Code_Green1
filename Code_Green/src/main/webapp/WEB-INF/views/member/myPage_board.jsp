@@ -52,7 +52,7 @@
                         <div class="ps-section__right">
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
-                                    <h3>작성글</h3>
+                                    <h3>작성글 ${listCount }</h3>
                                 </div>
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
