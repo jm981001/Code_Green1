@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,15 +128,18 @@
 
 <!-------------------------------------------form 태그 시작 ----------------------------------->
     <form action="recipe_detail" method="get">
+    
+    <c:forEach var="board" items="${RecipeList }">
+       
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-1.jpg" alt="" onclick="location.href='recipe_detail'"></a>
+                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-1.jpg" 
+                        onclick="location.href='recipe_detail?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}'"></a>
                         <div class="ri-text">
-                            <div class="cat-name">요리종류</div>
-                                <h4>레시피 제목</h4>
-                            <p>작성자,조회수,좋아요수,짧은소개?</p>
+                                <h4></h4>
+                            <p>${board.board_id }${board.board_subject } </p>
                         </div>
                     </div>
                 </div>
@@ -143,43 +147,6 @@
                     <div class="recipe-item">
                         <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-2.jpg" alt="" onclick="location.href='recipe_detail'"></a>
                         <div class="ri-text">
-                            <div class="cat-name">요리종류</div>
-                            <a href="recipe_detail">
-                                <h4>레시피 제목</h4>
-                            </a>
-                            <p>작성자,조회수,좋아요수,짧은소개?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-3.jpg" alt="" onclick="location.href='recipe_detail'"></a>
-                        <div class="ri-text">
-                            <div class="cat-name">요리종류</div>
-                            <a href="recipe_detail">
-                                <h4>레시피 제목</h4>
-                            </a>
-                            <p>작성자,조회수,좋아요수,짧은소개?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-4.jpg" alt="" onclick="location.href='recipe_detail'"></a>
-                        <div class="ri-text">
-                            <div class="cat-name">요리종류</div>
-                            <a href="recipe_detail">
-                                <h4>레시피 제목</h4>
-                            </a>
-                            <p>작성자,조회수,좋아요수,짧은소개?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-5.jpg" alt="" onclick="location.href='recipe_detail'"></a>
-                        <div class="ri-text">
-                            <div class="cat-name">요리종류</div>
                             <a href="recipe_detail">
                                 <h4>레시피 제목</h4>
                             </a>
@@ -197,8 +164,13 @@
 	            <a href="#">Next</a>
 	 	        <input type="button" value="작성" id="recipe-write" onclick="location.href='recipe_form'">
              </div>
+           
            </div>
+          
+    </c:forEach>
     </form>
+  
+  
     </section>
 <!-------------------------------------------form 태그 끝 ----------------------------------->
     
