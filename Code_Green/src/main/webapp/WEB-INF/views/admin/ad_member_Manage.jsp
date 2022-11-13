@@ -165,28 +165,10 @@
                 
                 
                 
-                
-<!--                 <div class="ps-section__footer"> -->
-<!--                     <p>Show 10 in 30 items.</p> -->
-<!--                     <ul class="pagination"> -->
-<!--                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
-<!--                         <li class="active"><a href="#">1</a></li> -->
-<!--                         <li><a href="#">2</a></li> -->
-<!--                         <li><a href="#">3</a></li> -->
-<!--                         <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
-<!--                     </ul> -->
-<!--                 </div> -->
+              
             </section>
             <section id="pageList">
-		<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
-<%-- 		<c:choose> --%>
-<%-- 			<c:when test="${pageInfo.pageNum > pageInfo.startPage }"> --%>
-<%-- 				<input type="button" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageInfo.pageNum - 1}'"> --%>
-<%-- 			</c:when> --%>
-<%-- 			<c:otherwise> --%>
-<!-- 				<input type="button" value="이전"> -->
-<%-- 			</c:otherwise> --%>
-<%-- 		</c:choose> --%>
+	
 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
 			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
@@ -203,9 +185,10 @@
 		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
 		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
 	</section>
-</body>
-        </div>
-    </main>
+
+					</div>
+    			</main>
+        
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/bootstrap/js/bootstrap.min.js"></script>

@@ -50,8 +50,6 @@ public class AdminService {
 		return mapper.deleteMember(id);
 	}
 	
-	
-
 	//회원관리 검색기능
 	public int getBoardListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
@@ -62,17 +60,29 @@ public class AdminService {
 	
 	//여기부터는 기업
 	
-
-	// 기업 목록 조회(승인완료)
-	public List<ManagerVO> getManagerList() {
+	//기업관리(승인완료) 검색기능
+	public int getManagerListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectManagerList();
+		return mapper.selectManagerListCount(searchType, keyword);
 	}
 	
-	// 기업 목록 조회(미승인)
-	public List<ManagerVO> getManagerAuthList() {
+
+	//기업목록 조회(승인완료)
+	public List<ManagerVO> getManagerList(int startRow, int listLimit, String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectManagerAuthList();
+		return mapper.selectManagerList(startRow, listLimit, searchType, keyword);
+	}
+	
+	//기업관리(미승인) 검색기능
+		public int getAuthListCount(String searchType, String keyword) {
+			// TODO Auto-generated method stub
+			return mapper.selectAuthListCount(searchType, keyword);
+		}
+	
+	//기업목록 조회(미승인)
+	public List<ManagerVO> getManagerAuthList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectManagerAuthList(startRow, listLimit, searchType, keyword);
 	}
 	
 
@@ -112,13 +122,23 @@ public class AdminService {
 	//여기부터는 게시글 관리(커뮤,레시피 등)
 	
 	
-	
-	//게시판 관리 목록
+	//커뮤니티 게시판 목록
 	public List<BoardVO> getBoardList() {
 		// TODO Auto-generated method stub
 		return mapper.selectBoardList();
 	}
+
+	//후기게시판 갯수 조회 | 검색
+	public int getReviewListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewListCount(searchType, keyword);
+	}
 	
+	//후기 게시판 목록
+		public List<BoardVO> getReviewList(int startRow, int listLimit, String searchType, String keyword) {
+			// TODO Auto-generated method stub
+			return mapper.selectReviewList(startRow, listLimit, searchType, keyword);
+		}
 	
 	
 	//게시판 글 삭제
@@ -172,6 +192,10 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportStatus(board_idx, report);
 	}
+
+	
+
+	
 	
 	
 

@@ -218,7 +218,10 @@ public class AdminController {
 		
 		//------------전체관리자 기업관리(승인완료)----------------------------
 		@GetMapping(value = "/ad_Manager_manage")
-		public String ad_Manager_manage(Model model, HttpSession session) {
+		public String ad_Manager_manage(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
 			
 			String sId = (String)session.getAttribute("sId");
 			
@@ -227,8 +230,37 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			List<ManagerVO> managerList = service.getManagerList();
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			//기업목록 조회
+			List<ManagerVO> managerList = service.getManagerList(startRow, listLimit,
+																searchType, keyword);
+			
+			int listCount = service.getManagerListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
 			model.addAttribute("managerList", managerList);
+			model.addAttribute("pageInfo", pageinfo); 
 			System.out.println(managerList);
 			return "admin/ad_Manager_manage";
 		}
@@ -236,7 +268,10 @@ public class AdminController {
 		
 		//------------전체관리자 기업관리(승인대기)----------------------------
 		@GetMapping(value = "/ad_Manager_auth")
-		public String ad_ad_Manager_auth(Model model, HttpSession session) {
+		public String ad_ad_Manager_auth(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
 			
 			String sId = (String)session.getAttribute("sId");
 			
@@ -245,8 +280,38 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			List<ManagerVO> managerAuthList = service.getManagerAuthList();
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			
+			List<ManagerVO> managerAuthList = service.getManagerAuthList(startRow, listLimit,
+																		searchType, keyword);
+			
+			int listCount = service.getAuthListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
 			model.addAttribute("managerAuthList", managerAuthList);
+			model.addAttribute("pageInfo", pageinfo);
 			System.out.println(managerAuthList);
 			return "admin/ad_Manager_auth";
 		}
@@ -370,16 +435,60 @@ public class AdminController {
 		
 		
 		
-		//------------전체관리자 후기 게시판 ----------------------------
+		//------------관리자 후기 게시판 ----------------------------
 		@RequestMapping(value = "/ad_Board_Review", method = RequestMethod.GET)
-		public String ad_Board_Review() {
+		public String ad_Board_Review(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			List<BoardVO> reviewList = service.getReviewList(startRow, listLimit,
+															searchType, keyword);
+//			System.out.println(reviewList);
+			
+			int listCount = service.getReviewListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			model.addAttribute("reviewList", reviewList);
+			model.addAttribute("pageInfo", pageinfo);
+			
 			return "admin/ad_Board_Review";
 		}
 			
 			
 			
 			
-		//------------전체관리자 커뮤니티 게시판 관리----------------------------
+		//------------관리자 커뮤니티 게시판 관리----------------------------
 		@GetMapping(value = "/ad_Board_Management")
 		public String ad_Board_Management(Model model, HttpSession session) {
 			
@@ -400,7 +509,7 @@ public class AdminController {
 		
 		
 		
-		//------------전체관리자 게시글 상세조회----------------------------
+		//------------관리자 게시글 상세조회----------------------------
 		@GetMapping(value = "/ad_Board_Detail")
 		public String ad_Board_Detail() {
 			return "admin/ad_Board_Detail";

@@ -74,7 +74,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>1:1 문의글 관리</h3>
+                    <h3>1:1 문의 | <a href="ad_item_qna">상품문의</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -84,16 +84,17 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="ad_Manager_manage" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Search..." />
+                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
                                 <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">Status</option>
-                                        <option value="2">Active</option>
-                                        <option value="3">Inactive</option>
+                                    <select class="ps-select" name="searchType">
+                                        <option value="category">배송문의</option>
+                                        <option value="category">주문/결제/반품/교환문의</option>
+                                        <option value="category">상품누락문의</option>
+                                        <option value="category">기타문의</option>
                                     </select>
                                 </div>
                             </div>
@@ -116,7 +117,7 @@
                         <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
-                                    <th>커뮤니티</th>
+                                    <th>카테고리</th>
                                     <th>제목</th>
                                     <th>작성자(아이디)</th>
                                     <th>작성일</th>
@@ -126,7 +127,7 @@
                             <tbody >
                             <c:forEach var="qnaList" items="${OneQnaList }">
                                 <tr>
-                                	<td>${qnaList.qna_type }</td>
+                                	<td>${qnaList.qna_category }</td>
                                     <td onclick="location.href='ad_One_Board_Detail?subject=${qnaList.qna_subject }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
                                     <td>${qnaList.qna_id }</td>
                                     <td>${qnaList.qna_date }</td>
