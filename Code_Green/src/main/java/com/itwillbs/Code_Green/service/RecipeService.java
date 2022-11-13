@@ -36,4 +36,9 @@ public class RecipeService {
 		return mapper.selectBoard(board_idx);
 	}
 
+	//레시피 작성
+	public int registRecipe(BoardVO board) {
+		return mapper.insertRecipe(board);
+	}
+
 }

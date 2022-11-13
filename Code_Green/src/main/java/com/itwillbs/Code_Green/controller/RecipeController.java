@@ -1,14 +1,22 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.RecipeService;
 import com.itwillbs.Code_Green.vo.BoardVO;
@@ -102,23 +110,18 @@ public class RecipeController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "recipe_form", method = RequestMethod.GET)
-	public String recipe_form() {
-		return "recipe/recipe_form";
+	// 글 쓰기 폼 - POST
+	@PostMapping(value = "/recipe_formPro")
+	public String writePro(@ModelAttribute BoardVO board, Model model, HttpSession session) {
+		int insertCount = service.registRecipe(board);
+
+		if (insertCount > 0) {
+			return "redirect:/recipe_main";
+		} else {
+			model.addAttribute("msg", "글 쓰기 실패!");
+			return "member/fail_back";
+		}
 	}
-
-
-
-
-
-
 
 
 

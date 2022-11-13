@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.RecipeMapper">
-							
+						
 	<select id="selectRecipeList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT * 
 			FROM board WHERE board_type = '레시피'
@@ -78,7 +78,9 @@
 			FROM board
 			WHERE board_type = '레시피' AND board_idx = #{board_idx}
 	</select>				
-							
+						
+						
+	
 							
 							
 </mapper>

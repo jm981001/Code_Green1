@@ -22,5 +22,8 @@ public interface RecipeMapper {
 
 	// 게시물 상세 정보 조회
 	BoardVO selectBoard(int board_idx);
+
+	//레시피 작성
+	int insertRecipe(BoardVO board);
 	
 }

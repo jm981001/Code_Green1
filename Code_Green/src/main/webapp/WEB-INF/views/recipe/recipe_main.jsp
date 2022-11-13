@@ -127,54 +127,73 @@
 
 
 <!-------------------------------------------form 태그 시작 ----------------------------------->
-    <form action="recipe_detail" method="get">
-    
-    <c:forEach var="board" items="${RecipeList }">
-       
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-1.jpg" 
-                        onclick="location.href='recipe_detail?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}'"></a>
-                        <div class="ri-text">
-                                <h4></h4>
-                            <p>${board.board_id }${board.board_subject } </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="recipe-item">
-                        <a href="recipe_detail"><img src="/Code_Green/resources/img/recipe/recipe-2.jpg" alt="" onclick="location.href='recipe_detail'"></a>
-                        <div class="ri-text">
-                            <a href="recipe_detail">
-                                <h4>레시피 제목</h4>
-                            </a>
-                            <p>작성자,조회수,좋아요수,짧은소개?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<!--페이징 -->
-            <div class="recipe-pagination">
-	            <a href="#" class="active">01</a>
-	            <a href="#">02</a>
-	            <a href="#">03</a>
-	            <a href="#">04</a>
-	            <a href="#">Next</a>
-	 	        <input type="button" value="작성" id="recipe-write" onclick="location.href='recipe_form'">
-             </div>
-           
-           </div>
-          
-    </c:forEach>
-    </form>
-  
-  
-    </section>
+		<form action="recipe_detail" method="get">
+
+			<c:forEach var="board" items="${RecipeList }">
+
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4 col-sm-6">
+							<div class="recipe-item">
+								<a href="recipe_detail"><img
+									src="/Code_Green/resources/img/recipe/recipe-1.jpg"
+									onclick="location.href='recipe_detail?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}'"></a>
+								<div class="ri-text">
+									<h4></h4>
+									<p>${board.board_id }${board.board_subject }</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="recipe-item">
+								<a href="recipe_detail"><img
+									src="/Code_Green/resources/img/recipe/recipe-2.jpg" alt=""
+									onclick="location.href='recipe_detail'"></a>
+								<div class="ri-text">
+									<a href="recipe_detail">
+										<h4>레시피 제목</h4>
+									</a>
+									<p>작성자,조회수,좋아요수,짧은소개?</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--페이징 -->
+					<div class="recipe-pagination">
+						<a href="#" class="active">01</a> <a href="#">02</a> <a href="#">03</a>
+						<a href="#">04</a> <a href="#">Next</a> <input type="button"
+							value="작성" id="recipe-write"
+							onclick="location.href='recipe_formPro'">
+					</div>
+				</div>
+			</c:forEach>
+		</form>
+		<div>
+			<form action="recipe_main" method="get">
+			<select name="searchType">
+				<option value="subject">제목</option>
+				<option value="content">내용</option>
+				<option value="subject_content">제목&내용</option>
+				<option value="name">작성자</option>
+			</select>
+			<input type="text" name="keyword"><input type="submit" value="검색">
+		</form>
+		
+		</div>
+	</section>
 <!-------------------------------------------form 태그 끝 ----------------------------------->
-    
-    <!-- 푸터 시작! -->
+	
+	
+	<!---------------검색-------------------->
+		
+
+
+
+
+
+
+	<!-- 푸터 시작! -->
      <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 끝! -->
 
