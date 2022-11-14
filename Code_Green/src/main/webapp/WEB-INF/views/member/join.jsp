@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
+<!-- 주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $('#mail-Check-Btn').click(function() {
 	const eamil = $('#userEmail1').val() + $('#userEmail2').val(); // 이메일 주소값 얻어오기
@@ -57,12 +59,7 @@ $('.mail-check-input').blur(function () {
 		$resultMsg.css('color','red');
 	}
 });
-</script>
-<!-- 주소 api -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript">
-</script>
-<script type="text/javascript">
+
 function setDisplay() {
 	if ($('input:radio[id=memberJoin]').is(':checked')) {
 		$('#companyDiv').hide();
@@ -183,7 +180,17 @@ function execDaumPostcode() {
         }
     }).open();
 }
+function setDisplay() {
+	if ($('input:radio[id=memberJoin]').is(':checked')) {
+		$('#companyDiv').hide();
+		$('#memberDiv').show();
+	} else {
+		$('#memberDiv').hide();
+		$('#companyDiv').show();
+	}
+}
 </script>
+
 
 <style type="text/css">
 #companyDiv {
@@ -191,17 +198,7 @@ function execDaumPostcode() {
 }
 </style>
 
-<script type="text/javascript">
-	function setDisplay() {
-		if ($('input:radio[id=memberJoin]').is(':checked')) {
-			$('#companyDiv').hide();
-			$('#memberDiv').show();
-		} else {
-			$('#memberDiv').hide();
-			$('#companyDiv').show();
-		}
-	}
-</script>
+
 <title>일반 회원가입</title>
 <style type="text/css">
 * {
@@ -380,7 +377,7 @@ button {
 	</div>
 
 	<!-- ----------------------------------바디 시작------------------------------------  -->
-	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup"
+	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup_member"
 		onsubmit="return checkForm()">
 		<!--------------------------------개인----------------------------------->
 		<div class="member">
@@ -484,7 +481,7 @@ button {
 
 	<!--------------------------------기업----------------------------------->
 
-	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup" onsubmit="return checkForm()" enctype="multipart/form-data">
+	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkForm()" enctype="multipart/form-data">
 		<div class="member">
 			<div id="companyDiv">
 				<div class="field">

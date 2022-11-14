@@ -33,6 +33,10 @@ public class CartService {
 	public CartVO checkCart(CartVO cart) {
 		return mapper.checkCart(cart);
 	}
+
+	public List<CartVO> selectCart(String member_id) {
+		return mapper.selectCart(member_id);
+	}
 	
 	
 }

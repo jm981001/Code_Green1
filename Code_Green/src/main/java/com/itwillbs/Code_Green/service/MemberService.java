@@ -37,6 +37,11 @@ public class MemberService {
 		return mapper.insertMember(member);
 	}
 
+	//회원 가입시 기본 적립금 지급 
+	public void setCoin(int member_idx) {
+		mapper.setCoin(member_idx);
+	}
+
 	
 
 }

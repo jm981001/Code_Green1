@@ -15,6 +15,10 @@ public interface CartMapper {
 	public List<CartVO> getCart(int rf_member_idx);
 
 	public CartVO checkCart(CartVO cart);
+
+	public List<CartVO> selectCart(String member_id);
+
+
 	
 	
 	

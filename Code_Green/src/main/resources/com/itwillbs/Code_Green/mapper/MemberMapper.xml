@@ -23,6 +23,18 @@
 				)
 	</insert>
 
+	<!-- 회원가입시 기본 적립금 지급 -->
+	<update id="setCoin">
+		UPDATE coin
+			SET 
+				coin_add = 3000
+			WHERE
+				rf_member_idx = #{member_idx}
+	</update>
+	
+	
+	
+
 	<!-- 
 	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
 	암호문으로 저장되어 있는 패스워드 조회하기 위한 SELECT 구문 작성

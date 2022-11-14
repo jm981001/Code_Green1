@@ -34,4 +34,18 @@
 	</select>
 
 
+	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
+		SELECT 
+			i.item_name,
+			i.item_price,
+			m.manager_brandname,
+			c.cart_amount,
+			c.cart_total,
+			c.rf_member_idx
+		FROM cart c
+		LEFT JOIN item i ON c.rf_item_idx = i.item_idx
+		JOIN manager m ON m.manager_idx = i.re_manager_idx
+        JOIN member r ON r.member_idx = c.rf_member_idx
+		WHERE r.member_id = #{member_id}
+	</select>
 </mapper>
