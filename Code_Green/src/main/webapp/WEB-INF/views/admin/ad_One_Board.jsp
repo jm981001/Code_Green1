@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -84,17 +85,18 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="ad_Manager_manage" method="get">
+                        <form class="ps-form--filter" action="ad_One_Board" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
                                 <div class="form-group">
                                     <select class="ps-select" name="searchType">
-                                        <option value="category">배송문의</option>
-                                        <option value="category">주문/결제/반품/교환문의</option>
-                                        <option value="category">상품누락문의</option>
-                                        <option value="category">기타문의</option>
+                                        <option value="category1">배송문의</option>
+                                        <option value="category2">주문/결제/반품/교환문의</option>
+                                        <option value="category3">상품누락문의</option>
+                                        <option value="category4">이벤트/쿠폰/적립금문의</option>
+                                        <option value="category5">기타문의</option>
                                     </select>
                                 </div>
                             </div>
@@ -155,6 +157,29 @@
                     </ul>
             	</div>
             </section>
+            
+            
+            <section id="pageList">
+			<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
+
+			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_One_Board?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+			&nbsp;
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+				<c:choose>
+					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+					<c:otherwise><a href="ad_One_Board?pageNum=${i }">${i }</a></c:otherwise>
+				</c:choose>
+				&nbsp;
+			</c:forEach>
+		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+		 <input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_One_Board?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+		 </section>
+            
+            
         </div>
     </main>
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>

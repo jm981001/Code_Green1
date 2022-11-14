@@ -68,9 +68,13 @@ public interface AdminMapper {
 	
 	//----------------------------------------------------------
 	
-
-	//1:1 문의게시판 목록
-	public List<QnaVO> selectOneQnaList();
+	//1:1 문의글 갯수
+	public int selectOneListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	//1:1 문의글 목록
+	public List<QnaVO> selectOneQnaList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
 	//1:1 문의 상세내용
 	public QnaVO selectOneQnaInFo(@Param("subject") String subject, @Param("id") String id);
@@ -99,12 +103,23 @@ public interface AdminMapper {
 	
 	//----------------------------------------------------------
 	
+	//신고글(처리대기) 갯수 조회
+	public int selectReportListCount(
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
 	//신고글 목록(처리대기)
-	public List<ReportVO> selectReportList();
+	public List<ReportVO> selectReportList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
+	//신고글(처리완료) 갯수 조회
+	public int selectReportSuccessListCount(
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
 	//신고글 목록(처리완료)
-	public List<ReportVO> selectReportSuccessList();
+	public List<ReportVO> selectReportSuccessList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	
 	//신고글 상세조회(reporter)
 	public ReportVO selectReportInfo(int report_idx);
@@ -117,6 +132,15 @@ public interface AdminMapper {
 
 	//신고글 상태 변경(처리대기 => 처리완료)
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
+
+
+	
+
+
+	
+
+
+	
 
 
 	

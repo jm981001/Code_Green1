@@ -60,8 +60,7 @@
   </style>
   
 <script type="text/javascript">
-// $("#btn1").hide();
-// document.getElementById("btn1").style.display="none";
+
 let auth = '${manager.manager_adminauth }';
 
 if(auth === "N") {
@@ -212,8 +211,9 @@ if(auth === "N") {
 			            <label for="address2">상세주소<span class="text-muted">&nbsp;</span></label>
 			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
-			          <div id="tlqkf">
-			          <button class="btn btn-primary btn-lg btn-block" type="submit">가입승인하기</button></div>
+			          
+			          
+			          <button id="btn1" class="btn btn-primary btn-lg btn-block" type="submit">가입승인하기</button>
 
 			        </form>
 			      </div>

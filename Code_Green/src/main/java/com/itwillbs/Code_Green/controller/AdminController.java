@@ -366,9 +366,12 @@ public class AdminController {
 		
 		
 		
-		//------------1:1 문의게시판 목록 조회----------------------------
+		//------------1:1 문의 목록 조회----------------------------
 		@RequestMapping(value = "/ad_One_Board", method = RequestMethod.GET)
-		public String ad_One_Board(Model model, HttpSession session) {
+		public String ad_One_Board(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
 			String sId = (String)session.getAttribute("sId");
 			
 			if(sId == null || !sId.equals("admin")) {
@@ -376,8 +379,38 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			List<QnaVO> OneQnaList = service.getOneQnaBoardList();
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			//1:1 문의 목록
+			List<QnaVO> OneQnaList = service.getOneQnaBoardList(startRow, listLimit,
+																searchType, keyword);
+			
+			//1:1 문의 갯수
+			int listCount = service.getOneListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
 			model.addAttribute("OneQnaList", OneQnaList);
+			model.addAttribute("pageInfo", pageinfo);
 //			System.out.println("야야야야야" + OneQnaList);
 			
 				return "admin/ad_One_Board";
@@ -517,7 +550,7 @@ public class AdminController {
 		
 		
 		
-		//------------전체관리자 게시글 삭제----------------------------
+		//------------관리자 게시글 삭제----------------------------
 		@GetMapping(value = "/ad_BoardRemove")
 		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
 			
@@ -551,7 +584,10 @@ public class AdminController {
 		
 		//------------ 신고글 관리(처리대기 목록만 출력)----------------------------
 		@GetMapping(value = "/ad_Report_Management")
-		public String ad_Report_Management(Model model, HttpSession session) {
+		public String ad_Report_Management(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
 			
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
@@ -560,8 +596,39 @@ public class AdminController {
 				model.addAttribute("msg", "잘못된 접근입니다!");
 				return "admin/ad_fail_back";
 			}
-			List<ReportVO> reportList = service.getReportList();
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			List<ReportVO> reportList = service.getReportList(startRow, listLimit, searchType, keyword);
+			
+			
+			int listCount = service.getReportListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			
 			model.addAttribute("reportList", reportList);
+			model.addAttribute("pageInfo", pageinfo);
 //			System.out.println(reportList);
 			return "admin/ad_Report_Management";
 		}
@@ -570,7 +637,10 @@ public class AdminController {
 		
 		//------------ 신고글 관리(처리완료 목록만 출력)----------------------------
 		@GetMapping(value = "/ad_Report_Success")
-		public String ad_Report_Success(Model model, HttpSession session) {
+		public String ad_Report_Success(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
 			
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
@@ -579,8 +649,36 @@ public class AdminController {
 				model.addAttribute("msg", "잘못된 접근입니다!");
 				return "admin/ad_fail_back";
 			}
-			List<ReportVO> reportSuccessList = service.getReportSuccessList();
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			List<ReportVO> reportSuccessList = service.getReportSuccessList(startRow, listLimit, searchType, keyword);
+			
+			int listCount = service.getReportSuccessListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
 			model.addAttribute("reportSuccessList", reportSuccessList);
+			model.addAttribute("pageInfo", pageinfo);
 					System.out.println(reportSuccessList);
 			return "admin/ad_Report_Success";
 		}

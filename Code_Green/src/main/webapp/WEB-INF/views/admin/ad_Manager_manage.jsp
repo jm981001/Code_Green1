@@ -183,7 +183,7 @@
             
             
              <section id="pageList">
-		<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
+			<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
 
 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Manager_manage?pageNum=${pageInfo.pageNum - 1}'"<%} %>>

@@ -100,11 +100,16 @@ public class AdminService {
 	
 	//여기부터는 1:1 게시글
 	
-	
-	//1:1게시글 목록 조회(1개)
-	public List<QnaVO> getOneQnaBoardList() {
+	//1:1게시글 갯수 조회
+	public int getOneListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectOneQnaList();
+		return mapper.selectOneListCount(searchType, keyword);
+	}
+	
+	//1:1게시글 목록 조회
+	public List<QnaVO> getOneQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectOneQnaList(startRow, listLimit, searchType, keyword);
 	}
 	//1:1게시글 상세정보 조회(1개)
 	public QnaVO getOneQnaInfo(String subject, String id) {
@@ -154,17 +159,31 @@ public class AdminService {
 	//여기부터는 신고글 관리
 	
 	
-	//신고글 목록(처리대기)
-	public List<ReportVO> getReportList() {
+	
+	//신고글(처리대기) 갯수 조회
+	public int getReportListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectReportList();
+		return mapper.selectReportListCount(searchType, keyword);
 	}
 
 	
-	//신고글 목록 조회(처리완료)
-	public List<ReportVO> getReportSuccessList() {
+	//신고글 목록(처리대기)
+	public List<ReportVO> getReportList(int startRow, int listLimit, String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectReportSuccessList();
+		return mapper.selectReportList(startRow, listLimit, searchType, keyword);
+	}
+
+	//신고글(처리완료) 갯수 조회
+	public int getReportSuccessListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectReportSuccessListCount(searchType, keyword);
+	}
+	
+	
+	//신고글 목록 조회(처리완료)
+	public List<ReportVO> getReportSuccessList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectReportSuccessList(startRow, listLimit, searchType, keyword);
 	}
 	
 	
@@ -193,6 +212,11 @@ public class AdminService {
 		return mapper.updateReportStatus(board_idx, report);
 	}
 
+	
+
+	
+
+	
 	
 
 	
