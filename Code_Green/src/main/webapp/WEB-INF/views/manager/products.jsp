@@ -129,7 +129,7 @@
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index" method="get">
+                        <form class="ps-form--filter" action="product method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select">
@@ -193,7 +193,7 @@
 					<c:forEach items="${itemList}" var="item">
 						    <tr>
 						     <td>${item.item_idx}</td>
-						     <td>${item.item_name}</td>
+						     <td onclick="location.href='products_detail?item_idx=${item.item_idx}'"><strong>${item.item_name }</strong></td>
 						     <td>${item.item_info}</td>
 						     <td>${item.item_stock}</td>
 						     <td>${item.item_price}</td>
@@ -228,22 +228,16 @@
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->
 				  
-				  
-			
                 
                 
-                
-                
-                
-                
-                    <p>Show 10 in 30 items.</p>
-                    <ul class="pagination">
-                        <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-                    </ul>
+<!--                     <p>Show 10 in 30 items.</p> -->
+<!--                     <ul class="pagination"> -->
+<!--                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
+<!--                         <li class="active"><a href="#">1</a></li> -->
+<!--                         <li><a href="#">2</a></li> -->
+<!--                         <li><a href="#">3</a></li> -->
+<!--                         <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
+<!--                     </ul> -->
                 </div>
             </section>
         </div>

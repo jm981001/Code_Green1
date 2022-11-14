@@ -49,28 +49,23 @@ public class ManagerService {
 		return mapper.selectItemListCount(searchType, keyword);
 	}
 	
-	
-	
-	
-	// 문의글 리스트
-//	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
-//		return mapper.selectQnaBoardList();
-//	}
-//	
-	// 문의글 상세조회
-//	public QnaVO getQnaInfo(String qna_idx) {
-//		return mapper.selectQnaInfo(qna_idx);
-//	}
-	
-	//문의글 갯수 조회
-//	public int getQnaBoardListCount(String searchType, String keyword) {
-//		return mapper.selectQnaBoardListCount(searchType, keyword);
-//	}
+	// 상품 상세조회
+	public ItemVO getItemInfo(int item_idx) {
+		return mapper.selectItemInfo(item_idx);
+	}
 
-	// 문의글 리스트
-	public List<QnaVO> getQnaBoardList() {
+
+//	 문의글 리스트
+	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
 		return mapper.selectQnaBoardList();
 	}
+	
+	
+	//문의글 갯수 조회
+	public int getQnaBoardListCount(String searchType, String keyword) {
+		return mapper.selectQnaBoardListCount(searchType, keyword);
+	}
+
 	
 	// 문의글 상세조회
 	public QnaVO getQnaInfo(String qna_idx) {
