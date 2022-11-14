@@ -17469,4 +17469,41 @@ html .bg--parallax {
   list-style: none;
 }
 
+/*보슬*/
+.orderList{
+	border-style: none;
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+}
+
+/*보슬*/
+.orderList tr{
+	border-bottom: 1px solid #eaeaea; 
+}
+
+/*보슬*/
+.orderList img{
+	width: 115px; 
+	height: 150px; 
+/* 	margin: 20px; */
+}
+
+/*보슬*/
+.orderList td{
+/* 	font-size: 20px;  */
+	color: gray;
+	padding: 65px 30px;
+/* 	text-align: center; */
+}
+
+/*보슬*/
+.orderList td input{
+	border-style: none;
+/* 	font-size: 20px; */
+    color: gray;
+    text-align: center;
+}
+
+
 /*# sourceMappingURL=style.css.map */

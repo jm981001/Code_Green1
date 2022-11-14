@@ -52,8 +52,8 @@
                     </form>
                 </div>
                 <div class="header__right">
-                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i><span><i>${sessionScope.listCount }</i></span></a>
-                        <div class="ps-cart--mini"><a class="header__extra" href="cart"><i class="icon-bag2"></i><span><i>0</i></span></a>
+                    <div class="header__actions"><a class="header__extra" href="myPage_heart?member_id||manager_id=${sessionScope.sId }"><i class="icon-heart"></i><span><i>0</i></span></a>
+                        <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span><i>0</i></span></a>
                         </div>
                         <c:choose>
                       	  <c:when test="${empty sessionScope.sId }">

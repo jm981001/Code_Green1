@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,7 +108,7 @@
                                     </ul>
                                     <h3>총합 <span class="ps-block__shipping">4000원</span></h3>
                                 </div>
-                            </div><a class="ps-btn ps-btn--fullwidth" style="width: auto" href="payment">결제 진행</a>
+                            </div><a class="ps-btn ps-btn--fullwidth" style="width: auto" href="payment?member_id=${sessionScope.sId }">결제 진행</a>
                         </div>
                     </div>
                 </div>
