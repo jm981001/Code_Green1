@@ -111,6 +111,35 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectOneQnaList(startRow, listLimit, searchType, keyword);
 	}
+	
+	//상품문의글(답변대기) 갯수 조회
+	public int getItemQnaListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemQnaListCount(searchType, keyword);
+	}
+
+	
+	
+	//상품문의(답변대기) 목록 조회
+	public List<QnaVO> getItemQnaList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemQnaList(startRow, listLimit, searchType, keyword);
+	}
+	
+	//상품문의글(답변완료) 갯수 조회
+	public int getItemAnswerListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemAnswerListCount(searchType, keyword);
+	}
+	
+	
+	//상품문의(답변완료) 목록 조회
+	public List<QnaVO> getItemAnswerList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemAnswerList(startRow, listLimit, searchType, keyword);
+	}
+	
+	
 	//1:1게시글 상세정보 조회(1개)
 	public QnaVO getOneQnaInfo(String subject, String id) {
 		// TODO Auto-generated method stub
@@ -124,6 +153,10 @@ public class AdminService {
 	}
 
 
+	
+	
+	
+	
 	//여기부터는 게시글 관리(커뮤,레시피 등)
 	
 	
@@ -211,6 +244,13 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportStatus(board_idx, report);
 	}
+
+	
+
+	
+
+	
+	
 
 	
 

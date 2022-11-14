@@ -363,6 +363,111 @@ public class AdminController {
 	//======================================여기부터는 문의게시판행 열차입니다=====================================================
 	//======================================여기부터는 문의게시판행 열차입니다=====================================================
 			
+			
+	
+		//------------상품문의(답변대기) 게시글 목록----------------------------
+		@GetMapping(value = "/ad_Item_Qna")
+		public String ad_Item_Qna(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			List<QnaVO> itemQnaList = service.getItemQnaList(startRow, listLimit,
+															 searchType, keyword);
+			
+			//1:1 문의 갯수
+			int listCount = service.getItemQnaListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			model.addAttribute("itemQnaList", itemQnaList);
+			model.addAttribute("pageInfo", pageinfo);
+			
+			
+			
+			return "admin/ad_Item_Qna";
+		}
+			
+		
+		//------------상품문의(답변완료) 게시글 목록----------------------------
+				@GetMapping(value = "/ad_Item_Answer")
+				public String ad_Item_Answer(Model model, HttpSession session,
+						@RequestParam(defaultValue = "1") int pageNum,
+						@RequestParam(defaultValue = "") String searchType,
+						@RequestParam(defaultValue = "") String keyword) {
+					
+					String sId = (String)session.getAttribute("sId");
+					
+					if(sId == null || !sId.equals("admin")) {
+						model.addAttribute("msg", "잘못된 접근입니다!");
+						return "admin/ad_fail_back";
+					}
+					
+					//페이징 처리
+					int listLimit = 10;
+					int pageListLimit = 10;
+					
+					int startRow = (pageNum - 1) * listLimit;
+					
+					List<QnaVO> itemAnswerList = service.getItemAnswerList(startRow, listLimit,
+																	 searchType, keyword);
+					
+					//상품문의 갯수
+					int listCount = service.getItemAnswerListCount(searchType, keyword);
+					System.out.println("검색 결과(목록 수)" + listCount);
+					// 페이지 계산 작업 수행
+					// 전체 페이지 수 계산
+					int maxPage = (int)Math.ceil((double)listCount / listLimit);
+					
+					//시작 페이지 번호 계산
+					int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+					
+					//끝 페이지 번호 계산
+					int endPage = startPage + pageListLimit - 1;
+					
+					if(endPage > maxPage) {
+						endPage = maxPage;
+					}
+					PageInfo  pageinfo = new PageInfo(
+							pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+					
+					
+					model.addAttribute("itemAnswerList", itemAnswerList);
+					model.addAttribute("pageInfo", pageinfo);
+					
+					
+					
+					return "admin/ad_Item_Answer";
+				}
+		
 		
 		
 		
@@ -372,6 +477,7 @@ public class AdminController {
 				@RequestParam(defaultValue = "1") int pageNum,
 				@RequestParam(defaultValue = "") String searchType,
 				@RequestParam(defaultValue = "") String keyword) {
+			
 			String sId = (String)session.getAttribute("sId");
 			
 			if(sId == null || !sId.equals("admin")) {

@@ -68,6 +68,8 @@ public interface AdminMapper {
 	
 	//----------------------------------------------------------
 	
+	
+	
 	//1:1 문의글 갯수
 	public int selectOneListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
@@ -76,12 +78,33 @@ public interface AdminMapper {
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
+	//상품문의(답변대기) 갯수 조회
+	public int selectItemQnaListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	//상품문의(답변대기) 목록 조회
+	public List<QnaVO> selectItemQnaList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
+	
+	//상품문의(답변완료) 갯수 조회
+	public int selectItemAnswerListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	
+	//상품문의(답변완료) 목록 조회
+	public List<QnaVO> selectItemAnswerList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
+	
+	
 	//1:1 문의 상세내용
 	public QnaVO selectOneQnaInFo(@Param("subject") String subject, @Param("id") String id);
 
 	//1:1 문의글 삭제
 	public int deleteOneQnaBoard(String id);
 
+	
+	
+	
 	
 	//----------------------------------------------------------
 	
@@ -100,6 +123,11 @@ public interface AdminMapper {
 	
 	//게시판 삭제
 	public int deleteBoard(int board_idx);
+	
+	
+	
+	
+	
 	
 	//----------------------------------------------------------
 	
@@ -132,6 +160,16 @@ public interface AdminMapper {
 
 	//신고글 상태 변경(처리대기 => 처리완료)
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
+
+
+	
+
+	
+
+
+	
+
+	
 
 
 	

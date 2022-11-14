@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>Martfury - Orders</title>
+    <title>상품문의 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -25,6 +25,17 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    
+    <style type="text/css">
+    .header--dashboard .header__left {
+    	max-width: 400px;
+    }
+    
+    .header--dashboard > * {
+    	flex-basis: 130%;
+    	}
+    </style>
+    
 </head>
 
 <body>
@@ -75,7 +86,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>1:1 문의 | <a href="ad_Item_Qna">상품문의</a></h3>
+                    <h3><a href="ad_One_Board">1:1 문의</a> | 상품문의 | <a href="ad_Item_Answer">답변완료</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -85,18 +96,15 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="ad_One_Board" method="get">
+                        <form class="ps-form--filter" action="ad_Item_Qna" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
-                               <div class="form-group">
+                                <div class="form-group">
                                     <select class="ps-select" name="searchType">
-                                        <option value="category1">배송문의</option>
-                                        <option value="category2">주문/결제/반품/교환문의</option>
-                                        <option value="category3">상품누락문의</option>
-                                        <option value="category4">이벤트/쿠폰/적립금문의</option>
-                                        <option value="category5">기타문의</option>
+                                        <option value="id">아이디</option>
+                                        <option value="subject">제목</option>
                                     </select>
                                 </div>
                             </div>
@@ -119,7 +127,7 @@
                         <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
-                                    <th>카테고리</th>
+                                    <th>상품번호</th>
                                     <th>제목</th>
                                     <th>작성자(아이디)</th>
                                     <th>작성일</th>
@@ -127,17 +135,17 @@
                                 </tr>
                             </thead>
                             <tbody >
-                            <c:forEach var="qnaList" items="${OneQnaList }">
+                            <c:forEach var="iList" items="${itemQnaList }">
                                 <tr>
-                                	<td>${qnaList.qna_category }</td>
-                                    <td onclick="location.href='ad_One_Board_Detail?subject=${qnaList.qna_subject }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
-                                    <td>${qnaList.qna_id }</td>
-                                    <td>${qnaList.qna_date }</td>
+                                	<td>${iList.item_idx }</td>
+                                    <td onclick="location.href='ad_One_Board_Detail?subject=${iList.qna_subject }&id=${iList.qna_id }'"><strong>${iList.qna_subject }</strong></td>
+                                    <td>${iList.qna_id }</td>
+                                    <td>${iList.qna_date }</td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${iList.qna_id }">Delete</a></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -163,7 +171,7 @@
 			<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
 
 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_One_Board?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Item_Qna?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
 			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
 			&nbsp;
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
@@ -171,12 +179,12 @@
 				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
 				<c:choose>
 					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
-					<c:otherwise><a href="ad_One_Board?pageNum=${i }">${i }</a></c:otherwise>
+					<c:otherwise><a href="ad_Item_Qna?pageNum=${i }">${i }</a></c:otherwise>
 				</c:choose>
 				&nbsp;
 			</c:forEach>
 		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
-		 <input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_One_Board?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+		 <input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_Item_Qna?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
 		 </section>
             
             
