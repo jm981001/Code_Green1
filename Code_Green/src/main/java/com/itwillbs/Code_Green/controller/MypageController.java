@@ -284,6 +284,14 @@ public class MypageController {
 	
 	
 	
+	//------------마이페이지 룰렛,,,?-------------------------------------------
+	@RequestMapping(value = "roulette", method = RequestMethod.GET)
+	public String roulette() {
+		return "inc/roulette";
+	}
+	
+	
+	
 	
 	
 	

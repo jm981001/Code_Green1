@@ -36,6 +36,8 @@
                                <a href="index">전체관리자</a>
                                <hr>
                                <a href="manager_index">기업관리자</a>
+                               <hr>
+                               <a href="roulette">룰렛</a>
                     </div>
                 </div>
                 <div class="ps-footer__copyright">
