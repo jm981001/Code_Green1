@@ -418,60 +418,60 @@ public class AdminController {
 			
 		
 		//------------상품문의(답변완료) 게시글 목록----------------------------
-				@GetMapping(value = "/ad_Item_Answer")
-				public String ad_Item_Answer(Model model, HttpSession session,
-						@RequestParam(defaultValue = "1") int pageNum,
-						@RequestParam(defaultValue = "") String searchType,
-						@RequestParam(defaultValue = "") String keyword) {
-					
-					String sId = (String)session.getAttribute("sId");
-					
-					if(sId == null || !sId.equals("admin")) {
-						model.addAttribute("msg", "잘못된 접근입니다!");
-						return "admin/ad_fail_back";
-					}
-					
-					//페이징 처리
-					int listLimit = 10;
-					int pageListLimit = 10;
-					
-					int startRow = (pageNum - 1) * listLimit;
-					
-					List<QnaVO> itemAnswerList = service.getItemAnswerList(startRow, listLimit,
-																	 searchType, keyword);
-					
-					//상품문의 갯수
-					int listCount = service.getItemAnswerListCount(searchType, keyword);
-					System.out.println("검색 결과(목록 수)" + listCount);
-					// 페이지 계산 작업 수행
-					// 전체 페이지 수 계산
-					int maxPage = (int)Math.ceil((double)listCount / listLimit);
-					
-					//시작 페이지 번호 계산
-					int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-					
-					//끝 페이지 번호 계산
-					int endPage = startPage + pageListLimit - 1;
-					
-					if(endPage > maxPage) {
-						endPage = maxPage;
-					}
-					PageInfo  pageinfo = new PageInfo(
-							pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-					
-					
-					model.addAttribute("itemAnswerList", itemAnswerList);
-					model.addAttribute("pageInfo", pageinfo);
-					
-					
-					
-					return "admin/ad_Item_Answer";
-				}
+		@GetMapping(value = "/ad_Item_Answer")
+		public String ad_Item_Answer(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			List<QnaVO> itemAnswerList = service.getItemAnswerList(startRow, listLimit,
+															 searchType, keyword);
+			
+			//상품문의 갯수
+			int listCount = service.getItemAnswerListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			model.addAttribute("itemAnswerList", itemAnswerList);
+			model.addAttribute("pageInfo", pageinfo);
+			
+			
+			
+			return "admin/ad_Item_Answer";
+		}
 		
 		
 		
 		
-		//------------1:1 문의 목록 조회----------------------------
+		//------------1:1문의(답변대기) 목록 조회----------------------------
 		@RequestMapping(value = "/ad_One_Board", method = RequestMethod.GET)
 		public String ad_One_Board(Model model, HttpSession session,
 				@RequestParam(defaultValue = "1") int pageNum,
@@ -523,9 +523,14 @@ public class AdminController {
 		}
 		
 		
-		//------------1:1 문의글 상세정보 조회----------------------------
-		@RequestMapping(value = "/ad_One_Board_Detail", method = RequestMethod.GET)
-		public String ad_One_Board_Detail(Model model, HttpSession session, String subject, String id) {
+		
+		//------------1:1문의(답변 완료) 목록 조회----------------------------
+		@RequestMapping(value = "/ad_One_Answer", method = RequestMethod.GET)
+		public String ad_One_Answer(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
 			String sId = (String)session.getAttribute("sId");
 			
 			if(sId == null || !sId.equals("admin")) {
@@ -533,7 +538,56 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			QnaVO oneQnaInfo = service.getOneQnaInfo(subject, id);
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			//1:1문의(답변완료) 목록
+			List<QnaVO> OneQnaAnswerList = service.getOneQnaAnswerList(startRow, listLimit,
+																searchType, keyword);
+			
+			//1:1문의(답변완료) 갯수
+			int listCount = service.getOneQnaAnswerCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			model.addAttribute("OneQnaAnswerList", OneQnaAnswerList);
+			model.addAttribute("pageInfo", pageinfo);
+//					System.out.println("야야야야야" + OneQnaList);
+			
+				return "admin/ad_One_Answer";
+		}
+		
+		
+		
+		//------------1:1 문의글 상세정보 조회----------------------------
+		@RequestMapping(value = "/ad_One_Board_Detail", method = RequestMethod.GET)
+		public String ad_One_Board_Detail(Model model, HttpSession session, String idx, String id) {
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			QnaVO oneQnaInfo = service.getOneQnaInfo(idx, id);
 			System.out.println("1:1문의 상세 : " + oneQnaInfo);
 			model.addAttribute("oneQnaInfo", oneQnaInfo);
 			
@@ -544,26 +598,26 @@ public class AdminController {
 		
 		
 		//------------1:1게시글 삭제----------------------------
-			@GetMapping(value = "/ad_oneQnaDelete")
-			public String oneQna_remove(@RequestParam String id, Model model, HttpSession session) {
-				
-				String sId = (String)session.getAttribute("sId");
-				
-				if(sId == null || !sId.equals("admin")) {
-					model.addAttribute("msg", "잘못된 접근입니다!");
-					return "admin/ad_fail_back";
-				}
-				
-				int delectCount = service.removeOneQnaRemove(id);
-				System.out.println(delectCount);
-				
-				if(delectCount > 0) {
-					return "redirect:/ad_One_Board";
-				}
-				
-				model.addAttribute("fail", "1:1문의글 삭제에 실패 했습니다!");
+		@GetMapping(value = "/ad_oneQnaDelete")
+		public String oneQna_remove(@RequestParam String id, String idx, Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
 				return "admin/ad_fail_back";
 			}
+			
+			int delectCount = service.removeOneQnaRemove(idx,id);
+			System.out.println(delectCount);
+			
+			if(delectCount > 0) {
+				return "redirect:/ad_One_Board";
+			}
+			
+			model.addAttribute("fail", "1:1문의글 삭제에 실패 했습니다!");
+			return "admin/ad_fail_back";
+		}
 		
 		
 		
@@ -882,13 +936,41 @@ public class AdminController {
 			
 			
 			
+		//======================================여기부터는 공지관리행 열차입니다=====================================================
+		//======================================여기부터는 공지관리행 열차입니다=====================================================		
 			
 			
+		//------------공지 목록----------------------------
+		@GetMapping(value = "/ad_Notice")
+		public String ad_Notice(Model model, HttpSession session) {
 			
+			List<BoardVO> noticeList = service.getNoticeList();
+			System.out.println(noticeList);
+			model.addAttribute("noticeList", noticeList);
 			
-			
-			
-			
+			return "admin/ad_Notice";
+		}
+	
+	
+		//------------공지 작성----------------------------
+		@GetMapping(value = "/ad_Notice_Write")
+		public String ad_Notice_Write() {
+			return "admin/ad_Notice_Write";
+		}
+		
+		
+		//------------공지 수정----------------------------
+		@GetMapping(value = "/ad_Notice_Update")
+		public String ad_Notice_Update() {
+			return "admin/ad_Notice_Update";
+		}
+	
+	
+		//------------공지 삭제----------------------------
+		@GetMapping(value = "/ad_Notice_Delete")
+		public String ad_Notice_Delete() {
+			return "admin/ad_Notice_Delete";
+		}
 	
 	
 	

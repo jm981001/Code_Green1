@@ -1,9 +1,6 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>기업관리 페이지</title>
+    <title>문의게시판 관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -28,17 +25,16 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-     <script type="text/javascript">
-	function confirmDelete(id) {
-		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
-		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
-		let result = confirm(id + "을 추방하시겠습니까?");
-		
-		if(result) {
-			location.href="ad_ManagerDelete?id=" + id;
-		}
-	}
-</script>
+    
+    <style type="text/css">
+    .header--dashboard .header__left {
+    	max-width: 400px;
+    }
+    
+    .header--dashboard > * {
+    	flex-basis: 130%;
+    	}
+    </style>
 </head>
 
 <body>
@@ -49,7 +45,7 @@
         <div class="header__center"><a class="ps-logo" href="#"><img src="/Code_Green/resources/img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
-   
+  
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
         <div class="ps-main__sidebar">
@@ -58,7 +54,7 @@
                     <div class="ps-block--user-wellcome">
                         <div class="ps-block__left"><img src="/Code_Green/resources/img/users/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>여기는<a href="#">총관리자</a></p>
+                             <p>여기는<a href="#">총관리자</a></p>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
@@ -68,7 +64,6 @@
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
-<!-- 왼쪽의 메뉴바 -->
                        <ul class="menu">
                             <li><a class="active" href="index"><i class="icon-home"></i>매출현황조회</a></li>
                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
@@ -90,30 +85,28 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3><a href="ad_Manager_manage">기업 관리</a> | 승인 대기</h3>
-                    <p>Business Management</p>
+                    <h3><a href="ad_One_Board">1:1 문의</a> | 답변완료 |<a href="ad_Item_Qna">상품문의</a></h3>
+                    <p>Board Manager</p>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-                    </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="ad_Manager_auth" method="get">
+                        <form class="ps-form--filter" action="ad_One_Answer" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
-                                <div class="form-group">
+                               <div class="form-group">
                                     <select class="ps-select" name="searchType">
-                                        <option value="brandName">기업명</option>
-                                        <option value="name">이름</option>
-                                        <option value="id">아이디</option>
+                                        <option value="category1">배송문의</option>
+                                        <option value="category2">주문/결제/반품/교환문의</option>
+                                        <option value="category3">상품누락문의</option>
+                                        <option value="category4">이벤트/쿠폰/적립금문의</option>
+                                        <option value="category5">기타문의</option>
                                     </select>
                                 </div>
                             </div>
@@ -122,48 +115,43 @@
                             </div>
                         </form>
                     </div>
-<!--                     <div class="ps-section__actions"><a class="ps-btn success" href="#"><i class="icon icon-plus mr-2"></i>입점관리</a></div> -->
+<!--                     <div class="ps-section__actions"><a class="ps-btn success" href="#"><i class="icon icon-plus mr-2"></i>Add Customer</a></div> -->
                 </div>
-                
                 <div class="ps-section__content">
                     <div class="table-responsive">
-                        <table class="table ps-table">
+
+
+<!--   <tbody>  가운데 정렬 넣음   <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음-->
+<!--   <tbody>  가운데 정렬 넣음   <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음-->
+
+
+                    
+                        <table class="table ps-table" style="text-align: center;">
                             <thead>
                                 <tr>
-                                    <th>기업명</th>
-                                     <th>아이디</th>
-                                    <th>이름</th>
-                                    <th>전화번호</th>
-                                    <th>이메일</th>
-                                    <th>가입일</th>
-                                    <th>승인상태</th>
-                                    <th></th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>작성자(아이디)</th>
+                                    <th>작성일</th>
+                                    <th>답변상태</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            <c:forEach var="aList" items="${managerAuthList }">
+                            <tbody >
+                            <c:forEach var="qAlist" items="${OneQnaAnswerList }">
                                 <tr>
-<!-- A태그 추가 클릭시 - 상세 정보 조회 페이지로 이동  -->
-                                
-                                    <td><a href="ad_Manager_detail?id=${aList.manager_id }&auth=${aList.manager_adminauth }"><strong>${aList.manager_brandname }</strong></a></td>
-                                    <td>${aList.manager_id }</td>
-                                    <td>${aList.manager_name }</td>
-                                    <td>${aList.manager_phone }</td>
-                                    <td>${aList.manager_email }</td>
-<!--                                     <td><span class="ps-badge success">active</span> -->
-<!--                                     </td> -->
-                                    <td>${aList.manager_date }</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${fn:replace(aList.manager_adminauth, 'N', '승인대기')}</strong></button></td>
+                                	<td>${qAlist.qna_category }</td>
+                                    <td onclick="location.href='ad_One_Board_Detail?subject=${qAlist.qna_subject }&id=${qAlist.qna_id }'"><strong>${qAlist.qna_subject }</strong></td>
+                                    <td>${qAlist.qna_id }</td>
+                                    <td>${qAlist.qna_date }</td>
+                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
+                                    </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">상품목록</a>
-                                            <a class="dropdown-item" onclick="confirmDelete('${aList.manager_id}')">탈퇴시키기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?idx=${qAList.qna_idx }&id=${qAList.qna_id }">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
-                             </c:forEach>
-                                   
+                               </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -177,15 +165,15 @@
                         <li><a href="#">3</a></li>
                         <li><a href="#"><i class="icon-chevron-right"></i></a></li>
                     </ul>
-                </div>
+            	</div>
             </section>
             
-		<!-- 페이징 처리 -->
-        <section id="pageList">
-		<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
+            
+            <section id="pageList">
+			<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
 
 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Manager_auth?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_One_Answer?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
 			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
 			&nbsp;
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
@@ -193,19 +181,17 @@
 				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
 				<c:choose>
 					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
-					<c:otherwise><a href="ad_Manager_auth?pageNum=${i }">${i }</a></c:otherwise>
+					<c:otherwise><a href="ad_One_Answer?pageNum=${i }">${i }</a></c:otherwise>
 				</c:choose>
 				&nbsp;
 			</c:forEach>
 		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
-		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_Manager_auth?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
-	</section>
-            
+		 <input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_One_Answer?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+		 </section>
             
             
         </div>
     </main>
-    
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/bootstrap/js/bootstrap.min.js"></script>

@@ -145,7 +145,7 @@
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${iList.qna_id }">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?idx=${iList.qna_idx }&id=${iList.qna_id }">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>

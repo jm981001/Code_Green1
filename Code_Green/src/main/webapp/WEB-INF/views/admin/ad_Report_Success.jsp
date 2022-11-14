@@ -59,10 +59,10 @@
                             <li><a class="active" href="index"><i class="icon-home"></i>매출현황조회</a></li>
                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
                             <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li>
-                            <li><a href="ad_One_Board"><i class="icon-papers"></i>1:1 문의 관리</a></li>
+                            <li><a href="ad_Notice"><i class="icon-users2"></i>공지 관리</a></li>
                             <li><a href="ad_Board_Management"><i class="icon-papers"></i>게시판 관리</a></li>
+                            <li><a href="ad_One_Board"><i class="icon-papers"></i>문의글 관리</a></li>
                             <li><a href="ad_Report_Management"><i class="icon-papers"></i>신고글 관리</a></li>
-                            <li><a href="#"><i class="icon-users2"></i>이제...끝?</a></li>
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">

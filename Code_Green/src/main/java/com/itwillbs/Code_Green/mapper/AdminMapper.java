@@ -70,11 +70,19 @@ public interface AdminMapper {
 	
 	
 	
-	//1:1 문의글 갯수
+	//1:1문의(답변대기) 갯수
 	public int selectOneListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
-	//1:1 문의글 목록
+	//1:1문의(답변대기) 목록
 	public List<QnaVO> selectOneQnaList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
+	
+	//1:1문의(답변완료) 갯수
+	public int selectOneAnswerListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	//1:1문의(답변완료) 목록 조회
+	public List<QnaVO> selectOneQnaAnswerList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
@@ -97,10 +105,10 @@ public interface AdminMapper {
 	
 	
 	//1:1 문의 상세내용
-	public QnaVO selectOneQnaInFo(@Param("subject") String subject, @Param("id") String id);
+	public QnaVO selectOneQnaInFo(@Param("idx") String idx, @Param("id") String id);
 
 	//1:1 문의글 삭제
-	public int deleteOneQnaBoard(String id);
+	public int deleteOneQnaBoard(@Param("idx") String idx, @Param("id") String id);
 
 	
 	
@@ -162,43 +170,12 @@ public interface AdminMapper {
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
 
 
-	
-
-	
-
-
-	
-
-	
+	public List<BoardVO> selectNoticeList();
 
 
 	
 
 
-	
-
-
-	
-
-
-	
-
-	
-
-	
-
-			
-
-
-
-			
-
-		
-	
-	
-	
-	
-	
 	
 
 }

@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>Martfury - Orders</title>
+    <title>문의게시판 관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -25,6 +25,16 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    
+    <style type="text/css">
+    .header--dashboard .header__left {
+    	max-width: 400px;
+    }
+    
+    .header--dashboard > * {
+    	flex-basis: 130%;
+    	}
+    </style>
 </head>
 
 <body>
@@ -58,10 +68,10 @@
                             <li><a class="active" href="index"><i class="icon-home"></i>매출현황조회</a></li>
                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
                             <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li>
-                            <li><a href="ad_One_Board"><i class="icon-papers"></i>1:1 문의 관리</a></li>
+                            <li><a href="ad_Notice"><i class="icon-users2"></i>공지 관리</a></li>
                             <li><a href="ad_Board_Management"><i class="icon-papers"></i>게시판 관리</a></li>
+                            <li><a href="ad_One_Board"><i class="icon-papers"></i>문의글 관리</a></li>
                             <li><a href="ad_Report_Management"><i class="icon-papers"></i>신고글 관리</a></li>
-                            <li><a href="#"><i class="icon-users2"></i>이제...끝?</a></li>
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -75,7 +85,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>1:1 문의 | <a href="ad_Item_Qna">상품문의</a></h3>
+                    <h3>1:1 문의 | <a href="ad_One_Answer">답변완료</a> |<a href="ad_Item_Qna">상품문의</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -130,14 +140,14 @@
                             <c:forEach var="qnaList" items="${OneQnaList }">
                                 <tr>
                                 	<td>${qnaList.qna_category }</td>
-                                    <td onclick="location.href='ad_One_Board_Detail?subject=${qnaList.qna_subject }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
+                                    <td onclick="location.href='ad_One_Board_Detail?idx=${qnaList.qna_idx }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
                                     <td>${qnaList.qna_id }</td>
                                     <td>${qnaList.qna_date }</td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?idx=${qnaList.qna_idx }&id=${qnaList.qna_id }">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
