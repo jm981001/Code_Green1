@@ -83,7 +83,7 @@
                                         <div class="form-group--number">
                                             <button class="up">+</button>
                                             <button class="down">-</button>
-                                            <input class="form-control" type="text" placeholder="1" value="1">
+                                            <input class="form-control" type="text" id="quan" placeholder="1" value="1">
                                         </div>
                                     </td>
                                     <td data-label="Total">갯수랑해서 총합</td>
@@ -117,6 +117,7 @@
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 끝! -->
     
+    <script src="/Code_Green/resources/js/quantity.js"></script>
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
@@ -124,7 +125,7 @@
     <script src="/Code_Green/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/Code_Green/resources/plugins/imagesloaded.pkgd.min.js"></script>
     <script src="/Code_Green/resources/plugins/masonry.pkgd.min.js"></script>
-    <script src="/Code_Green/resourcesplugins/isotope.pkgd.min.js"></script>
+    <script src="/Code_Green/resources/plugins/isotope.pkgd.min.js"></script>
     <script src="/Code_Green/resources/plugins/jquery.matchHeight-min.js"></script>
     <script src="/Code_Green/resources/plugins/slick/slick/slick.min.js"></script>
     <script src="/Code_Green/resources/plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
@@ -135,6 +136,7 @@
     <script src="/Code_Green/resources/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
+    <script src="/Code_Green/resources/js/quantity.js"></script>
 </body>
 
 </html>
