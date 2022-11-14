@@ -12,7 +12,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category, 
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -56,7 +57,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category,  
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -99,7 +101,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category,  
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -142,7 +145,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category,  
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -185,7 +189,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category,  
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -229,7 +234,8 @@
 							   i.item_name,
 							   i.item_price,
 							   i.item_sale, 
-							   i.item_date, 
+							   i.item_date,
+							   i.item_category,  
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score
@@ -262,6 +268,7 @@
 							   i.item_price,
 							   i.item_sale, 
 							   i.item_date, 
+							   i.item_category, 
 							   f.file1,
 							   m.manager_brandname,
 							   truncate( a.board_star_score,1) AS board_star_score

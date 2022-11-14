@@ -157,7 +157,7 @@
 	                                     
 	                                      <!-- 적립금 -->
                                         <div class="ps-block__panel" style="margin-top: 50px;">
-                                            <figure><small>보유</small><strong> 5000원</strong></figure>
+                                            <figure><small>보유</small><strong> ${coin.coin_total }원</strong></figure>
                                             
                                             <!-- 사용할 적립금 적기 -->
                                             <figure><small>사용</small>

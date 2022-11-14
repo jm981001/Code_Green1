@@ -193,7 +193,7 @@
                                                     	
                                                     	
                                                     	<!-- 상품 이미지 -->
-                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx }">
+                                                    	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >
                                                     		<img src="/Code_Green/resources/item/${item.file1 }" alt="" />
                                                     	</a>
                                                         <ul class="ps-product__actions">

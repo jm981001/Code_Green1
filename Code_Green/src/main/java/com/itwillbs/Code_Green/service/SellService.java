@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.SellMapper;
 import com.itwillbs.Code_Green.vo.CartVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 
 @Service
 public class SellService {
@@ -17,6 +18,10 @@ public class SellService {
 
 	public List<CartVO> selectCart(String member_id) {
 		return sell_mapper.selectCart(member_id);
+	}
+
+	public CoinVO selectCoin(String member_id) {
+		return sell_mapper.selectCoin(member_id);
 	}
 
 

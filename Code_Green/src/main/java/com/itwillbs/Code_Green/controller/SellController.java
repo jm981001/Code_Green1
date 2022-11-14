@@ -16,6 +16,7 @@ import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.CartVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
@@ -36,11 +37,13 @@ public class SellController {
 		
 		session.setAttribute(member_id, "member_id");
 		
+		// 장바구니 상품 불러오기
 		List<CartVO> cartList = sell_service.selectCart(member_id);
-		
 		model.addAttribute("cartList", cartList);
 		
-		
+		// 적립금 불러오기
+		CoinVO coin = sell_service.selectCoin(member_id);
+		model.addAttribute("coin", coin);
 		
 		return "payment/payment";
 	}
