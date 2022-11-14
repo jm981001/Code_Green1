@@ -133,7 +133,7 @@ public class MypageController {
 				return "member/fail_back";
 			}
 
-			return "redirect:/myPage_wishList";
+			return "redirect:/myPageWishList.my";
 
 	}
 	
@@ -197,7 +197,7 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 상품후기-------------------------------------------
-	@RequestMapping(value = "myPage_review", method = RequestMethod.GET)
+	@RequestMapping(value = "myPageReview.my", method = RequestMethod.GET)
 	public String myPage_review() {
 		return "member/myPage_review";
 	}

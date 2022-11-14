@@ -90,14 +90,14 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPage_wishList?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageWishList.my?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="myPage_wishList?member_id=${sessionScope.sId}&pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="myPageWishList.my?member_id=${sessionScope.sId}&pageNum=${i }">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPage_wishList?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageWishList.my?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
 				                    <!-- 페이징 버튼들 끝 -->
