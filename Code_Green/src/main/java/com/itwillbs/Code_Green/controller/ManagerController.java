@@ -159,10 +159,6 @@ public class ManagerController {
 		return "manager/brand_mypage";
 	}
 			
-	
-	
-		
-		
 		
 	//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
 	@GetMapping(value = "/products")
