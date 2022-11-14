@@ -53,6 +53,14 @@ public class SellController {
 	@RequestMapping(value = "payment_success", method = RequestMethod.POST)
 	public String payment_success_account(@ModelAttribute SellVO sell) {
 		
+		// rf_member_idx 어떻게 받아올것인가.....?
+		
+		// insert - sell 테이블에 데이터 넣기
+		
+		// select - sell 테이블 데이터 들고와서 payment_success에 뿌리기
+		//		  - 주문번호, 주문일 같이 들고와서 뿌리기 
+		
+		
 		System.out.println(sell);
 		
 		return "payment/payment_success";
