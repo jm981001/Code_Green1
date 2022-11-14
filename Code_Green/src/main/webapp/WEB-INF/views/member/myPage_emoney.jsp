@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 
@@ -72,44 +74,39 @@
                                             <thead>
                                                 <tr align="center">
                                                     <th>날짜</th>
-                                                    <th width="70%">내용</th>
+                                                    <th width="70%" colspan="3">내용</th>
                                                     <th>금액</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>2022.10.09</td>
-                                                    <td>주문(1021212)결제시 이용</td>
-                                                    <td>-1232원</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022.10.09</td>
-                                                    <td>주문(232332) 10% 적립</td>
-                                                    <td>+2193원</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022.10.09</td>
-                                                    <td>주문(232332) 10% 적립</td>
-                                                    <td>+1000원</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022.10.09</td>
-                                                    <td>주문(232332) 10% 적립</td>
-                                                    <td>-10000원</td>
-                                                </tr>
+                                            
+	                                            <c:forEach var="coin" items="${coinList }">
+	                                                <tr>
+	                                                    <td>${coin.coin_date }</td>
+	                                                    <td>주문(1021212)결제시 이용</td>
+	                                                    <td>+${coin.coin_add}원</td>
+	                                                    <td>-${coin.coin_use}원</td>
+	                                                    <td>${coin.coin_total}원</td>
+	                                                </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
-                                        <!-- 페이징 버튼들 시작 -->
-	                                    <div class="ps-pagination">
-	                                        <ul class="pagination">
-	                                       		<li><a href="#"><i class="icon-chevron-left"></i></a></li>
-	                                            <li class="active"><a href="#">1</a></li>
-	                                            <li><a href="#">2</a></li>
-	                                            <li><a href="#">3</a></li>
-	                                            <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-	                                        </ul>
-	                                    </div>
-	                                    <!-- 페이징 버튼들 끝 -->
+					 					<!-- 페이징 버튼들 시작 -->
+					                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+					                    <div class="ps-pagination">
+					                        <ul class="pagination">
+					                           
+					                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageEmoney.my?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+					                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+					                               <c:choose>
+					                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+					                                  <c:otherwise><li><a href="myPageEmoney.my?member_id=${sessionScope.sId}&pageNum=${i }">${i }</a></li></c:otherwise>
+					                               </c:choose>
+					                            </c:forEach>
+					                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageEmoney.my?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+					                        </ul>
+					                    </div>
+				                    <!-- 페이징 버튼들 끝 -->
                                     </div>
                                 </div>
                             </div>

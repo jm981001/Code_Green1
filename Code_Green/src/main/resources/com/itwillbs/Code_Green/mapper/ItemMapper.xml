@@ -302,7 +302,9 @@
 			 , f.file1
 			 , i.item_idx
 			 , i.item_category
+			 , h.heart_idx
 			 , a.manager_brandname
+			 , m.member_idx
 	 		FROM heart h 
 	 			LEFT JOIN item i 
 					ON h.rf_item_idx = i.item_idx
@@ -325,4 +327,15 @@
 			    ON h.rf_member_idx = m.member_idx
 			 WHERE m.member_id = #{member_id};
 	</select>
+	
+	
+<!-- 	마이페이지 찜한상품 삭제 -->
+	<delete id="deleteWish">
+        DELETE FROM heart
+			WHERE heart_idx = #{heart_idx}
+				AND rf_member_idx=${member_idx};
+	</delete>
+	
+	
+	
 </mapper>

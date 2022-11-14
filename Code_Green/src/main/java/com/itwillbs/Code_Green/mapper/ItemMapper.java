@@ -58,6 +58,9 @@ public interface ItemMapper {
 	//마이페이지 찜한 상품 리스트 갯수
 	int selectWishListCount(String member_id);
 
+	//마이페이지 찜한상품 삭제
+	int deleteWish(@Param("member_idx")int member_idx, @Param("heart_idx")int heart_idx);
+
 
 
 

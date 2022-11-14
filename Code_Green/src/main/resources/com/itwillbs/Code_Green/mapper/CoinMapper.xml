@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.CoinMapper">
+
+<!-- 적립금 목록 -->
+  <select id="selectCoinList" resultType="com.itwillbs.Code_Green.vo.CoinVO">
+		 SELECT c.coin_idx
+        	   , c.COIN_ADD
+         	   , c.COIN_USE
+         	   , c.COIN_CHARGE
+         	   , c.COIN_TOTAL
+         	   , c.COIN_DATE
+               , m.MEMBER_ID
+			 FROM coin c
+				left join member m
+					on c.RF_MEMBER_IDX = m.MEMBER_IDX
+			 WHERE 
+			 	  m.MEMBER_ID = #{member_id}  
+			 ORDER BY c.coin_idx desc LIMIT #{startRow}, #{listLimit};
+   </select>
+
+<!-- 적립금 목록 갯수 -->
+	<select id="selectCoinListCount" resultType="integer">
+		SELECT 
+				COUNT(*) 
+				FROM coin
+				WHERE
+					rf_member_idx =1
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.QnaService;
 import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
@@ -35,6 +37,8 @@ public class MypageController {
 	private QnaService Qservice;
 	@Autowired
 	private ItemService Iservice;
+	@Autowired
+	private CoinService Cservice;
 	
 	//------------마이페이지 메인-------------------------------------------
 	@GetMapping(value = "/MemberInfo.me")
@@ -57,14 +61,14 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 찜한상품-------------------------------------------
-	@GetMapping(value = "/myPage_wishList")
+	@GetMapping(value = "/myPageWishList.my")
 	public String myPage_heart(@RequestParam(defaultValue = "1") int pageNum,
 			Model model, @RequestParam String member_id,
 			@ModelAttribute ItemVO item, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
 		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
+			model.addAttribute("msg", "잘못된 접근입니다");
 			return "member/fail_back";
 		}
 			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
@@ -105,6 +109,35 @@ public class MypageController {
 		
 	}
 	
+	//------------마이페이지 찜한상품 삭제-------------------------------------------
+	@GetMapping(value = "/deleteWish")
+	public String deleteWish(@RequestParam(defaultValue = "1") int pageNum,
+			Model model, @RequestParam String member_id,@RequestParam int member_idx,@RequestParam int heart_idx,
+			@ModelAttribute ItemVO item, HttpSession session) {
+	
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("member_idx", member_idx);
+		model.addAttribute("heart_idx", heart_idx);
+		System.out.println(member_id);
+		
+		String sId = (String)session.getAttribute("sId");
+		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			return "member/fail_back";
+		}
+		
+			int deleteCount = Iservice.removeWish(member_idx,heart_idx);
+			
+			if(deleteCount == 0) {
+				model.addAttribute("msg", "위시리스트 삭제 실패");
+				return "member/fail_back";
+			}
+
+			return "redirect:/myPage_wishList";
+
+	}
+	
+	
 	//------------마이페이지 팔로우-------------------------------------------
 	@RequestMapping(value = "myPage_following", method = RequestMethod.GET)
 	public String myPage_fllowing() {
@@ -112,10 +145,44 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 적립금-------------------------------------------
-	@RequestMapping(value = "myPage_emoney", method = RequestMethod.GET)
-	public String myPage_emoney() {
+	@GetMapping(value = "/myPageEmoney.my")
+	public String myPageEmoney(
+			@RequestParam(defaultValue = "1") int pageNum, Model model,
+			@RequestParam String member_id) {
+
+		int listLimit = 10; 
+		int pageListLimit = 10; 
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		//적립금 목록
+		List<CoinVO> coinList = Cservice.getCoinList(startRow, listLimit,member_id);
+		
+		//적립금 목록 갯수
+		int listCount = Cservice.getCoinListCount();
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		
+		model.addAttribute("coinList", coinList);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("member_id", member_id);
+		
 		return "member/myPage_emoney";
 	}
+	
+	
+	
+	
 	
 	//------------마이페이지 주문목록-------------------------------------------
 	@RequestMapping(value = "myPage_buyListNull", method = RequestMethod.GET)

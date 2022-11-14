@@ -90,6 +90,13 @@ public class ItemService {
 		return mapper.selectWishListCount(member_id);
 	}
 
+	//마이페이지 찜한상품 삭제
+	public int removeWish(int member_idx, int heart_idx) {
+		return mapper.deleteWish(member_idx, heart_idx);
+	}
+
+
+
 
 
 

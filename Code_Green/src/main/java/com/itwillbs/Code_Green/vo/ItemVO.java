@@ -26,6 +26,8 @@ public class ItemVO {
 	private String star5;
 	private String heart;
 	private String member_id;
+	private String member_idx;
+	private String heart_idx;
 	
 	public int getItem_idx() {
 		return item_idx;
@@ -180,6 +182,22 @@ public class ItemVO {
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	
+	
+	public String getHeart_idx() {
+		return heart_idx;
+	}
+	public void setHeart_idx(String heart_idx) {
+		this.heart_idx = heart_idx;
+	}
+	
+	
+	public String getMember_idx() {
+		return member_idx;
+	}
+	public void setMember_idx(String member_idx) {
+		this.member_idx = member_idx;
 	}
 	public ItemVO() {
 		// TODO Auto-generated constructor stub

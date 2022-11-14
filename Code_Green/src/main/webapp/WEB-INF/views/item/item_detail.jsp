@@ -529,29 +529,41 @@
                                         <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 ">
                                             <div class="ps-block--average-rating">
                                                 <div class="ps-block__header">
+                                                    <%
+                                                	item = (ItemVO) request.getAttribute("item");
+                                                	score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
+                                                	pageContext.setAttribute("score", score);
+                                         	        %>
                                                     <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="1">5</option>
+                                                    <c:forEach var="i" begin="1" end="5">
+                                                    
+                                                    	<c:choose>
+                                                    		<c:when test="${i <= score}">
+                                                    			<option value="1">${i }</option>
+                                                    		</c:when>
+                                                    		<c:otherwise>
+                                                    			<option value="2">${i }</option>
+                                                    		</c:otherwise>
+                                                    	</c:choose>
+                                                    
+                                                    </c:forEach>
                                                     </select><span>${item.count } review</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>5 Star</span>
-                                                    <div class="ps-progress" data-value="100"><span></span></div><span>100%</span>
+                                                    <div class="ps-progress" data-value="${item.star5 }"><span></span></div><span>${item.star5 }%</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>4 Star</span>
-                                                    <div class="ps-progress" data-value="0"><span></span></div><span>0</span>
+                                                    <div class="ps-progress" data-value="${item.star4 }"><span></span></div><span>${item.star4 }%</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>3 Star</span>
-                                                    <div class="ps-progress" data-value="0"><span></span></div><span>0</span>
+                                                    <div class="ps-progress" data-value="${item.star3 }"><span></span></div><span>${item.star3 }%</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>2 Star</span>
-                                                    <div class="ps-progress" data-value="0"><span></span></div><span>0</span>
+                                                    <div class="ps-progress" data-value="${item.star2 }"><span></span></div><span>${item.star2 }%</span>
                                                 </div>
                                                 <div class="ps-block__star"><span>1 Star</span>
-                                                    <div class="ps-progress" data-value="0"><span></span></div><span>0</span>
+                                                    <div class="ps-progress" data-value="${item.star1 }"><span></span></div><span>${item.star1 }%</span>
                                                 </div>
                                             </div>
                                         </div>

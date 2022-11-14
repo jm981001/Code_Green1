@@ -60,7 +60,7 @@
 										   <c:forEach var="item" items="${WishList }">
 										
 											<tr>
-												<td data-label="Remove"><a href="#"><i
+												<td data-label="Remove"><a href="deleteWish?member_id=${sessionScope.sId}&heart_idx=${item.heart_idx}&member_idx=${item.member_idx}"><i
 														class="icon-cross"></i></a></td>
 												<td data-label="Product">
 													<div class="ps-product--cart">
