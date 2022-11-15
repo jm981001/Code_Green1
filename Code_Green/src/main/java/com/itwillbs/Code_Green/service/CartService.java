@@ -13,30 +13,28 @@ public class CartService {
 
 	@Autowired
 	private CartMapper mapper;
-
-	public int addCart(CartVO cart) {
-		return mapper.addCart(cart);
+	//물건 장바구니 담기
+	public int insertCart(CartVO cart) {
+		return mapper.insertCart(cart);
 	}
-
+	//장바구니 삭제
 	public int deleteCart(int cart_idx) {
 		return mapper.deleteCart(cart_idx);
 	}
-
+	//장바구니 수정
 	public int updateCart(CartVO cart) {
 		return mapper.updateCart(cart);
 	}
-
-	public List<CartVO> getCart(int rf_member_idx) {
-		return mapper.getCart(rf_member_idx);
-	}
-
+	//장바구니 데이터 체크
 	public CartVO checkCart(CartVO cart) {
 		return mapper.checkCart(cart);
 	}
-
+	//장바구니 조회
 	public List<CartVO> selectCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
+	
+
 	
 	
 }
