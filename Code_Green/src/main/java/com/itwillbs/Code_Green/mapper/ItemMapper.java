@@ -1,3 +1,5 @@
+
+
 package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
@@ -41,8 +43,15 @@ public interface ItemMapper {
 	
 	//상품 목록
 	List<ItemVO> selectItemList(@Param("startRow") int startRow, @Param("listLimit") int listLimit,
-			@Param("searchType") String searchType, @Param("keyword") String keyword);
+									@Param("searchType") String searchType, @Param("keyword") String keyword);
 
+	//베스트리스트
+	List<ItemVO> selectItemBestList(@Param("startRow")int startRow, @Param("listLimit") int listLimit, @Param("searchType") String searchType, @Param("keyword") String keyword);
+
+
+	//베스트리스트 갯수
+	int selectItemBestListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
+		
 	//상세상세페이지 안 관련상품 6개
 	List<ItemVO> selectItemList6(String item_category);
 

@@ -53,13 +53,6 @@ public class WishListController {
 			}
 		}
 		
-		
-
-
-		
-		
-		
-		
 		return "item/item_detail";
 	}
 

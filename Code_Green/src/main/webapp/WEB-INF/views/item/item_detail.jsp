@@ -135,6 +135,59 @@
 			});
 		});	
 	</script>
+	
+	<script type="text/javascript">
+// 	추천기능
+	$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#wishBtn").click(function(){
+				if(${sessionScope.sId == null}){
+					
+					alert("로그인 후 사용가능합니다!!");
+					
+				} else {
+					
+					$.ajax({
+						url: "WishList.bo",
+						type: "GET",
+						data: {
+							member_id: '${sessionScope.sId}',
+							item_idx: ${item.item_idx},
+							pageNum: ${pageInfo.pageNum},
+							manager_brandname: ${item.manager_brandname},
+							item_category: ${item.item_category},
+							heart: ${item.heart},
+						},
+						success: function(heart){
+							$(".wish_count").html(heart);
+						},
+					})
+				}	
+			})
+			
+// 			// 게시글 추천수
+// 			function bestCount(){
+// 				$.ajax({
+// 					url: "BestCounting.bo",
+// 					type: "POST",
+// 					data:{
+// 						rf_board_idx: ${cBoard.board_idx}
+// 					},
+// 					success: function(count){
+// 						$(".bestcnt_count").html(count);
+// 					},
+// 				})
+// 			};
+		
+	// 처음 시작했을때 실행되도록 해당 함수 호출
+		
+	});
+	
+	
+	
+	
+	
+	</script>
 </head>
 <style>
 	select {
@@ -220,7 +273,8 @@
                                     </figure>
                                     
                                     <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
-                                    <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>${item.heart }</a></div>
+                                      <div class="ps-product__actions" id="wishBtn"><span class="wish_count"></span><i class="icon-heart"></i>${item.heart }</div>
+                              		  <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>${item.heart }</a></div>
                                 </div>
                             </div>
                         </div>

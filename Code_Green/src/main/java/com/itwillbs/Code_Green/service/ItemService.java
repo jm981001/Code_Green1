@@ -63,6 +63,16 @@ public class ItemService {
 	public int getItemListCount(String searchType, String keyword) {
 		return mapper.selectItemListCount(searchType, keyword);
 	}
+	
+	//베스트리스트
+	public List<ItemVO> itemBestList(int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectItemBestList(startRow, listLimit, searchType, keyword);
+	}
+
+	//베스트리스트 갯수
+	public int getItemBestListCount(String searchType, String keyword) {
+		return mapper.selectItemBestListCount(searchType, keyword);
+	}
 
 	//상세상세페이지 안 관련상품 6개
 	public List<ItemVO> itemList6(String item_category) {
@@ -94,6 +104,9 @@ public class ItemService {
 	public int removeWish(int member_idx, int heart_idx) {
 		return mapper.deleteWish(member_idx, heart_idx);
 	}
+
+
+
 
 
 
