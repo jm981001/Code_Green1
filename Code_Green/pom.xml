@@ -136,6 +136,13 @@
 		</dependency>
 <!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
 
+		<!-- AJAX -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.8.11</version>
+		</dependency>
+
 
 		<!-- AspectJ -->
 		<dependency>

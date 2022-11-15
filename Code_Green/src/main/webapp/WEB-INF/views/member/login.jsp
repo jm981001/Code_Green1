@@ -19,65 +19,67 @@
 <!DOCTYPE html>
 <html>
 <head>
- 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <title>로그인 | Login</title>
-    <!-- Css Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/plugins/nouislider/nouislider.min.css">
-	<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
-	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-	<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
-	<style type="text/css">
-	h5{
-		text-align: center;
-	}
-	
-	.ps-btn, button.ps-btn {
-		  background-color: #5fa30f;
-		  color: #ffffff;
-		  margin: 5px;
-	}
-	#managerDiv{
-   		display: none;
-   	}
-   	#adminDiv{
-   		display: none;
-   	}
-	</style>
-	<script type="text/javascript">
-	
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>로그인 | Login</title>
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
+<!-- Css Styles -->
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins/nouislider/nouislider.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
+<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+<style type="text/css">
+h5{
+	text-align: center;
+}
+
+.ps-btn, button.ps-btn {
+	  background-color: #5fa30f;
+	  color: #ffffff;
+	  margin: 5px;
+}
+#managerDiv{
+  		display: none;
+  	}
+  	#adminDiv{
+  		display: none;
+  	}
+</style>
+<script type="text/javascript">
 	function setDisplay(){    
 		if($('input:radio[id=memberLogin]').is(':checked')){
+// 			debugger;
 			$('#adminDiv').hide(); 
 			$('#managerDiv').hide(); 
 	     	$('#memberDiv').show();
 		} else if($('input:radio[id=managerLogin]').is(':checked')){
+// 			debugger;
 			$('#adminDiv').hide(); 
 			$('#memberDiv').hide(); 
 	     	$('#managerDiv').show();
 		} else {
+// 	     	debugger;
 			$('#adminDiv').show(); 
 			$('#memberDiv').hide(); 
 	     	$('#managerDiv').hide();
 		}
-}
+	}
 	</script>
 </head>
 <body>
@@ -105,8 +107,8 @@
 									<b>구분</b>
 									<div>
 										<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
-										<label><input type="radio" name="memberType" id="managerLogin"onclick="setDisplay()">기업회원</label>
-										<label><input type="radio" name="memberType" id="adminLogin" onclick="setDisplay()">관리자</label>
+										<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
+										<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
 									</div>
 								</div>
                                 <div class="form-group">
@@ -147,7 +149,7 @@
 									<b>구분</b>
 									<div>
 										<label><input type="radio" name="memberType" id="memberLogin" onchange="setDisplay()">개인회원</label>
-										<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
+										<label><input type="radio" name="memberType" id="managerLogin" checked onchange="setDisplay()">기업회원</label>
 										<label><input type="radio" name="memberType" id="adminLogin"  onchange="setDisplay()">관리자</label>
 									</div>
 								</div>
@@ -190,7 +192,7 @@
 									<div>
 										<label><input type="radio" name="memberType" id="memberLogin" onchange="setDisplay()">개인회원</label>
 										<label><input type="radio" name="memberType" id="companyLogin" onchange="setDisplay()">기업회원</label>
-										<label><input type="radio" name="memberType" id="adminLogin"  onchange="setDisplay()">관리자</label>
+										<label><input type="radio" name="memberType" id="adminLogin" checked onchange="setDisplay()">관리자</label>
 									</div>
 								</div>
                                 <div class="form-group">
