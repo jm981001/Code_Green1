@@ -259,11 +259,38 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportStatus(board_idx, report);
 	}
-
-	public List<BoardVO> getNoticeList() {
+	//공지 목록 조회
+	public List<BoardVO> getNoticeList(int startRow, int listLimit) {
 		// TODO Auto-generated method stub
-		return mapper.selectNoticeList();
+		return mapper.selectNoticeList(startRow, listLimit);
 	}
+	//공지 갯수 조회
+	public int getNoticeListCount() {
+		// TODO Auto-generated method stub
+		return mapper.selectNoticeListCount();
+	}
+	//공지 상세 조회
+	public BoardVO getNoticeDetail(int board_idx) {
+		// TODO Auto-generated method stub
+		return mapper.selectNoticeDetail(board_idx);
+	}
+	//공지 등록
+	public int registNotice(BoardVO board) {
+		// TODO Auto-generated method stub
+		return mapper.insertNotice(board);
+	}
+	//공지 삭제
+	public int removeNotice(String idx) {
+		// TODO Auto-generated method stub
+		return mapper.deleteNotice(idx);
+	}
+	//공지 수정
+	public int modifyNotice(BoardVO board) {
+		// TODO Auto-generated method stub
+		return mapper.updateNotice(board);
+	}
+	
+	
 	
 	
 

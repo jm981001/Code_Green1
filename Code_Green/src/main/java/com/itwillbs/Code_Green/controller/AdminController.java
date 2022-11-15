@@ -942,37 +942,150 @@ public class AdminController {
 			
 		//------------공지 목록----------------------------
 		@GetMapping(value = "/ad_Notice")
-		public String ad_Notice(Model model, HttpSession session) {
+		public String ad_Notice(Model model, HttpSession session, @RequestParam(defaultValue = "1") int pageNum) {
 			
-			List<BoardVO> noticeList = service.getNoticeList();
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			
+			List<BoardVO> noticeList = service.getNoticeList(startRow, listLimit);
+			
+			
+			int listCount = service.getNoticeListCount();
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
 			System.out.println(noticeList);
 			model.addAttribute("noticeList", noticeList);
+			model.addAttribute("pageInfo", pageinfo);
 			
 			return "admin/ad_Notice";
 		}
 	
 	
-		//------------공지 작성----------------------------
+		//------------공지 상세조회----------------------------
+		@GetMapping(value = "/ad_Notice_Detail")
+		public String ad_Notice_Detail(Model model, HttpSession session, int board_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			
+			BoardVO noticeDetail = service.getNoticeDetail(board_idx);
+			System.out.println("공지 상세조회 : " + noticeDetail);
+			model.addAttribute("noticeDetail", noticeDetail);
+			
+			
+			return "admin/ad_Notice_Detail";
+		}
+		
+		//------------공지 작성폼 요청----------------------------
 		@GetMapping(value = "/ad_Notice_Write")
 		public String ad_Notice_Write() {
 			return "admin/ad_Notice_Write";
 		}
 		
+		//------------공지 등록----------------------------
+		@PostMapping(value = "/ad_Notice_WritePro")
+		public String ad_Notice_WritePro(BoardVO board, Model model, HttpSession session) {
+			
+			
+			int insertCount = service.registNotice(board);
+			System.out.println(insertCount);
+			
+			if(insertCount > 0) {
+				
+				return "redirect:/ad_Notice";
+			}
+			
+			model.addAttribute("fail", "공지등록에 실패했습니다!");
+			
+			return "admin/ad_fail_back";
+		}
 		
-		//------------공지 수정----------------------------
+		
+		//------------공지 수정 폼 요청----------------------------
 		@GetMapping(value = "/ad_Notice_Update")
-		public String ad_Notice_Update() {
+		public String ad_Notice_Update(Model model, HttpSession session, @RequestParam int board_idx) {
+			
+			BoardVO noticeDetail = service.getNoticeDetail(board_idx);
+			model.addAttribute("noticeDetail", noticeDetail);
+			
 			return "admin/ad_Notice_Update";
 		}
-	
+		
+		
+		//------------공지 수정----------------------------
+		@GetMapping(value = "/ad_Notice_UpdatePro")
+		public String ad_Notice_UpdatePro(Model model, HttpSession session, BoardVO board) {
+			
+			int updateCount = service.modifyNotice(board);
+			
+			System.out.println(updateCount +"집가고싶어효");
+			
+			return "redirect:/ad_Notice";
+		}
+
 	
 		//------------공지 삭제----------------------------
 		@GetMapping(value = "/ad_Notice_Delete")
-		public String ad_Notice_Delete() {
-			return "admin/ad_Notice_Delete";
+		public String ad_Notice_Delete(Model model, HttpSession session, @RequestParam String idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			int deleteCount = service.removeNotice(idx);
+			
+			if(deleteCount > 0 ) {
+				System.out.println("공지삭제 성공!!!");
+				return "redirect:/ad_Notice";
+			}
+			
+			model.addAttribute("fail", "공지글 삭제에 실패 했습니다!");
+			return "admin/ad_fail_back";
 		}
 	
 	
+		
+		
+		
+		
 	
 	
 }

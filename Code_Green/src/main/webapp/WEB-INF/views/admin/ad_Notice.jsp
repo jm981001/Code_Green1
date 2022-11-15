@@ -26,13 +26,13 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
     <script type="text/javascript">
-	function confirmDelete(id) {
+	function confirmDelete(idx) {
 		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
 		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
-		let result = confirm("삭제하시겠습니까?");
+		let result = confirm("공지를 삭제하시겠습니까?");
 		
 		if(result) {
-			location.href="ad_noticeDelete?id=" + id;
+			location.href="ad_Notice_Delete?idx=" + idx;
 		}
 	}
 </script>
@@ -95,23 +95,7 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="ad_member_Manage" method="get">
-                            <div class="ps-form__left">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." >
-                                </div>
-                                <div class="form-group">
-                                    <select class="ps-select" name="searchType">
-                                        <option value="id">아이디</option>
-                                        <option value="name">이름</option>
-                                        <option value="email">이메일</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray" type="submit"><i class="icon icon-funnel mr-2"></i>Filter</button>
-                            </div>
-                        </form>
+
                     </div>
 <!--                     <div class="ps-section__actions"><a class="ps-btn success" href="#"><i class="icon icon-plus mr-2"></i>Add Customer</a></div> -->
                 </div>
@@ -133,14 +117,14 @@
                                 <tr>
                                 	<td>${notice.board_idx }</td>
                                 	<td>${notice.board_category }</td>
-                                    <td><a href="ad_Notice_Detail?id=${notice.board_id }&pageNum=${pageInfo.pageNum}"><strong>${notice.board_subject }</strong></a></td>
+                                    <td><a href="ad_Notice_Detail?board_idx=${notice.board_idx }&pageNum=${pageInfo.pageNum}"><strong>${notice.board_subject }</strong></a></td>
                                     <td>${notice.board_id }</td>
                                     <td>${notice.board_date }</td>
                                     <td>${notice.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" onclick="confirmDelete('${notice.board_id}')">삭제하기</a>
+                                            <a class="dropdown-item" onclick="confirmDelete('${notice.board_idx}')">삭제하기</a>
                                             </div>
                                         </div>
                                     </td>
@@ -150,6 +134,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <div style="margin-left: 1250px"><button type="button" onclick="location.href='ad_Notice_Write'" class="btn btn-info" style="font-size: 13px"><strong>공지작성</strong></button></div>
                 </div>
                 <div class="ps-section__footer">
                     <p>Show 10 in 30 items.</p>
@@ -161,29 +146,26 @@
                         <li><a href="#"><i class="icon-chevron-right"></i></a></li>
                     </ul>
                 </div>
-                
-                
-                
-              
             </section>
-<!--             <section id="pageList"> -->
+<!-- 페이징 기능 구현-->
+            <section id="pageList">
 	
-<%-- 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
-<%-- 			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Notice?pageNum=${pageInfo.pageNum - 1}'"<%} %>> --%>
-<!-- 			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 --> -->
-<!-- 			&nbsp; -->
-<%-- 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
-<!-- 				현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
-<!-- 				아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
-<%-- 				<c:choose> --%>
-<%-- 					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when> --%>
-<%-- 					<c:otherwise><a href="ad_Notice?pageNum=${i }">${i }</a></c:otherwise> --%>
-<%-- 				</c:choose> --%>
-<!-- 				&nbsp; -->
-<%-- 			</c:forEach> --%>
-<!-- 		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 --> -->
-<%-- 		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_Notice?pageNum=${pageInfo.pageNum + 1}'"<%} %>> --%>
-<!-- 	</section> -->
+			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Notice?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+			&nbsp;
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+				<c:choose>
+					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+					<c:otherwise><a href="ad_Notice?pageNum=${i }">${i }</a></c:otherwise>
+				</c:choose>
+				&nbsp;
+			</c:forEach>
+		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_Notice?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+	</section>
 
 					</div>
     			</main>

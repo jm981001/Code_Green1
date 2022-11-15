@@ -169,8 +169,23 @@ public interface AdminMapper {
 	//신고글 상태 변경(처리대기 => 처리완료)
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
 
+	//공지 목록 조회
+	public List<BoardVO> selectNoticeList(@Param("startRow") int startRow, @Param("listLimit") int listLimit);
 
-	public List<BoardVO> selectNoticeList();
+	//공지 갯수 조회
+	public int selectNoticeListCount();
+
+	//공지 상세 조회
+	public BoardVO selectNoticeDetail(int board_idx);
+
+	//공지 등록
+	public int insertNotice(BoardVO board);
+
+	//공지 삭제
+	public int deleteNotice(String idx);
+
+	//공지 수정
+	public int updateNotice(BoardVO board);
 
 
 	

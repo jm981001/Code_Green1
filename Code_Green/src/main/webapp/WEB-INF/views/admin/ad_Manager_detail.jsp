@@ -61,14 +61,13 @@
   
 <script type="text/javascript">
 
-let auth = '${manager.manager_adminauth }';
+window.onload = function(){
+	let auth = '${manager.manager_adminauth }';
 
-if(auth === "N") {
-	alert("ddd");
-	document.getElementById("btn1").style.display = "";
+	if(auth === "N") {
+		document.getElementById("btn1").style.display = "block";
+	}	
 }
-
-
 </script>
     
 </head>

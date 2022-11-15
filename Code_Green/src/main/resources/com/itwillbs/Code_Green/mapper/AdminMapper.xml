@@ -681,12 +681,57 @@
 	
 	<!-- 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다-->
 	
-	
+	<!-- 공지 목록 -->
 	<select id="selectNoticeList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT * FROM board
 		WHERE board_category='공지'
+		ORDER BY board_idx DESC
 	</select>
-	
-	
+	<!-- 공지 갯수 -->
+	<select id="selectNoticeListCount" resultType="integer">
+		SELECT COUNT(*) FROM board
+		WHERE board_category='공지'
+	</select>
+	<!-- 공지 상세조회 -->
+	<select id="selectNoticeDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT * FROM board
+		WHERE board_idx = #{board_idx}
+		
+	</select>
+	<!-- 공지 등록 -->
+	<insert id="insertNotice">
+		<selectKey keyProperty="board_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(board_idx) FROM board
+		</selectKey>
+			INSERT INTO board values(
+				#{board_idx} + 1,
+				"0",
+				"커뮤",
+				#{board_id},
+				"공지",
+				#{board_subject},
+				#{board_content},
+				"0",
+				date_format(now(),'%Y%m%d')
+				)
+					
+	</insert>
+	<!-- 공지 삭제 -->
+	<delete id="deleteNotice">
+		DELETE FROM board
+		WHERE
+			board_idx=#{board_idx}
+	</delete>
+	<!-- 공지 수정 -->
+	<update id="updateNotice">
+		UPDATE board
+		SET
+			board_subject=#{board_subject},
+			board_content=#{board_content}
+		WHERE
+			board_idx=#{board_idx}
+	</update>
+
+
 
 </mapper>
