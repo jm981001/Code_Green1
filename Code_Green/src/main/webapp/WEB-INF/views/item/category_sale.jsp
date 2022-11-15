@@ -148,11 +148,16 @@
                                                              -->
                                                             <div class="ps-product__rating">
                                                                 <select class="ps-rating" data-read-only="true">
-                                                                    <option value="1">1</option>
-                                                                    <option value="1">2</option>
-                                                                    <option value="1">3</option>
-                                                                    <option value="1">4</option>
-                                                                    <option value="2">5</option>
+			              										 	<c:forEach var="i" begin="1" end="5">
+						                                             	<c:choose>
+						                                             		<c:when test="${i <= item.score}">
+						                                             			<option value="1">${i }</option>
+						                                             		</c:when>
+						                                             		<c:otherwise>
+						                                             			<option value="2">${i }</option>
+						                                             		</c:otherwise>
+						                                             	</c:choose>
+						                                             </c:forEach>
                                                                 </select><span>${item.board_star_score }</span>
                                                             </div>
                                                             
