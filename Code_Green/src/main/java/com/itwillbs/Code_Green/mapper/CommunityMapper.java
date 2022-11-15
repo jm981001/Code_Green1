@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 
 public interface CommunityMapper {
@@ -30,5 +31,25 @@ public interface CommunityMapper {
 
 	// 신고하기 (신고테이블에 입력하기)
 	int insertReport(ReportVO report);
+
+	// 추천버튼 클릭시 아이디존재여부 판단하기 
+	int selectBoardBest(@Param("rf_board_idx") int rf_board_idx, @Param("member_id") String member_id);
+
+	// 추천하기 테이블에서 추천한 아이디 행 삭제하기 
+	int deleteBoardBest(@Param("rf_board_idx") int rf_board_idx, @Param("member_id") String member_id);
+
+	// 추천하기 테이블에 추천아이디 행 추가하기 
+	int insertBoardBest(@Param("rf_board_idx") int rf_board_idx, @Param("member_id") String member_id);
+	
+	// 추천수 카운팅 
+	int countBoardBest(int rf_board_idx);
+
+	// 댓글 쓰기 (기본)
+	int insertReply(ReplyVO replyVO);
+
+	// 댓글 목록 출력
+	List<ReplyVO> selectReplyList(int reply_bo_ref);
+	
+	
 	
 }

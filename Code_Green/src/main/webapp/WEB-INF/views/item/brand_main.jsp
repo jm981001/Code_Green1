@@ -30,10 +30,11 @@
 </head>
 <style>
 	.heart_icon_brand {
-		width: 40px; height:40px;
-		position: absolute;
-	    top: 11px;
-    	left: 135px;
+		width: 25px;
+	    height: 25px;
+	    position: absolute;
+	    top: 19px;
+	    left: 154px;
 	}
 
 	.brandlist-ul {
@@ -148,99 +149,72 @@
 		                    </div>
 <!-- =========================================== 수정중 사이드바!!!======================================================== -->
 
-			<aside class="widget widget_shop">
-                <h4 class="widget-title">BY BRANDS</h4>
-                <form class="ps-form--widget-search" action="do_action" method="get">
-                    <input class="form-control" type="text" placeholder="">
-                    <button><i class="icon-magnifier"></i></button>
-                </form>
-                <figure class="ps-custom-scrollbar" data-height="250">
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-1" name="brand" />
-                        <label for="m-brand-1">Adidas (3)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-2" name="brand" />
-                        <label for="m-brand-2">Amcrest (1)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-3" name="brand" />
-                        <label for="m-brand-3">Apple (2)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-4" name="brand" />
-                        <label for="m-brand-4">Asus (19)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-5" name="brand" />
-                        <label for="m-brand-5">Baxtex (20)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-6" name="brand" />
-                        <label for="m-brand-6">Adidas (11)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-7" name="brand" />
-                        <label for="m-brand-7">Casio (9)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-8" name="brand" />
-                        <label for="m-brand-8">Electrolux (0)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-9" name="brand" />
-                        <label for="m-brand-9">Gallaxy (0)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="m-brand-10" name="brand" />
-                        <label for="m-brand-10">Samsung (0)</label>
-                    </div>
-                    <div class="ps-checkbox">
-                        <input class="form-control" type="checkbox" id="brand-11" name="brand" />
-                        <label for="brand-11">Sony (0)</label>
-                    </div>
-                </figure>
-                <figure>
-                    <h4 class="widget-title">By Price</h4>
-                    <div class="leftbar_searchbyprice">
-                            <form action="SearchByPrice.mo" method="get">
-	                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
-	                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
-	                            <input type="submit" value="검색" >
-                            </form>
-                            </div>
-                    
-                </figure>
-			</aside>
-
+					<aside class="widget widget_shop">
+		                <h4 class="widget-title">BY BRANDS</h4>
+		                <figure class="ps-custom-scrollbar" data-height="250">
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-1" name="brand" />
+		                        <label for="m-brand-1">Adidas (3)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-2" name="brand" />
+		                        <label for="m-brand-2">Amcrest (1)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-3" name="brand" />
+		                        <label for="m-brand-3">Apple (2)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-4" name="brand" />
+		                        <label for="m-brand-4">Asus (19)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-5" name="brand" />
+		                        <label for="m-brand-5">Baxtex (20)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-6" name="brand" />
+		                        <label for="m-brand-6">Adidas (11)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-7" name="brand" />
+		                        <label for="m-brand-7">Casio (9)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-8" name="brand" />
+		                        <label for="m-brand-8">Electrolux (0)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-9" name="brand" />
+		                        <label for="m-brand-9">Gallaxy (0)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="m-brand-10" name="brand" />
+		                        <label for="m-brand-10">Samsung (0)</label>
+		                    </div>
+		                    <div class="ps-checkbox">
+		                        <input class="form-control" type="checkbox" id="brand-11" name="brand" />
+		                        <label for="brand-11">Sony (0)</label>
+		                    </div>
+		                </figure>
+		                
+		                <figure>
+		                	<!-- 가격검색 목록 -->    
+		                    <h4 class="widget-title">By Price</h4>
+		                    <div class="leftbar_searchbyprice">
+		                            <form action="SearchByPrice.mo" method="get">
+			                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
+			                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
+			                            <input type="submit" value="검색" >
+		                            </form>
+		                     </div>
+		                </figure>
+		                
+					</aside>
+                 </aside>
+             </div>
 <!-- =========================================== 수정중 사이드바!!!======================================================== -->
                             
-                            <!-- 카테고리화 목록 -->
-                            <hr>
-                            <div class="leftbar_category">
-	                            <ul class="ps-list--arrow">
-	                                <li><a href="#">신상품순</a></li>
-	                                <li><a href="#">판매량순</a></li>
-	                                <li><a href="#">낮은가격순</a></li>
-	                                <li><a href="#">높은가격순</a></li>
-	                            </ul>
-                            </div>
-                            
-                            
-							<!-- 가격검색 목록 -->                            
-                            <hr>
-                            <div class="leftbar_searchbyprice">
-                            <h4># 가격범위로 검색 # </h4> 
-                            <form action="SearchByPrice.mo" method="get">
-	                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
-	                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
-	                            <input type="submit" value="검색" >
-                            </form>
-                            </div>
-                            
-                        </aside>
-                       
-                    </div>
                     
                     
                     <!-- 상품리스트 헤더  -->

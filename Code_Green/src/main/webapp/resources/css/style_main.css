@@ -1743,18 +1743,19 @@ button {
   }
 }
 
-.ps-btn, button.ps-btn {
-  display: inline-block;
-  padding: 15px 45px;
+/* 지영 */ 
+#replyWrite.ps-btn, button.ps-btn {
+  padding-right: 20px;
+  padding-left: 20px;
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
-  color: #000;
+  background-color:	rgb(95, 163, 15);
+  color:rgb(255, 255, 255);
   border: none;
   font-weight: 600;
   border-radius: 4px;
   background-color: #5FA30F;
-  transition: all .4s ease;
   cursor: pointer;
 }
 
@@ -1802,7 +1803,7 @@ button {
   display: inline-block;
   padding: 10px 20px;
   text-align: left;
-  width: 80px;
+  width: 110px;
   font-weight: bold;
   font-size: 13px;
   line-height: 20px;
@@ -5126,10 +5127,12 @@ textarea.form-control {
   max-width: 70px;
   border-radius: 50px;
 }
-
+	
+/* 지영 */	
 .ps-block--comment > .ps-block__content {
   padding: 15px 0 30px 20px;
-  border-top: 1px solid #e1e1e1;
+  border-top: 1px solid #d9f9b3;
+  border-bottom: 1px solid #d9f9b3;
 }
 
 .ps-block--comment > .ps-block__content h5 {
@@ -5166,6 +5169,7 @@ textarea.form-control {
 .ps-block--comment > .ps-block__content > .ps-block--comment {
   margin-top: 30px;
 }
+
 
 .ps-block--comment > .ps-block__content > .ps-block--comment > .ps-block__content {
   padding: 15px 0 30px 0;

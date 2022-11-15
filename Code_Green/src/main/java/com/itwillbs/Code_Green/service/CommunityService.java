@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.CommunityMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 
 @Service
@@ -45,6 +46,37 @@ public class CommunityService {
 	// 관리자에게 신고글 제출(신고테이블에 입력)
 	public int reportBoard(ReportVO report) {
 		return mapper.insertReport(report);
+	}
+
+	// 추천하기 테이블에 아이디존재유무 판단하기
+	public int selectBoardBest(int rf_board_idx, String member_id) {
+		return mapper.selectBoardBest(rf_board_idx,member_id);
+	}
+	
+	// 추천하기 테이블에서 추천한 아이디 행 삭제하기 
+	public int deleteBoardBest(int rf_board_idx, String member_id) {
+		return mapper.deleteBoardBest(rf_board_idx,member_id);
+	}
+	
+	// 추천하기 테이블에 추천아이디 행 추가하기 
+	public int insertBoardBest(int rf_board_idx, String member_id) {
+		return mapper.insertBoardBest(rf_board_idx,member_id);
+	}
+	
+	// 추천 수 카운팅 
+	public int countBoardBest(int rf_board_idx) {
+		return mapper.countBoardBest(rf_board_idx);
+	}
+	
+	// 댓글 쓰기등록 (기본)
+	public int writeReply(ReplyVO replyVO) {
+		System.out.println(replyVO);
+		 return mapper.insertReply(replyVO);
+	}
+	
+	// 댓글 목록 출력
+	public List<ReplyVO> replyList(int reply_bo_ref) {
+		return mapper.selectReplyList(reply_bo_ref);
 	}
 
 	

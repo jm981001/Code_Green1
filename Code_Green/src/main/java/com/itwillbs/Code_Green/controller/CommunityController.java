@@ -1,7 +1,8 @@
 package com.itwillbs.Code_Green.controller;
 
-import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.itwillbs.Code_Green.service.CommunityService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
+import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 
 @Controller
@@ -85,6 +89,8 @@ public class CommunityController {
 		// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		
 		return "community/community_main";
 	}
@@ -168,7 +174,89 @@ public class CommunityController {
 	}
 	
 		
+	// 추천하기 로직 수행 
+	@PostMapping("/BestCountUpdate.bo")
+	public String bestCountUpdate(@RequestParam int rf_board_idx,@RequestParam String member_id, Model model) {
+		System.out.println(rf_board_idx);
+		System.out.println(member_id);
 		
+		// 가져온 아이디와 보드넘버로 board_best테이블에 존재유무 판단하기
+		int existCount = service.selectBoardBest(rf_board_idx,member_id);
+		String msg = "";
+
+		if(existCount > 0) { // 판단해서 있으면 삭제하기
+			
+			int resultDeleteCount = service.deleteBoardBest(rf_board_idx,member_id);
+			if(resultDeleteCount > 0) {
+				model.addAttribute("msg", "추천이 취소되었습니다!");
+			}
+			return "member/fail_back";
+		} else {	// 판단해서 없으면 추가하기
+			
+			int resultInsertCount = service.insertBoardBest(rf_board_idx,member_id);
+			
+			if(resultInsertCount > 0) {
+				model.addAttribute("msg", "추천했습니다!!");
+			}
+			return "member/fail_back";
+		}
 		
+//		model.addAttribute("msg", msg);
+//		System.out.println(msg);
+//		return "community/msg_back";
+		
+	}
+	
+	// 추천수 카운팅 로직
+	@ResponseBody
+	@PostMapping("/BestCounting.bo")
+	public int bestBoardCounting(int rf_board_idx) {
+		
+		int count = service.countBoardBest(rf_board_idx);
+//		System.out.println(count);
+		return count;
+	}
+		
+	
+	
+	
+	// 댓글쓰기
+	@ResponseBody
+	@PostMapping("/ReplyWrite.re")
+	public Map<String,Object> replyWrite(
+			@RequestParam int reply_bo_ref, 
+			@RequestParam String reply_id,
+			@RequestParam String reply_content){
+		
+		System.out.println(reply_bo_ref);
+		System.out.println(reply_id);
+		System.out.println(reply_content);
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		ReplyVO replyVO = new ReplyVO();
+		replyVO.setReply_bo_ref(reply_bo_ref);
+		replyVO.setReply_id(reply_id);
+		replyVO.setReply_content(reply_content);
+		int resultCount = service.writeReply(replyVO);
+		
+		if(resultCount > 0) {
+			map.put("result", "success");
+		} else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
+	// 댓글목록 출력
+	@ResponseBody
+	@PostMapping("/ReplyList.re")
+	public List<ReplyVO> replyList(@RequestParam int reply_bo_ref){
+		
+		List<ReplyVO> replyList = service.replyList(reply_bo_ref);
+		System.out.println(replyList);
+		return replyList;
+	}
 		
 }

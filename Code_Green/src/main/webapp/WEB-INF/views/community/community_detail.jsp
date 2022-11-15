@@ -35,27 +35,21 @@
 <script type="text/javascript">
 	
 	
-	$(function(){
-		$(":button").click(function(){
+	function checkReport(){
+		if(${sessionScope.sId == null}){
 			
-			if(${sessionScope.sId == null}){
-				alert("로그인 후 사용가능합니다!");
-				return false;
-			}
-		});
-	});	
-	
-	
-	$(function() {
-		if(${sessionScope.sId != null}){
-			$(".ps-btn-report").click(function(){
-				$("#modal").fadeIn();
-			});
+			alert("로그인 후 사용가능합니다!");
+			
+		} else {
+// 			$(".ps-btn-report").click(function(){
+			$("#modal").fadeIn();
+// 			});
 			$("#modal_close_btn").click(function(){
 				$("#modal").fadeOut();
 			});
-		}
-	});
+		} 
+		
+	}
 		
 	
 	function checkS() {
@@ -68,12 +62,141 @@
 		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
 	}
 	
+// 	추천기능
+	$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#bestcnt_update").click(function(){
+				if(${sessionScope.sId == null}){
+					
+					alert("로그인 후 사용가능합니다!");
+					
+				} else {
+					
+					$.ajax({
+						url: "BestCountUpdate.bo",
+						type: "POST",
+						data: {
+							rf_board_idx: ${cBoard.board_idx},
+							member_id: '${sessionScope.sId}'
+						},
+						success: function(){
+							bestCount();
+						},
+					})
+				}	
+			})
+			
+			// 게시글 추천수
+			function bestCount(){
+				$.ajax({
+					url: "BestCounting.bo",
+					type: "POST",
+					data:{
+						rf_board_idx: ${cBoard.board_idx}
+					},
+					success: function(count){
+						$(".bestcnt_count").html(count);
+					},
+				})
+			};
+		
+		bestCount();	// 처음 시작했을때 실행되도록 해당 함수 호출
+		
+	});
+	
+	// 댓글목록 불러오기(로딩시 기본적으로 list 불러오기)
+	$(document).ready(function(){
+		getReplyList();			
+	});
+
+	// 댓글목록 출력
+	function getReplyList(){
+		
+		$.ajax({
+			url:"ReplyList.re",
+			type:"POST",
+			dataType:"json",
+			data:{
+				reply_bo_ref : ${cBoard.board_idx }		// 원본게시글번호 전달
+			},
+			success: function(result){
+				var comments="";
+				
+				
+				if(result.length < 1){
+					comments = "등록된 댓글이 없습니다.";
+				} else {
+					
+					$(result).each(function(){
+						
+						comments +=  '<h5>'+this.reply_id+'<small>' +this.reply_date+ '</small></h5>';
+						comments +=  '<p>'+this.reply_content+'</p>';
+						comments +=  '<a class="reply_write_btn" onclick="reReplyWrite()" >답글</a>';
+                        <!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
+						if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
+	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re">  삭제</a></span>';
+	                        }
+						comments += '<div id="reReplyBox" style="display:none"><br>&nbsp;&nbsp;<input type="text" id ="rereBox"><input type="button" id="goReReply" value="작성"></div>';
+                        comments += '<hr>';
+					});
+				};
+				$("#replyList").html(comments);
+				
+			}
+		});
+	};	
+	
+	// 대댓글상자 숨김/표시 처리기능 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 질문하기!!!!!!이것때문에 고통받는중.. 아악!!!!!!!!
+	function reReplyWrite(){
+		 if ($('#reReplyBox').css('display') == 'none') {
+	          $('#reReplyBox').css('display', 'block');
+	     } else {
+	            $('#reReplyBox').css('display', 'none');
+	     }
+	}
 	
 	
+	// 댓글쓰기기능
+	$(function(){		// 댓글쓰기 버튼 클릭시 수행
+		$("#replyWrite").click(function(){
+			if(${sessionScope.sId == null}){
+				
+				alert("로그인 후 사용가능합니다!");
+				
+			} else {
+				
+					if($("#reply_content").val() == '' || $("#reply_content").val() == null){
+						
+						alert("댓글 내용을 입력해주세요!");
+						
+					} else { 
+					
+					$.ajax({
+						url:"ReplyWrite.re",
+						type: "POST",
+						dataType:"json",
+						data:{
+							reply_content : $("#reply_content").val(), 	// 댓글내용
+							reply_id : '${sessionScope.sId}',				// 댓글작성자
+							reply_bo_ref : ${cBoard.board_idx }		// 원본참조게시글번호	
+						},
+						success: function(result){
+							getReplyList();					// 댓글목록불러오는 함수
+							$("#reply_content").val('');	// 댓글칸 비우기
+						}
+						, error: function(error){
+							console.log("에러 : " + error);
+						}
+					})
+				 }
+			  }
+			})
+	});
 	
 	
 	
 </script>
+
 <body>
     
     <!-- 헤더 삽입 -->
@@ -98,16 +221,16 @@
 		                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
 	                            / ${cBoard.board_id }
 	                            / 조회수 ${cBoard.board_readcount }
-	                            / 댓글(45) 
+	                            / 댓글(${cBoard.reply_cnt }) 
+	                            / 추천수 <span class="bestcnt_count"></span>
                             </p>
                             </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
-                        
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
                         	<p>${cBoard.board_content }
-                        	<p><img src="/Code_Green/resources/img/홍콩센트럴소호비건레스토랑.jpg">
+                        	<p><img src="/Code_Green/resources/img/삼색이.jpg">
                         </div>
                        	<!-- 태그를...쓸건가? -->
 <!--                         <div class="ps-post__footer"> -->
@@ -120,7 +243,7 @@
 				
 				
 				<div class="form-group-comm">
-					<button class="ps-btn-report" >신고</button>
+					<button class="ps-btn-report" onclick="checkReport()">신고</button>
 						<div id="modal">
 						   <div class="modal_content">
 						   	  <button type="button" id="modal_close_btn">X</button><br>
@@ -152,56 +275,35 @@
 						   	  </form>
 						   </div>	
 						</div>
-							
-                    <button class="ps-btn-best">추천 45</button>
+                    <button class="ps-btn-best" id="bestcnt_update">추천 <span class="bestcnt_count"></span></button>
                 </div>
 			   <!-- 신고하기 / 추천하기 버튼 끝 -->
 			   <!-- ========================================= 댓글 영역 시작 ========================================= -->
 			   
                <div class="ps-post-comments">
 			   <!-- 댓글쓰기 영역 -->
-	                <form class="ps-form--post-comment" action="do_action" method="post">
 	                    <h4>댓글 쓰기</h4>
 	                    <div class="form-group">
-	                        <textarea class="form-control" rows="3" placeholder="댓글을 입력하세요" required></textarea>
+	                        <textarea id="reply_content" class="form-control" rows="3" placeholder="댓글을 입력하세요" required="required"></textarea>
 	                    </div>
 	                    <div class="form-group submit">
-	                        <button class="ps-btn"> 댓글입력</button>
+	                        <button class="ps-btn" id="replyWrite"> 댓글쓰기</button>
 	                    </div>
-	                </form>
 	            <!-- 댓글쓰기 영역 -->
-                <h4> 댓글 (3) </h4>
-                <div class="ps-block--comment">
-                    <div class="ps-block__thumbnail">
-                    	<img src="http://1.gravatar.com/avatar/af7935f33b10cec23f77b8d9717641df?s=70&amp;d=mm&amp;r=g">
-                    </div>
-                    <div class="ps-block__content">
-                        <h5>고리라<small>2022년 11월 08일 오후 6시 43분</small></h5>
-                        <p>오늘 저녁메뉴는 맥도날드구요. 아직 메뉴는 못정했는데, 세트먹고 감자튀김은 소금빼서 받을생각 입니다. 이의있으신가요?</p>
-                        <a class="ps-block__reply" href="#">답글</a>
-                    </div>
-                </div>
+                <h4> 댓글(${cBoard.reply_cnt }) </h4>
+       
+          
                 
                 <div class="ps-block--comment">
-                    <div class="ps-block__thumbnail"><img src="http://2.gravatar.com/avatar/b2c1febfd11117eef66c351c1d4c10f1?s=70&amp;d=mm&amp;r=g"></div>
-                    <div class="ps-block__content">
-                        <h5>김춘배<small>2022년 11월 05일 오후 2시 4분</small></h5>
-                        <p>마!니 이정도면 고양이 중독이담ㅁ ㅏ!!!!!!!!!!</p><a class="ps-block__reply" href="#">답글</a>
-                        
-                        <div class="ps-block--comment">
-                            <div class="ps-block__thumbnail"><img src="http://2.gravatar.com/avatar/25df3939b2e33bd19783411afd5bc6e3?s=70&amp;d=mm&amp;r=g"></div>
-                            <div class="ps-block__content">
-                                <h5>황애옹<small>2022년 11월 08일 오후 6시 43분</small></h5>
-                                <p>심각한고양이중독입니다. 마음의준비애옹</p><a class="ps-block__reply" href="#">답글</a>
-                            </div>
-                        </div>
-                    </div>
+<!--                     <div class="ps-block__thumbnail"> -->
+<!--                     	<img src="http://1.gravatar.com/avatar/af7935f33b10cec23f77b8d9717641df?s=70&amp;d=mm&amp;r=g"> -->
+<!--                     </div> -->
+	                    <div class="ps-block__content" id="replyList"></div>
                 </div>
                 
                 
-	            </div>
+	         </div>
              <!-- ========================================= 댓글 영역 끝 ========================================= -->
-             <hr>
                         
                         
                     </div>
@@ -214,7 +316,7 @@
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
 		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
 		                        <a href="CommunityWrite.bo"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
-		                        <c:if test="${cBoard.board_id eq sessionScope.sId }">
+		                        <c:if test="${cBoard.board_id eq sessionScope.sId || cBoard.board_id eq 'admin'}">
 			                        <a href="CommunityModify.bo"><i class="fi fi-rr-scissors"></i> 글 수정</a>
 			                        <a href="CommunityDelete.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }" onclick="return deleteCheck();"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>
 		                        </c:if>

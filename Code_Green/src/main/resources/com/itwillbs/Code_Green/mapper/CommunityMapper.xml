@@ -2,12 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.CommunityMapper">
 
-
-
 	<!-- 게시물 목록 조회(검색 기능 추가) -->
-	<select id="selectCommunityList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+	<select id="selectCommunityList" parameterType="hashMap" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT * 
-			FROM board WHERE board_type = '커뮤'
+			FROM board b
+			LEFT JOIN
+				(SELECT 
+						rf_board_idx, 
+						count(*) AS best_cnt 
+						FROM 
+							board_best 
+						GROUP BY 
+							RF_BOARD_IDX) AS be
+			
+			ON b.board_idx = be.rf_board_idx
+			LEFT JOIN
+				(SELECT 
+						reply_bo_ref, 
+						count(*) AS reply_cnt 
+						FROM 
+							reply
+						GROUP BY 
+							reply_bo_ref) AS re
+						
+			ON b.board_idx = re.reply_bo_ref
+			WHERE b.board_type = '커뮤'
+			
 			<!-- choose, when, otherwise 태그를 사용하여 복수개의 조건 판별(if ~ else if 문 구조) -->
 			<!-- 1. 검색어(keyword)가 널스트링이 아닐 때 검색 수행 -->
 			<if test="!keyword.equals('')">
@@ -31,7 +51,7 @@
 				</choose>
 			</if>
 			ORDER BY
-				board_idx DESC
+				FIELD(board_id, 'admin') DESC , board_date DESC
 			LIMIT #{startRow}, #{listLimit}
 	</select>
 
@@ -40,9 +60,29 @@
 
 	<!-- 전체 게시물 목록 갯수 조회(검색 기능 추가) -->
 	<select id="selectCommunityListCount" resultType="integer">
-		SELECT 
-			COUNT(*) 
-			FROM board WHERE board_type = '커뮤'
+		SELECT count(*) 
+			FROM board b
+			LEFT JOIN
+				(SELECT 
+						rf_board_idx, 
+						count(*) AS best_cnt 
+						FROM 
+							board_best 
+						GROUP BY 
+							RF_BOARD_IDX) AS be
+			
+			ON b.board_idx = be.rf_board_idx
+			LEFT JOIN
+				(SELECT 
+						reply_bo_ref, 
+						count(*) AS reply_cnt 
+						FROM 
+							reply
+						GROUP BY 
+							reply_bo_ref) AS re
+						
+			ON b.board_idx = re.reply_bo_ref
+			WHERE b.board_type = '커뮤'
 			<!-- choose, when, otherwise 태그를 사용하여 복수개의 조건 판별(if ~ else if 문 구조) -->
 			<!-- 1. 검색어(keyword)가 널스트링이 아닐 때 검색 수행 -->
 			<if test="!keyword.equals('')">
@@ -83,7 +123,27 @@
 	<!-- 글 상세정보 조회 -->
 	<select id="selectBoardDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT * 
-			FROM board
+			FROM board b
+			LEFT JOIN
+				(SELECT 
+						rf_board_idx, 
+						count(*) AS best_cnt 
+						FROM 
+							board_best 
+						GROUP BY 
+							RF_BOARD_IDX) AS be
+			
+			ON b.board_idx = be.rf_board_idx
+			LEFT JOIN
+				(SELECT 
+						reply_bo_ref, 
+						count(*) AS reply_cnt 
+						FROM 
+							reply
+						GROUP BY 
+							reply_bo_ref) AS re
+						
+			ON b.board_idx = re.reply_bo_ref
 			WHERE board_type = '커뮤' AND board_idx = #{board_idx}
 	</select>	
 		
@@ -119,6 +179,74 @@
 					
 	</insert>
 	
+
+	<!-- 추천하기 클릭시 아이디 존재여부 판단하기  -->
+	<select id="selectBoardBest" resultType="integer">
+		SELECT count(*)
+			FROM board_best
+			WHERE 
+				rf_board_idx = #{rf_board_idx} 
+				AND
+				rf_member_idx = (SELECT member_idx FROM member WHERE member_id=#{member_id})
+	</select>
 	
+	
+	<!-- 추천하기 테이블에서 이미 추천했던 아이디 행 삭제하기 -->
+	<delete id="deleteBoardBest">
+		DELETE 
+			FROM board_best
+			WHERE
+				rf_board_idx = #{rf_board_idx}
+				AND 
+				rf_member_idx = (SELECT member_idx FROM member WHERE member_id=#{member_id})
+	</delete>
+	
+	<!-- 추천하기 테이블에 추천아이디 행 추가하기 -->
+	<insert id="insertBoardBest">
+		INSERT
+			INTO board_best
+			VALUES (
+					IFNULL((SELECT MAX(board_best_idx) FROM board_best b),0) + 1,
+					(SELECT member_idx FROM member WHERE member_id=#{member_id}),
+					#{rf_board_idx}
+			)
+	</insert>
+	
+	<!-- 추천수 카운팅 -->
+	<select id="countBoardBest" resultType="integer">
+		SELECT
+			count(*)
+			FROM board_best
+			WHERE
+				rf_board_idx = #{rf_board_idx}
+	</select>
+	
+	<!-- 댓글쓰기(기본) -->
+	<insert id="insertReply">
+		INSERT
+			INTO reply
+			VALUES (
+					IFNULL((SELECT MAX(reply_idx) FROM reply r),0) + 1,
+					'커뮤',
+					#{reply_id},
+					#{reply_content},
+					IFNULL((SELECT MAX(reply_idx) FROM reply r),0) + 1,
+					0,
+					0,
+					#{reply_bo_ref},
+					date_format(now(),'%Y년%m월%d일 %H:%i')
+			)
+	
+	</insert>
+	
+	<!-- 댓글 목록 출력 -->
+	<select id="selectReplyList" resultType="com.itwillbs.Code_Green.vo.ReplyVO" parameterType="com.itwillbs.Code_Green.vo.ReplyVO">
+		SELECT * 
+			FROM reply
+			WHERE reply_type = '커뮤'
+				  AND 
+				  reply_bo_ref = #{reply_bo_ref}
+			ORDER BY reply_idx DESC
+	</select>	
 	
 </mapper>

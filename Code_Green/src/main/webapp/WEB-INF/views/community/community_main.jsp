@@ -74,24 +74,34 @@
 		                            <table class="table ps-table ps-table--vendor">
 		                                <thead>
 		                                    <tr>
-		                                        <th>번호</th>
 		                                        <th>말머리</th>
 		                                        <th>제목</th>
 		                                        <th>작성자</th>
 		                                        <th>작성일</th>
+		                                        <th>추천수</th>
 		                                        <th>조회수</th>
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
 		                               	 <c:forEach var="board" items="${communityList }">
 		                                    <tr>
-		                                        <td>${board.board_idx }</td>
 		                                        <td>[${board.board_category }]</td>
-		                                        <td><a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a></td>
+		                                        
+		                                        <td>
+		                                        	<!-- 댓글수가 0보다 크면 제목에 댓글수 함께 표시 -->
+		                                        	<c:choose>
+		                                        	<c:when test="${board.reply_cnt gt 0}">
+		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject } (${board.reply_cnt })</a>
+		                                        	</c:when>
+		                                        	<c:otherwise>
+		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a>
+		                                        	</c:otherwise>
+		                                        	</c:choose>
+		                                        </td>
 		                                        <td>${board.board_id }</td>
 		                                        <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 		                                        <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
-		                                        
+		                                        <td>${board.best_cnt }</td>
 		                                        <td>${board.board_readcount }</td>
 		                                    </tr>
 		                                 </c:forEach>
@@ -110,14 +120,14 @@
 		                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
 	                         <select name="searchType">
 	                               <option value="">카테고리</option>
-	                               <option value="category">말머리</option>
-	                               <option value="id">작성자</option>
-	                               <option value="subject">제목</option>
-	                               <option value="content">내용</option>
-	                               <option value="subject_content">제목&내용</option>
+	                               <option value="category" <c:if test="${searchType eq 'category'}">selected</c:if>>말머리</option>
+	                               <option value="id" <c:if test="${searchType eq 'id'}">selected</c:if>>작성자</option>
+	                               <option value="subject" <c:if test="${searchType eq 'subject'}">selected</c:if>>제목</option>
+	                               <option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
+	                               <option value="subject_content" <c:if test="${searchType eq 'subject_content'}">selected</c:if>>제목+내용</option>
 	                          </select>
 	                          <aside class="widget widget--blog widget--search">
-		                            <input class="form-control" type="text"  name="keyword" placeholder="검색">
+		                            <input class="form-control" type="text"  name="keyword" value="${keyword }" placeholder="검색">
 		                            <button><i class="icon-magnifier"></i></button>
 	                   		 </aside>
 		                  </form>
@@ -132,14 +142,14 @@
                     <div class="ps-pagination">
                         <ul class="pagination">
                            
-                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
                             <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
                             	<c:choose>
                             		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-                            		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+                            		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
                             	</c:choose>
                             </c:forEach>
-                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
                         </ul>
                     </div>
                     <!-- 페이징 버튼들 끝 -->

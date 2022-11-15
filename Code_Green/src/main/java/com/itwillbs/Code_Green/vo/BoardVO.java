@@ -3,15 +3,16 @@ package com.itwillbs.Code_Green.vo;
 public class BoardVO {
 
 	private int board_idx;
-	private int board_item_idx; //상품번호 (없으면 N)
-	private String board_type; //게시판 타입 (커뮤, 후기)
-	private String board_id; //아이디
-	private String board_category; //말머리
-	private String board_subject; //제목
-	private String board_content; //내용
-	private String board_readcount; //조회수
-	private String board_date; //날짜
-	private int board_bestcnt;	  // 추천(좋아요) 수 집계컬럼(default 0) 
+	private int board_item_idx; // 상품번호 (없으면 N)
+	private String board_type; // 게시판 타입 (커뮤, 후기)
+	private String board_id; // 아이디
+	private String board_category; // 말머리
+	private String board_subject; // 제목
+	private String board_content; // 내용
+	private String board_readcount; // 조회수
+	private String board_date; // 날짜
+	private int best_cnt;	   // 게시물별 추천(좋아요) 수 집계컬럼
+	private int reply_cnt;     // 게시물별 댓글 수 집계컬럼 
 	private String item_idx; //상품번호
 	private String member_id; 
 	private String file1;
@@ -76,11 +77,17 @@ public class BoardVO {
 		this.board_date = board_date;
 	}
 	
-	public int getBoard_bestcnt() {
-		return board_bestcnt;
+	public int getBest_cnt() {
+		return best_cnt;
 	}
-	public void setBoard_bestcnt(int board_bestcnt) {
-		this.board_bestcnt = board_bestcnt;
+	public void setBest_cnt(int best_cnt) {
+		this.best_cnt = best_cnt;
+	}
+	public int getReply_cnt() {
+		return reply_cnt;
+	}
+	public void setReply_cnt(int reply_cnt) {
+		this.reply_cnt = reply_cnt;
 	}
 	
 	public String getItem_idx() {
@@ -129,15 +136,19 @@ public class BoardVO {
 	public void setItem_category(String item_category) {
 		this.item_category = item_category;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "BoardVO [board_idx=" + board_idx + ", board_item_idx=" + board_item_idx + ", board_type=" + board_type
 				+ ", board_id=" + board_id + ", board_category=" + board_category + ", board_subject=" + board_subject
 				+ ", board_content=" + board_content + ", board_readcount=" + board_readcount + ", board_date="
-				+ board_date + ", board_bestcnt=" + board_bestcnt + ", item_idx=" + item_idx + ", member_id="
-				+ member_id + ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3 + ", board_star_score="
-				+ board_star_score + "]";
+				+ board_date + ", best_cnt=" + best_cnt + ", reply_cnt=" + reply_cnt + ", item_idx=" + item_idx
+				+ ", member_id=" + member_id + ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3
+				+ ", board_star_score=" + board_star_score + ", item_category=" + item_category + "]";
 	}
+	
+	
 	
 	
 	
