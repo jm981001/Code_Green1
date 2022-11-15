@@ -28,12 +28,14 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
 <!--     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<!--     <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script> -->
+<!--     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+    <!-- 5버전 사용소스 -->
+    <script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
 </head>
 <style>
-	.ck-editor__editable { height: 300px; }
-	.ck-content { font-size: 12px; }
+/* 	.ck-editor__editable { height: 300px; } */
+/* 	.ck-content { font-size: 12px; } */
 </style>
 <body>
     
@@ -62,11 +64,11 @@
 				                    	<div class="ps-block__content">
 					                        <div class="table-responsive">
 					                        	
-	                       						<form action="community_write.me" method="post">
+	                       						<form action="CommunityWritePro.bo" method="post">
 					                           		 <table class="table ps-table ps-table--vendor">
 							                                    <tr>
 							                                        <td>말머리</td>
-							                                        <td><select class="board_category">
+							                                        <td><select name="board_category" required>
 											                                <option value="">말머리선택</option>
 											                                <option value="맛집">맛집</option>
 											                                <option value="정보">정보</option>
@@ -77,30 +79,33 @@
 							                                    </tr>
 							                                    <tr>
 							                                        <td>작성자</td>
-							                                        <td><input type="text" id="board_id" name="writer" style="width: 50%"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>비밀번호</td>
-							                                        <td><input type="password" id="board_pass" name="passwd" style="width: 50%"></td>
+							                                        <td><input type="text" id="board_id" name="board_id" value="${sessionScope.sId }" readonly="readonly" style="width: 50%"></td>
 							                                    </tr>
 							                                    <tr>
 							                                        <td>제목</td>
-							                                        <td><input type="text" id="board_subject" name="subject" style="width: 100%"></td>
+							                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 100%"></td>
 							                                    </tr>
 							                                    <tr>
 							                                        <td colspan="2">
-																		 <textarea name="board_content" id="editor"></textarea>
+<!-- 																		 <textarea name="board_content" id="editor"></textarea> -->
+																		<textarea class="form-control" name="board_content" id="board_content"></textarea>
+																		<script>
+																	 		CKEDITOR.replace('board_content'
+																	 			, {filebrowserUploadUrl:'imageUpload.bo'
+																	            , height: 500, width: 1000
+																	         });
+																		</script>
 																	</td>
 							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택1"></td>
-							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택2"></td>
-							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택3"></td>
-							                                    </tr>
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택1"></td> -->
+<!-- 							                                    </tr> -->
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택2"></td> -->
+<!-- 							                                    </tr> -->
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택3"></td> -->
+<!-- 							                                    </tr> -->
 													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
 					                            	</table>
 	                        					</form> 
@@ -159,15 +164,15 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
-    <script>
-    ClassicEditor
-      .create( document.querySelector( '#editor' ) ,{
-    	  language: "ko"
-      })
-      .catch( error => {
-        console.error( error );
-      } );
-  </script>
+<!--     <script> -->
+//     ClassicEditor
+//       .create( document.querySelector( '#editor' ) ,{
+//     	  language: "ko"
+//       })
+//       .catch( error => {
+//         console.error( error );
+//       } );
+<!--  	 </script> -->
      
 </body>
 

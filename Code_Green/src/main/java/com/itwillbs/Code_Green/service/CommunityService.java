@@ -79,6 +79,16 @@ public class CommunityService {
 		return mapper.selectReplyList(reply_bo_ref);
 	}
 
+	// 새글 작성(사진제외)
+	public int writeBoard(BoardVO board) {
+		return mapper.insertBoard(board);
+	}
+
+	// 글 수정폼 페이지에 글데이터 가져오기
+	public BoardVO getBoard(int board_idx) {
+		return mapper.selectBoardModify(board_idx);
+	}
+
 	
 	
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,13 +27,15 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+    
+    <!-- CKEditor 5버전 사용소스 -->
+    <script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
 </head>
 <body>
     
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
-    
     
    <!-- 블로그 바디 시작  -->
     <div class="ps-page--blog">
@@ -43,7 +46,9 @@
                     
                         <!-- 블로그 헤더 시작  -->
                         <div class="ps-post__header">
-                            <h2>게시글 수정</h2>
+                       		<div class="colorheaderhead">
+                            	<h2>글 수정</h2>
+                            </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
                         
@@ -53,43 +58,61 @@
 				                    	<div class="ps-block__content">
 					                        <div class="table-responsive">
 					                        	
-	                       						<form action="community_write.me" method="get">
+	                       						<form action="CommunityWritePro.bo" method="post">
+		                       						<input type="hidden" name="board_idx" value="${param.board_idx }" />
+													<input type="hidden" name="pageNum" value="${param.pageNum }" />
 					                           		 <table class="table ps-table ps-table--vendor">
 							                                    <tr>
-							                                        <td>작성자</td>
-							                                        <td><input type="text" id="writer" name="writer"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>비밀번호</td>
-							                                        <td><input type="password" id="passwd" name="passwd"></td>
-							                                    </tr>
-							                                    <tr>
 							                                        <td>말머리</td>
-							                                        <td><select class="search-category">
+							                                        <td><select name="board_category" required>
 											                                <option value="">말머리선택</option>
-											                                <option value="head">맛집</option>
-											                                <option value="subject">사담</option>
-											                                <option value="writer">추천</option>
+											                                <option value="맛집" <c:if test='${board.board_category == "맛집"}'>selected="selected"</c:if>>맛집</option>
+											                                <option value="정보" <c:if test='${board.board_category == "정보"}'>selected="selected"</c:if>>정보</option>
+											                                <option value="사담" <c:if test='${board.board_category == "사담"}'>selected="selected"</c:if>>사담</option>
+											                                <option value="추천" <c:if test='${board.board_category == "추천"}'>selected="selected"</c:if>>추천</option>
 											                            </select>
 											                        </td>
 							                                    </tr>
 							                                    <tr>
-							                                        <td>제목</td>
-							                                        <td><input type="text" id="writer" name="subject"></td>
+							                                        <td>작성자</td>
+							                                        <td><input type="text" id="board_id" name="board_id" value="${board.board_id}" readonly="readonly" style="width: 50%"></td>
 							                                    </tr>
 							                                    <tr>
-							                                    	<td>내용</td>
-							                                        <td><textarea id="content"></textarea></td>
+							                                        <td>제목</td>
+							                                        <td><input type="text" id="board_subject" name="board_subject" value="${board.board_subject }" style="width: 100%"></td>
 							                                    </tr>
+							                                    <tr>
+							                                        <td colspan="2">
+<!-- 																		 <textarea name="board_content" id="editor"></textarea> -->
+																		<textarea class="form-control" name="board_content" id="board_content">${board.board_content }</textarea>
+																		<script>
+																	 		CKEDITOR.replace('board_content'
+																	 			, {filebrowserUploadUrl:'imageUpload.bo'
+																	            , height: 500, width: 1000
+																	         });
+																		</script>
+																	</td>
+							                                    </tr>
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택1"></td> -->
+<!-- 							                                    </tr> -->
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택2"></td> -->
+<!-- 							                                    </tr> -->
+<!-- 							                                    <tr> -->
+<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택3"></td> -->
+<!-- 							                                    </tr> -->
+													<tr> <td><input type="submit" value="글 수정" id="submitBtn"></td> </tr>
+													<tr> <td><input type="button" value="뒤로" onclick="history.back()"></td> </tr>
 					                            	</table>
-							                        <input type="submit" value="글 등록">
 	                        					</form> 
+	                        					
 				                       		</div>
 				                        </div>
                       			</div>
                       		</div>
                       
-                       
+                    
                         
                     </div>
                 </div>
@@ -99,7 +122,7 @@
                     <aside class="widget widget--blog widget--recent-post">
 	                        <div class="widget__content">
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
-		                        <a href="community_main"><i class="fi fi-rr-list"></i> 목록 보기</a>
+		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
 	                        </div>
                     </aside>
                 </div>
@@ -119,7 +142,7 @@
     <!-- 푸터 삽입 -->
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 삽입 -->
-    
+   
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
@@ -138,6 +161,17 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
+<!--     <script> -->
+//     ClassicEditor
+//       .create( document.querySelector( '#editor' ) ,{
+//     	  language: "ko"
+//       })
+//       .catch( error => {
+//         console.error( error );
+//       } );
+<!--  	 </script> -->
+     
 </body>
 
 </html>
+

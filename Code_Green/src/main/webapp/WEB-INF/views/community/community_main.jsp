@@ -31,6 +31,16 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
+<script>
+	// 글쓰기 버튼 클릭시 (로그인 했거나 ,관리자여야 작동)
+	function commu_write(){
+		if(${sessionScope.sId != null || sessionScope.sId == 'admin'}){
+			location.href="CommunityWrite.bo";	
+		} else {
+			alert("로그인 후 사용가능합니다!");
+		}
+ 	};
+</script>
 <body>
    
    
@@ -133,7 +143,7 @@
 		                  </form>
 	               		<!-- 글작성 버튼 -->
 	               		<div class="ps-form--quick-search--com" align="left">
-	               			<button onclick="location.href='CommunityWrite.bo'">글쓰기</button>
+	               			<button id="commu_write" onclick="commu_write()">글쓰기</button>
 	               		</div>
                     </div>
                    	

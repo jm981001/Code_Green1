@@ -117,8 +117,23 @@
 				board_idx = #{board_idx}
 	</update>
 		
-		
-		
+	<!-- 글 새로등록 ( 사진제외, 텍스트만 ) -->	
+	<insert id="insertBoard">
+		INSERT 
+			INTO board 
+			VALUES (
+				IFNULL((SELECT MAX(board_idx) FROM board b),0) + 1,
+				'0',
+				'커뮤',
+				#{board_id},
+				#{board_category},
+				#{board_subject},
+				#{board_content},
+				'0',
+				date_format(now(),'%Y%m%d')
+			)
+			
+	</insert>	
 		
 	<!-- 글 상세정보 조회 -->
 	<select id="selectBoardDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
@@ -147,7 +162,15 @@
 			WHERE board_type = '커뮤' AND board_idx = #{board_idx}
 	</select>	
 		
-		
+	<!-- 글 수정을 위한 원래게시글 내용 불러오기 -->	
+	<select id="selectBoardModify" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT *
+			FROM board
+			WHERE 
+				board_type='커뮤'
+				AND
+				board_idx = #{board_idx}
+	</select>
 		
 		
 	<!-- 글 삭제  -->

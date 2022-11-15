@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,7 +192,14 @@
 			})
 	});
 	
-	
+	// 오른쪽 사이드바에서 새글쓰기 버튼 클릭시
+	function writeNew(){
+		if(${sessionScope.sId != null || sessionScope.sId == 'admin'}){
+			location.href="CommunityWrite.bo";	
+		} else {
+			alert("로그인 후 사용가능합니다!");
+		}
+ 	};
 	
 </script>
 
@@ -230,7 +236,6 @@
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
                         	<p>${cBoard.board_content }
-                        	<p><img src="/Code_Green/resources/img/삼색이.jpg">
                         </div>
                        	<!-- 태그를...쓸건가? -->
 <!--                         <div class="ps-post__footer"> -->
@@ -315,9 +320,9 @@
 	                        <div class="widget__content">
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
 		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
-		                        <a href="CommunityWrite.bo"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
+		                        <a href="#" onclick="writeNew();"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
 		                        <c:if test="${cBoard.board_id eq sessionScope.sId || cBoard.board_id eq 'admin'}">
-			                        <a href="CommunityModify.bo"><i class="fi fi-rr-scissors"></i> 글 수정</a>
+			                        <a href="CommunityModify.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }"><i class="fi fi-rr-scissors"></i> 글 수정</a>
 			                        <a href="CommunityDelete.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }" onclick="return deleteCheck();"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>
 		                        </c:if>
 	                        </div>
