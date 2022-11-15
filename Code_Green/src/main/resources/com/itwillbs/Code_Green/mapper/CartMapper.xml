@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.CartMapper">
-
+<!-- <selectKey keyProperty="cart_idx" resultType="integer" order="BEFORE"> -->
+<!-- 		SELECT MAX(cart_idx) FROM cart -->
+<!-- </selectKey> -->
 
 	<!-- 장바구니 추가 -->
-	<insert id="addCart">
-		INSERT INTO cart(rf_item_idx,rf_member_idx,cart_amount)
-			VALUES(#{rf_item_idx},{rf_member_idx},{cart_amount})
+	<insert id="insertCart">
+		INSERT INTO cart
+			VALUES(
+					#{rf_item_idx},
+					#{rf_member_idx},
+					#{cart_amount})
 	</insert>
 
 
@@ -27,13 +32,18 @@
 	</select>
 	
 	
-	<!-- 카트확인 -->
+	<!-- 물건이 이미 카트에 있는지 확인 -->
 	<select id="checkCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
-		SELECT * FROM cart 
-		WHERE rf_member_idx = #{rf_member_idx} and rf_item_idx = #{rf_item_idx}
+		SELECT c.cart_idx
+	    FROM cart c
+        INNER JOIN item i
+        ON(c.rf_item_idx = i.item_idx)
+        INNER JOIN member m
+        ON(c.rf_member_idx = m.member_idx)
+        WHERE c.rf_member_idx = #{member_idx} and i.item_idx = #{item_idx}
+		
 	</select>
-
-
+	
 	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT 
 			i.item_name,
@@ -48,4 +58,14 @@
         JOIN member r ON r.member_idx = c.rf_member_idx
 		WHERE r.member_id = #{member_id}
 	</select>
+	
+	
+	<select id="getPrice"  resultType="String">
+		SELECT item_price
+		FROM item
+		where item_idx = #rf_item_idx#
+	</select>
+	
+	
+	
 </mapper>
