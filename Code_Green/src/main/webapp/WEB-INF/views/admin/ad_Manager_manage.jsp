@@ -152,8 +152,8 @@
                                     <td>${mgList.manager_email }</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
 <!--                                     </td> -->
-										<fmt:parseDate var="dateString" value="${mgList.manager_date }" pattern="yyyyMMdd" />	
-                                    <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
+<%-- 										<fmt:parseDate var="dateString" value="${mgList.manager_date }" pattern="yyyyMMddHH:mm:ss" />	 --%>
+<%--                                     <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td> --%>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${fn:replace(mgList.manager_adminauth, 'Y', '승인완료')}</strong></button></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

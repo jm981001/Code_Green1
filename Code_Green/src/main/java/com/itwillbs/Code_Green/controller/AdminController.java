@@ -332,31 +332,42 @@ public class AdminController {
 			model.addAttribute("manager", manager);
 			return "admin/ad_Manager_detail";
 		}
+		
+		
+		//------------기업 가입 승인 기능----------------------------
+		@GetMapping(value = "/ad_AdminAuth")
+		public String ad_AdminAuth(Model model, HttpSession session, ManagerVO manager) {
 			
+			int updateCount = service.updateAuth(manager);
+			System.out.println("승인 완료? =" + updateCount);
+			
+			return "redirect:/ad_Manager_detail?id=" + manager.getManager_id() + "&auth=" + manager.getManager_adminauth();
+		}
+		
 		
 		//------------전체관리자 기업삭제----------------------------
-			@GetMapping(value = "/ad_ManagerDelete")
-			public String ad_Manager_remove(@RequestParam String id, Model model, HttpSession session) {
-				
-				String sId = (String)session.getAttribute("sId");
-				
-				if(sId == null || !sId.equals("admin")) {
-					model.addAttribute("msg", "잘못된 접근입니다!");
-					return "admin/ad_fail_back";
-				}
-				
-				int delectCount = service.removeManager(id);
-				
-				System.out.println(delectCount);
-				
-				if(delectCount > 0) {
-					return "redirect:/ad_Manager_manage";
-				}
-				//삭제를 누를 때 manager_adminauth 데이터 받아와서 Y이냐 N이냐에 따라 포워딩 주소를 달라지게
-				//if문을 사용해 나눠야 할듯... 일이 많네ㅎ
-				model.addAttribute("fail", "기업 삭제에 실패 했습니다!");
+		@GetMapping(value = "/ad_ManagerDelete")
+		public String ad_Manager_remove(@RequestParam String id, Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
 				return "admin/ad_fail_back";
 			}
+			
+			int delectCount = service.removeManager(id);
+			
+			System.out.println(delectCount);
+			
+			if(delectCount > 0) {
+				return "redirect:/ad_Manager_manage";
+			}
+			//삭제를 누를 때 manager_adminauth 데이터 받아와서 Y이냐 N이냐에 따라 포워딩 주소를 달라지게
+			//if문을 사용해 나눠야 할듯... 일이 많네ㅎ
+			model.addAttribute("fail", "기업 삭제에 실패 했습니다!");
+			return "admin/ad_fail_back";
+		}
 		
 		
 		
@@ -940,6 +951,7 @@ public class AdminController {
 		//======================================여기부터는 공지관리행 열차입니다=====================================================		
 			
 			
+		
 		//------------공지 목록----------------------------
 		@GetMapping(value = "/ad_Notice")
 		public String ad_Notice(Model model, HttpSession session, @RequestParam(defaultValue = "1") int pageNum) {
@@ -1053,7 +1065,7 @@ public class AdminController {
 			
 			int updateCount = service.modifyNotice(board);
 			
-			System.out.println(updateCount +"집가고싶어효");
+			System.out.println(updateCount);
 			
 			return "redirect:/ad_Notice";
 		}

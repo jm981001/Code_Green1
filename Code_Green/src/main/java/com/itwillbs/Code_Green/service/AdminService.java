@@ -289,6 +289,11 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateNotice(board);
 	}
+	//기업 가입 승인
+	public int updateAuth(ManagerVO manager) {
+		// TODO Auto-generated method stub
+		return mapper.updateAdminAuth(manager);
+	}
 	
 	
 	

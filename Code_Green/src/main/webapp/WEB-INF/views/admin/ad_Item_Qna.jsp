@@ -141,7 +141,7 @@
                                     <td onclick="location.href='ad_One_Board_Detail?subject=${iList.qna_subject }&id=${iList.qna_id }'"><strong>${iList.qna_subject }</strong></td>
                                     <td>${iList.qna_id }</td>
                                     <td>${iList.qna_date }</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
+                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${iList.qna_category }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

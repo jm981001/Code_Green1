@@ -224,6 +224,15 @@
 <!-- 			manager_id =#{manager_id} -->
 <!-- 	</delete> -->
 
+
+	<update id="updateAdminAuth">
+		UPDATE manager
+		SET 
+			manager_adminauth="Y"
+		WHERE
+			manager_id=#{manager_id}
+	</update>
+
 	<!--기업 삭제(영구삭제X) -->
 	<update id="deleteManager">
 		UPDATE manager

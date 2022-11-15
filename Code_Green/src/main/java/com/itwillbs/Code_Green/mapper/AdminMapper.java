@@ -187,6 +187,9 @@ public interface AdminMapper {
 	//공지 수정
 	public int updateNotice(BoardVO board);
 
+	//기업 가입 승인
+	public int updateAdminAuth(ManagerVO manager);
+
 
 	
 

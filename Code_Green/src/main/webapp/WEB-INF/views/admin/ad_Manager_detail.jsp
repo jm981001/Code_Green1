@@ -80,7 +80,6 @@ window.onload = function(){
         <div class="header__center"><a class="ps-logo" href="#"><img src="/Code_Green/resources/img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
-    
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
         <div class="ps-main__sidebar">
@@ -145,8 +144,7 @@ window.onload = function(){
 			    <div class="input-form-backgroud row">
 			      <div class="input-form col-md-12 mx-auto">
 			        <h4 class="mb-3">상세정보조회</h4>
-			        <form class="validation-form" novalidate>
-			        
+			        <form class="validation-form" novalidate >
 			        
 			        <div class="row">
 			          
@@ -161,21 +159,15 @@ window.onload = function(){
 			            </div>
 			         </div>
 			<!--아래 사업자번호 -->
-			        
-			        
 			         <div class="mb-3">
 			            <label for="email">사업자 번호</label>
 			            <input type="text" class="form-control" id="storecode" value="${manager.manager_storecode }" readonly="readonly">
 			          </div>
-			          
-			          
-			          
 			<!-- 이름 -->
 			         <div class="mb-3">
 			            <label for="email">이름</label>
 			            <input type="text" class="form-control" id="name" value="${manager.manager_name }" readonly="readonly">
 			          </div> 
-			        
 			<!-- 아디,비번 -->
 			          <div class="row">
 			          
@@ -188,8 +180,6 @@ window.onload = function(){
 			              <label for="name">비밀번호</label>
 			              <input type="text" class="form-control" id="passwd" value="${manager.manager_pass }" readonly="readonly">
 			            </div>
-			            
-			            
 		 	<!-- 전화번호,이메일,주소 -->    
 			            <div class="col-md-6 mb-3">
 			              <label for="name">전화번호</label>
@@ -211,8 +201,7 @@ window.onload = function(){
 			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
 			          
-			          
-			          <button id="btn1" class="btn btn-primary btn-lg btn-block" type="submit">가입승인하기</button>
+			          <button id="btn1" name="auth" onclick="location.href='ad_AdminAuth?manager_id=${manager.manager_id }'" class="btn btn-primary btn-lg btn-block" type="button" >가입승인하기</button>
 
 			        </form>
 			      </div>

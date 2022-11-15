@@ -90,7 +90,7 @@
                     <p>Notice Management</p>
                 </div>
 
-                <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -134,7 +134,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin-left: 1250px"><button type="button" onclick="location.href='ad_Notice_Write'" class="btn btn-info" style="font-size: 13px"><strong>공지작성</strong></button></div>
+                    <div style="margin-left: 1050px"><button type="button" onclick="location.href='ad_Notice_Write'" class="btn btn-info" style="font-size: 13px"><strong>공지작성</strong></button></div>
                 </div>
                 <div class="ps-section__footer">
                     <p>Show 10 in 30 items.</p>
