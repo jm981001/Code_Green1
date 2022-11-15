@@ -137,34 +137,70 @@
                                     <th>가격</th>
                                      <th>상품분류</th>
                                      <th>포장분류</th>
-                                     <th>브랜드이름</th>
+<!--                                      <th>브랜드이름</th> -->
                                     <th>등록일</th>
                                 </tr>
                             </thead>
                             <tbody>
                             
                                 <tr>
-                                	<td>${item.item_idx }</td>
-                                	<td>${item.item_name }</td>
-                                    <td>${item.item_info }</td>
-                                    <td>${item.item_stock }</td>
-                                    <td>${item.item_price }</td>
-                                    <td>${item.item_category }</td>
-                                    <td>${item.item_packing }</td>
-                                    <td>${item.manager_brandname }</td>
-                                    <td>${item.item_date}</td>
+                                	<td>${ItemInfo.item_idx }</td>
+                                	<td>${ItemInfo.item_name }</td>
+                                    <td>${ItemInfo.item_info }</td>
+                                    <td>${ItemInfo.item_stock }</td>
+                                    <td>${ItemInfo.item_price }</td>
+                                    <td>${ItemInfo.item_category }</td>
+                                    <td>${ItemInfo.item_packing }</td>
+<%--                                     <td>${ItemInfo.manager_brandname }</td> --%>
+<%--                                     <td>${manager.manager_brandname }</td> --%>
+<%--                                     <td>${item.manager_brandname }</td> --%>
+                                    <td>${ItemInfo.item_date}</td>
                                  </tr>   
+			                
+					 	<!-- 상품 이미지 -->
+                            <tr>
+                    		 <a href="ItemInfo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >
+                     			<img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+			                 </tr>           
                     </tbody>
                     </table>
                     </form>
 					</div>
-					</div>                                    
+					</div>       
+
+
+<%--            <c:forEach var="qnaList" items="${ItemInfo }"> --%>
+<!--                                 <tr> -->
+<%--                                 	<td>${itemInfo.item_idx }</td> --%>
+<%--                                     <td onclick="location.href='products_detail?item_idx=${itemInfo.item_idx}'"><strong>${itemInfo.item_name }</strong></td> --%>
+<%--                                 	<td>${itemInfo.item_name }</td> --%>
+<%--                                     <td>${itemInfo.item_info }</td> --%>
+<%--                                     <td>${itemInfo.item_stock }</td> --%>
+<%--                                     <td>${itemInfo.item_price }</td> --%>
+<%--                                     <td>${itemInfo.item_category }</td> --%>
+<%--                                     <td>${itemInfo.item_packing }</td> --%>
+<%--                                     <td>${itemInfo.manager_brandname }</td> --%>
+<%--                                     <td>${itemInfo.item_date}</td> --%>
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<%--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div> --%>
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<%--                                </c:forEach> --%>
+<!--                             </tbody> -->
+<!--                         </table> -->
+<!--                     </div> -->
+<!--                 </div> -->
+
+
+
 
                 
                      <div class="ps-form__submit text-center">
                      	<br>
                           <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                          <button class="ps-btn success">상품수정</button>
+                          <button class="ps-btn success"> <a href="inventory_management">상품수정</a></button>
                     </div>
 
        

@@ -21,7 +21,9 @@ public interface ManagerMapper {
 	// 3. 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
 	public ManagerVO selectManagerInfo(String id);
-
+    
+	// 브랜드 정보조회(브랜드마이페이지)
+	public ManagerVO selectBrandInfo(String id);
 	
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 	public List<ItemVO> selectItemList(
@@ -29,22 +31,28 @@ public interface ManagerMapper {
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 
 	//상품 상세 조회
-     public ItemVO selectItemInfo(int item_idx);
+     public ItemVO selectItemInfo(String item_idx);
 	
 	//상품 갯수 조회
 	public int selectItemListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 	
 	//문의글 목록 조회
-	public List<QnaVO> selectQnaBoardList();
+	public List<QnaVO> selectQnaBoardList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	
 	//문의글 상세 조회
-	public QnaVO selectQnaInfo(@Param ("qna_idx") String qna_idx);
+	public QnaVO selectQnaInfo(String qna_idx);
 	
 	//문의글 갯수 조회
 	public int selectQnaBoardListCount(
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
 
+
+
+	
+	
 
 
 	//팔로우 목록조회

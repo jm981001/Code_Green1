@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -100,47 +101,49 @@
 <!--                     <p>Martfury Customers</p> -->
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
-                        <input class="form-control" type="text" placeholder="Search something" />
-                        <button><i class="icon-magnifier"></i></button>
-                    </form>
+<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
+<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
+<!--                         <button><i class="icon-magnifier"></i></button> -->
+<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
             </header>
             <section class="ps-items-listing">
+                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="qnaboard_list" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Search..." />
-                                </div>
-                                <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">답변중</option>
-                                        <option value="2">답변대기</option>
-                                        <option value="3">답변완료</option>
+                                    <select class="ps-select"name="searchType">
+                                        <option value="qna_subject">제목</option>
+                                        <option value="qna_category">답변상태</option>
+                                        <option value="qna_id">작성자</option>
+                                        <option value="qna_answer">답변</option>
                                     </select>
                                 </div>
                             </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
+                                </div>
                             <div class="ps-form__right">
                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
                 </div>
+                    </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                	<th>번호</th>
+                                	
+                                	<th>문의번호</th>
                                     <th>질문분류</th>
                                    	<th>제목</th>
                                     <th>작성자</th>
                                      <th>처리상태</th>
-                                     <th>답변유무</th>
+                                     <th>답변</th>
                                     <th>작성일</th>
                                    
                                 </tr>
@@ -170,32 +173,22 @@
                             
                               <div class="ps-section__footer">
                    <!-- 페이징 버튼들 시작 -->
-<%-- 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
-<!-- 				                    <div class="ps-pagination"> -->
-<!-- 				                        <ul class="pagination"> -->
+				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
 				                           
-<%-- 				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li> --%>
-<%-- 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
-<%-- 				                               <c:choose> --%>
-<%-- 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when> --%>
-<%-- 				                                  <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise> --%>
-<%-- 				                               </c:choose> --%>
-<%-- 				                            </c:forEach> --%>
-<%-- 				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
-<!-- 				                        </ul> -->
-<!-- 				                    </div> -->
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				                               <c:choose>
+				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+				                                  <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
+				                               </c:choose>
+				                            </c:forEach>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
 				  <!-- 페이징 버튼들 끝 -->
-                            
-                            
-                            
-            
-<!--                     <p>Show 10 in 30 items.</p> -->
-<!--                     <ul class="pagination"> -->
-<!--                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
-<!--                         <li><a href="#">2</a></li> -->
-<!--                         <li><a href="#">3</a></li> -->
-<!--                         <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
-<!--                     </ul> -->
+
                 </div>
             </section>
         </div>

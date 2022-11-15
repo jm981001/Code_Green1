@@ -111,7 +111,7 @@
                         <div class="ps-card__header">
                         
                         
-                            <h4>재고관리</h4>
+<!--                             <h4>재고관리</h4> -->
                         </div>
                      <div class="ps-section__content">
                     <div class="table-responsive">

@@ -98,29 +98,9 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>상품관리</h3>
-<!--                     <p>Product Listings</p> -->
                 </div>
-<!--                 <div class="header__center"> -->
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
-<!--                 </div> -->
-                	<!-- 검색 기능 구현을 위한 form 태그 -->
-								<form action="product" method="get" style="margin-left: 20px">
-									<select name="searchType">
-										<option value="item_name">상품명</option>
-										<option value="brand_name">상호명</option>
-									</select>
-									<input type="text" name="keyword">
-									<input type="submit" value="검색">
-								</form>
-<!--                             <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)"> -->
-<!-- 							  <option value="newDate">신상품순</option> -->
-<!-- 							  <option value="review">후기 많은순</option> -->
-<!-- 							  <option value="cheap">낮은 가격순</option> -->
-<!-- 							  <option value="expensive">높은 가격순</option> -->
-<!-- 							</select> -->
+								
+
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
@@ -129,46 +109,30 @@
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="product method="get">
+                        <form class="ps-form--filter" action="products" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">상품 카테고리</option>
-                                        <option value="1">특가상품</option>
-                                        <option value="2">과일/채소</option>
-                                        <option value="3">유제품/음료</option>
-                                        <option value="4">냉동식품/ 간편식품</option>
-                                        <option value="5">해산물</option>
-                                        <option value="6">간식류</option>
+                                    <select class="ps-select" name="searchType">
+										<option value="item_name">상품명</option>
+                                        <option value="item_category">상품카테고리</option>
+                                        <option value="item_packing">포장분류</option>
+                                        <option value="item_stock">재고유무</option>
                                     </select>
-                                </div>
+                                    </div>
+                                    </div>
                                 <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">포장분류</option>
-                                        <option value="2">냉장</option>
-                                        <option value="3">냉동</option>
-                                        <option value="4">실온</option>
-                                    </select>
+                                 <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
-                                <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">재고있음</option>
-                                        <option value="2">재고없음</option>
-                                    </select>
-                                </div>
-                            </div>
+                                    
                             <div class="ps-form__right">
                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
                     </div>
+                    
                     <br>
                     <div class="ps-section__search">
               
-                        <form class="ps-form--search-simple" action="index" method="get">
-                            <input class="form-control" type="text" placeholder="Search product" />
-                            <button><i class="icon icon-magnifier"></i></button>
-                        </form>
                     </div>
                 </div>
                 <div class="ps-section__content">
@@ -190,7 +154,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-					<c:forEach items="${itemList}" var="item">
+					<c:forEach var="item" items="${itemList}" >
 						    <tr>
 						     <td>${item.item_idx}</td>
 						     <td onclick="location.href='products_detail?item_idx=${item.item_idx}'"><strong>${item.item_name }</strong></td>
@@ -227,17 +191,7 @@
 				                        </ul>
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->
-				  
-                
-                
-<!--                     <p>Show 10 in 30 items.</p> -->
-<!--                     <ul class="pagination"> -->
-<!--                         <li><a href="#"><i class="icon icon-chevron-left"></i></a></li> -->
-<!--                         <li class="active"><a href="#">1</a></li> -->
-<!--                         <li><a href="#">2</a></li> -->
-<!--                         <li><a href="#">3</a></li> -->
-<!--                         <li><a href="#"><i class="icon-chevron-right"></i></a></li> -->
-<!--                     </ul> -->
+
                 </div>
             </section>
         </div>

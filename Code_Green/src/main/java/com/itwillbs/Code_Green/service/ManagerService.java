@@ -34,6 +34,11 @@ public class ManagerService {
 	public ManagerVO getManagerInfo(String manager_id) {
 		return mapper.selectManagerInfo(manager_id);
 	}
+	
+	// 브랜드 정보조회(브랜드마이페이지)
+	public ManagerVO getBrandInfo(String id) {
+		return mapper.selectBrandInfo(id);
+	}
 //	//팔로우 목록조회
 //	public MemberVO followInfo(String idx) {
 //		return mapper.selectFollowInfo(idx);
@@ -50,14 +55,14 @@ public class ManagerService {
 	}
 	
 	// 상품 상세조회
-	public ItemVO getItemInfo(int item_idx) {
+	public ItemVO getItemInfo(String item_idx) {
 		return mapper.selectItemInfo(item_idx);
 	}
 
 
 //	 문의글 리스트
 	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectQnaBoardList();
+		return mapper.selectQnaBoardList(startRow,listLimit,searchType,keyword);
 	}
 	
 	
@@ -71,6 +76,7 @@ public class ManagerService {
 	public QnaVO getQnaInfo(String qna_idx) {
 		return mapper.selectQnaInfo(qna_idx);
 	}
+	
 
 
 	

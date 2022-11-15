@@ -153,13 +153,30 @@ public class ManagerController {
 		}
 		
 	
-	//------------매니저페이지 내브랜드정보-------------------------------------------
-	@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
-	 public String brand_mypage() {
-		return "manager/brand_mypage";
-	}
-			
+	//------------매니저페이지 내브랜드정보조회-------------------------------------------
+//	@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
+//	 public String brand_mypage() {
+//		return "manager/brand_mypage";
+//	}
+//			
+	//------------매니저페이지 내브랜드정보조회-------------------------------------------
 		
+	@GetMapping(value = "brand_mypage")
+	public String brand_mypage(@RequestParam String id, Model model, HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("id : " + id );
+			
+		ManagerVO brandInfo = service.getBrandInfo(id);
+		
+		model.addAttribute("brandInfo",brandInfo);
+	
+		return "manager/brand_mypage";
+	
+	}
+	
+	
+	
 	//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
 	@GetMapping(value = "/products")
 	public String itemList ( Model model, HttpSession session,
@@ -225,8 +242,8 @@ public class ManagerController {
 		
 	
 	//------------ 상품 상세 조회-------------------------------------------	
-	@RequestMapping(value = "/product_register", method = RequestMethod.GET)
-	public String qna_Item_Detail( Model model, HttpSession session, int item_idx) {
+	@RequestMapping(value = "/products_detail", method = RequestMethod.GET)
+	public String qna_Item_Detail( Model model, HttpSession session, String item_idx) {
 		
 		String sId = (String)session.getAttribute("sId");
 		
@@ -238,7 +255,7 @@ public class ManagerController {
 		
 		model.addAttribute("ItemInfo", ItemInfo);
 		
-		return "manager/product_register";
+		return "manager/products_detail";
 	}
 	
 	
@@ -289,21 +306,8 @@ public class ManagerController {
 
 
 		
-//	//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
-		
-//		@RequestMapping(value = "/qnaboard_list", method = RequestMethod.GET)
-//		public String qna_Board(Model model, HttpSession session) {
-//			String sId = (String)session.getAttribute("sId");
-//		
-//			
-//			List<QnaVO> QnaBoardList = service.getQnaBoardList();
-//			model.addAttribute("QnaBoardList", QnaBoardList);
-//			System.out.println(QnaBoardList);
-//			
-//				return "manager/qnaboard_list";
-//		}
-//		
-//		//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
+
+	//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
 	
 		@GetMapping(value = "/qnaboard_list")
 		public String qna_Board( Model model, HttpSession session,
@@ -312,12 +316,18 @@ public class ManagerController {
 				@RequestParam(defaultValue = "")String keyword) {
 			
 		
+//			System.out.println(pageNum);
+			
 			// 페이징 처리를 위한 계산 작업
 			int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
 			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
 			
 			// 조회 시작 게시물 번호(행 번호) 계산
 			int startRow = (pageNum - 1) * listLimit;
+			
+			System.out.println(startRow);
+			System.out.println(listLimit);
+			System.out.println(pageListLimit);
 			
 			// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
