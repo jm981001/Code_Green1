@@ -14,4 +14,7 @@ public interface CoinMapper {
 	//적립금 목록 갯수
 	public int selectCoinListCount();
 
+	//적립금 총금액
+	public List<CoinVO> selectTotalCoin(String member_id);
+
 }

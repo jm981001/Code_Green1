@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -216,8 +217,10 @@
                                             <button class="down"><i class="fa fa-minus"></i></button>
                                             <input class="form-control" type="text" placeholder="1">
                                         </div>
-                                    </figure><a class="ps-btn ps-btn--black" href="#">Add to cart</a>
-                                    <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i>${item.heart }</a></div>
+                                    </figure>
+                                    
+                                    <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
+                                    <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>${item.heart }</a></div>
                                 </div>
                             </div>
                         </div>
@@ -365,7 +368,8 @@
 													            <tr class="item">  
 													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
 													                <td width="10%">${board.board_id }</td>  
-													                <td width="10%">${board.board_date }</td>  
+													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
+													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
 													                <td width="10%">12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
@@ -393,7 +397,8 @@
 													            <tr class="item">  
 													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
 													                <td width="10%">${board.board_id }</td>  
-													                <td width="10%">${board.board_date }</td>  
+													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
+													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
 													                <td width="10%">12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
@@ -420,7 +425,8 @@
 													            <tr class="item">  
 													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
 													                <td width="10%">${board.board_id }</td>  
-													                <td width="10%">${board.board_date }</td>  
+													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
+													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>  
 													                <td width="10%">12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
@@ -447,7 +453,8 @@
 													            <tr class="item">  
 													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
 													                <td width="10%">${board.board_id }</td>  
-													                <td width="10%">${board.board_date }</td>  
+													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
+													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
 													                <td width="10%">12</td>  
 													            </tr>  
 													            <tr class="hide" style="height:300px">  
@@ -644,7 +651,8 @@
 <!-- 														                <td>1</td>   -->
 														                <td>${qna.qna_subject }</td>  
 														                <td>${qna.qna_id }</td>  
-														                <td>${qna.qna_date }</td>  
+															            <fmt:parseDate var="dateString" value="${qna.qna_date }" pattern="yyyyMMdd" />
+														                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
 														                <td>${qna.qna_category }</td>  
 														            </tr>  
 														            <tr class="hide">  
@@ -858,7 +866,6 @@
     <div id="back2top"><i class="icon icon-arrow-up"></i></div>
     
     <!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->
-    
     
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>

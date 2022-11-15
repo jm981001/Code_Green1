@@ -10,6 +10,7 @@ public class CoinVO {
 	private String coin_total;
 	private String coin_date;
 	private String member_idx;
+	private String total;
 	
 	
 	public int getCoin_idx() {
@@ -60,6 +61,13 @@ public class CoinVO {
 	}
 	public void setMember_idx(String member_idx) {
 		this.member_idx = member_idx;
+	}
+	
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
 	}
 	@Override
 	public String toString() {

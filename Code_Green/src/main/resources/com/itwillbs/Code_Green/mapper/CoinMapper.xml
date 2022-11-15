@@ -28,9 +28,16 @@
 					rf_member_idx =1
 	</select>
 
-
-
-
+<!-- 적립금 목록 -->
+   <select id="selectTotalCoin" resultType="com.itwillbs.Code_Green.vo.CoinVO">
+             SELECT max(coin_idx)
+             	   ,c.COIN_TOTAL as total
+			 FROM coin c
+				left join member m
+					on c.RF_MEMBER_IDX = m.MEMBER_IDX
+			 WHERE 
+			 	  m.MEMBER_ID =  #{member_id};
+	</select>
 
 
 

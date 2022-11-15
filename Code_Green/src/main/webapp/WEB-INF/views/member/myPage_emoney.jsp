@@ -55,16 +55,16 @@
                                     <h3 style="display:inline;">적립금</h3> &nbsp;&nbsp;&nbsp;보유하고 계신 적립금을 한눈에 볼 수 있습니다.
                                 </div>
                                 
-                                
+                                <c:forEach var="coin" items="${TotalCoin }">
                                 <table class="table ps-table" >
                                 	<tr>
                                 		<td align="center" height="80">충전한 적립금</td>
                                 		<td align="center"  style="border-left: none;">1000 원</td>
                                 		<td align="center">총 적립금</td>
-                                		<td align="center">1000 원</td>
+                                		<td align="center">${coin.total } 원</td>
                                 	</tr>
                                 </table>
-                                
+                                </c:forEach>
                                 <br>
                                 
                                 
@@ -74,7 +74,9 @@
                                             <thead>
                                                 <tr align="center">
                                                     <th>날짜</th>
-                                                    <th width="70%" colspan="3">내용</th>
+                                                    <th width="40%" >내용</th>
+                                                    <th>충전된 적립금</th>
+                                                    <th>사용한 적립금</th>
                                                     <th>금액</th>
                                                 </tr>
                                             </thead>

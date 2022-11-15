@@ -64,25 +64,25 @@
                                                 <tr>
                                                     <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</td>
                                                     <td>20-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write'"> 
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</td>
                                                     <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write'"> 
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td> Et harum quidem rerum</td>
                                                     <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write'"> 
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</td>
                                                     <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write'"> 
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
                                                     </td>
                                                 </tr>
                                             </tbody>

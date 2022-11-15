@@ -99,7 +99,7 @@
                                                                 <select class="ps-rating" data-read-only="true">
 			              										 	<c:forEach var="i" begin="1" end="5">
 						                                             	<c:choose>
-						                                             		<c:when test="${i <= score}">
+						                                             		<c:when test="${i <= item.score}">
 						                                             			<option value="1">${i }</option>
 						                                             		</c:when>
 						                                             		<c:otherwise>

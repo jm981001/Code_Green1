@@ -28,6 +28,7 @@ public class ItemVO {
 	private String member_id;
 	private String member_idx;
 	private String heart_idx;
+	private String score;
 	
 	public int getItem_idx() {
 		return item_idx;
@@ -198,6 +199,14 @@ public class ItemVO {
 	}
 	public void setMember_idx(String member_idx) {
 		this.member_idx = member_idx;
+	}
+	
+	
+	public String getScore() {
+		return score;
+	}
+	public void setScore(String score) {
+		this.score = score;
 	}
 	public ItemVO() {
 		// TODO Auto-generated constructor stub

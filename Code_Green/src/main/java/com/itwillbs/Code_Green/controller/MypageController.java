@@ -161,6 +161,9 @@ public class MypageController {
 		//적립금 목록 갯수
 		int listCount = Cservice.getCoinListCount();
 		
+		//적립금 총금액
+		List<CoinVO> TotalCoin = Cservice.getTotalCoin(member_id);
+		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
@@ -175,6 +178,7 @@ public class MypageController {
 		
 		model.addAttribute("coinList", coinList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("TotalCoin", TotalCoin);
 		model.addAttribute("member_id", member_id);
 		
 		return "member/myPage_emoney";
@@ -201,9 +205,14 @@ public class MypageController {
 	public String myPage_review() {
 		return "member/myPage_review";
 	}
+	//------------마이페이지 상품상세-------------------------------------------
+	@RequestMapping(value = "myPageReview_detail.my", method = RequestMethod.GET)
+	public String myPage_review_detail() {
+		return "member/myPage_review_detail";
+	}
 	
 	//------------마이페이지 상품후기 작성-------------------------------------------
-	@RequestMapping(value = "myPage_review_Write", method = RequestMethod.GET)
+	@RequestMapping(value = "myPage_review_Write.my", method = RequestMethod.GET)
 	public String myPage_review_Write() {
 		return "member/myPage_review_Write";
 	}

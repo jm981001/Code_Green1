@@ -1,8 +1,5 @@
-<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -15,9 +12,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>나의 글</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+<title>나의상품후기</title>
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
@@ -39,7 +34,7 @@
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
-<input type="hidden" name="member_id" value="${sessionScope.sId}" />
+
 	<!-- ==========왼쪽 사이드바=========================================================================================================     -->
 	<main class="ps-page--my-account">
 		<section class="ps-section--account">
@@ -47,55 +42,64 @@
 				<div class="row">
 					<jsp:include page="../inc/left_mypage.jsp"></jsp:include>
 
-
 <!-- ==========Q&A=========================================================================================================     -->
 					<div class="col-lg-8">
                         <div class="ps-section__right">
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
-                                    <h3>작성글 ${listCount }</h3>
+                                    <h3>상품 후기 상세</h3>
+                                    상품 상세목록 쫘라락 그 안에서 후기 쓸 수 있도록 
                                 </div>
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
                                         <table class="table ps-table ps-table--notification">
-                                        
                                             <thead>
-                                                <tr align="center">
-                                                    <th>말머리</th>
-                                                    <th>제목</th>
-                                                    <th>조회수</th>
-                                                    <th>날짜</th>
+                                                <tr>
+                                                    <th width="70%">제목</th>
+                                                    <th>작성일</th>
+                                                    <th>작성상태</th>
                                                 </tr>
                                             </thead>
-                                             <c:forEach var="board" items="${BoardList }">
-										        <tbody>  
-										            <tr class="item">  
-										                <td>${board.board_category }</td>  
-										                <td><a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a></td>  
-										                <td width="12%">${board.board_readcount }</td>  
-										                 <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
-		                                        		<td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>  
-										            </tr>  
-										        </tbody>  
-									        </c:forEach>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</td>
+                                                    <td>20-1-2020</td>
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write.my'"> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</td>
+                                                    <td>21-1-2020</td>
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write.my'"> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> Et harum quidem rerum</td>
+                                                    <td>21-1-2020</td>
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write.my'"> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</td>
+                                                    <td>21-1-2020</td>
+                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPage_review_Write.my'"> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                         
- 								 <!-- 페이징 버튼들 시작 -->
-				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-				                    <div class="ps-pagination">
-				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				                               <c:choose>
-				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${i }">${i }</a></li></c:otherwise>
-				                               </c:choose>
-				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageBoard.bo?member_id=${sessionScope.sId}&pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-				                        </ul>
-				                    </div>
-				                    <!-- 페이징 버튼들 끝 -->
+                                    <!-- 페이징 버튼들 시작 -->
+                                    <div class="ps-pagination">
+                                        <ul class="pagination">
+                                       		<li><a href="#"><i class="icon-chevron-left"></i></a></li>
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- 페이징 버튼들 끝 -->
+                                    
                                     </div>
                                 </div>
                             </div>

@@ -16,9 +16,15 @@ public class CoinService {
 	public List<CoinVO> getCoinList(int startRow, int listLimit, String member_id) {
 		return mapper.selectCoinList(startRow, listLimit, member_id);
 	}
+	
 	//적립금 목록 갯수
 	public int getCoinListCount() {
 		return mapper.selectCoinListCount();
+	}
+	
+	//적립금 총금액
+	public List<CoinVO> getTotalCoin(String member_id) {
+		return mapper.selectTotalCoin(member_id);
 	}
 
 
