@@ -6,7 +6,7 @@ import com.itwillbs.Code_Green.vo.CartVO;
 
 public interface CartMapper {
 
-	public int addCart(CartVO cart);
+	public int insertCart(CartVO cart);
 
 	public int deleteCart(int cart_idx);
 
