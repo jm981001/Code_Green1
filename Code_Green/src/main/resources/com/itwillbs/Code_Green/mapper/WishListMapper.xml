@@ -47,7 +47,7 @@
 <!-- 위시리스트 갯수-->
 	<select id="WishCount" resultType="integer">
 		select 
-			count(*) 
+			count(*)+100 
 				from heart
 				where RF_ITEM_IDX = #{item_idx}
 	

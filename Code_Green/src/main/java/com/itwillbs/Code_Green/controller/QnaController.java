@@ -69,11 +69,13 @@ public class QnaController {
 		model.addAttribute("item_category",item_category);
 		return "item/qna_modify";
 	}	
+	
 	@PostMapping(value = "/QnaModifyPro.bo")
 	public String modifyPro(@ModelAttribute QnaVO qna, Model model, String item_idx,
 			@RequestParam(defaultValue = "1") int pageNum,
 			@RequestParam String item_category,@RequestParam String manager_brandname) {
 
+		//상품 문의 수정
 		int updateCount = service.modifyQna(qna);
 		model.addAttribute("item_idx", item_idx);
 		model.addAttribute("pageNum", pageNum);

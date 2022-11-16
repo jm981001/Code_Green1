@@ -14,7 +14,7 @@ public interface ReviewMapper {
 	int insertReview(BoardVO board);
 
 	//리뷰 삭제
-	int deleteReview(String board_idx);
+	int deleteReview(int board_idx);
 
 	//마이페이지 작성글 리스트
 	List<BoardVO> selectBoardList(@Param("startRow") int startRow,@Param("listLimit") int listLimit, @Param("member_id") String member_id);
@@ -27,6 +27,20 @@ public interface ReviewMapper {
 
 	//별점등록
 	int insertStar(BoardStarVO star);
+
+	//리뷰 상세정보 조회
+	BoardVO selectReview(int board_idx);
+
+	//리뷰 수정
+	int updateReview(BoardVO board);
+
+	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청1
+	String selectRealFile1(int board_idx);
+	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청2
+	String selectRealFile2(int board_idx);
+
+	//파일삭제
+	int deleteFile(int board_idx);
 
 
 	

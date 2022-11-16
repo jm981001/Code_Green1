@@ -28,9 +28,7 @@
 					"N", 
 					#{qna_subject}, 
 					#{qna_content}, 
-					#{qna_idx}+ 1,  
-					"0", 
-					"0", 
+					"N",
 					"0", 
 					date_format(now(),'%Y%m%d')
 					)

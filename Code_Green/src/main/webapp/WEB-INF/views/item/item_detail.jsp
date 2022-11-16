@@ -273,8 +273,7 @@
                                     </figure>
                                     
                                     <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
-                                      <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i>1231313<span class="wish_count"></span></div>
-<%--                               		  <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>1${item.heart }</a></div> --%>
+                                      <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i><span class="wish_count"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -434,7 +433,7 @@
 																			
 																		<div align="right">
 																		    <button>좋아용</button>
-																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
+																			<input type="button" value="수정" onclick="location.href='ReviewModify.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
 																			<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 </div>
 													                </td>  

@@ -19,6 +19,8 @@ import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
+import com.itwillbs.Code_Green.vo.QnaVO;
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 @Controller
 public class ReviewController {
@@ -89,41 +91,90 @@ public class ReviewController {
 	
 	
 	
-	//------------리뷰 등록 처리-------------------------------------------
 	
-	
-	
-	//------------리뷰 수정 (할...꺼야..?)-------------------------------------------
+	//------------리뷰 수정-------------------------------------------
 	@GetMapping(value = "/ReviewModify.bo")
-	public String brand_main() {
+	public String reveiw_modify(@RequestParam int board_idx, Model model, String item_idx,
+			@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam String item_category,@RequestParam String manager_brandname) {
+	
+		//리뷰 상세정보 조회
+		BoardVO board = service.getReview(board_idx);
+		model.addAttribute("board",board);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("manager_brandname",manager_brandname);
+		model.addAttribute("item_category",item_category);
+		
 		return "item/review_modify";
 	}
 	
+	@PostMapping(value = "/ReviewModifyPro.bo")
+	public String modifyPro(@ModelAttribute BoardVO board ,@RequestParam int board_idx, Model model, String item_idx,
+			@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam String item_category,@RequestParam String manager_brandname) {
+
+		//리뷰 수정
+		int updateCount = service.modifyReview(board);
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("manager_brandname",manager_brandname);
+		model.addAttribute("item_category",item_category);
+
+
+		if(updateCount == 0) {
+			model.addAttribute("msg", "수정 실패!");
+			return "member/fail_back";
+		}
+		
+		return "redirect:/ItemDetail.bo" ;
+	}
 	
 	
 	//------------리뷰 삭제-------------------------------------------
-	
-
-	
 	@GetMapping(value = "/ReviewDelete.bo")
-	public String deletePro(@RequestParam String board_idx, Model model, HttpSession session,@RequestParam String item_idx
+	public String deletePro(@ModelAttribute BoardVO board, @RequestParam int board_idx, Model model, HttpSession session,@RequestParam String item_idx
 			,@RequestParam(defaultValue = "1") int pageNum,
 			@RequestParam String item_category,@RequestParam String manager_brandname) {
-		// Service - removeBoard() 메서드 호출하여 삭제 작업 요청
-		// => 파라미터 : BoardVO 객체, 리턴타입 : int(deleteCount)
-			int deleteCount = service.removeReview(board_idx);
-			model.addAttribute("item_idx", item_idx);
-			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("manager_brandname",manager_brandname);
-			model.addAttribute("item_category",item_category);
-			if(deleteCount > 0) {
-				return "redirect:/ItemDetail.bo";
-//				return "redirect:/ItemList.bo?";
+			
+		//글 삭제 전 실제 업로드된 파일 삭제작업
+		String realFile1 = service.getRealFile1(board_idx);
+		String realFile2 = service.getRealFile2(board_idx);
+		System.out.println("realFile1 -> "+realFile1);
+		System.out.println("realFile2 -> "+realFile2);
+		
+		int deleteFileCount = service.removeFile(board_idx);
+		int deleteCount = service.removeReview(board_idx);
+		
+		System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
+		
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("manager_brandname",manager_brandname);
+		model.addAttribute("item_category",item_category);
+		
+		
+		if(deleteCount > 0) {
+			String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+			// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			System.out.println("실제 업로드 경로 : " + saveDir);
+			
+			File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
+			File f2 = new File(saveDir, realFile2);
+			System.out.println("삭제될것인가...!!"+f1);
+				
+			if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
+					f1.delete();
 			}
+			if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
+				f2.delete();
+			}
+			
+			return "redirect:/ItemDetail.bo";
+//				return "redirect:/ItemList.bo?";
+		}
 		return "member/fail_back";
 	}	
-	
-	//------------내 리뷰 리스트 (할...꺼야...?)-------------------------------------------
 	
 
 

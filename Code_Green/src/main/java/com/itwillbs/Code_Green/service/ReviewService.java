@@ -23,7 +23,7 @@ public class ReviewService {
 	}
 
 	//리뷰 삭제
-	public int removeReview(String board_idx) {
+	public int removeReview(int board_idx) {
 		return mapper.deleteReview(board_idx);
 	}
 
@@ -46,6 +46,31 @@ public class ReviewService {
 	public int StarScore(BoardStarVO star) {
 		return mapper.insertStar(star);
 		
+	}
+
+	//리뷰 상세정보 조회
+	public BoardVO getReview(int board_idx) {
+		return mapper.selectReview(board_idx);
+	}
+
+	//리뷰 수정
+	public int modifyReview(BoardVO board) {
+		return mapper.updateReview(board);
+	}
+
+	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청1
+	public String getRealFile1(int board_idx) {
+		return mapper.selectRealFile1(board_idx);
+	}
+
+	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청1
+	public String getRealFile2(int board_idx) {
+		return mapper.selectRealFile2(board_idx);
+	}
+
+	//파일 삭제
+	public int removeFile(int board_idx) {
+		return mapper.deleteFile(board_idx);
 	}
 
 }

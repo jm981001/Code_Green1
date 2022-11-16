@@ -54,9 +54,24 @@
 					)
 	</insert>
 		
+		
+	<!-- 리뷰 실제 업로드 파일명 조회1 -->
+	<select id="selectRealFile1" resultType="string">
+		SELECT file1
+			FROM file_board
+			WHERE
+				rf_board_idx = #{board_idx}
+	</select>
+	<!-- 리뷰 실제 업로드 파일명 조회2 -->
+	<select id="selectRealFile2" resultType="string">
+		SELECT file2
+			FROM file_board
+			WHERE
+				rf_board_idx = #{board_idx}
+	</select>
 	
 	
-<!-- 	리뷰삭제 -->
+	<!-- 	리뷰삭제 -->
 	<delete id="deleteReview">
 		DELETE
 			FROM board
@@ -64,7 +79,13 @@
 				board_idx = #{board_idx}
 	</delete>
 	
-	
+<!-- 	파일삭제 -->
+	<delete id="deleteFile">
+		DELETE
+			FROM file_board
+			WHERE 
+				rf_board_idx = #{board_idx}
+	</delete>
 	
 		<!-- 마이페이지 작성글 목록-->
 	<select id="selectBoardList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
@@ -85,8 +106,25 @@
 			 WHERE board_id = #{member_id} and board_type NOT LIKE '%후기%'
 	</select>
 	
+	<!-- 	리뷰 상세정보 조회 -->
+	<select id="selectReview" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT * 
+			FROM board
+			WHERE
+				board_idx = #{board_idx}
+	</select>
 	
-
+	
+	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview">
+		UPDATE board
+			SET
+				board_subject = #{board_subject},
+				board_content = #{board_content}
+			WHERE
+				board_idx = #{board_idx}
+	</update>
 	
 	
 	

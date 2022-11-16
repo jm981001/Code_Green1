@@ -14,7 +14,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>item_detail</title>
+    <title>베지터틀 -상품후기 수정</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -28,106 +28,71 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 
-	
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>  
-  <style type="text/css">  
-    table {
-  	  width:100%;
-  	  height:100% ;
-  	  border-color: #e1e1e1;
-    }  
-    table thead tr th{
-		font-weight: 500;
-		color: #000;
-/* 		border-bottom:none; */
-		border-top: none;
-		border-left: none;
-		border-right: none;
-		text-align: center;
-		padding: 15px 15px 15px 15px;
-    }  
-    
-    table tbody tr td  {
-	    font-weight: 500;
-	    color: #000;
-/* 	    border-bottom:none; */
-	    border-top: none;
-	    border-left: none;
-	    border-right: none;
-	    text-align: center;
-		padding: 15px 15px 15px 15px;
-	   
-	    
-	}  
-	
-/* 	.item table tr:hover{ */
-/* 		background-color: #f2f2f2; */
-/* 	} */
-    .hide {
-   	 display:none;
-    }  
-    .show {
-   	 display:table-row;
-    }  
-    .item td {
-   	 cursor:pointer;
-   	 background-color: #FAFAFA;
-    }  
-    
-   </style>  
-   
-</head>
-<style>
-	select {
-		width: 130px; padding: .5em .5em; border: 1px solid #999; font-family: inherit;  
-		background: url('/Code_Green/resources/img/arrow.jpg') no-repeat 95% 50%; border-radius: 5px; 
-		-webkit-appearance: none; -moz-appearance: none;appearance: none;
-		  float: right; padding-bottom: 3px; font-size: 1em;
-	}
-	select::-ms-expand {
-	        display: none;
-	    }
-</style>
-<body>
-                                
-<!-- ==========상품후기 작성=========================================================================================================     -->                                 
 
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-7 col-md-12 col-sm-12 col-12 ">
-                                            <form class="ps-form--review" action="ReviewWritePro.bo" method="post" name="reviewForm">
-                                                <h4>PRODUCT REVIEW</h4>
-                                                <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
-                                                <div class="form-group form-group__rating">
-                                                    <label>별점을 매겨주세요</label>
-                                                    <select class="ps-rating" data-read-only="false">
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                	<input type="hidden" name="board_id" value="${sessionScope.sId}" />
-                                                	<input type="hidden" name="item_idx" value="${item.item_idx}" />
-                                                    <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요"></textarea>
-                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?"></textarea>
-                                                    
-                                                </div>
-                                                <div align="right">
-	                                                <div class="form-group submit">
-	                                                    <button class="ps-btn" type="submit">Submit Review</button>
-	                                                </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                
- <!-- ==========상품후기 작성 끝=========================================================================================================     -->  
+<body>
+    <!-- 헤더 삽입 -->
+    <jsp:include page="../inc/top.jsp"></jsp:include>
+    <!-- 헤더 삽입 -->
+                                    
+<!-- ==========상품후기 작성=========================================================================================================     -->	<div class="ps-page--product">
+		<div class="ps-container">
+			<div class="ps-page__container">
+				<div class="row">
+					<div class="col-xl-2 col-lg-5 col-md-12 col-sm-12 col-12 "></div>
+
+					<div class="col-xl-9 col-lg-7 col-md-12 col-sm-12 col-12 ">
+						<form class="ps-form--review" action="ReviewModifyPro.bo"
+							method="post" name="modifyForm">
+							<br>
+							<br>
+							<br>
+							<h4>PRODUCT REVIEW</h4>
+							<p>
+								<sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당
+								게시판으로 이동될 수 있습니다.<br> <sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및
+								요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
+							</p>
+							<div class="form-group form-group__rating">
+								<label>별점을 매겨주세요</label> <select class="ps-rating"
+									data-read-only="false">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="hidden" id="board_idx" name="board_idx"value="${board.board_idx}" /> 
+								<input type="hidden" id="item_idx" name="item_idx" value="${param.item_idx}" /> 
+								<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
+								<input type="hidden" name="item_category" value="${param.item_category}" />
+                                <input type="hidden" name="manager_brandname" value="${param.manager_brandname}" />
+								<textarea class="form-control" id="board_subject"
+									name="board_subject" rows="1">${board.board_subject  }</textarea>
+								<textarea class="form-control" id="board_content"
+									name="board_content" rows="6">${board.board_content}</textarea>
+
+							</div>
+							<div align="right">
+								<div class="form-group submit">
+									<button class="ps-btn" type="submit">Submit Review</button>
+									<br>
+									<br>
+									<br>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- ==========상품후기 작성 끝=========================================================================================================     -->  
             
-    
+    <!-- ---------------------------------------------------------- 푸터푸터 ---------------------------------------------------------- -->
+     	<jsp:include page="../inc/footer.jsp"></jsp:include>
+    	<!-- ---------------------------------------------------------- 푸터푸터 끝 ---------------------------------------------------------- -->
     
 
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
