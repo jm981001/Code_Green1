@@ -5,7 +5,7 @@
 <!-- 		SELECT MAX(cart_idx) FROM cart -->
 <!-- </selectKey> -->
 
-	<!-- 장바구니 추가 -->
+	<!-- 1. 장바구니 추가 -->
 	<insert id="insertCart">
 		INSERT INTO cart
 			VALUES(
@@ -13,37 +13,8 @@
 					#{member_idx},
 					#{cart_amount})
 	</insert>
-
-
-	<!-- 장바구니 삭제 -->
-	<delete id="deleteCart">
-		DELETE FROM cart WHERE cart_idx = #{cart_idx}
-	</delete>
-
-
-	<!-- 장바구니 수량 변경 -->
-	<update id="updateCart">
-		UPDATE cart SET cart_amount = #{cart_amount} where cart_idx = #{cart_idx} 
-	</update>
-
-	<!-- 장바구니 목록 -->	
-	<select id="getCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
-		
-	</select>
 	
-	
-	<!-- 물건이 이미 카트에 있는지 확인 -->
-	<select id="checkCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
-		SELECT c.cart_idx
-	    FROM cart c
-        INNER JOIN item i
-        ON(c.rf_item_idx = i.item_idx)
-        INNER JOIN member m
-        ON(c.rf_member_idx = m.member_idx)
-        WHERE c.rf_member_idx = #{member_idx} and i.item_idx = #{item_idx}
-		
-	</select>
-	
+	<!-- 2. 장바구니 목록 -->
 	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT 
 			i.item_name,
@@ -57,15 +28,45 @@
 		JOIN manager m ON m.manager_idx = i.re_manager_idx
         JOIN member r ON r.member_idx = c.rf_member_idx
 		WHERE r.member_id = #{member_id}
+	
 	</select>
+
+	<!-- 3. 장바구니 삭제 -->
+	<delete id="deleteCart">
+		DELETE FROM cart WHERE cart_idx = #{cart_idx}
+	</delete>
+	
+	<!-- 4. 장바구니 수정 -->
+	<update id="modifyCart">
+	
+	</update>
 	
 	
+	<!--  5. 장바구니 금액 합계 -->
 	<select id="getPrice"  resultType="String">
 		SELECT item_price
 		FROM item
 		where item_idx = #rf_item_idx#
 	</select>
 	
+	
+	<!--  6. 장바구니 상품확인 -->
+	<select id="checkCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
+		SELECT c.cart_idx
+	    FROM cart c
+        INNER JOIN item i
+        ON(c.rf_item_idx = i.item_idx)
+        INNER JOIN member m
+        ON(c.rf_member_idx = m.member_idx)
+        WHERE c.rf_member_idx = #{member_idx} and i.item_idx = #{item_idx}
+	</select>
+	
+	<!-- 7. 장바구니에 기존의 상품이 존재하면 수정 -->
+	<update id="updateCart">
+		UPDATE cart SET cart_amount = #{cart_amount} where cart_idx = #{cart_idx} 
+	<!-- UPDATE tbl_cart	SET amount = amount + #{amount}  -->
+	<!-- WHERE user_id= #{userId} AND product_id = #{productId} -->
+	</update>
 	
 	
 </mapper>

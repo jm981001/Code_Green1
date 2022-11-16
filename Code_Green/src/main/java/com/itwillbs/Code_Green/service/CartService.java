@@ -13,32 +13,35 @@ public class CartService {
 
 	@Autowired
 	private CartMapper mapper;
-	//물건 장바구니 담기
+	
+	// 1. 장바구니 추가
 	public String insertCart(CartVO cart) {
 		return mapper.insertCart(cart);
 	}
-	//장바구니 삭제
-	public int deleteCart(int cart_idx) {
-		return mapper.deleteCart(cart_idx);
-	}
-	//장바구니 수정
-	public int updateCart(CartVO cart) {
-		return mapper.updateCart(cart);
-	}
-	//장바구니 담겨 있는지 체크 둘중 하나씀
-	public CartVO checkCart(CartVO cart) {
-		return mapper.checkCart(cart);
-	}
-	//장바구니 담겨 있는지 체크 둘중 하나씀
-	public int checkCart(int rf_item_idx, String sId) {
-		return 0;
-	}
-	//장바구니 조회
+	// 2. 장바구니 목록
 	public List<CartVO> selectCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
-	
-	
+	// 3. 장바구니 삭제
+	public int deleteCart(int cart_idx) {
+		return mapper.deleteCart(cart_idx);
+	}
+	// 4. 장바구니 수정
+	public int modifyCart(CartVO cart) {
+		return mapper.modifyCart(cart);
+	}
+	// 5. 장바구니 금액 합계
+	public int sumMoney(String member_id) {
+		return mapper.sumMoney(member_id);
+	}
+	// 6. 장바구니 상품확인
+	public int checkCart(int rf_item_idx, String member_id) {
+		return mapper.checkCart(rf_item_idx,member_id);
+	}
+	// 7. 장바구니 상품수량 변경
+	public int updateCart(CartVO cart) {
+		return mapper.updateCart(cart);
+	}
 
 	
 	
