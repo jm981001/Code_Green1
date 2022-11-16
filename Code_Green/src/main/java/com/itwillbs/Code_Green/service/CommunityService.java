@@ -88,6 +88,24 @@ public class CommunityService {
 	public BoardVO getBoard(int board_idx) {
 		return mapper.selectBoardModify(board_idx);
 	}
+	
+	// 대댓글 순서번호(reply_re_seq) 조정
+	public void increaseReplyReSeq(ReplyVO reply) {
+		mapper.updateReplyReSeq(reply);
+	}
+		
+	// 대댓글 쓰기등록
+	public int writeReReply(ReplyVO reply) {
+		return mapper.insertReReply(reply);
+	}
+
+	// 댓글 삭제 
+	public int deleteReply(int reply_idx) {
+		return mapper.deleteReply(reply_idx);
+	}
+
+		
+	
 
 	
 	

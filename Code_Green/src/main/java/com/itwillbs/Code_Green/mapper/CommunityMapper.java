@@ -55,6 +55,16 @@ public interface CommunityMapper {
 
 	// 글 수정폼 페이지에 글데이터 가져오기
 	BoardVO selectBoardModify(int board_idx);
+
+	// 대댓글 순서번호 조정(reply_re_seq)
+	void updateReplyReSeq(ReplyVO reply);
+
+	// 대댓글 쓰기
+	int insertReReply(ReplyVO reply);
+
+	// 댓글 삭제
+	int deleteReply(int reply_idx);
+	
 	
 	
 	

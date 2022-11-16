@@ -78,8 +78,9 @@
 							rf_board_idx: ${cBoard.board_idx},
 							member_id: '${sessionScope.sId}'
 						},
-						success: function(){
+						success: function(msg){
 							bestCount();
+							alert(msg);
 						},
 					})
 				}	
@@ -120,23 +121,43 @@
 			},
 			success: function(result){
 				var comments="";
-				
+				var space ="";
 				
 				if(result.length < 1){
 					comments = "등록된 댓글이 없습니다.";
 				} else {
-					
+					let idNum = 0;
 					$(result).each(function(){
 						
-						comments +=  '<h5>'+this.reply_id+'<small>' +this.reply_date+ '</small></h5>';
-						comments +=  '<p>'+this.reply_content+'</p>';
-						comments +=  '<a class="reply_write_btn" onclick="reReplyWrite()" >답글</a>';
-                        <!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
-						if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
-	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re">  삭제</a></span>';
+						<!-- 대댓글 깊이만큼 들여쓰기(이미지 삽입 ) <<<<<<<<<<<<<<<<<<<이거 질문해야되는거 >>>>>>>>>>>>>>>>>>>>>> -->
+						if(this.reply_re_lev > 0) {
+							for(let i = 0; i < this.reply_re_lev; i++) {
+								space += "";
+							}
+							
+							space += '<img src="<%=request.getContextPath() %>/resources/img/re.png" width="20px" height="20px">&nbsp;';
+						}
+						
+						comments +=  '<div id="commentPart"><h5>'+this.reply_id+'<small>' +this.reply_date+ '</small></h5>';
+						comments +=  '<p>' + space +this.reply_content+'</p>';
+						comments +=  '<a class="reply_write_btn" onclick="reReplyWrite('+ idNum +')" >답글</a>';
+                        
+						<!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
+                        if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
+	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re?reply_idx='+ this.reply_idx +'">  삭제</a></span>';
 	                        }
-						comments += '<div id="reReplyBox" style="display:none"><br>&nbsp;&nbsp;<input type="text" id ="rereBox"><input type="button" id="goReReply" value="작성"></div>';
-                        comments += '<hr>';
+                        <!-- 대댓글 작성을 위한 폼 -->
+						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none"><br>'
+									+ '<form action="reReplyWrite.re" method="post">'
+									+ '<input type="hidden" name="reply_bo_ref" value="'+ this.reply_bo_ref +'">'
+									+ '<input type="hidden" name="reply_re_ref" value="'+ this.reply_re_ref +'">'
+									+ '<input type="hidden" name="reply_re_lev" value="'+ this.reply_re_lev +'">'
+									+ '<input type="hidden" name="reply_re_seq" value="'+ this.reply_re_seq +'">'
+									+ '<input type="hidden" name="reply_id" value="${sessionScope.sId}">'
+									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">'
+									<!-- 작성 onsubmit 함수걸어서 ajax로 수정해보기 -->
+									+ '<input type="submit" id="goReReply" value="작성"></form></div>';
+                        comments += '</div><hr>';
 					});
 				};
 				$("#replyList").html(comments);
@@ -145,12 +166,12 @@
 		});
 	};	
 	
-	// 대댓글상자 숨김/표시 처리기능 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 질문하기!!!!!!이것때문에 고통받는중.. 아악!!!!!!!!
-	function reReplyWrite(){
-		 if ($('#reReplyBox').css('display') == 'none') {
-	          $('#reReplyBox').css('display', 'block');
+	// 대댓글상자 숨김/표시 처리기능 
+	function reReplyWrite(idNum){
+		 if ($('#reReplyBox'+ idNum).css('display') == 'none') {
+	          $('#reReplyBox'+ idNum).css('display', 'block');
 	     } else {
-	            $('#reReplyBox').css('display', 'none');
+	            $('#reReplyBox'+ idNum).css('display', 'none');
 	     }
 	}
 	
@@ -181,7 +202,8 @@
 						},
 						success: function(result){
 							getReplyList();					// 댓글목록불러오는 함수
-							$("#reply_content").val('');	// 댓글칸 비우기
+							$("#reply_content").val('');
+							// 댓글칸 비우기
 						}
 						, error: function(error){
 							console.log("에러 : " + error);
@@ -241,7 +263,6 @@
 <!--                         <div class="ps-post__footer"> -->
 <!--                             <p class="ps-post__tags">Tags:<a href="#">business</a><a href="#">technology</a></p> -->
 <!--                         </div> -->
-
 
 
 			   <!-- 신고하기 / 추천하기 버튼 시작 -->

@@ -320,8 +320,9 @@ public class CommunityController {
 	
 		
 	// 추천하기 로직 수행 
+	@ResponseBody
 	@PostMapping("/BestCountUpdate.bo")
-	public String bestCountUpdate(@RequestParam int rf_board_idx,@RequestParam String member_id, Model model) {
+	public void bestCountUpdate(@RequestParam int rf_board_idx,@RequestParam String member_id, Model model, HttpServletResponse response) {
 		System.out.println(rf_board_idx);
 		System.out.println(member_id);
 		
@@ -329,23 +330,31 @@ public class CommunityController {
 		int existCount = service.selectBoardBest(rf_board_idx,member_id);
 		String msg = "";
 
+		
 		if(existCount > 0) { // 판단해서 있으면 삭제하기
 			
 			int resultDeleteCount = service.deleteBoardBest(rf_board_idx,member_id);
 			if(resultDeleteCount > 0) {
-				model.addAttribute("msg", "추천이 취소되었습니다!");
+//				model.addAttribute("msg", "추천이 취소되었습니다!");
+				msg = "추천이 취소되었습니다!";
 			}
-			return "member/fail_back";
 		} else {	// 판단해서 없으면 추가하기
 			
 			int resultInsertCount = service.insertBoardBest(rf_board_idx,member_id);
 			
 			if(resultInsertCount > 0) {
-				model.addAttribute("msg", "추천했습니다!!");
+//				model.addAttribute("msg", "추천했습니다!!");
+				msg = "추천했습니다!";
+
 			}
-			return "member/fail_back";
 		}
 		
+		response.setCharacterEncoding("UTF-8");
+		try {
+			response.getWriter().print(msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 //		model.addAttribute("msg", msg);
 //		System.out.println(msg);
 //		return "community/msg_back";
@@ -377,6 +386,7 @@ public class CommunityController {
 		System.out.println(reply_id);
 		System.out.println(reply_content);
 		
+		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		ReplyVO replyVO = new ReplyVO();
@@ -394,7 +404,28 @@ public class CommunityController {
 		return map;
 	}
 	
-	// 댓글목록 출력
+	// 대댓글 쓰기
+	@PostMapping("/reReplyWrite.re")
+	public void reReplyWrite(@ModelAttribute ReplyVO reply,Model model) {
+		System.out.println("들어왔나요?");
+		System.out.println(reply);
+		// 순서번호(reply_re_seq) 조정 
+		service.increaseReplyReSeq(reply);
+		
+		// 대댓글 등록
+		int reResultCount = service.writeReReply(reply);
+		
+		if(reResultCount > 0) {
+			System.out.println("대댓글쓰기 성공");
+		} else {
+			System.out.println("대댓글쓰기 실패");
+		}
+		
+		
+	}
+	
+	
+	// 댓글 전체 목록 출력
 	@ResponseBody
 	@PostMapping("/ReplyList.re")
 	public List<ReplyVO> replyList(@RequestParam int reply_bo_ref){
@@ -403,5 +434,23 @@ public class CommunityController {
 		System.out.println(replyList);
 		return replyList;
 	}
+	
+	// 댓글 삭제
+	@GetMapping("/replyDelete.re")
+	public String deleteReply(@RequestParam int reply_idx,Model model) {
 		
+		int deleteReplyCount = service.deleteReply(reply_idx);
+		
+		String msg = "";
+		if(deleteReplyCount > 0) {
+			msg += "선택한 댓글이 삭제되었습니다.";
+		} else {
+			msg += "댓글삭제에 실패하였습니다.\n 다시시도해주세요.";
+		}
+		
+		model.addAttribute("msg", msg);
+		return "member/fail_back";
+	}
+	
+	
 }

@@ -27,15 +27,11 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
-<!--     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script> -->
-<!--     <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script> -->
-<!--     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
-    <!-- 5버전 사용소스 -->
-    <script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
 </head>
 <style>
-/* 	.ck-editor__editable { height: 300px; } */
-/* 	.ck-content { font-size: 12px; } */
+ 	.ck-editor__editable { height: 300px; }  
+  	.ck-content { font-size: 12px; }  
 </style>
 <body>
     
@@ -87,25 +83,28 @@
 							                                    </tr>
 							                                    <tr>
 							                                        <td colspan="2">
-<!-- 																		 <textarea name="board_content" id="editor"></textarea> -->
-																		<textarea class="form-control" name="board_content" id="board_content"></textarea>
-																		<script>
-																	 		CKEDITOR.replace('board_content'
-																	 			, {filebrowserUploadUrl:'imageUpload.bo'
-																	            , height: 500, width: 1000
-																	         });
-																		</script>
+																		 <textarea name="board_content" id="editor"></textarea>
+																		  <script>
+																		    ClassicEditor
+																		        .create( document.querySelector( '#editor' ), {
+																		            // 제거 하고싶은 플러그인 (배열)
+																		             removePlugins: [ 'ImageUpload' ]
+																		        } )
+																		        .catch( error => {
+																		            console.error( error );
+																		        } );
+																		  </script>
 																	</td>
 							                                    </tr>
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택1"></td> -->
-<!-- 							                                    </tr> -->
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택2"></td> -->
-<!-- 							                                    </tr> -->
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택3"></td> -->
-<!-- 							                                    </tr> -->
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택1"></td>
+							                                    </tr>
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택2"></td>
+							                                    </tr>
+							                                    <tr>
+							                                    	<td colspan="2"><input type="file" id="파일선택3"></td>
+							                                    </tr>
 													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
 					                            	</table>
 	                        					</form> 
@@ -164,15 +163,6 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
-<!--     <script> -->
-//     ClassicEditor
-//       .create( document.querySelector( '#editor' ) ,{
-//     	  language: "ko"
-//       })
-//       .catch( error => {
-//         console.error( error );
-//       } );
-<!--  	 </script> -->
      
 </body>
 

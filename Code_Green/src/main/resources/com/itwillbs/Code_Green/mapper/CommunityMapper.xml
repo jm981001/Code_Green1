@@ -269,7 +269,60 @@
 			WHERE reply_type = '커뮤'
 				  AND 
 				  reply_bo_ref = #{reply_bo_ref}
-			ORDER BY reply_idx DESC
+			ORDER BY 
+				  reply_re_ref DESC,
+				  reply_re_seq ASC
 	</select>	
+	
+	<!-- 
+	대댓글 등록을 위한 게시물 순서번호(reply_re_seq) 조정 - UPDATE
+	=> 기존 답글들에 대한 순서번호 증가(UPDATE 구문 사용)
+	=> 원본글의 참조글번호(reply_re_ref)와 같은 레코드들 중에서
+	   원본글의 순서번호 보다 큰 게시물들의 순서번호를 + 1 씩 처리
+	-->
+	
+	<!-- 대댓글 순서번호 조정(reply_re_seq) -->
+	<update id="updateReplyReSeq">
+		UPDATE reply 
+				SET 
+					reply_re_seq = reply_re_seq + 1 
+				WHERE 
+					reply_re_ref = #{reply_re_ref}
+					AND reply_re_seq > #{reply_re_seq}
+		
+	</update>
+	<!-- 
+	대댓글 등록 - INSERT
+	=> 단, INSERT 작업 실행 전 먼저 SELECT 구문을 통해 글번호(board_num) 의 최대값을 조회하여
+	   INSERT 시 reply_idx 값을 조회결과 + 1 값으로 설정
+	=> 또한, INSERT 과정에서 들여쓰기레벨(board_re_lev)과 순서번호(board_re_seq)는
+	   전달받은 값 + 1 값을 사용
+	 -->
+	<!-- 대댓글 쓰기 -->
+	<insert id="insertReReply">
+		INSERT
+			INTO reply
+			VALUES (
+					IFNULL((SELECT MAX(reply_idx) FROM reply r),0) + 1,
+					'커뮤',
+					#{reply_id},
+					#{reply_content},
+					#{reply_re_ref},
+					#{reply_re_lev} + 1,
+					#{reply_re_seq} + 1,
+					#{reply_bo_ref},
+					date_format(now(),'%Y년%m월%d일 %H:%i')
+			)
+	
+	</insert>
+	
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE 
+			FROM reply
+			WHERE reply_idx = #{reply_idx} 
+			
+	</delete>
 	
 </mapper>
