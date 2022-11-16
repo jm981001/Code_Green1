@@ -14,7 +14,7 @@ public class CartService {
 	@Autowired
 	private CartMapper mapper;
 	//물건 장바구니 담기
-	public int insertCart(CartVO cart) {
+	public String insertCart(CartVO cart) {
 		return mapper.insertCart(cart);
 	}
 	//장바구니 삭제
@@ -25,14 +25,19 @@ public class CartService {
 	public int updateCart(CartVO cart) {
 		return mapper.updateCart(cart);
 	}
-	//장바구니 데이터 체크
+	//장바구니 담겨 있는지 체크 둘중 하나씀
 	public CartVO checkCart(CartVO cart) {
 		return mapper.checkCart(cart);
+	}
+	//장바구니 담겨 있는지 체크 둘중 하나씀
+	public int checkCart(int rf_item_idx, String sId) {
+		return 0;
 	}
 	//장바구니 조회
 	public List<CartVO> selectCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
+	
 	
 
 	

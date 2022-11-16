@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.vo.CartVO;
+import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class CartController {
@@ -45,45 +47,27 @@ public class CartController {
 //			);
 	
 	
+	
+	// 장바구니 추가
 	@ResponseBody
 	@GetMapping(value = "addCart")
-	public String addCart(@ModelAttribute CartVO cart, HttpSession session,
-			@RequestParam int member_idx,
-			@RequestParam int item_idx) {
-		member_idx= 1;
-		item_idx= 1;
+	public String addCart(@ModelAttribute CartVO cart, HttpSession session,int member_idx) {
+		String sId = (String) session.getAttribute("sId");
 		cart.setRf_member_idx(member_idx);
-		cart.setRf_item_idx(item_idx);
-		System.out.println(item_idx);
-		List<CartVO> cartList;
-		
-		
-		String sId = (String)session.getAttribute("sId");
-
-		//상품이 이미 담겨있는지 확인
-		CartVO checkCart = service.checkCart(cart);
-
-		if(checkCart != null) {
-			
-		}
-		
-		
-		
-		//장바구니 담기
-		int insertCartCount = service.insertCart(cart);
-		
-		if(insertCartCount > 0) {
-			System.out.println("장바구니담기 성공!");
+		// 장바구니에 기존 상품이 있는지 검사
+		int count = service.checkCart(cart.getRf_item_idx(), sId);
+		if(count == 0){		
+			// 없으면 insert
+			service.insertCart(cart);
 		} else {
-			System.out.println("장바구니 담기 실패!");
+			// 있으면 update
+			service.updateCart(cart);
 		}
+		return "redirect:/shop/cart/list.do";
 		
 		
-		return insertCartCount + "";
 		
 	}
-
-	
 	
 	
 	

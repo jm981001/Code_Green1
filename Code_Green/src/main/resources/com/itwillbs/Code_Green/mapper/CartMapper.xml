@@ -9,8 +9,8 @@
 	<insert id="insertCart">
 		INSERT INTO cart
 			VALUES(
-					#{rf_item_idx},
-					#{rf_member_idx},
+					#{item_idx},
+					#{member_idx},
 					#{cart_amount})
 	</insert>
 
