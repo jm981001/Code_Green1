@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.CartVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -28,7 +29,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_payment.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
+    
     
 <!-- 기존 주소 클릭시 변경 주소 숨김 / 변경 주소 클릭시 기존 주소 숨김-->
     <style type="text/css">
@@ -37,6 +38,7 @@
     	}
     </style>
     
+    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     
 <!-- 결제 api 관련 js-->
     <!-- jQuery -->
@@ -46,6 +48,7 @@
  
 <!-- 주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
     
     <script>
 <!-- 결제 api -->
@@ -95,28 +98,72 @@
                 }
             }).open();
         }
-        
+
+ <!-- 주문 확인 alert -->       
         function orderConfirm() {
 			alert("주문을 완료하시겠습니까? \n확인을 클릭하시면 결제페이지로 이동합니다.");
 		}
-         
         
-        // TODO
-        // 1. sellController로 데이터 넘기기
-        // 1-2. sell 테이블에 insert 시켜보기
-        // 1-3. rf_member_idx 어떻게 넘길건기 생각해보기
-        // 1-4. 적립금 사용(sell_usecoin) 같이 넘겨서 적립금 테이블에 잔액에 차감시키기
-        // 1-5. rf_item_idx, sell_amount 배열로 넘겼기 때문에 xml에서 foreach 써서 insert
-        //      - https://www.google.com/search?q=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4+%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0&biw=1366&bih=625&ei=TGRyY-DKGsyQ-AbA9LPgBQ&oq=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgUIABCABDIFCAAQgAQyBggAEAgQHjIGCAAQCBAeMgYIABAIEB46CwgAEIAEELEDEIMBOggIABCABBCxAzoUCC4QgAQQsQMQgwEQxwEQ0QMQ1AI6CwguEIAEEMcBENEDOhEILhCABBCxAxCDARDHARDRAzoLCC4QgAQQsQMQgwE6BAgAEAM6DgguEIAEELEDEIMBENQCOgcILhCABBAKOgcIABCABBAKOhEILhCABBCxAxCDARDHARCvAToHCC4Q1AIQAzoFCC4QgAQ6CAguEIAEELEDOgoIABCxAxCDARBDOgQIABBDOg4ILhCABBCxAxDHARDRA0oECEEYAEoECEYYAFAAWPobYNsmaAZwAXgFgAGUAogBzx6SAQYyLjkuMTGYAQCgAQGwAQDAAQE&sclient=gws-wiz-serp
-        // 2. 배송비를 주문 페이지에서 보여줄건지 생각해보기
-        // 3. 주문완료 페이지에 카드결제, 무통장입금 안내 폼 만들기
-        // 4. insert 되면 select해서 불러와서 주문 완료페이지에 뿌려보기(주문번호와 주문일자)
-        //    - 결제되면 주문상태(sell_status) 변경(update)시키기 ex)결제대기중(default) -> 결제완료
-        //    - 결제일(sell_payment_date)도 insert 하기
-        //    - 결제방식(sell_payment_type) insert ex)카드 결제면 '카드' / 무통장입금이면 '무통장입금'
-        //    - 결제여부(sell_payment_status)update ex) 'N'(default) -> 'Y'
-        // 5. 적립금 사용 클릭하면 남은 적립금에 차감되게 만들기
-    </script>
+
+<!-- 장바구니 불러오기 -->
+       	$(function() {
+       		cartList();
+       	});
+       		
+           function cartList(){
+        	   var member_id="${sessionScope.sId }";
+   	        $.ajax({
+   				type: "GET",
+   				url: "/Code_Green/paymentJson",
+   				data:{
+   					member_id : member_id
+   				},
+   				dataType: "json"
+   			})
+   			.done(function(cartList) {
+//    				console.log(cartList)
+   				for(let cart of cartList){ 
+//    					console.log(cart)
+   			let result = "<tr>"
+   							+ "<td>" + "<img src='/Code_Green/resources/item/" + cart.file1 + "'>" + "</td>"
+   							+ "<td>" + cart.rf_item_idx	+ "</td>" 
+   							+ "<td>" + cart.manager_brandname +"</td>"
+   							+ "<td>" + cart.item_name +"</td>"
+   							+ "<td>" + cart.item_price +"</td>"
+   							+ "<td>" + cart.cart_amount +"</td>"
+   							+ "<td>" + cart.cart_total +"</td>"
+   						+ "</tr>";
+   					
+   					$(".ps-block__content > table").append(result);
+   				}
+   	
+   	
+   			})
+   			.fail(function() { // 요청 실패 시
+   				$(".ps-block__content > table").html("요청 실패!");
+   			});
+   			
+   	       }
+       	     
+               // TODO
+               // 1. sellController로 데이터 넘기기
+               // 1-2. sell 테이블에 insert 시켜보기
+               // 1-3. rf_member_idx 어떻게 넘길건기 생각해보기(O)
+               // 1-4. 적립금 사용(sell_usecoin) 같이 넘겨서 적립금 테이블에 잔액에 차감시키기
+               // 1-5. rf_item_idx, sell_amount 배열로 넘겼기 때문에 xml에서 foreach 써서 insert
+               //      - https://www.google.com/search?q=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4+%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0&biw=1366&bih=625&ei=TGRyY-DKGsyQ-AbA9LPgBQ&oq=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgUIABCABDIFCAAQgAQyBggAEAgQHjIGCAAQCBAeMgYIABAIEB46CwgAEIAEELEDEIMBOggIABCABBCxAzoUCC4QgAQQsQMQgwEQxwEQ0QMQ1AI6CwguEIAEEMcBENEDOhEILhCABBCxAxCDARDHARDRAzoLCC4QgAQQsQMQgwE6BAgAEAM6DgguEIAEELEDEIMBENQCOgcILhCABBAKOgcIABCABBAKOhEILhCABBCxAxCDARDHARCvAToHCC4Q1AIQAzoFCC4QgAQ6CAguEIAEELEDOgoIABCxAxCDARBDOgQIABBDOg4ILhCABBCxAxDHARDRA0oECEEYAEoECEYYAFAAWPobYNsmaAZwAXgFgAGUAogBzx6SAQYyLjkuMTGYAQCgAQGwAQDAAQE&sclient=gws-wiz-serp
+               // 2. 배송비를 주문 페이지에서 보여줄건지 생각해보기
+               // 3. 주문완료 페이지에 카드결제, 무통장입금 안내 폼 만들기
+               // 4. insert 되면 select해서 불러와서 주문 완료페이지에 뿌려보기(주문번호와 주문일자)
+               //    - 결제되면 주문상태(sell_status) 변경(update)시키기 ex)결제대기중(default) -> 결제완료
+               //    - 결제일(sell_payment_date)도 insert 하기
+               //    - 결제방식(sell_payment_type) insert ex)카드 결제면 '카드' / 무통장입금이면 '무통장입금'
+               //    - 결제여부(sell_payment_status)update ex) 'N'(default) -> 'Y'
+               // 5. 적립금 사용 클릭하면 남은 적립금에 차감되게 만들기 
+     
+    </script>    
+         
+  
 </head>
 
 <body>
@@ -175,19 +222,6 @@
 												  <input type="text" class="form-control" name="sell_address" value="${memberInfo.member_address }" readonly="readonly">
 												</div>
 	                                     
-	                                      <!-- 적립금 -->
-                                        <div class="ps-block__panel" style="margin-top: 50px;">
-                                            <figure><small>보유</small><strong> ${coin.coin_total }원</strong></figure>
-                                            
-                                            <!-- 사용할 적립금 적기 -->
-                                            <figure><small>사용</small>
-                                            	<input type="text" style="text-align: right; border: 1px solid #d1d1d1" name="sell_use_coin" value="3000">원
-		                                    	<input type="button" value="적립금 사용">
-                                            </figure>
-                                            <!-- 남은 적립금 -->
-                                            <figure><small>남은 적립금</small><strong> 2000원</strong></figure>
-                                        </div>
-	                                     
 	                                       <!-- 주문 내역 -->
 		                                  <!-- cart에서 넘어온거 뿌리기 -->
 <!-- 		                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 "> -->
@@ -195,72 +229,14 @@
 		                                        <div class="ps-block__content">
 		                                           <table class="orderList">
 			                                           	 	<tr>
-				                                           		<td></td>
+				                                           		<td></td><!-- 파일 -->
 				                                           		<td >상품 번호</td>
 				                                           		<td>브랜드명</td>
 				                                           		<td>상품명</td>
 				                                           		<td>가격</td>
 				                                           		<td>주문 갯수</td>
-				                                           		<td>총 금액</td>
+				                                           		<td>상품 총 금액</td>
 				                                           	</tr>
-			                                           	 <c:forEach var="cart" items="${cartList}">
-				                                           	<tr>
-				                                           		<td>
-				                                           			<img src="/Code_Green/resources/item/${cart.file1 }" >
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text" value="${cart.rf_item_idx}" readonly="readonly">
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text" value="${cart.manager_brandname}" readonly="readonly">
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text" value="${cart.item_name}" readonly="readonly">
-				                                           		 </td>
-				                                           		<td>
-				                                           			<input type="text" value="${cart.item_price }" readonly="readonly">
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text" name="sell_amount" value="${cart.cart_amount }" readonly="readonly">
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text" value="${cart.cart_total }" readonly="readonly">
-				                                           		</td>
-				                                           	</tr>
-		                                           		 </c:forEach>
-		                                           		  <tr>
-				                                           		<td colspan="6"><b>전체 금액</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="29960" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         
-				                                         <!-- 배송비는 결제 완료 페이지에서 총 결제 금액보고 결정 -->
-<!-- 				                                         <tr> -->
-<!-- 				                                           		<td colspan="6"><b>배송비</b></td> -->
-<!-- 				                                           		<td> -->
-<!-- 				                                           			<input type="text" value="2500" readonly="readonly"> -->
-<!-- 				                                           		</td> -->
-<!-- 				                                         </tr> -->
-
-				                                         <tr>
-				                                           		<td colspan="6"><b>총 금액</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="32460" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr>
-				                                           		<td colspan="6"><b>적립금 사용</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="1000" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr style="font-size: 20px;">
-				                                           		<td colspan="6">최종 결제 금액</td>
-				                                           		<td>
-				                                           			<input type="text" value="31460" readonly="readonly"  style="color: #5fa30f">
-				                                           		</td>
-				                                         </tr>
 		                                           </table>
 		                                           
 		                                        </div>
@@ -300,82 +276,31 @@
 											  <input type="text" class="form-control" id="address" name="sell_address" placeholder="받는 분의 주소를 입력하세요.(주소 검색 클릭 후 상세 주소까지 입력해주세요.)" required="required">
 											</div>
 
-											 <!-- 적립금 -->
-                                        <div class="ps-block__panel" style="margin-top: 50px;">
-                                            <figure><small>보유</small><strong> 5000원</strong></figure>
-                                            
-                                            <!-- 사용할 적립금 적기 -->
-                                             <figure><small>사용</small>
-                                            	<input type="text" style="text-align: right; border: 1px solid #d1d1d1" name="sell_use_coin" value="3000">원
-		                                    	<input type="button" value="적립금 사용">
-                                            </figure>
-                                            
-                                            <!-- 남은 적립금 -->
-                                            <figure><small>남은 적립금</small><strong> 2000원</strong></figure>
-                                        </div>
-	                                     
-	                                        <!-- 주문 내역 -->
+										 <!-- 주문 내역 -->
 		                                  <!-- cart에서 넘어온거 뿌리기 -->
 <!-- 		                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 "> -->
 		                                    <div class="ps-block--checkout-order">
 		                                        <div class="ps-block__content">
 		                                           <table class="orderList">
-			                                           	 <c:forEach var="cart" items="${cartList}">
-				                                           	<tr>
-				                                           		<td>
-				                                           			<img src="/Code_Green/resources/item/${cart.file1 }" >
-				                                           		</td>
-				                                           		<td>
-				                                           			<input type="text"  name="rf_item_idx" value="${cart.rf_item_idx}  ${cart.manager_brandname} ${cart.item_name}" readonly="readonly"><br>
-				                                           		</td>
-				                                           		<td>${cart.item_price }</td>
-				                                           		<td>${cart.cart_amount }EA</td>
-				                                           		<td>${cart.cart_total }</td>
+			                                           	 	<tr>
+				                                           		<td></td><!-- 파일 -->
+				                                           		<td >상품 번호</td>
+				                                           		<td>브랜드명</td>
+				                                           		<td>상품명</td>
+				                                           		<td>가격</td>
+				                                           		<td>주문 갯수</td>
+				                                           		<td>상품 총 금액</td>
 				                                           	</tr>
-				                                           	<tr>
-				                                           	</tr>
-		                                           		 </c:forEach>
-		                                           		  <tr>
-				                                           		<td colspan="4"><b>전체 금액</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="29960" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr>
-				                                           		<td colspan="4" ><b>배송비</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="2500" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr>
-				                                           		<td colspan="4"><b>총 금액</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="32460" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr>
-				                                           		<td colspan="4" ><b>적립금 사용</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="1000" readonly="readonly">
-				                                           		</td>
-				                                         </tr>
-				                                         <tr style="font-size: 20px;">
-				                                           		<td colspan="4" style="color: #5fa30f"><b>최종 결제 금액</b></td>
-				                                           		<td>
-				                                           			<input type="text" value="31460" readonly="readonly"  style="color: #5fa30f">
-				                                           		</td>
-				                                         </tr>
 		                                           </table>
 		                                           
 		                                        </div>
 		                                    </div>
-<!-- 		                                </div> -->
 	                                     
 	                                         <div class="ps-block--payment-method" style="background: white">
 		                                      <div class="ps-tabs">
 		                                              <div class="ps-tab active" id="account">
 		                                                    <div class="form-group submit">
-		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" value="주문하기">
+		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" value="주문하기" onclick="orderConfirm()">
 		                                                    </div>
 			                                          </div>
 		                                         </div>
@@ -383,7 +308,6 @@
 	                                  </div>   
 	                               </form>
 				               </div>
-<!-- 				       </div> -->
                     </div>
                 </div>
             </div>
