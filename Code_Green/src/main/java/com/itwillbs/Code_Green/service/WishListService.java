@@ -27,6 +27,11 @@ public class WishListService {
 		return mapper.removeWish(wishList,item_idx,member_id);
 	}
 
+	//위시리스트 갯수
+	public int WishCount(int item_idx) {
+		return mapper.WishCount(item_idx);
+	}
+
 
 
 }

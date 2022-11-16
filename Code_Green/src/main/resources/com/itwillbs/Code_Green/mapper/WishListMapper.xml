@@ -9,7 +9,7 @@
         WHERE RF_ITEM_IDX = #{item_idx}
               and RF_MEMBER_IDX = (SELECT member_idx 
 									FROM member
-									WHERE MEMBER_ID = #{member_id});
+									WHERE MEMBER_ID = #{member_id})
 	</select>
 
 
@@ -27,7 +27,7 @@
                   		  FROM member
                     	  WHERE MEMBER_ID = #{member_id}),
 					date_format(now(),'%Y%m%d')
-					);
+					)
 	</insert>
 
 
@@ -38,14 +38,20 @@
 			WHERE RF_ITEM_IDX = #{item_idx}
 				AND RF_MEMBER_IDX = (select member_idx 
 										from member
-										where MEMBER_ID = #{member_id});
+										where MEMBER_ID = #{member_id})
 	
 	</delete>
 
 
 
-
-
+<!-- 위시리스트 갯수-->
+	<select id="WishCount" resultType="integer">
+		select 
+			count(*) 
+				from heart
+				where RF_ITEM_IDX = #{item_idx}
+	
+	</select>
 
 
 

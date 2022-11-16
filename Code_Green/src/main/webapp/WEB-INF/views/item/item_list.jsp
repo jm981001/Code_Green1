@@ -71,13 +71,7 @@
                                     <div class="ps-shopping-product">
                                         <div class="row">
                                         
-                                        	<!-- 반복문 시작 -->
-                                                <%
-//                                                 	List<ItemVO> itemList = (List<ItemVO>) request.getAttribute("item");
-//                                                 	int score = (int)Math.round(Double.parseDouble(item.board_star_score));
-//                                                 	pageContext.setAttribute("score", score);
-													
-                                                %>
+
                                         	<c:forEach var="item" items="${itemList }">
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">

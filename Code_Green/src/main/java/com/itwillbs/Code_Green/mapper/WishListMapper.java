@@ -15,4 +15,7 @@ public interface WishListMapper {
 	//위시리스트 삭제
 	int removeWish(WishListVO wishList, @Param("item_idx")int item_idx, @Param("member_id")String member_id);
 
+	//위시리스트 갯수
+	int WishCount(@Param("item_idx")int item_idx);
+
 }

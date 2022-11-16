@@ -154,33 +154,33 @@
 							member_id: '${sessionScope.sId}',
 							item_idx: ${item.item_idx},
 							pageNum: ${pageInfo.pageNum},
-							manager_brandname: ${item.manager_brandname},
-							item_category: ${item.item_category},
-							heart: ${item.heart},
+							manager_brandname: '${item.manager_brandname}',
+							item_category: '${item.item_category}'
+							
 						},
-						success: function(heart){
-							$(".wish_count").html(heart);
+						success: function(){
+							wish_count();
 						},
 					})
 				}	
 			})
 			
 // 			// 게시글 추천수
-// 			function bestCount(){
-// 				$.ajax({
-// 					url: "BestCounting.bo",
-// 					type: "POST",
-// 					data:{
-// 						rf_board_idx: ${cBoard.board_idx}
-// 					},
-// 					success: function(count){
-// 						$(".bestcnt_count").html(count);
-// 					},
-// 				})
-// 			};
+			function wish_count(){
+				$.ajax({
+					url: "WishCount.bo",
+					type: "POST",
+					data:{
+						item_idx: ${item.item_idx}
+					},
+					success: function(count){
+						$(".wish_count").html(count);
+					},
+				})
+			};
 		
 	// 처음 시작했을때 실행되도록 해당 함수 호출
-		
+			wish_count();
 	});
 	
 	
@@ -273,8 +273,8 @@
                                     </figure>
                                     
                                     <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
-                                      <div class="ps-product__actions" id="wishBtn"><span class="wish_count"></span><i class="icon-heart"></i>${item.heart }</div>
-                              		  <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>${item.heart }</a></div>
+                                      <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i>1231313<span class="wish_count"></span></div>
+<%--                               		  <div class="ps-product__actions"><a href="WishList.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&member_id=${sessionScope.sId}"><i class="icon-heart"></i>1${item.heart }</a></div> --%>
                                 </div>
                             </div>
                         </div>

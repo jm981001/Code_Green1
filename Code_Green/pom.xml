@@ -136,6 +136,16 @@
 		</dependency>
 <!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
 
+<!-- 		json 라이브러리 추가 221116 -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20220924</version>
+		</dependency>
+				
+				
+				
 		<!-- AJAX -->
 		<dependency>
 		    <groupId>org.codehaus.jackson</groupId>
