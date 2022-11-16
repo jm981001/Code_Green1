@@ -35,21 +35,29 @@ public class SellController {
 	@Autowired
 	private SellService sell_service;
 	
-	//---------------AJAX 글목록------------------------
+	
+	// 회원정보 및 적립금 불러오기
 	@GetMapping(value = "payment")
-	public String payment() {
-		return "payment/payment";
-	}
-	
-	
-	// 결제
-	@ResponseBody
-	@RequestMapping(value = "paymentJson", method = RequestMethod.GET)
-	public void paymentJson(@RequestParam(name="member_id") String member_id, HttpSession session, Model model, HttpServletResponse response) {
+	public String payment(@RequestParam String member_id, HttpSession session, Model model) {
+		
 		MemberVO memberInfo = member_service.getMemberInfo(member_id);
 		// 주문자 기본 정보 불러오기
 		model.addAttribute("memberInfo", memberInfo);
 		session.setAttribute(member_id, "member_id");
+		
+		// 적립금 불러오기
+		CoinVO coin = sell_service.selectCoin(member_id);
+		model.addAttribute("coin", coin);
+				
+		
+		return "payment/payment";
+	}
+	
+	
+	// 장바구니 리스트 불러오기
+	@ResponseBody
+	@RequestMapping(value = "paymentJson", method = RequestMethod.GET)
+	public void paymentJson(@RequestParam(name="member_id") String member_id, HttpSession session, Model model, HttpServletResponse response) {
 		
 		// 장바구니 상품 불러오기
 		List<CartVO> cartList = sell_service.selectCart(member_id);
@@ -77,12 +85,49 @@ public class SellController {
 			e.printStackTrace();
 		}
 		
-//		// 적립금 불러오기
-		CoinVO coin = sell_service.selectCoin(member_id);
-		model.addAttribute("coin", coin);
-		
 	}
 	
+	
+//	@ResponseBody
+//	@RequestMapping(value = "paymentJson", method = RequestMethod.GET)
+//	public void paymentJson(@RequestParam(name="member_id") String member_id, HttpSession session, Model model, HttpServletResponse response) {
+//		MemberVO memberInfo = member_service.getMemberInfo(member_id);
+//		// 주문자 기본 정보 불러오기
+//		model.addAttribute("memberInfo", memberInfo);
+//		session.setAttribute(member_id, "member_id");
+//		
+//		// 장바구니 상품 불러오기
+//		List<CartVO> cartList = sell_service.selectCart(member_id);
+//		
+//		JSONArray jsonArray = new JSONArray();
+//		
+//		// 1. List 객체 크기만큼 반복
+//		for(CartVO cart : cartList) {
+//			// JSONObject 클래스 인스턴스 생성
+//			// 파라미터 : VO 객체(getter/setter, 기본 생성자 필요)
+//			JSONObject jsonObject = new JSONObject(cart);
+////			System.out.println(jsonObject);
+//		
+//			// 3. JSONArray  객체의 put() 메서드 호출하여 JSONObject 객체 추가
+//			jsonArray.put(jsonObject);
+//			
+//		}
+//		System.out.println(jsonArray);
+//		
+//		try {
+//			response.setCharacterEncoding("UTF-8");
+//			response.getWriter().print(jsonArray);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+////		// 적립금 불러오기
+//		CoinVO coin = sell_service.selectCoin(member_id);
+//		model.addAttribute("coin", coin);
+//		
+//	}
+//	
 
 	// 결제 완료
 	@RequestMapping(value = "payment_success", method = RequestMethod.POST)
