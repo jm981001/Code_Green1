@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -48,44 +50,36 @@
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
                                     <h3>상품 후기</h3>
-                                    지영언니가 구매목록 만들면 그 옆에 리뷰쓸수있도록 만들기
                                 </div>
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
                                         <table class="table ps-table ps-table--notification">
                                             <thead>
                                                 <tr>
-                                                    <th width="70%">제목</th>
-                                                    <th>작성일</th>
-                                                    <th>작성상태</th>
+                                                    <th>주문날짜</th>
+                                                    <th>주문번호</th>
+                                                    <th>상품갯수</th>
+                                                    <th>결제방법</th>
+                                                    <th>결제금액</th>
+                                                    <th>주문상태</th>
                                                 </tr>
                                             </thead>
+                                            
+                                            
+                                           	<c:forEach var="sell" items="${sellList }">
                                             <tbody>
-                                                <tr>
-                                                    <td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor</td>
-                                                    <td>20-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> Et harum quidem rerum</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</td>
-                                                    <td>21-1-2020</td>
-                                                    <td><input type="button" value="리뷰쓰기" onclick="location.href='myPageReview_detail.my'"> 
-                                                    </td>
+                                                <tr onClick="location.href='myPageReview_detail.my?member_id=${sessionScope.sId}&sell_idx=${sell.sell_idx }'">
+<%--                                                     <td>${sell.sell_pay_date }</td> --%>
+                                                    <td>2022-10-28 12시50분</td>
+                                                    <td>${sell.sell_idx }</td>
+                                                    <td>${sell.sell_amount }</td>
+                                                    <td>${sell.sell_pay_type }</td>
+                                                    <td>${sell.sell_item_total_price }</td>
+                                                    <td>${sell.sell_status }</td>
+                                                   
                                                 </tr>
                                             </tbody>
+                                            </c:forEach>
                                         </table>
                                         
                                     <!-- 페이징 버튼들 시작 -->

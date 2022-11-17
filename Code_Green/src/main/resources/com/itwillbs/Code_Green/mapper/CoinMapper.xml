@@ -6,6 +6,7 @@
   <select id="selectCoinList" resultType="com.itwillbs.Code_Green.vo.CoinVO">
 		 SELECT c.coin_idx
         	   , c.COIN_ADD
+        	   , c.COIN_CONTENT
          	   , c.COIN_USE
          	   , c.COIN_CHARGE
          	   , c.COIN_TOTAL

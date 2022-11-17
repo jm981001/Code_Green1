@@ -18,12 +18,14 @@ import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.QnaService;
 import com.itwillbs.Code_Green.service.ReviewService;
+import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 
 @Controller
@@ -39,6 +41,8 @@ public class MypageController {
 	private ItemService Iservice;
 	@Autowired
 	private CoinService Cservice;
+	@Autowired
+	private SellService Sservice;
 	
 	//------------마이페이지 메인-------------------------------------------
 	@GetMapping(value = "/MemberInfo.me")
@@ -148,7 +152,7 @@ public class MypageController {
 	//------------마이페이지 적립금-------------------------------------------
 	@GetMapping(value = "/myPageEmoney.my")
 	public String myPageEmoney(
-			@RequestParam(defaultValue = "1") int pageNum, Model model,
+			@RequestParam(defaultValue = "1") int pageNum, Model model, 
 			@RequestParam String member_id) {
 
 		int listLimit = 10; 
@@ -202,13 +206,59 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 상품후기-------------------------------------------
-	@RequestMapping(value = "myPageReview.my", method = RequestMethod.GET)
-	public String myPage_review() {
+	@GetMapping(value = "/myPageReview.my")
+	public String myPageReview(
+			@RequestParam(defaultValue = "1") int pageNum, Model model
+			,@RequestParam String member_id) {
+		
+		int listLimit = 10; 
+		int pageListLimit = 10; 
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		//상품구매 목록
+		List<SellVO> sellList = Sservice.getReviewList(startRow, listLimit,member_id);
+		
+		//상품구매 목록 갯수
+		int listCount = Sservice.getSellListCount();
+		
+
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("sellList", sellList);
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("member_id", member_id);
+		
+		
+		
 		return "member/myPage_review";
 	}
+	
+	
 	//------------마이페이지 상품상세-------------------------------------------
-	@RequestMapping(value = "myPageReview_detail.my", method = RequestMethod.GET)
-	public String myPage_review_detail() {
+		@GetMapping(value = "/myPageReview_detail.my")
+		public String myPage_review_detail( @RequestParam(defaultValue = "1") int pageNum, Model model
+				                           ,@RequestParam String member_id,@RequestParam int sell_idx) {
+			
+		//상품구매 상세 목록
+		List<SellVO> sellDetailList = Sservice.getSellDetailList(member_id, sell_idx);	
+			
+			
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("sell_idx", sell_idx);
+		model.addAttribute("sellDetailList", sellDetailList);
 		return "member/myPage_review_detail";
 	}
 	

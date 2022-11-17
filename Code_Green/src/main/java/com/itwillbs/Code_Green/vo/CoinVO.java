@@ -4,6 +4,7 @@ public class CoinVO {
 
 	private int coin_idx ;
 	private int rf_member_idx;
+	private String coin_content;
 	private String coin_add;
 	private String coin_use;
 	private String coin_charge;
@@ -24,6 +25,13 @@ public class CoinVO {
 	}
 	public void setRf_member_idx(int rf_member_idx) {
 		this.rf_member_idx = rf_member_idx;
+	}
+	
+	public String getCoin_content() {
+		return coin_content;
+	}
+	public void setCoin_content(String coin_content) {
+		this.coin_content = coin_content;
 	}
 	public String getCoin_add() {
 		return coin_add;

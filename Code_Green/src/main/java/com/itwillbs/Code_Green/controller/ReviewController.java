@@ -112,23 +112,14 @@ public class ReviewController {
 	public String modifyPro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file,@RequestParam int board_idx, Model model, String item_idx,
 			@RequestParam(defaultValue = "1") int pageNum,HttpSession session,
 			@RequestParam String item_category,@RequestParam String manager_brandname) {
-		System.out.println("기존 파일명1 : " + file.getFile1());
-		System.out.println("기존 파일명2 : " + file.getFile2());
-		System.out.println("새 파일 객체1 : " + file.getFile_1());
-		System.out.println("새 파일명1 : " + file.getFile_1().getOriginalFilename());
-		System.out.println("새 파일 객체2 : " + file.getFile_2());
-		System.out.println("새 파일명2 : " + file.getFile_2().getOriginalFilename());
 		//기존 실제 파일명을 변수에 저장 (새 파일 업로드시 삭제하기 위함)
 		String oldRealFile1 = file.getFile1();
 		String oldRealFile2 = file.getFile2();
-		System.out.println("기존 실제 파일명1 : "+oldRealFile1);
-		System.out.println("기존 실제 파일명2 : "+oldRealFile2);
 		
 		
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		System.out.println("실제 업로드 경로 : " + saveDir);
 		
 
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
@@ -142,31 +133,37 @@ public class ReviewController {
 		MultipartFile mFile2 = file.getFile_2();
 		
 
+		boolean isNewFile1 = false;
+		if(!mFile.getOriginalFilename().equals("")) {
+			
+			String originalFileName = mFile.getOriginalFilename();
+			String uuid = UUID.randomUUID().toString();
+			file.setFile1(uuid + "1_" + originalFileName);
+			
+			isNewFile1 = true;
+		}
 		
-		String originalFileName = mFile.getOriginalFilename();
-		String originalFileName2 = mFile2.getOriginalFilename();
-		System.out.println("originalFileName ->" + originalFileName);
-		System.out.println("originalFileName2 ->" + originalFileName2);
+		boolean isNewFile2 = false;
+		if(!mFile2.getOriginalFilename().equals("")) {
+			
+			String originalFileName2 = mFile2.getOriginalFilename();
+			String uuid = UUID.randomUUID().toString();
+			file.setFile2(uuid + "2_" + originalFileName2);
+			
+			isNewFile2 = true;
+		}
 		
 		
-		
-		String uuid = UUID.randomUUID().toString();
-		
-		file.setFile1(uuid + "1_" + originalFileName);
-		file.setFile2(uuid + "2_" + originalFileName2);
-		System.out.println("getFile1 -> " + file.getFile1());
-		System.out.println("getFile2 -> " + file.getFile2());
-		System.out.println("getBoard_idx -> " + file.getBoard_idx());
 		
 		//파일 수정
 		int updateFile = service.modifyFile(file);
 		System.out.println("updateFile -> " + updateFile);
 		
 		if(updateFile== 0) {
-			model.addAttribute("msg", "패스워드 틀림!");
+			model.addAttribute("msg", "파일수정 실패!");
 			return "member/fail_back";
 		} else { 
-			if(!originalFileName.equals("")) {
+			if( isNewFile1) { 
 				try {
 					mFile.transferTo(new File(saveDir, file.getFile1()));
 					
@@ -183,7 +180,7 @@ public class ReviewController {
 					e.printStackTrace();
 				}
 			}
-			if(!originalFileName2.equals("")) {
+			if( isNewFile2) {
 				try {
 					mFile2.transferTo(new File(saveDir, file.getFile2()));
 					

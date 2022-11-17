@@ -22,7 +22,13 @@ public class SellVO {
 	private String sell_pay_type; // 결제수단
 	private String sell_pay_status; // 결제여부 / default 'N'
 	private String sell_pay_date; // 결제일
-	
+	private String sell_detail_idx; // 주문상세번호
+	private String item_name; // 상품명
+	private String item_price; // 상품가격
+	private String item_idx; // 상품가격
+	private String item_category; // 상품 카테고리
+	private String manager_brandname; // 상품 브랜드
+	private String file1; // 상품사진
 	public SellVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -122,6 +128,62 @@ public class SellVO {
 	}
 	public void setSell_pay_date(String sell_pay_date) {
 		this.sell_pay_date = sell_pay_date;
+	}
+	
+	public String getSell_detail_idx() {
+		return sell_detail_idx;
+	}
+
+	public void setSell_detail_idx(String sell_detail_idx) {
+		this.sell_detail_idx = sell_detail_idx;
+	}
+
+	public String getItem_name() {
+		return item_name;
+	}
+
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+
+	public String getItem_price() {
+		return item_price;
+	}
+
+	public void setItem_price(String item_price) {
+		this.item_price = item_price;
+	}
+
+	public String getItem_idx() {
+		return item_idx;
+	}
+
+	public void setItem_idx(String item_idx) {
+		this.item_idx = item_idx;
+	}
+
+	public String getItem_category() {
+		return item_category;
+	}
+
+	public void setItem_category(String item_category) {
+		this.item_category = item_category;
+	}
+
+	public String getManager_brandname() {
+		return manager_brandname;
+	}
+
+	public void setManager_brandname(String manager_brandname) {
+		this.manager_brandname = manager_brandname;
+	}
+
+	public String getFile1() {
+		return file1;
+	}
+
+	public void setFile1(String file1) {
+		this.file1 = file1;
 	}
 
 	@Override

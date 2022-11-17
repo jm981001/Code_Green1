@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.CartVO;
 import com.itwillbs.Code_Green.vo.CoinVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface SellMapper {
 
@@ -13,7 +14,14 @@ public interface SellMapper {
 
 	CoinVO selectCoin(String member_id);
 
-//	int insertOrder(@Param("member_id") String member_id, @Param("orderNum") int orderNum);
+	//상품구매 목록
+	List<SellVO> getReviewList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("member_id")String member_id);
+
+	//상품구매 목록 갯수
+	int selectSellListCount();
+
+	//상품구매 상세 목록
+	List<SellVO> getSellDetailList(@Param("member_id")String member_id, @Param("sell_idx")int sell_idx);
 
 	
 	

@@ -136,12 +136,8 @@
 		UPDATE file_board
 			SET
 			     RF_BOARD_IDX = #{board_idx}
-			     <if test="!file1.equals('')">
 				 	 ,file1 = #{file1}
-				  </if>
-				  <if test="!file2.equals('')">
 					, file2 = #{file2}
-				</if>
 			WHERE
 				rf_board_idx = #{board_idx}
 	</update>

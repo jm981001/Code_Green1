@@ -85,7 +85,7 @@
 	                                            <c:forEach var="coin" items="${coinList }">
 	                                                <tr>
 	                                                    <td>${coin.coin_date }</td>
-	                                                    <td>주문(1021212)결제시 이용</td>
+	                                                    <td>${coin.coin_content}</td>
 	                                                    <td>+${coin.coin_add}원</td>
 	                                                    <td>-${coin.coin_use}원</td>
 	                                                    <td>${coin.coin_total}원</td>

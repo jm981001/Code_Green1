@@ -73,5 +73,59 @@
 <!-- 							) -->
 		
 <!-- 	</insert>	 -->
+		
+<!-- 	상품구매 목록 -->
+	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		 select  SELL_IDX  
+				,RF_MEMBER_IDX  
+				,RF_ITEM_IDX   
+				,SELL_AMOUNT   
+				,SELL_ITEM_TOTAL_PRICE  
+				,SELL_USECOIN  
+				,SELL_TOTAL_PAY_PRICE  
+				,SELL_STATUS  
+				,SELL_SHIPPING_FEE  
+				,SELL_POSTCODE 
+				,SELL_ADDRESS  
+				,SELL_PHONE  
+				,SELL_RECIEVER  
+				,SELL_DATE  
+				,SELL_PAY_TYPE  
+				,SELL_PAY_STATUS  
+				,SELL_PAY_DATE  
+		from sell
+	    where RF_MEMBER_IDX = (select member_idx
+								from member
+	                            where member_id = #{member_id})
+	</select>
 	
+<!-- 	상품구매 목록 갯수 -->
+	<select id="selectSellListCount" resultType="integer">
+		 select count(*)
+			from sell
+		    where RF_MEMBER_IDX = (select member_idx
+									from member
+                            		where member_id = #{member_id})
+	</select>
+	
+<!-- 	상품구매 상세 목록 -->
+	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	     select  	s.SELL_DETAIL_IDX 
+					,s.RF_SELL_IDX 
+			        ,i.ITEM_NAME 
+			        ,i.ITEM_PRICE
+			        ,i.ITEM_IDX
+			        ,i.ITEM_CATEGORY
+			        ,f.FILE1
+					,s.SELL_AMOUNT
+			        ,m.MANAGER_BRANDNAME
+			from sell_detail s 
+				join item i 
+					on s.RF_ITEM_IDX = i.item_idx
+			    join file_item f 
+					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
+				join manager m
+					on m.MANAGER_IDX = i.RE_MANAGER_IDX
+			    where s.RF_SELL_IDX =  #{sell_idx}
+	</select>
 </mapper>
