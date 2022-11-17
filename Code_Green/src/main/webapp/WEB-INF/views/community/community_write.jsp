@@ -31,9 +31,7 @@
 <style>
   	.ck-editor__editable { height: 300px; }  
    	.ck-content { font-size: 12px; }  
-   	
 </style>
-
 <body>
     
     <!-- 헤더 삽입 -->
@@ -56,55 +54,53 @@
                         <!-- 블로그 헤더 끝  -->
                         
                         <!-- 블로그 본문 시작  -->
-	                		<div class="ps-post__content">
-                      			<div class="ps-block--vendor-dashboard">
-				                    	<div class="ps-block__content">
-					                        <div class="table-responsive">
-					                        	
-	                       						<form action="CommunityWritePro.bo" method="post">
-					                           		 <table class="table ps-table ps-table--vendor">
-							                                    <tr>
-							                                        <td>말머리</td>
-							                                        <td><select name="board_category" required>
-											                                <option value="">말머리선택</option>
-											                                <option value="맛집">맛집</option>
-											                                <option value="정보">정보</option>
-											                                <option value="사담">사담</option>
-											                                <option value="추천">추천</option>
-											                            </select>
-											                        </td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>작성자</td>
-							                                        <td><input type="text" id="board_id" name="board_id" value="${sessionScope.sId }" readonly="readonly" style="width: 50%"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>제목</td>
-							                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 100%"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td colspan="2">
-																		 <textarea name="board_content" id="editor"></textarea>
-																		  
-																	</td>
-							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택1" name="file1"></td>
-							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택2" name="file2"></td>
-							                                    </tr>
-							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택3" name="file3"></td>
-							                                    </tr>
-													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
-					                            	</table>
-	                        					</form> 
-	                        					
-				                       		</div>
-				                        </div>
-                      			</div>
-                      		</div>
+              		<div class="ps-post__content">
+                   		<div class="ps-block--vendor-dashboard">
+                    		<div class="ps-block__content">
+	                        	<div class="table-responsive">
+                    				<form action="CommunityWritePro.bo" method="post" enctype="multipart/form-data">
+	                           		 <table class="table ps-table ps-table--vendor">
+	                                    <tr>
+	                                        <td>말머리</td>
+	                                        <td><select name="board_category" required>
+					                                <option value="">말머리선택</option>
+					                                <option value="맛집">맛집</option>
+					                                <option value="정보">정보</option>
+					                                <option value="사담">사담</option>
+					                                <option value="추천">추천</option>
+					                            </select>
+					                        </td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td>작성자</td>
+	                                        <td><input type="text" id="board_id" name="board_id" value="${sessionScope.sId }" readonly="readonly" style="width: 50%"></td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td>제목</td>
+	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 100%"></td>
+	                                    </tr>
+	                                    <tr><td colspan="2"><textarea name="board_content" id="editor"></textarea></td></tr>
+	                                   
+	                                   <!-- 파일 업로드 부분 -->
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택3" name="file_3"></td>
+	                                    </tr>
+										<tr> 
+											<td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> 
+										</tr>
+	                            	</table>
+                     			 </form> 
+                     					
+                       		   </div>
+                        	</div>
+                   		  </div>
+                   		</div>
                     </div>
                 </div>
                 <!-- 오른쪽 메뉴 시작  -->
@@ -117,10 +113,8 @@
                     </aside>
                 </div>
                 <!-- 오른쪽 메뉴 끝  -->
-                
             </div>
         </div>
-        
     </div>
     
     <!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->

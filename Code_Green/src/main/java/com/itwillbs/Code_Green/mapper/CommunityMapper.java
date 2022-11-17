@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 
@@ -50,8 +51,11 @@ public interface CommunityMapper {
 	// 댓글 목록 출력
 	List<ReplyVO> selectReplyList(int reply_bo_ref);
 	
-	// 새 글 작성(사진제외)
+	// 새글 작성 - 텍스트 (사진제외)
 	int insertCommunityBoard(BoardVO board);
+	
+	// 새글작성 - 파일업로드 
+	int insertCommunityFile(File_boardVO fileBoard);
 
 	// 글 수정폼 페이지에 글데이터 가져오기
 	BoardVO selectBoardModify(int board_idx);
@@ -64,6 +68,8 @@ public interface CommunityMapper {
 
 	// 댓글 삭제
 	int deleteReply(int reply_idx);
+
+	
 	
 	
 	

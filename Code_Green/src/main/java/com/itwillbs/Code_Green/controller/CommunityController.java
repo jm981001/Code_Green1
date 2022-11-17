@@ -128,18 +128,6 @@ public class CommunityController {
 	}
 	
 	
-	// ==================== 파일 업로드 시 복수개의 파일을 처리할 메서드 정의 ==========
-	
-	public void testFile(MultipartFile mFile) {
-		String originalFileName = mFile.getOriginalFilename();
-		long fileSize = mFile.getSize();
-		System.out.println("파일명 : " + originalFileName);
-		System.out.println("파일크기 : " + fileSize + " Byte");
-		String uuid = UUID.randomUUID().toString();
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
-	}
-	
-	
 	//------------ 커뮤니티 새글 작성 로직 -------------------------------------------
 	@PostMapping(value = "/CommunityWritePro.bo")
 	public String communityWritePro(@ModelAttribute BoardVO board,@ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
@@ -166,23 +154,50 @@ public class CommunityController {
 		MultipartFile mFile2 = fileBoard.getFile_2();
 		MultipartFile mFile3 = fileBoard.getFile_3();
 		
-		testFile(mFile1);
-		testFile(mFile2);
-		testFile(mFile3);
+		String originalFileName1 = mFile1.getOriginalFilename();
+		String originalFileName2 = mFile2.getOriginalFilename();
+		String originalFileName3 = mFile3.getOriginalFilename();
+		String uuid = UUID.randomUUID().toString();
+
+		// ===========================================================
 		
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName3);
 		
+		// ===========================================================
+		
+		fileBoard.setFile1(uuid + "_" + originalFileName1);
+		fileBoard.setFile2(uuid + "_" + originalFileName2);
+		fileBoard.setFile3(uuid + "_" + originalFileName3);
 		
 		int insertCount = service.writeCommunityBoard(board);
+		int file_insertCount = service.writeCommunityFile(fileBoard);
 		
 		if(insertCount > 0) {
-			return "redirect:/CommunityList.bo";
+			if(file_insertCount > 0) {
+				try {
+					mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+					mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+					mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				return "redirect:/CommunityList.bo";
+			} else {
+				model.addAttribute("msg", "파일 업로드 실패!");
+				return "member/fail_back";
+			}
 			
 		} else {
 			
 			model.addAttribute("msg", "글 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
 			return "member/fail_back";
 		}
-	}
+	} 
 	
 	
 	
