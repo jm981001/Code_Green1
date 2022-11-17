@@ -132,34 +132,22 @@
 				    </tr>
 				    <tr>
 				      <td scope="row" rowspan="2">내용</td>
-<!-- 					<td>Jacob</td> -->
-<!-- 					<td>Thornton</td> -->
-<!-- 					<td>@fat</td> -->
 				    </tr>
 				    <tr>
-<!-- 					 <th scope="row">3</th> -->
 				      <td colspan="4">${oneQnaInfo.qna_content }</td>
-<!-- 				     <td>@twitter</td> -->
 				    </tr>
 				  </tbody>
 				</table>
                      
                      <hr>
                      
-                     <form action="" method="post">
-                     		<div class="mb-3">
-		            	<label>답변 제목</label>
-		            	<input type="text" class="form-control" id="name" placeholder="답변 제목" required="required">
-		          	</div> 
-                     	<textarea id="summernote" name="content"></textarea>
-                      		<div style="margin-left: 900px"><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변하기</strong></button></div>
-                     
+                     <form action="ad_Answer" method="get">
+                     	<input type="hidden" id="qna_idx" name="qna_idx" value="${oneQnaInfo.qna_idx }">
+                     	<textarea id="summernote" name="qna_answer" ></textarea>
+                      		<div style="margin-left: 1100px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>답변하기</strong></button></div>
                      </form>
-                       
-                       
                     </div>
                 </div>
-                
             </section>
         </div>
     </main>

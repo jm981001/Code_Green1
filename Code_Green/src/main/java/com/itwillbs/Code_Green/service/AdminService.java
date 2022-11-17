@@ -115,6 +115,14 @@ public class AdminService {
 		return mapper.selectOneQnaList(startRow, listLimit, searchType, keyword);
 	}
 	
+	//1:1문의 답변 등록
+	public int registAnswer(QnaVO qna) {
+		// TODO Auto-generated method stub
+		return mapper.updateAnswer(qna);
+	}
+	
+	
+	
 	//1:1문의(답변완료) 갯수
 	public int getOneQnaAnswerCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
@@ -156,9 +164,9 @@ public class AdminService {
 	
 	
 	//1:1게시글 상세정보 조회(1개)
-	public QnaVO getOneQnaInfo(String idx, String id) {
+	public QnaVO getOneQnaInfo(int qna_idx, String id) {
 		// TODO Auto-generated method stub
-		return mapper.selectOneQnaInFo(idx, id);
+		return mapper.selectOneQnaInFo(qna_idx, id);
 	}
 	
 	//1:1 게시글 삭제
@@ -259,6 +267,10 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportStatus(board_idx, report);
 	}
+	
+	
+	
+	
 	//공지 목록 조회
 	public List<BoardVO> getNoticeList(int startRow, int listLimit) {
 		// TODO Auto-generated method stub
@@ -294,6 +306,7 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
+	
 	
 	
 	

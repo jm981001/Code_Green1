@@ -77,6 +77,10 @@ public interface AdminMapper {
 	public List<QnaVO> selectOneQnaList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
+
+	//1:1문의 답변 등록
+	public int updateAnswer(QnaVO qna);
+
 	
 	//1:1문의(답변완료) 갯수
 	public int selectOneAnswerListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
@@ -105,7 +109,7 @@ public interface AdminMapper {
 	
 	
 	//1:1 문의 상세내용
-	public QnaVO selectOneQnaInFo(@Param("idx") String idx, @Param("id") String id);
+	public QnaVO selectOneQnaInFo(@Param("qna_idx") int qna_idx, @Param("id") String id);
 
 	//1:1 문의글 삭제
 	public int deleteOneQnaBoard(@Param("idx") String idx, @Param("id") String id);
@@ -169,6 +173,9 @@ public interface AdminMapper {
 	//신고글 상태 변경(처리대기 => 처리완료)
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
 
+	
+	
+	
 	//공지 목록 조회
 	public List<BoardVO> selectNoticeList(@Param("startRow") int startRow, @Param("listLimit") int listLimit);
 
@@ -190,6 +197,8 @@ public interface AdminMapper {
 	//기업 가입 승인
 	public int updateAdminAuth(ManagerVO manager);
 
+
+	
 
 	
 

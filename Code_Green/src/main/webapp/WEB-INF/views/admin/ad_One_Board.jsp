@@ -140,10 +140,10 @@
                             <c:forEach var="qnaList" items="${OneQnaList }">
                                 <tr>
                                 	<td>${qnaList.qna_category }</td>
-                                    <td onclick="location.href='ad_One_Board_Detail?idx=${qnaList.qna_idx }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
+                                    <td onclick="location.href='ad_One_Board_Detail?qna_idx=${qnaList.qna_idx }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
                                     <td>${qnaList.qna_id }</td>
                                     <td>${qnaList.qna_date }</td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>답변대기</strong></button>
+                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${qnaList.qna_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

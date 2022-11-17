@@ -535,6 +535,27 @@ public class AdminController {
 		
 		
 		
+		
+		//------------1:1문의 답변 등록 요청----------------------------
+		@GetMapping(value = "/ad_Answer")
+		public String ad_Answer(Model model, HttpSession session, QnaVO qna) {
+			System.out.println(" dhkdhkd" + qna.getItem_idx());
+			String sId = (String)session.getAttribute("sId");
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			int updateCount = service.registAnswer(qna);
+			System.out.println("1:1문의 답변 =" + updateCount);
+			
+			return "admin/ad_One_Board"; //답변완료 상세 페이지로 포워딩하기
+		}
+		
+		
+		
+		
 		//------------1:1문의(답변 완료) 목록 조회----------------------------
 		@RequestMapping(value = "/ad_One_Answer", method = RequestMethod.GET)
 		public String ad_One_Answer(Model model, HttpSession session,
@@ -590,7 +611,7 @@ public class AdminController {
 		
 		//------------1:1 문의글 상세정보 조회----------------------------
 		@RequestMapping(value = "/ad_One_Board_Detail", method = RequestMethod.GET)
-		public String ad_One_Board_Detail(Model model, HttpSession session, String idx, String id) {
+		public String ad_One_Board_Detail(Model model, HttpSession session, int qna_idx, String id) {
 			String sId = (String)session.getAttribute("sId");
 			
 			if(sId == null || !sId.equals("admin")) {
@@ -598,7 +619,7 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			QnaVO oneQnaInfo = service.getOneQnaInfo(idx, id);
+			QnaVO oneQnaInfo = service.getOneQnaInfo(qna_idx, id);
 			System.out.println("1:1문의 상세 : " + oneQnaInfo);
 			model.addAttribute("oneQnaInfo", oneQnaInfo);
 			
