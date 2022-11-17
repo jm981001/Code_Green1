@@ -20,8 +20,15 @@ public class BoardVO {
 	private String file3;
 	private String board_star_score;
 	private String item_category;
+	private String best_count;
 	
 	
+	public String getBest_count() {
+		return best_count;
+	}
+	public void setBest_count(String best_count) {
+		this.best_count = best_count;
+	}
 	public int getBoard_idx() {
 		return board_idx;
 	}

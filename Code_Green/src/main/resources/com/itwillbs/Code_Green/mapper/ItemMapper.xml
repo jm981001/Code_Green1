@@ -84,7 +84,7 @@
 
 	<!-- 상품 상세 정보 조회 -->
 	<select id="selectItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
- select i.item_idx, 
+ 		select  i.item_idx, 
 				i.re_manager_idx,
 				i.item_name,
 				i.item_info,
@@ -192,12 +192,17 @@
                 b.BOARD_DATE,
                 f.FILE1,
                 f.FILE2,
-                s.board_star_score
+                s.board_star_score,
+                ifnull( v.count,0)as best_count
 			FROM board b left join file_board f 
-               on b.BOARD_IDX = f.RF_BOARD_IDX
+             	  on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+			   left join (select  RF_BOARD_IDX,count(*) as count
+			                from board_best
+			                group by RF_BOARD_IDX) v 
+                  on b.board_idx = v.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY b.board_date  desc;     
+			ORDER BY b.board_date  desc ,b.board_idx  desc;     
    </select>
 	
 <!-- 	상품 후기 별점높은순 -->
@@ -215,7 +220,7 @@
                on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  desc;   
+			ORDER BY s.board_star_score  desc ,b.board_idx  desc;  
    </select>
 	
 	
@@ -234,7 +239,7 @@
                on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  desc;   
+			ORDER BY s.board_star_score  desc ,b.board_idx  desc;  
    </select>
    
    
@@ -253,7 +258,7 @@
                on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  ASC;   
+			ORDER BY s.board_star_score  ASC ,b.board_idx  desc;   
    </select>
 	
 	
@@ -313,7 +318,7 @@
 				FROM qna
 				WHERE
 					qna_item_idx = #{item_idx}
-				ORDER BY qna_idx DESC
+				ORDER BY qna_idx DESC 
 	</select>
 	
 	

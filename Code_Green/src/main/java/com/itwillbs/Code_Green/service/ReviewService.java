@@ -45,17 +45,26 @@ public class ReviewService {
 	//별점 등록
 	public int StarScore(BoardStarVO star) {
 		return mapper.insertStar(star);
-		
 	}
 
 	//리뷰 상세정보 조회
 	public BoardVO getReview(int board_idx) {
 		return mapper.selectReview(board_idx);
 	}
+	
+	//리뷰 파일 상세정보 조회
+	public File_boardVO getFile(int board_idx) {
+		return mapper.selecFile(board_idx);
+	}
 
 	//리뷰 수정
 	public int modifyReview(BoardVO board) {
 		return mapper.updateReview(board);
+	}
+
+	//파일 수정
+	public int modifyFile(File_boardVO file) {
+		return mapper.updateFile(file);
 	}
 
 	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청1
@@ -72,5 +81,8 @@ public class ReviewService {
 	public int removeFile(int board_idx) {
 		return mapper.deleteFile(board_idx);
 	}
+
+
+
 
 }

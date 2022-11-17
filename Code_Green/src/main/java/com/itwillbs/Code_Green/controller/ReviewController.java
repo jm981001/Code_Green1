@@ -54,8 +54,8 @@ public class ReviewController {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
 		
-		file.setFile1(uuid + "_" + originalFileName);
-		file.setFile2(uuid + "_" + originalFileName2);
+		file.setFile1(uuid + "1_" + originalFileName);
+		file.setFile2(uuid + "2_" + originalFileName2);
 		
 		int insertCount = service.registReview(board);
 		int file_insertCount = service.registReview_file(file);
@@ -97,7 +97,7 @@ public class ReviewController {
 	public String reveiw_modify(@RequestParam int board_idx, Model model, String item_idx,
 			@RequestParam(defaultValue = "1") int pageNum,
 			@RequestParam String item_category,@RequestParam String manager_brandname) {
-	
+
 		//리뷰 상세정보 조회
 		BoardVO board = service.getReview(board_idx);
 		model.addAttribute("board",board);
@@ -109,10 +109,100 @@ public class ReviewController {
 	}
 	
 	@PostMapping(value = "/ReviewModifyPro.bo")
-	public String modifyPro(@ModelAttribute BoardVO board ,@RequestParam int board_idx, Model model, String item_idx,
-			@RequestParam(defaultValue = "1") int pageNum,
+	public String modifyPro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file,@RequestParam int board_idx, Model model, String item_idx,
+			@RequestParam(defaultValue = "1") int pageNum,HttpSession session,
 			@RequestParam String item_category,@RequestParam String manager_brandname) {
+		System.out.println("기존 파일명1 : " + file.getFile1());
+		System.out.println("기존 파일명2 : " + file.getFile2());
+		System.out.println("새 파일 객체1 : " + file.getFile_1());
+		System.out.println("새 파일명1 : " + file.getFile_1().getOriginalFilename());
+		System.out.println("새 파일 객체2 : " + file.getFile_2());
+		System.out.println("새 파일명2 : " + file.getFile_2().getOriginalFilename());
+		//기존 실제 파일명을 변수에 저장 (새 파일 업로드시 삭제하기 위함)
+		String oldRealFile1 = file.getFile1();
+		String oldRealFile2 = file.getFile2();
+		System.out.println("기존 실제 파일명1 : "+oldRealFile1);
+		System.out.println("기존 실제 파일명2 : "+oldRealFile2);
+		
+		
+		
+		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : " + saveDir);
+		
 
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		MultipartFile mFile = file.getFile_1();
+		MultipartFile mFile2 = file.getFile_2();
+		
+
+		
+		String originalFileName = mFile.getOriginalFilename();
+		String originalFileName2 = mFile2.getOriginalFilename();
+		System.out.println("originalFileName ->" + originalFileName);
+		System.out.println("originalFileName2 ->" + originalFileName2);
+		
+		
+		
+		String uuid = UUID.randomUUID().toString();
+		
+		file.setFile1(uuid + "1_" + originalFileName);
+		file.setFile2(uuid + "2_" + originalFileName2);
+		System.out.println("getFile1 -> " + file.getFile1());
+		System.out.println("getFile2 -> " + file.getFile2());
+		System.out.println("getBoard_idx -> " + file.getBoard_idx());
+		
+		//파일 수정
+		int updateFile = service.modifyFile(file);
+		System.out.println("updateFile -> " + updateFile);
+		
+		if(updateFile== 0) {
+			model.addAttribute("msg", "패스워드 틀림!");
+			return "member/fail_back";
+		} else { 
+			if(!originalFileName.equals("")) {
+				try {
+					mFile.transferTo(new File(saveDir, file.getFile1()));
+					
+					File f2 = new File(saveDir, oldRealFile1); 
+					System.out.println("File f2 = new File(saveDir, oldRealFile1);  -> "+ f2);
+					if(f2.exists()) {
+						f2.delete();
+					}
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+			if(!originalFileName2.equals("")) {
+				try {
+					mFile2.transferTo(new File(saveDir, file.getFile2()));
+					
+					File f3 = new File(saveDir, oldRealFile2); 
+					System.out.println("File f3 = new File(saveDir, oldRealFile2); -> "+ f3);
+					if(f3.exists()) {
+						f3.delete();
+					}
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
 		//리뷰 수정
 		int updateCount = service.modifyReview(board);
 		model.addAttribute("item_idx", item_idx);

@@ -5,8 +5,14 @@ public class BoardBestVO {
 	private int board_best_idx;	// 추천하기테이블 내 인덱스번호
 	private int rf_member_idx;	// 멤버테이블 idx 참조하는 인덱스번호
 	private int rf_board_idx;	// 보드테이블 idx 참조하는 인덱스번호
+	private int item_idx;
 	
-	
+	public int getItem_idx() {
+		return item_idx;
+	}
+	public void setItem_idx(int item_idx) {
+		this.item_idx = item_idx;
+	}
 	public int getBoard_best_idx() {
 		return board_best_idx;
 	}

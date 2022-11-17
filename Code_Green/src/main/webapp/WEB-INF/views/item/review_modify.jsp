@@ -34,15 +34,15 @@
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
                                     
-<!-- ==========상품후기 작성=========================================================================================================     -->	<div class="ps-page--product">
+<!-- ==========상품후기 작성=========================================================================================================     -->	
+<div class="ps-page--product">
 		<div class="ps-container">
 			<div class="ps-page__container">
 				<div class="row">
 					<div class="col-xl-2 col-lg-5 col-md-12 col-sm-12 col-12 "></div>
 
 					<div class="col-xl-9 col-lg-7 col-md-12 col-sm-12 col-12 ">
-						<form class="ps-form--review" action="ReviewModifyPro.bo"
-							method="post" name="modifyForm">
+						<form class="ps-form--review" action="ReviewModifyPro.bo" method="post" name="modifyForm" enctype="multipart/form-data">
 							<br>
 							<br>
 							<br>
@@ -69,11 +69,14 @@
 								<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
 								<input type="hidden" name="item_category" value="${param.item_category}" />
                                 <input type="hidden" name="manager_brandname" value="${param.manager_brandname}" />
+                                <input type="hidden" name="file1" value="${param.file1}" />
+                                <input type="hidden" name="file2" value="${param.file2}" />
 								<textarea class="form-control" id="board_subject"
 									name="board_subject" rows="1">${board.board_subject  }</textarea>
 								<textarea class="form-control" id="board_content"
 									name="board_content" rows="6">${board.board_content}</textarea>
-
+								<input type="file" name="file_1" id="file_1">${param.file1 }<br>
+                                <input type="file" name="file_2" id="file_2">${param.file2 }
 							</div>
 							<div align="right">
 								<div class="form-group submit">

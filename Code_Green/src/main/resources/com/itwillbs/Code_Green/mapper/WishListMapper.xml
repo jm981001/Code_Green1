@@ -53,9 +53,56 @@
 	
 	</select>
 
+<!-- 추천 있는지 없는지 -->
+	<select id="checkBest" resultType="integer">
+    SELECT count(*) 
+        FROM board_best
+        WHERE RF_BOARD_IDX = #{board_idx}
+              and RF_MEMBER_IDX = (SELECT member_idx 
+									FROM member
+									WHERE MEMBER_ID =  #{member_id});
+	</select>
 
 
 
+
+<!-- 	추천 추가 -->
+	<insert id="insertBest">
+		<selectKey keyProperty="board_best_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(board_best_idx) FROM board_best
+		</selectKey>
+		INSERT 
+			INTO board_best
+			VALUES (
+					#{board_best_idx}+ 1,   
+					(SELECT member_idx 
+                  		  FROM member
+                    	  WHERE MEMBER_ID = #{member_id}),
+					#{board_idx}
+					)
+	</insert>
+
+
+
+<!-- 추천 삭제 -->
+	<delete id="removeBest">
+	   DELETE FROM board_best
+			WHERE RF_BOARD_IDX = #{board_idx}
+				AND RF_MEMBER_IDX = (select member_idx 
+										from member
+										where MEMBER_ID = #{member_id})
+	
+	</delete>
+
+
+<!-- 추천 갯수-->
+	<select id="BestCount" resultType="integer">
+		select 
+			count(*)
+				from board_best
+				where RF_BOARD_IDX = #{board_idx}
+	
+	</select>
 
 
 

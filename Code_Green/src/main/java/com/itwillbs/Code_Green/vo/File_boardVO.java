@@ -13,6 +13,7 @@ public class File_boardVO {
  private MultipartFile file_2;
  private MultipartFile file_3;
  private String item_idx;
+ private String board_idx;
  
 public int getFile_board_idx() {
 	return file_board_idx;
@@ -69,6 +70,13 @@ public void setItem_idx(String item_idx) {
 	this.item_idx = item_idx;
 }
 
+
+public String getBoard_idx() {
+	return board_idx;
+}
+public void setBoard_idx(String board_idx) {
+	this.board_idx = board_idx;
+}
 public File_boardVO() {
 	// TODO Auto-generated constructor stub
 }

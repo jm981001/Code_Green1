@@ -63,13 +63,14 @@ public class MypageController {
 	//------------마이페이지 찜한상품-------------------------------------------
 	@GetMapping(value = "/myPageWishList.my")
 	public String myPage_heart(@RequestParam(defaultValue = "1") int pageNum,
-			Model model, @RequestParam String member_id,
+			Model model, @RequestParam(defaultValue = "null") String member_id,
 			@ModelAttribute ItemVO item, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
 		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
-			model.addAttribute("msg", "잘못된 접근입니다");
-			return "member/fail_back";
+//			model.addAttribute("msg", "잘못된 접근입니다");
+//			return "member/fail_back";
+			return "member/login";
 		}
 			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
 			model.addAttribute("member", member);

@@ -60,7 +60,7 @@ public class WishListController {
 		
 	}
 
-	// 위시리스트 갯수
+	//------------ 위시리스트 갯수-------------------------------------------
 	@ResponseBody
 	@PostMapping("/WishCount.bo")
 	public int WishCount(@RequestParam(defaultValue = "0") int item_idx, Model model ) {
@@ -73,5 +73,57 @@ public class WishListController {
 	}
 	
 	
+	//------------ 상품후기 추천-------------------------------------------
+	@GetMapping(value = "/ReviewBest.bo")
+	public String ReviewBest( Model model, HttpSession session,@ModelAttribute WishListVO wishList,
+			@RequestParam(defaultValue = "1") int item_idx,@RequestParam int board_idx, @RequestParam String item_category,@RequestParam String manager_brandname,@RequestParam String member_id ) {
+		System.out.println(item_idx);
+		
+		String sId = (String)session.getAttribute("sId");
+		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+			model.addAttribute("msg", "잘못된 접근입니다");
+			return "member/fail_back";
+		}
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("manager_brandname",manager_brandname);
+		model.addAttribute("item_category",item_category);
+		
+		
+		
+		//추천 있는지 없는지
+		int checkBest = service.checkBest(board_idx, item_idx, member_id);
+		
+		
+		if(checkBest == 0) {
+			//추천 추가
+			int insertBest = service.insertBest(board_idx, item_idx, member_id);
+			
+			if(insertBest > 0) {
+				return "redirect:/ItemDetail.bo";
+			}
+		}else {
+			//위시리스트 삭제
+			int deleteCount = service.removeBest(board_idx, item_idx, member_id);
+			
+			if(deleteCount > 0) {
+				return "redirect:/ItemDetail.bo";
+			}
+		}
+		return "redirect:/ItemDetail.bo";
+	}
+
+	//------------ 상품후기 추천 갯수-------------------------------------------
+	@ResponseBody
+	@GetMapping("/ReviewBest_Count.bo")
+	public int ReviewBest_Count(@RequestParam(defaultValue = "0") int board_idx, Model model,@RequestParam(defaultValue = "0") int item_idx ) {
+		
+		int count = service.BestCount(board_idx);
+		model.addAttribute("board_idx", board_idx);
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("count", count);
+		System.out.println(count);
+		return count;
+	}
 	
 }

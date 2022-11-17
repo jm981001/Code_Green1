@@ -31,8 +31,14 @@ public interface ReviewMapper {
 	//리뷰 상세정보 조회
 	BoardVO selectReview(int board_idx);
 
+	//리뷰 파일 상세정보 조회
+	File_boardVO selecFile(int board_idx);
+	
 	//리뷰 수정
 	int updateReview(BoardVO board);
+
+	//파일 수정
+	int updateFile(File_boardVO file);
 
 	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청1
 	String selectRealFile1(int board_idx);
@@ -41,6 +47,7 @@ public interface ReviewMapper {
 
 	//파일삭제
 	int deleteFile(int board_idx);
+	
 
 
 	
