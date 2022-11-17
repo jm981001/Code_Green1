@@ -39,7 +39,7 @@ public interface AdminMapper {
 	int deleteMember(String id);
 	
 	
-	//----------------------------------------------------------
+	//=== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ===
 	
 	//기업목록 갯수(승인완료) 조회
 	public int selectManagerListCount(
@@ -66,7 +66,7 @@ public interface AdminMapper {
 	public int deleteManager(String id);
 	
 	
-	//----------------------------------------------------------
+	//=== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ===
 	
 	
 	
@@ -80,6 +80,9 @@ public interface AdminMapper {
 
 	//1:1문의 답변 등록
 	public int updateAnswer(QnaVO qna);
+	
+	//1:1 문의 답변상태 처리
+	public int updateQnaStatus(QnaVO qna);
 
 	
 	//1:1문의(답변완료) 갯수
@@ -118,7 +121,7 @@ public interface AdminMapper {
 	
 	
 	
-	//----------------------------------------------------------
+	//=== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 
 	
 	
 	//커뮤니티 게시판 목록
@@ -141,7 +144,10 @@ public interface AdminMapper {
 	
 	
 	
-	//----------------------------------------------------------
+	//=== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리 ====== 신고글관리
+	
+	
+	
 	
 	//신고글(처리대기) 갯수 조회
 	public int selectReportListCount(
@@ -172,8 +178,9 @@ public interface AdminMapper {
 
 	//신고글 상태 변경(처리대기 => 처리완료)
 	public int updateReportStatus(@Param("board_idx") int board_idx,@Param("report") ReportVO report);
-
 	
+
+	//=== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ====== 공지관리 ===
 	
 	
 	//공지 목록 조회
@@ -197,6 +204,10 @@ public interface AdminMapper {
 	//기업 가입 승인
 	public int updateAdminAuth(ManagerVO manager);
 
+	//상품문의(답변대기) 상세조회
+	public QnaVO selectItemQnaInfo(@Param("qna_idx") int qna_idx,@Param("id") String id);
+
+	
 
 	
 

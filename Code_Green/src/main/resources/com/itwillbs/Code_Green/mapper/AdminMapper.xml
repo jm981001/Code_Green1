@@ -87,7 +87,7 @@
 
 
 
-<!-- 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다. 기업체 관리역에 도착했습니다-->
+<!-- ==기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리====기업 관리==-->
 
 
 
@@ -224,7 +224,7 @@
 
 
 
-<!-- 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다. 1:1 문의글 관리역에 도착했습니다-->
+<!-- ==문의(1:1문의 | 상품문의) 관리====문의(1:1문의 | 상품문의) 관리====문의(1:1문의 | 상품문의) 관리====문의(1:1문의 | 상품문의) 관리====문의(1:1문의 | 상품문의) 관리== -->
 
 
 	<!--1:1 문의글 갯수 조회 -->
@@ -283,6 +283,7 @@
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
+	<!-- 1:1문의 답변 등록 -->	
 	<update id="updateAnswer">
 		UPDATE qna
 		SET
@@ -290,6 +291,16 @@
 		WHERE
 			qna_idx=#{qna_idx }
 	</update>
+	
+	<!-- 1:1문의 답변상태 처리 -->
+	<update id="updateQnaStatus">
+		UPDATE qna
+		SET
+			qna_status='답변완료'
+		WHERE
+			qna_idx=#{qna_idx }
+	</update>
+	
 	
 	<!--1:1문의(답변완료) 갯수 조회 -->
 	<select id="selectOneAnswerListCount" resultType="integer">
@@ -365,7 +376,7 @@
 		SELECT COUNT(*)
 		FROM qna 
 		WHERE
-			qna_type='상품문의' AND qna_category='답변대기'
+			qna_type='상품문의' AND qna_status='답변대기'
 			<if test="!keyword.equals('')">
 			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 			<choose>
@@ -386,7 +397,7 @@
 		FROM qna q JOIN item i
 		ON q.qna_item_idx = i.item_idx
 		WHERE
-			q.qna_type='상품문의' AND q.qna_category='답변대기'
+			q.qna_type='상품문의' AND q.qna_status='답변대기'
 			<if test="!keyword.equals('')">
 			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 			<choose>
@@ -403,7 +414,32 @@
 		LIMIT #{startRow}, #{listLimit}
 	</select>
 	
-	<!--상품문의글 상세 조회 -->
+	<!--상품문의글(문의 대기) 상세 조회 -->
+	<select id="selectItemQnaInfo" resultType="com.itwillbs.Code_Green.vo.QnaVO">
+		SELECT
+			q.qna_idx,
+			q.qna_id,
+		    q.qna_subject,
+		    q.qna_content,
+		    q.qna_status,
+		    q.qna_date,
+		    m.manager_brandname,
+		    i.item_idx,
+		    i.item_name,
+		    i.item_category	
+		FROM
+			qna q
+		LEFT JOIN
+			item i
+		ON
+			q.qna_item_idx = i.item_idx
+		LEFT JOIN
+			manager m
+		ON
+			i.re_manager_idx = m.manager_idx
+		WHERE
+			q.qna_idx=#{qna_idx } AND q.qna_id=#{id}
+	</select>
 	
 	
 	<!--상품문의(답변완료) 갯수 조회 -->
@@ -411,7 +447,7 @@
 		SELECT COUNT(*)
 		FROM qna 
 		WHERE
-			qna_type='상품문의' AND qna_category='답변완료'
+			qna_type='상품문의' AND qna_status='답변완료'
 			<if test="!keyword.equals('')">
 			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 			<choose>
@@ -432,7 +468,7 @@
 		FROM qna q JOIN item i
 		ON q.qna_item_idx = i.item_idx
 		WHERE
-			q.qna_type='상품문의' AND q.qna_category='답변완료'
+			q.qna_type='상품문의' AND q.qna_status='답변완료'
 			<if test="!keyword.equals('')">
 			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
 			<choose>
@@ -462,7 +498,7 @@
 	
 	
 	
-<!-- 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다. 게시판 관리역에 도착했습니다-->
+<!-- ==게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리==-->
 	
 	
 	
@@ -534,7 +570,7 @@
 	</delete>
 	
 	
-<!-- 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다. 신고글 관리역에 도착했습니다-->
+<!-- ==신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리====신고글 관리== -->
 	
 	
 	<!-- 신고글(처리대기) 갯수 조회 -->
@@ -662,7 +698,7 @@
 	
 	
 	
-	<!-- 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다. 공지 관리역에 도착했습니다-->
+	<!-- ==공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리====공지 관리== -->
 	
 	
 	

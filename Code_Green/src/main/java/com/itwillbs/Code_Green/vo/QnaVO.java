@@ -15,6 +15,7 @@ public class QnaVO {
     private String qna_date;
     
     private String item_idx; //상품번호
+    private String item_name;
     private String manager_brandname;
     private String item_category;
     
@@ -173,11 +174,23 @@ public class QnaVO {
 		this.item_category = item_category;
 	}
 
+	
+	public String getItem_name() {
+		return item_name;
+	}
+
+
+
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	
+
 
 
 	public QnaVO(int qna_idx, int qna_item, String qna_type, String qna_category, String qna_answer, String qna_id,
 			String qna_pass, String qna_subject, String qna_content, String qna_status, String qna_readcount,
-			String qna_date, String item_idx, String manager_brandname, String item_category) {
+			String qna_date, String item_idx, String item_name, String manager_brandname, String item_category) {
 		super();
 		this.qna_idx = qna_idx;
 		this.qna_item = qna_item;
@@ -192,6 +205,7 @@ public class QnaVO {
 		this.qna_readcount = qna_readcount;
 		this.qna_date = qna_date;
 		this.item_idx = item_idx;
+		this.item_name = item_name;
 		this.manager_brandname = manager_brandname;
 		this.item_category = item_category;
 	}
@@ -204,8 +218,13 @@ public class QnaVO {
 				+ qna_category + ", qna_answer=" + qna_answer + ", qna_id=" + qna_id + ", qna_pass=" + qna_pass
 				+ ", qna_subject=" + qna_subject + ", qna_content=" + qna_content + ", qna_status=" + qna_status
 				+ ", qna_readcount=" + qna_readcount + ", qna_date=" + qna_date + ", item_idx=" + item_idx
-				+ ", manager_brandname=" + manager_brandname + ", item_category=" + item_category + "]";
+				+ ", item_name=" + item_name + ", manager_brandname=" + manager_brandname + ", item_category="
+				+ item_category + "]";
 	}
+
+
+
+	
     
     
     

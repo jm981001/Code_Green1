@@ -140,7 +140,7 @@
                             <c:forEach var="qAlist" items="${OneQnaAnswerList }">
                                 <tr>
                                 	<td>${qAlist.qna_category }</td>
-                                    <td onclick="location.href='ad_One_Board_Detail?subject=${qAlist.qna_subject }&id=${qAlist.qna_id }'"><strong>${qAlist.qna_subject }</strong></td>
+                                    <td onclick="location.href='ad_One_Answer_Detail?qna_idx=${qAlist.qna_idx }&id=${qAlist.qna_id }'"><strong>${qAlist.qna_subject }</strong></td>
                                     <td>${qAlist.qna_id }</td>
                                     <td>${qAlist.qna_date }</td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${qAlist.qna_status }</strong></button>

@@ -58,7 +58,9 @@ public class AdminService {
 	
 	
 	
-	//여기부터는 기업
+	//기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 기업관리 
+	
+	
 	
 	//기업관리(승인완료) 검색기능
 	public int getManagerListCount(String searchType, String keyword) {
@@ -74,10 +76,10 @@ public class AdminService {
 	}
 	
 	//기업관리(미승인) 검색기능
-		public int getAuthListCount(String searchType, String keyword) {
-			// TODO Auto-generated method stub
-			return mapper.selectAuthListCount(searchType, keyword);
-		}
+	public int getAuthListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectAuthListCount(searchType, keyword);
+	}
 	
 	//기업목록 조회(미승인)
 	public List<ManagerVO> getManagerAuthList(int startRow, int listLimit, String searchType, String keyword) {
@@ -85,12 +87,12 @@ public class AdminService {
 		return mapper.selectManagerAuthList(startRow, listLimit, searchType, keyword);
 	}
 	
-
 	//기업 상세정보 조회(1개)
 	public ManagerVO getManagerInfo(String id) {
 		// TODO Auto-generated method stub
 		return mapper.selectManagerInfo(id);
 	}
+	
 	//기업 삭제(1개)
 	public int removeManager(String id) {
 		// TODO Auto-generated method stub
@@ -101,7 +103,10 @@ public class AdminService {
 	
 	
 	
-	//여기부터는 1:1 게시글
+	//문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리 문의글 관리
+	
+	
+	
 	
 	//1:1문의(답변대기) 갯수 조회
 	public int getOneListCount(String searchType, String keyword) {
@@ -121,7 +126,11 @@ public class AdminService {
 		return mapper.updateAnswer(qna);
 	}
 	
-	
+	//1:1문의 답변 상태변경 
+		public int changeQnaStatus(QnaVO qna) {
+			// TODO Auto-generated method stub
+			return mapper.updateQnaStatus(qna);
+		} 
 	
 	//1:1문의(답변완료) 갯수
 	public int getOneQnaAnswerCount(String searchType, String keyword) {
@@ -169,6 +178,9 @@ public class AdminService {
 		return mapper.selectOneQnaInFo(qna_idx, id);
 	}
 	
+	
+
+	
 	//1:1 게시글 삭제
 	public int removeOneQnaRemove(String idx, String id) {
 		// TODO Auto-generated method stub
@@ -178,9 +190,7 @@ public class AdminService {
 
 	
 	
-	
-	
-	//여기부터는 게시글 관리(커뮤,레시피 등)
+	//게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등)
 	
 	
 	//커뮤니티 게시판 목록
@@ -212,7 +222,7 @@ public class AdminService {
 	
 	
 	
-	//여기부터는 신고글 관리
+	// 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리 신고글 관리
 	
 	
 	
@@ -270,6 +280,8 @@ public class AdminService {
 	
 	
 	
+	//공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리 공지글 관리
+	
 	
 	//공지 목록 조회
 	public List<BoardVO> getNoticeList(int startRow, int listLimit) {
@@ -306,6 +318,13 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
+	//상품문의(답변대기) 상세조회
+	public QnaVO getItemQnaInfo(int qna_idx, String id) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemQnaInfo(qna_idx, id);
+	}
+
+	
 	
 	
 	
