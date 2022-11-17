@@ -31,7 +31,9 @@
 <style>
   	.ck-editor__editable { height: 300px; }  
    	.ck-content { font-size: 12px; }  
+   	
 </style>
+
 <body>
     
     <!-- 헤더 삽입 -->
@@ -83,15 +85,7 @@
 							                                    <tr>
 							                                        <td colspan="2">
 																		 <textarea name="board_content" id="editor"></textarea>
-																		  <script>
 																		  
-																		    ClassicEditor
-																		      .create( document.querySelector( '#editor' ) )
-																		      .catch( error => {
-																		        console.error( error );
-																		      } );
-
-																		  </script>
 																	</td>
 							                                    </tr>
 							                                    <tr>
@@ -138,7 +132,23 @@
     <!-- 푸터 삽입 -->
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 삽입 -->
-   
+   	
+   	
+   	
+   	<!-- CKEditor5 관련 설정 -->
+   	<script>
+	  ClassicEditor
+	    .create( document.querySelector( '#editor' ), {
+	    	removePlugins: ['Title'],
+	    	placeholder: '내용을 입력해주세요',
+	    } )
+	    .then( editor => {
+	        console.log( editor );
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
+	  </script>
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
