@@ -26,12 +26,11 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    
-    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+    <script src="/Code_Green/resources/plugins_community/ckeditor5/build/ckeditor.js"></script>
 </head>
 <style>
- 	.ck-editor__editable { height: 300px; }  
-  	.ck-content { font-size: 12px; }  
+  	.ck-editor__editable { height: 300px; }  
+   	.ck-content { font-size: 12px; }  
 </style>
 <body>
     
@@ -85,25 +84,24 @@
 							                                        <td colspan="2">
 																		 <textarea name="board_content" id="editor"></textarea>
 																		  <script>
+																		  
 																		    ClassicEditor
-																		        .create( document.querySelector( '#editor' ), {
-																		            // 제거 하고싶은 플러그인 (배열)
-																		             removePlugins: [ 'ImageUpload' ]
-																		        } )
-																		        .catch( error => {
-																		            console.error( error );
-																		        } );
+																		      .create( document.querySelector( '#editor' ) )
+																		      .catch( error => {
+																		        console.error( error );
+																		      } );
+
 																		  </script>
 																	</td>
 							                                    </tr>
 							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택1"></td>
+							                                    	<td colspan="2"><input type="file" id="파일선택1" name="file1"></td>
 							                                    </tr>
 							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택2"></td>
+							                                    	<td colspan="2"><input type="file" id="파일선택2" name="file2"></td>
 							                                    </tr>
 							                                    <tr>
-							                                    	<td colspan="2"><input type="file" id="파일선택3"></td>
+							                                    	<td colspan="2"><input type="file" id="파일선택3" name="file3"></td>
 							                                    </tr>
 													<tr> <td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> </tr>
 					                            	</table>
@@ -113,12 +111,8 @@
 				                        </div>
                       			</div>
                       		</div>
-                      
-                    
-                        
                     </div>
                 </div>
-                
                 <!-- 오른쪽 메뉴 시작  -->
                 <div class="ps-blog__right">
                     <aside class="widget widget--blog widget--recent-post">

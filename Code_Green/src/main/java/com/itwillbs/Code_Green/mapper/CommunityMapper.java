@@ -51,7 +51,7 @@ public interface CommunityMapper {
 	List<ReplyVO> selectReplyList(int reply_bo_ref);
 	
 	// 새 글 작성(사진제외)
-	int insertBoard(BoardVO board);
+	int insertCommunityBoard(BoardVO board);
 
 	// 글 수정폼 페이지에 글데이터 가져오기
 	BoardVO selectBoardModify(int board_idx);

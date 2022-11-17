@@ -80,8 +80,8 @@ public class CommunityService {
 	}
 
 	// 새글 작성(사진제외)
-	public int writeBoard(BoardVO board) {
-		return mapper.insertBoard(board);
+	public int writeCommunityBoard(BoardVO board) {
+		return mapper.insertCommunityBoard(board);
 	}
 
 	// 글 수정폼 페이지에 글데이터 가져오기

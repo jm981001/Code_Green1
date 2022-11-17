@@ -1,7 +1,7 @@
 (function($) {
     'use strict';
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
+	
     var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);

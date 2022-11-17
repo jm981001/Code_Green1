@@ -31,18 +31,45 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-<script type="text/javascript">
+<style>
 	
+	#rep_delBtn {
+		float: right;
+		color: #4b810c;
+	}
 	
+	#rereBox {
+		width: 700px; height: 40px;
+		border: 1px solid lightgray;
+		margin: 10px 10px;
+	}
+	
+	#goReReply {
+		
+		color: white;
+		background-color: #5FA30F;
+		border: none;
+		border-radius: 20px;
+		padding: 5px 15px 5px 15px;
+	
+	}
+	
+	#reId{
+		font-weight: bold;
+		font-size: 16px;
+	}
+	
+</style>
+<script>
+	
+// ============================ 신고하기 로그인 확인 ===================================	
 	function checkReport(){
 		if(${sessionScope.sId == null}){
 			
 			alert("로그인 후 사용가능합니다!");
 			
 		} else {
-// 			$(".ps-btn-report").click(function(){
 			$("#modal").fadeIn();
-// 			});
 			$("#modal_close_btn").click(function(){
 				$("#modal").fadeOut();
 			});
@@ -50,18 +77,17 @@
 		
 	}
 		
-	
+// ============================ 신고하기 완료알림 ===================================	
 	function checkS() {
-
 		alert("신고가 완료되었습니다!\n관리자의 확인 후 처리됩니다. 감사합니다.");
-		
 	};
 	
+// ============================ 글삭제여부 확인 =====================================	
 	function deleteCheck(){
 		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
 	}
 	
-// 	추천기능
+// ============================ 추천기능 ==========================================	
 	$(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 			$("#bestcnt_update").click(function(){
@@ -103,13 +129,12 @@
 		bestCount();	// 처음 시작했을때 실행되도록 해당 함수 호출
 		
 	});
-	
-	// 댓글목록 불러오기(로딩시 기본적으로 list 불러오기)
+// ============================ 페이지 로딩시 댓글목록 불러오기 ===================================		
 	$(document).ready(function(){
 		getReplyList();			
 	});
 
-	// 댓글목록 출력
+// ================================== 댓글목록 출력 ==========================================	
 	function getReplyList(){
 		
 		$.ajax({
@@ -117,58 +142,70 @@
 			type:"POST",
 			dataType:"json",
 			data:{
+				
 				reply_bo_ref : ${cBoard.board_idx }		// 원본게시글번호 전달
 			},
 			success: function(result){
-				var comments="";
-				var space ="";
+				let commentsResult="";
 				
 				if(result.length < 1){
-					comments = "등록된 댓글이 없습니다.";
+					commentsResult = "등록된 댓글이 없습니다.";
 				} else {
 					let idNum = 0;
 					$(result).each(function(){
-						
-						<!-- 대댓글 깊이만큼 들여쓰기(이미지 삽입 ) <<<<<<<<<<<<<<<<<<<이거 질문해야되는거 >>>>>>>>>>>>>>>>>>>>>> -->
+						let comments="";
+						let space ="";
+						<!-- 대댓글 깊이만큼 들여쓰기( 이미지 삽입 ) <<<<<<<<<<<<<<<<<<<이거 질문해야되는거 >>>>>>>>>>>>>>>>>>>>>> -->
 						if(this.reply_re_lev > 0) {
 							for(let i = 0; i < this.reply_re_lev; i++) {
-								space += "";
+								space += '&nbsp;&nbsp;&nbsp;&nbsp;';
 							}
 							
 							space += '<img src="<%=request.getContextPath() %>/resources/img/re.png" width="20px" height="20px">&nbsp;';
 						}
 						
-						comments +=  '<div id="commentPart"><h5>'+this.reply_id+'<small>' +this.reply_date+ '</small></h5>';
-						comments +=  '<p>' + space +this.reply_content+'</p>';
-						comments +=  '<a class="reply_write_btn" onclick="reReplyWrite('+ idNum +')" >답글</a>';
+						comments +=  space + '<span id="commentPart"><b>'+this.reply_id+'</b>&nbsp;&nbsp;&nbsp;<small>' + this.reply_date+ '</small>';
+						
+						if(this.reply_re_lev > 0) {
+							var arrow = '&nbsp;&nbsp;&nbsp;&nbsp;';
+							comments = arrow.concat(comments);
+							
+						}
+						
+						comments +=  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + this.reply_content;
+						comments +=  '<a class="reply_write_btn" id="rep_delBtn" onclick="reReplyWrite('+ idNum +')" > &nbsp;답글 </a>';
                         
 						<!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
                         if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
-	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re?reply_idx='+ this.reply_idx +'">  삭제</a></span>';
+	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re?reply_idx='
+	                        			 + this.reply_idx +'&board_idx='+ this.reply_bo_ref +'&pageNum=' +${param.pageNum} + '" id="rep_delBtn" onclick="return deleteCheck();"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
 	                        }
                         <!-- 대댓글 작성을 위한 폼 -->
-						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none"><br>'
-									+ '<form action="reReplyWrite.re" method="post">'
+//                         idNum++;
+						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none">'
+									+ '<form action="reReplyWrite.re" method="post" id="form">'
 									+ '<input type="hidden" name="reply_bo_ref" value="'+ this.reply_bo_ref +'">'
 									+ '<input type="hidden" name="reply_re_ref" value="'+ this.reply_re_ref +'">'
 									+ '<input type="hidden" name="reply_re_lev" value="'+ this.reply_re_lev +'">'
 									+ '<input type="hidden" name="reply_re_seq" value="'+ this.reply_re_seq +'">'
 									+ '<input type="hidden" name="reply_id" value="${sessionScope.sId}">'
-									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">'
-									<!-- 작성 onsubmit 함수걸어서 ajax로 수정해보기 -->
+									+ '<input type="hidden" name="pageNum" value="${param.pageNum}">'
+									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
 									+ '<input type="submit" id="goReReply" value="작성"></form></div>';
-                        comments += '</div><hr>';
+// 									+ '<input type="text" id ="rereBox'+ idNum +'" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
+// 									+ '<input type="button" id="goReReply'+ idNum +'" value="작성" ></form></div>';
+                        comments += '</span><hr>';
+                        commentsResult += comments;
 					});
 				};
-				$("#replyList").html(comments);
 				
+				$("#replyList").html(commentsResult);
 			}
 		});
 	};	
-	
-	// 대댓글상자 숨김/표시 처리기능 
+// ============================ 답글버튼(대댓글) 클릭시 숨김/표시 처리 ===================================
 	function reReplyWrite(idNum){
-		 if ($('#reReplyBox'+ idNum).css('display') == 'none') {
+		 if ($('#reReplyBox' + idNum).css('display') == 'none') {
 	          $('#reReplyBox'+ idNum).css('display', 'block');
 	     } else {
 	            $('#reReplyBox'+ idNum).css('display', 'none');
@@ -176,7 +213,7 @@
 	}
 	
 	
-	// 댓글쓰기기능
+// ============================ 댓글쓰기 ===================================
 	$(function(){		// 댓글쓰기 버튼 클릭시 수행
 		$("#replyWrite").click(function(){
 			if(${sessionScope.sId == null}){
@@ -213,8 +250,8 @@
 			  }
 			})
 	});
-	
-	// 오른쪽 사이드바에서 새글쓰기 버튼 클릭시
+
+// ============================ 오른쪽 사이드바: 새글쓰기 로그인여부 확인 ===================================
 	function writeNew(){
 		if(${sessionScope.sId != null || sessionScope.sId == 'admin'}){
 			location.href="CommunityWrite.bo";	

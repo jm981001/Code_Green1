@@ -51,7 +51,7 @@
 				</choose>
 			</if>
 			ORDER BY
-				FIELD(board_id, 'admin') DESC , board_date DESC
+				FIELD(board_id, 'admin') DESC , board_date DESC , board_idx DESC
 			LIMIT #{startRow}, #{listLimit}
 	</select>
 
@@ -118,7 +118,7 @@
 	</update>
 		
 	<!-- 글 새로등록 ( 사진제외, 텍스트만 ) -->	
-	<insert id="insertBoard">
+	<insert id="insertCommunityBoard">
 		INSERT 
 			INTO board 
 			VALUES (
@@ -132,7 +132,6 @@
 				'0',
 				date_format(now(),'%Y%m%d')
 			)
-			
 	</insert>	
 		
 	<!-- 글 상세정보 조회 -->

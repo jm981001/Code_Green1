@@ -1,20 +1,12 @@
 package com.itwillbs.Code_Green.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itwillbs.Code_Green.service.CommunityService;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
@@ -134,11 +126,53 @@ public class CommunityController {
 	public String communityWrite() {
 		return "community/community_write";
 	}
-		
+	
+	
+	// ==================== 파일 업로드 시 복수개의 파일을 처리할 메서드 정의 ==========
+	
+	public void testFile(MultipartFile mFile) {
+		String originalFileName = mFile.getOriginalFilename();
+		long fileSize = mFile.getSize();
+		System.out.println("파일명 : " + originalFileName);
+		System.out.println("파일크기 : " + fileSize + " Byte");
+		String uuid = UUID.randomUUID().toString();
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+	}
+	
+	
 	//------------ 커뮤니티 새글 작성 로직 -------------------------------------------
 	@PostMapping(value = "/CommunityWritePro.bo")
-	public String communityWritePro(@ModelAttribute BoardVO board,Model model) {
-		int insertCount = service.writeBoard(board);
+	public String communityWritePro(@ModelAttribute BoardVO board,@ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
+		// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
+		// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
+		//    (request 객체에 해당 메서드 없음)
+		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : " + saveDir);
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
+		// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
+//				MultipartFile mFile = board.getFile();
+		MultipartFile mFile1 = fileBoard.getFile_1();
+		MultipartFile mFile2 = fileBoard.getFile_2();
+		MultipartFile mFile3 = fileBoard.getFile_3();
+		
+		testFile(mFile1);
+		testFile(mFile2);
+		testFile(mFile3);
+		
+		
+		
+		int insertCount = service.writeCommunityBoard(board);
 		
 		if(insertCount > 0) {
 			return "redirect:/CommunityList.bo";
@@ -150,114 +184,7 @@ public class CommunityController {
 		}
 	}
 	
-	//-----------------커뮤니티 사진업로드 수행 1 ---------------------------------------
-	@RequestMapping(value="/imageUpload.bo", method = RequestMethod.POST) 
-	public void imageUpload(
-							HttpServletRequest request, HttpSession session,
-							HttpServletResponse response, 
-							MultipartHttpServletRequest multiFile , 
-							@RequestParam MultipartFile upload) throws Exception{ 
 	
-		
-				// 랜덤 문자 생성 
-				UUID uid = UUID.randomUUID();
-				
-				OutputStream out = null; 
-				PrintWriter printWriter = null; 
-				
-				//인코딩 
-				response.setCharacterEncoding("utf-8");
-				response.setContentType("text/html;charset=utf-8");
-				
-				try{ 
-					//파일 이름 가져오기 
-					String fileName = upload.getOriginalFilename();
-					byte[] bytes = upload.getBytes(); 
-					
-					//이미지 경로 생성 
-					String real = session.getServletContext().getRealPath("/resources/commUpload");
-					String ckUploadPath = real + "/" + uid + "_" + fileName; 
-					File folder = new File(real);
-					
-					//해당 디렉토리 확인 
-					if(!folder.exists()){ 
-						try{ folder.mkdirs(); // 폴더 생성 
-						}catch(Exception e){ 
-							e.getStackTrace(); 
-							} 
-						}
-					
-					out = new FileOutputStream(new File(ckUploadPath)); 
-					out.write(bytes); 
-					out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화 
-					
-					String callback = request.getParameter("CKEditorFuncNum"); 
-					printWriter = response.getWriter(); 
-					String fileUrl = "ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면 
-					
-					// 업로드시 메시지 출력
-					printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}"); 
-					printWriter.flush(); 
-					
-				}catch(IOException e){ 
-					e.printStackTrace(); 
-					} finally { 
-						try { if(out != null) { out.close(); } 
-						if(printWriter != null) { printWriter.close(); } 
-						} catch(IOException e) { e.printStackTrace(); } 
-					} 
-				return; 
-		
-		
-	}
-	
-	//-----------------커뮤니티 사진업로드 수행2 ---------------------------------------
-	
-	@RequestMapping(value="/ckImgSubmit.do") 
-	public void ckSubmit(@RequestParam(value="uid") String uid, 
-						 @RequestParam(value="fileName") String fileName,
-			 			 HttpSession session, HttpServletRequest request, 
-			 			 HttpServletResponse response) throws ServletException, IOException{ 
-		
-			//서버에 저장된 이미지 경로 
-			String real = session.getServletContext().getRealPath("/resources/commUpload");
-			String sDirPath = real+ "/" + uid + "_" + fileName; 
-			File imgFile = new File(sDirPath); 
-			
-			//사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다. 
-			if(imgFile.isFile()){ byte[] buf = new byte[1024]; 
-			int readByte = 0; 
-			int length = 0; 
-			byte[] imgBuf = null; 
-			
-			FileInputStream fileInputStream = null; 
-			ByteArrayOutputStream outputStream = null; 
-			ServletOutputStream out = null; 
-			
-			try{ 
-				fileInputStream = new FileInputStream(imgFile); 
-				outputStream = new ByteArrayOutputStream(); 
-				out = response.getOutputStream(); 
-				
-				while((readByte = fileInputStream.read(buf)) != -1){ 
-					outputStream.write(buf, 0, readByte); 
-					} 
-				
-				imgBuf = outputStream.toByteArray(); 
-				length = imgBuf.length; 
-				out.write(imgBuf, 0, length); 
-				out.flush(); 
-				
-			}catch(IOException e){ 
-				e.getMessage();
-			}finally { 
-				outputStream.close();
-				fileInputStream.close();
-				out.close();
-				} 
-			} 
-			
-	}
 	
 	//------------ 커뮤니티 글 수정 폼 ------------------------------------------- 
 	@GetMapping(value = "/CommunityModify.bo")
@@ -297,7 +224,7 @@ public class CommunityController {
 	}
 		
 	
-	//------------ 커뮤니티 글 신고 기능 (신고테이블에 입력) ------------------------------------------- 
+	//------------------- 커뮤니티 글 신고 기능 (신고테이블에 입력) ------------------------------------------- 
 		
 	@PostMapping(value = "/ReportBoard.re")	
 	public String reportBoard(@ModelAttribute ReportVO report,Model model,@RequestParam int pageNum) {
@@ -319,7 +246,7 @@ public class CommunityController {
 	}
 	
 		
-	// 추천하기 로직 수행 
+	//-------------------------------- 추천하기 로직 수행------------------------------------------- 
 	@ResponseBody
 	@PostMapping("/BestCountUpdate.bo")
 	public void bestCountUpdate(@RequestParam int rf_board_idx,@RequestParam String member_id, Model model, HttpServletResponse response) {
@@ -361,7 +288,7 @@ public class CommunityController {
 		
 	}
 	
-	// 추천수 카운팅 로직
+	//-------------------------------- 추천수 카운팅 -------------------------------------------
 	@ResponseBody
 	@PostMapping("/BestCounting.bo")
 	public int bestBoardCounting(int rf_board_idx) {
@@ -374,7 +301,7 @@ public class CommunityController {
 	
 	
 	
-	// 댓글쓰기
+	//-------------------------------- 댓글 작성 -------------------------------------------
 	@ResponseBody
 	@PostMapping("/ReplyWrite.re")
 	public Map<String,Object> replyWrite(
@@ -404,9 +331,9 @@ public class CommunityController {
 		return map;
 	}
 	
-	// 대댓글 쓰기
+	//-------------------------------- 대댓글 작성 ----------------------------------------- 여기서 비동기식으로 가게되면 어떻게처리할수있는지....
 	@PostMapping("/reReplyWrite.re")
-	public void reReplyWrite(@ModelAttribute ReplyVO reply,Model model) {
+	public String reReplyWrite(@ModelAttribute ReplyVO reply, Model model, int pageNum) {
 		System.out.println("들어왔나요?");
 		System.out.println(reply);
 		// 순서번호(reply_re_seq) 조정 
@@ -414,18 +341,20 @@ public class CommunityController {
 		
 		// 대댓글 등록
 		int reResultCount = service.writeReReply(reply);
-		
+		String msg = "";
 		if(reResultCount > 0) {
-			System.out.println("대댓글쓰기 성공");
+			msg += "답댓글작성 완료";
 		} else {
-			System.out.println("대댓글쓰기 실패");
+			msg += "답댓글작성 실패";
 		}
+//		System.out.println(msg);	// 확인용
 		
+		return "redirect:/CommunityDetail.bo?board_idx=" + reply.getReply_bo_ref() + "&pageNum=" + pageNum;
 		
 	}
 	
 	
-	// 댓글 전체 목록 출력
+	//-------------------------------- 댓글 전체 목록 출력 -------------------------------------------
 	@ResponseBody
 	@PostMapping("/ReplyList.re")
 	public List<ReplyVO> replyList(@RequestParam int reply_bo_ref){
@@ -435,9 +364,9 @@ public class CommunityController {
 		return replyList;
 	}
 	
-	// 댓글 삭제
+	//-------------------------------- 댓글 삭제 ------------------------------------------- 여기서 비동기식으로 가게되면 어떻게처리할수있는지....
 	@GetMapping("/replyDelete.re")
-	public String deleteReply(@RequestParam int reply_idx,Model model) {
+	public String deleteReply(@RequestParam int reply_idx,Model model,int pageNum, int board_idx) {
 		
 		int deleteReplyCount = service.deleteReply(reply_idx);
 		
@@ -448,8 +377,8 @@ public class CommunityController {
 			msg += "댓글삭제에 실패하였습니다.\n 다시시도해주세요.";
 		}
 		
-		model.addAttribute("msg", msg);
-		return "member/fail_back";
+		System.out.println(msg);
+		return "redirect:/CommunityDetail.bo?board_idx=" + board_idx + "&pageNum=" + pageNum;
 	}
 	
 	
