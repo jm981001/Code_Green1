@@ -36,14 +36,18 @@ public class ManagerService {
 	}
 	
 	// 브랜드 정보조회(브랜드마이페이지)
-	public ManagerVO getBrandInfo(String id) {
-		return mapper.selectBrandInfo(id);
+	public ManagerVO getBrandInfo(String sId) {
+		return mapper.selectBrandInfo(sId);
 	}
+	// 브랜드 정보수정(브랜드마이페이지)
+	public int modifyManager(ManagerVO manager, String id) {
+		return mapper.updateBrandInfo(manager,id);
+	}
+	
 //	//팔로우 목록조회
 //	public MemberVO followInfo(String idx) {
 //		return mapper.selectFollowInfo(idx);
 //	}
-	
 	//상품 목록 조회
 	
 	public List<ItemVO> getItemList(String id, int startRow, int listLimit, String searchType, String keyword) {
@@ -76,7 +80,6 @@ public class ManagerService {
 	public QnaVO getQnaInfo(String qna_idx) {
 		return mapper.selectQnaInfo(qna_idx);
 	}
-	
 
 
 	

@@ -57,9 +57,35 @@
 
 	<select id="selectBrandInfo" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT * FROM manager
-		WHERE MANAGER_ID=#{manager_id}
-		AND MANAGER_BRANDNAME=#{manager_brandname}
+		WHERE MANAGER_ID=#{sId}
+<!-- 		AND MANAGER_BRANDNAME=#{manager_brandname} -->
 	</select>
+
+	<!--브랜드 정보 수정 -->
+	<update id="updateBrandInfo">
+		UPDATE manager
+		SET 
+			manager_id = #{manager_id},
+<!-- 			manager_pass = #{newPass}, -->
+			<if test="newPasswd != null and newPasswd != ''">
+			manager_pass = #{manager_pass},
+			</if>
+			manager_name = #{manager_name},
+			manager_brandname = #{manager_brandname},
+			manager_storecode = #{manager_storecode},
+		    manager_phone = #{manager_phone},
+ 	        manager_email = #{manager_email}, 
+			manager_postcode = #{manager_postcode}, 
+			manager_address = #{manager_address} 
+			
+		WHERE 
+			manager_id = #{manager_id}
+	</update>
+
+
+
+
+
 
 
 

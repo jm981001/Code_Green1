@@ -41,14 +41,14 @@
         <div class="ps-drawer__content">
             <ul class="menu">
               		           <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
+								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li>
             </ul>
         </div>
@@ -73,14 +73,14 @@
                     <div class="ps-sidebar__center">
                         <ul class="menu">
                					<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
+								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li>
                         </ul>
                     </div>
@@ -205,9 +205,9 @@
 <!--                                </div> -->
                                     
                                 <div class="ps-form__submit text-center	">
-                                    <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                                    <button class="ps-btn success"><a href="brand_settings">수정페이지 이동</a></button>
-				                <input type="button"><a href="brand_settings">수정페이지 이동</a>
+<!--                                  <button class="ps-btn success"onclick="brand_settings">수정하기</button> -->
+                                     <button class="ps-btn success" type="submit">수정하기</button>
+                                    <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                                 </div>
                             </form>
                         </div>

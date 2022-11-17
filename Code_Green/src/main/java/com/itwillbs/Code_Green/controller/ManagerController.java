@@ -1,8 +1,7 @@
 package com.itwillbs.Code_Green.controller;
 
 
-import java.io.File;
-import java.util.List;
+import java.io.File;import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -154,27 +153,57 @@ public class ManagerController {
 		
 	
 	//------------매니저페이지 내브랜드정보조회-------------------------------------------
-//	@RequestMapping(value = "brand_mypage", method = RequestMethod.GET)
-//	 public String brand_mypage() {
-//		return "manager/brand_mypage";
-//	}
-//			
-	//------------매니저페이지 내브랜드정보조회-------------------------------------------
 		
 	@GetMapping(value = "brand_mypage")
 	public String brand_mypage(@RequestParam String id, Model model, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
-		System.out.println("id : " + id );
+		System.out.println("sId : " + sId );
 			
-		ManagerVO brandInfo = service.getBrandInfo(id);
+		ManagerVO brandInfo = service.getBrandInfo(sId);
+		System.out.println(brandInfo);
 		
 		model.addAttribute("brandInfo",brandInfo);
-	
+		System.out.println();
+		
 		return "manager/brand_mypage";
 	
 	}
 	
+	//------------매니저페이지 내브랜드정보 수정----------------------------
+	@GetMapping(value = "brand_mypage_modify.bo")
+	public String modifyManager(@RequestParam String id, Model model, HttpSession session) {
+		String sId = (String)session.getAttribute("sId");
+		
+		ManagerVO brandInfo = service.getBrandInfo(sId);
+		model.addAttribute("brandInfo",brandInfo);
+		
+		return "manager/brand_mypage_modify" ;
+	}
+	
+	
+	
+	@GetMapping(value = "brand_mypage_modifyPro.bo")
+	public String modifyManagerPro(
+			@ModelAttribute ManagerVO manager, @RequestParam String id, Model model, HttpSession session) {
+		
+		String sId = (String)session.getAttribute("sId");
+
+		manager = service.getBrandInfo(sId);
+		int updateCount = service.modifyManager(manager,id);
+		model.addAttribute("id",id);
+		
+		System.out.println(manager);
+		System.out.println(id);
+		System.out.println("정보수정" + updateCount);
+		if(updateCount > 0) {
+			model.addAttribute("msg", "수정 실패!");
+		   return "manager/mn_fail_back";
+		}
+		return "redirect:/ManagerInfo.me";
+	}
+	
+
 	
 	
 	//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
@@ -272,9 +301,9 @@ public class ManagerController {
 		
 		
 	//------------매니저페이지 제품등록-------------------------------------------
-		@RequestMapping(value = "product_registe", method = RequestMethod.GET)
-		public String product_registe() {
-			return "manager/product_registe";
+		@RequestMapping(value = "product_register", method = RequestMethod.GET)
+		public String product_register() {
+			return "manager/product_register";
 		}		
 		
 		
@@ -431,11 +460,12 @@ public class ManagerController {
 
 
 	//------------매니저페이지 내브랜드정보수정-------------------------------------------
-		@RequestMapping(value = "brand_settings", method = RequestMethod.GET)
-		public String brand_settings() {
-			return "manager/brand_settings";
-		}
-	
+//		@RequestMapping(value = "brand_settings", method = RequestMethod.GET)
+//		public String brand_settings() {
+//			return "manager/brand_settings";
+//		}
+//	
 	
 
 }
+

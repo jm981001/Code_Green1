@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
+import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 
 public interface ManagerMapper {
@@ -23,7 +24,10 @@ public interface ManagerMapper {
 	public ManagerVO selectManagerInfo(String id);
     
 	// 브랜드 정보조회(브랜드마이페이지)
-	public ManagerVO selectBrandInfo(String id);
+	public ManagerVO selectBrandInfo(String sId);
+	
+	// 브랜드 정보수정(브랜드마이페이지)
+	public int updateBrandInfo(@Param("manager") ManagerVO manager, @Param("id") String id);
 	
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 	public List<ItemVO> selectItemList(
@@ -48,6 +52,9 @@ public interface ManagerMapper {
 	//문의글 갯수 조회
 	public int selectQnaBoardListCount(
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+
+
 
 
 
