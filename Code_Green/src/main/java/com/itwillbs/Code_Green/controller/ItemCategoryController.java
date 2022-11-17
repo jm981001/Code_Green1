@@ -33,7 +33,7 @@ public class ItemCategoryController {
 //	int cheapItemListCount;
 	
 	// 전체 상품
-	@RequestMapping(value = "category_all", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_all", method = RequestMethod.GET)
 	public String category_all(
 			@RequestParam(defaultValue = "") String searchType, 
 			@RequestParam(defaultValue = "") String keyword,  
@@ -83,7 +83,7 @@ public class ItemCategoryController {
 	}
 	
 	// 유제품 / 음료
-	@RequestMapping(value = "category_dairy_drink", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_dairy_drink", method = RequestMethod.GET)
 	public String category_dairy_drink(@RequestParam(defaultValue = "") String searchType, 
 									   @RequestParam(defaultValue = "") String keyword,  
 									   @RequestParam(defaultValue = "1") int pageNum, 
@@ -132,7 +132,7 @@ public class ItemCategoryController {
 	}
 	
 	// 해산물
-	@RequestMapping(value = "category_fish", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_fish", method = RequestMethod.GET)
 	public String category_fish(@RequestParam(defaultValue = "") String searchType, 
 							    @RequestParam(defaultValue = "") String keyword,  
 							    @RequestParam(defaultValue = "1") int pageNum, 
@@ -181,7 +181,7 @@ public class ItemCategoryController {
 	}
 	
 	// 과일 / 채소
-	@RequestMapping(value = "category_fruit_vegi", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_fruit_vegi", method = RequestMethod.GET)
 	public String category_fruit_vegi(@RequestParam(defaultValue = "") String searchType, 
 								     @RequestParam(defaultValue = "") String keyword,  
 								     @RequestParam(defaultValue = "1") int pageNum, 
@@ -230,7 +230,7 @@ public class ItemCategoryController {
 	}
 	
 	// 냉동 / 간편 식품
-	@RequestMapping(value = "category_iced_easy", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_iced_easy", method = RequestMethod.GET)
 	public String category_iced_easy(@RequestParam(defaultValue = "") String searchType, 
 								     @RequestParam(defaultValue = "") String keyword,  
 								     @RequestParam(defaultValue = "1") int pageNum, 
@@ -279,7 +279,7 @@ public class ItemCategoryController {
 	}
 	
 	// 특가 상품
-	@RequestMapping(value = "category_sale", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_sale", method = RequestMethod.GET)
 	public String category_sale(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
 		itemList = service.select_sale();
@@ -290,7 +290,7 @@ public class ItemCategoryController {
 	}
 	
 	// 간식류
-	@RequestMapping(value = "category_snack", method = RequestMethod.GET)
+	@RequestMapping(value = "/category_snack", method = RequestMethod.GET)
 	public String category_snack(@RequestParam(defaultValue = "") String searchType, 
 							     @RequestParam(defaultValue = "") String keyword,  
 							     @RequestParam(defaultValue = "1") int pageNum, 

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_payment.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     
     
 <!-- 기존 주소 클릭시 변경 주소 숨김 / 변경 주소 클릭시 기존 주소 숨김-->
@@ -38,7 +39,6 @@
     	}
     </style>
     
-    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     
 <!-- 결제 api 관련 js-->
     <!-- jQuery -->
@@ -50,7 +50,7 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
     
-    <script>
+<script>
 <!-- 결제 api -->
         var IMP = window.IMP; 
         IMP.init("imp82131734"); 
@@ -93,74 +93,98 @@
         function execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
-                    document.getElementById('postcode').value = data.zonecode; // 우편번호
+                    document.getElementById("postcode").value = data.zonecode; // 우편번호
                     document.getElementById("address").value = data.roadAddress; // 주소(도로명 주소)
                 }
             }).open();
         }
 
  <!-- 주문 확인 alert -->       
-        function orderConfirm() {
-			alert("주문을 완료하시겠습니까? \n확인을 클릭하시면 결제페이지로 이동합니다.");
-		}
+//         function orderConfirm() {
+// 			alert("주문을 완료하시겠습니까? \n확인을 클릭하시면 결제페이지로 이동합니다.");
+// 		}
         
 
-<!-- 장바구니 불러오기 -->
-       	$(function() {
-       		cartList();
-       	});
+
+
+
+
+
+
+// <!-- 장바구니 불러오기 -->
+//        	$(function() {
+//        		cartList();
+//        	});
        		
-           function cartList(){
-        	   var member_id="${sessionScope.sId }";
-   	        $.ajax({
-   				type: "GET",
-   				url: "/Code_Green/paymentJson",
-   				data:{
-   					member_id : member_id
-   				},
-   				dataType: "json"
-   			})
-   			.done(function(cartList) {
-//    				console.log(cartList)
-   				for(let cart of cartList){ 
-//    					console.log(cart)
-   			let result = "<tr>"
-   							+ "<td>" + "<img src='/Code_Green/resources/item/" + cart.file1 + "'>" + "</td>"
-   							+ "<td>" + cart.rf_item_idx	+ "</td>" 
-   							+ "<td>" + cart.manager_brandname +"</td>"
-   							+ "<td>" + cart.item_name +"</td>"
-   							+ "<td>" + cart.item_price +"</td>"
-   							+ "<td>" + cart.cart_amount +"</td>"
-   							+ "<td>" + cart.cart_total +"</td>"
-   						+ "</tr>";
+//            function cartList(){
+//         	   var member_id = "${sessionScope.sId }";
+//    	        $.ajax({
+//    				type: "GET",
+//    				url: "/Code_Green/cartListJson",
+//    				data:{
+//    					member_id : member_id
+//    				},
+//    				dataType: "json"
+//    			})
+//    			.done(function(cartList) {
+// //    				console.log(cartList)
+//    				for(let cart of cartList){ 
+// //    					console.log(cart)
+//    			let result = "<tr>"
+//    							+ "<td>" + "<img src='/Code_Green/resources/item/" + cart.file1 + "'>" + "</td>"
+//    							+ "<td id='rf_item_idx'>" + cart.rf_item_idx	+ "</td>" 
+//    							+ "<td id='rf_item_idx'>" + cart.manager_brandname +"</td>"
+//    							+ "<td id='rf_item_idx'>" + cart.item_name +"</td>"
+//    							+ "<td id='rf_item_idx'>" + cart.item_price +"</td>"
+//    							+ "<td id='rf_item_idx'>" + cart.cart_amount +"</td>"
+//    							+ "<td id='rf_item_idx'>" + cart.cart_total +"</td>"
+//    						+ "</tr>";
    					
-   					$(".ps-block__content > table").append(result);
-   				}
+//    					$(".ps-block__content > table").append(result);
+//    				}
    	
    	
-   			})
-   			.fail(function() { // 요청 실패 시
-   				$(".ps-block__content > table").html("요청 실패!");
-   			});
+//    			})
+//    			.fail(function() { // 요청 실패 시
+//    				$(".ps-block__content > table").html("요청 실패!");
+//    			});
    			
-   	       }
-       	     
-               // TODO
-               // 1. sellController로 데이터 넘기기
-               // 1-2. sell 테이블에 insert 시켜보기
-               // 1-3. rf_member_idx 어떻게 넘길건기 생각해보기(O)
-               // 1-4. 적립금 사용(sell_usecoin) 같이 넘겨서 적립금 테이블에 잔액에 차감시키기
-               // 1-5. rf_item_idx, sell_amount 배열로 넘겼기 때문에 xml에서 foreach 써서 insert
-               //      - https://www.google.com/search?q=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4+%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0&biw=1366&bih=625&ei=TGRyY-DKGsyQ-AbA9LPgBQ&oq=%EB%A7%88%EC%9D%B4%EB%B0%94%ED%8B%B0%EC%8A%A4+%EB%B0%B0%EC%97%B4&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgAMgUIABCABDIFCAAQgAQyBggAEAgQHjIGCAAQCBAeMgYIABAIEB46CwgAEIAEELEDEIMBOggIABCABBCxAzoUCC4QgAQQsQMQgwEQxwEQ0QMQ1AI6CwguEIAEEMcBENEDOhEILhCABBCxAxCDARDHARDRAzoLCC4QgAQQsQMQgwE6BAgAEAM6DgguEIAEELEDEIMBENQCOgcILhCABBAKOgcIABCABBAKOhEILhCABBCxAxCDARDHARCvAToHCC4Q1AIQAzoFCC4QgAQ6CAguEIAEELEDOgoIABCxAxCDARBDOgQIABBDOg4ILhCABBCxAxDHARDRA0oECEEYAEoECEYYAFAAWPobYNsmaAZwAXgFgAGUAogBzx6SAQYyLjkuMTGYAQCgAQGwAQDAAQE&sclient=gws-wiz-serp
-               // 2. 배송비를 주문 페이지에서 보여줄건지 생각해보기
-               // 3. 주문완료 페이지에 카드결제, 무통장입금 안내 폼 만들기
-               // 4. insert 되면 select해서 불러와서 주문 완료페이지에 뿌려보기(주문번호와 주문일자)
-               //    - 결제되면 주문상태(sell_status) 변경(update)시키기 ex)결제대기중(default) -> 결제완료
-               //    - 결제일(sell_payment_date)도 insert 하기
-               //    - 결제방식(sell_payment_type) insert ex)카드 결제면 '카드' / 무통장입금이면 '무통장입금'
-               //    - 결제여부(sell_payment_status)update ex) 'N'(default) -> 'Y'
-               // 5. 적립금 사용 클릭하면 남은 적립금에 차감되게 만들기 
-     
+//    	       }
+
+           
+           
+<!-- 주문 컨트롤러로 보내기 -->            
+//        	let sell_receiver = $("#sell_receiver").val();
+		
+		
+		
+// 		$(function() {
+// 			orderList();
+// 		});
+        
+		
+		
+// 		function orderList(){  
+// 			var orderList = $("#orderList").serialize();
+			
+// 			$("#orderBtn").on("click",function(){
+				
+// 				$.ajax({
+// 					type:"POST",
+// 					data:orderList,
+// 					url:"/Code_Green/payment_success",
+// 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+// // 					dataType: "json",
+// 					success:function() {	
+// 						console.log("됨")
+// 					},
+// 					error:function() {
+// 						console.log("안됨")
+// 					}
+// 				});
+// 			});
+// 		}	
+             
     </script>    
          
   
@@ -203,24 +227,33 @@
                                     <div class="ps-block--shipping">
                                         
                                         <!-- 기존 주소 -->
-		                                   <form action="payment_success?member_id=${sessionScope.sId }" method="post">
+		                                   <form action="payment_success?member_id=${sessionScope.sId }" method="post" id="orderList">
 			                                  <div class="ps-block__panel" id="basicDiv" style="width: 1200px;">
 	                                            <div class="mb-3">
 												  <label for="formGroupExampleInput" class="form-label">이름</label>
-												  <input type="text" class="form-control" name="sell_receiver" value="${memberInfo.member_name }" readonly="readonly">
+												  <input type="text" class="form-control" id="sell_receiver" name="sell_receiver" value="${memberInfo.member_name }" readonly="readonly">
 												</div>
 												<div class="mb-3">
 												  <label for="formGroupExampleInput2" class="form-label">연락처</label>
-												  <input type="text" class="form-control" name="sell_phone" value="${memberInfo.member_phone }" readonly="readonly">
+												  <input type="text" class="form-control" id="sell_phone" name="sell_phone" value="${memberInfo.member_phone }" readonly="readonly">
 												</div>
 												<div class="mb-3">
 												  <label for="formGroupExampleInput2" class="form-label">우편번호</label>
-												  <input type="text" class="form-control" name="sell_postcode" value="${memberInfo.member_postcode }" readonly="readonly">
+												  <input type="text" class="form-control" id="sell_postcode" name="sell_postcode" value="${memberInfo.member_postcode }" readonly="readonly">
 												</div>
 												<div class="mb-3">
 												  <label for="formGroupExampleInput2" class="form-label">배송지 주소</label>
-												  <input type="text" class="form-control" name="sell_address" value="${memberInfo.member_address }" readonly="readonly">
+												  <input type="text" class="form-control" id="sell_address" name="sell_address" value="${memberInfo.member_address }" readonly="readonly">
 												</div>
+	                                     
+	                                     		<div class="ps-block--checkout-order">
+			                                        <div class="ps-block__content">
+			                                        	보유 적립금
+			                                        	<input type="text" value="${coin.coin_total }">
+														사용할 적립금
+			                                        	<input type="text" name="sell_use_coin">
+			                                        </div>
+		                                        </div>
 	                                     
 	                                       <!-- 주문 내역 -->
 		                                  <!-- cart에서 넘어온거 뿌리기 -->
@@ -230,13 +263,38 @@
 		                                           <table class="orderList">
 			                                           	 	<tr>
 				                                           		<td></td><!-- 파일 -->
-				                                           		<td >상품 번호</td>
+				                                           		<td>상품 번호</td>
 				                                           		<td>브랜드명</td>
 				                                           		<td>상품명</td>
 				                                           		<td>가격</td>
 				                                           		<td>주문 갯수</td>
 				                                           		<td>상품 총 금액</td>
 				                                           	</tr>
+				                                          <c:forEach var="cart" items="${cartList }"> 	
+				                                           	<tr>
+				                                           		<td>
+				                                           			<img src="/Code_Green/resources/item/${cart.file1 }">
+				                                           		</td>
+				                                           		<td>${cart.rf_item_idx }</td>
+				                                           		<td>${cart.manager_brandname }"</td>
+				                                           		<td>${cart.item_name }</td>
+				                                           		<td>${cart.item_price }</td>
+				                                           		<td>${cart.cart_amount }</td>
+				                                           		<td>${cart.cart_total }</td>
+				                                           	</tr>
+				                                         </c:forEach> 
+				                                         <tr>
+				                                           		<td>사용한 적립금</td>
+				                                           		<td colspan="6">00000</td>
+				                                        </tr>	
+				                                         <tr>
+				                                           		<td>배송비</td>
+				                                           		<td colspan="6">00000</td>
+				                                        </tr>	
+				                                         <tr>
+				                                           		<td>결제 금액</td>
+				                                           		<td colspan="6">00000</td>
+				                                        </tr>	
 		                                           </table>
 		                                           
 		                                        </div>
@@ -247,13 +305,13 @@
 		                                      <div class="ps-tabs">
 		                                              <div class="ps-tab active" id="account">
 		                                                    <div class="form-group submit">
-		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" value="주문하기" onclick="orderConfirm()">
+		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" id="orderBtn" value="주문하기">
 		                                                    </div>
 			                                          </div>
 		                                         </div>
 		                                    </div>
 	                                  </div>   
-	                               </form>
+	                               C</form>
                                    
                                         <!-- 변경 주소 -->
                                      <form action="payment_success_account" method="post">
@@ -300,7 +358,7 @@
 		                                      <div class="ps-tabs">
 		                                              <div class="ps-tab active" id="account">
 		                                                    <div class="form-group submit">
-		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" value="주문하기" onclick="orderConfirm()">
+		                                                          <input type="submit" class="ps-btn ps-btn--fullwidth" value="주문하기">
 		                                                    </div>
 			                                          </div>
 		                                         </div>

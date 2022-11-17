@@ -35,4 +35,43 @@
 		JOIN member m ON c.rf_member_idx = m.member_idx
 		WHERE m.member_id = #{member_id}
 	</select>
+	
+<!-- <insert id="insertOrder"> -->
+<!-- 		<selectKey keyProperty="member_id" order="BEFORE"> -->
+<!-- 			SELECT  -->
+<!-- 				   c.rf_item_idx, -->
+<!-- 				   c.rf_member_idx, -->
+<!-- 				   c.cart_amount, -->
+<!-- 				   c.cart_total -->
+<!-- 			  FROM cart c -->
+<!-- 			  JOIN member m  -->
+<!-- 			    ON m.member_idx = c.rf_member_idx -->
+<!-- 			  JOIN sell s -->
+<!-- 			    ON s.rf_member_idx = c.rf_member_idx -->
+<!-- 			  JOIN item i  -->
+<!-- 			    ON c.item_idx = i.item_idx   -->
+<!-- 			 WHERE m.member_id = #{member_id} -->
+<!-- 		</selectKey> -->
+<!-- 			INSERT INTO sell  -->
+<!-- 							VALUES( -->
+<!-- 									<selectKey order="BEFORE"> -->
+<!-- 									   <if test="max(s.sell_idx) == null"> -->
+<!-- 									  	 s.sell_idx = 1, -->
+<!-- 									   </if>	  -->
+<!-- 									   <if test="max(s.sell_idx) != null"> -->
+<!-- 									   	s.sell_idx = max(s.sell_idx) + 1, -->
+<!-- 									   </if> -->
+<!-- 								  </selectKey> -->
+<!-- 								   s.rf_member_idx = c.rf_member_idx, -->
+<!-- 								   s.rf_item_idx = c.rf_item_idx, -->
+<!-- 								   s.sell_amount = c.cart_amount, -->
+<!-- 								  	 <if test=""> -->
+								  	 
+<!-- 								  	 </if> -->
+								   
+<!-- 								   <if test="sell_use_coin"></if> -->
+<!-- 							) -->
+		
+<!-- 	</insert>	 -->
+	
 </mapper>

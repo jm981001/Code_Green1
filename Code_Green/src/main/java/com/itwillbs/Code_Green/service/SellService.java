@@ -24,6 +24,10 @@ public class SellService {
 		return sell_mapper.selectCoin(member_id);
 	}
 
+//	public int insertOrder(String member_id, int orderNum) {
+//		return sell_mapper.insertOrder(member_id, orderNum);
+//	}
+
 
 		
 	

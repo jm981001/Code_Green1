@@ -9,11 +9,11 @@ public class SellVO {
 //	private int rf_member_idx; // 회원 번호
 	private int rf_item_idx; // 상품 번호
 	private String sell_amount; // 상품당 구매 수량
-	private String sell_item_total_price; // 상품당 총 금액(가격 * 갯수)
+	private String sell_item_total_price; // 상품당 총 금액(가격 * 갯수) // => sell_total_price
 	private String sell_use_coin; // 사용한 적립금
-	private String sell_total_pay_price; // 결제할 금액(적립금 + 배송비?)
+	private String sell_total_pay_price; // 결제할 금액(적립금 + 배송비?)     // => 빼기
 	private String sell_status; // 주문상태  / default '결제대기중'
-	private String sell_shipping_fee; // 배송비 / default '2500'
+	private String sell_shipping_fee; // 배송비 / default '2500'      // => 배송비 빼기
 	private String sell_postcode; // 받는 사람 우편번호
 	private String sell_address;  // 받는 사람 주소
 	private String sell_phone; // 받는 사람 연락처
