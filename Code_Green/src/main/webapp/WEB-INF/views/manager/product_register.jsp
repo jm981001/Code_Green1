@@ -48,7 +48,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
+				                <li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li>
 						</ul>
             </ul>
@@ -62,7 +62,7 @@
                     <div class="ps-block--user-wellcome">
                         <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>Hello,<a href="#">브랜드 관리자</a></p>
+                            <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>

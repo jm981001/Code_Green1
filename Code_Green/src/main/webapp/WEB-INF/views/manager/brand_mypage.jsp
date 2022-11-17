@@ -61,7 +61,7 @@
                     <div class="ps-block--user-wellcome">
                         <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>Hello,<a href="#">브랜드 관리자</a></p>
+                        <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
@@ -96,13 +96,6 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>내브랜드 정보</h3>
-<!--                     <p>Account Settings</p> -->
-                </div>
-                <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
-                        <input class="form-control" type="text" placeholder="Search something" />
-                        <button><i class="icon-magnifier"></i></button>
-                    </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -110,79 +103,111 @@
                 <div class="ps-section__left">
                     <section class="ps-card">
                         <div class="ps-card__header">
-                            <h4>내 브랜드 정보 조회</h4>
+                            <h4>${brandInfo.manager_id }님의 페이지</h4>
+                            
+
+                            <hr>
+                            <br>
+                                 <div class="card" style="width: 18rem;">
+						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_realfile }" alt="${brandInfo.manager_realfile }" />
+						  <div class="card-body">
+						    <h5 class="card-title">${brandInfo.manager_brandname }</h5>
+						    <p class="card-text">${brandInfo.manager_realfile }</p>
+						    <a href="#" class="btn btn-primary">로고 이미지수정</a>
+						  </div>
+						</div>
                         </div>
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="index.html" method="get">
+                            <form class="ps-form--account-settings" action="brandInfo" method="get">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>기업번호</label>
-                                            <input type="text"class="form-control" id="idx"value="${manager.manager_idx}"readonly="readonly"/>
+                                            <input type="text"class="form-control" id="idx"value="${brandInfo.manager_idx}"readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>가입날짜</label>
+                                            <input type="text"class="form-control" id="idx"value="${brandInfo.manager_date}"readonly="readonly"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>기업아이디</label>
-                                            <input type="text" class="form-control" id="id" value="${manager.manager_id }" />
+                                            <input type="text" class="form-control" id="id" value="${brandInfo.manager_id }" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업비밀번호</label>
-                                            <input type="text"class="form-control" id="passwd" value="${manager.manager_pass}"/>
+                                            <input type="text"class="form-control" id="passwd" value="${brandInfo.manager_pass}"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>기업이름</label>
-                                            <input type="text" class="form-control" id="name" value="${manager.manager_name}" />
+                                            <input type="text" class="form-control" id="name" value="${brandInfo.manager_name}" />
                                         </div>
                                     </div>
-                                     <div class="col-md-6 mb-3">
-<!--                                     <div class="col-sm-6"> -->
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>브랜드이름</label>
-                                            <input type="text" class="form-control" id="brandname" value="${manager.manager_brandname}" />
+                                            <input type="text" class="form-control" id="brandname" value="${brandInfo.manager_brandname}" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>사업자번호</label>
-                                            <input type="text" class="form-control" id="storecode" value="${manager.manager_storecode}" />
+                                            <input type="text" class="form-control" id="storecode" value="${brandInfo.manager_storecode}" />
                                         </div>
                                     </div>
                                 
                                   <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업 전화번호 </label>
-                                             <input type="text"class="form-control" id="phone" value="${manager.manager_phone }" />
+                                             <input type="text"class="form-control" id="phone" value="${brandInfo.manager_phone }" />
                                         </div>
                                     </div>
                                 
                                   <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업이메일</label>
-                                            <input type="text"class="form-control" id="email" value="${manager.manager_email }" />
+                                            <input type="text"class="form-control" id="email" value="${brandInfo.manager_email }" />
                                         </div>
                                     </div>
                                      <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업 우편번호</label>
-                                            <input type="text" class="form-control" id="postcode" value="${manager.manager_postcode }" />
+                                            <input type="text" class="form-control" id="postcode" value="${brandInfo.manager_postcode }" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업 주소 </label>
-                                            <input type="text"class="form-control" id="address" value="${manager.manager_address }" />
+                                            <input type="text"class="form-control" id="address" value="${brandInfo.manager_address }" />
                                         </div>
                                     </div>
-                               </div>
+                                    </div>
+                                    
+<!--                                     <div class="col-sm-12"> -->
+<!--                                         <div class="form-group"> -->
+<!--                                             <label>기업 로고 </label> -->
+<%--                                             <input type="text"class="form-control" id="realfile" value="${brandInfo.manager_realfile }" /> --%>
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                     <div class="col-sm-12"> -->
+<!--                                         <div class="form-group"> -->
+<!--                                             <label>기업 로고 </label> -->
+<%--                                             <input type="text"class="form-control" id="originalfile" value="${brandInfo.manager_originalfile }" /> --%>
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                </div> -->
                                     
                                 <div class="ps-form__submit text-center	">
                                     <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                                    <button class="ps-btn success"><a href="brand_settings.jsp">수정페이지 이동</a></button>
+                                    <button class="ps-btn success"><a href="brand_settings">수정페이지 이동</a></button>
+				                <input type="button"><a href="brand_settings">수정페이지 이동</a>
                                 </div>
                             </form>
                         </div>

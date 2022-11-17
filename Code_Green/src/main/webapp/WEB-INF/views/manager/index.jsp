@@ -47,9 +47,12 @@
                     <div class="ps-block--user-wellcome">
                      <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>Hello,<a href="#">브랜드 관리자</a></p>
+                         <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
+
+
+                            
                         </div>
-                        <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
+                        <div class="ps-block__action"><a href=""><i class="icon-exit"></i></a></div>
                     </div>
                     <div class="ps-block--earning-count"><small>수익</small>
                         <h3>$12,560.55</h3>
@@ -66,14 +69,15 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
+								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+
 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li>
                         </ul>
                     </div>
                     </aside>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2022 최고의 비건마켓 어쩌구. <br/> All rights reversed.</p>
+                            <p>&copy;2022 CODEGREEN <br/> All rights reversed.</p>
                         </div>`
                     </div>
                 </div>
@@ -84,12 +88,6 @@
                 <div class="header__left">
                     <h3>매출현황</h3>
                     <p>Sales Status</p>
-                </div>
-                <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something"> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -228,7 +226,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="ps-card__footer"><a class="ps-card__morelink" href="orders">순위 더 알아보기(더 수정해야함)<i class="icon icon-chevron-right"></i></a></div>
+<!--                         <div class="ps-card__footer"><a class="ps-card__morelink" href="orders">순위 더 알아보기(더 수정해야함)<i class="icon icon-chevron-right"></i></a></div> -->
                     </div>
                 </div>
                <div class="ps-section__right">

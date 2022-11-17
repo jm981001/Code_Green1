@@ -74,7 +74,7 @@
                     <div class="ps-block--user-wellcome">
                         <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>Hello,<a href="#">브랜드 관리자</a></p>
+                            <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
@@ -137,11 +137,15 @@
                                     <th>가격</th>
                                      <th>상품분류</th>
                                      <th>포장분류</th>
-<!--                                      <th>브랜드이름</th> -->
                                     <th>등록일</th>
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+                                     <th>상품썸네일</th>
+                                     <th>상품상세이미지</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                
                             
                                 <tr>
                                 	<td>${ItemInfo.item_idx }</td>
@@ -151,12 +155,12 @@
                                     <td>${ItemInfo.item_price }</td>
                                     <td>${ItemInfo.item_category }</td>
                                     <td>${ItemInfo.item_packing }</td>
-<%--                                     <td>${ItemInfo.manager_brandname }</td> --%>
-<%--                                     <td>${manager.manager_brandname }</td> --%>
-<%--                                     <td>${item.manager_brandname }</td> --%>
                                     <td>${ItemInfo.item_date}</td>
-                                 </tr>   
-			                
+                                 </tr> 
+                                 <tr>  
+                                	<td><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></td>
+                                	<td><img src="/Code_Green/resources/item/${item.file2 }" alt="" /></td>
+			                </tr>
 					 	<!-- 상품 이미지 -->
                             <tr>
                     		 <a href="ItemInfo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >

@@ -74,7 +74,7 @@
                     <div class="ps-block--user-wellcome">
                         <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
-                            <p>Hello,<a href="#">브랜드 관리자</a></p>
+                            <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
