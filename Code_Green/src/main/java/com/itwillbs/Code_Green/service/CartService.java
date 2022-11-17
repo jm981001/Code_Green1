@@ -15,7 +15,7 @@ public class CartService {
 	private CartMapper mapper;
 	
 	// 1. 장바구니 추가
-	public String insertCart(CartVO cart) {
+	public int insertCart(CartVO cart) {
 		return mapper.insertCart(cart);
 	}
 	// 2. 장바구니 목록
@@ -35,8 +35,8 @@ public class CartService {
 		return mapper.sumMoney(member_id);
 	}
 	// 6. 장바구니 상품확인
-	public int checkCart(int rf_item_idx, String member_id) {
-		return mapper.checkCart(rf_item_idx,member_id);
+	public int checkCart(int item_idx, int member_idx) {
+		return mapper.checkCart(item_idx,member_idx);
 	}
 	// 7. 장바구니 상품수량 변경
 	public int updateCart(CartVO cart) {

@@ -7,11 +7,17 @@
 
 	<!-- 1. 장바구니 추가 -->
 	<insert id="insertCart">
-		INSERT INTO cart
-			VALUES(
-					#{item_idx},
-					#{member_idx},
-					#{cart_amount})
+		<selectKey keyProperty="cart_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(cart_idx) FROM cart
+		</selectKey>
+				INSERT INTO cart
+				VALUES(
+				#{cart_idx} + 1,
+				#{rf_item_idx},
+				#{rf_member_idx},
+				#{cart_amount},
+				#{cart_total}
+				)
 	</insert>
 	
 	<!-- 2. 장바구니 목록 -->
@@ -50,7 +56,7 @@
 	</select>
 	
 	
-	<!--  6. 장바구니 상품확인 -->
+	<!--  6. 장바구니 상품확인 test1 -->
 	<select id="checkCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT c.cart_idx
 	    FROM cart c
@@ -58,7 +64,12 @@
         ON(c.rf_item_idx = i.item_idx)
         INNER JOIN member m
         ON(c.rf_member_idx = m.member_idx)
-        WHERE c.rf_member_idx = #{member_idx} and i.item_idx = #{item_idx}
+        WHERE i.item_idx = #{rf_item_idx} and m.member_idx = #{rf_member_idx}
+	</select>
+	<!--  6. 장바구니 상품확인 test2 -->
+	<select id="cou" resultType="int">
+		SELECT COUNT(*) FROM cart 
+		WHERE rf_item_idx = #{rf_item_idx} AND rf_member_idx= #{rf_member_idx}
 	</select>
 	
 	<!-- 7. 장바구니에 기존의 상품이 존재하면 수정 -->

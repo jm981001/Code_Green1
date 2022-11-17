@@ -1,4 +1,6 @@
 <%@page import="com.itwillbs.Code_Green.vo.ItemVO"%>
+<%@page import="com.itwillbs.Code_Green.vo.MemberVO"%>
+<%@page import="com.itwillbs.Code_Green.vo.CartVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -183,7 +185,26 @@
 			wish_count();
 	});
 	
-	
+	$(document).ready(function(){
+		$('#cartBtn').click(function() {
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					rf_item_idx: ${item.item_idx},
+					rf_member_idx: 2,//       -------------------------여기!!! ${member.member_idx}해야하는데 어디서 값을 못가져옴
+					cart_amount: 1,
+					cart_total: '${item.item_price }'
+				},
+				success : function (data) {
+					console.log("data : " +  data);
+					code =data;
+					alert('장바구니에 담았습니다.')
+				}
+				
+			});
+		});
+	});
 	
 	
 	
@@ -230,6 +251,8 @@
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                                 <%
                                                 	ItemVO item = (ItemVO)request.getAttribute("item");
+                                                	MemberVO member = (MemberVO)request.getAttribute("member");
+                                                	CartVO cart = (CartVO)request.getAttribute("cart");
                                                 	int score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
                                                 	pageContext.setAttribute("score", score);
                                                 %>
@@ -271,8 +294,8 @@
                                             <input class="form-control" type="text" placeholder="1">
                                         </div>
                                     </figure>
-                                    
-                                    <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
+<%--                                      href="addCart?${member.member_id }" --%>
+<!--  -->                                <a class="ps-btn ps-btn--black" id="cartBtn">Add to cart</a>
                                       <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i><span class="wish_count"></span></div>
                                 </div>
                             </div>

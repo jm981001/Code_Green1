@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.vo.CartVO;
+import com.itwillbs.Code_Green.vo.ItemVO;
+import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class CartController {
@@ -33,42 +34,29 @@ public class CartController {
 
 	//  장바구니 추가
 	@ResponseBody
-	@GetMapping(value = "addCart")
-	public String addCart(@ModelAttribute CartVO cart, HttpSession session, int member_idx) {
+	@GetMapping(value = "/addCart")
+	public String addCart(@ModelAttribute CartVO cart,@ModelAttribute MemberVO member,@ModelAttribute ItemVO item, HttpSession session, Model model) {
 		String sId = (String) session.getAttribute("sId");
-		cart.setRf_member_idx(member_idx);
-		// 장바구니에 기존 상품이 있는지 검사
-		int count = service.checkCart(cart.getRf_item_idx(), sId);
-		if (count == 0) {
+
+		int insertCount = service.insertCart(cart);
+		
+//		int count = service.checkCart(cart.getRf_item_idx(), cart.getRf_member_idx());
+		
+//		if(count == 0){		
 			// 없으면 insert
-			service.insertCart(cart);
-		} else {
-			// 있으면 update
-			service.updateCart(cart);
-		}
-		return "redirect:/cart/shopping_cart";// 제품페이지,게시판으로
+//			return count+"";
+//		} else {
+//			// 있으면 update
+//			return "이미있어요";
+//		}
+		return insertCount+""; //데이터만 전달 나머진 뷰페이지
 	}
 
 	//  장바구니 목록
-	@GetMapping(value = "cart")
-	public String cart(@RequestParam String member_id, HttpSession session, Model model, ModelAndView mav) {
-//		Map<String, Object> map = new HashMap<String, Object>();
+	@GetMapping(value = "/cart")
+	public String cart(@RequestParam String member_id, HttpSession session, Model model) {
 		session.setAttribute(member_id, "member_id");
-//		String member_id = (String) session.getAttribute("member_id"); // session에 저장된 member_id
 		List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
-		
-//		int sumMoney = service.sumMoney(member_id); // 장바구니 전체 금액 호출
-		// 장바구니 전체 긍액에 따라 배송비 구분
-		// 배송료(5만원이상 => 무료, 미만 => 3000원)
-//		int fee = sumMoney >= 50000 ? 0 : 3000;
-
-//		map.put("list", cartList);			// 장바구니 정보를 map에 저장
-//		map.put("count", cartList.size());	// 장바구니 상품의 유무
-//		map.put("sumMoney", sumMoney);		// 장바구니 전체 금액
-//		map.put("fee", fee); 				// 배송금액
-//		map.put("allSum", sumMoney+fee);	// 주문 상품 전체 금액 
-//		mav.setViewName("cart/shopping_cart");	// view(jsp)의 이름 저장
-//		mav.addObject("map", map);			// map 변수 저장
 		
 		model.addAttribute("cartList", cartList);
 
