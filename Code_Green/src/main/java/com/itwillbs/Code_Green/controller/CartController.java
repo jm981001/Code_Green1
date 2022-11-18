@@ -1,6 +1,8 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,11 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.vo.CartVO;
-import com.itwillbs.Code_Green.vo.ItemVO;
-import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class CartController {
@@ -36,13 +37,28 @@ public class CartController {
 
 	//  장바구니 목록
 	@GetMapping(value = "/cart")
-	public String cart(@RequestParam String member_id, HttpSession session, Model model) {
+	public ModelAndView cart(@RequestParam String member_id, HttpSession session, Model model,ModelAndView mav,@ModelAttribute CartVO cart) {
 		session.setAttribute(member_id, "member_id");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
+
+		
+//		int sumMoney =  service.sumMoney(cart.getRf_member_idx());//String->Int 에러 뜨는중
 		
 		model.addAttribute("cartList", cartList);
+		
+//		int fee = sumMoney >= 50000 ? 0 : 2500;
+		map.put("cartList", cartList);				// 장바구니 정보를 map에 저장
+		map.put("count", cartList.size());		// 장바구니 상품의 유무
+//		map.put("sumMoney", sumMoney);		// 장바구니 전체 금액
+//		map.put("fee", fee); 				// 배송금액
+//		map.put("allSum", sumMoney+fee);	// 주문 상품 전체 금액 
+		mav.setViewName("cart/shopping_cart");	// view(jsp)의 이름 저장
+		mav.addObject("map", map);			// map 변수 저장
 
-		return "cart/shopping_cart";
+		return mav;
 	}
 
 	// 장바구니 삭제
