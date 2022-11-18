@@ -1,4 +1,5 @@
 <%@page import="com.itwillbs.Code_Green.vo.ItemVO"%>
+<%@page import="com.itwillbs.Code_Green.vo.MemberVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -182,6 +183,29 @@
 			wish_count();
 	});
 	
+	$(document).ready(function(){
+		$('#cartBtn').click(function() {
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					rf_item_idx: ${item.item_idx},
+					rf_member_idx: 2,
+					cart_amount: 1,
+					cart_total: '${item.item_price }',
+					item_name: '${item.item_name}',
+					manager_brandname: '${item.manager_brandname }',
+					file1: '${item.file1 }'
+				},
+				success : function (data) {
+// 					console.log("data : " +  data);
+// 					code =data;
+					alert('장바구니에 담았습니다.')
+				}
+				
+			});
+		});
+	});
 	
 	</script>	
 	
@@ -234,6 +258,7 @@
                                 <div class="ps-product__meta">
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                                 <%
+                                                	MemberVO member = (MemberVO)request.getAttribute("member");
                                                 	ItemVO item = (ItemVO)request.getAttribute("item");
                                                 	int score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
                                                 	pageContext.setAttribute("score", score);
@@ -277,7 +302,7 @@
                                         </div>
                                     </figure>
                                     
-                                    <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
+                                    <button class="ps-btn ps-btn--black" id="cartBtn" >Add to cart</button>
                                       <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i><span class="wish_count"></span></div>
                                 </div>
                             </div>
@@ -367,7 +392,7 @@
 					});
 				}	
 			});
-			
+	});	
 			// 게시글 추천수
 			function bestCount(){
 				url: "ReviewBest_Count.bo",
