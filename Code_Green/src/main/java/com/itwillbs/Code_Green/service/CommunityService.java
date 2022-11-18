@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.CommunityMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ReplyVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 
@@ -83,6 +84,11 @@ public class CommunityService {
 	public int writeCommunityBoard(BoardVO board) {
 		return mapper.insertCommunityBoard(board);
 	}
+	
+	// 새글 작성 - 파일업로드
+	public int writeCommunityFile(File_boardVO fileBoard) {
+		return mapper.insertCommunityFile(fileBoard);
+	}
 
 	// 글 수정폼 페이지에 글데이터 가져오기
 	public BoardVO getBoard(int board_idx) {
@@ -103,6 +109,8 @@ public class CommunityService {
 	public int deleteReply(int reply_idx) {
 		return mapper.deleteReply(reply_idx);
 	}
+
+
 
 		
 	
