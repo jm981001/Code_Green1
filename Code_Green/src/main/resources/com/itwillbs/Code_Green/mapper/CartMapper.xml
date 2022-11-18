@@ -26,6 +26,7 @@
 			i.item_name,
 			i.item_price,
 			m.manager_brandname,
+			c.cart_idx,
 			c.cart_amount,
 			c.cart_total,
 			c.rf_member_idx

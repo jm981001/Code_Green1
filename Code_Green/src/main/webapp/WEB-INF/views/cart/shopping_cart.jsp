@@ -31,13 +31,28 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	// 리스트 페이지로 이동
+	// 상품 리스트 페이지로 이동 (돌아가기 버튼))
 	$("#btnList").click(function(){
 		location.href="ItemList.bo";
 	});
 });
 
-
+//장바구니 항목삭제	
+function deleteItem(cart_idx) {
+// alert(cart_idx);
+		$.ajax({
+			type : 'get',
+			url : 'deleteCart',
+			data: {
+				cart_idx: cart_idx,
+			},
+			success : function (data) {
+//					console.log("data : " +  data);
+//					code =data;
+				alert('삭제완료.')
+			}
+		});
+}
 </script>
 </head>
 
@@ -73,7 +88,6 @@ $(document).ready(function(){
 				<div class="table-responsive">
 				
 				
-	<!-- form -->	<form name="form1" id="form1" method="post" action="${path}/shop/cart/">
 						<table class="table ps-table--shopping-cart ps-table--responsive">
 							<thead>
 								<tr>
@@ -104,8 +118,8 @@ $(document).ready(function(){
 								<td class="price" data-label="Price">${row.item_price}원</td>
 								<td data-label="Quantity">
 									<div class="form-group--number">
-										<button class="up">+</button> <!-- 수량	증가 버튼 -->
-										<button class="down">-</button><!-- 수량 감소 버튼 -->
+										<button type="button" class="up">+</button> <!-- 수량	증가 버튼 -->
+										<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
 										
 										<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
 										<input class="form-control" type="text" id="quan" placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1">
@@ -113,12 +127,11 @@ $(document).ready(function(){
 								</td>
 								<td data-label="Total">${row.cart_total}원</td>
 								<td>
-									<a href="${path}/shop/cart/delete?cart_idx=${row.cart_idx}">삭제</a>
+									<button type="button" id="delBtn" onclick="deleteItem('${row.cart_idx}')" style="border: none;">삭제</button>
 								</td>
 							</tr>	
 							</c:forEach>
 						</table><!-- class="table ps-table--shopping-cart ps-table--responsive"> -->
-	<!-- form -->	</form>
 				</div><!--<div class="table-responsive"> -->
 
 				<div class="ps-section__cart-actions">
@@ -127,8 +140,6 @@ $(document).ready(function(){
 				</div>
 
 			</div>
-
-
 
 
 

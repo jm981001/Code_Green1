@@ -190,7 +190,7 @@
 				url : 'addCart',
 				data: {
 					rf_item_idx: ${item.item_idx},
-					rf_member_idx: 2,
+					rf_member_idx: '${item.member_idx}',
 					cart_amount: 1,
 					cart_total: '${item.item_price }',
 					item_name: '${item.item_name}',
@@ -256,6 +256,7 @@
                                 <p>${item.item_info }</p>
                                 <h4 class="ps-product__price">${item.item_price }원</h4>
                                 <div class="ps-product__meta">
+<%--                                 <input type="hidden" name="member_idx" value="${item.member_idx}" /> --%>
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                                 <%
                                                 	MemberVO member = (MemberVO)request.getAttribute("member");

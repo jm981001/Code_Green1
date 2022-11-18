@@ -23,32 +23,14 @@ public class CartController {
 	@Autowired
 	private CartService service;
 
-//	CREATE TABLE CART (
-//			CART_IDX INT PRIMARY KEY,
-//			RF_ITEM_IDX INT,
-//			RF_MEMBER_IDX INT,
-//			CART_AMOUNT INT,
-//			FOREIGN KEY (RF_ITEM_IDX) REFERENCES ITEM(ITEM_IDX),
-//			FOREIGN KEY (RF_MEMBER_IDX) REFERENCES MEMBER(MEMBER_IDX)
-//			);
-
 	//  장바구니 추가
 	@ResponseBody
 	@GetMapping(value = "/addCart")
-	public String addCart(@ModelAttribute CartVO cart,@ModelAttribute MemberVO member,@ModelAttribute ItemVO item, HttpSession session, Model model) {
+	public String addCart(@ModelAttribute CartVO cart,HttpSession session, Model model) {
 		String sId = (String) session.getAttribute("sId");
-
+		System.out.println(cart);
 		int insertCount = service.insertCart(cart);
 		
-//		int count = service.checkCart(cart.getRf_item_idx(), cart.getRf_member_idx());
-		
-//		if(count == 0){		
-			// 없으면 insert
-//			return count+"";
-//		} else {
-//			// 있으면 update
-//			return "이미있어요";
-//		}
 		return insertCount+""; //데이터만 전달 나머진 뷰페이지
 	}
 
@@ -64,10 +46,13 @@ public class CartController {
 	}
 
 	// 장바구니 삭제
+	@ResponseBody
 	@GetMapping("deleteCart")
 	public String delete(@RequestParam int cart_idx) {
-		service.deleteCart(cart_idx);
-		return "redirect:/";
+		System.out.println(cart_idx);
+		int del =service.deleteCart(cart_idx);
+		System.out.println(cart_idx);
+			return del+"";
 	}
 	
 	// 장바구니 수정
