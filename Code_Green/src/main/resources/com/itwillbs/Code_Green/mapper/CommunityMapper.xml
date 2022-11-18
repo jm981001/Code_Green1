@@ -154,43 +154,102 @@
 	
 	<!-- 글 상세정보 조회 -->
 	<select id="selectBoardDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT * 
-			FROM board b
-			LEFT JOIN
-				(SELECT 
-						rf_board_idx, 
-						count(*) AS best_cnt 
-						FROM 
-							board_best 
-						GROUP BY 
-							RF_BOARD_IDX) AS be
-			
-			ON b.board_idx = be.rf_board_idx
-			LEFT JOIN
-				(SELECT 
-						reply_bo_ref, 
-						count(*) AS reply_cnt 
-						FROM 
-							reply
-						GROUP BY 
-							reply_bo_ref) AS re
-						
-			ON b.board_idx = re.reply_bo_ref
-			WHERE board_type = '커뮤' AND board_idx = #{board_idx}
+		SELECT b.board_idx,
+			   b.board_item_idx,
+			   b.board_type,
+		       b.board_id,
+		       b.board_category,
+		       b.board_subject,
+		       b.board_content,
+		       b.BOARD_READCOUNT,
+		       b.BOARD_DATE,
+		       be.best_cnt,
+		       re.reply_cnt,
+		       f.FILE1,
+		       f.FILE2,
+		       f.FILE3
+		FROM board b
+		LEFT JOIN (SELECT 
+					rf_board_idx, 
+					count(*) AS best_cnt 
+					FROM board_best 
+					GROUP BY RF_BOARD_IDX) AS be
+					
+		ON b.board_idx = be.rf_board_idx
+		LEFT JOIN (SELECT reply_bo_ref, 
+					count(*) AS reply_cnt 
+					FROM 
+					reply
+					GROUP BY reply_bo_ref) AS re
+		ON b.board_idx = re.reply_bo_ref
+		LEFT JOIN file_board AS f
+		ON b.board_idx = f.rf_board_idx
+		WHERE board_type = '커뮤' AND board_idx = #{board_idx};
 	</select>	
 		
 	<!-- 글 수정을 위한 원래게시글 내용 불러오기 -->	
 	<select id="selectBoardModify" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT *
-			FROM board
-			WHERE 
-				board_type='커뮤'
-				AND
-				board_idx = #{board_idx}
+		SELECT b.board_idx,
+			   b.board_item_idx,
+			   b.board_type,
+		       b.board_id,
+		       b.board_category,
+		       b.board_subject,
+		       b.board_content,
+		       b.BOARD_READCOUNT,
+		       b.BOARD_DATE,
+		       be.best_cnt,
+		       re.reply_cnt,
+		       f.FILE1,
+		       f.FILE2,
+		       f.FILE3
+		FROM board b
+		LEFT JOIN (SELECT 
+					rf_board_idx, 
+					count(*) AS best_cnt 
+					FROM board_best 
+					GROUP BY RF_BOARD_IDX) AS be
+					
+		ON b.board_idx = be.rf_board_idx
+		LEFT JOIN (SELECT reply_bo_ref, 
+					count(*) AS reply_cnt 
+					FROM 
+					reply
+					GROUP BY reply_bo_ref) AS re
+		ON b.board_idx = re.reply_bo_ref
+		LEFT JOIN file_board AS f
+		ON b.board_idx = f.rf_board_idx
+		WHERE board_type = '커뮤' AND board_idx = #{board_idx};
 	</select>
 		
 		
-	<!-- 글 삭제  -->
+	<!-- 게시글 삭제전 파일1 명 조회 -->	
+	<select id="selectRealFile1" resultType="string">
+		SELECT file1
+			FROM file_board
+			WHERE
+				rf_board_idx = #{board_idx}
+	</select>
+
+	<!-- 게시글 삭제전 파일2 명 조회 -->	
+	<select id="selectRealFile2" resultType="string">
+		SELECT file2
+			FROM file_board
+			WHERE
+				rf_board_idx = #{board_idx}
+	</select>
+
+	<!-- 게시글 삭제전 파일3 명 조회 -->	
+	<select id="selectRealFile3" resultType="string">
+		SELECT file3
+			FROM file_board
+			WHERE
+				rf_board_idx = #{board_idx}
+	</select>
+	
+	
+		
+	<!-- 게시글 삭제  -->
 	<delete id="deleteBoard">
 		DELETE 
 			FROM board
@@ -201,7 +260,13 @@
 	</delete>
 		
 		
-		
+	<!-- 게시글 삭제 시 해당 파일(정보) 삭제 -->	
+	<delete id="deleteBoardFile">
+		DELETE 
+			FROM file_board
+			WHERE 
+				rf_board_idx = #{board_idx}
+	</delete>	
 		
 		
 	<!-- 신고글 입력 -->	

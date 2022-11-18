@@ -137,7 +137,7 @@ public class CommunityController {
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		System.out.println("실제 업로드 경로 : " + saveDir);
+//		System.out.println("실제 업로드 경로 : " + saveDir);
 		
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
 		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
@@ -150,6 +150,10 @@ public class CommunityController {
 		// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
 		// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
 //				MultipartFile mFile = board.getFile();
+		
+		String uuid = UUID.randomUUID().toString();
+		
+	
 		MultipartFile mFile1 = fileBoard.getFile_1();
 		MultipartFile mFile2 = fileBoard.getFile_2();
 		MultipartFile mFile3 = fileBoard.getFile_3();
@@ -157,29 +161,42 @@ public class CommunityController {
 		String originalFileName1 = mFile1.getOriginalFilename();
 		String originalFileName2 = mFile2.getOriginalFilename();
 		String originalFileName3 = mFile3.getOriginalFilename();
-		String uuid = UUID.randomUUID().toString();
 
+		
+		// ========================================================
+		
+		if(!originalFileName1.equals("")) {
+			fileBoard.setFile1(uuid + "_" + originalFileName1);
+//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+		}
+
+		if(!originalFileName2.equals("")) {
+			fileBoard.setFile2(uuid + "_" + originalFileName2);
+//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+		}
+		
+		if(!originalFileName3.equals("")) {
+			fileBoard.setFile3(uuid + "_" + originalFileName3);
+//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName3);
+		}
+		
 		// ===========================================================
-		
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName3);
-		
-		// ===========================================================
-		
-		fileBoard.setFile1(uuid + "_" + originalFileName1);
-		fileBoard.setFile2(uuid + "_" + originalFileName2);
-		fileBoard.setFile3(uuid + "_" + originalFileName3);
-		
+
 		int insertCount = service.writeCommunityBoard(board);
 		int file_insertCount = service.writeCommunityFile(fileBoard);
 		
 		if(insertCount > 0) {
 			if(file_insertCount > 0) {
 				try {
-					mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
-					mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
-					mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
+					if(fileBoard.getFile1() != null) {
+						mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+					}
+					if(fileBoard.getFile2() != null) {
+						mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+					}
+					if(fileBoard.getFile3() != null) {
+						mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
+					}
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -203,17 +220,17 @@ public class CommunityController {
 	
 	//------------ 커뮤니티 글 수정 폼 ------------------------------------------- 
 	@GetMapping(value = "/CommunityModify.bo")
-	public String communityModify(@RequestParam int board_idx, Model model ) {
-		BoardVO board = service.getBoard(board_idx);
+	public String communityModify(@ModelAttribute BoardVO board, Model model ) {
+		BoardVO boardMove = service.getBoard(board);
 		
-		model.addAttribute("board", board);
+		model.addAttribute("board", boardMove);
 		
 		return "community/community_modify";
 	}
 	
 	//------------ 커뮤니티 글 수정 업데이트로직------------------------------------------- 
 	@PostMapping(value = "/CommunityModifyPro.bo")
-	public String communityModifyPro() {
+	public String communityModifyPro(@ModelAttribute BoardVO board,Model model) {
 		
 		
 		return "redirect:/CommunityDetail.bo?board_idx=" ;
@@ -223,17 +240,53 @@ public class CommunityController {
 	
 	//------------ 커뮤니티 글 삭제 페이지------------------------------------------- 
 	@GetMapping(value = "/CommunityDelete.bo")
-	public String communityDelete(@ModelAttribute BoardVO board,@RequestParam int pageNum, Model model) {
-		int deleteCount = service.removeBoard(board);
+	public String communityDelete(@RequestParam int board_idx, Model model, HttpSession session,@RequestParam int pageNum) {
 		
-		if(deleteCount == 0) {
-
-			model.addAttribute("msg", "글 삭제 실패!<br>다시 확인해주세요");
-			return "member/fail_back";
+		//글 삭제 전 실제 업로드된 파일 삭제작업
+		String realFile1 = service.getRealFile1(board_idx);
+		String realFile2 = service.getRealFile2(board_idx);
+		String realFile3 = service.getRealFile3(board_idx);
+		System.out.println("realFile1 -> "+realFile1);
+		System.out.println("realFile2 -> "+realFile2);
+		System.out.println("realFile2 -> "+realFile3);
+		
+		int deleteCount = service.removeBoard(board_idx);
+		int deleteFileCount = service.removeFile(board_idx);
+		System.out.println("deleteCount 갯수 -> "+deleteCount);
+		System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
+		// ----------------------------------------------------------
+		
+		if(deleteCount > 0) {
+			String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+			// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			System.out.println("실제 업로드 경로 : " + saveDir);
+			
+			if(!realFile1.equals("N")) {
+				File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
+				if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
+					f1.delete();
+				}
+			}
+			if(!realFile2.equals("N")) {
+				File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
+				if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
+					f2.delete();
+				}
+			}
+			if(!realFile3.equals("N")) {
+				File f3 = new File(saveDir, realFile3); // 실제 경로를 갖는 File 객체 생성
+				if(f3.exists()) { // 해당 경로에 파일이 존재할 경우
+					f3.delete();
+				}
+			}
+			
+			model.addAttribute("pageNum", pageNum);
+			return "redirect:/CommunityList.bo?pageNum=" + pageNum;
 			
 		} else {
-			
-			return "redirect:/CommunityList.bo?pageNum=" + pageNum;
+			model.addAttribute("msg", "글 삭제 실패!<br>다시 확인해주세요");
+			return "member/fail_back";
 		}
 		
 	}
@@ -346,11 +399,10 @@ public class CommunityController {
 		return map;
 	}
 	
-	//-------------------------------- 대댓글 작성 ----------------------------------------- 여기서 비동기식으로 가게되면 어떻게처리할수있는지....
+	//-------------------------------- 대댓글 작성 ----------------------------------------- 
+	@ResponseBody
 	@PostMapping("/reReplyWrite.re")
-	public String reReplyWrite(@ModelAttribute ReplyVO reply, Model model, int pageNum) {
-		System.out.println("들어왔나요?");
-		System.out.println(reply);
+	public void reReplyWrite(@ModelAttribute ReplyVO reply, Model model) {
 		// 순서번호(reply_re_seq) 조정 
 		service.increaseReplyReSeq(reply);
 		
@@ -363,8 +415,6 @@ public class CommunityController {
 			msg += "답댓글작성 실패";
 		}
 //		System.out.println(msg);	// 확인용
-		
-		return "redirect:/CommunityDetail.bo?board_idx=" + reply.getReply_bo_ref() + "&pageNum=" + pageNum;
 		
 	}
 	

@@ -1,3 +1,5 @@
+<%@page import="com.itwillbs.Code_Green.vo.BoardVO"%>
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,6 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>커뮤니티 - 글 수정</title>
+     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -27,10 +30,13 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    
-    <!-- CKEditor 5버전 사용소스 -->
-    <script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
+    <script src="/Code_Green/resources/plugins_community/ckeditor5/build/ckeditor.js"></script>
 </head>
+<style>
+  	.ck-editor__editable { height: 300px; }  
+   	.ck-content { font-size: 12px; }  
+</style>
+
 <body>
     
     <!-- 헤더 삽입 -->
@@ -53,70 +59,83 @@
                         <!-- 블로그 헤더 끝  -->
                         
                         <!-- 블로그 본문 시작  -->
-	                		<div class="ps-post__content">
-                      			<div class="ps-block--vendor-dashboard">
-				                    	<div class="ps-block__content">
-					                        <div class="table-responsive">
-					                        	
-	                       						<form action="CommunityWritePro.bo" method="post">
-		                       						<input type="hidden" name="board_idx" value="${param.board_idx }" />
-													<input type="hidden" name="pageNum" value="${param.pageNum }" />
-					                           		 <table class="table ps-table ps-table--vendor">
-							                                    <tr>
-							                                        <td>말머리</td>
-							                                        <td><select name="board_category" required>
-											                                <option value="">말머리선택</option>
-											                                <option value="맛집" <c:if test='${board.board_category == "맛집"}'>selected="selected"</c:if>>맛집</option>
-											                                <option value="정보" <c:if test='${board.board_category == "정보"}'>selected="selected"</c:if>>정보</option>
-											                                <option value="사담" <c:if test='${board.board_category == "사담"}'>selected="selected"</c:if>>사담</option>
-											                                <option value="추천" <c:if test='${board.board_category == "추천"}'>selected="selected"</c:if>>추천</option>
-											                            </select>
-											                        </td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>작성자</td>
-							                                        <td><input type="text" id="board_id" name="board_id" value="${board.board_id}" readonly="readonly" style="width: 50%"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td>제목</td>
-							                                        <td><input type="text" id="board_subject" name="board_subject" value="${board.board_subject }" style="width: 100%"></td>
-							                                    </tr>
-							                                    <tr>
-							                                        <td colspan="2">
-<!-- 																		 <textarea name="board_content" id="editor"></textarea> -->
-																		<textarea class="form-control" name="board_content" id="board_content">${board.board_content }</textarea>
-																		<script>
-																	 		CKEDITOR.replace('board_content'
-																	 			, {filebrowserUploadUrl:'imageUpload.bo'
-																	            , height: 500, width: 1000
-																	         });
-																		</script>
-																	</td>
-							                                    </tr>
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택1"></td> -->
-<!-- 							                                    </tr> -->
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택2"></td> -->
-<!-- 							                                    </tr> -->
-<!-- 							                                    <tr> -->
-<!-- 							                                    	<td colspan="2"><input type="file" id="파일선택3"></td> -->
-<!-- 							                                    </tr> -->
-													<tr> <td><input type="submit" value="글 수정" id="submitBtn"></td> </tr>
-													<tr> <td><input type="button" value="뒤로" onclick="history.back()"></td> </tr>
-					                            	</table>
-	                        					</form> 
-	                        					
-				                       		</div>
-				                        </div>
-                      			</div>
-                      		</div>
-                      
-                    
-                        
+              		<div class="ps-post__content">
+                   		<div class="ps-block--vendor-dashboard">
+                    		<div class="ps-block__content">
+	                        	<div class="table-responsive">
+                    				<form action="CommunityWritePro.bo" method="post" enctype="multipart/form-data">
+	                           		 <table class="table ps-table ps-table--vendor">
+	                                    <tr>
+	                                        <td>말머리</td>
+	                                        <td><select name="board_category" required>
+					                                <option value="">말머리선택</option>
+					                                <option value="맛집" <c:if test="${board.board_category eq '맛집'}">selected</c:if>>맛집</option>
+					                                <option value="정보" <c:if test="${board.board_category eq '정보'}">selected</c:if>>정보</option>
+					                                <option value="사담" <c:if test="${board.board_category eq '사담'}">selected</c:if>>사담</option>
+					                                <option value="추천" <c:if test="${board.board_category eq '추천'}">selected</c:if>>추천</option>
+					                            </select>
+					                        </td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td>작성자</td>
+	                                        <td><input type="text" id="board_id" name="board_id" value="${board.board_id }" readonly="readonly" style="width: 50%"></td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td>제목</td>
+	                                        <td><input type="text" id="board_subject" name="board_subject" value="${board.board_subject }" style="width: 100%"></td>
+	                                    </tr>
+	                                    <tr><td colspan="2"><textarea name="board_content" id="editor">${board.board_content }</textarea></td></tr>
+	                                   
+	                                   <!-- 파일 업로드 부분 -->
+	                                    <tr>
+	                                    	
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1">
+	                                    	<c:if test="${board.file1 ne 'N' }">(기존파일:<span id="here"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+		                                   		 <script>
+										       		let name = '${board.file1}';
+										       		let result = name.split('_');
+										       		$('#here').text(result[1]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2">
+	                                    	<c:if test="${board.file2 ne 'N' }">(기존파일:<span id="here2"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    		<script>
+										       		let name = '${board.file2}';
+										       		let result = name.split('_');
+										       		$('#here2').text(result[2]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_3">
+	                                    	<c:if test="${board.file3 ne 'N' }">(기존파일:<span id="here3"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    		<script>
+										       		let name = '${board.file3}';
+										       		let result = name.split('_');
+										       		$('#here3').text(result[3]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+										<tr> 
+											<td colspan="2"><input type="submit" value="수정하기" id="submitBtn"></td> 
+										</tr>
+	                            	</table>
+                     			 </form> 
+                     					
+                       		   </div>
+                        	</div>
+                   		  </div>
+                   		</div>
                     </div>
                 </div>
-                
                 <!-- 오른쪽 메뉴 시작  -->
                 <div class="ps-blog__right">
                     <aside class="widget widget--blog widget--recent-post">
@@ -127,10 +146,8 @@
                     </aside>
                 </div>
                 <!-- 오른쪽 메뉴 끝  -->
-                
             </div>
         </div>
-        
     </div>
     
     <!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->
@@ -142,8 +159,24 @@
     <!-- 푸터 삽입 -->
     <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 삽입 -->
+   	
+   	
+   	
+   	<!-- CKEditor5 관련 설정 -->
+   	<script>
+	  ClassicEditor
+	    .create( document.querySelector( '#editor' ), {
+	    	removePlugins: ['Title'],
+	    	placeholder: '내용을 입력해주세요',
+	    } )
+	    .then( editor => {
+	        console.log( editor );
+	    } )
+	    .catch( error => {
+	        console.error( error );
+	    } );
+	  </script>
    
-    <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins/owl-carousel/owl.carousel.min.js"></script>
@@ -161,16 +194,7 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
-<!--     <script> -->
-//     ClassicEditor
-//       .create( document.querySelector( '#editor' ) ,{
-//     	  language: "ko"
-//       })
-//       .catch( error => {
-//         console.error( error );
-//       } );
-<!--  	 </script> -->
-     
+     	
 </body>
 
 </html>

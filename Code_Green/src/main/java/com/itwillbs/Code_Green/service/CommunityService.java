@@ -39,8 +39,8 @@ public class CommunityService {
 	}
 
 	// 게시글 삭제 
-	public int removeBoard(BoardVO board) {
-		return mapper.deleteBoard(board);
+	public int removeBoard(int board_idx) {
+		return mapper.deleteBoard(board_idx);
 	}
 
 	
@@ -91,8 +91,8 @@ public class CommunityService {
 	}
 
 	// 글 수정폼 페이지에 글데이터 가져오기
-	public BoardVO getBoard(int board_idx) {
-		return mapper.selectBoardModify(board_idx);
+	public BoardVO getBoard(BoardVO board) {
+		return mapper.selectBoardModify(board);
 	}
 	
 	// 대댓글 순서번호(reply_re_seq) 조정
@@ -109,7 +109,26 @@ public class CommunityService {
 	public int deleteReply(int reply_idx) {
 		return mapper.deleteReply(reply_idx);
 	}
+	
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 1  
+	public String getRealFile1(int board_idx) {
+		return mapper.selectRealFile1(board_idx);
+	}
 
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 2 
+	public String getRealFile2(int board_idx) {
+		return mapper.selectRealFile2(board_idx);
+	}
+	
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 2 
+	public String getRealFile3(int board_idx) {
+		return mapper.selectRealFile3(board_idx);
+	}
+
+	// 커뮤니티 게시글 해당파일 삭제
+	public int removeFile(int board_idx) {
+		return mapper.deleteBoardFile(board_idx);
+	}
 
 
 		

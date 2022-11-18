@@ -28,7 +28,7 @@ public interface CommunityMapper {
 	BoardVO selectBoardDetail(int board_idx);
 	
 	// 게시글 삭제 
-	int deleteBoard(BoardVO board);
+	int deleteBoard(int board_idx);
 
 	// 신고하기 (신고테이블에 입력하기)
 	int insertReport(ReportVO report);
@@ -58,7 +58,7 @@ public interface CommunityMapper {
 	int insertCommunityFile(File_boardVO fileBoard);
 
 	// 글 수정폼 페이지에 글데이터 가져오기
-	BoardVO selectBoardModify(int board_idx);
+	BoardVO selectBoardModify(BoardVO board);
 
 	// 대댓글 순서번호 조정(reply_re_seq)
 	void updateReplyReSeq(ReplyVO reply);
@@ -68,6 +68,18 @@ public interface CommunityMapper {
 
 	// 댓글 삭제
 	int deleteReply(int reply_idx);
+	
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 1  
+	String selectRealFile1(int board_idx);
+
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 2 
+	String selectRealFile2(int board_idx);
+
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 3 
+	String selectRealFile3(int board_idx);
+	
+	// 커뮤니티 게시글 해당파일 삭제
+	int deleteBoardFile(int board_idx);
 
 	
 	

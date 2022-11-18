@@ -183,7 +183,7 @@
                         <!-- 대댓글 작성을 위한 폼 -->
 //                         idNum++;
 						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none">'
-									+ '<form action="reReplyWrite.re" method="post" id="form">'
+									+ '<form action="#" method="post" id="form">'
 									+ '<input type="hidden" name="reply_bo_ref" value="'+ this.reply_bo_ref +'">'
 									+ '<input type="hidden" name="reply_re_ref" value="'+ this.reply_re_ref +'">'
 									+ '<input type="hidden" name="reply_re_lev" value="'+ this.reply_re_lev +'">'
@@ -191,9 +191,7 @@
 									+ '<input type="hidden" name="reply_id" value="${sessionScope.sId}">'
 									+ '<input type="hidden" name="pageNum" value="${param.pageNum}">'
 									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
-									+ '<input type="submit" id="goReReply" value="작성"></form></div>';
-// 									+ '<input type="text" id ="rereBox'+ idNum +'" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
-// 									+ '<input type="button" id="goReReply'+ idNum +'" value="작성" ></form></div>';
+									+ '<input type="button" id="goReReply" value="작성" onclick="callreReply()"></form></div>';
                         comments += '</span><hr>';
                         commentsResult += comments;
 					});
@@ -203,6 +201,18 @@
 			}
 		});
 	};	
+// ========================= 대댓작성을 위한 비동기 처리 ================================================
+	function callreReply(){
+		$.ajax({
+			url:"reReplyWrite.re",
+			type:"POST",
+			data: $("#form").serialize(),
+			datatype:"json",
+			success:function(){
+				getReplyList();	
+			},
+		})
+	};
 // ============================ 답글버튼(대댓글) 클릭시 숨김/표시 처리 ===================================
 	function reReplyWrite(idNum){
 		 if ($('#reReplyBox' + idNum).css('display') == 'none') {
@@ -295,15 +305,20 @@
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
                         	<p>${cBoard.board_content }
+                        	<c:if test="${cBoard.file1 ne 'N'}">
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file1}" style="max-width:90%">
+                        	</c:if>
+                        	<c:if test="${cBoard.file2 ne 'N'}">
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file2}" style="max-width:90%">
+                        	</c:if>
+                        	<c:if test="${cBoard.file3 ne 'N'}">
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file3}" style="max-width:90%">
+                        	</c:if>
+                        	
                         </div>
-                       	<!-- 태그를...쓸건가? -->
-<!--                         <div class="ps-post__footer"> -->
-<!--                             <p class="ps-post__tags">Tags:<a href="#">business</a><a href="#">technology</a></p> -->
-<!--                         </div> -->
 
 
 			   <!-- 신고하기 / 추천하기 버튼 시작 -->
-				
 				
 				<div class="form-group-comm">
 					<button class="ps-btn-report" onclick="checkReport()">신고</button>

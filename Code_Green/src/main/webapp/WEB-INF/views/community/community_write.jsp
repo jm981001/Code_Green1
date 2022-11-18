@@ -92,7 +92,8 @@
 	                                    	<td colspan="2"><input type="file" id="파일선택3" name="file_3"></td>
 	                                    </tr>
 										<tr> 
-											<td colspan="2"><input type="submit" value="글 등록" id="submitBtn"></td> 
+											<td><input type="submit" value="글 등록" id="submitBtn"></td> 
+											<td><input type="reset" value="초기화하기" id="resetBtn"></td> 
 										</tr>
 	                            	</table>
                      			 </form> 
