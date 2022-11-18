@@ -70,8 +70,7 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li>
-<%--                         		<li><a href="brand_mypage_modify=${sessionScope.sId} }"><i class="icon-cog"></i>브랜드정보수정</a></li> --%>
+<!-- 				                <li><a href="brand_mypage_modify"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
                         
                         </ul>
                     </div>
