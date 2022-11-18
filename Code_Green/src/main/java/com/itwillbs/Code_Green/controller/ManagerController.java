@@ -178,7 +178,7 @@ public class ManagerController {
 		ManagerVO brandInfo = service.getBrandInfo(sId);
 		model.addAttribute("brandInfo",brandInfo);
 		
-		return "manager/brand_mypage_modify" ;
+		return "manager/brand_mypage_modify";
 	}
 	
 	

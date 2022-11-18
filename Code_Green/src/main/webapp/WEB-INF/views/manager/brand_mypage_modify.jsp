@@ -118,7 +118,7 @@
 						</div>
                         </div>
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brandInfo" method="get">
+                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
