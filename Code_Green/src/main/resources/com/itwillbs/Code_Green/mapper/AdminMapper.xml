@@ -487,20 +487,40 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 <!-- ==게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리====게시판(커뮤니티,후기,레시피) 관리==-->
 	
 	
+	
+	
+	
+	<!-- 커뮤니티 게시글 갯수  -->
+	<select id="selectBoardListCount" resultType="Integer">
+		SELECT
+			COUNT(*) 
+		FROM
+			board
+		WHERE 
+			board_type='커뮤'
+			<!-- choose, when, otherwise 태그를 사용하여 복수개의 조건 판별(if ~ else if 문 구조) -->
+			<!-- 1. 검색어(keyword)가 널스트링이 아닐 때 검색 수행 -->
+			<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('info')">
+						AND board_category='정보' AND board_subject LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('tasty')">
+						AND board_category='맛집' AND board_subject LIKE '%${keyword}%' 
+					</when>
+					<when test="searchType.equals('talk')">
+						AND board_category='사담' AND board_subject LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('review')">
+						AND board_category='후기' AND board_subject LIKE '%${keyword}%'
+					</when>
+				</choose>
+			</if>
+	</select>
 	
 	
 	<!-- 커뮤니티 게시글 목록 -->
@@ -508,9 +528,42 @@
 		SELECT * FROM board
 			WHERE 
 				board_type='커뮤'
-			ORDER BY 
-				board_idx DESC
+				<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('info')">
+						AND board_category='정보' AND board_subject LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('tasty')">
+						AND board_category='맛집' AND board_subject LIKE '%${keyword}%' 
+					</when>
+					<when test="searchType.equals('talk')">
+						AND board_category='사담' AND board_subject LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('review')">
+						AND board_category='후기' AND board_subject LIKE '%${keyword}%'
+					</when>
+				</choose>
+			</if>
+		ORDER BY 
+			board_idx DESC
+		LIMIT #{startRow}, #{listLimit}
 	</select>
+	
+	<!-- 커뮤니티 게시글 상세 조회  -->
+	<select id="selectCommuDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT
+			 * 
+		FROM 
+			board b LEFT JOIN file_board f
+		ON
+			b.board_idx = f.rf_board_idx
+		WHERE
+			b.board_idx=#{board_idx};
+	</select>
+	
+	
+	
 	
 	<!-- 후기 게시글 갯수  -->
 	<select id="selectReviewListCount" resultType="Integer">
@@ -561,6 +614,40 @@
 			board_idx DESC
 		LIMIT #{startRow}, #{listLimit}
 	</select>
+	
+	<select id="selectReviewDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT
+			f.file1,
+		    f.file2,
+		    f.file3,
+			b.board_idx,
+		    b.board_item_idx,
+		    b.board_type,
+		    b.board_id,
+		    b.board_subject,
+		    b.board_content,
+		    b.board_date,
+		    i.item_idx,
+		    i.item_category,
+		    m.manager_idx
+		FROM 
+			file_board f
+		LEFT JOIN
+			board b
+		ON
+			f.rf_board_idx = b.board_idx
+		LEFT JOIN
+			item i
+		ON
+			b.board_item_idx = i.item_idx
+		LEFT JOIN
+			manager m
+		ON
+			i.re_manager_idx = m.manager_idx
+		WHERE
+			b.board_idx=#{board_idx }
+	</select>
+	
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard">

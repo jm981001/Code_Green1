@@ -118,21 +118,21 @@
 				  <thead>
 				    <tr>
 				      <td scope="col">제목</td>
-				      <td scope="col" colspan="3">어쩌구 저쩌구</td>
+				      <td scope="col" colspan="3">${commuDetail.board_subject }</td>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
 				      <td scope="row">작성자</td>
-				      <td>설탕노움</td>
+				      <td>${commuDetail.board_id }</td>
 				      <td>작성일</td>
-				      <td>22.10.21</td>
+				      <td>${commuDetail.board_date }</td>
 				    </tr>
 				    <tr>
 				      <td scope="row" rowspan="2">내용</td>
 				    </tr>
 				    <tr>
-				      <td colspan="4">솰라솰라</td>
+				      <td colspan="4">${commuDetail.board_content } ${commuDetail.file1 }</td>
 				    </tr>
 				  </tbody>
 				</table>

@@ -101,6 +101,10 @@ public interface AdminMapper {
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	
+	//상품문의(답변대기) 상세조회
+	public QnaVO selectItemQnaInfo(@Param("qna_idx") int qna_idx,@Param("id") String id);
+
+	
 	//상품문의(답변완료) 갯수 조회
 	public int selectItemAnswerListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
@@ -124,8 +128,23 @@ public interface AdminMapper {
 	//=== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 ====== 게시판(커뮤니티,후기,레시피)관리 
 	
 	
+	//커뮤니티 게시글 갯수 조회
+	public int selectBoardListCount(
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	
 	//커뮤니티 게시판 목록
-	public List<BoardVO> selectBoardList();
+	public List<BoardVO> selectBoardList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);
+	
+	
+	//커뮤니티 게시글 상세 조회
+		public BoardVO selectCommuDetail(int board_idx);
+	
+	
+	//후기 후기 후기 후기 후기 후기 후기 후기 후기 후기 후기 후기 후기
+	
 	
 	//후기 게시글 갯수 조회 | 검색
 	public int selectReviewListCount(
@@ -135,6 +154,10 @@ public interface AdminMapper {
 	public List<BoardVO> selectReviewList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
+	
+	//후기 게시글 상세조회
+	public BoardVO selectReviewDetail(int board_idx);
+
 	
 	//게시판 삭제
 	public int deleteBoard(int board_idx);
@@ -202,16 +225,7 @@ public interface AdminMapper {
 	public int updateNotice(BoardVO board);
 
 	//기업 가입 승인
-	public int updateAdminAuth(ManagerVO manager);
-
-	//상품문의(답변대기) 상세조회
-	public QnaVO selectItemQnaInfo(@Param("qna_idx") int qna_idx,@Param("id") String id);
-
-	
-
-	
-
-	
+	public int updateAdminAuth(ManagerVO manager);	
 
 
 	

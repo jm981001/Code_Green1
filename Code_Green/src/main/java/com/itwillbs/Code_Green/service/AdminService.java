@@ -51,7 +51,7 @@ public class AdminService {
 	}
 	
 	//회원관리 검색기능
-	public int getBoardListCount(String searchType, String keyword) {
+	public int getMemberListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		return mapper.selectMemberListCount(searchType, keyword);
 	}
@@ -192,11 +192,22 @@ public class AdminService {
 	
 	//게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등) 게시글 관리(커뮤,레시피 등)
 	
-	
-	//커뮤니티 게시판 목록
-	public List<BoardVO> getBoardList() {
+	//커뮤니티 갯수
+	public int getBoardListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
-		return mapper.selectBoardList();
+		return mapper.selectBoardListCount(searchType, keyword);
+	}
+	
+	//커뮤니티 목록
+	public List<BoardVO> getBoardList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectBoardList(startRow, listLimit, searchType, keyword);
+	}
+	
+	//커뮤니티 게시글 상세조회
+	public BoardVO getCommuDetail(int board_idx) {
+		// TODO Auto-generated method stub
+		return mapper.selectCommuDetail(board_idx);
 	}
 
 	//후기게시판 갯수 조회 | 검색
@@ -206,11 +217,17 @@ public class AdminService {
 	}
 	
 	//후기 게시판 목록
-		public List<BoardVO> getReviewList(int startRow, int listLimit, String searchType, String keyword) {
-			// TODO Auto-generated method stub
-			return mapper.selectReviewList(startRow, listLimit, searchType, keyword);
-		}
+	public List<BoardVO> getReviewList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewList(startRow, listLimit, searchType, keyword);
+	}
 	
+	//후기 게시글 상세조회
+	public BoardVO getReviewDetail(int board_idx) {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewDetail(board_idx);
+	}
+		
 	
 	//게시판 글 삭제
 	public int removeBoard(int board_idx) {
@@ -323,42 +340,9 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectItemQnaInfo(qna_idx, id);
 	}
-
-	
-	
-	
-	
 	
 	
 
-	
-
-	
-
-	
-
-	
-	
-
-	
-
-	
-
-	
-	
-
-	
-	
-	
-
-	
-	
-	
-	
-
-		
-	
-	
 	
 	
 }

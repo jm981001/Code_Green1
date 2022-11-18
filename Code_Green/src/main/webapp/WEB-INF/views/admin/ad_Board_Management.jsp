@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -27,10 +28,6 @@
 </head>
 
 <body>
-
-
-
-
     <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
@@ -78,7 +75,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>커뮤니티 |<a href="ad_Board_Recipe"> 레시피</a> |<a href="ad_Board_Review"> 후기</a></h3>
+                    <h3>커뮤니티 | <a href="ad_Board_Recipe"> 레시피</a> |<a href="ad_Board_Review"> 후기 </a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -94,17 +91,17 @@
                     <div class="ps-section__filter">
                     
 <!--  키워드 검색기능 구현 sql LIKE 사용하여 원하는 키워드 검색 -->
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="ad_Board_Management" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
+                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." >
                                 </div>
                                 <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">정보</option>
-                                        <option value="2">맛집</option>
-                                        <option value="3">사담</option>
-                                        <option value="4">후기</option>
+                                    <select class="ps-select" name="searchType">
+                                        <option value="info">정보</option>
+                                        <option value="tasty">맛집</option>
+                                        <option value="talk">사담</option>
+                                        <option value="review">후기</option>
                                     </select>
                                 </div>
                             </div>
@@ -139,7 +136,7 @@
                             <c:forEach var="bList" items="${boardList }">
                                 <tr>
                                 	<td>${bList.board_category }</td>
-                                    <td onclick="location.href='ad_Board_Detail'"><strong>${bList.board_subject }</strong></td>
+                                    <td onclick="location.href='ad_Board_Detail?board_idx=${bList.board_idx }'"><strong>${bList.board_subject }</strong></td>
                                     <td>${bList.board_id }</td>
                                     <td>${bList.board_date }</td>
                                     <td>${bList.board_readcount }</td>
@@ -170,8 +167,31 @@
                     </ul>
                 </div>
             </section>
+            
+            <section id="pageList">
+		<!-- 현재 페이지번호가 시작 페이지번호보다 클 때 현재 페이지번호 - 1 값으로 페이지 이동 -->
+
+			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_Board_Management?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
+			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
+			&nbsp;
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
+				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
+				<c:choose>
+					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
+					<c:otherwise><a href="ad_Board_Management?pageNum=${i }">${i }</a></c:otherwise>
+				</c:choose>
+				&nbsp;
+			</c:forEach>
+		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
+		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_Board_Management?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
+	</section>
+            
         </div>
     </main>
+    
+    
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/bootstrap/js/bootstrap.min.js"></script>

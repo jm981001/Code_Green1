@@ -93,7 +93,7 @@ public class AdminController {
 			//model 객체에 조회 데이터를 가리키는 변수 memberList 저장
 			
 			
-			int listCount = service.getBoardListCount(searchType, keyword);
+			int listCount = service.getMemberListCount(searchType, keyword);
 			System.out.println("검색 결과(목록 수)" + listCount);
 			// 페이지 계산 작업 수행
 			// 전체 페이지 수 계산
@@ -768,8 +768,116 @@ public class AdminController {
 		
 	//======================================여기부터는 게시판관리행 열차입니다=====================================================
 	//======================================여기부터는 게시판관리행 열차입니다=====================================================
+			
+			
+			
+		//------------관리자 커뮤니티 게시판 관리----------------------------
+		@GetMapping(value = "/ad_Board_Management")
+		public String ad_Board_Management(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			
+			List<BoardVO> boardList = service.getBoardList(startRow, listLimit, searchType, keyword);
+			
+			int listCount = service.getBoardListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("pageInfo", pageinfo);
+//			System.out.println(boardList);
+			
+			return "admin/ad_Board_Management";
+		}	
 		
 		
+		
+		//------------관리자 커뮤니티 상세조회----------------------------
+		@GetMapping(value = "/ad_Board_Detail")
+		public String ad_Board_Detail(Model model, HttpSession session, int board_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			
+			BoardVO commuDetail = service.getCommuDetail(board_idx);
+			System.out.println(commuDetail);
+			model.addAttribute("commuDetail", commuDetail);
+			
+			
+			return "admin/ad_Board_Detail";
+		}
+		
+		
+//		//------------관리자 게시글 상세조회----------------------------
+//				@GetMapping(value = "/ad_Board_Detail")
+//				public String ad_Board_Detail() {
+//					return "admin/ad_Board_Detail";
+//				}
+		
+		
+		
+		
+		//------------관리자 게시글 삭제----------------------------
+		@GetMapping(value = "/ad_BoardRemove")
+		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			int deleteCount = service.removeBoard(board_idx);
+			System.out.println("게시글 삭제" + deleteCount);
+			if(deleteCount > 0 ) {
+				return "redirect:/ad_Board_Management";
+				
+			}
+			
+			model.addAttribute("fail", "게시글 삭제에 실패했습니다");
+			return "admin/ad_fail_back";
+		}
 		
 		
 		
@@ -796,7 +904,7 @@ public class AdminController {
 			
 			List<BoardVO> reviewList = service.getReviewList(startRow, listLimit,
 															searchType, keyword);
-//			System.out.println(reviewList);
+//					System.out.println(reviewList);
 			
 			int listCount = service.getReviewListCount(searchType, keyword);
 			System.out.println("검색 결과(목록 수)" + listCount);
@@ -822,13 +930,12 @@ public class AdminController {
 			
 			return "admin/ad_Board_Review";
 		}
-			
-			
-			
-			
-		//------------관리자 커뮤니티 게시판 관리----------------------------
-		@GetMapping(value = "/ad_Board_Management")
-		public String ad_Board_Management(Model model, HttpSession session) {
+		
+		
+		
+		//------------후기 게시글 상세조회----------------------------
+		@GetMapping(value = "/ad_Review_Detail")
+		public String ad_Review_Detail(Model model, HttpSession session, int board_idx) {
 			
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
@@ -838,44 +945,12 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
-			List<BoardVO> boardList = service.getBoardList();
-			model.addAttribute("boardList", boardList);
-//			System.out.println(boardList);
+			BoardVO reviewDetail = service.getReviewDetail(board_idx);
+			System.out.println(reviewDetail);
+			model.addAttribute("reviewDetail", reviewDetail);
 			
-			return "admin/ad_Board_Management";
-		}	
-		
-		
-		
-		//------------관리자 게시글 상세조회----------------------------
-		@GetMapping(value = "/ad_Board_Detail")
-		public String ad_Board_Detail() {
-			return "admin/ad_Board_Detail";
-		}
-		
-		
-		
-		//------------관리자 게시글 삭제----------------------------
-		@GetMapping(value = "/ad_BoardRemove")
-		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
 			
-			String sId = (String)session.getAttribute("sId");
-			System.out.println("sId= " + sId);
-			
-			if(sId == null || !sId.equals("admin")) {
-				model.addAttribute("msg", "잘못된 접근입니다!");
-				return "admin/ad_fail_back";
-			}
-			
-			int deleteCount = service.removeBoard(board_idx);
-			System.out.println("게시글 삭제" + deleteCount);
-			if(deleteCount > 0 ) {
-				return "redirect:/ad_Board_Management";
-				
-			}
-			
-			model.addAttribute("fail", "게시글 삭제에 실패했습니다");
-			return "admin/ad_fail_back";
+			return "admin/ad_Review_Detail";
 		}
 		
 		
