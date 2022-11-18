@@ -23,12 +23,15 @@ public interface ManagerMapper {
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
 	public ManagerVO selectManagerInfo(String id);
     
-	// 브랜드 정보조회(브랜드마이페이지)
-	public ManagerVO selectBrandInfo(String sId);
+	// 브랜드 상세정보조회(브랜드마이페이지)
+	public ManagerVO selectBrandInfo(String id);
+	
+	// 브랜드 정보수정조회(브랜드마이페이지)
+//	public ManagerVO modifyBrandInfo(String sId);
 	
 	// 브랜드 정보수정(브랜드마이페이지)
-	public int updateBrandInfo(@Param("manager") ManagerVO manager, @Param("id") String id);
-	
+	public int updateBrandInfo(ManagerVO manager);
+		
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 	public List<ItemVO> selectItemList(
 			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
@@ -52,6 +55,7 @@ public interface ManagerMapper {
 	//문의글 갯수 조회
 	public int selectQnaBoardListCount(
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
 
 
 

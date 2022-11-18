@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.Code_Green.mapper.ManagerMapper;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
-import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 
 @Service
@@ -35,13 +34,18 @@ public class ManagerService {
 		return mapper.selectManagerInfo(manager_id);
 	}
 	
-	// 브랜드 정보조회(브랜드마이페이지)
-	public ManagerVO getBrandInfo(String sId) {
-		return mapper.selectBrandInfo(sId);
+	// 브랜드 상세정보조회(브랜드마이페이지)
+	public ManagerVO getBrandInfo(String id) {
+		return mapper.selectBrandInfo(id);
 	}
+	
+	// 브랜드 정보수정조회(브랜드마이페이지)
+//	public ManagerVO getModifyInfo(String sid) {
+//		return mapper.modifyBrandInfo(sid);
+//	}
 	// 브랜드 정보수정(브랜드마이페이지)
-	public int modifyManager(ManagerVO manager, String id) {
-		return mapper.updateBrandInfo(manager,id);
+	public int modifyManager(ManagerVO manager) {
+		return mapper.updateBrandInfo(manager);
 	}
 	
 //	//팔로우 목록조회

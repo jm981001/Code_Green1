@@ -14,7 +14,7 @@
 	
 	if(result){
 		alert(result);
-		location.href ="main";
+		location.href ="manager/brand_mypage";
 	} else if("${fail}") {
 		alert("${fail}");
 		history.back();

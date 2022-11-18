@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -171,9 +172,11 @@ public class ManagerController {
 	}
 	
 	//------------매니저페이지 내브랜드정보 수정----------------------------
-	@GetMapping(value = "brand_mypage_modify.bo")
-	public String modifyManager(@RequestParam String id, Model model, HttpSession session) {
+	@GetMapping(value = "brand_mypage_modify")
+	public String modifyManager(Model model, HttpSession session) {
+		
 		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId : " + sId );
 		
 		ManagerVO brandInfo = service.getBrandInfo(sId);
 		model.addAttribute("brandInfo",brandInfo);
@@ -181,26 +184,25 @@ public class ManagerController {
 		return "manager/brand_mypage_modify";
 	}
 	
+		
 	
+	//------------매니저페이지 내브랜드정보 수정 업데이트----------------------------
 	
 	@GetMapping(value = "brand_mypage_modifyPro.bo")
 	public String modifyManagerPro(
-			@ModelAttribute ManagerVO manager, @RequestParam String id, Model model, HttpSession session) {
+			@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
+//		
 		
-		String sId = (String)session.getAttribute("sId");
-
-		manager = service.getBrandInfo(sId);
-		int updateCount = service.modifyManager(manager,id);
-		model.addAttribute("id",id);
-		
-		System.out.println(manager);
-		System.out.println(id);
+		int updateCount = service.modifyManager(manager);
 		System.out.println("정보수정" + updateCount);
+		
 		if(updateCount > 0) {
-			model.addAttribute("msg", "수정 실패!");
-		   return "manager/mn_fail_back";
+			model.addAttribute("msg", "수정 성공!");
+			model.addAttribute("manager",manager);
+			return "redirect:/brand_mypage?id=" + manager.getManager_id();
 		}
-		return "redirect:/ManagerInfo.me";
+		model.addAttribute("fail", "수정 실패!");
+		return "manager/mn_fail_back";
 	}
 	
 
@@ -460,11 +462,11 @@ public class ManagerController {
 
 
 	//------------매니저페이지 내브랜드정보수정-------------------------------------------
-//		@RequestMapping(value = "brand_settings", method = RequestMethod.GET)
-//		public String brand_settings() {
-//			return "manager/brand_settings";
-//		}
-//	
+		@RequestMapping(value = "brand_settings", method = RequestMethod.GET)
+		public String brand_settings() {
+			return "manager/brand_settings";
+		}
+	
 	
 
 }

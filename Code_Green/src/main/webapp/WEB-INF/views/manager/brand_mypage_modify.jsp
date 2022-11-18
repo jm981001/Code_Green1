@@ -118,7 +118,7 @@
 						</div>
                         </div>
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get">
+                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo?id=${sessionScope.sId}" method="get"name="modifyForm">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -141,12 +141,12 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업비밀번호</label>
-                                            <input type="text"class="form-control" id="passwd" name="newPass"value="${brandInfo.manager_pass}"/>
+                                            <input type="text"class="form-control" id="manager_pass" name="manager_pass"value="${brandInfo.manager_pass}"required="required"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>기업이름</label>
+                                            <label>대표이름</label>
                                             <input type="text" class="form-control" id="manager_name" name="manager_name"value="${brandInfo.manager_name}" />
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                                     
                                 <div class="ps-form__submit text-center	">
 <!--                                <button class="ps-btn success"onclick="brand_settings">수정하기</button> -->
-                                    <button class="ps-btn success" type="submit">등록</button>
+                                    <button class="ps-btn success" type="submit">수정하기</button>
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                                 </div>
                             </form>
