@@ -6,14 +6,11 @@ public class SellVO {
 	// 주문에 대한 상세는 SellDetailVO => 후에 만들 것
 	
 	private int sell_idx; // 주문 번호
-//	private int rf_member_idx; // 회원 번호
-	private int rf_item_idx; // 상품 번호
-	private String sell_amount; // 상품당 구매 수량
-	private String sell_item_total_price; // 상품당 총 금액(가격 * 갯수) // => sell_total_price
+	private int rf_member_idx; // 회원 번호
+	private String sell_amount; // 총 구매 수량 // 상품당 구매 수량은 detail
 	private String sell_use_coin; // 사용한 적립금
-	private String sell_total_pay_price; // 결제할 금액(적립금 + 배송비?)     // => 빼기
+	private String sell_total_price; // 결제할 금액
 	private String sell_status; // 주문상태  / default '결제대기중'
-	private String sell_shipping_fee; // 배송비 / default '2500'      // => 배송비 빼기
 	private String sell_postcode; // 받는 사람 우편번호
 	private String sell_address;  // 받는 사람 주소
 	private String sell_phone; // 받는 사람 연락처
@@ -22,6 +19,8 @@ public class SellVO {
 	private String sell_pay_type; // 결제수단
 	private String sell_pay_status; // 결제여부 / default 'N'
 	private String sell_pay_date; // 결제일
+	
+	
 	private String sell_detail_idx; // 주문상세번호
 	private String item_name; // 상품명
 	private String item_price; // 상품가격
@@ -29,6 +28,7 @@ public class SellVO {
 	private String item_category; // 상품 카테고리
 	private String manager_brandname; // 상품 브랜드
 	private String file1; // 상품사진
+	
 	public SellVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,11 +39,11 @@ public class SellVO {
 	public void setSell_idx(int sell_idx) {
 		this.sell_idx = sell_idx;
 	}
-	public int getRf_item_idx() {
-		return rf_item_idx;
+	public int getRf_member_idx() {
+		return rf_member_idx;
 	}
-	public void setRf_item_idx(int rf_item_idx) {
-		this.rf_item_idx = rf_item_idx;
+	public void setRf_member_idx(int rf_member_idx) {
+		this.rf_member_idx = rf_member_idx;
 	}
 	public String getSell_amount() {
 		return sell_amount;
@@ -51,35 +51,23 @@ public class SellVO {
 	public void setSell_amount(String sell_amount) {
 		this.sell_amount = sell_amount;
 	}
-	public String getSell_item_total_price() {
-		return sell_item_total_price;
-	}
-	public void setSell_item_total_price(String sell_item_total_price) {
-		this.sell_item_total_price = sell_item_total_price;
-	}
 	public String getSell_use_coin() {
 		return sell_use_coin;
 	}
 	public void setSell_use_coin(String sell_use_coin) {
 		this.sell_use_coin = sell_use_coin;
 	}
-	public String getSell_total_pay_price() {
-		return sell_total_pay_price;
+	public String getSell_total_price() {
+		return sell_total_price;
 	}
-	public void setSell_total_pay_price(String sell_total_pay_price) {
-		this.sell_total_pay_price = sell_total_pay_price;
+	public void setSell_total_price(String sell_total_price) {
+		this.sell_total_price = sell_total_price;
 	}
 	public String getSell_status() {
 		return sell_status;
 	}
 	public void setSell_status(String sell_status) {
 		this.sell_status = sell_status;
-	}
-	public String getSell_shipping_fee() {
-		return sell_shipping_fee;
-	}
-	public void setSell_shipping_fee(String sell_shipping_fee) {
-		this.sell_shipping_fee = sell_shipping_fee;
 	}
 	public String getSell_postcode() {
 		return sell_postcode;
@@ -129,73 +117,61 @@ public class SellVO {
 	public void setSell_pay_date(String sell_pay_date) {
 		this.sell_pay_date = sell_pay_date;
 	}
-	
 	public String getSell_detail_idx() {
 		return sell_detail_idx;
 	}
-
 	public void setSell_detail_idx(String sell_detail_idx) {
 		this.sell_detail_idx = sell_detail_idx;
 	}
-
 	public String getItem_name() {
 		return item_name;
 	}
-
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
 	}
-
 	public String getItem_price() {
 		return item_price;
 	}
-
 	public void setItem_price(String item_price) {
 		this.item_price = item_price;
 	}
-
 	public String getItem_idx() {
 		return item_idx;
 	}
-
 	public void setItem_idx(String item_idx) {
 		this.item_idx = item_idx;
 	}
-
 	public String getItem_category() {
 		return item_category;
 	}
-
 	public void setItem_category(String item_category) {
 		this.item_category = item_category;
 	}
-
 	public String getManager_brandname() {
 		return manager_brandname;
 	}
-
 	public void setManager_brandname(String manager_brandname) {
 		this.manager_brandname = manager_brandname;
 	}
-
 	public String getFile1() {
 		return file1;
 	}
-
 	public void setFile1(String file1) {
 		this.file1 = file1;
 	}
 
 	@Override
 	public String toString() {
-		return "SellVO [sell_idx=" + sell_idx + ", rf_item_idx=" + rf_item_idx + ", sell_amount=" + sell_amount
-				+ ", sell_item_total_price=" + sell_item_total_price + ", sell_use_coin=" + sell_use_coin
-				+ ", sell_total_pay_price=" + sell_total_pay_price + ", sell_status=" + sell_status
-				+ ", sell_shipping_fee=" + sell_shipping_fee + ", sell_postcode=" + sell_postcode + ", sell_address="
-				+ sell_address + ", sell_phone=" + sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date="
-				+ sell_date + ", sell_pay_type=" + sell_pay_type + ", sell_pay_status=" + sell_pay_status
-				+ ", sell_pay_date=" + sell_pay_date + "]";
+		return "SellVO [sell_idx=" + sell_idx + ", rf_member_idx=" + rf_member_idx + ", sell_amount=" + sell_amount
+				+ ", sell_use_coin=" + sell_use_coin + ", sell_total_price=" + sell_total_price + ", sell_status="
+				+ sell_status + ", sell_postcode=" + sell_postcode + ", sell_address=" + sell_address + ", sell_phone="
+				+ sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date=" + sell_date + ", sell_pay_type="
+				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
+				+ ", sell_detail_idx=" + sell_detail_idx + ", item_name=" + item_name + ", item_price=" + item_price
+				+ ", item_idx=" + item_idx + ", item_category=" + item_category + ", manager_brandname="
+				+ manager_brandname + ", file1=" + file1 + "]";
 	}
+	
 	
 	
 }
