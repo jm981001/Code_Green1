@@ -36,8 +36,13 @@ public class SellService {
 	}
 
 	//상품구매 상세 목록
-	public List<SellVO> getSellDetailList(String member_id, int sell_idx) {
-		return sell_mapper.getSellDetailList(member_id, sell_idx);
+	public List<SellVO> getSellDetailList(String member_id) {
+		return sell_mapper.getSellDetailList(member_id);
+	}
+
+	//마이페이지 상품후기작성
+	public List<SellVO> getSellReview(String member_id, int sell_idx, int item_idx) {
+		return sell_mapper.getSellReview(member_id, sell_idx,item_idx);
 	}
 
 

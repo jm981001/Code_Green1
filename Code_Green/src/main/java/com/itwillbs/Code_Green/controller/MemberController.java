@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MailSendService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.vo.MemberVO;
@@ -24,7 +25,10 @@ public class MemberController {
 	private MailSendService mailService;
 	@Autowired
 	private MemberService service;
-
+	@Autowired
+	private ItemService Iservice;
+	
+	
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
@@ -37,6 +41,7 @@ public class MemberController {
 		// => 파라미터 : 아이디 리턴타입 : String(passwd)
 		String passwd = service.getPasswd(member.getMember_id());
 //		System.out.println(passwd);
+		
 
 		// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
 		// 1) 아이디가 없을 경우(passwd 값이 null) 실패
@@ -49,6 +54,10 @@ public class MemberController {
 			return "member/fail_back";
 		} else {
 			session.setAttribute("sId", member.getMember_id());
+			int WishlistCount = Iservice.getWishListCount( member.getMember_id());
+			session.setAttribute("WishlistCount", WishlistCount);
+			model.addAttribute("item_category",WishlistCount);
+			
 			return "redirect:/";
 		}
 

@@ -155,7 +155,7 @@ public class ReviewController {
 		
 		
 		
-		//파일 수정
+		//------------파일 수정-------------------------------------------
 		int updateFile = service.modifyFile(file);
 		System.out.println("updateFile -> " + updateFile);
 		
@@ -199,8 +199,7 @@ public class ReviewController {
 			}
 		}
 		
-		
-		//리뷰 수정
+		//리뷰 글수정
 		int updateCount = service.modifyReview(board);
 		model.addAttribute("item_idx", item_idx);
 		model.addAttribute("pageNum", pageNum);

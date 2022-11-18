@@ -1,5 +1,4 @@
 <%@page import="com.itwillbs.Code_Green.vo.ItemVO"%>
-<%@page import="com.itwillbs.Code_Green.vo.MemberVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -183,39 +182,23 @@
 			wish_count();
 	});
 	
-	$(document).ready(function(){
-		$('#cartBtn').click(function() {
-			$.ajax({
-				type : 'get',
-				url : 'addCart',
-				data: {
-					rf_item_idx: ${item.item_idx},
-					rf_member_idx: '${item.member_idx}',
-					cart_amount: 1,
-					cart_total: '${item.item_price }',
-					item_name: '${item.item_name}',
-					manager_brandname: '${item.manager_brandname }',
-					file1: '${item.file1 }'
-				},
-				success : function (data) {
-// 					console.log("data : " +  data);
-// 					code =data;
-					alert('장바구니에 담았습니다.')
-				}
-				
-			});
-		});
-	});
 	
 	</script>	
 	
 	<script type="text/javascript">
-		$(function(){
-			$("#best").click(function(){
+// 		$(function(){
+// 			$(".best").click(function(){
 				
-					alert("추천완료!");
-			});
-		});	
+// 					alert("추천완료!");
+// 			});
+// 		});	
+		
+		function best(item_idx, board_idx ,item_category, manager_brandname, sId){
+// 			alert(item_idx+board_idx+item_category+manager_brandname+sId);
+			location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx='+board_idx+'&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }';
+			
+			
+		}
 	</script>
 </head>
 <style>
@@ -245,9 +228,9 @@
                             <div class="ps-product__thumbnail" data-vertical="true">
                                 <figure>
                                     <div class="ps-wrapper">
-                                        <div class="ps-product__gallery" data-arrow="true">
+<!--                                         <div class="ps-product__gallery" data-arrow="true"> -->
                                             <div class="item"><a href="/Code_Green/resources/item/${item.file1 } "><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a></div>
-                                        </div>
+<!--                                         </div> -->
                                     </div>
                                 </figure>
                             </div>
@@ -256,10 +239,8 @@
                                 <p>${item.item_info }</p>
                                 <h4 class="ps-product__price">${item.item_price }원</h4>
                                 <div class="ps-product__meta">
-<%--                                 <input type="hidden" name="member_idx" value="${item.member_idx}" /> --%>
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                                 <%
-                                                	MemberVO member = (MemberVO)request.getAttribute("member");
                                                 	ItemVO item = (ItemVO)request.getAttribute("item");
                                                 	int score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
                                                 	pageContext.setAttribute("score", score);
@@ -284,14 +265,15 @@
                                 
                                 
                                 <div class="ps-product__desc">
+                                <br>
                                     <ul class="ps-list--dot">
-                                        <li>판매자 &nbsp;${item.manager_brandname }</li>
-                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
+                                        <li>판매자 &nbsp;${item.manager_brandname }</li><br>
+                                        <li>포장타입 &nbsp; ${item.item_packing }</li><br>
                                         <li>카테고리 &nbsp; ${item.item_category }</li>
-                                        <li>원산지   &nbsp;&nbsp; ${item.item_packing }</li>
-                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
-                                        <li>포장타입 &nbsp; ${item.item_packing }</li>
                                     </ul>
+								<br>
+										
+										
                                 </div>
                                 <div class="ps-product__shopping">
                                     <figure>
@@ -303,7 +285,7 @@
                                         </div>
                                     </figure>
                                     
-                                    <button class="ps-btn ps-btn--black" id="cartBtn" >Add to cart</button>
+                                    <a class="ps-btn ps-btn--black" href="#">Add to cart</a>
                                       <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i><span class="wish_count"></span></div>
                                 </div>
                             </div>
@@ -393,7 +375,7 @@
 					});
 				}	
 			});
-	});	
+			
 			// 게시글 추천수
 			function bestCount(){
 				url: "ReviewBest_Count.bo",
@@ -508,20 +490,23 @@
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
 													                <td width="10%">${board.best_count }</td>  
 													            </tr>  
-													            <tr class="hide" style="height:300px">  
+													            <tr class="hide" >  
 													                <td colspan="5">  
+													                	<br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br>${board.board_content }
+																			<br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
+																		    <button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button>
+																		    <input type="button"  class="ps-btn-best_jm"  class="best" onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
+<%-- 																		    <input type="button"  class="ps-btn-best_jm"  class="best" onclick="location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }'">${board.best_count } --%>
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&file1=${board.file1 }&file2=${board.file2 }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 	</c:if>
-																		    <button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button>
-																		    <input type="button"  class="ps-btn-best_jm"  id="best" onclick="location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }'">${board.best_count }
 																		 </div>
+	 
 													                </td>  
 													            </tr>  
 													        </tbody>  
@@ -540,18 +525,19 @@
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
 													                <td width="10%">12</td>  
 													            </tr>  
-													            <tr class="hide" style="height:300px">  
+													            <tr class="hide" >  
 													                <td colspan="5">  
+													                	 <br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br>${board.board_content }
+																			<br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		 <div align="right">
+<!-- 																			<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 	</c:if>
-<!-- 																			<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -570,18 +556,19 @@
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>  
 													                <td width="10%">12</td>  
 													            </tr>  
-													            <tr class="hide" style="height:300px">  
+													            <tr class="hide" >  
 													                <td colspan="5">  
+													                	 <br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br>${board.board_content }
+																		 <br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
+<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 	</c:if>
-<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -600,18 +587,19 @@
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
 													                <td width="10%">12</td>  
 													            </tr>  
-													            <tr class="hide" style="height:300px">  
-													                <td colspan="5">  
+													            <tr class="hide" >  
+													                <td colspan="5">
+													                	 <br><br>  
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br>${board.board_content }
+																		 <br><br><br><br>${board.board_content }<br><br>
 																			
 																		<div align="right">
+<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
 																		 	</c:if>
-<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
 																		 </div>
 													                </td>  
 													            </tr>  
@@ -820,7 +808,7 @@
 																			<br>
 																			감사합니다.
 														                    <br><br><br>
-														                  <div align="right">
+														                  <div align="right"><br><br>
 														                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
 																				<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">

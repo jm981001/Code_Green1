@@ -51,11 +51,16 @@
                         <button>search</button> <!-- 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
                     </form>
                 </div>
-                <div class="header__right">
-                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i><span><i>0</i></span></a>
+				<div class="header__right">
+                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i><span>
+                    <c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null}">
+                    <i>${0 }</i>
+                    </c:if>
+                    <i>${WishlistCount }</i>
+                    </span></a>
                         <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span><i>0</i></span></a>
                         </div>
-                        <c:choose>
+				<c:choose>
                       	  <c:when test="${empty sessionScope.sId }">
 	                        <div class="ps-block--user-header">
 	                            <div class="ps-block__left"><i class="icon-user"></i></div>
@@ -77,8 +82,7 @@
                    	   		  <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
                    	   		</c:otherwise>
                    	    </c:choose>
-                   	    
-                    </div>
+		</div>
                 </div>
             </div>
         </div>

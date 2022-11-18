@@ -47,7 +47,7 @@
 <!-- ==========Q&A=========================================================================================================     -->
 					<div class="col-lg-9">
 					<div class="ps-section--shopping ps-whishlist">
-					<h3>구매후기 작성</h3>
+					<h3>작성 가능 후기</h3>
 							<div class="ps-section__content">
 								<div class="table-responsive">
 									<table class="table ps-table--whishlist ps-table--responsive">
@@ -71,7 +71,7 @@
 												<td class="price" data-label="Price"> </td>
 												<td data-label="Status"><span
 													class="ps-tag ps-tag--in-stock"> </span></td>
-												<td data-label="action"><a class="ps-btn" href="#">리뷰작성</a></td>
+												<td data-label="action"><a class="ps-btn" href="myPage_review_Write.my?member_id=${sessionScope.sId }&sell_idx=${sell.sell_idx}&item_idx=${sell.item_idx}">리뷰작성</a></td>
 											</tr>
 											
 										</c:forEach>

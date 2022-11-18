@@ -72,9 +72,7 @@ public class MypageController {
 		
 		String sId = (String)session.getAttribute("sId");
 		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
-//			model.addAttribute("msg", "잘못된 접근입니다");
-//			return "member/fail_back";
-			return "member/login";
+			return "redirect:/login";
 		}
 			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
 			model.addAttribute("member", member);
@@ -206,65 +204,72 @@ public class MypageController {
 	}
 	
 	//------------마이페이지 상품후기-------------------------------------------
-	@GetMapping(value = "/myPageReview.my")
-	public String myPageReview(
-			@RequestParam(defaultValue = "1") int pageNum, Model model
-			,@RequestParam String member_id) {
-		
-		int listLimit = 10; 
-		int pageListLimit = 10; 
-		
-		int startRow = (pageNum - 1) * listLimit;
-		
-		//상품구매 목록
-		List<SellVO> sellList = Sservice.getReviewList(startRow, listLimit,member_id);
-		
-		//상품구매 목록 갯수
-		int listCount = Sservice.getSellListCount();
-		
-
-		
-		int maxPage = (int)Math.ceil((double)listCount / listLimit);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pageInfo = new PageInfo(
-				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-		
-		
-		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("sellList", sellList);
-		model.addAttribute("listCount", listCount);
-		model.addAttribute("member_id", member_id);
-		
-		
-		
-		return "member/myPage_review";
-	}
-	
+//	@GetMapping(value = "/myPageReview.my")
+//	public String myPageReview(
+//			@RequestParam(defaultValue = "1") int pageNum, Model model
+//			,@RequestParam String member_id) {
+//		
+//		int listLimit = 10; 
+//		int pageListLimit = 10; 
+//		
+//		int startRow = (pageNum - 1) * listLimit;
+//		
+//		//상품구매 목록
+//		List<SellVO> sellList = Sservice.getReviewList(startRow, listLimit,member_id);
+//		
+//		//상품구매 목록 갯수
+//		int listCount = Sservice.getSellListCount();
+//		
+//
+//		
+//		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//		int endPage = startPage + pageListLimit - 1;
+//		
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		
+//		PageInfo pageInfo = new PageInfo(
+//				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+//		
+//		
+//		model.addAttribute("pageInfo", pageInfo);
+//		model.addAttribute("sellList", sellList);
+//		model.addAttribute("listCount", listCount);
+//		model.addAttribute("member_id", member_id);
+//		
+//		
+//		
+//		return "member/myPage_review";
+//	}
+//	
 	
 	//------------마이페이지 상품상세-------------------------------------------
-		@GetMapping(value = "/myPageReview_detail.my")
+		@GetMapping(value = "/myPageReview.my")
 		public String myPage_review_detail( @RequestParam(defaultValue = "1") int pageNum, Model model
-				                           ,@RequestParam String member_id,@RequestParam int sell_idx) {
+				                           ,@RequestParam String member_id) {
 			
 		//상품구매 상세 목록
-		List<SellVO> sellDetailList = Sservice.getSellDetailList(member_id, sell_idx);	
+		List<SellVO> sellDetailList = Sservice.getSellDetailList(member_id);	
 			
 			
 		model.addAttribute("member_id", member_id);
-		model.addAttribute("sell_idx", sell_idx);
 		model.addAttribute("sellDetailList", sellDetailList);
 		return "member/myPage_review_detail";
 	}
 	
 	//------------마이페이지 상품후기 작성-------------------------------------------
 	@RequestMapping(value = "myPage_review_Write.my", method = RequestMethod.GET)
-	public String myPage_review_Write() {
+	public String myPage_review_Write(Model model ,@RequestParam String member_id,@RequestParam int sell_idx,@RequestParam int item_idx) {
+		
+		//마이페이지 상품후기작성
+		List<SellVO> sellReview = Sservice.getSellReview(member_id, sell_idx, item_idx);	
+		
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("sell_idx", sell_idx);
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("sellReview", sellReview);
 		return "member/myPage_review_Write";
 	}
 	

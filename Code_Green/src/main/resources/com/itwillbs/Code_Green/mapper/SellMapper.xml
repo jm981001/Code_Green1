@@ -110,7 +110,7 @@
 	
 <!-- 	상품구매 상세 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-	     select  	s.SELL_DETAIL_IDX 
+           select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
 			        ,i.ITEM_NAME 
 			        ,i.ITEM_PRICE
@@ -119,6 +119,7 @@
 			        ,f.FILE1
 					,s.SELL_AMOUNT
 			        ,m.MANAGER_BRANDNAME
+			        ,l.sell_idx
 			from sell_detail s 
 				join item i 
 					on s.RF_ITEM_IDX = i.item_idx
@@ -126,6 +127,37 @@
 					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
 				join manager m
 					on m.MANAGER_IDX = i.RE_MANAGER_IDX
+				join sell l
+					on s.rf_sell_idx = l.sell_idx
+			    where l.RF_MEMBER_IDX =(select member_idx
+									from member
+                            		where member_id = #{member_id})
+                      and s.SELL_REVIEW_STATUS="N";
+	</select>
+	
+	
+<!-- 	마이페이지 상품후기작성 -->
+	<select id="getSellReview" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		select       s.SELL_DETAIL_IDX 
+					,s.RF_SELL_IDX 
+			        ,i.ITEM_NAME 
+			        ,i.ITEM_PRICE
+			        ,i.ITEM_IDX
+			        ,i.ITEM_CATEGORY
+			        ,f.FILE1
+					,s.SELL_AMOUNT
+			        ,m.MANAGER_BRANDNAME
+			        ,l.SELL_IDX  
+			from sell_detail s 
+				join item i 
+					on s.RF_ITEM_IDX = i.item_idx
+			    join file_item f 
+					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
+				join manager m
+					on m.MANAGER_IDX = i.RE_MANAGER_IDX
+				join sell l
+					on s.rf_sell_idx = l.sell_idx
 			    where s.RF_SELL_IDX =  #{sell_idx}
+                and i.item_idx = #{item_idx};
 	</select>
 </mapper>

@@ -78,6 +78,7 @@ public class WishListController {
 	public String ReviewBest( Model model, HttpSession session,@ModelAttribute WishListVO wishList,
 			@RequestParam(defaultValue = "1") int item_idx,@RequestParam int board_idx, @RequestParam String item_category,@RequestParam String manager_brandname,@RequestParam String member_id ) {
 		System.out.println(item_idx);
+		System.out.println(board_idx);
 		
 		String sId = (String)session.getAttribute("sId");
 		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
@@ -88,6 +89,7 @@ public class WishListController {
 		model.addAttribute("member_id", member_id);
 		model.addAttribute("manager_brandname",manager_brandname);
 		model.addAttribute("item_category",item_category);
+		model.addAttribute("board_idx",board_idx);
 		
 		
 		
@@ -100,14 +102,26 @@ public class WishListController {
 			int insertBest = service.insertBest(board_idx, item_idx, member_id);
 			
 			if(insertBest > 0) {
-				return "redirect:/ItemDetail.bo";
+				model.addAttribute("best_alert", "글 추천이 완료되었습니다");
+				model.addAttribute("item_idx", item_idx);
+				model.addAttribute("member_id", member_id);
+				model.addAttribute("manager_brandname",manager_brandname);
+				model.addAttribute("item_category",item_category);
+				model.addAttribute("board_idx",board_idx);
+				return "member/fail_back2";
 			}
 		}else {
 			//위시리스트 삭제
 			int deleteCount = service.removeBest(board_idx, item_idx, member_id);
 			
 			if(deleteCount > 0) {
-				return "redirect:/ItemDetail.bo";
+				model.addAttribute("best_alert", "글추천 삭제되었습니다");
+				model.addAttribute("item_idx", item_idx);
+				model.addAttribute("member_id", member_id);
+				model.addAttribute("manager_brandname",manager_brandname);
+				model.addAttribute("item_category",item_category);
+				model.addAttribute("board_idx",board_idx);
+				return "member/fail_back2";
 			}
 		}
 		return "redirect:/ItemDetail.bo";

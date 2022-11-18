@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <!-- headers-->
 <html lang="en">
@@ -49,25 +51,27 @@
 					<div class="col-lg-8">
 						<h3>상품 후기 작성</h3>
 						<table class="table ps-table--shopping-cart ps-table--responsive">
-							<tbody>
-								<tr>
-									<td data-label="Product">
-										<div class="ps-product--cart">
-											<div class="ps-product__thumbnail">
-												<a href="product-default.html">
-												<img src="/Code_Green/resources/img/products/shop/1.jpg" alt="" /></a>
+							<c:forEach var="sell" items="${sellReview }">
+								<tbody>
+									<tr>
+										<td data-label="Product">
+											<div class="ps-product--cart">
+												<div class="ps-product__thumbnail">
+													<a href="ItemDetail.bo?item_idx=${sell.item_idx}&manager_brandname=${sell.manager_brandname}&item_category=${sell.item_category}">
+													<img src="/Code_Green/resources/item/${sell.file1 }" alt="" /></a>
+												</div>
+												<div class="ps-product__content">
+													<a href="ItemDetail.bo?item_idx=${sell.item_idx}&manager_brandname=${sell.manager_brandname}&item_category=${sell.item_category}">${sell.item_name }</a>
+													<p>
+														<strong> ${sell.manager_brandname } </strong>
+													</p>
+												</div>
 											</div>
-											<div class="ps-product__content">
-												<a href="product-default.html">귤</a>
-												<p>
-													<strong> 풀무원 </strong>
-												</p>
-											</div>
-										</div>
-									</td>
-									<td data-label="Total">22000원</td>
-								</tr>
-							</tbody>
+										</td>
+										<td data-label="Total">${sell.item_price }원</td>
+									</tr>
+								</tbody>
+							</c:forEach>
 						</table>
 						
 						<hr>
