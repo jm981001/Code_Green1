@@ -185,21 +185,7 @@
 	
 	</script>	
 	
-	<script type="text/javascript">
-// 		$(function(){
-// 			$(".best").click(function(){
-				
-// 					alert("추천완료!");
-// 			});
-// 		});	
-		
-		function best(item_idx, board_idx ,item_category, manager_brandname, sId){
-// 			alert(item_idx+board_idx+item_category+manager_brandname+sId);
-			location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx='+board_idx+'&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }';
-			
-			
-		}
-	</script>
+
 </head>
 <style>
 	select {
@@ -401,7 +387,53 @@
 	
 	
 	</script>
-                                
+	
+	
+    <script type="text/javascript">
+		function best(item_idx, board_idx ,item_category, manager_brandname, sId){
+			location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx='+board_idx+'&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }';
+		}
+	</script>   
+<%-- 	  <button class="ps-btn-best_jm"  onclick="best_ajax('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')"><span class="best_count"></span></button>                          --%>
+    <script type="text/javascript">
+		function best_ajax(item_idx, board_idx ,item_category, manager_brandname, sId){
+			$("#btnOk").on("click", function() {
+				$.ajax({
+					url: "ReviewBest.bo",
+					type: "GET",
+					data: {
+						member_id: '${sessionScope.sId}',
+						manager_brandname: manager_brandname,
+						item_category: item_category,
+						item_idx: item_idx,
+						board_idx : board_idx
+					},
+					success: function(){
+						bestCount();
+					}
+				})
+			});
+			function bestCount(item_idx, board_idx ,item_category, manager_brandname, sId){
+				url: "ReviewBest_Count.bo",
+				type: "POST",
+				data:{
+					member_id: '${sessionScope.sId}',
+					manager_brandname: manager_brandname,
+					item_category: item_category,
+					item_idx: item_idx,
+					board_idx : board_idx
+					
+					
+				},
+				success: function(count){
+					$(".best_count").html(count);
+				}
+			}
+		
+		bestCount();	// 처음 시작했을때 실행되도록 해당 함수 호출
+		
+		}
+	</script>                            
  <!-- ==========상품후기 목록=========================================================================================================     -->                                 
                      
                                 <div class="ps-tab" id="tab-3">
@@ -498,8 +530,8 @@
 																			<br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
-																		    <button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button>
-																		    <input type="button"  class="ps-btn-best_jm"  class="best" onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
+																		    <button class="ps-btn-best_jm"  onclick="best_ajax('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')"><span class="best_count"></span></button>
+																		    <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
 <%-- 																		    <input type="button"  class="ps-btn-best_jm"  class="best" onclick="location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }'">${board.best_count } --%>
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&file1=${board.file1 }&file2=${board.file2 }'">

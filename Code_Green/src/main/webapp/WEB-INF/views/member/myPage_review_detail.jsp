@@ -71,7 +71,7 @@
 												<td class="price" data-label="Price"> </td>
 												<td data-label="Status"><span
 													class="ps-tag ps-tag--in-stock"> </span></td>
-												<td data-label="action"><a class="ps-btn" href="myPage_review_Write.my?member_id=${sessionScope.sId }&sell_idx=${sell.sell_idx}&item_idx=${sell.item_idx}">리뷰작성</a></td>
+												<td data-label="action"><a class="ps-btn" href="myPage_review_Write.my?member_id=${sessionScope.sId }&sell_idx=${sell.sell_idx}&item_idx=${sell.item_idx}&manager_brandname=${sell.manager_brandname}&item_category=${sell.item_category}">리뷰작성</a></td>
 											</tr>
 											
 										</c:forEach>

@@ -89,11 +89,27 @@
 	
 		<!-- 마이페이지 작성글 목록-->
 	<select id="selectBoardList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		 SELECT *
-		 FROM board
-		 WHERE board_id = #{member_id} and board_type NOT LIKE '%후기%'
-		 ORDER BY board_idx DESC
-		 LIMIT #{startRow}, #{listLimit}
+	
+	     SELECT b.BOARD_IDX
+				,b.BOARD_ITEM_IDX
+				,b.BOARD_TYPE
+				,b.BOARD_ID
+				,b.BOARD_CATEGORY
+				,b.BOARD_SUBJECT
+				,b.BOARD_CONTENT
+				,b.BOARD_READCOUNT
+				,b.BOARD_DATE
+                ,ifnull( r.reply_count,0)as reply_count
+			 FROM board b 
+			 	left join (select reply_bo_ref, count(*) as reply_count
+			 					from reply
+	         					group by reply_bo_ref) r
+					on b.board_idx = r.reply_bo_ref
+			 WHERE board_id = #{member_id} and board_type NOT LIKE '%후기%'
+			 ORDER BY board_idx DESC
+			 LIMIT #{startRow}, #{listLimit}
+		 
+
 	</select>
 	
 	
@@ -140,5 +156,15 @@
 					, file2 = #{file2}
 			WHERE
 				rf_board_idx = #{board_idx}
+	</update>
+	
+<!-- 	마이페이지 리뷰 상태 변경 -->
+	<update id="updateStatus">
+		UPDATE sell_detail
+			SET
+			     sell_review_status = "Y"
+			WHERE
+					rf_sell_idx = #{sell_idx}
+				and rf_item_idx = #{item_idx}
 	</update>
 </mapper>

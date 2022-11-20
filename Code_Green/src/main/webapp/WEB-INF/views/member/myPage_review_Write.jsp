@@ -78,7 +78,7 @@
 
 					<!-- ==========리뷰작성=========================================================================================================     -->
 						
-						<form class="ps-form--review" action="index.html" method="get">
+						<form class="ps-form--review" action="ReviewWritePro.my" method="post" name="reviewForm" enctype="multipart/form-data">
 							<h4>PRODUCT REVIEW</h4>
 							<p>
 								<sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 이동될 수 있습니다.<br> 
@@ -86,8 +86,8 @@
 								요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
 							</p>
 							<div class="form-group form-group__rating">
-								<label>별점을 매겨주세요</label> <select class="ps-rating"
-									data-read-only="false">
+								<label>별점을 매겨주세요</label> 
+								<select class="ps-rating" data-read-only="false" id="board_star_score" name="board_star_score" required="required">
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -97,11 +97,21 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" rows="6"
-									placeholder="Write your review here"></textarea>
+								<input type="hidden" name="board_id" value="${sessionScope.sId}" />
+								<input type="hidden" name="member_id" value="${sessionScope.sId}" />
+                                <input type="hidden" name="item_idx" value="${param.item_idx}" />
+                                <input type="hidden" name="item_category" value="${param.item_category}" />
+                                <input type="hidden" name="manager_brandname" value="${param.manager_brandname } " />
+                                <input type="hidden" name="sell_idx" value="${param.sell_idx } " />
+								<textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요" required="required"></textarea>
+                                <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?" required="required"></textarea>
 							</div>
 							<div class="form-group submit">
+								<input type="file" name="file_1" id="file_1">
+	                            <input type="file" name="file_2" id="file_2">
+							<div align="right">
 								<button class="ps-btn">Submit Review</button>
+							</div>
 							</div>
 						</form>
 					</div>

@@ -47,6 +47,9 @@ public interface ReviewMapper {
 
 	//파일삭제
 	int deleteFile(int board_idx);
+
+	//리뷰 상태 변경
+	void updateStatus(@Param("sell_idx") int sell_idx, @Param("item_idx") int item_idx);
 	
 
 

@@ -82,6 +82,11 @@ public class ReviewService {
 		return mapper.deleteFile(board_idx);
 	}
 
+	//리뷰 상태 변경
+	public void updateStatus(int sell_idx, int item_idx) {
+		mapper.updateStatus(sell_idx,item_idx);
+	}
+
 
 
 

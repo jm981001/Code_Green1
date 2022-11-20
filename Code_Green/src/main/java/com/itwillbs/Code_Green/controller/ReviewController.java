@@ -90,7 +90,71 @@ public class ReviewController {
 	}	
 	
 	
-	
+	//------------마이페이지 리뷰작성-------------------------------------------
+	@PostMapping(value = "/ReviewWritePro.my")
+	public String reviewWritePro_my( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star
+								 ,@RequestParam String item_category,@RequestParam String manager_brandname,@RequestParam int sell_idx, @RequestParam String member_id) {
+//		@RequestParam String board_idx
+		
+		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : " + saveDir);
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		MultipartFile mFile = file.getFile_1();
+		MultipartFile mFile2 = file.getFile_2();
+		
+		String originalFileName = mFile.getOriginalFilename();
+		String originalFileName2 = mFile2.getOriginalFilename();
+		String uuid = UUID.randomUUID().toString();
+		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+		
+		file.setFile1(uuid + "1_" + originalFileName);
+		file.setFile2(uuid + "2_" + originalFileName2);
+		
+		int insertCount = service.registReview(board);
+		int file_insertCount = service.registReview_file(file);
+		int starCount= service.StarScore(star);
+	    service.updateStatus(sell_idx,item_idx);//리뷰 상태 변경
+	    
+		model.addAttribute("item_idx", item_idx);
+		model.addAttribute("item_category", item_category);
+		model.addAttribute("manager_brandname", manager_brandname);
+		model.addAttribute("member_id", member_id);
+
+		
+		
+		if(insertCount > 0) {
+			if(file_insertCount > 0) {
+				try {
+					mFile.transferTo(new File(saveDir, file.getFile1()));
+					mFile2.transferTo(new File(saveDir, file.getFile2()));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return "redirect:/myPageReview.my";
+			} else {
+				model.addAttribute("msg", "파일업로드 실패!");
+				return "member/fail_back";
+			}
+		}else {
+			model.addAttribute("msg", "글 쓰기 실패!");
+			return "member/fail_back";
+		}
+		
+		
+	}	
 	
 	//------------리뷰 수정-------------------------------------------
 	@GetMapping(value = "/ReviewModify.bo")

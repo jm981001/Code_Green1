@@ -1824,9 +1824,9 @@ button {
 /* 정민 _ 상품후기 _ 추천하기 */
 .ps-btn-best_jm {
   display: inline-block;
-  padding: 10px 20px;
-  text-align: left;
-  width: 50px;
+  padding: 12px 0px;
+  text-align: right;
+  width: 100px;
   height: 1px;
   font-weight: bold;
   font-size: 15px;

@@ -21,8 +21,15 @@ public class BoardVO {
 	private String board_star_score;
 	private String item_category;
 	private String best_count;
+	private String reply_count;
 	
 	
+	public String getReply_count() {
+		return reply_count;
+	}
+	public void setReply_count(String reply_count) {
+		this.reply_count = reply_count;
+	}
 	public String getBest_count() {
 		return best_count;
 	}
