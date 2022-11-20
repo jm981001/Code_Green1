@@ -499,10 +499,16 @@ button {
 
 				<div class="field">
 					<div>
-						<b>브랜드이름</b>
+						<b>브랜드 이름</b>
 						<input type="text" id="manager_brandname" name="manager_brandname" maxlength="20" required="required">
 						<b>로고</b>
 						<input type="file" name="file" required="required" style="background-color: white; padding: 0px" /> 
+					</div>
+				</div>
+				<div class="field">
+					<div>
+						<b>브랜드 소개</b>
+						<textarea id="manager_info" name="manager_info" maxlength="1000" required="required"></textarea>
 					</div>
 				</div>
 				<div class="field">
