@@ -9,6 +9,7 @@ public class ManagerVO {
 	private String  	manager_pass;
 	private String  	manager_name; 
 	private String  	manager_brandname; 
+	private String 		manager_info;
 	private String  	manager_storecode; 
 	private String  	manager_phone; 
 	private String  	manager_email; 
@@ -25,6 +26,7 @@ public class ManagerVO {
 	public ManagerVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	public int getManager_idx() {
 		return manager_idx;
@@ -55,6 +57,12 @@ public class ManagerVO {
 	}
 	public void setManager_brandname(String manager_brandname) {
 		this.manager_brandname = manager_brandname;
+	}
+	public String getManager_info() {
+		return manager_info;
+	}
+	public void setManager_info(String manager_info) {
+		this.manager_info = manager_info;
 	}
 	public String getManager_storecode() {
 		return manager_storecode;
@@ -128,20 +136,18 @@ public class ManagerVO {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_idx=" + manager_idx + ", manager_id=" + manager_id + ", manager_pass=" + manager_pass
-				+ ", manager_name=" + manager_name + ", manager_brandname=" + manager_brandname + ", manager_storecode="
-				+ manager_storecode + ", manager_phone=" + manager_phone + ", manager_email=" + manager_email
-				+ ", manager_email_auth=" + manager_email_auth + ", manager_postcode=" + manager_postcode
-				+ ", manager_address=" + manager_address + ", manager_adminauth=" + manager_adminauth
-				+ ", manager_realfile=" + manager_realfile + ", manager_original_file=" + manager_original_file
-				+ ", manager_del_yn=" + manager_del_yn + ", manager_date=" + manager_date + ", file=" + file + "]";
+				+ ", manager_name=" + manager_name + ", manager_brandname=" + manager_brandname + ", manager_info="
+				+ manager_info + ", manager_storecode=" + manager_storecode + ", manager_phone=" + manager_phone
+				+ ", manager_email=" + manager_email + ", manager_email_auth=" + manager_email_auth
+				+ ", manager_postcode=" + manager_postcode + ", manager_address=" + manager_address
+				+ ", manager_adminauth=" + manager_adminauth + ", manager_realfile=" + manager_realfile
+				+ ", manager_original_file=" + manager_original_file + ", manager_del_yn=" + manager_del_yn
+				+ ", manager_date=" + manager_date + ", file=" + file + "]";
 	}
-
 	
-
 	
-
 }
