@@ -67,8 +67,9 @@
         ON(c.rf_member_idx = m.member_idx)
         WHERE i.item_idx = #{rf_item_idx} and m.member_idx = #{rf_member_idx}
 	</select>
+	
 	<!--  6. 장바구니 상품확인 test2 -->
-	<select id="cou" resultType="int">
+	<select id="checkCart2" resultType="int">
 		SELECT COUNT(*) FROM cart 
 		WHERE rf_item_idx = #{rf_item_idx} AND rf_member_idx= #{rf_member_idx}
 	</select>

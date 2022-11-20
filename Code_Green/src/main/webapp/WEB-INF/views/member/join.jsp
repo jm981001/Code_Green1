@@ -516,11 +516,28 @@ button {
 					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20" required="required">
 				</div>
 
-				<div class="field">
-					<b>본인 확인 이메일</b>
-					<input type="email" placeholder="선택입력" name="manager_email" id="manager_email" maxlength="30" required="required">
-					<input type="button" onclick="location.href='sendMail'">
-				</div>
+				<div class="form-group email-form">
+					<label for="email">이메일</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="userEmail1"
+							id="userEmail1" placeholder="이메일"> <select
+							class="form-control" name="userEmail2" id="userEmail2">
+							<option>@naver.com</option>
+							<option>@daum.net</option>
+							<option>@gmail.com</option>
+							<option>@hanmail.com</option>
+							<option>@yahoo.co.kr</option>
+						</select> </div>
+						<div class="input-group-addon">
+							<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+						</div>
+						<div class="mail-check-box">
+							<input class="form-control mail-check-input"
+								placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled"
+								maxlength="6" required="required">
+						</div>
+						<span id="mail-check-warn"></span>
+					</div>
 				<div class="field post-code">
 						<b>주소</b>
 						<div>

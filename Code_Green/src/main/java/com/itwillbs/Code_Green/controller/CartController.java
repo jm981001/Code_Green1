@@ -30,7 +30,14 @@ public class CartController {
 	public String addCart(@ModelAttribute CartVO cart,HttpSession session, Model model) {
 		String sId = (String) session.getAttribute("sId");
 		System.out.println(cart);
-		int insertCount = service.insertCart(cart);
+//		int count = service.checkCart(cart.getRf_item_idx(), cart.getRf_member_idx());
+//		if(count == 0){		
+			// 없으면 insert
+			int insertCount = service.insertCart(cart);
+//		} else {
+			// 있으면 update
+//			service.ucpdateCart(cart);
+//		}
 		
 		return insertCount+""; //데이터만 전달 나머진 뷰페이지
 	}

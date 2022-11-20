@@ -127,7 +127,7 @@ h5{
 <!--                                 네이버 로그인 버튼(이미지) -->
                                 <div id="naver_id_login" style="text-align:center"><a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
                                  
-                                    <button class="ps-btn ps-btn--fullwidth" style="background-color: #fae100">카카오 로그인</button>
+                                    <div class="kl"><img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/></div>
                                 </div>
                             </div>
                         </div>
