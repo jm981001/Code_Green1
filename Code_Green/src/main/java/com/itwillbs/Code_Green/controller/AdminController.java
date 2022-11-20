@@ -857,8 +857,32 @@ public class AdminController {
 		
 		
 		//------------관리자 게시글 삭제----------------------------
+//		@GetMapping(value = "/ad_BoardRemove")
+//		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
+//			
+//			String sId = (String)session.getAttribute("sId");
+//			System.out.println("sId= " + sId);
+//			
+//			if(sId == null || !sId.equals("admin")) {
+//				model.addAttribute("msg", "잘못된 접근입니다!");
+//				return "admin/ad_fail_back";
+//			}
+//			
+//			int deleteCount = service.removeBoard(board_idx);
+//			System.out.println("게시글 삭제" + deleteCount);
+//			if(deleteCount > 0 ) {
+//				return "redirect:/ad_Board_Management";
+//				
+//			}
+//			
+//			model.addAttribute("fail", "게시글 삭제에 실패했습니다");
+//			return "admin/ad_fail_back";
+//		}
+		
+		
+		//------------게시글(커뮤,레시피,후기) 삭제----------------------------
 		@GetMapping(value = "/ad_BoardRemove")
-		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx) {
+		public String ad_Board_Remove(Model model ,HttpSession session, int board_idx, String board_type) {
 			
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
@@ -868,10 +892,17 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			}
 			
+			
 			int deleteCount = service.removeBoard(board_idx);
-			System.out.println("게시글 삭제" + deleteCount);
+			
+			System.out.println("게시글 삭제" + deleteCount + board_type);
 			if(deleteCount > 0 ) {
-				return "redirect:/ad_Board_Management";
+				
+				switch (board_type) {
+				case "커뮤": return "redirect:/ad_Board_Management";
+				case "후기":	return "redirect:/ad_Board_Review";
+				default:	return "redirect:/ad_Board_Recipe";
+				}
 				
 			}
 			
@@ -881,7 +912,7 @@ public class AdminController {
 		
 		
 		
-		//------------관리자 후기 게시판 ----------------------------
+		//------------후기 게시판 목록----------------------------
 		@RequestMapping(value = "/ad_Board_Review", method = RequestMethod.GET)
 		public String ad_Board_Review(Model model, HttpSession session,
 				@RequestParam(defaultValue = "1") int pageNum,
@@ -946,11 +977,87 @@ public class AdminController {
 			}
 			
 			BoardVO reviewDetail = service.getReviewDetail(board_idx);
-			System.out.println(reviewDetail);
+			System.out.println("후기상세조회 : " + reviewDetail);
 			model.addAttribute("reviewDetail", reviewDetail);
 			
 			
 			return "admin/ad_Review_Detail";
+		}
+		
+		
+		
+		//------------레시피 게시판----------------------------
+		@GetMapping(value = "/ad_Board_Recipe")
+		public String ad_Board_Recipe(Model model, HttpSession session,
+				@RequestParam(defaultValue = "1") int pageNum,
+				@RequestParam(defaultValue = "") String searchType,
+				@RequestParam(defaultValue = "") String keyword) {
+			
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			//페이징 처리
+			int listLimit = 10;
+			int pageListLimit = 10;
+			
+			int startRow = (pageNum - 1) * listLimit;
+			
+			
+			//레시피 목록
+			List<BoardVO> recipeList = service.getRecipeList(startRow, listLimit, searchType, keyword);
+			System.out.println("레시피 목록 : " + recipeList);
+			
+			//레시피 목록 갯수
+			int listCount = service.getRecipeListCount(searchType, keyword);
+			System.out.println("검색 결과(목록 수)" + listCount);
+			// 페이지 계산 작업 수행
+			// 전체 페이지 수 계산
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			
+			//시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			
+			//끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			PageInfo  pageinfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			model.addAttribute("recipeList", recipeList);
+			model.addAttribute("pageInfo", pageinfo);
+			
+			return "admin/ad_Board_Recipe";
+		}
+		
+		
+		//------------관리자 게시글 상세조회----------------------------
+		@GetMapping(value = "/ad_Recipe_Detail")
+		public String ad_Recipe_Detail(Model model, HttpSession session, String board_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			
+			if(sId == null || !sId.equals("admin")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			}
+			
+			
+			BoardVO recipeDetail = service.getRecipeDetail(board_idx);
+			model.addAttribute("recipeDetail", recipeDetail);
+			
+			
+			return "admin/ad_Recipe_Detail";
 		}
 		
 		
@@ -1274,7 +1381,7 @@ public class AdminController {
 			
 			int updateCount = service.modifyNotice(board);
 			
-			System.out.println(updateCount);
+			System.out.println("왓더 : " + updateCount);
 			
 			return "redirect:/ad_Notice";
 		}

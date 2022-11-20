@@ -158,6 +158,18 @@ public interface AdminMapper {
 	//후기 게시글 상세조회
 	public BoardVO selectReviewDetail(int board_idx);
 
+	//레시피 목록 조회
+	public List<BoardVO> selectRecipeList(
+			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword);	
+	
+	//레시피 목록 갯수 조회
+	public int selectRecipeListCount(
+			@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
+	//레시피글 상세 조회
+	public BoardVO selectRecipeDetail(String board_idx);
+
 	
 	//게시판 삭제
 	public int deleteBoard(int board_idx);
@@ -225,8 +237,13 @@ public interface AdminMapper {
 	public int updateNotice(BoardVO board);
 
 	//기업 가입 승인
-	public int updateAdminAuth(ManagerVO manager);	
+	public int updateAdminAuth(ManagerVO manager);
 
+	
+
+	
+
+	
 
 	
 

@@ -158,6 +158,12 @@ public class AdminService {
 		return mapper.selectItemQnaList(startRow, listLimit, searchType, keyword);
 	}
 	
+	//상품문의(답변대기) 상세조회
+	public QnaVO getItemQnaInfo(int qna_idx, String id) {
+		// TODO Auto-generated method stub
+		return mapper.selectItemQnaInfo(qna_idx, id);
+	}
+	
 	//상품문의글(답변완료) 갯수 조회
 	public int getItemAnswerListCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
@@ -227,7 +233,25 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectReviewDetail(board_idx);
 	}
-		
+	
+	//레시피 목록 조회
+	public List<BoardVO> getRecipeList(int startRow, int listLimit, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectRecipeList(startRow, listLimit, searchType, keyword);
+	}
+	
+	
+	//레시피 목록 갯수 조회
+	public int getRecipeListCount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.selectRecipeListCount(searchType, keyword);
+	}
+	
+	//레시피 상세 조회
+	public BoardVO getRecipeDetail(String board_idx) {
+		// TODO Auto-generated method stub
+		return mapper.selectRecipeDetail(board_idx);
+	}
 	
 	//게시판 글 삭제
 	public int removeBoard(int board_idx) {
@@ -335,11 +359,12 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
-	//상품문의(답변대기) 상세조회
-	public QnaVO getItemQnaInfo(int qna_idx, String id) {
-		// TODO Auto-generated method stub
-		return mapper.selectItemQnaInfo(qna_idx, id);
-	}
+	
+
+	
+
+	
+	
 	
 	
 

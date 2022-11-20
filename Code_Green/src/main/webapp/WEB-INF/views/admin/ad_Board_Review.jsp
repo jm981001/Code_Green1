@@ -141,7 +141,7 @@
                                     <td>${rList.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_BoardRemove?board_idx=${rList.board_idx }&board_type=${rList.board_type}">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>

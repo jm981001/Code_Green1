@@ -132,7 +132,7 @@
 				    	<td scope="row" rowspan="2">상품명</td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">${reviewDetail.board_content }</td>
+				    	<td colspan="4"><a href="ItemDetail.bo?item_idx=${reviewDetail.item_idx }&manager_brandname=${reviewDetail.manager_brandname }&item_category=${reviewDetail.item_category }">${reviewDetail.item_name }</a></td>
 				    </tr>
 				    <tr>
 				    	<td scope="row" rowspan="2">내용</td>

@@ -22,6 +22,11 @@ public class BoardVO {
 	private String item_category;
 	private String best_count;
 	private String reply_count;
+	private String manager_brandname;
+	private String item_name; 
+	
+	
+	public BoardVO() {}
 	
 	
 	public String getReply_count() {
@@ -151,6 +156,21 @@ public class BoardVO {
 		this.item_category = item_category;
 	}
 	
+	public String getManager_brandname() {
+		return manager_brandname;
+	}
+	public void setManager_brandname(String manager_brandname) {
+		this.manager_brandname = manager_brandname;
+	}
+	
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	
+	
 	
 	@Override
 	public String toString() {
@@ -159,8 +179,11 @@ public class BoardVO {
 				+ ", board_content=" + board_content + ", board_readcount=" + board_readcount + ", board_date="
 				+ board_date + ", best_cnt=" + best_cnt + ", reply_cnt=" + reply_cnt + ", item_idx=" + item_idx
 				+ ", member_id=" + member_id + ", file1=" + file1 + ", file2=" + file2 + ", file3=" + file3
-				+ ", board_star_score=" + board_star_score + ", item_category=" + item_category + "]";
+				+ ", board_star_score=" + board_star_score + ", item_category=" + item_category + ", best_count="
+				+ best_count + ", reply_count=" + reply_count + ", manager_brandname=" + manager_brandname
+				+ ", item_name=" + item_name + "]";
 	}
+	
 	
 	
 	

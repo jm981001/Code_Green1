@@ -125,11 +125,12 @@ $(document).ready(function() {
 
 				 <div style="margin-left: 800px" ></div>                   
 			 
-                     <form action="ad_Notice_UpdatePro?board_idx=${noticeDetail.board_idx }" method="get">
+                     <form action="ad_Notice_UpdatePro" method="get">
                      		<div class="mb-3">
 		            	<label>제목</label>
 		            	<input type="text" class="form-control" id="board_subject" name="board_subject" placeholder="공지 제목" value="${noticeDetail.board_subject }" required="required">
 		            	<input type="hidden" id="board_id" name="board_id" value="${sessionScope.sId }">
+		            	<input type="hidden" id="board_id" name="board_idx" value="${noticeDetail.board_idx }">
 		          	</div> 
                      	<textarea id="summernote" onload="${noticeDetail.board_subject }" name="board_content"></textarea>
                       		<div style="margin-left: 1250px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>

@@ -163,6 +163,11 @@ window.onload = function(){
 			            <label for="email">사업자 번호</label>
 			            <input type="text" class="form-control" id="storecode" value="${manager.manager_storecode }" readonly="readonly">
 			          </div>
+			<!--아래 기업정보 -->
+			         <div class="mb-3">
+			            <label for="email">기업정보</label>
+			            <input type="text" class="form-control" id="storecode" value="${manager.manager_info }" readonly="readonly">
+			          </div>
 			<!-- 이름 -->
 			         <div class="mb-3">
 			            <label for="email">이름</label>
