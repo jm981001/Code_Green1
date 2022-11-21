@@ -7,38 +7,33 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.RecipeMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 
 @Service
 public class RecipeService {
 	
 	@Autowired
 	private RecipeMapper mapper;
-	
-	//레시피 메인 목록 조회
-	public List<BoardVO> recipeList(int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectRecipeList(startRow, listLimit, searchType, keyword);
-	}
-	
-	// 전체 글 목록 갯수 조회
-	// => 파라미터 : 검색타입, 검색어    리턴타입 : int(listCount)
-	public int recipeListCount(String searchType, String keyword) {
-		return mapper.selectRecipeListCount(searchType, keyword);
-	}
-	
-	// 게시물 조회수 증가
-	public void increaseReadcount(int board_idx) {
-		mapper.updateReadcount(board_idx);
-		
-	}
-	// 게시물 상세 정보 조회
-	// => 파라미터 : 글번호, 리턴타입 : BoardVO(board)
-	public BoardVO recipeDetail(int board_idx) {
-		return mapper.selectBoard(board_idx);
+
+	// 레시피 작성(글)
+	public int writeRecipeBoard(BoardVO board) {
+		return mapper.insertRecipeBoard(board);
 	}
 
-	//레시피 작성
-	public int registRecipe(BoardVO board) {
-		return mapper.insertRecipe(board);
+	// 레시피 작성(파일)
+	public int writeRecipeFile(File_boardVO fileBoard) {
+		return mapper.insertRecipeFile(fileBoard);
 	}
+
+	// 레시피 목록(글) 불러오기
+	public List<BoardVO> getRecipeList(String searchType, String keyword) {
+		return mapper.selectRecipeFile(searchType, keyword);
+	}
+
+	// 레시피 목록(사진) 불러오기
+//	public List<File_boardVO> getRecipeFileList() {
+//		return mapper.selectRecipeFileList();
+//	}
+	
 
 }

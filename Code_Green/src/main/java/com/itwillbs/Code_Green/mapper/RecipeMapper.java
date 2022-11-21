@@ -5,25 +5,21 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 
 public interface RecipeMapper {
+
+	// 레시피 작성(글)
+	int insertRecipeBoard(BoardVO board);
+
+	// 레시피 작성(파일)
+	int insertRecipeFile(File_boardVO fileBoard);
+
+	// 레시피 목록(글) 불러오기
+	List<BoardVO> selectRecipeFile(@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+	// 레시피 목록(사진) 불러오기
+//	List<File_boardVO> selectRecipeFileList();
 	
-	//레시피 메인 목록 조회
-	List<BoardVO> selectRecipeList(
-			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
-			@Param("searchType") String searchType, @Param("keyword") String keyword);
-	
-	// 전체 글 목록 갯수 조회 
-	int selectRecipeListCount(
-			@Param("searchType") String searchType, @Param("keyword") String keyword);
-
-	// 게시물 조회수 증가
-	void updateReadcount(int board_idx);
-
-	// 게시물 상세 정보 조회
-	BoardVO selectBoard(int board_idx);
-
-	//레시피 작성
-	int insertRecipe(BoardVO board);
 	
 }

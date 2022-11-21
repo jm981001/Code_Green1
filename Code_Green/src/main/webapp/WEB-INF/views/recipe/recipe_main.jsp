@@ -35,6 +35,18 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
 	
+	<script type="text/javascript">
+		function recipe_write_auth() {
+			if(${sessionScope.sCode != null || sessionScope.sId == 'admin'}){
+				location.href="recipe_write.bo?manager_id=${sessionScope.sId }"
+			} else {
+				alert("작성 권한이 없습니다.");
+			}
+				
+		}
+	
+	</script>
+	
 </head>
 
 <body>
@@ -61,10 +73,12 @@
 		    </div>
 		</div>
 	</div>
+	
+	
 <!--------------------------------------------상단 태그 ---------------------------------------------------->
     <section class="recipe-section spad">
         <div class="categories-filter-section spad">
-        <div class="container">
+          <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="filter-item">
@@ -77,6 +91,9 @@
                     </div>
                 </div>
             </div>
+            
+            
+            
 <!------------------------------------상단 카테고리---------------------------------------------------->
             <div class="cf-filter" id="category-filter">
                 <div class="cf-item mix all mostpopular">
@@ -122,73 +139,43 @@
             </div>
         </div>
     </div>
-<!------------------------------------상단 카테고리---------------------------------------------------->
-
-
-
-<!-------------------------------------------form 태그 시작 ----------------------------------->
-		<form action="recipe_detail" method="get">
-
-			<c:forEach var="board" items="${RecipeList }">
-
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-4 col-sm-6">
-							<div class="recipe-item">
-								<a href="recipe_detail"><img
-									src="/Code_Green/resources/img/recipe/recipe-1.jpg"
-									onclick="location.href='recipe_detail?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}'"></a>
-								<div class="ri-text">
-									<h4></h4>
-									<p>${board.board_id }${board.board_subject }</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-sm-6">
-							<div class="recipe-item">
-								<a href="recipe_detail"><img
-									src="/Code_Green/resources/img/recipe/recipe-2.jpg" alt=""
-									onclick="location.href='recipe_detail'"></a>
-								<div class="ri-text">
-									<a href="recipe_detail">
-										<h4>레시피 제목</h4>
-									</a>
-									<p>작성자,조회수,좋아요수,짧은소개?</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<!--페이징 -->
-					<div class="recipe-pagination">
-						<a href="#" class="active">01</a> <a href="#">02</a> <a href="#">03</a>
-						<a href="#">04</a> <a href="#">Next</a> <input type="button"
-							value="작성" id="recipe-write"
-							onclick="location.href='recipe_formPro'">
-					</div>
+    
+    
+<!------------------------------------내용---------------------------------------------------->
+		<div class="container">
+            <div class="row">
+          		 <c:forEach var="recipe" items="${recipeList }">
+	                <div class="col-lg-4 col-sm-6">
+		                    <div class="recipe-item" style="margin-bottom: 200px;">
+		                        <a href="recipe_detail.bo">
+		                        	<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
+		                        </a>
+		                        <div class="ri-text">
+		                            <div class="cat-name"></div>
+		                                <h4>${recipe.board_subject }</h4>
+		                        </div>
+		                    </div>
+			            </div>
+          		 </c:forEach>
 				</div>
-			</c:forEach>
-		</form>
-		<div>
-			<form action="recipe_main" method="get">
-			<select name="searchType">
-				<option value="subject">제목</option>
-				<option value="content">내용</option>
-				<option value="subject_content">제목&내용</option>
-				<option value="name">작성자</option>
-			</select>
-			<input type="text" name="keyword"><input type="submit" value="검색">
-		</form>
-		
-		</div>
-	</section>
-<!-------------------------------------------form 태그 끝 ----------------------------------->
-	
-	
-	<!---------------검색-------------------->
-		
+				<div>
+					<div class="ps-form--quick-search--com" align="left">
+			            <form action="recipe_main.bo" method="get">
+							<select name="searchType">
+								<option value="recipe_name">레시피</option>
+								<option value="recipe_brandname">작성자명</option>
+							</select>
+							<input type="text" name="keyword">
+							<input type="submit" value="검색" id="typeSearch" style="border-style: none; ">
+						</form>
+			       </div>
+					<div class="ps-form--quick-search--com" align="right">
+			       			<button onclick="recipe_write_auth()">글쓰기</button>
+			       	</div>	
+			   	</div>
+		   	</div>
 
-
+</section>
 
 
 
@@ -196,6 +183,9 @@
 	<!-- 푸터 시작! -->
      <jsp:include page="../inc/footer.jsp"></jsp:include>
     <!-- 푸터 끝! -->
+
+
+
 
     <!-- Js Plugins -->
     <script src="/Code_Green/resources/js/jquery-3.3.1.min.js"></script>

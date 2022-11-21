@@ -1,86 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.Code_Green.mapper.RecipeMapper">
-						
-	<select id="selectRecipeList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT * 
-			FROM board WHERE board_type = '레시피'
-			<!-- choose, when, otherwise 태그를 사용하여 복수개의 조건 판별(if ~ else if 문 구조) -->
-			<!-- 1. 검색어(keyword)가 널스트링이 아닐 때 검색 수행 -->
-			<if test="!keyword.equals('')">
-				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-				<choose>
-					<when test="searchType.equals('category')">
-						AND board_category LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('id')">
-						AND board_id LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('subject')">
-						AND board_subject LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('content')">
-						AND board_content LIKE '%${keyword}%' 
-					</when>
-					<when test="searchType.equals('subject_content')">
-						AND board_subject LIKE '%${keyword}%' OR board_content LIKE '%${keyword}%'
-					</when>
-				</choose>
-			</if>
-			ORDER BY
-				board_idx DESC
-			LIMIT #{startRow}, #{listLimit}
+	
+	<!-- 레시피 등록(글) -->
+	<insert id="insertRecipeBoard">
+		INSERT 
+			  INTO board 
+			            VALUES (
+								IFNULL((SELECT MAX(board_idx) FROM board b),0) + 1,
+								'0',
+								'레시피',
+								#{board_id},
+								'N',
+								#{board_subject},
+								#{board_content},
+								'0',
+								date_format(now(),'%Y%m%d')
+								)
+	</insert>	
+	
+	<!-- 레시피 등록(사진) -->
+	<insert id="insertRecipeFile">
+		<selectKey keyProperty="file_board_idx" resultType="integer" order="BEFORE">
+		SELECT MAX(file_board_idx) 
+		  FROM file_board
+		</selectKey>
+		INSERT
+			  INTO file_board
+							 VALUES (
+									#{file_board_idx} + 1,
+									IFNULL(#{file1},'N'),
+									IFNULL(#{file2},'N'),
+									'', 
+									(SELECT MAX(board_idx) FROM board)
+								    )
+	</insert>
+	
+	<!-- 레시피 목록(글) 조회 -->
+	<select id="selectRecipeFile" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT
+			   b.board_subject,	   
+			   f.file1,
+			   m.manager_brandname
+		  FROM board b
+     LEFT JOIN file_board f
+     	    ON b.board_idx = f.rf_board_idx
+		  JOIN manager m 
+		    ON b.board_id = m.manager_id
+		 WHERE b.board_type = '레시피'
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('recipe_name')">     
+		   AND b.board_subject LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('recipe_brandname')">     
+		   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>
 	</select>
-
-	
-	<!-- 게시물 조회수 증가 -->
-	<update id="updateReadcount">
-		UPDATE board
-			SET
-				board_readcount = board_readcount + 1
-			WHERE
-				board_idx = #{board_idx}
-	</update>
-
-							
-	<!-- 전체 게시물 목록 갯수 조회(검색 기능 추가) -->
-	<select id="selectRecipeListCount" resultType="integer">
-		SELECT 
-			COUNT(*) 
-			FROM board WHERE board_type = '레시피'
-			<!-- choose, when, otherwise 태그를 사용하여 복수개의 조건 판별(if ~ else if 문 구조) -->
-			<!-- 1. 검색어(keyword)가 널스트링이 아닐 때 검색 수행 -->
-			<if test="!keyword.equals('')">
-				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-				<choose>
-					<when test="searchType.equals('category')">
-						AND board_category LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('id')">
-						AND board_id LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('subject')">
-						AND board_subject LIKE '%${keyword}%'
-					</when>
-					<when test="searchType.equals('content')">
-						AND board_content LIKE '%${keyword}%' 
-					</when>
-					<when test="searchType.equals('subject_content')">
-						AND board_subject LIKE '%${keyword}%' OR board_content LIKE '%${keyword}%'
-					</when>
-				</choose>
-			</if>
-	</select>		
-							
-	<!-- 글 상세정보 조회 -->
-	<select id="selectBoard" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT * 
-			FROM board
-			WHERE board_type = '레시피' AND board_idx = #{board_idx}
-	</select>				
-						
-						
-	
-							
-							
 </mapper>

@@ -48,7 +48,7 @@
     
     
 <!-------------------------------------------- 레시피 시작---------------------------------------->
-    <section class="single-page-recipe spad">
+    <section class="single-page-recipe spad" style="margin-top: 200px;">
         <div class="recipe-top">
             <div class="container-fluid">
                 <div class="recipe-title"> <!-- 타이틀 -->
@@ -62,39 +62,13 @@
                     <div class="ingredients-item">
                         <div class="intro-item">
                             <img src="/Code_Green/resources/img/recipe/샹그리아.png" alt="">
-                            <h2>샹그리아</h2>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="reviews">좋아요수 조회수</div>
-                            <div class="recipe-time">
-                                <ul>
-                                </ul>
-                            </div>
-                             <div class="recipe-time2">
-								<button><a href="../shopping-cart/shopping-cart.jsp">레시피 재료 한꺼번에 담기</a></button>
-                            </div>
                         </div>
                         <div class="ingredient-list">
                             <div class="list-item">
-                                <h5>재료</h5>
+                                <h5>요리 소개</h5>
                                 <div class="salad-list">
-                                    <h6>샐러드</h6>
-                                    <ul>
-                                        <li>재료 이것저것</li>
-                                        <li>재료 이것저것</li>
-                                    </ul>
                                 </div>
                                 <div class="dressing-list">
-                                    <h6>드레싱</h6>
-                                    <ul>
-                                        <li>재료 이것저것</li>
-                                        <li>재료 이것저것</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -102,37 +76,8 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="recipe-right">
-                        <div class="recipe-desc">
-                            <h3>요리 소개</h3>
-                            <p>샹그리아,조리시간,잡설</p>
-                        </div>
                         <div class="instruction-list">
-                            <h3>만들어봐요</h3>
-                            <ul>
-                                <li>
-                                    <span>01.</span>
-                                    먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                    먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 저 과일을 잘라서 
-                                    먼저 과일을 잘라서먼저 과일을 잘라서먼저 과일을 먼저 과일을 잘라서 
-                                    먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                    먼저 과일을 잘라서 먼저 과일을 잘라서 먼과일을 잘라서 
-                                </li>
-                                <li>
-                                    <span>02.</span>
-                                   먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                   먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                   먼저 과일을 잘라서 먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                   먼저 과일을 잘라서 먼저 과일을 잘라서 
-                                </li>
-                               
-                            </ul>
-                        </div>
-                        <div class="notes">
-                            <h3>팁</h3>
-                            <div class="notes-item">
-                                <span>i</span>
-                                <p>사이다 넣으면 맛있어요.</p>
-                            </div>
+                            <h3>만드는법</h3>
                         </div>
                     </div>
                 </div>
@@ -141,49 +86,6 @@
     </section>
  <!-------------------------------------------- 레시피 끝---------------------------------------->
 
-
- <!---------------------------------------- 추천레시피 시작 ----------------------------------------->
-
-    <section class="similar-recipe spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="similar-item">
-                        <a href="#"><img src="/Code_Green/resources/img/recipe/cat-feature/small-7.jpg" alt=""></a>
-                        <div class="similar-text">
-                            <h6>이탈리안 티라미수오 커피</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="similar-item">
-                        <a href="#"><img src="/Code_Green/resources/img/recipe/cat-feature/small-6.jpg" alt=""></a>
-                        <div class="similar-text">
-                            <h6>쿠키와 콘</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="similar-item">
-                        <a href="#"><img src="/Code_Green/resources/img/recipe/cat-feature/small-5.jpg" alt=""></a>
-                        <div class="similar-text">
-                            <h6>아스파라거스 구이</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="similar-item">
-                        <a href="#"><img src="/Code_Green/resources/img/recipe/cat-feature/small-4.jpg" alt=""></a>
-                        <div class="similar-text">
-                            <h6>훈제 연어</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!----------------------------------- 추천레시피 끝 ------------------------------------------------->
 
     <!-- 푸터 시작 -->
      <jsp:include page="../inc/footer.jsp"></jsp:include>
