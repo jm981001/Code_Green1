@@ -79,23 +79,24 @@ public class CartController {
 	}
 	
 	// 장바구니 수정
+	@ResponseBody
 	@GetMapping("updateCart")
-	public String update(@RequestParam int[] cart_amount, @RequestParam int[] item_idx, HttpSession session) {
+	public String update(@ModelAttribute CartVO cart, HttpSession session) {
 		// session의 id
 		String member_id = (String) session.getAttribute("member_id");
 		
 		// 레코드의 갯수 만큰 반복문 실행
-		for(int i=0; i<item_idx.length; i++){
-			CartVO cart = new CartVO();
-//			cart.setRf_member_idx(member_id);
-			cart.setCart_amount(cart_amount[i]);
-			cart.setRf_item_idx(item_idx[i]);
+//		for(int i=0; i<item_idx.length; i++){
+//			cart = new CartVO();
+////			cart.setRf_member_idx(member_id);
+//			cart.setCart_amount(cart_amount[i]);
+//			cart.setRf_item_idx(item_idx[i]);
 			service.modifyCart(cart);
-		}
+//		}
 		
-		return "redirect:/";
+		return "redirect:/cart/" + cart.getRf_member_idx();
 	}
-	
+//	, @RequestParam int[] cart_amount, @RequestParam int[] item_idx
 	
 	
 	

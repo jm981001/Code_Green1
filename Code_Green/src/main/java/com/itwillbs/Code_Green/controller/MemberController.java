@@ -32,7 +32,7 @@ public class MemberController {
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
-
+		System.out.println(member);
 		// ------------------ BCryptPasswordEncoder 활용한 로그인 판별 ----------------------
 		// 1. BCryptPasswordEncoder 객체 생성
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -53,7 +53,13 @@ public class MemberController {
 //			System.out.println(member.getMember_id() + ", " + member.getMember_pass()+"로그인 실패..");
 			return "member/fail_back";
 		} else {
+
+			MemberVO getMem = service.getMemberInfo(member.getMember_id());
+			System.out.println(getMem);
 			session.setAttribute("sId", member.getMember_id());
+			session.setAttribute("sIdx", getMem.getMember_idx());
+
+			System.out.println("세션값" + ((Integer)session.getAttribute("sIdx")));
 			int WishlistCount = Iservice.getWishListCount( member.getMember_id());
 			session.setAttribute("WishlistCount", WishlistCount);
 			model.addAttribute("item_category",WishlistCount);

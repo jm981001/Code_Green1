@@ -31,8 +31,8 @@ public class CartService {
 		return mapper.modifyCart(cart);
 	}
 	// 5. 장바구니 금액 합계
-	public int sumMoney(String member_id) {
-		return mapper.sumMoney(member_id);
+	public int sumMoney(int member_idx) {
+		return mapper.sumMoney(member_idx);
 	}
 	// 6. 장바구니 상품확인
 	public int checkCart(int item_idx, int member_idx) {

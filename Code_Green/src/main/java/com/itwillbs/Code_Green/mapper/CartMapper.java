@@ -15,7 +15,7 @@ public interface CartMapper {
 	// 4. 장바구니 수정
 	public int modifyCart(CartVO cart);
 	// 5. 장바구니 금액 합계
-	public int sumMoney(String userId);
+	public int sumMoney(int member_idx);
 	// 6. 물건이 이미 카트에 있는지 확인
 	public int checkCart(int item_idx, int member_idx);
 	// 7. 장바구니 상품수량 변경

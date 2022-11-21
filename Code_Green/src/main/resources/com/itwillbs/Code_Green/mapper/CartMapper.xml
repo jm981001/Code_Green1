@@ -45,7 +45,7 @@
 	
 	<!-- 4. 장바구니 수정 -->
 	<update id="modifyCart">
-	
+		update vam_cart set bookCount=#{bookCount} where cartId = #{cartId}
 	</update>
 	
 	
