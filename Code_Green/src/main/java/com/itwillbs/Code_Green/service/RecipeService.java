@@ -30,6 +30,10 @@ public class RecipeService {
 		return mapper.selectRecipeFile(searchType, keyword);
 	}
 
+	public BoardVO getRecipe(int board_idx) {
+		return mapper.selectRecipe(board_idx);
+	}
+
 	// 레시피 목록(사진) 불러오기
 //	public List<File_boardVO> getRecipeFileList() {
 //		return mapper.selectRecipeFileList();

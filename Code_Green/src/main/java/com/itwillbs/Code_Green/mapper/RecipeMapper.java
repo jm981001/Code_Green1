@@ -18,6 +18,9 @@ public interface RecipeMapper {
 	// 레시피 목록(글) 불러오기
 	List<BoardVO> selectRecipeFile(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
+	// 레시피 상세 불러오기
+	BoardVO selectRecipe(int board_idx);
+
 	// 레시피 목록(사진) 불러오기
 //	List<File_boardVO> selectRecipeFileList();
 	

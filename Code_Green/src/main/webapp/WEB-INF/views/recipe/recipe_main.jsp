@@ -37,8 +37,8 @@
 	
 	<script type="text/javascript">
 		function recipe_write_auth() {
-			if(${sessionScope.sCode != null || sessionScope.sId == 'admin'}){
-				location.href="recipe_write.bo?manager_id=${sessionScope.sId }"
+			if(${sessionScope.sCode != null || sessionScope.sId == "admin"}){
+				location.href="recipe_write.bo?id=" + "${sessionScope.sId }";
 			} else {
 				alert("작성 권한이 없습니다.");
 			}
@@ -147,7 +147,7 @@
           		 <c:forEach var="recipe" items="${recipeList }">
 	                <div class="col-lg-4 col-sm-6">
 		                    <div class="recipe-item" style="margin-bottom: 200px;">
-		                        <a href="recipe_detail.bo">
+		                        <a href="recipe_detail.bo?board_idx=${recipe.board_idx }&id=${sessionScope.sId}&manager_storecode=${sessionScope.sCode}">
 		                        	<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
 		                        </a>
 		                        <div class="ri-text">
@@ -170,7 +170,7 @@
 						</form>
 			       </div>
 					<div class="ps-form--quick-search--com" align="right">
-			       			<button onclick="recipe_write_auth()">글쓰기</button>
+			       		<button onclick="recipe_write_auth()">글쓰기</button>
 			       	</div>	
 			   	</div>
 		   	</div>

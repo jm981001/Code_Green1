@@ -39,6 +39,7 @@
 	<!-- 레시피 목록(글) 조회 -->
 	<select id="selectRecipeFile" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT
+			   b.board_idx,
 			   b.board_subject,	   
 			   f.file1,
 			   m.manager_brandname
@@ -59,4 +60,23 @@
 		</choose>                                            
 	  </if>
 	</select>
+	
+	<!-- 상세보기 -->
+	<select id="selectRecipe" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT 
+		       b.board_idx,
+			   b.board_subject,
+			   b.board_content,
+			   b.board_id,
+			   f.file1,
+			   f.file2,
+			   m.manager_brandname
+		  FROM board b
+	 LEFT JOIN file_board f
+	 		ON b.board_idx = f.rf_board_idx
+	 LEFT JOIN manager m
+	 	    ON b.board_id = m.manager_id
+	 	 WHERE b.board_idx = ${board_idx}  		
+	</select>
+	
 </mapper>

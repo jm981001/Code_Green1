@@ -9,7 +9,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>상세 레시피</title>
+    <title>레시피</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;
@@ -33,6 +33,17 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
+	
+	<script type="text/javascript">
+		function recipe_modify_auth() {
+			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
+				location.href="recipe_modify.bo?board_idx=" +${recipe.board_idx};
+			} else {
+				alert("수정 권한이 없습니다.");
+			}
+				
+		}
+	</script>
 </head>
 
 <body>
@@ -52,7 +63,7 @@
         <div class="recipe-top">
             <div class="container-fluid">
                 <div class="recipe-title"> <!-- 타이틀 -->
-                    <h2>샹그리아</h2>
+                    <h2>${recipe.board_subject }</h2>
                 </div>
             </div>
         </div>
@@ -61,15 +72,12 @@
                 <div class="col-lg-5">
                     <div class="ingredients-item">
                         <div class="intro-item">
-                            <img src="/Code_Green/resources/img/recipe/샹그리아.png" alt="">
+                            <img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt="">
                         </div>
                         <div class="ingredient-list">
                             <div class="list-item">
-                                <h5>요리 소개</h5>
-                                <div class="salad-list">
-                                </div>
-                                <div class="dressing-list">
-                                </div>
+                            	${recipe.manager_brandname }<br>
+                            	${recipe.board_content }
                             </div>
                         </div>
                     </div>
@@ -77,10 +85,13 @@
                 <div class="col-lg-7">
                     <div class="recipe-right">
                         <div class="instruction-list">
-                            <h3>만드는법</h3>
+                        	<img src="/Code_Green/resources/recUpload/${recipe.file2 }" alt="">
                         </div>
                     </div>
                 </div>
+                <div class="ps-form--quick-search--com" align="right">
+			       	<button onclick="recipe_modify_auth()">글 수정</button>
+			   </div>	
             </div>
         </div>
     </section>
@@ -91,16 +102,6 @@
      <jsp:include page="../inc/footer.jsp"></jsp:include>
     
     <!-- 푸터 끝 -->
-    <!-- Search model -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
     <!-- Js Plugins -->
     <script src="/Code_Green/resources/js/jquery-3.3.1.min.js"></script>
     <script src="/Code_Green/resources/js/bootstrap.min.js"></script>

@@ -136,9 +136,24 @@ public class RecipeController {
 	
 	//레시피 상세보기
 	@GetMapping(value = "/recipe_detail.bo")
-	public String recipe_detail() {
+	public String recipe_detail(@RequestParam int board_idx, Model model) {
+	
+		BoardVO recipe = service.getRecipe(board_idx);
+		
+		model.addAttribute("recipe", recipe);
 		
 		return "recipe/recipe_detail";
+	}
+	
+	// 레시피 수정 - 원본글 불러오기
+	@GetMapping(value = "/recipe_modify.bo")
+	public String recipe_modify(@RequestParam int board_idx, Model model) {
+	
+		BoardVO recipe = service.getRecipe(board_idx);
+		
+		model.addAttribute("recipe", recipe);
+		
+		return "recipe/recipe_modify";
 	}
 	
 	

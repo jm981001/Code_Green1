@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
 <script src="/Code_Green/resources/plugins_community/ckeditor5/build/ckeditor.js"></script>
 
-<title>레시피 작성</title>
+<title>레시피 수정</title>
 <style type="text/css">
 .no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;
@@ -72,7 +72,7 @@ h{
                         <!-- 블로그 헤더 시작  -->
                         <div class="ps-post__header">
                        		<div class="colorheaderhead">
-                            	<h2>레시피</h2>
+                            	<h2>레시피 수정</h2>
                             </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
@@ -82,7 +82,7 @@ h{
                    		<div class="ps-block--vendor-dashboard">
                     		<div class="ps-block__content">
 	                        	<div class="table-responsive">
-                    				<form action="recipe_writePro.bo" method="post" enctype="multipart/form-data">
+                    				<form action="recipe_modifyPro.bo" method="post" enctype="multipart/form-data">
 	                           		 <table class="table ps-table ps-table--vendor">
 	                                    <tr>
 	                                        <td>작성자</td>
@@ -90,30 +90,27 @@ h{
 	                                    </tr>
 	                                    <tr>
 	                                        <td>제목</td>
-	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%"></td>
+	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%" value="${recipe.board_subject }"></td>
 	                                    </tr>
 	                                    <tr>
 	                                    	<td>내용</td>
 	                                    	<td colspan="2">
-	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60" placeholder=
-"* 썸네일, 본문에 업로드할 사진 한장씩 올려주세요.
-* 내용엔 간단한 설명글을 올려주세요."></textarea>
-	                                    		
+	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60">${recipe.board_content }</textarea>
 	                                    	</td>
 	                                    </tr>
 	                                   
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
 	                                    	<td>썸네일</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${recipe.file1 }</td>
 	                                    </tr>
 	                                    <tr>
 	                                    	<td>본문 사진</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${recipe.file2 }</td>
 	                                    </tr>
 										<tr> 
 											<td colspan="2">
-												<input type="submit" value="글 등록" id="submitBtn">
+												<input type="submit" value="글 수정" id="submitBtn">
 											</td> 
 										</tr>
 	                            	</table>
