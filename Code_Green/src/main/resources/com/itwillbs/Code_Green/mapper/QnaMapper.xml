@@ -25,11 +25,11 @@
 					"답변대기", 
 					"N", 
 					#{qna_id}, 
-					"N", 
+					#{qna_pass}, 
 					#{qna_subject}, 
 					#{qna_content}, 
 					"N",
-					"0", 
+					"0",   
 					date_format(now(),'%Y%m%d')
 					)
 	</insert>

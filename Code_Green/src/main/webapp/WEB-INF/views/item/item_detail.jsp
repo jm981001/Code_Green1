@@ -837,68 +837,132 @@
 													        
 													        <c:forEach var="qna" items="${qnaList }">
 														        <tbody>  
-														            <tr class="item">  
-<!-- 														                <td>1</td>   -->
-														                <td>${qna.qna_subject }</td>  
+														        <tr class="item">  
+																<c:if test="${qna.qna_pass eq 'Y'}" >
+																	<c:choose>
+																	
+														                <c:when test="${qna.qna_id eq sessionScope.sId || sessionScope.sId eq 'admin' || sessionScope.sId  eq qna.manager_id}">
+														       				<td>${qna.qna_subject }</td>  
+															                <td>${qna.qna_id }</td>  
+																            <fmt:parseDate var="dateString" value="${qna.qna_date }" pattern="yyyyMMdd" />
+															                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
+															                <td>${qna.qna_category }</td>  
+														                    
+														                </c:when>
+														                <c:otherwise>
+														                	<td><img src="/Code_Green/resources/img/잠금.png"  style="width: 15px"/> 비밀글은 작성자와 관리자만 볼 수 있습니다.</td>
+														                	<td>***</td>
+																			<fmt:parseDate var="dateString" value="${qna.qna_date }" pattern="yyyyMMdd" />
+															                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
+														                	<td>${qna.qna_category }</td></c:otherwise>
+														            </c:choose>
+																</c:if>
+														            
+																<c:if test="${qna.qna_pass eq 'N' || qna.qna_pass eq null || qna.qna_pass eq '' }" >
+																		<td>${qna.qna_subject }</td>  
 														                <td>${qna.qna_id }</td>  
 															            <fmt:parseDate var="dateString" value="${qna.qna_date }" pattern="yyyyMMdd" />
 														                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
 														                <td>${qna.qna_category }</td>  
-														            </tr>  
-														            <tr class="hide">  
-														                <td colspan="4"><br>
-														            		${qna.qna_content }
-														            		<br><br><br>
-														            	
-														                	(관리자의 답글)<br>
-														                    안녕하세요 베지터틀 입니다. <br>
-																			순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																			<br>
-																			먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																			상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																			<br>
-																			문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																			<br>
-																			추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																			<br>
-																			앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																			<br>
-																			감사합니다.
-														                    <br><br><br>
-														                  <div align="right"><br><br>
-														                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
-																				<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
-																				<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
-																		  </c:if>
-																		 </div>
-														                </td>  
-														            </tr>  
-														        </tbody>  
-													        </c:forEach>
-													    </table>  
-												    <br>
+														        </c:if>					            
+												            </tr>  
+												            
+												            
+												            <tr class="hide">  
+															<c:if test="${qna.qna_pass eq 'Y'}" >
+															<c:choose>
+															
+												                <c:when test="${qna.qna_id eq sessionScope.sId || sessionScope.sId eq 'admin' || sessionScope.sId  eq qna.manager_id}">
+												       				 <td colspan="4"><br>
+													            		${qna.qna_content }
+													            		<br><br><br>
+													            	
+													                	(관리자의 답글)<br>
+													                    안녕하세요 베지터틀 입니다. <br>
+																		순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
+																		<br>
+																		먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
+																		상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
+																		<br>
+																		문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
+																		<br>
+																		추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
+																		<br>
+																		앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
+																		<br>
+																		감사합니다.
+													                    <br><br><br>
+													                  <div align="right"><br><br>
+													                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
+																			<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
+																			<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
+																	  </c:if>
+																	 </div>
+													                </td>    
+												                    
+												                </c:when>
+												                <c:otherwise>
+												                	 <td colspan="4"><br><br><br> 비밀글은 작성자와 관리자만 볼 수 있습니다.<br><br><br></td>
+												                </c:otherwise>
+												            </c:choose>
+														</c:if>
+														            
+														<c:if test="${qna.qna_pass eq 'N' || qna.qna_pass eq null || qna.qna_pass eq '' }" >
+												                <td colspan="4"><br>
+												            		${qna.qna_content }
+												            		<br><br><br>
+												            	
+												                	(관리자의 답글)<br>
+												                    안녕하세요 베지터틀 입니다. <br>
+																	순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
+																	<br>
+																	먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
+																	상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
+																	<br>
+																	문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
+																	<br>
+																	추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
+																	<br>
+																	앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
+																	<br>
+																	감사합니다.
+												                    <br><br><br>
+												                  <div align="right"><br><br>
+												                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
+																		<input type="button" value="수정" onclick="location.href='QnaModify.bo?item_idx=${item.item_idx }&qna_idx=${qna.qna_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }'">
+																		<input type="button" value="삭제" onclick="qnaDelete('${qna.qna_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
+																  </c:if>
+																 </div>
+												                </td>  
+												        </c:if>					            
+																
+											            </tr>  
+											        </tbody>  
+										        </c:forEach>
+										    </table>  
+									    <br>
 												    
-												     <!-- 페이징 버튼들 시작 -->
-								                   <%PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo"); %>
-								                    <div class="ps-pagination">
-								                        <ul class="pagination">
-								                           
-								                            <li><%if(pageInfo1.getPageNum() > pageInfo1.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo1.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-								                            <li><%if(pageInfo1.getPageNum() < pageInfo1.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-								                        </ul>
-								                    </div>
-								                    <!-- 페이징 버튼들 끝 -->
-												    
-												    <!-- 문의작성 버튼 -->
-												   <div align="right">
-							                            <ul class="ps-tab-list" >
-							                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
-							                            </ul>
-						                            </div> 
-						                            <!-- 문의작성 버튼 끝 -->
-                                            </form>
-                                        </div>
-   								</div>
+								     <!-- 페이징 버튼들 시작 -->
+				                  	 <%PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
+				                           
+				                            <li><%if(pageInfo1.getPageNum() > pageInfo1.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo1.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo1.getPageNum() < pageInfo1.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
+				                    <!-- 페이징 버튼들 끝 -->
+								    
+								    <!-- 문의작성 버튼 -->
+								   <div align="right">
+			                            <ul class="ps-tab-list" >
+			                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
+			                            </ul>
+		                            </div> 
+		                            <!-- 문의작성 버튼 끝 -->
+                                        </form>
+                                    </div>
+							</div>
   								<script type="text/javascript">
 									function qnaDelete(qna_idx) {
 										// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
@@ -940,7 +1004,7 @@
 확인가능합니다
 주문취소
 * 배송 단계별로 주문취소 방법이 상이합니다. 
-* [입금확인] 단계 : [ㅇㅇㅇㅇ > 주문내역 상세페이지] 에서 직접 취소 가능
+* [입금확인] 단계 : [마켓터틀> 주문내역 상세페이지] 에서 직접 취소 가능
 * [입금확인] 이후 단계 : 고객센터로 문의
 * 주문상품의 부분 취소는 불가능합니다. 전체 주문 취소 후 재구매 해주세요.
 배송
@@ -951,6 +1015,7 @@
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">
+                                                	비밀글<input type="checkbox" id="qna_pass" name="qna_pass" value="Y" />
 	                                                    <button class="ps-btn" type="submit">Submit Review</button>
 	                                                </div>
 	                                            </div>

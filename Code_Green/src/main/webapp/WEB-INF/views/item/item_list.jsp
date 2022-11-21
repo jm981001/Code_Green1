@@ -31,7 +31,55 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/autopart.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+
+
 </head>
+<script type="text/javascript">
+// 	추천기능
+	$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#wishBtn").click(function(){
+				if(${sessionScope.sId == null}){
+					
+					alert("로그인 후 사용가능합니다!!");
+					
+				} else {
+					
+					$.ajax({
+						url: "WishList.bo",
+						type: "GET",
+						data: {
+							member_id: '${sessionScope.sId}',
+							item_idx: ${item.item_idx},
+							pageNum: ${pageInfo.pageNum},
+							manager_brandname: '${item.manager_brandname}',
+							item_category: '${item.item_category}'
+							
+						},
+						success: function(){
+							wish_count();
+						},
+					})
+				}	
+			});
+			
+// 			// 게시글 추천수
+			function wish_count(){
+				$.ajax({
+					url: "WishCount.bo",
+					type: "POST",
+					data:{
+						item_idx: ${item.item_idx}
+					},
+					success: function(count){
+						$(".wish_count").html(count);
+					},
+				})
+			};
+		
+			wish_count();
+	});
+	</script>
 <body>
     
     
@@ -83,7 +131,7 @@
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
                                                         <ul class="ps-product__actions">
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
