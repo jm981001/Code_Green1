@@ -53,6 +53,31 @@ function deleteItem(cart_idx) {
 			}
 		});
 }
+
+/* 수량버튼 */
+$(".plus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	$(this).parent("div").find("input").val(++quantity);
+});
+$(".minus_btn").on("click", function(){
+	let quantity = $(this).parent("div").find("input").val();
+	if(quantity > 1){
+		$(this).parent("div").find("input").val(--quantity);		
+	}
+});
+
+
+/* 수량 수정 버튼 */
+$(".quantity_modify_btn").on("click", function(){
+	let cartId = $(this).data("cartid");
+	let bookCount = $(this).parent("td").find("input").val();
+	$(".update_cartId").val(cartId);
+	$(".update_bookCount").val(bookCount);
+	$(".quantity_update_form").submit();
+	
+});
+
+/* 수량 수정 버튼 */
 </script>
 </head>
 
@@ -98,11 +123,12 @@ function deleteItem(cart_idx) {
 								</tr>
 							</thead>
 							<c:forEach var="row" items="${cartList}" varStatus="i">
+							<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
 							<tr>
 								<td data-label="Product">
 									<div class="ps-product--cart">
 										<div class="ps-product__thumbnail">
-											<a href="product-default.html"><img src="/Code_Green/resources/img/products/shop/1.jpg" /></a>
+											<a href="product-default.html"><img src="/Code_Green/resources/item/${row.file1 }"></a>
 										</div>
 										<div class="ps-product__content">
 											<a href="product-default.html">${row.item_name}</a>
@@ -114,16 +140,23 @@ function deleteItem(cart_idx) {
 										</div>
 									</div>
 								</td>
-
 								<td class="price" data-label="Price">${row.item_price}원</td>
+
+									<!-- 수량조절 -->
 								<td data-label="Quantity">
 									<div class="form-group--number">
 										<button type="button" class="up">+</button> <!-- 수량	증가 버튼 -->
 										<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
-										
-										<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
 										<input class="form-control" type="text" id="quan" placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1">
 									</div>
+										<button type="button" class="quantity_modify_btn" data-cart_idx="${cart.cart_idx}">변경</button>
+									<!-- 수량조절 데이터 전송용 -->
+								<form action="/cart/update" method="post" class="quantity_update_form">
+									<input type="hidden" name="cart_idx" class="update_cart_idx">
+									<input type="hidden" name="item_idx" class="update_item_idx">
+									<input type="hidden" name="member_idx" class="update_member_idx">
+								</form>										
+
 								</td>
 								<td data-label="Total">${row.cart_total}원</td>
 								<td>

@@ -10,12 +10,15 @@ public interface CartMapper {
 	public int insertCart(CartVO cart);
 	// 2. 장바구니 목록
 	public List<CartVO> selectCart(String member_id);
+	
+	public CartVO selectIdx(int member_idx);
+	
 	// 3. 장바구니 삭제
 	public int deleteCart(int cart_idx);
 	// 4. 장바구니 수정
 	public int modifyCart(CartVO cart);
 	// 5. 장바구니 금액 합계
-	public int sumMoney(int member_idx);
+	public String sumMoney(int member_idx);
 	// 6. 물건이 이미 카트에 있는지 확인
 	public int checkCart(int item_idx, int member_idx);
 	// 7. 장바구니 상품수량 변경

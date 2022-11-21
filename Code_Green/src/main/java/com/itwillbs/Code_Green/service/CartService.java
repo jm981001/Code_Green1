@@ -22,6 +22,13 @@ public class CartService {
 	public List<CartVO> selectCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
+	
+	
+	public CartVO selectIdx(int member_idx) {
+		return mapper.selectIdx(member_idx);
+	}
+	
+	
 	// 3. 장바구니 삭제
 	public int deleteCart(int cart_idx) {
 		return mapper.deleteCart(cart_idx);
@@ -31,7 +38,7 @@ public class CartService {
 		return mapper.modifyCart(cart);
 	}
 	// 5. 장바구니 금액 합계
-	public int sumMoney(int member_idx) {
+	public String sumMoney(int member_idx) {
 		return mapper.sumMoney(member_idx);
 	}
 	// 6. 장바구니 상품확인
