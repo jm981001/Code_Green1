@@ -10,6 +10,7 @@ import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface AdminMapper {
 
@@ -238,6 +239,18 @@ public interface AdminMapper {
 
 	//기업 가입 승인
 	public int updateAdminAuth(ManagerVO manager);
+
+	//총매출
+	public SellVO selectTotalMoney();
+
+	//총주문수
+	public int selectTotalsellCount();
+
+
+//	public SellVO selectSellChart();
+
+	//차트입니다
+	public List<SellVO> selectSellChart();
 
 	
 

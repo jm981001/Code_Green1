@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,21 +191,21 @@
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
-                                    <h4>25400<small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                    <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총주문수</p>
-                                    <h4>6,260<small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                    <h4>${sellCount }<small class="asc"><i class="icon-arrow-up"></i></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>환불/취소 건</p>
-                                    <h4>180<small class="desc"><i class="icon-arrow-down"></i></small></h4>
+                                    <h4><small class="desc"><i class="icon-arrow-down"></i></small></h4>
                                 </div>
                             </div>
                         </div>
@@ -229,41 +232,71 @@
     
     <script type="text/javascript">
 // 차트를 그럴 영역을 dom요소로 가져온다.
-var chartArea = document.getElementById('myChart').getContext('2d');
-// 차트를 생성한다. 
-var myChart = new Chart(chartArea, {
-    // ①차트의 종류(String)
-    type: 'bar',
-    // ②차트의 데이터(Object)
-    data: {
-        // ③x축에 들어갈 이름들(Array)
-        labels: ['잇츠베러', '매일유업', '왕만두', '먹고', '싶다', 'Orange'],
-        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
-        datasets: [{
-            // ⑤dataset의 이름(String)
-            label: '# of Votes',
-            // ⑥dataset값(Array)
-            data: [364, 19, 3, 5, 2, 3],
-            // ⑦dataset의 배경색(rgba값을 String으로 표현)
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            // ⑧dataset의 선 색(rgba값을 String으로 표현)
-            borderColor: 'rgba(255, 99, 132, 1)',
-            // ⑨dataset의 선 두께(Number)
-            borderWidth: 1
-        }]
-    },
-    // ⑩차트의 설정(Object)
-    options: {
-        // ⑪축에 관한 설정(Object)
-        scales: {
-            // ⑫y축에 대한 설정(Object)
-            y: {
-                // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
-                beginAtZero: true
-            }
-        }
-    }
+
+$(document).ready(function(){
+	getGraph();
+	
 });
+
+function getGraph(){
+	
+	
+	$ajax({
+		url:"index",
+		type:"get",
+		dataType:"json",
+		success:function(){
+			
+			
+			new Chart(document.getElementById('myChart'), {
+			    // ①차트의 종류(String)
+			    type: 'bar',
+			    // ②차트의 데이터(Object)
+			    data: {
+			        // ③x축에 들어갈 이름들(Array)
+			        labels: ['잇츠베러', '매일유업', '왕만두', '먹고', '싶다', 'Orange'],
+			        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
+			        datasets: [{
+			            // ⑤dataset의 이름(String)
+			            label: '# 집에보내줘',
+			            // ⑥dataset값(Array)
+			            data: [364, 19, 3, 5, 2, 3],
+			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
+			            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			            // ⑧dataset의 선 색(rgba값을 String으로 표현)
+			            borderColor: 'rgba(255, 99, 132, 1)',
+			            // ⑨dataset의 선 두께(Number)
+			            borderWidth: 1
+			        }]
+			    },
+			    // ⑩차트의 설정(Object)
+			    options: {
+			        // ⑪축에 관한 설정(Object)
+			        scales: {
+			            // ⑫y축에 대한 설정(Object)
+			            y: {
+			                // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
+			                beginAtZero: true
+			            }
+			        }
+			    }
+			});
+			
+			
+		}
+
+	
+	
+	
+	
+	
+	
+	
+	})//ajax
+	
+}//getGraph
+
+
 </script>
 </body>
 

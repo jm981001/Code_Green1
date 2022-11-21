@@ -12,6 +12,7 @@ import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 @Service
 public class AdminService {
@@ -359,7 +360,27 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
+	//총매출
+	public SellVO getTotalMoney() {
+		// TODO Auto-generated method stub
+		return mapper.selectTotalMoney(); 
+	}
+	//총주문수
+	public int getTotalsellCount() {
+		// TODO Auto-generated method stub
+		return mapper.selectTotalsellCount();
+	}
+	//매출 차트
+	public List<SellVO> getChart() {
+		
+		return mapper.selectSellChart();
+	}
 	
+
+//	public SellVO getChart() {
+
+//		return mapper.selectSellChart();
+//	}
 
 	
 

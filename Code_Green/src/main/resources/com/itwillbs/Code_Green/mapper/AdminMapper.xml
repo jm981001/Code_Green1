@@ -7,6 +7,40 @@
 		SELECT * FROM admin
 		WHERE ADMIN_ID=#{admin_id} AND ADMIN_PASS=#{admin_pass}
 	</select>
+	
+	
+	<select id="selectTotalMoney" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+			SUM(sell_total_price) 
+		AS 
+			total
+		FROM
+			sell
+	</select>
+
+	<select id="selectTotalsellCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM sell
+	</select>
+
+	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT
+		sum((i.item_price * s.sell_amount)) as brandtotal
+		FROM manager m JOIN item i 
+		ON m.manager_idx = i.re_manager_idx
+		JOIN sell_detail s
+		ON i.item_idx = s.rf_item_idx
+		WHERE
+			m.manager_adminauth='Y' AND m.manager_del_yn ='N'
+		GROUP BY
+			i.re_manager_idx
+	</select>
+
+
+
+
+
+
 
 
 <!-- 아래부터 페이지 기능 -->

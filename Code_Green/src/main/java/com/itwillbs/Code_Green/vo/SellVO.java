@@ -29,9 +29,16 @@ public class SellVO {
 	private String manager_brandname; // 상품 브랜드
 	private String file1; // 상품사진
 	
+	private int total;//총매출
+	private int sell_count;//총주문수
+	private int brandtotal;
+	
+	
 	public SellVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	
 	public int getSell_idx() {
 		return sell_idx;
@@ -160,6 +167,10 @@ public class SellVO {
 		this.file1 = file1;
 	}
 
+	
+
+	
+
 	@Override
 	public String toString() {
 		return "SellVO [sell_idx=" + sell_idx + ", rf_member_idx=" + rf_member_idx + ", sell_amount=" + sell_amount
@@ -169,7 +180,72 @@ public class SellVO {
 				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
 				+ ", sell_detail_idx=" + sell_detail_idx + ", item_name=" + item_name + ", item_price=" + item_price
 				+ ", item_idx=" + item_idx + ", item_category=" + item_category + ", manager_brandname="
-				+ manager_brandname + ", file1=" + file1 + "]";
+				+ manager_brandname + ", file1=" + file1 + ", total=" + total + ", sell_count=" + sell_count
+				+ ", brandtotal=" + brandtotal + "]";
+	}
+
+
+
+	public SellVO(int sell_idx, int rf_member_idx, String sell_amount, String sell_use_coin, String sell_total_price,
+			String sell_status, String sell_postcode, String sell_address, String sell_phone, String sell_receiver,
+			String sell_date, String sell_pay_type, String sell_pay_status, String sell_pay_date,
+			String sell_detail_idx, String item_name, String item_price, String item_idx, String item_category,
+			String manager_brandname, String file1, int total, int sell_count, int brandtotal) {
+		super();
+		this.sell_idx = sell_idx;
+		this.rf_member_idx = rf_member_idx;
+		this.sell_amount = sell_amount;
+		this.sell_use_coin = sell_use_coin;
+		this.sell_total_price = sell_total_price;
+		this.sell_status = sell_status;
+		this.sell_postcode = sell_postcode;
+		this.sell_address = sell_address;
+		this.sell_phone = sell_phone;
+		this.sell_receiver = sell_receiver;
+		this.sell_date = sell_date;
+		this.sell_pay_type = sell_pay_type;
+		this.sell_pay_status = sell_pay_status;
+		this.sell_pay_date = sell_pay_date;
+		this.sell_detail_idx = sell_detail_idx;
+		this.item_name = item_name;
+		this.item_price = item_price;
+		this.item_idx = item_idx;
+		this.item_category = item_category;
+		this.manager_brandname = manager_brandname;
+		this.file1 = file1;
+		this.total = total;
+		this.sell_count = sell_count;
+		this.brandtotal = brandtotal;
+	}
+
+
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getSell_count() {
+		return sell_count;
+	}
+
+	public void setSell_count(int sell_count) {
+		this.sell_count = sell_count;
+	}
+
+
+
+	public int getBrandtotal() {
+		return brandtotal;
+	}
+
+
+
+	public void setBrandtotal(int brandtotal) {
+		this.brandtotal = brandtotal;
 	}
 	
 	

@@ -22,6 +22,7 @@ import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 @Controller
 public class AdminController {
@@ -48,24 +49,58 @@ public class AdminController {
 	
 
 	//------------전체관리자 메인----------------------------
-		@RequestMapping(value = "index", method = RequestMethod.GET)
-		public String index(Model model,HttpSession session) { 
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+	public String index(Model model,HttpSession session) { 
 
-			String sId = (String)session.getAttribute("sId");
-			System.out.println("sId= " + sId);
-			if(sId == null || !sId.equals("admin") || sId == "") {
-				model.addAttribute("msg", " 잘못된 접근입니다!");
-				return "admin/ad_fail_back";
-			} 
-			return "admin/index";
-			
-		}
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId= " + sId);
+		if(sId == null || !sId.equals("admin") || sId == "") {
+			model.addAttribute("msg", " 잘못된 접근입니다!");
+			return "admin/ad_fail_back";
+		} 
+		
+//		SellVO sellChart = service.getChart();
+//		System.out.println("오늘안에하고싶다 : " + sellChart);
+
+		SellVO sellTotal = service.getTotalMoney();
+//		System.out.println("돈돈돈돈 = " + sellTotal); //총매출
+		
+		int sell_count = service.getTotalsellCount();
+//		System.out.println("총주문수 = " + sell_count); //총주문수
+		
+		
+		
+		List<SellVO> sellChart = service.getChart();
+		System.out.println("오늘안에하고싶다 : " + sellChart);
+		
+		model.addAttribute("sellTotal", sellTotal);
+		model.addAttribute("sellCount", sell_count);
+		model.addAttribute("sellChart", sellChart);
+		
+		return "admin/index";
+		
+	}
+	
+	
+//	//------------전체관리자 메인----------------------------
+//		@RequestMapping(value = "index", method = RequestMethod.GET)
+//		public String index(Model model,HttpSession session) { 
+//
+//			String sId = (String)session.getAttribute("sId");
+//			System.out.println("sId= " + sId);
+//			if(sId == null || !sId.equals("admin") || sId == "") {
+//				model.addAttribute("msg", " 잘못된 접근입니다!");
+//				return "admin/ad_fail_back";
+//			} 
+//			return "admin/index";
+//			
+//		}
 		
 		//------------메인페이지----------------------------
-			@RequestMapping(value = "main", method = RequestMethod.GET)
-			public String main() {
-				return "main/main";
-			}
+		@RequestMapping(value = "main", method = RequestMethod.GET)
+		public String main() {
+			return "main/main";
+		}
 			
 		
 		//------------전체관리자 회원관리(전체목록)----------------------------
@@ -90,6 +125,7 @@ public class AdminController {
 			
 			
 			List<MemberVO> memberList = service.getMemberList(startRow, listLimit, searchType, keyword);
+			System.out.println("gmd" + memberList);
 			//model 객체에 조회 데이터를 가리키는 변수 memberList 저장
 			
 			
@@ -899,9 +935,9 @@ public class AdminController {
 			if(deleteCount > 0 ) {
 				
 				switch (board_type) {
-				case "커뮤": return "redirect:/ad_Board_Management";
+				case "커뮤": 	return "redirect:/ad_Board_Management";
 				case "후기":	return "redirect:/ad_Board_Review";
-				default:	return "redirect:/ad_Board_Recipe";
+				default	   :	return "redirect:/ad_Board_Recipe";
 				}
 				
 			}
