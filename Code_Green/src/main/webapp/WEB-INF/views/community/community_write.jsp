@@ -83,13 +83,13 @@
 	                                   
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
+	                                    	<td colspan="2"><input type="file" id="file_1" name="file_1"></td>
 	                                    </tr>
 	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
+	                                    	<td colspan="2"><input type="file" id="file_2" name="file_2"></td>
 	                                    </tr>
 	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택3" name="file_3"></td>
+	                                    	<td colspan="2"><input type="file" id="file_3" name="file_3"></td>
 	                                    </tr>
 										<tr> 
 											<td><input type="submit" value="글 등록" id="submitBtn"></td> 

@@ -36,7 +36,28 @@
   	.ck-editor__editable { height: 300px; }  
    	.ck-content { font-size: 12px; }  
 </style>
+<script>
+// 	function deleteOriginalFile(fileName){
+// 		let conDelete = alert("기존 파일을 삭제하시겠습니까?\n삭제 후 취소할수 없습니다.");
+		
+// 		if(conDelete){
+// 			$.ajax({
+// 				url:"FindModifyFile.bo",
+// 				type:"POST",
+// 				// 이거 파일이름...어떻게 하드코딩으로 말고 구분할수있을까 
+// 				data: {
+// 					file1 : fileName
+// 				},
+// 				success:function(msg){
+// 				// 삭제하고 돌아오면 파일.val ""으로 비워주기 
+// 					$("#" + fileName).val="";
+// 					alert(msg);
+// 				}
+// 			}) 
+// 		}
+// 	}
 
+</script>
 <body>
     
     <!-- 헤더 삽입 -->
@@ -63,7 +84,12 @@
                    		<div class="ps-block--vendor-dashboard">
                     		<div class="ps-block__content">
 	                        	<div class="table-responsive">
-                    				<form action="CommunityWritePro.bo" method="post" enctype="multipart/form-data">
+                    				<form action="CommunityModifyPro.bo" method="post" enctype="multipart/form-data">
+                    				<input type="hidden" name="pageNum" value="${param.pageNum }">  
+                    				<input type="hidden" name="board_idx" value="${board.board_idx}">  
+                    				<input type="hidden" name="file1" value="${board.file1}">  
+                    				<input type="hidden" name="file2" value="${board.file2}">  
+                    				<input type="hidden" name="file3" value="${board.file3}">  
 	                           		 <table class="table ps-table ps-table--vendor">
 	                                    <tr>
 	                                        <td>말머리</td>
@@ -88,10 +114,9 @@
 	                                   
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
-	                                    	
-	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1">
-	                                    	<c:if test="${board.file1 ne 'N' }">(기존파일:<span id="here"></span>)
-	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    	<td colspan="2"><input type="file" id="file_1" name="file_1">
+	                                    	<c:if test="${board.file1 ne '' }">(기존파일:<span id="here"></span>)
+<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile1('${board.file1}')" width="22px" > --%>
 		                                   		 <script>
 										       		let name = '${board.file1}';
 										       		let result = name.split('_');
@@ -101,25 +126,25 @@
 	                                    	</td>
 	                                    </tr>
 	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2">
-	                                    	<c:if test="${board.file2 ne 'N' }">(기존파일:<span id="here2"></span>)
-	                                    	<button onclick="deleteOriginalFile()">삭제</button>
-	                                    		<script>
-										       		let name = '${board.file2}';
-										       		let result = name.split('_');
-										       		$('#here2').text(result[2]);
+	                                    	<td colspan="2"><input type="file" id="file_2" name="file_2">
+	                                    	<c:if test="${board.file2 ne '' }">(기존파일:<span id="here2">${board.file2 }</span>)
+<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile2('${board.file2}')" width="22px" > --%>
+	                                    		 <script>
+										       		let name2 = '${board.file2}';
+										       		let result2 = name2.split('_');
+										       		$('#here2').text(result2[1]);
 										      	</script>
 	                                    	</c:if>
 	                                    	</td>
 	                                    </tr>
 	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_3">
-	                                    	<c:if test="${board.file3 ne 'N' }">(기존파일:<span id="here3"></span>)
-	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    	<td colspan="2"><input type="file" id="file_3" name="file_3">
+	                                    	<c:if test="${board.file3 ne '' }">(기존파일:<span id="here3">${board.file3 }</span>)
+<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile3('${board.file3}')" width="22px" > --%>
 	                                    		<script>
-										       		let name = '${board.file3}';
-										       		let result = name.split('_');
-										       		$('#here3').text(result[3]);
+										       		let name3 = '${board.file3}';
+										       		let result3 = name3.split('_');
+										       		$('#here3').text(result3[1]);
 										      	</script>
 	                                    	</c:if>
 	                                    	</td>
@@ -164,7 +189,7 @@
    	
    	<!-- CKEditor5 관련 설정 -->
    	<script>
-	  ClassicEditor
+	    ClassicEditor
 	    .create( document.querySelector( '#editor' ), {
 	    	removePlugins: ['Title'],
 	    	placeholder: '내용을 입력해주세요',

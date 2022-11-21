@@ -144,9 +144,9 @@
 			INTO file_board
 			VALUES (
 				#{file_board_idx} + 1,
-				IFNULL(#{file1},'N'),
-				IFNULL(#{file2},'N'), 
-				IFNULL(#{file3},'N'), 
+				IFNULL(#{file1},''),
+				IFNULL(#{file2},''), 
+				IFNULL(#{file3},''), 
 				(SELECT MAX(board_idx) FROM board)
 			)
 	</insert>
@@ -221,8 +221,40 @@
 		ON b.board_idx = f.rf_board_idx
 		WHERE board_type = '커뮤' AND board_idx = #{board_idx};
 	</select>
+	
+	<!-- 글 수정을 위한 파일불러오기  -->	
+<!-- 	<select id="selectFileModify" resultType="com.itwillbs.Code_Green.vo.File_boardVO"> -->
+<!-- 		SELECT * -->
+<!-- 			FROM file_board -->
+<!-- 				WHERE rf_board_idx = #{board_idx} -->
+<!-- 	</select> -->
 		
-		
+	<!-- 글 수정 => 파일 업데이트  -->	
+	<update id="updateFile">
+		UPDATE file_board
+			SET
+				rf_board_idx = #{board_idx},
+				file1 = IFNULL(#{file1},''),
+				file2 = IFNULL(#{file2},''), 
+				file3 = IFNULL(#{file3},'')
+			WHERE
+				rf_board_idx = #{board_idx}
+	</update>	
+	
+	<!-- 글 수정 => 글 업데이트 -->
+	<update id="updateBoard">
+		UPDATE board
+			SET
+				board_category = #{board_category},
+				board_subject = #{board_subject},
+				board_content = #{board_content}
+			WHERE
+				board_type = '커뮤'
+				AND
+				board_idx = #{board_idx}	
+	</update>		
+	
+	
 	<!-- 게시글 삭제전 파일1 명 조회 -->	
 	<select id="selectRealFile1" resultType="string">
 		SELECT file1

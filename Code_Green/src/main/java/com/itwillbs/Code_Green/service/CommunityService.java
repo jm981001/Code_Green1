@@ -95,6 +95,11 @@ public class CommunityService {
 		return mapper.selectBoardModify(board);
 	}
 	
+//	// 글 수정폼 페이지에 파일 데이터 가져오기
+//	public File_boardVO getFile(int board_idx) {
+//		return mapper.selectFileModify(board_idx);
+//	}
+	
 	// 대댓글 순서번호(reply_re_seq) 조정
 	public void increaseReplyReSeq(ReplyVO reply) {
 		mapper.updateReplyReSeq(reply);
@@ -120,7 +125,7 @@ public class CommunityService {
 		return mapper.selectRealFile2(board_idx);
 	}
 	
-	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 2 
+	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 3 
 	public String getRealFile3(int board_idx) {
 		return mapper.selectRealFile3(board_idx);
 	}
@@ -129,6 +134,18 @@ public class CommunityService {
 	public int removeFile(int board_idx) {
 		return mapper.deleteBoardFile(board_idx);
 	}
+
+	// 글 수정하기 -> 파일수정 
+	public int modifyFile(File_boardVO fileBoard) {
+		return mapper.updateFile(fileBoard);
+	}
+
+	// 글 수정하기 -> 글 수정 
+	public int modifyBoard(BoardVO board) {
+		return mapper.updateBoard(board);
+	}
+
+	
 
 
 		

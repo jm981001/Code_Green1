@@ -183,7 +183,14 @@ public class CommunityController {
 		// ===========================================================
 
 		int insertCount = service.writeCommunityBoard(board);
-		int file_insertCount = service.writeCommunityFile(fileBoard);
+		
+		// 사진파일이 하나도 등록안될경우 + 사진등록 될 경우 
+		int file_insertCount = 0;
+		if(!(originalFileName1.equals("") 
+				&& originalFileName2.equals("") 
+				&& originalFileName3.equals(""))){
+			file_insertCount = service.writeCommunityFile(fileBoard);
+		}
 		
 		if(insertCount > 0) {
 			if(file_insertCount > 0) {
@@ -218,9 +225,9 @@ public class CommunityController {
 	
 	
 	
-	//------------ 커뮤니티 글 수정 폼 ------------------------------------------- 
+	//------------ 커뮤니티 글 수정 폼으로 가기(원글불러오기) ------------------------------------------- 
 	@GetMapping(value = "/CommunityModify.bo")
-	public String communityModify(@ModelAttribute BoardVO board, Model model ) {
+	public String communityModify(@ModelAttribute BoardVO board, Model model) {
 		BoardVO boardMove = service.getBoard(board);
 		
 		model.addAttribute("board", boardMove);
@@ -228,14 +235,161 @@ public class CommunityController {
 		return "community/community_modify";
 	}
 	
-	//------------ 커뮤니티 글 수정 업데이트로직------------------------------------------- 
+	//------------ 커뮤니티 글 수정 업데이트로직(새로덮어쓰기)------------------------------------------- 
 	@PostMapping(value = "/CommunityModifyPro.bo")
-	public String communityModifyPro(@ModelAttribute BoardVO board,Model model) {
+	public String communityModifyPro(@ModelAttribute BoardVO board,
+									 @ModelAttribute File_boardVO fileBoard, 
+									 HttpSession session,
+									 @RequestParam(defaultValue = "1") int pageNum,
+									 Model model) {
+		
+		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
+		String oldRealFile1 = fileBoard.getFile1();
+		String oldRealFile2 = fileBoard.getFile2();
+		String oldRealFile3 = fileBoard.getFile3();
+		
+		String uuid = UUID.randomUUID().toString();
+		String uploadDir = "/resources/commUpload";	// 가상의 업로드 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		MultipartFile mFile1 = fileBoard.getFile_1();
+		MultipartFile mFile2 = fileBoard.getFile_2();
+		MultipartFile mFile3 = fileBoard.getFile_3();
+		
+		// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
+		boolean isNewFile1 = false, isNewFile2 = false, isNewFile3 = false; 
+		
+		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
+		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
+		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
+		if(!mFile1.getOriginalFilename().equals("")) {
+			String originalFileName = mFile1.getOriginalFilename();
+			System.out.println("파일명1 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			fileBoard.setFile1(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile1 = true;
+		} 
+		
+		if(!mFile2.getOriginalFilename().equals("")) {
+			String originalFileName = mFile2.getOriginalFilename();
+			System.out.println("파일명2 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			fileBoard.setFile2(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile2 = true;
+		}	
+		
+		if(!mFile3.getOriginalFilename().equals("")) {
+			String originalFileName = mFile3.getOriginalFilename();
+			System.out.println("파일명3 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			fileBoard.setFile3(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile3 = true;
+		} 
 		
 		
-		return "redirect:/CommunityDetail.bo?board_idx=" ;
+		// ==================== 덮어쓰기 과정시작 =========================
+		// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
+		int updateFileCount = service.modifyFile(fileBoard);
+		
+		if(updateFileCount == 0) {
+			
+			model.addAttribute("msg","파일수정 실패");
+			return "member/fail_back";
+			
+		} else {
+			if(isNewFile1) {
+				try {
+					mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+
+					File f1_1 = new File(saveDir, oldRealFile1); 
+//					System.out.println("File f1_1 = new File(saveDir, oldRealFile1);  -> "+ f1_1);
+					if(f1_1.exists()) {
+						f1_1.delete();
+					}
+					
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+			
+			if(isNewFile2) {
+				try {
+					mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+					File f2_2 = new File(saveDir, oldRealFile2); 
+//					System.out.println("File f2_2 = new File(saveDir, oldRealFile1);  -> "+ f2_2);
+					if(f2_2.exists()) {
+						f2_2.delete();
+					}
+					
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+			
+			if(isNewFile3) {
+				try {
+					mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
+					File f3_3 = new File(saveDir, oldRealFile3); 
+//					System.out.println("File f3_3 = new File(saveDir, oldRealFile1);  -> "+ f3_3);
+					if(f3_3.exists()) {
+						f3_3.delete();
+					}
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		// ========================= 글 수정 ===============================
+		
+		int updateCount = service.modifyBoard(board);
+		model.addAttribute("pageNum", pageNum);
+		System.out.println(updateCount);
+		System.out.println(board);
+		if(updateCount == 0) {
+			model.addAttribute("msg", "글 수정 실패");
+			return "member/fail_back";
+		}
+		
+		return "redirect:/CommunityDetail.bo?board_idx=" + board.getBoard_idx() + "&pageNum=" + pageNum;
 	}
 
+	
 	
 	
 	//------------ 커뮤니티 글 삭제 페이지------------------------------------------- 

@@ -81,6 +81,15 @@ public interface CommunityMapper {
 	// 커뮤니티 게시글 해당파일 삭제
 	int deleteBoardFile(int board_idx);
 
+	// 글 수정하기 -> 파일수정 
+	int updateFile(File_boardVO fileBoard);
+
+	// 글 수정하기 -> 글수정
+	int updateBoard(BoardVO board);
+
+//	// 글 수정폼 페이지에 파일데이터 가져오기
+//	File_boardVO selectFileModify(int board_idx);
+
 	
 	
 	
