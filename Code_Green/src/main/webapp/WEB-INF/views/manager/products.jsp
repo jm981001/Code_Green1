@@ -105,7 +105,7 @@
             </header>
             <section class="ps-items-listing">
    
-                 <div class="ps-section__actions"><a class="ps-btn success" href="manager/product_register"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_manage"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
+                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">

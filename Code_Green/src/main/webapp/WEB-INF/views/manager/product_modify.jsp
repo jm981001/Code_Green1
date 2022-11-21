@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>상품수정</title>
+    <title>상품수정/삭제</title>
      <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -48,7 +48,6 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
 						</ul>
             </ul>
         </div>
@@ -81,12 +80,11 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
 						</ul>
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
+                            <p>&copy;2020 CODEGREEN marketplace. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>
@@ -118,24 +116,7 @@
 
  
 <!--        <table class="table ps-table"> -->
-              
-<!--                     </form> -->
-<!--                     <h2>상품등록</h2> -->
-<!--                     <hr> -->
-<!--                             <thead> -->
-<!--                                 <tr> -->
-<!--                                     <th>상품번호</th> -->
-<!--                                     <th>날짜</th> -->
-<!--                                     <th>상품명</th> -->
-<!--                                     <th>결제</th> -->
-<!--                                     <th>주문상태</th> -->
-<!--                                     <th>총금액</th> -->
-<!--                                     <th></th> -->
-<!--                                 </tr> -->
-<!--                             </thead>     -->
-                     
-<!--   		</table> -->
-  				
+
 <!--   		</div> -->
   		
                             <h4>상품수정 & 삭제</h4>
@@ -148,6 +129,16 @@
 						    <a href="#" class="btn btn-primary">썸네일수정</a>
 						  </div>
 						</div>
+						
+                        <div class="card" style="width: 18rem;">
+						  <img src="/Code_Green/resources/img/삼색이.jpg" class="card-img-top"alt="">
+						  <div class="card-body">
+						    <h5 class="card-title">상품명</h5>
+						    <p class="card-text">상품소개 어쩌고 저쩌고</p>
+						    <a href="#" class="btn btn-primary">썸네일수정</a>
+						  </div>
+						</div>
+						
 						
 						<br>
 						<div class="ps-card__content">
@@ -248,10 +239,45 @@
                                 </div>
                 
                
-<!--                        <div class="ps-form__left"> -->
-<!--                                 <div class="form-group"> -->
-<!--                                     <input class="form-control" type="text" placeholder="Search..." /> -->
-<!--                                 </div> -->
+             <!-- 파일 업로드 부분 -->
+	                                    <tr>
+	                                    	
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1">
+	                                    	<c:if test="${board.file1 ne 'N' }">(기존파일:<span id="here"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+		                                   		 <script>
+										       		let name = '${board.file1}';
+										       		let result = name.split('_');
+										       		$('#here').text(result[1]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2">
+	                                    	<c:if test="${board.file2 ne 'N' }">(기존파일:<span id="here2"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    		<script>
+										       		let name = '${board.file2}';
+										       		let result = name.split('_');
+										       		$('#here2').text(result[2]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_3">
+	                                    	<c:if test="${board.file3 ne 'N' }">(기존파일:<span id="here3"></span>)
+	                                    	<button onclick="deleteOriginalFile()">삭제</button>
+	                                    		<script>
+										       		let name = '${board.file3}';
+										       		let result = name.split('_');
+										       		$('#here3').text(result[3]);
+										      	</script>
+	                                    	</c:if>
+	                                    	</td>
+	                                    </tr>
+										<tr> 
                              
                     <br>
                     

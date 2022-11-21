@@ -121,7 +121,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="get">
+  		<form class="ps-form--search-bar" action="manager/index" method="get">
 
  
        <table class="table ps-table">
@@ -140,8 +140,8 @@
                                     <th>등록일</th>
 <!--                                 </tr> -->
 <!--                                 <tr> -->
-                                     <th>상품썸네일</th>
-                                     <th>상품상세이미지</th>
+<!--                                      <th>상품썸네일</th> -->
+<!--                                      <th>상품상세이미지</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -157,55 +157,51 @@
                                     <td>${ItemInfo.item_packing }</td>
                                     <td>${ItemInfo.item_date}</td>
                                  </tr> 
-                                 <tr>  
-                                	<td><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></td>
-                                	<td><img src="/Code_Green/resources/item/${item.file2 }" alt="" /></td>
-			                </tr>
-					 	<!-- 상품 이미지 -->
-                            <tr>
-                    		 <a href="ItemInfo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >
-                     			<img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
-			                 </tr>           
+
                     </tbody>
                     </table>
                     </form>
 					</div>
 					</div>       
+                                	
 
-
-<%--            <c:forEach var="qnaList" items="${ItemInfo }"> --%>
-<!--                                 <tr> -->
-<%--                                 	<td>${itemInfo.item_idx }</td> --%>
-<%--                                     <td onclick="location.href='products_detail?item_idx=${itemInfo.item_idx}'"><strong>${itemInfo.item_name }</strong></td> --%>
-<%--                                 	<td>${itemInfo.item_name }</td> --%>
-<%--                                     <td>${itemInfo.item_info }</td> --%>
-<%--                                     <td>${itemInfo.item_stock }</td> --%>
-<%--                                     <td>${itemInfo.item_price }</td> --%>
-<%--                                     <td>${itemInfo.item_category }</td> --%>
-<%--                                     <td>${itemInfo.item_packing }</td> --%>
-<%--                                     <td>${itemInfo.manager_brandname }</td> --%>
-<%--                                     <td>${itemInfo.item_date}</td> --%>
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<%--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div> --%>
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<%--                                </c:forEach> --%>
-<!--                             </tbody> -->
-<!--                         </table> -->
-<!--                     </div> -->
-<!--                 </div> -->
-
-
-
-
-                
-                     <div class="ps-form__submit text-center">
-                     	<br>
-                          <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                          <button class="ps-btn success"> <a href="inventory_management">상품수정</a></button>
+                                	
+ 				
+ 				<table class="table ps-table">
+                       <thead>
+                                <tr>
+                                	<th>상품썸네일</th>
+                                	<th>상품상세이미지</th>
+                                </tr>
+           <table class="item_image"id="itemImage">
+         		<div class="ps-form__submit text-center">
+                  <br>
+                   	<tr>
+                      <td><div class="card" style="width: 18rem;"></div></td><td><td><div class="card" style="width: 18rem;"></div></td>
+                    </tr>
+                </div>
+			<!-------------등록된 상품이미지 ------------>
+	<c:forEach var="item" items="${itemList}" >
+					  <tr>
+					    <td><img alt="${item.file1}" src="/Code_Green/resources/img/item/${file_item.file1 }"/></td><td><img alt="${file_item.file2}" src="/Code_Green/resources/img/item/${item.file2 }" /></td>
+						<td><h5 class="card-title">${ItemInfo.item_name }</h5></td><td><h5 class="card-title">${ItemInfo.item_name }</h5></td>
+					  <tr>
+					</c:forEach>
+						</tbody>
+						</table>
+					
+											
+			<!-------------등록된 상품이미지 ------------>
+                            
+                            
+                    <center>  
+                          <button class="ps-btn success"> <a href="product_modify">상품수정</a></button>
+                         <button class="ps-btn ps-btn--gray mr-3"><a href="products"> 취소</a></button>
+                    </thead>
+                    </table>
                     </div>
+                    </center>
+                    
 
        
     </main>

@@ -292,17 +292,14 @@ public class ManagerController {
 	
 		
 		
-		
-		
-		
    //------------매니저페이지 상품수정-------------------------------------------
-		@RequestMapping(value = "edit_product", method = RequestMethod.GET)
+		@RequestMapping(value = "product_modify", method = RequestMethod.GET)
 		public String edit_product() {
-			return "manager/edit_product";
+			return "manager/product_modify";
 		}		
 		
 		
-	//------------매니저페이지 제품등록-------------------------------------------
+	//------------매니저페이지 상품등록-------------------------------------------
 		@RequestMapping(value = "product_register", method = RequestMethod.GET)
 		public String product_register() {
 			return "manager/product_register";
@@ -314,6 +311,11 @@ public class ManagerController {
 		public String inventory_management() {
 			return "manager/inventory_management";
 		}
+		
+		
+		
+		
+		
 		
 	//------------매니저페이지 주문현황-------------------------------------------
 		@RequestMapping(value = "orders", method = RequestMethod.GET)
@@ -327,6 +329,14 @@ public class ManagerController {
 		public String order_detail() {
 			return "manager/order_detail";
 		}		
+		
+		//------------매니저페이지 배송관리----------------------------------------
+		
+		
+		
+		
+		
+		
 		
 	//------------매니저페이지 매출관리-------------------------------------------
 		@RequestMapping(value = "sales_main", method = RequestMethod.GET)
@@ -423,6 +433,9 @@ public class ManagerController {
 			return "manager/qnaboard_detail";
 		}
 		
+		//------------ 문의글 답글작성-------------------------------------------	
+		//------------ 문의글 답글수정-------------------------------------------	
+		//------------ 문의글 답글삭제-------------------------------------------	
 		
 		
 		
@@ -461,12 +474,7 @@ public class ManagerController {
 		
 
 
-	//------------매니저페이지 내브랜드정보수정-------------------------------------------
-		@RequestMapping(value = "brand_settings", method = RequestMethod.GET)
-		public String brand_settings() {
-			return "manager/brand_settings";
-		}
-	
+
 	
 
 }
