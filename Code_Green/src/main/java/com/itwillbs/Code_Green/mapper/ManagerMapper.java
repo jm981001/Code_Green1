@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
@@ -32,6 +33,10 @@ public interface ManagerMapper {
 	// 브랜드 정보수정(브랜드마이페이지)
 	public int updateBrandInfo(ManagerVO manager);
 		
+	// 브랜드 정보삭제(브랜드마이페이지)
+	public int deleteBrand(String id);
+	
+	
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 	public List<ItemVO> selectItemList(
 			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
@@ -44,6 +49,16 @@ public interface ManagerMapper {
 	public int selectItemListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 	
+	// 새 상품등록 - 텍스트
+	public int addNewProducts(ItemVO item);
+	
+	// 새 상품등록 - 파일업로드
+	public int addNewProductsFile(File_ItemVO fileItem);
+	
+	//상품수정하기- 파일수정
+	public int selectItemFileModify(File_ItemVO fileItem);
+	
+	
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
@@ -55,6 +70,10 @@ public interface ManagerMapper {
 	//문의글 갯수 조회
 	public int selectQnaBoardListCount(
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+
+
+
 
 
 

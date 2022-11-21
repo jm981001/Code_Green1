@@ -1,5 +1,7 @@
 package com.itwillbs.Code_Green.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ItemVO {
 	
 	private int item_idx;
@@ -29,7 +31,9 @@ public class ItemVO {
 	private String member_idx;
 	private String heart_idx;
 	private String score;
-	
+	 private MultipartFile file_1;
+	 private MultipartFile file_2;
+	 
 	public int getItem_idx() {
 		return item_idx;
 	}
@@ -108,7 +112,6 @@ public class ItemVO {
 	public void setFile1(String file1) {
 		this.file1 = file1;
 	}
-	
 	public String getFile2() {
 		return file2;
 	}
@@ -121,23 +124,18 @@ public class ItemVO {
 	public void setManager_brandname(String manager_brandname) {
 		this.manager_brandname = manager_brandname;
 	}
-	
-	
 	public String getBoard_star_score() {
 		return board_star_score;
 	}
 	public void setBoard_star_score(String board_star_score) {
 		this.board_star_score = board_star_score;
 	}
-	
 	public String getCount() {
 		return count;
 	}
 	public void setCount(String count) {
 		this.count = count;
 	}
-	
-	
 	public String getStar1() {
 		return star1;
 	}
@@ -156,7 +154,6 @@ public class ItemVO {
 	public void setStar3(String star3) {
 		this.star3 = star3;
 	}
-	
 	public String getStar4() {
 		return star4;
 	}
@@ -169,51 +166,59 @@ public class ItemVO {
 	public void setStar5(String star5) {
 		this.star5 = star5;
 	}
-	
 	public String getHeart() {
 		return heart;
 	}
 	public void setHeart(String heart) {
 		this.heart = heart;
 	}
-	
-	
 	public String getMember_id() {
 		return member_id;
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	
-	
-	public String getHeart_idx() {
-		return heart_idx;
-	}
-	public void setHeart_idx(String heart_idx) {
-		this.heart_idx = heart_idx;
-	}
-	
-	
 	public String getMember_idx() {
 		return member_idx;
 	}
 	public void setMember_idx(String member_idx) {
 		this.member_idx = member_idx;
 	}
-	
-	
+	public String getHeart_idx() {
+		return heart_idx;
+	}
+	public void setHeart_idx(String heart_idx) {
+		this.heart_idx = heart_idx;
+	}
 	public String getScore() {
 		return score;
 	}
 	public void setScore(String score) {
 		this.score = score;
 	}
+	public MultipartFile getFile_1() {
+		return file_1;
+	}
+	public void setFile_1(MultipartFile file_1) {
+		this.file_1 = file_1;
+	}
+	public MultipartFile getFile_2() {
+		return file_2;
+	}
+	public void setFile_2(MultipartFile file_2) {
+		this.file_2 = file_2;
+	}
+
 	public ItemVO() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ItemVO(int item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
 			String item_category, String item_price, String item_sale, String item_stock, String item_status,
-			String item_readcount, String item_date, String file1, String file2, String manager_brandname) {
+			String item_readcount, String item_date, String file1, String file2, String manager_brandname,
+			String board_star_score, String count, String star1, String star2, String star3, String star4, String star5,
+			String heart, String member_id, String member_idx, String heart_idx, String score, MultipartFile file_1,
+			MultipartFile file_2) {
 		super();
 		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
@@ -230,6 +235,20 @@ public class ItemVO {
 		this.file1 = file1;
 		this.file2 = file2;
 		this.manager_brandname = manager_brandname;
+		this.board_star_score = board_star_score;
+		this.count = count;
+		this.star1 = star1;
+		this.star2 = star2;
+		this.star3 = star3;
+		this.star4 = star4;
+		this.star5 = star5;
+		this.heart = heart;
+		this.member_id = member_id;
+		this.member_idx = member_idx;
+		this.heart_idx = heart_idx;
+		this.score = score;
+		this.file_1 = file_1;
+		this.file_2 = file_2;
 	}
 	@Override
 	public String toString() {
@@ -237,10 +256,16 @@ public class ItemVO {
 				+ ", item_info=" + item_info + ", item_packing=" + item_packing + ", item_category=" + item_category
 				+ ", item_price=" + item_price + ", item_sale=" + item_sale + ", item_stock=" + item_stock
 				+ ", item_status=" + item_status + ", item_readcount=" + item_readcount + ", item_date=" + item_date
-				+ ", file1=" + file1 + ", file2=" + file2 + ", manager_brandname=" + manager_brandname + "]";
+				+ ", file1=" + file1 + ", file2=" + file2 + ", manager_brandname=" + manager_brandname
+				+ ", board_star_score=" + board_star_score + ", count=" + count + ", star1=" + star1 + ", star2="
+				+ star2 + ", star3=" + star3 + ", star4=" + star4 + ", star5=" + star5 + ", heart=" + heart
+				+ ", member_id=" + member_id + ", member_idx=" + member_idx + ", heart_idx=" + heart_idx + ", score="
+				+ score + ", file_1=" + file_1 + ", file_2=" + file_2 + "]";
 	}
+	 
 	
 	
+
 	
 	
 

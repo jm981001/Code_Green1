@@ -49,7 +49,6 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
 						</ul>
         </div>
     </aside>
@@ -81,7 +80,6 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
 						</ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -95,19 +93,14 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>새로운 상품</h3>
-<!--                     <p>상품 추가</p> -->
+                    <h3>새로운 상품등록</h3>
                 </div>
-<!--                 <div class="header__center"> -->
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
-<!--                 </div> -->
+
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form class="ps-form ps-form--new-product" action="manager/index" method="get">
+              <form action="product_register" method="post" enctype="multipart/form-data">
+                <form class="ps-form ps-form--new-product">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -135,16 +128,6 @@
                                             </label>
                                             <input class="form-control" type="text" placeholder="할인가를 입력해주세요" />
                                         </div>
-<!--                                             <div class="form-group"> -->
-<!--                                             <label>할인율<sup>*</sup> -->
-<!--                                             </label> -->
-<!--                                             <input class="form-control" type="text" placeholder="할인율을 입력해주세요" /> -->
-<!--                                         </div> -->
-<!--                                         <div class="form-group"> -->
-<!--                                             <label>재고수량<sup>*</sup> -->
-<!--                                             </label> -->
-<!--                                             <input class="form-control" type="text" placeholder="판매수량을 입력해주세요" /> -->
-<!--                                         </div> -->
                                              <div class="form-group">
                                             <label>포장상태<sup>*</sup>
                                             </label>
@@ -178,41 +161,41 @@
                                             <input class="form-control" type="text" placeholder="판매수량을 입력해주세요" />
                                         </div>
                                     </div>
+                                    </div>
+                                </figure>
+                                    </form>
 <!--                                         <div class="form-group"> -->
 <!--                                             <label>상품설명<sup>*</sup></label> -->
 <!--                                             <textarea id="summernote" rows="6" name="editordata"placeholder=""></textarea> -->
 <!--                                         </div> -->
 <!--                                     </div> -->
-                                </figure>
-                            </div>
+<!--                             </div> -->
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <figure class="ps-block--form-box">
                                     <figcaption>상품 이미지</figcaption>
                                     <div class="ps-block__content">
-                                           <!-- 파일 업로드 부분 -->
+                                   
+                                 <!-- 파일 업로드 부분 -->
 	                                    <tr>
                                           <div class="form-group--nest">
                                             <label>상품 썸네일<sup>*</sup></label>
                                           </div>  
 	                                        <td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
 	                                    </tr>
-	                                  
 	                                    <tr>
                                            <div class="form-group--nest">
-                                           <tr>
+                                       </tr>
+                                       <tr>
                                             <label>상품 상세이미지<sup>*</sup></label>
-                                            </tr>
+                                       </tr>
 										   </div>
+										<tr>   
 	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
 	                                    </tr>
-	                                    <tr>
-                                           <div class="form-group--nest">
-	                                       <td colspan="2"><input type="file" id="파일선택3" name="file_3"></td>
-	                                    </tr>
-										</div>
-										
-										
                                 </figure>
+								</div>
+										
+										
                                 <figure class="ps-block--form-box">
                                     <figcaption>기타정보</figcaption>
                                     <div class="ps-block__content">

@@ -138,15 +138,10 @@
                                      <th>상품분류</th>
                                      <th>포장분류</th>
                                     <th>등록일</th>
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                      <th>상품썸네일</th> -->
-<!--                                      <th>상품상세이미지</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 
-                            
                                 <tr>
                                 	<td>${ItemInfo.item_idx }</td>
                                 	<td>${ItemInfo.item_name }</td>
@@ -167,40 +162,36 @@
 
                                 	
  				
- 				<table class="table ps-table">
-                       <thead>
-                                <tr>
-                                	<th>상품썸네일</th>
-                                	<th>상품상세이미지</th>
-                                </tr>
+<!--  				<table class="table ps-table"> -->
+<!--                        <thead> -->
+<!--                                 <tr> -->
+<!--                                 	<th>상품썸네일</th> -->
+<!--                                 	<th>상품상세이미지</th> -->
+<!--                                 </tr> -->
            <table class="item_image"id="itemImage">
          		<div class="ps-form__submit text-center">
-                  <br>
-                   	<tr>
-                      <td><div class="card" style="width: 18rem;"></div></td><td><td><div class="card" style="width: 18rem;"></div></td>
-                    </tr>
-                </div>
-			<!-------------등록된 상품이미지 ------------>
-	<c:forEach var="item" items="${itemList}" >
-					  <tr>
-					    <td><img alt="${item.file1}" src="/Code_Green/resources/img/item/${file_item.file1 }"/></td><td><img alt="${file_item.file2}" src="/Code_Green/resources/img/item/${item.file2 }" /></td>
-						<td><h5 class="card-title">${ItemInfo.item_name }</h5></td><td><h5 class="card-title">${ItemInfo.item_name }</h5></td>
-					  <tr>
-					</c:forEach>
-						</tbody>
-						</table>
+<!--                   <br> -->
+<!--                    	<tr> -->
+<!--                       <td><div class="card" style="width: 18rem;"></div></td><td><td><div class="card" style="width: 18rem;"></div></td> -->
+<!--                     </tr> -->
+<!--                 </div> -->
+<!-- 			<!-------------등록된 상품이미지 ------------> 
+
+<!-- 					  <tr> -->
+<%-- 					    <td><img alt="${item.file1}" src="/Code_Green/resources/img/item/${file_item.file1 }"/></td><td><img alt="${file_item.file2}" src="/Code_Green/resources/img/item/${item.file2 }" /></td> --%>
+<%-- 						<td><h5 class="card-title">${ItemInfo.item_name }</h5></td><td><h5 class="card-title">${ItemInfo.item_name }</h5></td> --%>
+<!-- 					  <tr> -->
+<!-- 					</table> -->
 					
 											
-			<!-------------등록된 상품이미지 ------------>
+<!-- 			<!-------------등록된 상품이미지 ------------> 
                             
                             
-                    <center>  
                           <button class="ps-btn success"> <a href="product_modify">상품수정</a></button>
                          <button class="ps-btn ps-btn--gray mr-3"><a href="products"> 취소</a></button>
-                    </thead>
                     </table>
                     </div>
-                    </center>
+                    
                     
 
        

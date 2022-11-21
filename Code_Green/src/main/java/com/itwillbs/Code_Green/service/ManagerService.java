@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ManagerMapper;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
@@ -48,6 +49,10 @@ public class ManagerService {
 		return mapper.updateBrandInfo(manager);
 	}
 	
+	// 브랜드 삭제
+	public int deleteManager(String id) {
+		return mapper.deleteBrand(id);
+	}
 //	//팔로우 목록조회
 //	public MemberVO followInfo(String idx) {
 //		return mapper.selectFollowInfo(idx);
@@ -66,8 +71,20 @@ public class ManagerService {
 	public ItemVO getItemInfo(String item_idx) {
 		return mapper.selectItemInfo(item_idx);
 	}
+    // 새 상품등록(파일제외)
+	public int newProducts(ItemVO item) {
+		return mapper.addNewProducts(item);
+	}
 
-
+	// 새 상품등록- 파일업로드
+	public int newProductsFile(File_ItemVO fileItem) {
+		return mapper.addNewProductsFile(fileItem);
+	}
+	
+	//상품수정
+	public int modifyItemFile(File_ItemVO fileItem) {
+		return mapper.selectItemFileModify(fileItem);
+	}
 //	 문의글 리스트
 	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
 		return mapper.selectQnaBoardList(startRow,listLimit,searchType,keyword);

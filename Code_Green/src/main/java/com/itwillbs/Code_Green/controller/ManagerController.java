@@ -1,10 +1,13 @@
 package com.itwillbs.Code_Green.controller;
 
 
-import java.io.File;import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.ServiceMode;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.ManagerService;
+import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
@@ -205,6 +210,28 @@ public class ManagerController {
 		return "manager/mn_fail_back";
 	}
 	
+		//------------매니저페이지 내브랜드정보 삭제----------------------------
+		
+	@RequestMapping(value = "delete_MyBrand")
+	public String brandDelete(@ModelAttribute ManagerVO manager, @RequestParam String id,
+			                   Model model, HttpSession session) {
+	
+		String sId = (String)session.getAttribute("sId");
+		
+		int deleteCount = service.deleteManager(id);
+		System.out.println(deleteCount);
+		
+		if(deleteCount > 0) {
+			
+			return "redirect:/brand_mypage_modify";
+			
+		}
+		
+			model.addAttribute("fail", "탈퇴 실패");
+			return "manager/mn_fail_back";
+		
+		
+	}
 
 	
 	
@@ -291,20 +318,214 @@ public class ManagerController {
 	
 	
 		
+
 		
-   //------------매니저페이지 상품수정-------------------------------------------
-		@RequestMapping(value = "product_modify", method = RequestMethod.GET)
-		public String edit_product() {
-			return "manager/product_modify";
-		}		
-		
-		
-	//------------매니저페이지 상품등록-------------------------------------------
+	//------------매니저페이지 상품등록 폼페이지-------------------------------------------
 		@RequestMapping(value = "product_register", method = RequestMethod.GET)
 		public String product_register() {
-			return "manager/product_register";
+				return "manager/product_register";
+			}		
+				
+		
+	//------------매니저페이지 상품등록-------------------------------------------
+		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.GET)
+		public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
+				                           Model model, HttpSession session ) {
+			
+			String uploadDir = "/resources/itemUpload";
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+
+			File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+			// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+			if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+				// 경로 상의 존재하지 않는 모든 경로 생성
+				f.mkdirs();
+			}
+			
+			String uuid = UUID.randomUUID().toString();
+			
+
+			MultipartFile mFile1 = fileItem.getFile_1();
+			MultipartFile mFile2 = fileItem.getFile_2();
+			
+			String originalFileName1 = mFile1.getOriginalFilename();
+			String originalFileName2 = mFile2.getOriginalFilename();
+
+			// ========================================================
+			
+			if(!originalFileName1.equals("")) {
+				fileItem.setFile1(uuid + "_" + originalFileName1);
+//				System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+			}
+
+			if(!originalFileName2.equals("")) {
+				fileItem.setFile2(uuid + "_" + originalFileName2);
+//				System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+			}
+		
+			// ===========================================================
+			
+			int insertCount = service.newProducts(item);
+			int file_insertCount = service.newProductsFile(fileItem);
+			
+			if(insertCount > 0) {
+				if(file_insertCount > 0) {
+					try {
+						if(fileItem.getFile1() != null) {
+							mFile1.transferTo(new File(saveDir, fileItem.getFile1()));
+						}
+						if(fileItem.getFile2() != null) {
+							mFile2.transferTo(new File(saveDir, fileItem.getFile2()));
+						}
+						
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					return "redirect:/products";
+				} else {
+					model.addAttribute("msg", "파일 업로드 실패!");
+					return "manager/mn_fail_back";
+				}
+				
+			} else {
+				
+				model.addAttribute("msg", "상품 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
+				return "manager/mn_fail_back";
+			}
+	
+			
+			
+			
 		}		
 		
+		
+	 //------------매니저페이지 상품수정 업데이트-------------------------------------------
+		@PostMapping(value = "product_modify")
+		public String edit_product(@ModelAttribute ItemVO item, 
+									@ModelAttribute File_ItemVO fileItem, 
+                                    Model model, HttpSession session ) { 
+			
+			
+			// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
+			String oldRealFile1 = fileItem.getFile1();
+			String oldRealFile2 = fileItem.getFile2();
+			
+			String uuid = UUID.randomUUID().toString();
+			String uploadDir = "/resources/itemUpload";	// 가상의 업로드 경로
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			
+			File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+			// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+			if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+				// 경로 상의 존재하지 않는 모든 경로 생성
+				f.mkdirs();
+			}
+			
+			// ItemVO 객체에 전달된 MultipartFile 객체 꺼내기
+			MultipartFile mFile1 = fileItem.getFile_1();
+			MultipartFile mFile2 = fileItem.getFile_2();
+			
+			// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
+			boolean isNewFile1 = false, isNewFile2 = false;
+			
+
+			// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
+			// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
+			// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
+			if(!mFile1.getOriginalFilename().equals("")) {
+				String originalFileName = mFile1.getOriginalFilename();
+				System.out.println("파일명1 : " + originalFileName);
+				
+				// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+				// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+				//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+				//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+				fileItem.setFile1(uuid + "_" + originalFileName);
+				// 새 파일 업로드 표시
+				isNewFile1 = true;
+			} 
+			
+			if(!mFile2.getOriginalFilename().equals("")) {
+				String originalFileName = mFile2.getOriginalFilename();
+				System.out.println("파일명2 : " + originalFileName);
+				
+				// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+				// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+				//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+				//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+				fileItem.setFile2(uuid + "_" + originalFileName);
+				// 새 파일 업로드 표시
+				isNewFile2 = true;
+			}	
+			
+			// ==================== 덮어쓰기 과정시작 =========================
+			// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
+			int updateFileCount = service.modifyItemFile(fileItem);
+			
+			if(updateFileCount == 0) {
+				
+				model.addAttribute("msg","파일수정 실패");
+				return "member/fail_back";
+				
+			} else {
+				if(isNewFile1) {
+					try {
+						mFile1.transferTo(new File(saveDir, fileItem.getFile1()));
+
+						File f1_1 = new File(saveDir, oldRealFile1); 
+//						System.out.println("File f1_1 = new File(saveDir, oldRealFile1);  -> "+ f1_1);
+						if(f1_1.exists()) {
+							f1_1.delete();
+						}
+						
+					} catch (IllegalStateException e) {
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					}
+				}
+				
+				if(isNewFile2) {
+					try {
+						mFile2.transferTo(new File(saveDir, fileItem.getFile2()));
+						File f2_2 = new File(saveDir, oldRealFile2); 
+//						System.out.println("File f2_2 = new File(saveDir, oldRealFile1);  -> "+ f2_2);
+						if(f2_2.exists()) {
+							f2_2.delete();
+						}
+						
+					} catch (IllegalStateException e) {
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			return "";
+		}
+		// ========================= 상품 내용 수정 ===============================
+
+//		int updateCount = service.modifyProducts(item);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	//------------매니저페이지 상품수정 업데이트-------------------------------------------
+				
+				
 		
 	//------------매니저페이지 재고관리-------------------------------------------
 		@RequestMapping(value = "inventory_management", method = RequestMethod.GET)

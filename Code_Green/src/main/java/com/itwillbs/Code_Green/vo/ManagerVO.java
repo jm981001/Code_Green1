@@ -137,6 +137,34 @@ public class ManagerVO {
 		this.file = file;
 	}
 	
+	
+	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
+			String manager_brandname, String manager_info, String manager_storecode, String manager_phone,
+			String manager_email, String manager_email_auth, String manager_postcode, String manager_address,
+			String manager_adminauth, String manager_realfile, String manager_original_file, String manager_del_yn,
+			String manager_date, MultipartFile file) {
+		super();
+		this.manager_idx = manager_idx;
+		this.manager_id = manager_id;
+		this.manager_pass = manager_pass;
+		this.manager_name = manager_name;
+		this.manager_brandname = manager_brandname;
+		this.manager_info = manager_info;
+		this.manager_storecode = manager_storecode;
+		this.manager_phone = manager_phone;
+		this.manager_email = manager_email;
+		this.manager_email_auth = manager_email_auth;
+		this.manager_postcode = manager_postcode;
+		this.manager_address = manager_address;
+		this.manager_adminauth = manager_adminauth;
+		this.manager_realfile = manager_realfile;
+		this.manager_original_file = manager_original_file;
+		this.manager_del_yn = manager_del_yn;
+		this.manager_date = manager_date;
+		this.file = file;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_idx=" + manager_idx + ", manager_id=" + manager_id + ", manager_pass=" + manager_pass
