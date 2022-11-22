@@ -153,9 +153,10 @@
 				} else {
 					let idNum = 0;
 					$(result).each(function(){
+						
 						let comments="";
 						let space ="";
-						<!-- 대댓글 깊이만큼 들여쓰기( 이미지 삽입 ) <<<<<<<<<<<<<<<<<<<이거 질문해야되는거 >>>>>>>>>>>>>>>>>>>>>> -->
+						
 						if(this.reply_re_lev > 0) {
 							for(let i = 0; i < this.reply_re_lev; i++) {
 								space += '&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -181,7 +182,6 @@
 	                        			 + this.reply_idx +'&board_idx='+ this.reply_bo_ref +'&pageNum=' +${param.pageNum} + '" id="rep_delBtn" onclick="return deleteCheck();"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
 	                        }
                         <!-- 대댓글 작성을 위한 폼 -->
-//                         idNum++;
 						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none">'
 									+ '<form action="#" method="post" id="form">'
 									+ '<input type="hidden" name="reply_bo_ref" value="'+ this.reply_bo_ref +'">'

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,12 +41,13 @@
 	.brandlist-ul {
 		display: grid;
 	    grid-template-columns: repeat(4, 180px);
-	    gap: 16px 83px;
+	    gap: 20px 130px;
 	    overflow: hidden;
 	    margin-bottom: 40px;
 	    padding: 30px 40px;
 	    border: 1px solid rgb(226, 226, 226);
 	    line-height: 20px;
+	    justify-items: center;
 	}
 	
 	.brandlist-li {
@@ -82,6 +84,7 @@
 	}
 </style>
 <script>
+	// 입점브랜드 목록 토글버튼 
 	function togglefun(text){
 		var target = document.querySelector('#listlist');
 		if(this.value==='입점브랜드 목록 ▲'){
@@ -92,6 +95,38 @@
 			this.value = '입점브랜드 목록 ▲';
 		}
 	}
+	
+	
+	window.onload = function(){
+		if(${sessionScope.sId == null}){
+			$(".brandfollowbtn").hide();
+		} else {
+			$(".brandfollowbtn").show();
+		}
+	}
+	
+// 	//브랜드 팔로우 상태
+// 	window.onload = function(){
+// 		if(${sessionScope.sId != null}){
+// 			$(".brandfollowbtn").show();
+// 			$.ajax({
+// 				url:"FollowCheck.br",
+// 				type:"post",
+// 				data:{
+// 					manager_idx : ${brand.manager_idx },
+// 					member_id: '${sessionScope.sId}'
+// 				},
+// 				success:function(status){
+// 					if(status > 0){
+// 						$(".brandfollowbtn img").attr("src", "/Code_Green/resources/img/forzero/fheart.png");
+// 					}
+// 				}
+// 			});
+// 		} else {
+// 			$(".brandfollowbtn").hide();
+// 		}
+// 	}
+	
 	
 	
 </script>
@@ -116,33 +151,33 @@
                 <input type="button" id="brandlist-header" value="입점브랜드 목록 ▼" onclick="togglefun(this.value)">
                 <div id="listlist">
                 	<ul class="brandlist-ul">
-               			<li class="brandlist-li"><a href="#">전체보기</a></li>
-               			<li class="brandlist-li"><a href="#">풀무원</a></li>
-               			<li class="brandlist-li"><a href="#">올가</a></li>
-               			<li class="brandlist-li"><a href="#">비비고</a></li>
-               			<li class="brandlist-li"><a href="#">오틀리</a></li>
-               			<li class="brandlist-li"><a href="#">진양수산</a></li>
-               			<li class="brandlist-li"><a href="#">은하수산</a></li>
-               			<li class="brandlist-li"><a href="#">진선푸드</a></li>
-               			<li class="brandlist-li"><a href="#">베지박스</a></li>
-               			<li class="brandlist-li"><a href="#">베지터틀</a></li>
-               			<li class="brandlist-li"><a href="#">비긴비거닝</a></li>
+               			<li class="brandlist-li"><a href="BrandMain.br"><strong>전체보기</strong></a></li>
+	                	<c:forEach var="brand" items="${brandList }">
+               			<li class="brandlist-li"><a href="BrandInner.br?manager_idx=${brand.manager_idx }" >${brand.manager_brandname }</a></li>
+               			</c:forEach>
                 	</ul>
-                
                 </div>
                 
+                
+              <div id="brandListInsert"> 
                 <div class="ps-section__wrapper">
-                    
-                    
                     <div class="ps-section__left">
                         <aside class="widget widget--vendor">
-                            <h3 class="widget-title">비긴비거닝</h3><img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
-                            <div class="brandfollowbtn"><a class="ps-block__inquiry" href="FollowBrand.mo">Follow</a></div>
-                            <div class="ps-block__user">
+                           
+                            <h3 class="widget-title">브랜드별</h3>
+	                           
+	                            <div class="brandfollowbtn" style="display: none">
+		                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
+		<!--                             <div class="brandfollowbtn"><a class="ps-block__inquiry" href="FollowBrand.mo">Follow</a></div> -->
+		                            <a class="ps-block__inquiry" href="#">Follow</a>
+	                            </div>
+	                            
+                            <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
-	                     		   <img src="/Code_Green/resources/img/forzero/나뽀얌쓰.jpg">
+		                     	<!-- 브랜드별 로고띄우기 -->
+	                     		   <img src="/Code_Green/resources/img/winkya.jpg">
 		                           <div class="brand_info">
-		                           		여기에 브랜드별 상세정보 및 간단한 소개 넣으면 되지않을까.
+		                           		궁금하신 브랜드를<p> 상단목록에서 선택해주세요!
 		                           		
 		                           </div>
 		                    	</div>
@@ -152,50 +187,12 @@
 					<aside class="widget widget_shop">
 		                <h4 class="widget-title">BY BRANDS</h4>
 		                <figure class="ps-custom-scrollbar" data-height="250">
+		                  <c:forEach var="brand" items="${brandList }">
 		                    <div class="ps-checkbox">
 		                        <input class="form-control" type="checkbox" id="m-brand-1" name="brand" />
-		                        <label for="m-brand-1">Adidas (3)</label>
+		                        <label for="m-brand-1">${brand.manager_brandname }</label>
 		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-2" name="brand" />
-		                        <label for="m-brand-2">Amcrest (1)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-3" name="brand" />
-		                        <label for="m-brand-3">Apple (2)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-4" name="brand" />
-		                        <label for="m-brand-4">Asus (19)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-5" name="brand" />
-		                        <label for="m-brand-5">Baxtex (20)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-6" name="brand" />
-		                        <label for="m-brand-6">Adidas (11)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-7" name="brand" />
-		                        <label for="m-brand-7">Casio (9)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-8" name="brand" />
-		                        <label for="m-brand-8">Electrolux (0)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-9" name="brand" />
-		                        <label for="m-brand-9">Gallaxy (0)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-10" name="brand" />
-		                        <label for="m-brand-10">Samsung (0)</label>
-		                    </div>
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="brand-11" name="brand" />
-		                        <label for="brand-11">Sony (0)</label>
-		                    </div>
+		                   </c:forEach>
 		                </figure>
 		                
 		                <figure>
@@ -213,140 +210,79 @@
 					</aside>
                  </aside>
              </div>
-<!-- =========================================== 수정중 사이드바!!!======================================================== -->
-                            
+<!-- =========================================== 수정중 사이드바 끝위치!!!======================================================== -->
+          <!-- ===================================== 상품리스트 파트  ================================================== -->                  
                     
-                    
-                    <!-- 상품리스트 헤더  -->
+          <!-- 상품리스트 헤더  -->
                     <div class="ps-section__right">
                         <div class="ps-shopping ps-tab-root">
                             <div class="ps-shopping__header">
-                                <p>총<strong> 6 </strong> 개의 상품 </p>
+<!--                                 <p>총<strong> 6 </strong> 개의 상품 </p> -->
+                               <div id="orderbylist"><a href="#">최근순</a>  |  <a href="#">판매량순</a></div>
                             </div>
                             
-                    <!-- 상품리스트 페이지  -->
                     <div class="ps-tabs">
                         <div class="ps-tab active" id="tab-1">
                             <div class="ps-shopping-product">
                                 <div class="row">
                                 
-                                	<!-- 상품 1개당 시작 -->
+           <!-- ===================================== 상품 1개당 ================================================== --> 
+           						<c:forEach var="item" items="${itemList }">
                                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                         <div class="ps-product">
-                                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
+                                            <div class="ps-product__thumbnail">
+                                            
+                                            <a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }"/></a>
                                                 <ul class="ps-product__actions">
                                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
-                                                <div class="ps-product__content"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
+                                           <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
+                                               <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                                     <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>02</span>
+                                                   	 <select class="ps-rating" data-read-only="true">
+                                                        <c:forEach var="i" begin="1" end="5">
+			                                             	<c:choose>
+			                                             		<c:when test="${i <= item.score}">
+			                                             			<option value="1">${i }</option>
+			                                             		</c:when>
+			                                             		<c:otherwise>
+			                                             			<option value="2">${i }</option>
+			                                             		</c:otherwise>
+			                                             	</c:choose>
+			                                             </c:forEach>
+                                                      </select><span>${item.board_star_score }</span>
                                                     </div>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
+                                                    
+                                                    
+                                                    
+                                                  <h4 class="ps-product__price">${item.item_price }원</h4>
                                                 </div>
-                                                <div class="ps-product__content hover"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
+                                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                                <h4 class="ps-product__price">${item.item_price }원</h4>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                               </c:forEach>     
                                     <!-- 상품 1개당 끝 -->
-                                    
-                                    
-                                    
-                                
-                                	<!-- 상품 1개당 시작 -->
-                                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                        <div class="ps-product">
-                                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                <ul class="ps-product__actions">
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
-                                                <div class="ps-product__content"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
-                                                    <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>02</span>
-                                                    </div>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                </div>
-                                                <div class="ps-product__content hover"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 상품 1개당 끝 -->
-                                    
-                                    
-                                    
-                                
-                                	<!-- 상품 1개당 시작 -->
-                                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                        <div class="ps-product">
-                                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/home-2/recommend/1.jpg" alt="" /></a>
-                                                <ul class="ps-product__actions">
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">풀무원</a>
-                                                <div class="ps-product__content"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
-                                                    <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>02</span>
-                                                    </div>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                </div>
-                                                <div class="ps-product__content hover"><a class="ps-product__title" href="item_detail">두부텐더스틱</a>
-                                                    <p class="ps-product__price sale">6,800원 <del>10,800원 </del></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 상품 1개당 끝 -->
-                                    
+                
+           <!-- ===================================== 상품 1개당 ================================================== --> 
                                 </div>
                             </div>
                                     
-                                    
-                                    
-                                    <!-- 페이징 버튼들 시작 -->
-                                    <div class="ps-pagination">
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">Next<i class="icon-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- 페이징 버튼들 끝 -->
                                     
                                 </div>
                            </div>
                        </div>
                     </div>
                 </div>
+              </div>  
+                
+                
+                
+                
             </div>
         </section>
 	</div>

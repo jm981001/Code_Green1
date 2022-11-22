@@ -31,8 +31,9 @@ public class ItemVO {
 	private String member_idx;
 	private String heart_idx;
 	private String score;
-	 private MultipartFile file_1;
-	 private MultipartFile file_2;
+	private String brand_itemCnt;
+	private MultipartFile file_1;
+	private MultipartFile file_2;
 	 
 	public int getItem_idx() {
 		return item_idx;
@@ -196,6 +197,12 @@ public class ItemVO {
 	public void setScore(String score) {
 		this.score = score;
 	}
+	public String getBrand_itemCnt() {
+		return brand_itemCnt;
+	}
+	public void setBrand_itemCnt(String brand_itemCnt) {
+		this.brand_itemCnt = brand_itemCnt;
+	}
 	public MultipartFile getFile_1() {
 		return file_1;
 	}
@@ -213,12 +220,13 @@ public class ItemVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public ItemVO(int item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
 			String item_category, String item_price, String item_sale, String item_stock, String item_status,
 			String item_readcount, String item_date, String file1, String file2, String manager_brandname,
 			String board_star_score, String count, String star1, String star2, String star3, String star4, String star5,
-			String heart, String member_id, String member_idx, String heart_idx, String score, MultipartFile file_1,
-			MultipartFile file_2) {
+			String heart, String member_id, String member_idx, String heart_idx, String score, String brand_itemCnt,
+			MultipartFile file_1, MultipartFile file_2) {
 		super();
 		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
@@ -247,9 +255,11 @@ public class ItemVO {
 		this.member_idx = member_idx;
 		this.heart_idx = heart_idx;
 		this.score = score;
+		this.brand_itemCnt = brand_itemCnt;
 		this.file_1 = file_1;
 		this.file_2 = file_2;
 	}
+	
 	@Override
 	public String toString() {
 		return "ItemVO [item_idx=" + item_idx + ", re_manager_idx=" + re_manager_idx + ", item_name=" + item_name
@@ -260,9 +270,9 @@ public class ItemVO {
 				+ ", board_star_score=" + board_star_score + ", count=" + count + ", star1=" + star1 + ", star2="
 				+ star2 + ", star3=" + star3 + ", star4=" + star4 + ", star5=" + star5 + ", heart=" + heart
 				+ ", member_id=" + member_id + ", member_idx=" + member_idx + ", heart_idx=" + heart_idx + ", score="
-				+ score + ", file_1=" + file_1 + ", file_2=" + file_2 + "]";
+				+ score + ", brand_itemCnt=" + brand_itemCnt + ", file_1=" + file_1 + ", file_2=" + file_2 + "]";
 	}
-	 
+	
 	
 	
 
