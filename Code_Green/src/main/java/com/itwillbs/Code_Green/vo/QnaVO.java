@@ -13,15 +13,26 @@ public class QnaVO {
     private String qna_status;//답변상태
     private String qna_readcount;
     private String qna_date;
-    
     private String item_idx; //상품번호
     private String item_name;
     private String manager_brandname;
     private String item_category;
+    private String manager_id;
     
     
    
     public QnaVO() {}
+
+
+	public String getManager_id() {
+		return manager_id;
+	}
+
+
+
+	public void setManager_id(String manager_id) {
+		this.manager_id = manager_id;
+	}
 
 
 
