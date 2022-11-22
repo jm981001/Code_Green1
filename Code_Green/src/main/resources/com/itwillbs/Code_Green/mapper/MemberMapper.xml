@@ -66,6 +66,34 @@
 		WHERE MEMBER_ID=#{member_id}
 	</select>
 	
-
-
+	
+	
+	<!--  마이페이지 // 팔로우 브랜드 리스트 -->
+	<select id="selectFollowList" resultType="com.itwillbs.Code_Green.vo.FollowVO">
+		 SELECT  f.follow_idx,
+		 		 f.rf_member_idx,
+		  		 mb.member_id,
+	       		 f.rf_manager_idx,
+	       		 ff.store_follower_cnt,
+		   		 f.follow_date,
+	       		 m.manager_brandname,
+	       		 m.manager_original_file
+			FROM follow f
+			LEFT JOIN
+				(SELECT rf_manager_idx,count(*) AS store_follower_cnt FROM follow GROUP BY rf_manager_idx) AS ff
+			ON f.rf_manager_idx = ff.rf_manager_idx
+			LEFT JOIN
+				(SELECT member_idx, member_id from member) AS mb
+			ON f.rf_member_idx = mb.member_idx
+			LEFT JOIN 
+				(SELECT manager_idx, manager_brandname,manager_original_file FROM manager) AS m
+			ON f.rf_manager_idx = m.manager_idx
+			WHERE 
+				mb.member_id=#{member_id}
+			ORDER BY 
+				f.follow_date DESC
+	
+	</select>
+	
+	
 </mapper>

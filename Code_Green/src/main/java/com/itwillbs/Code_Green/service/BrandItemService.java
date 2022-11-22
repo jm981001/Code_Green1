@@ -25,20 +25,5 @@ public class BrandItemService {
 		return mapper.selectBrandFollow(manager_idx,member_id);
 	}
 	
-	// 아이템 전체리스트 메인에 출력
-	public List<ItemVO> selectAllList() {
-		return mapper.selectAllList();
-	}
-	
-	// 브랜드별 아이템들 페이지출력용 
-	public List<ItemVO> selectBrandPageList(int manager_idx) {
-		return mapper.selectBrandPageList(manager_idx);
-	}
-	
-	
-	
-	
-	
-	
 	
 }

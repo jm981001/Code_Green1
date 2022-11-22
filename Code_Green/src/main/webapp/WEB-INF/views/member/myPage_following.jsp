@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!-- headers-->
-<html lang="en">
-
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,9 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>팔로우브랜드</title>
+<title>MyPage</title>
+ <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+ <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -27,10 +28,18 @@
 <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    
-    
 </head>
-
+<style>
+	#unfollowBtn{
+		border: 1px solid green;
+		width: 90px; height: 30px;
+		background-color: transparent;
+		border-radius: 20px;
+		padding: 5px;
+		color:green;
+	}
+	
+</style>
 <body>
 
     <!-- 헤더 삽입 -->
@@ -49,7 +58,7 @@
                         <div class="ps-section__right">
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
-                                    <h3>팔로우 브랜드 목록</h3>
+                                    <h3><i class="icon-star"></i> 팔로우 브랜드</h3>
                                    
                                 </div>
                                 <div class="ps-section__content">
@@ -57,45 +66,19 @@
                                         <table class="table ps-table">
                                             <thead>
                                                 <tr>
-                                                    <th width="30%">브랜드썸넬</th>
-                                                    <th>상호명</th>
-                                                    <th>팔로우 / 언팔로우</th>
+                                                    <th width="30%">브랜드</th>
+                                                    <th>브랜드명</th>
+                                                    <th>팔로우 취소</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                              <c:forEach var="follow" items="${followList }">
                                                 <tr>
-                                                    <td>사진</td>
-                                                    <td>풀무원</td>
-                                                    <td><button>21.3 K <i class="fi fi-sr-heart"></i></button></td>
+                                                    <td><img src="<%=request.getContextPath() %>/resources/brand_logo/${brand.manager_original_file}" width="140px" height="40px"></td>
+                                                    <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">${follow.store_follower_cnt }</i></td>
+                                                    <td><button id="unfollowBtn"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>사진</td>
-                                                    <td>지구생각</td>
-                                                    <td><button>45 K <i class="fi fi-sr-heart"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>사진</td>
-                                                    <td>진미원</td>
-                                                    <td><button>0.3 K <i class="fi fi-sr-heart"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>사진</td>
-                                                    <td>비비고</td>
-                                                    <td><button>105 K <i class="fi fi-sr-heart"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>사진</td>
-                                                    <td>베지박스</td>
-                                                    <td><button>5 K <i class="fi fi-sr-heart"></i></button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>사진</td>
-                                                    <td>매일유업</td>
-                                                    <td><button>340 K <i class="fi fi-sr-heart"></i></button></td>
-                                                </tr>
-                                                
-                                                
-                                                
+                                               </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

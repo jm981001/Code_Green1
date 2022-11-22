@@ -1,9 +1,12 @@
 package com.itwillbs.Code_Green.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.MemberMapper;
+import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 
@@ -40,6 +43,11 @@ public class MemberService {
 	//회원 가입시 기본 적립금 지급 
 	public void setCoin(int member_idx) {
 		mapper.setCoin(member_idx);
+	}
+
+	// 마이페이지 - 팔로우브랜드 리스트
+	public List<FollowVO> getFollowList(String member_id) {
+		return mapper.selectFollowList(member_id);
 	}
 
 	

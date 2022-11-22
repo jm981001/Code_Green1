@@ -11,8 +11,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
@@ -46,13 +45,13 @@
 									<ul>
 									 	<li><a href="MemberInfo.me?member_id=${sessionScope.sId }"><i class="icon-store"></i> 마이페이지</a></li>
 										<li><a href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i>찜한 상품</a></li>
-										<li><a href="myPage_following"><i class="icon-store"></i>팔로우한 브랜드</a></li>
-										<li><a href="myPageEmoney.my?member_id=${sessionScope.sId}"><i class="icon-store"></i>적립금내역</a></li>
+										<li><a href="myPageFollowingList.my"><i class="icon-star"></i>팔로우 브랜드</a></li>
+										<li><a href="myPageEmoney.my?member_id=${sessionScope.sId}"><i class="icon-list"></i>적립금내역</a></li>
 										<li><a href="myPage_buyListNull"><i class="icon-papers"></i>주문목록</a></li>
 										<li><a href="myPage_buyList"><i class="icon-papers"></i>주문별상세</a></li>
-										<li><a href="myPageReview.my?member_id=${sessionScope.sId}"><i class="icon-map-marker"></i>상품후기</a></li>
-										<li><a href="myPageQnaDetail.my"><i class="icon-store"></i>문의내역</a></li>
-										<li><a href="myPageBoard.bo?member_id=${sessionScope.sId} "><i class="icon-store"></i>작성글</a></li>
+										<li><a href="myPageReview.my?member_id=${sessionScope.sId}"><i class="icon-papers"></i>상품후기</a></li>
+										<li><a href="myPageQnaDetail.my"><i class="icon-question"></i>1:1 문의내역</a></li>
+										<li><a href="myPageBoard.bo?member_id=${sessionScope.sId} "><i class="icon-pen"></i>나의 글</a></li>
 										<li><a href="myPage_userInfo"><i class="icon-user"></i>개인정보 수정</a></li>
 										<li><a href="MemberLogout.me"><i class="icon-power-switch"></i>Logout</a></li>
 									</ul>

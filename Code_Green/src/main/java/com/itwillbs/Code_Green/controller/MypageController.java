@@ -21,6 +21,7 @@ import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.CoinVO;
+import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
@@ -142,10 +143,17 @@ public class MypageController {
 	
 	
 	//------------마이페이지 팔로우-------------------------------------------
-	@RequestMapping(value = "myPage_following", method = RequestMethod.GET)
-	public String myPage_fllowing() {
+	
+	@GetMapping(value = "/myPageFollowingList.my")
+	public String myFollowingList(HttpSession session, Model model) {
+		
+		String member_id = (String)session.getAttribute("sId");
+		List<FollowVO> followList = Mservice.getFollowList(member_id);
+		model.addAttribute("followList", followList);
+		
 		return "member/myPage_following";
 	}
+	
 	
 	//------------마이페이지 적립금-------------------------------------------
 	@GetMapping(value = "/myPageEmoney.my")

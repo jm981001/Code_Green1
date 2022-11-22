@@ -127,7 +127,7 @@
 // 		}
 // 	}
 	
-	
+
 	
 </script>
 <body>
@@ -140,6 +140,7 @@
     
     
     <div class="ps-page--single ps-page--vendor">
+    <!-- ============================================================ 브랜드리스트 박스공간 시작 ====================================================================== -->         
         <section class="ps-store-list">
             <div class="container">
 					 <!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
@@ -152,19 +153,20 @@
                 <div id="listlist">
                 	<ul class="brandlist-ul">
                			<li class="brandlist-li"><a href="BrandMain.br"><strong>전체보기</strong></a></li>
+               			
 	                	<c:forEach var="brand" items="${brandList }">
-               			<li class="brandlist-li"><a href="BrandInner.br?manager_idx=${brand.manager_idx }" >${brand.manager_brandname }</a></li>
+               			<li class="brandlist-li"><a href="#" >${brand.manager_brandname }</a></li>
                			</c:forEach>
+               			
                 	</ul>
                 </div>
                 
-                
-              <div id="brandListInsert"> 
-                <div class="ps-section__wrapper">
+       <!-- ============================================================ 브랜드리스트 박스공간 끝 ====================================================================== -->         
+              <div class="ps-section__wrapper">
                     <div class="ps-section__left">
                         <aside class="widget widget--vendor">
                            
-                            <h3 class="widget-title">브랜드별</h3>
+                            <h3 class="widget-title">브랜드명</h3>
 	                           
 	                            <div class="brandfollowbtn" style="display: none">
 		                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
@@ -177,20 +179,20 @@
 		                     	<!-- 브랜드별 로고띄우기 -->
 	                     		   <img src="/Code_Green/resources/img/winkya.jpg">
 		                           <div class="brand_info">
-		                           		궁금하신 브랜드를<p> 상단목록에서 선택해주세요!
+		                           		브랜드 상세정보
 		                           		
 		                           </div>
 		                    	</div>
 		                    </div>
-<!-- =========================================== 수정중 사이드바!!!======================================================== -->
+	<!-- =========================================== 사이드바 시작 ======================================================== -->
 
 					<aside class="widget widget_shop">
 		                <h4 class="widget-title">BY BRANDS</h4>
 		                <figure class="ps-custom-scrollbar" data-height="250">
 		                  <c:forEach var="brand" items="${brandList }">
 		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-1" name="brand" />
-		                        <label for="m-brand-1">${brand.manager_brandname }</label>
+		                        <input class="form-control" type="checkbox" id="m-brand-${brand.manager_idx }" name="${brand.manager_idx }" />
+		                        <label for="m-brand-${brand.manager_idx }">${brand.manager_brandname }</label>
 		                    </div>
 		                   </c:forEach>
 		                </figure>
@@ -210,8 +212,9 @@
 					</aside>
                  </aside>
              </div>
-<!-- =========================================== 수정중 사이드바 끝위치!!!======================================================== -->
-          <!-- ===================================== 상품리스트 파트  ================================================== -->                  
+	<!-- =========================================== 사이드바 끝======================================================== -->
+	
+	<!-- =========================================== 상품리스트 시작=====================================================-->
                     
           <!-- 상품리스트 헤더  -->
                     <div class="ps-section__right">
@@ -227,24 +230,24 @@
                                 <div class="row">
                                 
            <!-- ===================================== 상품 1개당 ================================================== --> 
-           						<c:forEach var="item" items="${itemList }">
-                                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+           						<c:forEach var="brand" items="${brandPageList }">
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                         <div class="ps-product">
                                             <div class="ps-product__thumbnail">
                                             
-                                            <a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }"/></a>
+                                            <a href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}" ><img src="/Code_Green/resources/item/${brand.file1 }"/></a>
                                                 <ul class="ps-product__actions">
                                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
                                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                 </ul>
                                             </div>
-                                           <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
-                                               <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                           <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.manager_brandname }</a>
+                                               <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
                                                     <div class="ps-product__rating">
                                                    	 <select class="ps-rating" data-read-only="true">
                                                         <c:forEach var="i" begin="1" end="5">
 			                                             	<c:choose>
-			                                             		<c:when test="${i <= item.score}">
+			                                             		<c:when test="${i <= brand.score}">
 			                                             			<option value="1">${i }</option>
 			                                             		</c:when>
 			                                             		<c:otherwise>
@@ -252,33 +255,31 @@
 			                                             		</c:otherwise>
 			                                             	</c:choose>
 			                                             </c:forEach>
-                                                      </select><span>${item.board_star_score }</span>
+                                                      </select><span>${brand.board_star_score }</span>
                                                     </div>
                                                     
                                                     
                                                     
-                                                  <h4 class="ps-product__price">${item.item_price }원</h4>
+                                                  <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>
-                                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
-                                                <h4 class="ps-product__price">${item.item_price }원</h4>
+                                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
+                                                <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                </c:forEach>     
-                                    <!-- 상품 1개당 끝 -->
+          <!-- =========================================== 상품리스트 끝=====================================================-->
                 
-           <!-- ===================================== 상품 1개당 ================================================== --> 
                                 </div>
                             </div>
-                                    
                                     
                                 </div>
                            </div>
                        </div>
                     </div>
                 </div>
-              </div>  
+    
                 
                 
                 
