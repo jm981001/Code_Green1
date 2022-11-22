@@ -82,7 +82,9 @@ h{
                    		<div class="ps-block--vendor-dashboard">
                     		<div class="ps-block__content">
 	                        	<div class="table-responsive">
-                    				<form action="recipe_modifyPro.bo" method="post" enctype="multipart/form-data">
+                    				<form action="recipe_modifyPro.bo?board_idx=${recipe.board_idx }" method="post" enctype="multipart/form-data">
+		                           		<input type="hidden" name="file1" value="${recipe.file1}">  
+	                    				<input type="hidden" name="file2" value="${recipe.file2}">  
 	                           		 <table class="table ps-table ps-table--vendor">
 	                                    <tr>
 	                                        <td>작성자</td>

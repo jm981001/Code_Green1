@@ -156,5 +156,126 @@ public class RecipeController {
 		return "recipe/recipe_modify";
 	}
 	
+	// 레시피 글 수정 / 파일 수정
+	@PostMapping(value = "/recipe_modifyPro.bo")
+	public String recipe_modifyPro(@ModelAttribute BoardVO board,
+								   @ModelAttribute File_boardVO fileBoard,
+								   @RequestParam int board_idx,
+								   HttpSession session,Model model) {
+		
+		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
+		String oldRealFile1 = fileBoard.getFile1();
+		String oldRealFile2 = fileBoard.getFile2();
+		
+		String uuid = UUID.randomUUID().toString();
+		String uploadDir = "/resources/recUpload";	// 가상의 업로드 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		MultipartFile mFile1 = fileBoard.getFile_1();
+		MultipartFile mFile2 = fileBoard.getFile_2();
+		
+		// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
+		boolean isNewFile1 = false, isNewFile2 = false; 
+		
+		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
+		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
+		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
+		if(!mFile1.getOriginalFilename().equals("")) {
+			String originalFileName = mFile1.getOriginalFilename();
+			System.out.println("파일명1 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			fileBoard.setFile1(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile1 = true;
+		} 
+		
+		if(!mFile2.getOriginalFilename().equals("")) {
+			String originalFileName = mFile2.getOriginalFilename();
+			System.out.println("파일명2 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			fileBoard.setFile2(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile2 = true;
+		}	
+		
+		
+		// ---파일 수정---
+		// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
+		int updateFileCount = service.modifyFile(fileBoard);
+		
+		if(updateFileCount == 0) {
+			
+			model.addAttribute("msg","파일 수정 실패");
+			return "member/fail_back";
+			
+		} else {
+			if(isNewFile1) {
+				try {
+					mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+					File f1 = new File(saveDir, oldRealFile1); 
+					
+					if(f1.exists()) {
+						f1.delete();
+					}
+					
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+			
+			if(isNewFile2) {
+				try {
+					mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+					File f2 = new File(saveDir, oldRealFile2); 
+					
+					if(f2.exists()) {
+						f2.delete();
+					}
+					
+				} catch (IllegalStateException e) {
+					System.out.println("IllegalStateException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		//  글 수정
+		int updateCount = service.modifyBoard(board);
+		
+		System.out.println(updateCount);
+		
+		if(updateCount == 0) {
+			model.addAttribute("msg", "글 수정 실패");
+			return "member/fail_back";
+		}
+		
+		return "redirect:/recipe_detail.bo?board_idx=" + board.getBoard_idx();
+	}
+
+	
 	
 }
