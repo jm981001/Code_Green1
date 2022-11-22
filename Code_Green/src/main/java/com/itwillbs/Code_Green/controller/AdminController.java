@@ -23,6 +23,7 @@ import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
+import com.itwillbs.Code_Green.vo.TotalVO;
 
 @Controller
 public class AdminController {
@@ -59,8 +60,7 @@ public class AdminController {
 			return "admin/ad_fail_back";
 		} 
 		
-//		SellVO sellChart = service.getChart();
-//		System.out.println("오늘안에하고싶다 : " + sellChart);
+
 
 		SellVO sellTotal = service.getTotalMoney();
 //		System.out.println("돈돈돈돈 = " + sellTotal); //총매출
@@ -70,16 +70,21 @@ public class AdminController {
 		
 		
 		
-		List<SellVO> sellChart = service.getChart();
-		System.out.println("오늘안에하고싶다 : " + sellChart);
+//		List<TotalVO> sellChart = service.getChart();
+//		System.out.println("오늘안에하고싶다 : " + sellChart);
 		
 		model.addAttribute("sellTotal", sellTotal);
 		model.addAttribute("sellCount", sell_count);
-		model.addAttribute("sellChart", sellChart);
+//		model.addAttribute("sellChart", sellChart);
 		
 		return "admin/index";
 		
 	}
+	
+	
+	
+	
+	
 	
 	
 //	//------------전체관리자 메인----------------------------
