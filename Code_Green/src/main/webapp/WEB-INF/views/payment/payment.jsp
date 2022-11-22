@@ -354,13 +354,13 @@
 			                                           		<td>${cart.item_name }</td>
 			                                           		<td>${cart.item_price }</td>
 			                                           		<td>${cart.cart_amount }</td>
-			                                           		<td>${cart.cart_total }</td>
+			                                           		<td>${cart.cart_total*cart.cart_amount }</td>
 			                                           	</tr>
 			                                         </c:forEach> 
 			                                         	<tr>
 			                                           		<td>주문 총 금액</td>
 			                                           		<td colspan="6">
-			                                           			<input type="text" value="50000" class="sell_item_total_price">
+			                                           			<input type="text" value="" class="sell_item_total_price">
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
