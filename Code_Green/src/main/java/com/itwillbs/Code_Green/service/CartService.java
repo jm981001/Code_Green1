@@ -22,13 +22,6 @@ public class CartService {
 	public List<CartVO> selectCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
-	
-	
-	public CartVO selectIdx(int member_idx) {
-		return mapper.selectIdx(member_idx);
-	}
-	
-	
 	// 3. 장바구니 삭제
 	public int deleteCart(int cart_idx) {
 		return mapper.deleteCart(cart_idx);
@@ -42,9 +35,9 @@ public class CartService {
 		return mapper.sumMoney(member_idx);
 	}
 	// 6. 장바구니 상품확인
-	public int checkCart(int item_idx, int member_idx) {
-		return mapper.checkCart(item_idx,member_idx);
-	}
+//	public int checkCart(int item_idx, int member_idx) {
+//		return mapper.checkCart(item_idx,member_idx);
+//	}
 	// 7. 장바구니 상품수량 변경
 	public int updateCart(CartVO cart) {
 		return mapper.updateCart(cart);

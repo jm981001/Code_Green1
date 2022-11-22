@@ -32,6 +32,7 @@
 			c.cart_total,
 			c.rf_member_idx,
 			c.rf_item_idx,
+			c.cart_idx,
 			r.member_id,
             f.file1
 		FROM cart c
@@ -43,15 +44,13 @@
 	
 	</select>
 	
-	<select id="selectIdx" resultType="com.itwillbs.Code_Green.vo.CartVO">
-		SELECT 
-			i.item_idx,
-			c.rf_member_idx
-		FROM cart c
-		LEFT JOIN item i ON c.rf_item_idx = i.item_idx
-        JOIN member r ON r.member_idx = c.rf_member_idx
-		WHERE r.member_idx = #{member_idx}
-	
+	<select id="getCartIdx">
+		SELECT
+			c.cart_idx
+				FROM cart c
+					LEFT JOIN member r ON r.member_idx = c.rf_member_idx
+					WHERE r.member_id = #{member_id};
+		
 	</select>
 	
 
@@ -62,17 +61,17 @@
 	
 	<!-- 4. 장바구니 수정 -->
 	<update id="modifyCart">
-		update vam_cart set bookCount=#{bookCount} where cartId = #{cartId}
+		update cart set cart_amount = #{cart_amount} where cart_idx = #{cart_idx}
 	</update>
 	
 	
 	<!--  5. 장바구니 금액 합계 -->
-	<select id="getPrice"  resultType="String">
+	<select id="sumMoney"  resultType="String">
 		SELECT SUM(item_price * cart_amount) total
 		FROM 
 		  cart c, item i
 		WHERE 
-		  c.rf_item_idx = i.item_idx AND c.rf_member_idx = {member_idx}
+		  c.rf_item_idx = i.item_idx AND c.rf_member_idx = #{member_idx}
 	</select>
 	
 	
