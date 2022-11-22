@@ -6,7 +6,7 @@
 
 	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.TotalVO">
 		SELECT
-		
+		m.manager_brandname AS manager_brandname,
 		sum((i.item_price * s.sell_amount)) AS brandtotal
 		FROM
 			manager m

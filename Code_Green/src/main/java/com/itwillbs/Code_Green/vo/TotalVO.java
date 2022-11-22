@@ -3,7 +3,7 @@ package com.itwillbs.Code_Green.vo;
 public class TotalVO {
 	private int brandtotal;//브랜드매출
 	private String  manager_brandname;//브랜드명
-	
+	 
 	
 	
 	

@@ -240,13 +240,29 @@ $(document).ready(function(){
 
 function getGraph(){
 	
+	var brandtotal = new Array();
+	var brandname = new Array();
 	
 	$.ajax({
 		url:"drawChart",
 		type:"GET",
 		dataType:"json",
 		success:function(data){
-			let dataa = JSON.parse(data)
+			
+			
+// 			let str = JSON.stringify(data);
+// 			let parse = JSON.parse(str)
+// 			console.log(str);
+// 			alert(str);
+			
+			
+			for(let dt of data){
+				brandtotal.push(dt.brandtotal);
+				brandname.push(dt.manager_brandname);
+				
+			}
+			
+
 			
 			new Chart(document.getElementById('myChart'), {
 			    // ①차트의 종류(String)
@@ -254,13 +270,13 @@ function getGraph(){
 			    // ②차트의 데이터(Object)
 			    data: {
 			        // ③x축에 들어갈 이름들(Array)
-			        labels: ['잇츠베러', '매일유업', '왕만두', '먹고', '싶다', 'Orange'],
+			        labels: brandname,
 			        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
 			        datasets: [{
 			            // ⑤dataset의 이름(String)
-			            label: '# 차트끝내고 싶다',
+			            label: '# 브랜드별 차트',
 			            // ⑥dataset값(Array)
-			            data: [364, 19, 3, 5, 2, 3],
+			            data: brandtotal,
 			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
 			            backgroundColor: 'rgba(255, 99, 132, 0.2)',
 			            // ⑧dataset의 선 색(rgba값을 String으로 표현)
