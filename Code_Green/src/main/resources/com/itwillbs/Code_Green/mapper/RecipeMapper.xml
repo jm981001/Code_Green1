@@ -5,57 +5,69 @@
 	<!-- 레시피 등록(글) -->
 	<insert id="insertRecipeBoard">
 		INSERT 
-			  INTO board 
-			            VALUES (
-								IFNULL((SELECT MAX(board_idx) FROM board b),0) + 1,
-								'0',
-								'레시피',
-								#{board_id},
-								'N',
-								#{board_subject},
-								#{board_content},
-								'0',
-								date_format(now(),'%Y%m%d')
-								)
+	      INTO 
+	            board 
+	    VALUES  (
+				IFNULL((SELECT MAX(board_idx) FROM board b),0) + 1,
+				'0',
+				'레시피',
+				#{board_id},
+				'N',
+				#{board_subject},
+				#{board_content},
+				'0',
+				date_format(now(),'%Y%m%d')
+				)
 	</insert>	
 	
 	<!-- 레시피 등록(사진) -->
 	<insert id="insertRecipeFile">
 		<selectKey keyProperty="file_board_idx" resultType="integer" order="BEFORE">
-		SELECT MAX(file_board_idx) 
-		  FROM file_board
+		 SELECT 
+			     MAX(file_board_idx) 
+		   FROM  
+		  	     file_board
 		</selectKey>
-		INSERT
-			  INTO file_board
-							 VALUES (
-									#{file_board_idx} + 1,
-									IFNULL(#{file1},'N'),
-									IFNULL(#{file2},'N'),
-									'', 
-									(SELECT MAX(board_idx) FROM board)
-								    )
+		 INSERT
+		   INTO 
+		  	     file_board
+		VALUES(
+				 #{file_board_idx} + 1,
+				 IFNULL(#{file1},'N'),
+				 IFNULL(#{file2},'N'),
+				 '', 
+				 (SELECT MAX(board_idx) FROM board)
+			  )
 	</insert>
 	
 	<!-- 레시피 목록(글) 조회 -->
 	<select id="selectRecipeFile" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT
-			   b.board_idx,
-			   b.board_subject,	   
-			   f.file1,
-			   m.manager_brandname
-		  FROM board b
-     LEFT JOIN file_board f
-     	    ON b.board_idx = f.rf_board_idx
-		  JOIN manager m 
-		    ON b.board_id = m.manager_id
-		 WHERE b.board_type = '레시피'
+			    b.board_idx,
+			    b.board_subject,	   
+			    f.file1,
+			    m.manager_brandname
+		  FROM  
+		  	    board b
+     LEFT JOIN  
+     		    file_board f
+     	    ON  
+     	        b.board_idx = f.rf_board_idx
+		  JOIN  
+		  	    manager m 
+		    ON  
+		        b.board_id = m.manager_id
+		 WHERE  
+		 	    b.board_type = '레시피'
 		<if test="!keyword.equals('')">                         
 		<choose>                                            
 			<when test="searchType.equals('recipe_name')">     
-		   AND b.board_subject LIKE '%${keyword}%'            
+		   AND 
+		        b.board_subject LIKE '%${keyword}%'            
 			</when>                                        
 			<when test="searchType.equals('recipe_brandname')">     
-		   AND m.manager_brandname LIKE '%${keyword}%'  
+		   AND 
+		        m.manager_brandname LIKE '%${keyword}%'  
 			</when>                                          
 		</choose>                                            
 	  </if>
@@ -64,19 +76,51 @@
 	<!-- 상세보기 -->
 	<select id="selectRecipe" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT 
-		       b.board_idx,
-			   b.board_subject,
-			   b.board_content,
-			   b.board_id,
-			   f.file1,
-			   f.file2,
-			   m.manager_brandname
-		  FROM board b
-	 LEFT JOIN file_board f
-	 		ON b.board_idx = f.rf_board_idx
-	 LEFT JOIN manager m
-	 	    ON b.board_id = m.manager_id
-	 	 WHERE b.board_idx = ${board_idx}  		
+		        b.board_idx,
+			    b.board_subject,
+			    b.board_content,
+			    b.board_id,
+			    f.file1,
+			    f.file2,
+			    m.manager_brandname
+		  FROM  
+		  	    board b
+	 LEFT JOIN  
+	 		    file_board f
+	 		ON  
+	 		    b.board_idx = f.rf_board_idx
+	 LEFT JOIN  
+	 		    manager m
+	 	    ON  
+	 	        b.board_id = m.manager_id
+	 	 WHERE  
+	 	 	    b.board_idx = ${board_idx}  		
 	</select>
+	
+	<!-- 레시피 파일 수정 -->
+	<update id="updateFile">
+		UPDATE 
+		        file_board
+		   SET
+				rf_board_idx = #{board_idx},
+				file1 = IFNULL(#{file1},''),
+				file2 = IFNULL(#{file2},''),
+				file3 = '' 
+				
+		 WHERE 
+		 	    rf_board_idx = #{board_idx}
+	</update>	
+	
+	<!-- 레시피 글 수정 -->
+	<update id="updateBoard">
+		UPDATE board
+		   SET
+				board_subject = #{board_subject},
+				board_content = #{board_content}
+		 WHERE
+				board_type = '레시피'
+		   AND
+				board_idx = #{board_idx}	
+	</update>		
 	
 </mapper>
