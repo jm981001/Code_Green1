@@ -13,6 +13,7 @@ import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
+import com.itwillbs.Code_Green.vo.TotalVO;
 
 @Service
 public class AdminService {
@@ -370,17 +371,19 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectTotalsellCount();
 	}
-	//매출 차트
-	public List<SellVO> getChart() {
-		
-		return mapper.selectSellChart();
-	}
 	
-
-//	public SellVO getChart() {
-
+	
+	
+	
+	
+	//매출 차트
+//	public List<TotalVO> getChart() {
+//		
 //		return mapper.selectSellChart();
 //	}
+	
+
+
 
 	
 

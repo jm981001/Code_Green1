@@ -11,6 +11,7 @@ import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
+import com.itwillbs.Code_Green.vo.TotalVO;
 
 public interface AdminMapper {
 
@@ -247,10 +248,10 @@ public interface AdminMapper {
 	public int selectTotalsellCount();
 
 
-//	public SellVO selectSellChart();
+
 
 	//차트입니다
-	public List<SellVO> selectSellChart();
+//	public List<TotalVO> selectSellChart();
 
 	
 

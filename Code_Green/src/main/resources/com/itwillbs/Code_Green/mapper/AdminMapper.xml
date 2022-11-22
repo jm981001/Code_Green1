@@ -23,18 +23,19 @@
 		FROM sell
 	</select>
 
-	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		SELECT
-		sum((i.item_price * s.sell_amount)) as brandtotal
-		FROM manager m JOIN item i 
-		ON m.manager_idx = i.re_manager_idx
-		JOIN sell_detail s
-		ON i.item_idx = s.rf_item_idx
-		WHERE
-			m.manager_adminauth='Y' AND m.manager_del_yn ='N'
-		GROUP BY
-			i.re_manager_idx
-	</select>
+<!-- 	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.TotalVO"> -->
+<!-- 		SELECT -->
+<!-- 		m.manager_brandname, -->
+<!-- 		sum((i.item_price * s.sell_amount)) as brandtotal -->
+<!-- 		FROM manager m JOIN item i  -->
+<!-- 		ON m.manager_idx = i.re_manager_idx -->
+<!-- 		JOIN sell_detail s -->
+<!-- 		ON i.item_idx = s.rf_item_idx -->
+<!-- 		WHERE -->
+<!-- 			m.manager_adminauth='Y' AND m.manager_del_yn ='N' -->
+<!-- 		GROUP BY -->
+<!-- 			i.re_manager_idx -->
+<!-- 	</select> -->
 
 
 

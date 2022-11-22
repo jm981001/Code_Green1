@@ -241,12 +241,12 @@ $(document).ready(function(){
 function getGraph(){
 	
 	
-	$ajax({
-		url:"index",
-		type:"get",
+	$.ajax({
+		url:"drawChart",
+		type:"GET",
 		dataType:"json",
-		success:function(){
-			
+		success:function(data){
+			let dataa = JSON.parse(data)
 			
 			new Chart(document.getElementById('myChart'), {
 			    // ①차트의 종류(String)
@@ -258,7 +258,7 @@ function getGraph(){
 			        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
 			        datasets: [{
 			            // ⑤dataset의 이름(String)
-			            label: '# 집에보내줘',
+			            label: '# 차트끝내고 싶다',
 			            // ⑥dataset값(Array)
 			            data: [364, 19, 3, 5, 2, 3],
 			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
@@ -281,20 +281,21 @@ function getGraph(){
 			        }
 			    }
 			});
-			
-			
+				
 		}
+		
+		});//ajax
+			
+	}//getGraph
 
 	
 	
 	
+
 	
 	
 	
-	
-	})//ajax
-	
-}//getGraph
+
 
 
 </script>

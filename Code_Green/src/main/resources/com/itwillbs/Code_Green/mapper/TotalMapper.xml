@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itwillbs.Code_Green.mapper.TotalMapper">
+
+
+
+	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.TotalVO">
+		SELECT
+		
+		sum((i.item_price * s.sell_amount)) AS brandtotal
+		FROM
+			manager m
+		LEFT JOIN
+			item i 
+		ON
+			m.manager_idx = i.re_manager_idx
+		LEFT JOIN
+			sell_detail s
+		ON
+			i.item_idx = s.rf_item_idx
+		WHERE
+			m.manager_adminauth='Y' AND m.manager_del_yn ='N'
+		GROUP BY
+			i.re_manager_idx
+	</select>
+
+
+</mapper>
