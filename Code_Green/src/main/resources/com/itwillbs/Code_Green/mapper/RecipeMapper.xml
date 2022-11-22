@@ -3,7 +3,7 @@
 <mapper namespace="com.itwillbs.Code_Green.mapper.RecipeMapper">
 	
 	<!-- 레시피 등록(글) -->
-	<insert id="insertRecipeBoard">
+	<insert id="insertRecipe">
 		INSERT 
 	      INTO 
 	            board 
@@ -98,7 +98,7 @@
 	</select>
 	
 	<!-- 레시피 파일 수정 -->
-	<update id="updateFile">
+	<update id="updateRecipeFile">
 		UPDATE 
 		        file_board
 		   SET
@@ -112,8 +112,9 @@
 	</update>	
 	
 	<!-- 레시피 글 수정 -->
-	<update id="updateBoard">
-		UPDATE board
+	<update id="updateRecipe">
+		UPDATE
+			    board
 		   SET
 				board_subject = #{board_subject},
 				board_content = #{board_content}
@@ -121,6 +122,42 @@
 				board_type = '레시피'
 		   AND
 				board_idx = #{board_idx}	
-	</update>		
+	</update>
+	
+	<!-- 레시피 삭제 전 파일명(file1) 조회  -->	
+	<select id="selectRealFile1" resultType="string">
+		SELECT 
+		        file1
+		  FROM 
+		        file_board
+		  WHERE
+				rf_board_idx = #{board_idx}
+	</select>	
+	
+	<!-- 게시글 삭제전 파일2 명 조회 -->	
+	<select id="selectRealFile2" resultType="string">
+		SELECT 
+				file2
+		  FROM  
+		  		file_board
+		 WHERE
+				rf_board_idx = #{board_idx}
+	</select>
+	
+	<delete id="deleteRecipe">
+		DELETE
+		  FROM
+		  	    board
+		 WHERE  
+		 		board_idx = #{board_idx} 	    
+	</delete>
+
+	<delete id="deleteRecipeFile">
+		DELETE
+		  FROM
+		  	    file_board
+		 WHERE  
+		 		rf_board_idx = #{board_idx} 	    
+	</delete>
 	
 </mapper>

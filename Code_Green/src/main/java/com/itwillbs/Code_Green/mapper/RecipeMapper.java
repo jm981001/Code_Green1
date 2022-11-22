@@ -10,7 +10,7 @@ import com.itwillbs.Code_Green.vo.File_boardVO;
 public interface RecipeMapper {
 
 	// 레시피 작성(글)
-	int insertRecipeBoard(BoardVO board);
+	int insertRecipe(BoardVO board);
 
 	// 레시피 작성(파일)
 	int insertRecipeFile(File_boardVO fileBoard);
@@ -22,10 +22,22 @@ public interface RecipeMapper {
 	BoardVO selectRecipe(int board_idx);
 
 	// 레시피 파일 수정
-	int updateFile(File_boardVO fileBoard);
+	int updateRecipeFile(File_boardVO fileBoard);
 
 	// 레시피 글 수정
-	int updateBoard(BoardVO board);
+	int updateRecipe(BoardVO board);
+
+	// 레시피 삭제 전 파일명(file1) 조회  
+	String selectRealFile1(int board_idx);
+
+	// 레시피 삭제 전 파일명(file2) 조회  
+	String selectRealFile2(int board_idx);
+
+	// 레시피 글 삭제
+	int deleteRecipe(int board_idx);
+
+	// 레시피 파일 삭제
+	int deleteRecipeFile(int board_idx);
 
 	// 레시피 목록(사진) 불러오기
 //	List<File_boardVO> selectRecipeFileList();

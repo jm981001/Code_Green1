@@ -16,8 +16,8 @@ public class RecipeService {
 	private RecipeMapper mapper;
 
 	// 레시피 작성(글)
-	public int writeRecipeBoard(BoardVO board) {
-		return mapper.insertRecipeBoard(board);
+	public int writeRecipe(BoardVO board) {
+		return mapper.insertRecipe(board);
 	}
 
 	// 레시피 작성(파일)
@@ -36,13 +36,33 @@ public class RecipeService {
 	}
 
 	// 레시피 파일 수정
-	public int modifyFile(File_boardVO fileBoard) {
-		return mapper.updateFile(fileBoard);
+	public int modifyRecipeFile(File_boardVO fileBoard) {
+		return mapper.updateRecipeFile(fileBoard);
 	}
 
 	// 레시피 글 수정
-	public int modifyBoard(BoardVO board) {
-		return mapper.updateBoard(board);
+	public int modifyRecipe(BoardVO board) {
+		return mapper.updateRecipe(board);
+	}
+
+	// 레시피 삭제 전 파일명(file1) 조회  
+	public String getRealFile1(int board_idx) {
+		return mapper.selectRealFile1(board_idx);
+	}
+	
+	// 레시피 삭제 전 파일명(file2) 조회 
+	public String getRealFile2(int board_idx) {
+		return mapper.selectRealFile2(board_idx);
+	}
+
+	// 레시피 글 삭제
+	public int removeRecipe(int board_idx) {
+		return mapper.deleteRecipe(board_idx);
+	}
+
+	// 레시피 파일 삭제
+	public int removeRecipeFile(int board_idx) {
+		return mapper.deleteRecipeFile(board_idx);
 	}
 
 	// 레시피 목록(사진) 불러오기

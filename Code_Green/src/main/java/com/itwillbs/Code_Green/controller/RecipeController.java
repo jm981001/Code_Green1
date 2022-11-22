@@ -47,7 +47,7 @@ public class RecipeController {
 	}
 	
 	
-	//레시피 폼
+	// 레시피 폼
 	@GetMapping(value = "/recipe_write.bo")
 	public String recipe_write() {
 		
@@ -58,83 +58,83 @@ public class RecipeController {
 	@PostMapping(value = "/recipe_writePro.bo")
 	public String recipe_writePro(@ModelAttribute BoardVO board, @ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
 		
-				// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
-				// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
-				//    (request 객체에 해당 메서드 없음)
-				String uploadDir = "/resources/recUpload"; // 가상의 업로드 경로
+		// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
+		// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
+		//    (request 객체에 해당 메서드 없음)
+		String uploadDir = "/resources/recUpload"; // 가상의 업로드 경로
 //				// => webapp/resources 폴더 내에 upload 폴더 생성 필요
-				String saveDir = session.getServletContext().getRealPath(uploadDir);
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
 //				System.out.println("실제 업로드 경로 : " + saveDir);
-				
-				File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
-				// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
-				if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
-					// 경로 상의 존재하지 않는 모든 경로 생성
-					f.mkdirs();
-				}
-				
-				// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
-				// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
-				// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
+		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+		// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
+		// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
 //						MultipartFile mFile = board.getFile();
-				
-				String uuid = UUID.randomUUID().toString();
-				
-			
-				MultipartFile mFile1 = fileBoard.getFile_1();
-				MultipartFile mFile2 = fileBoard.getFile_2();
-				
-				String originalFileName1 = mFile1.getOriginalFilename();
-				String originalFileName2 = mFile2.getOriginalFilename();
+		
+		String uuid = UUID.randomUUID().toString();
+		
+	
+		MultipartFile mFile1 = fileBoard.getFile_1();
+		MultipartFile mFile2 = fileBoard.getFile_2();
+		
+		String originalFileName1 = mFile1.getOriginalFilename();
+		String originalFileName2 = mFile2.getOriginalFilename();
 
-				
-				// ========================================================
-				
-				if(!originalFileName1.equals("")) {
-					fileBoard.setFile1(uuid + "_" + originalFileName1);
+		
+		// ========================================================
+		
+		if(!originalFileName1.equals("")) {
+			fileBoard.setFile1(uuid + "_" + originalFileName1);
 //					System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
-				}
+		}
 
-				if(!originalFileName2.equals("")) {
-					fileBoard.setFile2(uuid + "_" + originalFileName2);
+		if(!originalFileName2.equals("")) {
+			fileBoard.setFile2(uuid + "_" + originalFileName2);
 //					System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
-				}
-				
-				// ===========================================================
+		}
+		
+		// ===========================================================
 
-				int insertCount = service.writeRecipeBoard(board);
-				int file_insertCount = service.writeRecipeFile(fileBoard);
-				
-				if(insertCount > 0) {
-					if(file_insertCount > 0) {
-						try {
-							if(fileBoard.getFile1() != null) {
-								mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
-							}
-							if(fileBoard.getFile2() != null) {
-								mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
-							}
-						} catch (IllegalStateException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-						return "redirect:/recipe_main.bo";
-					} else {
-						model.addAttribute("msg", "파일 업로드 실패하였습니다.");
-						return "member/fail_back";
+		int insertCount = service.writeRecipe(board);
+		int file_insertCount = service.writeRecipeFile(fileBoard);
+		
+		if(insertCount > 0) {
+			if(file_insertCount > 0) {
+				try {
+					if(fileBoard.getFile1() != null) {
+						mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
 					}
-					
-				} else {
-					
-					model.addAttribute("msg", "글 등록에 실패하였습니다.");
-					return "member/fail_back";
+					if(fileBoard.getFile2() != null) {
+						mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+					}
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+
+				return "redirect:/recipe_main.bo";
+			} else {
+				model.addAttribute("msg", "파일 업로드가 되지 않았습니다.<br>다시 시도해 주세요.");
+				return "member/fail_back";
+			}
+			
+		} else {
+			
+			model.addAttribute("msg", "레시피 등록이 되지 않았습니다<br>다시 시도해 주세요.");
+			return "member/fail_back";
+		}
 	}
 	
 	
-	//레시피 상세보기
+	// 레시피 상세보기
 	@GetMapping(value = "/recipe_detail.bo")
 	public String recipe_detail(@RequestParam int board_idx, Model model) {
 	
@@ -215,13 +215,13 @@ public class RecipeController {
 		}	
 		
 		
-		// ---파일 수정---
+		// ----파일 수정----
 		// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
-		int updateFileCount = service.modifyFile(fileBoard);
+		int updateFileCount = service.modifyRecipeFile(fileBoard);
 		
 		if(updateFileCount == 0) {
 			
-			model.addAttribute("msg","파일 수정 실패");
+			model.addAttribute("msg","파일 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
 			return "member/fail_back";
 			
 		} else {
@@ -263,17 +263,70 @@ public class RecipeController {
 			
 		}
 		
-		//  글 수정
-		int updateCount = service.modifyBoard(board);
+		//  ----글 수정----
+		int updateCount = service.modifyRecipe(board);
 		
 		System.out.println(updateCount);
 		
 		if(updateCount == 0) {
-			model.addAttribute("msg", "글 수정 실패");
+			model.addAttribute("msg", "레시피 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
 			return "member/fail_back";
 		}
 		
-		return "redirect:/recipe_detail.bo?board_idx=" + board.getBoard_idx();
+		return "redirect:/recipe_detail.bo?board_idx=" + board_idx;
+	}
+	
+	// 레시피 삭제 폼
+	@GetMapping(value = "/recipe_delete.bo")
+	public String recipe_delete() {
+	
+		return "recipe/recipe_delete";
+	}
+	
+	// 레시피 삭제
+	@PostMapping(value = "/recipe_deletePro.bo")
+	public String recipe_deletePro(@RequestParam int board_idx, Model model, HttpSession session) {
+		
+		//글 삭제 전 실제 업로드된 파일 삭제작업
+		String realFile1 = service.getRealFile1(board_idx);
+		String realFile2 = service.getRealFile2(board_idx);
+		
+		System.out.println("realFile1 -> "+realFile1);
+		System.out.println("realFile2 -> "+realFile2);
+		
+		int deleteCount = service.removeRecipe(board_idx);
+		int deleteFileCount = service.removeRecipeFile(board_idx);
+		
+		System.out.println("deleteCount 갯수 -> "+deleteCount);
+		System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
+		// ----------------------------------------------------------
+		
+		if(deleteCount > 0) {
+			String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
+			// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+			String saveDir = session.getServletContext().getRealPath(uploadDir);
+			System.out.println("실제 업로드 경로 : " + saveDir);
+			
+			if(!realFile1.equals("N")) {
+				File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
+				if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
+					f1.delete();
+				}
+			}
+			if(!realFile2.equals("N")) {
+				File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
+				if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
+					f2.delete();
+				}
+			}
+			
+			return "redirect:/recipe_main.bo";
+			
+		} else {
+			model.addAttribute("msg", "레시피 삭제가 되지 않았습니다.<br>다시 시도해주세요.");
+			return "member/fail_back";
+		}
+			
 	}
 
 	

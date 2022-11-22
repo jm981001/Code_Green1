@@ -37,9 +37,37 @@
 	<script type="text/javascript">
 		function recipe_modify_auth() {
 			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
-				location.href="recipe_modify.bo?board_idx=" +${recipe.board_idx};
+				location.href="recipe_modify.bo?board_idx=" + ${recipe.board_idx};
 			} else {
 				alert("수정 권한이 없습니다.");
+			}
+				
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function recipe_delete_auth() {
+			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
+// 				location.href="recipe_delete.bo?board_idx=" + ${recipe.board_idx};
+					confirm("삭제하시겠습니까? 삭제하면 복구가 불가능합니다.");
+				
+					$.ajax({
+						url: "recipe_deletePro.bo",
+						type: "POST",
+						data: {
+							board_idx: ${recipe.board_idx}
+						},
+						success: function(){
+							alert("삭제가 완료되었습니다.");
+							location.href="recipe_main.bo";
+						},
+						fail: function () {
+							alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
+						}
+					});
+				
+			} else {
+				alert("삭제 권한이 없습니다.");
 			}
 				
 		}
@@ -73,11 +101,58 @@
                     <div class="ingredients-item">
                         <div class="intro-item">
                             <img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt="">
+                       		<div class="ps-form--quick-search--com">
+						       	<button onclick="recipe_modify_auth()">글 수정</button>
+						       	<button onclick="recipe_delete_auth()">글 삭제</button>
+						   </div>
                         </div>
                         <div class="ingredient-list">
                             <div class="list-item">
                             	${recipe.manager_brandname }<br>
                             	${recipe.board_content }
+                            	
+                            	
+			                        <div class="ps-page__left"  style="margin-top: 100px;">
+			                        <h3>사용한 상품</h3>
+			                        <div class="widget__content">
+			                         <div class="ps-product">
+			                            <div class="ps-product__thumbnail"><a href=""><img src="/Code_Green/resources/item/" alt=""></a>
+			                                <ul class="ps-product__actions">
+			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+			                                </ul>
+			                            </div>
+<%-- 			                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a> --%>
+<%-- 			                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a> --%>
+<!-- 			                                    <div class="ps-product__rating"> -->
+<!-- 			                                        <select class="ps-rating" data-read-only="true"> -->
+<!-- 			                                            <option value="1">1</option> -->
+<!-- 			                                            <option value="1">2</option> -->
+<!-- 			                                            <option value="1">3</option> -->
+<!-- 			                                            <option value="1">4</option> -->
+<!-- 			                                            <option value="2">5</option> -->
+<%-- 			                                        </select><span>${item.board_star_score }</span> --%>
+<!-- 			                                    </div> -->
+<%-- 			                                   <h4 class="ps-product__price">${item.item_price }원</h4> --%>
+<!-- 			                                </div> -->
+<%-- 			                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a> --%>
+<%-- 			                                     <h4 class="ps-product__price">${item.item_price }원</h4> --%>
+<!-- 			                                </div> -->
+<!-- 			                            </div> -->
+			                        </div>
+			                     </div>
+			                </div>
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
+                            	
                             </div>
                         </div>
                     </div>
@@ -89,9 +164,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="ps-form--quick-search--com" align="right">
-			       	<button onclick="recipe_modify_auth()">글 수정</button>
-			   </div>	
             </div>
         </div>
     </section>
