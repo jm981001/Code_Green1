@@ -152,42 +152,27 @@
                         </table>
                     </div>
                 </div>
-                <div class="ps-section__footer">
-                    <p>Show 10 in 30 items.</p>
-                    <ul class="pagination">
-                        <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">이전</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">다음</a></li>
-                        <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-                    </ul>
-                </div>
-                
-                
-                
-              
+                       <div class="ps-section__footer">
+                   <!-- 페이징 버튼들 시작 -->
+				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
+				                           
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="ad_member_Manage?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i></a></li>
+				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				                               <c:choose>
+				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+				                                  <c:otherwise><li><a href="ad_member_Manage?pageNum=${i }">${i }</a></li></c:otherwise>
+				                               </c:choose>
+				                            </c:forEach>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="ad_member_Manage?pageNum=${pageInfo.pageNum + 1}"><%}%><i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
+				  <!-- 페이징 버튼들 끝 -->
+                		</div>
             </section>
-            <section id="pageList">
-	
-			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-			<input type="button" value="이전" <%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum - 1}'"<%} %>>
-			<!-- 시작페이지(startPage) 부터 끝페이지(endPage) 까지 페이지 번호 표시 -->
-			&nbsp;
-			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				<!-- 현재 페이지 번호와 i 값이 같을 경우 하이퍼링크 없이 페이지 번호 표시 -->
-				<!-- 아니면, pageNum 파라미터를 i 값으로 설정하여 BoardList.bo 서블릿 주소 링크 -->
-				<c:choose>
-					<c:when test="${i eq pageInfo.pageNum }">${i }</c:when>
-					<c:otherwise><a href="ad_member_Manage?pageNum=${i }">${i }</a></c:otherwise>
-				</c:choose>
-				&nbsp;
-			</c:forEach>
-		<!-- 현재 페이지번호가 끝 페이지번호보다 작을 때 현재 페이지번호 + 1 값으로 페이지 이동 -->
-		<input type="button" value="다음" <%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%>onclick="location.href='ad_member_Manage?pageNum=${pageInfo.pageNum + 1}'"<%} %>>
-	</section>
-
-					</div>
-    			</main>
+			</div>
+    </main>
         
     <script src="/Code_Green/resources/plugins_admin/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_admin/popper.min.js"></script>
