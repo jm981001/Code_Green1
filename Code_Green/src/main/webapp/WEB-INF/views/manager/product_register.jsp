@@ -48,7 +48,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 						</ul>
         </div>
     </aside>
@@ -79,7 +79,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 						</ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -93,14 +93,13 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>새로운 상품등록</h3>
+                    <h3>새로운 상품</h3>
+                    <p>상품 추가</p>
                 </div>
-
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-              <form action="product_register" method="post" enctype="multipart/form-data">
-                <form class="ps-form ps-form--new-product">
+                <form class="ps-form ps-form--new-product" action="index.html" method="get">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -110,21 +109,20 @@
                                         <div class="form-group">
                                             <label>상품번호<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="상품번호를 기재해주세요" />
+                                            <input class="form-control" type="text" placeholder="상품명을 기재해주세요" />
                                         </div>
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="상품명을 기재해주세요" />
+                                            <input class="form-control" type="text" placeholder="상품번호를 기재해주세요" />
                                         </div>
-                                   
                                         <div class="form-group">
                                             <label>정상가격<sup>*</sup>
                                             </label>
                                             <input class="form-control" type="text" placeholder="정상가를 입력해주세요" />
                                         </div>
                                         <div class="form-group">
-                                            <label>할인가격<sup></sup>
+                                            <label>할인가격<sup>*</sup>
                                             </label>
                                             <input class="form-control" type="text" placeholder="할인가를 입력해주세요" />
                                         </div>
@@ -141,6 +139,7 @@
                                     </select>
                                 </div>
                                  </div>
+<!--                                  </div> -->
                                          <div class="form-group">
                                             <label>상품카테고리<sup>*</sup>
                                             </label>
@@ -155,67 +154,51 @@
                                         <option value="7">간식류</option>
                                     </select>
                                 </div>
-                                		<div class="form-group">
-                                            <label>재고수량<sup>*</sup>
-                                            </label>
-                                            <input class="form-control" type="text" placeholder="판매수량을 입력해주세요" />
-                                        </div>
-                                    </div>
-                                    </div>
+   
                                 </figure>
-                                    </form>
-<!--                                         <div class="form-group"> -->
-<!--                                             <label>상품설명<sup>*</sup></label> -->
-<!--                                             <textarea id="summernote" rows="6" name="editordata"placeholder=""></textarea> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                             </div> -->
+                            </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <figure class="ps-block--form-box">
                                     <figcaption>상품 이미지</figcaption>
                                     <div class="ps-block__content">
-                                  
-                                 <!-- 파일 업로드 부분 -->
-	                                    <tr>
-                                          <div class="form-group--nest">
+                                        <div class="form-group">
+                                         <div class="form-group--nest">
                                             <label>상품 썸네일<sup>*</sup></label>
                                           </div>  
 	                                        <td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
-	                                    </tr>
-	                                    <tr>
-                                           <div class="form-group--nest">
-                                       </tr>
-                                       <tr>
-                                            <label>상품 상세이미지<sup>*</sup></label>
-                                       </tr>
-										   </div>
-										<tr>   
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
-	                                    </tr>
+                                         <div class="form-group--nest">
+                                          
+                                          <label>상품 상세이미지<sup>*</sup></label>
+                                          </div>
+                                        <td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
+                                        </div>
+                                       
+                                        <div class="form-group">
+                                            <label>상품 설명<sup>*</sup></label>
+                                            <input class="form-control" type="text" placeholder="상품소개를 입력해주세요" />
+                                        </div>
+                                    </div>
                                 </figure>
-								</div>
-										
-										
                                 <figure class="ps-block--form-box">
-                                    <figcaption>기타정보</figcaption>
+                                    <figcaption>재고</figcaption>
                                     <div class="ps-block__content">
-      								
+                                      
                                         <div class="form-group form-group--select">
-                                            <label>판매상태
+                                            <label>재고상태
                                             </label>
                                             <div class="form-group__content">
                                                 <select class="ps-select" title="Status">
-                                                    <option value="1">판매중</option>
+                                                    <option value="1">재입고</option>
                                                     <option value="2">품절</option>
-                                                    <option value="3">재입고예정</option>
+                                                    <option value="3">판매중</option>
                                                     <option value="4">판매중지</option>
                                                 </select>
                                             </div>
                                         </div>
-                                             <div class="form-group">
-                                            <label>상품소개글<sup>*</sup>
+                                            <div class="form-group">
+                                            <label>재고수량<sup>*</sup>
                                             </label>
-                                            <textarea class="form-control" rows="6" placeholder="상품상세페이지에 들어가는 상품소개글"></textarea>
+                                            <input class="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
                                 </figure>
@@ -223,9 +206,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ps-form__bottom">
-                        <button class="ps-btn">상품등록</button>
+                   <div class="ps-form__submit text-center	">
+                    <button class="ps-btn">상품등록</button>
                     <a class="ps-btn ps-btn--black" href="products">상품페이지이동</a>
+<!--                         <button class="ps-btn ps-btn--gray">취소</button> -->
                     </div>
                 </form>
             </section>

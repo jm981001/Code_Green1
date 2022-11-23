@@ -10,6 +10,7 @@ import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 @Service
 public class ManagerService {
@@ -101,6 +102,24 @@ public class ManagerService {
 	public QnaVO getQnaInfo(String qna_idx) {
 		return mapper.selectQnaInfo(qna_idx);
 	}
+	
+	//총매출
+	public SellVO getTotalMoney() {
+		return mapper.selectTotalMoney(); 
+	}
+	//총주문수
+	public int getTotalsellCount() {
+		return mapper.selectTotalsellCount();
+	}
+	//문의글 삭제
+	public int removeQnaboard(String idx, String id) {
+		return mapper.deleteQnaboard(idx,id);
+	}
+	//문의글 답글
+	public int registQnaboard(QnaVO qna) {
+		return mapper.updateQnaboard(qna);
+	}
+	
 
 
 	

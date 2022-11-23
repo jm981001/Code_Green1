@@ -59,7 +59,6 @@
 	<select id="selectBrandInfo" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT * FROM manager
 		WHERE MANAGER_ID=#{sId}
-<!-- 		AND MANAGER_BRANDNAME=#{manager_brandname} -->
 	</select>
 
 	<!--브랜드 정보 수정 -->
@@ -199,9 +198,23 @@
 			 
 	</select>
 
+  <!-- 상품문의글 답변 등록 -->	
+	<update id="updateQnaboard">
+		UPDATE qna
+		SET
+			qna_answer=#{qna_answer }
+		WHERE
+			qna_idx=#{qna_idx }
+	</update>
 
-
-
+	<!-- 상품문의글 삭제 -->
+	<delete id="deleteQnaboard">
+		DELETE FROM qna
+		WHERE 
+			qna_idx=#{idx} AND qna_id=#{id}
+	</delete>
+	
+	
 <!-- 상품문의글 목록 갯수 조회(검색 기능 추가) -->
 	<select id="selectQnaBoardListCount" resultType="integer">
 		SELECT 
@@ -246,7 +259,7 @@
 			WHERE 
 			item_idx = #{item_idx}
 	</select>	
-		
+	
 	
 
 	<!-- 팔로우 목록 조회 -->

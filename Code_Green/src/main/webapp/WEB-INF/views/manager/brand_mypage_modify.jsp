@@ -23,7 +23,26 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+	function myItem(value) {
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = '';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+	//		subForm.submit(); //form Submit
+	
+	}
+</script>
 </head>
 
 <body>
@@ -108,21 +127,22 @@
                             <hr>
                             <br>
                           <!-- 파일 업로드 부분 -->
-                                 <div class="card" style="width: 25rem;">
+                          <form action="_brand_mypage_modifyPro.bo?" method="get" enctype="multipart/form-data" id="modifyForm"">
+		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">  
+	                    	<input type="hidden" name="orginal_file" value="${brandInfo.manager_original_file}">  
+                          <div class="card" style="width: 25rem;">
 						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
-<%-- 						    <h5 class="card-title">${brandInfo.manager_brandname }</h5> --%>
-						    <p class="card-text">${brandInfo.manager_realfile }</p>
-						    <input type="file"class="파일선택1" id="manager_realfile"name="manager_realfile"value="${brandInfo.manager_realfile }">
-						    	<c:if test="${manager_realfile ne 'N' }">(기존파일:<span id="here"></span>
-	                                    	<button onclick="deletemanager_Realfile()">삭제</button>)
+						    <p class="card-text">${brandInfo.manager_original_file }</p>
+						    <input type="file"class="파일선택1" id="manager_original_file"name="manager_original_file"value="${brandInfo.manager_original_file }">
+						    	<c:if test="${manager_orginal_file ne 'N' }">(기존파일:${brandInfo.manager_original_file }<span id="here"></span>)
 		                                   		 <script>
-										       		let name = '${manager_realfile}';
+										       		let name = '${manager_original_file}';
 										       		let result = name.split('_');
 										       		$('#here').text(result[1]);
 										      	</script>
-	                                    	</c:if>
-						      
+	                            </c:if>
+						      </form>
                             <!-- 파일 업로드 부분 -->
                                           
                                     </div>
@@ -132,7 +152,7 @@
 						    
 						 
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo?id=${sessionScope.sId}" method="get"name="modifyForm">
+                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get"name="modifyForm">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

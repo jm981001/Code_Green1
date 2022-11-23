@@ -69,8 +69,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_mypage_modify"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
                         </ul>
                     </div>
@@ -119,7 +118,7 @@
                         </div>
                         
 <!-- 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트-->
-
+					<br>
                     </div>
                      <div class="ps-card">
                         <div class="ps-card__header">
@@ -248,20 +247,20 @@
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총주문수</p>
-                                    <h4>254<small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
+                                    <h4>${sellCount }<small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
-                                    <p>총누적금액</p>
-                                    <h4>$6,260<small class="asc"><i class="icon-arrow-up"></i><span>7.1%</span></small></h4>
+                                    <p>총매출</p>
+                                     <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
-                                    <p>이번달누적금액</p>
+                                    <p>이번달매출</p>
                                     <h4>$2,567<small class="desc"><i class="icon-arrow-down"></i><span>0.32%</span></small></h4>
                                 </div>
                             </div>

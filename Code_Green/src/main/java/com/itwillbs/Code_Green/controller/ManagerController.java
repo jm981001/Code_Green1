@@ -29,6 +29,7 @@ import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 @Controller
 public class ManagerController {
@@ -147,8 +148,17 @@ public class ManagerController {
 			System.out.println(Manager);
 			model.addAttribute("manager", Manager);
 			
-			return "manager/index";
 		}
+		
+		SellVO sellTotal = service.getTotalMoney();
+		int sell_count = service.getTotalsellCount();
+		
+		model.addAttribute("sellTotal", sellTotal);
+		model.addAttribute("sellCount", sell_count);
+		
+		return "manager/index";
+		
+		
 	}
 	
 		//------------매니저페이지 메인-------------------------------------------
@@ -194,27 +204,49 @@ public class ManagerController {
 	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
 	@GetMapping(value = "brand_mypage_modifyPro.bo")
-	public String modifyManagerPro(@ModelAttribute ManagerVO manager, 
+	public String modifyManagerPro(@ModelAttribute ManagerVO manager,
 									Model model, HttpSession session) {
-//		
+
 		
-//		
-//		String oldRealFile1 = manager.getManager_realfile();
-//		String oldRealFile2 = manager.getManager_original_file();
-//		
-//		String uuid = UUID.randomUUID().toString();
-//		String uploadDir = "/resources/BrandUpload";	// 가상의 업로드 경로
-//		String saveDir = session.getServletContext().getRealPath(uploadDir);
-//		
-//		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
-//		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
-//		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
-//			// 경로 상의 존재하지 않는 모든 경로 생성
-//			f.mkdirs();
-//		}
+
+		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
+		String oldRealFile1 = manager.getManager_realfile();
+		String oldRealFile2 = manager.getManager_original_file();
 		
-		String sId = (String)session.getAttribute("sId");
+		String uuid = UUID.randomUUID().toString();
+		String uploadDir = "/resources/commUpload";	// 가상의 업로드 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
 		
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}	
+		// ManagerVO 객체에 전달된 MultipartFile 객체 꺼내기
+		MultipartFile mFile1 = manager.getFile();
+		
+		// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
+		boolean isNewFile1 = false; 
+		
+		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
+		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
+		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
+		if(!mFile1.getOriginalFilename().equals("")) {
+			String originalFileName = mFile1.getOriginalFilename();
+			System.out.println("파일명1 : " + originalFileName);
+			
+			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
+			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
+			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
+			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
+			manager.setManager_original_file(uuid + "_" + originalFileName);
+			// 새 파일 업로드 표시
+			isNewFile1 = true;
+		} 
+		
+		
+		// ======================정보수정 ======================
 		int updateCount = service.modifyManager(manager);
 		System.out.println("정보수정" + updateCount);
 		System.out.println("수정정보" + manager );
@@ -223,7 +255,7 @@ public class ManagerController {
 		if(updateCount > 0) {
 //			model.addAttribute("msg", "수정 성공!");
 //			model.addAttribute("manager",manager);
-			return "redirect:/brand_mypage";
+			return "redirect:/brand_mypage?id=" + manager.getManager_id();
 		}
 		model.addAttribute("fail", "수정 실패!");
 		return "manager/mn_fail_back";
@@ -677,19 +709,64 @@ public class ManagerController {
 			return "manager/qnaboard_detail";
 		}
 		
-		//------------ 문의글 답글작성-------------------------------------------	
-		//------------ 문의글 답글수정-------------------------------------------	
-		//------------ 문의글 답글삭제-------------------------------------------	
+		//------------ 문의글 답변작성-------------------------------------------
+		@GetMapping(value = "qnaboard_answer_detailPro")
+		public String qnaboard_answer_detailPro(Model model, HttpSession session, QnaVO qna) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+		
+			int updateCount = service.registQnaboard(qna);
+			
+			//빨리하자ㅠㅠㅠ
+			
+			
+			
+			return"manager/qnaboard_detail";
+			
+		}
 		
 		
 		
 		
-	//------------매니저페이지 답글달기-------------------------------------------
-//		@RequestMapping(value = "review_board_manage", method = RequestMethod.GET)
-//		public String review_board_manage() {
-//			return "manager/review_board_manage";
-//		}		
-//		
+		
+		
+		//------------ 문의글 답변수정-------------------------------------------	
+		@GetMapping(value = "qnaboard_modify")
+		public String qnaboard_modify(Model model, HttpSession session, QnaVO qna) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			int updateCount = service.registQnaboard(qna);
+			
+			//빨리하자ㅠㅠㅠ
+			
+			return "qnaboard_answer_detail";
+		}
+		
+		
+		//------------ 문의글 답변삭제-------------------------------------------	
+		
+		@GetMapping(value = "qnaboard_delete")
+		public String qnaboard_delete(@RequestParam String id, String idx, Model model, HttpSession session) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+		
+			int delectCount = service.removeQnaboard(idx,id);
+			System.out.println(delectCount);
+			
+			if(delectCount > 0) {
+				return "qnaboard_list";
+			}
+			
+			model.addAttribute("fail", "삭제실패!");
+			return "manager/qnaboard_list";
+		}
+		
+		
+		
+
 	//------------매니저페이지 팔로워-------------------------------------------
 		@RequestMapping(value = "follower_list", method = RequestMethod.GET)
 		public String follower_list() {

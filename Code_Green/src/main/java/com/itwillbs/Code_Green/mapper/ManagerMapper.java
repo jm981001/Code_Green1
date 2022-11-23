@@ -9,6 +9,7 @@ import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface ManagerMapper {
 
@@ -70,6 +71,16 @@ public interface ManagerMapper {
 	//문의글 갯수 조회
 	public int selectQnaBoardListCount(
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
+
+	//문의글 답변등록
+	public int updateQnaboard(QnaVO qna);
+	//문의글 삭제
+	public int deleteQnaboard(@Param("idx") String idx, @Param("id") String id);
+	//총매출
+	public SellVO selectTotalMoney();
+
+	//총주문수
+	public int selectTotalsellCount();
 
 
 
