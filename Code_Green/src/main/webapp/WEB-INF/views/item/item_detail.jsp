@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.Qna_PageInfo"%>
 <%@page import="com.itwillbs.Code_Green.vo.ItemVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.MemberVO"%>
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
@@ -311,7 +312,7 @@
                                 <li class="active"><a href="#tab-1">상품설명</a></li>
                                 <li><a href="#tab-2">상세정보</a></li>
                                 <li><a href="#tab-3">후기 ${item.count }</a></li><!--tab-3-1은 작성폼 -->
-                                <li><a href="#tab-4">문의</a></li> <!--tab-4-1은 작성폼 -->
+                                <li><a href="#tab-4">문의 ${Qna_listCount }</a></li> <!--tab-4-1은 작성폼 -->
                             </ul>
                             <div class="ps-tabs">
                             
@@ -367,51 +368,7 @@
  
 	
 	
-    <script type="text/javascript">
-		function best(item_idx, board_idx ,item_category, manager_brandname, sId){
-			location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx='+board_idx+'&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }';
-		}
-	</script>   
-<%-- 	  <button class="ps-btn-best_jm"  onclick="best_ajax('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')"><span class="best_count"></span></button>                          --%>
-    <script type="text/javascript">
-		function best_ajax(item_idx, board_idx ,item_category, manager_brandname, sId){
-			$("#btnOk").on("click", function() {
-				$.ajax({
-					url: "ReviewBest.bo",
-					type: "GET",
-					data: {
-						member_id: '${sessionScope.sId}',
-						manager_brandname: manager_brandname,
-						item_category: item_category,
-						item_idx: item_idx,
-						board_idx : board_idx
-					},
-					success: function(){
-						bestCount();
-					}
-				})
-			});
-			function bestCount(item_idx, board_idx ,item_category, manager_brandname, sId){
-				url: "ReviewBest_Count.bo",
-				type: "POST",
-				data:{
-					member_id: '${sessionScope.sId}',
-					manager_brandname: manager_brandname,
-					item_category: item_category,
-					item_idx: item_idx,
-					board_idx : board_idx
-					
-					
-				},
-				success: function(count){
-					$(".best_count").html(count);
-				}
-			}
-		
-		bestCount();	// 처음 시작했을때 실행되도록 해당 함수 호출
-		
-		}
-	</script>                            
+      
  <!-- ==========상품후기 목록=========================================================================================================     -->                                 
                      
                                 <div class="ps-tab" id="tab-3">
@@ -727,11 +684,11 @@
 								                    </div>
 								                    <script type="text/javascript">
 								                    	function changePageUp() {
-								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}";
+								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
 // 								                    		location.href = "#tab-3";
 								                    	}
 								                    	function changePageDown() {
-								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}";
+								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
 // 								                    		location.href = "#tab-3";
 								                    	}
 								                    	
@@ -980,15 +937,28 @@
 									    <br>
 												    
 								     <!-- 페이징 버튼들 시작 -->
-				                  	 <%PageInfo pageInfo1 = (PageInfo)request.getAttribute("pageInfo"); %>
+				                  	<%Qna_PageInfo Qna_pageInfo = (Qna_PageInfo)request.getAttribute("Qna_pageInfo"); %>
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo1.getPageNum() > pageInfo1.getStartPage()) {%><a href="BoardList.bo?pageNum=${pageInfo1.pageNum - 1}'"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <li><%if(pageInfo1.getPageNum() < pageInfo1.getMaxPage()) {%><a href="ItemDetail.bo?item_idx=${item.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(Qna_pageInfo.getQna_pageNum() > Qna_pageInfo.getQna_startPage()) {%><a href="javascript:changeQnaPageDown() "><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+				                            <li><%if(Qna_pageInfo.getQna_pageNum() < Qna_pageInfo.getQna_maxPage()) {%><a href="javascript:changeQnaPageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        	
+				                            <%--  <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
 				                        </ul>
 				                    </div>
-				                    <!-- 페이징 버튼들 끝 -->
+				                    <script type="text/javascript">
+										   function changeQnaPageUp() {
+										      location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&Qna_pageNum="+${Qna_pageInfo.qna_pageNum+1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
+		// 								      location.href = "#tab-3";
+										   }
+								           function changeQnaPageDown() {
+								              location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&Qna_pageNum="+${Qna_pageInfo.qna_pageNum-1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
+// 								               location.href = "#tab-3";
+								           }
+								                    	
+								    </script>
+				                  
+								                    <!-- 페이징 버튼들 끝 -->
 								    
 								    <!-- 문의작성 버튼 -->
 								     <c:if test="${sessionScope.sId ne null}">

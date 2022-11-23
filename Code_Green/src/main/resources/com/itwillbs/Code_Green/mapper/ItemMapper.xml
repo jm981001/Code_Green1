@@ -292,7 +292,14 @@
 					board_item_idx = #{item_idx}
 	</select>
 	
-	
+<!-- 	상품 문의 갯수 조회 -->
+	<select id="selectQnaListCount" resultType="integer">
+		SELECT 
+				COUNT(*) 
+				FROM qna
+				WHERE
+					qna_item_idx = #{item_idx}
+	</select>
 	
 	<!-- 전체 상품 갯수 조회(검색 기능 추가 아직) -->
 	<select id="selectItemListCount" resultType="integer">
@@ -362,7 +369,7 @@
 				WHERE
 					q.qna_item_idx = #{item_idx}
 				ORDER BY q.qna_idx DESC 
-				LIMIT #{startRow}, #{listLimit}   
+				LIMIT #{Qna_startRow}, #{Qna_listLimit}   
 	</select>
 	
 	

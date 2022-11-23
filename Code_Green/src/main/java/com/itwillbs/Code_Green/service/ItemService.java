@@ -53,6 +53,10 @@ public class ItemService {
 		return mapper.selectReviewListCount(item_idx);
 	}
 
+	// 상품 문의 갯수 조회
+	public int getQnaListCount(int item_idx) {
+		return mapper.selectQnaListCount(item_idx);
+	}
 
 	//상품 리스트
 	public List<ItemVO> itemList(int startRow, int listLimit, String searchType, String keyword) {
@@ -80,8 +84,8 @@ public class ItemService {
 	}
 
 	//상품 문의 리스트
-	public List<QnaVO> getQna(int startRow, int listLimit, int item_idx) {
-		return mapper.selectQna(startRow, listLimit, item_idx);
+	public List<QnaVO> getQna(int Qna_startRow, int Qna_listLimit, int item_idx) {
+		return mapper.selectQna(Qna_startRow, Qna_listLimit, item_idx);
 	}
 
 	//상세상세페이지 같은 브랜드상품 2개

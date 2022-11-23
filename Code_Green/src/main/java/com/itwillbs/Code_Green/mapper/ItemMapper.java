@@ -35,6 +35,9 @@ public interface ItemMapper {
 	//리뷰 갯수 조회
 	int selectReviewListCount(int item_idx);
 
+	// 상품 문의 갯수 조회
+	int selectQnaListCount(int item_idx);
+	
 	//상품 갯수 조회
 	int selectItemListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
@@ -51,7 +54,7 @@ public interface ItemMapper {
 	List<ItemVO> selectItemList6(String item_category);
 
 	//상품 문의 리스트
-	List<QnaVO> selectQna(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
+	List<QnaVO> selectQna(@Param("Qna_startRow")int Qna_startRow, @Param("Qna_listLimit")int Qna_listLimit, @Param("item_idx")int item_idx);
 
 	//상세상세페이지 같은 브랜드상품 2개
 	List<ItemVO> selectSameBrand(String manager_brandname);
@@ -73,6 +76,8 @@ public interface ItemMapper {
 
 	//내 취향을 잘 아는 상품들
 	List<ItemVO> mainList3();
+	
+
 
 	
 
