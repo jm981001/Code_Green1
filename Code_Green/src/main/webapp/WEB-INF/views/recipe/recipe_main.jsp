@@ -47,6 +47,25 @@
 	
 	</script>
 	
+	<style type="text/css">
+		#recipeSearchBtn{
+			border-style: none; 
+			height: 41px; 
+			background: #5FA30F; 
+			color: white; 
+			border-radius: 4px;
+		}
+		
+		#recipeSearchInput{
+			height: 41px; 
+			border: 1px solid silver;
+		}
+	
+	
+		.cf-filter{
+			margin-bottom: 70px;
+		}
+	</style>
 </head>
 
 <body>
@@ -83,10 +102,11 @@
                 <div class="col-lg-12 text-center">
                     <div class="filter-item">
                         <ul>
-                            <li class="active" data-filter="*">비건</li>
-                            <li data-filter=".mostpopular">인기레시피</li>
-                            <li data-filter=".meatlover">샐러드</li>
-                            <li data-filter=".glutenfree">글루텐X</li>
+                            <li class="active" data-filter="*">과일 / 채소</li>
+                            <li data-filter=".mostpopular">유제품 / 음료</li>
+                            <li data-filter=".meatlover">냉동 / 간편식품</li>
+                            <li data-filter=".glutenfree">해산물</li>
+                            <li data-filter=".glutenfree2">간식류</li>
                         </ul>
                     </div>
                 </div>
@@ -128,7 +148,7 @@
                         <h5>제목</h5>
                     </div>
                 </div>
-                <div class="cf-item mix all meatlover glutenfree">
+                <div class="cf-item mix all meatlover glutenfree2">
                     <div class="cf-item-pic">
                         <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-5.jpg" alt="" onclick="location.href='recipe_detail'">
                     </div>
@@ -137,6 +157,19 @@
                     </div>
                 </div>
             </div>
+            <div>
+	            <div class="ps-form--quick-search--com" align="left" style="margin-bottom: 70px;">
+		            <div style="float: left">
+			            <form action="recipe_main.bo" method="get">
+							<input type="text" name="keyword" id="recipeSearchInput">
+							<input type="submit" id="recipeSearchBtn" value="검색">
+						</form>
+					</div>
+			       	 <div style="float: right">
+			       		<button onclick="recipe_write_auth()" style="float: left">글쓰기</button>
+			       	</div>
+			  </div>
+		   </div>			
         </div>
     </div>
     
@@ -159,19 +192,18 @@
           		 </c:forEach>
 				</div>
 				<div>
-					<div class="ps-form--quick-search--com" align="left">
-			            <form action="recipe_main.bo" method="get">
-							<select name="searchType">
-								<option value="recipe_name">레시피</option>
-								<option value="recipe_brandname">작성자명</option>
-							</select>
-							<input type="text" name="keyword">
-							<input type="submit" value="검색" id="typeSearch" style="border-style: none; ">
-						</form>
-			       </div>
-					<div class="ps-form--quick-search--com" align="right">
-			       		<button onclick="recipe_write_auth()">글쓰기</button>
-			       	</div>	
+       			
+       				<!-- 페이징 버튼들 시작 -->
+	                    <div class="ps-pagination">
+	                        <ul class="pagination">
+	                            <li><a href=""><i class="icon-chevron-left"></i>Prev</a></li>
+	                               <li class="active"><a href="#"></a></li>
+	                               <li><a class="pageLink" href=""></a></li>
+	                            <li><a href="">Next<i class="icon-chevron-right"></i></a></li>
+	                        </ul>
+	                    </div>
+	                <!-- 페이징 버튼들 끝 -->	
+	                
 			   	</div>
 		   	</div>
 

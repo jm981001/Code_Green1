@@ -32,8 +32,8 @@ public class RecipeService {
 	}
 
 	// 레시피 목록(글) 불러오기
-	public List<BoardVO> getRecipeList(String searchType, String keyword) {
-		return mapper.selectRecipeFile(searchType, keyword);
+	public List<BoardVO> getRecipeList(String keyword) {
+		return mapper.selectRecipeFile(keyword);
 	}
 	
 	// 레시피 상세보기 원글 불러오기

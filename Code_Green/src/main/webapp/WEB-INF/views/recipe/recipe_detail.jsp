@@ -114,7 +114,7 @@
                             	
                             	
 			                        <div class="ps-page__left"  style="margin-top: 100px;">
-			                        <h3>사용한 상품</h3>
+			                        <h5>사용한 상품</h5>
 			                        <div class="widget__content">
 			                         <div class="ps-product">
 			                            <div class="ps-product__thumbnail"><img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 300px;">

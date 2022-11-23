@@ -77,18 +77,8 @@
 		        b.board_id = m.manager_id
 		 WHERE  
 		 	    b.board_type = '레시피'
-		<if test="!keyword.equals('')">                         
-		<choose>                                            
-			<when test="searchType.equals('recipe_name')">     
 		   AND 
 		        b.board_subject LIKE '%${keyword}%'            
-			</when>                                        
-			<when test="searchType.equals('recipe_brandname')">     
-		   AND 
-		        m.manager_brandname LIKE '%${keyword}%'  
-			</when>                                          
-		</choose>                                            
-	  </if>
 	</select>
 	
 	<!-- 상세보기 -->

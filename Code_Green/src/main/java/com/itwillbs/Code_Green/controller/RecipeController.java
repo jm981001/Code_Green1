@@ -38,11 +38,10 @@ public class RecipeController {
 	
 	// 레시피 메인(리스트)
 	@GetMapping(value = "/recipe_main.bo")
-	public String recipe_main(@RequestParam(defaultValue = "") String searchType,
-							  @RequestParam(defaultValue = "") String keyword,
+	public String recipe_main(@RequestParam(defaultValue = "") String keyword,
 							  Model model) {
 		
-		List<BoardVO> recipeList = service.getRecipeList(searchType, keyword);
+		List<BoardVO> recipeList = service.getRecipeList(keyword);
 //		System.out.println(recipeList);
 		
 //		List<File_boardVO> recipe_fileList = service.getRecipeFileList();

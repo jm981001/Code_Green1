@@ -20,7 +20,7 @@ public interface RecipeMapper {
 	int insertRecipeFile(File_boardVO fileBoard);
 
 	// 레시피 목록(글) 불러오기
-	List<BoardVO> selectRecipeFile(@Param("searchType") String searchType, @Param("keyword") String keyword);
+	List<BoardVO> selectRecipeFile(String keyword);
 
 	// 레시피 상세보기에서 사용한 상품 불러오기
 	ItemVO selectUseItem(int board_idx);
