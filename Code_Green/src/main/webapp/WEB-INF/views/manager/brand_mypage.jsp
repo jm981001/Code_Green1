@@ -23,6 +23,19 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+
+	<script type="text/javascript">
+	function confirmDelete(manager_id) {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 ManagerDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		let result = confirm(manager_id + "탈퇴하시겠습니까???");
+		
+		if(result) {
+			location.href="brand_mypage_delete?manager_id=" + manager_id;
+		}
+	}
+</script>
+
 </head>
 
 <body>
@@ -48,8 +61,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -80,8 +92,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -104,12 +115,13 @@
                     <section class="ps-card">
                         <div class="ps-card__header">
                             <h4>${brandInfo.manager_id }님의 페이지</h4>
-                            
+						<!-- 탈퇴버튼 -->
+                             <button class="ps-btn success" type="button"id="submitBtn"onclick="confirmDelete('${brandInfo.manager_id}')">탈퇴하기</button>
 
                             <hr>
                             <br>
                                  <div class="card" style="width: 18rem;">
-						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_realfile }" alt="${brandInfo.manager_realfile }" />
+						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
 						    <h5 class="card-title">${brandInfo.manager_brandname }</h5>
 						    <p class="card-text">${brandInfo.manager_realfile }</p>

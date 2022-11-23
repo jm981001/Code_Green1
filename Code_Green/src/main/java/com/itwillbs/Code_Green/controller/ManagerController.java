@@ -191,20 +191,39 @@ public class ManagerController {
 	
 		
 	
-	//------------매니저페이지 내브랜드정보 수정 업데이트----------------------------
+	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
 	@GetMapping(value = "brand_mypage_modifyPro.bo")
-	public String modifyManagerPro(
-			@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
+	public String modifyManagerPro(@ModelAttribute ManagerVO manager, 
+									Model model, HttpSession session) {
 //		
+		
+//		
+//		String oldRealFile1 = manager.getManager_realfile();
+//		String oldRealFile2 = manager.getManager_original_file();
+//		
+//		String uuid = UUID.randomUUID().toString();
+//		String uploadDir = "/resources/BrandUpload";	// 가상의 업로드 경로
+//		String saveDir = session.getServletContext().getRealPath(uploadDir);
+//		
+//		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+//		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+//		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+//			// 경로 상의 존재하지 않는 모든 경로 생성
+//			f.mkdirs();
+//		}
+		
+		String sId = (String)session.getAttribute("sId");
 		
 		int updateCount = service.modifyManager(manager);
 		System.out.println("정보수정" + updateCount);
+		System.out.println("수정정보" + manager );
+		
 		
 		if(updateCount > 0) {
-			model.addAttribute("msg", "수정 성공!");
-			model.addAttribute("manager",manager);
-			return "redirect:/brand_mypage?id=" + manager.getManager_id();
+//			model.addAttribute("msg", "수정 성공!");
+//			model.addAttribute("manager",manager);
+			return "redirect:/brand_mypage";
 		}
 		model.addAttribute("fail", "수정 실패!");
 		return "manager/mn_fail_back";
@@ -212,23 +231,27 @@ public class ManagerController {
 	
 		//------------매니저페이지 내브랜드정보 삭제----------------------------
 		
-	@RequestMapping(value = "delete_MyBrand")
-	public String brandDelete(@ModelAttribute ManagerVO manager, @RequestParam String id,
+	@GetMapping(value = "brand_mypage_delete")
+	public String brandDelete(@ModelAttribute ManagerVO manager, @RequestParam String manager_id,
 			                   Model model, HttpSession session) {
 	
 		String sId = (String)session.getAttribute("sId");
 		
-		int deleteCount = service.deleteManager(id);
-		System.out.println(deleteCount);
+		int deleteCount = service.deleteManager(manager_id);
+		System.out.println("정보삭제" + deleteCount);
 		
 		if(deleteCount > 0) {
+//			model.addAttribute("msg", "탈퇴 성공!");
+//			model.addAttribute("manager_id", manager_id);
+//			model.addAttribute("manager", manager);
+			session.invalidate();
+			return "redirect:/";
 			
-			return "redirect:/brand_mypage_modify";
+		}else {
 			
-		}
-		
 			model.addAttribute("fail", "탈퇴 실패");
 			return "manager/mn_fail_back";
+		}
 		
 		
 	}
@@ -403,7 +426,7 @@ public class ManagerController {
 		
 		
 	 //------------매니저페이지 상품수정 업데이트-------------------------------------------
-		@PostMapping(value = "product_modify")
+		@GetMapping(value = "product_modify")
 		public String edit_product(@ModelAttribute ItemVO item, 
 									@ModelAttribute File_ItemVO fileItem, 
                                     Model model, HttpSession session ) { 

@@ -34,7 +34,7 @@ public interface ManagerMapper {
 	public int updateBrandInfo(ManagerVO manager);
 		
 	// 브랜드 정보삭제(브랜드마이페이지)
-	public int deleteBrand(String id);
+	public int deleteBrand(String manager_id);
 	
 	
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)

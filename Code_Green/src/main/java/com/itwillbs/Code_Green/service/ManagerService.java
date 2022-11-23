@@ -49,9 +49,9 @@ public class ManagerService {
 		return mapper.updateBrandInfo(manager);
 	}
 	
-	// 브랜드 삭제
-	public int deleteManager(String id) {
-		return mapper.deleteBrand(id);
+	// 브랜드 삭제(탈퇴)
+	public int deleteManager(String manager_id) {
+		return mapper.deleteBrand(manager_id);
 	}
 //	//팔로우 목록조회
 //	public MemberVO followInfo(String idx) {

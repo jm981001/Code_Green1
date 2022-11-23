@@ -174,7 +174,7 @@
                                 <figure class="ps-block--form-box">
                                     <figcaption>상품 이미지</figcaption>
                                     <div class="ps-block__content">
-                                   
+                                  
                                  <!-- 파일 업로드 부분 -->
 	                                    <tr>
                                           <div class="form-group--nest">

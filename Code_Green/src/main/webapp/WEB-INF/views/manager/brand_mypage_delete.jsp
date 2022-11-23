@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>내 브랜드 정보수정</title>
+    <title>탈퇴</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
@@ -23,7 +23,20 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+	 <script type="text/javascript">
+
+	function confirmDelete(manager_id) {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 ManagerDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		let result = confirm(manager_id + "탈퇴하시겠습니까???");
+		
+		if(result) {
+			location.href="brand_mypage_delete?manager_id=" + manager_id;
+		}
+	}
+</script>
 </head>
+
 
 <body>
     <header class="header--mobile">
@@ -49,7 +62,6 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
             </ul>
         </div>
     </aside>
@@ -81,7 +93,6 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -95,7 +106,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>내브랜드 정보</h3>
+                    <h3>내브랜드 삭제</h3>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -108,32 +119,22 @@
 
                             <hr>
                             <br>
-                          <!-- 파일 업로드 부분 -->
-                                 <div class="card" style="width: 25rem;">
+                            
+                            
+                          <div class="card" style="width: 18rem;">
 						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_realfile }" alt="${brandInfo.manager_realfile }" />
 						  <div class="card-body">
-<%-- 						    <h5 class="card-title">${brandInfo.manager_brandname }</h5> --%>
+						    <h5 class="card-title">${brandInfo.manager_brandname }</h5>
 						    <p class="card-text">${brandInfo.manager_realfile }</p>
-						    <input type="file"class="파일선택1" id="manager_realfile"name="manager_realfile"value="${brandInfo.manager_realfile }">
-						    	<c:if test="${manager_realfile ne 'N' }">(기존파일:<span id="here"></span>
-	                                    	<button onclick="deletemanager_Realfile()">삭제</button>)
-		                                   		 <script>
-										       		let name = '${manager_realfile}';
-										       		let result = name.split('_');
-										       		$('#here').text(result[1]);
-										      	</script>
-	                                    	</c:if>
-						      
-                            <!-- 파일 업로드 부분 -->
-                                          
-                                    </div>
-                                    </div>
-                                    </div>
-						    
+						    <a href="#" class="btn btn-primary">로고 이미지</a>
+						  </div>
+						</div>
+                        </div>
+
 						    
 						 
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo?id=${sessionScope.sId}" method="get"name="modifyForm">
+                            <form class="ps-form--account-settings" action="brand_mypage_delete?id=${sessionScope.sId}" method="get"name="deleteForm">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -210,7 +211,8 @@
                                         </div>
 
                                 <div class="ps-form__submit text-center	">
-                                    <button class="ps-btn success" type="submit"id="submitBtn">수정하기</button>
+<%--                                     <button class="ps-btn success" type="submit"id="submitBtn"onclick="confirmDelete('${manager.manager_id}&manager_idx=${param.manager_idx }')">탈퇴하기</button> --%>
+									<input type="button" value="탈퇴" onclick="confirmDelete('${manager.manager_id}')">
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                                 </div>
                             </form>
