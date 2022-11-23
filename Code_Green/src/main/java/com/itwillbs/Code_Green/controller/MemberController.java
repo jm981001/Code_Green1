@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MailSendService;
 import com.itwillbs.Code_Green.service.MemberService;
@@ -27,12 +28,13 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private ItemService Iservice;
+	@Autowired
+	private CartService cartService;
 	
 	
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
-		System.out.println(member);
 		// ------------------ BCryptPasswordEncoder 활용한 로그인 판별 ----------------------
 		// 1. BCryptPasswordEncoder 객체 생성
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -49,20 +51,23 @@ public class MemberController {
 		// 2-1) 다를 경우 실패
 		// 2-2) 같을 경우 성공
 		if (passwd == null || !encoder.matches(member.getMember_pass(), passwd)) {
-			model.addAttribute("msg", "로그인 실패! 힝~");
+			model.addAttribute("msg", "다시");
 //			System.out.println(member.getMember_id() + ", " + member.getMember_pass()+"로그인 실패..");
 			return "member/fail_back";
 		} else {
 
 			MemberVO getMem = service.getMemberInfo(member.getMember_id());
-			System.out.println(getMem);
-			session.setAttribute("sId", member.getMember_id());
-			session.setAttribute("sIdx", getMem.getMember_idx());
-
-			System.out.println("세션값" + ((Integer)session.getAttribute("sIdx")));
+			session.setAttribute("sId", member.getMember_id());  //세션아이디
+			session.setAttribute("sIdx", getMem.getMember_idx());//세션 IDX
+			//장바구니 갯수
+			int cartCount = cartService.getCartCount(getMem.getMember_idx());
+			session.setAttribute("cartCount", cartCount);
+			model.addAttribute("cartCount",cartCount);
+			//찜목록 갯수
 			int WishlistCount = Iservice.getWishListCount( member.getMember_id());
 			session.setAttribute("WishlistCount", WishlistCount);
 			model.addAttribute("item_category",WishlistCount);
+			
 			
 			return "redirect:/";
 		}

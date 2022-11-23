@@ -30,40 +30,63 @@ public class CartController {
 	//  장바구니 추가
 	@ResponseBody
 	@GetMapping(value = "/addCart")
-	public String addCart(@ModelAttribute CartVO cart,HttpSession session, Model model) {
+	public String addCart(@ModelAttribute CartVO cart, HttpSession session, Model model) {
 		String sId = (String) session.getAttribute("sId");
 
-		int insertCount = service.insertCart(cart);
-		if(insertCount > 0) {
-			return insertCount+""; //데이터만 전달 나머진 뷰페이지
+		if (sId == null) {
+			model.addAttribute("msg", "회원만 이용 가능합니다!");
+			return "member/fail_back";
+		
 		} else {
-			model.addAttribute("msg", "담기 실패!");
-			return "redirect:/cart/fail_back.jsp";	
+			int insertCount = service.insertCart(cart);
+			if (insertCount > 0) {
+				return insertCount + ""; // 데이터만 전달 나머진 뷰페이지
+			} else {
+				model.addAttribute("msg", "담기 실패!");
+				return "redirect:/cart/fail_back.jsp";
+			}
 		}
 	}
-
 	//  장바구니 목록
 	@GetMapping(value = "/cart")
 	public ModelAndView cart(@RequestParam String member_id, HttpSession session, Model model,ModelAndView mav,@ModelAttribute CartVO cart) {
 		String sId = (String) session.getAttribute("sId");
-		
-		List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
-		Map<String, Object> map = new HashMap<String, Object>();
-		String sumMoney =  service.sumMoney(cartList.get(0).getRf_member_idx());
-		model.addAttribute("cartList", cartList);
-		
-		int sumM = (int)(Double.parseDouble(sumMoney));
-		int fee = (sumM >= 50000 ? 0 : 2500);
-		map.put("cartList", cartList);				// 장바구니 정보를 map에 저장
-		map.put("count", cartList.size());		// 장바구니 상품의 유무
-		map.put("sumM", sumM);		// 장바구니 전체 금액
-		map.put("fee", fee); 				// 배송금액
-		map.put("allSum", sumM+fee);	// 주문 상품 전체 금액 
-		mav.setViewName("cart/shopping_cart");	// view(jsp)의 이름 저장
-		mav.addObject("map", map);			// map 변수 저장
-		System.out.println("cartList : "+ cartList);
-		return mav;
+
+		//		if(cart.get() <= 0) {  //장바구니가 비어있을때 보여주는 페이지
+//			mav.setViewName("cart/shopping_cart");
+//			return mav;
+
+		if (sId == null) { //로그인 안하면 못들어감
+			mav.setViewName("main/main");
+			return mav;
+		} else {
+			List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
+
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			String sumMoney = service.sumMoney(cartList.get(0).getRf_member_idx());
+
+			int sumM = (int) (Double.parseDouble(sumMoney));
+			int fee = (sumM >= 50000 ? 0 : 2500); // 5만원 기준으로 배송비 측정
+
+			model.addAttribute("cartList", cartList);
+			map.put("cartList", cartList); // 장바구니 정보를 map에 저장
+			map.put("count", cartList.size()); // 장바구니 상품의 유무
+			map.put("sumM", sumM); // 장바구니 전체 금액
+			map.put("fee", fee); // 배송비
+			map.put("allSum", sumM + fee); // 주문 상품 전체 금액
+
+			mav.setViewName("cart/shopping_cart"); // 이동할 view 페이지의 이름 저장
+			mav.addObject("map", map); // map 변수 저장
+//			System.out.println("cartList : " + cartList);
+
+			return mav;
+		}
+
 	}
+
+		
+//	}
 
 	// 장바구니 삭제
 	@ResponseBody

@@ -2,6 +2,8 @@ package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.itwillbs.Code_Green.vo.CartVO;
 
 public interface CartMapper {
@@ -16,10 +18,11 @@ public interface CartMapper {
 	public int modifyCart(CartVO cart);
 	// 5. 장바구니 금액 합계
 	public String sumMoney(int member_idx);
-//	// 6. 물건이 이미 카트에 있는지 확인
-//	public int checkCart(int item_idx, int member_idx);
-	// 7. 장바구니 상품수량 변경
+	// 6. 장바구니 상품수량 변경
 	public int updateCart(CartVO vo);
+	// 6. 장바구니 수
+	public int cartCount(@Param("member_idx")int member_idx);
+	public int getCartCount(@Param("member_idx")int member_idx);
 
 	
 	

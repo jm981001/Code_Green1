@@ -34,13 +34,16 @@ public class CartService {
 	public String sumMoney(int member_idx) {
 		return mapper.sumMoney(member_idx);
 	}
-	// 6. 장바구니 상품확인
-//	public int checkCart(int item_idx, int member_idx) {
-//		return mapper.checkCart(item_idx,member_idx);
-//	}
-	// 7. 장바구니 상품수량 변경
+	// 6. 장바구니 상품수량 변경
 	public int updateCart(CartVO cart) {
 		return mapper.updateCart(cart);
+	}
+//	 7. 장바구니 수
+	public int cartCount(int member_idx) {
+		return mapper.cartCount(member_idx);
+	}
+	public int getCartCount(int member_idx) {
+		return mapper.getCartCount(member_idx);
 	}
 
 	

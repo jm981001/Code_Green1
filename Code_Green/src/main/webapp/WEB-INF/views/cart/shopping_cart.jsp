@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +123,7 @@ function deleteItem(cart_idx) {
 										</div>
 									</div>
 								</td>
-								<td class="price" data-label="Price">${row.item_price}원</td>
+								<td class="price" data-label="Price"><fmt:formatNumber value="${row.item_price}" pattern="#,###"/> 원</td>
 
 								<!-- 수량조절 -->
 								<td data-label="Quantity">
@@ -139,7 +139,7 @@ function deleteItem(cart_idx) {
 									
 
 								</td>
-								<td data-label="Total">${row.cart_total*row.cart_amount }
+								<td data-label="Total"><fmt:formatNumber value="${row.cart_total*row.cart_amount }" pattern="#,###"/>
 									원</td>
 								<td>
 									<button type="button" id="delBtn" onclick="deleteItem('${row.cart_idx}')" style="border: none;">삭제</button>
@@ -166,19 +166,24 @@ function deleteItem(cart_idx) {
 			<div class="ps-section__footer">
 				<div class="row"></div>
 				<div class="ps-block--shopping-total" style="width: 600px">
+
 					<div class="ps-block__header">
 						<p>
-							소계 <span> ${map.sumM} 원</span>
+							소계 <span><fmt:formatNumber value="${map.sumM}" pattern="#,###"/> 원</span>
 						</p>
 					</div>
 					<div class="ps-block__content">
+						
 						<ul class="ps-block__product">
-							<li><h3>
-									배송비 <span class="ps-block__shipping">${map.fee} 원</span>
-								</h3></li>
+							<li>
+								<h3>
+									배송비 <span class="ps-block__shipping"><fmt:formatNumber value="${map.fee}" pattern="#,###"/> 원</span>
+								</h3>
+							</li>
 						</ul>
+						
 						<h3>
-							총합 <span class="ps-block__shipping">${map.allSum} 원</span>
+							총합 <span class="ps-block__shipping"><fmt:formatNumber value="${map.allSum}" pattern="#,###"/> 원</span>
 						</h3>
 					</div>
 				</div>

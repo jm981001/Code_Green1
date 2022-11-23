@@ -74,6 +74,25 @@
 		  c.rf_item_idx = i.item_idx AND c.rf_member_idx = #{member_idx}
 	</select>
 	
+	<!-- 7.장바구니 수-->
+	<select id="cartCount" resultType="integer">
+		select 
+			count(cart_idx) 
+				from cart
+				where rf_member_idx = #{member_idx}
+	
+	</select>
+	
+	<select id="getCartCount" resultType="integer">
+		SELECT count(cart_idx)
+			 FROM cart c
+			    LEFT JOIN member m
+			    ON c.rf_member_idx = m.member_idx
+			 WHERE m.member_idx = #{member_idx};
+	</select>
+	
+	
+	
 	
 	
 	<update id="updateCart">
