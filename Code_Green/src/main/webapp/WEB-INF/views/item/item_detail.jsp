@@ -87,12 +87,12 @@
     	}
     </style>
      <script type="text/javascript">
-// 	 	window.onload = function(){
+	 	window.onload = function(){
 			
-// 			$('#sort').val('${sort}')
-// 			sortItemList($('#sort').val());
+			$('#sort').val('${sort}')
+			sortItemList($('#sort').val());
 			
-// 		}	
+		}	
     
     	var sortItemList = function(value) {
     		
@@ -357,7 +357,7 @@
                                                     <td>수입식품에 해당하는경우"식품위생법에 따른 수입신고를 필함" 의 문구</td>
                                                     <td>식품위생법에 따른 수입신고를 필함</td>
                                                     <td>소비자 상담관련 전화번호</td>
-                                                    <td>ㅇㅇㅇ마켓 고객센터(803-0909)</td>
+                                                    <td>베지터틀 고객센터(803-0909)</td>
                                                 </tr>
                                               
                                             </tbody>
@@ -675,22 +675,45 @@
 								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
-								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="javascript:changePageDown() "><%}%>Prev<i class="icon-chevron-left"></i></a></li>
-								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+<!-- 								                         class="pageLink"  -->
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href='javascript:void(0);' onclick="changePageDown();"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href='javascript:void(0);' onclick="changePageUp();"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+<%-- 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a  href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
 								                        	
-								                            <%--  <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
 								                        	
 								                        </ul>
 								                    </div>
 								                    <script type="text/javascript">
 								                    	function changePageUp() {
 								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// 								                    		location.href = "#tab-3";
 								                    	}
 								                    	function changePageDown() {
-								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// 								                    		location.href = "#tab-3";
+								                    		$.ajax({ 
+									                    			url: "ItemDetail.bo", 
+									                    			type: "GET", 
+									                    			data: {
+									                    				item_idx: ${item.item_idx},
+									                    				pageNum: ${pageInfo.pageNum-1},
+									                    				Qna_pageNum: ${Qna_pageInfo.qna_pageNum},
+									                    				manager_brandname: '${item.manager_brandname}',
+									                    				item_category: '${item.item_category}',
+									                    				sort: '${sort}'
+									                    			},
+									                    			success: function(data){
+									            						let comments="";
+									            						let space ="";
+									                    				
+									                    			}
+									        						, error: function(error){
+									        							console.log("에러 : " + error);
+									        						}
+									        						});
 								                    	}
+								                    	
+								                    	
+// 								                    	function changePageDown() {
+// 								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
+// 								                    	}
 								                    	
 								                    </script>
 								                  

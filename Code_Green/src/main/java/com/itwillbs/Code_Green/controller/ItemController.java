@@ -60,28 +60,13 @@ public class ItemController {
 					@RequestParam int item_idx, Model model,@RequestParam String item_category,@RequestParam String manager_brandname,
 					@RequestParam(defaultValue = "new") String sort) {
 				
+				//--------상품문의 페이징처리 ---------------------------------------------------------------------------
 				int listLimit = 5; // 한 페이지 당 표시할 게시물 목록 갯수 
 				int pageListLimit = 3; // 한 페이지 당 표시할 페이지 목록 갯수
 				
 				// 조회 시작 게시물 번호(행 번호) 계산
 				int startRow = (pageNum - 1) * listLimit;
-		 
-				//상품 후기 리스트
-				List<BoardVO> itemList = service.getReview(startRow, listLimit, searchType,item_idx);
-				//상품 후기 별점높은순
-				List<BoardVO> goodList = service.selectGoodList(startRow, listLimit, item_idx);
-				//상품 후기 추천 많은순
-				List<BoardVO> bestList = service.selectBestList(startRow, listLimit, item_idx);
-				//상품 후기 별점낮은순
-				List<BoardVO> worstList = service.selectWorstList(startRow, listLimit, item_idx);
 				
-				//상세상세페이지 안 관련상품 5개
-				List<ItemVO> itemList6 = service.itemList6(item_category);
-				
-				//상세상세페이지 같은 브랜드상품 2개
-				List<ItemVO> sameBrand = service.sameBrand(manager_brandname);
-				
-//				int listCount = 9;
 				int listCount = service.getReviewListCount(item_idx);
 				
 				int maxPage = (int)Math.ceil((double)listCount / listLimit);
@@ -90,9 +75,6 @@ public class ItemController {
 				int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 				// 끝 페이지 번호 계산
 				int endPage = startPage + pageListLimit - 1;
-				System.out.println("maxPage -> " + maxPage);
-				System.out.println("startPage -> " + startPage);
-				System.out.println("listCount -> " + listCount);
 				
 				// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
 				// 끝 페이지 번호를 최대 페이지 번호로 교체
@@ -103,12 +85,10 @@ public class ItemController {
 				PageInfo pageInfo = new PageInfo(
 						pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 				
+				//--------상품문의 페이징처리 끝---------------------------------------------------------------------------
 				
 				
-				
-				
-				
-				//-------- qna 페이징처리----------------
+				//-------- qna 페이징처리---------------------------------------------------------------------------
 				int Qna_listLimit = 5; // 한 페이지 당 표시할 게시물 목록 갯수 
 				int Qna_pageListLimit = 3; // 한 페이지 당 표시할 페이지 목록 갯수
 				// 조회 시작 게시물 번호(행 번호) 계산
@@ -134,21 +114,37 @@ public class ItemController {
 				Qna_PageInfo Qna_pageInfo = new Qna_PageInfo(
 						Qna_pageNum, Qna_listLimit, Qna_listCount, Qna_pageListLimit, Qna_maxPage, Qna_startPage, Qna_endPage);
 				
-				//-------- qna 페이징처리 끝----------------
+				//-------- qna 페이징처리 끝---------------------------------------------------------------------------
+				
+				
+				//상품 후기 리스트
+				List<BoardVO> itemList = service.getReview(startRow, listLimit, searchType,item_idx);
+				
+				//상품 후기 별점높은순
+				List<BoardVO> goodList = service.selectGoodList(startRow, listLimit, item_idx);
+				
+				//상품 후기 추천 많은순
+				List<BoardVO> bestList = service.selectBestList(startRow, listLimit, item_idx);
+				
+				//상품 후기 별점낮은순
+				List<BoardVO> worstList = service.selectWorstList(startRow, listLimit, item_idx);
+				
+				//상세상세페이지 안 관련상품 5개
+				List<ItemVO> itemList6 = service.itemList6(item_category);
+				
+				//상세상세페이지 같은 브랜드상품 2개
+				List<ItemVO> sameBrand = service.sameBrand(manager_brandname);
 				
 				//상품 문의 리스트
 				List<QnaVO> qnaList = service.getQna(Qna_startRow, Qna_listLimit, item_idx);
 				
-				
-				
-				
-				
-				
-				
+				//상품 조회수 증가
 				service.increaseReadcount(item_idx);
+				
+				//상품 상세정보 조회
 				ItemVO item = service.getItem(item_idx);
+				
 				model.addAttribute("sort", sort);
-				System.out.println("sort"+sort);
 				model.addAttribute("itemList", itemList);
 				model.addAttribute("goodList", goodList);
 				model.addAttribute("bestList", bestList);
@@ -160,11 +156,12 @@ public class ItemController {
 				model.addAttribute("qnaList", qnaList);
 				model.addAttribute("itemList6", itemList6);
 				model.addAttribute("sameBrand", sameBrand);
+				
 				return "item/item_detail";
 			}
 		
 	
-	//------------ 베스트리스트 -------------------------------------------
+	//------------ 베스트리스트 --------------------------------------------------------------------------------------
 	@GetMapping(value = "/BestItemList.bo")
 		public String bestItemList(@RequestParam(defaultValue = "") String searchType, 
 				@RequestParam(defaultValue = "") String keyword, 
