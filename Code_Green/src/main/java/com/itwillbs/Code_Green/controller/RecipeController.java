@@ -73,14 +73,8 @@ public class RecipeController {
 			                      Model model, 
 			                      HttpSession session) {
 		
-		
-		
-		System.out.println(board);
-		System.out.println(fileBoard);
-		
+		// 레시피에 사용한 아이템 번호
 		int use_item_idx = Integer.parseInt(item_idx);
-		
-		System.out.println("item_idx : " + item_idx);
 		
 		// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
 		// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
@@ -164,18 +158,27 @@ public class RecipeController {
 	
 		BoardVO recipe = service.getRecipe(board_idx);
 		
+		ItemVO use_item = service.getUseItem(board_idx);
+		
 		model.addAttribute("recipe", recipe);
+		
+		model.addAttribute("use_item" ,use_item);
 		
 		return "recipe/recipe_detail";
 	}
 	
 	// 레시피 수정 - 원본글 불러오기
 	@GetMapping(value = "/recipe_modify.bo")
-	public String recipe_modify(@RequestParam int board_idx, Model model) {
+	public String recipe_modify(@RequestParam int board_idx, @RequestParam String id, Model model) {
 	
 		BoardVO recipe = service.getRecipe(board_idx);
 		
 		model.addAttribute("recipe", recipe);
+		
+		// 해당 기업이 올린 상품 조회
+		List<ItemVO> myItem = service.getmyItem(id);
+		
+		model.addAttribute("myItem", myItem);
 		
 		return "recipe/recipe_modify";
 	}
@@ -185,7 +188,10 @@ public class RecipeController {
 	public String recipe_modifyPro(@ModelAttribute BoardVO board,
 								   @ModelAttribute File_boardVO fileBoard,
 								   @RequestParam int board_idx,
+								   @RequestParam(name = "item_idx", required = false) String item_idx,
 								   HttpSession session,Model model) {
+		
+		int use_item_idx = Integer.parseInt(item_idx);
 		
 		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
 		String oldRealFile1 = fileBoard.getFile1();
@@ -288,7 +294,7 @@ public class RecipeController {
 		}
 		
 		//  ----글 수정----
-		int updateCount = service.modifyRecipe(board);
+		int updateCount = service.modifyRecipe(board, use_item_idx);
 		
 		System.out.println(updateCount);
 		

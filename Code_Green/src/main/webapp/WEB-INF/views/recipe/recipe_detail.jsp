@@ -38,7 +38,7 @@
 	<script type="text/javascript">
 		function recipe_modify_auth() {
 			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
-				location.href="recipe_modify.bo?board_idx=" + ${recipe.board_idx};
+				location.href="recipe_modify.bo?board_idx=" + ${recipe.board_idx} + "&id=" + "${sessionScope.sId}";
 			} else {
 				alert("수정 권한이 없습니다.");
 			}
@@ -117,56 +117,37 @@
 			                        <h3>사용한 상품</h3>
 			                        <div class="widget__content">
 			                         <div class="ps-product">
-			                            <div class="ps-product__thumbnail"><a href=""><img src="/Code_Green/resources/item/" alt=""></a>
+			                            <div class="ps-product__thumbnail"><img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 300px;">
 			                                <ul class="ps-product__actions">
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
 			                                </ul>
 			                            </div>
-<%-- 			                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a> --%>
-<%-- 			                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a> --%>
-<!-- 			                                    <div class="ps-product__rating"> -->
-<!-- 			                                        <select class="ps-rating" data-read-only="true"> -->
-<!-- 			                                            <option value="1">1</option> -->
-<!-- 			                                            <option value="1">2</option> -->
-<!-- 			                                            <option value="1">3</option> -->
-<!-- 			                                            <option value="1">4</option> -->
-<!-- 			                                            <option value="2">5</option> -->
-<%-- 			                                        </select><span>${item.board_star_score }</span> --%>
-<!-- 			                                    </div> -->
-<%-- 			                                   <h4 class="ps-product__price">${item.item_price }원</h4> --%>
-<!-- 			                                </div> -->
-<%-- 			                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a> --%>
-<%-- 			                                     <h4 class="ps-product__price">${item.item_price }원</h4> --%>
-<!-- 			                                </div> -->
-<!-- 			                            </div> -->
+			                            <div class="ps-product__container"><a class="ps-product__vendor">${use_item.manager_brandname }</a>
+			                                <div class="ps-product__content">${use_item.item_name }
+			                                   <h4 class="ps-product__price">${use_item.item_price }원</h4>
+			                                </div>
+			                                <div class="ps-product__content hover">${use_item.item_name }
+			                                     <h4 class="ps-product__price">${use_item.item_price }원</h4>
+			                                </div>
+			                            </div>
+			                        </div>
 			                        </div>
 			                     </div>
-			                </div>
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
+			                	</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-7">
+                    <div class="col-lg-7">
                     <div class="recipe-right">
                         <div class="instruction-list">
                         	<img src="/Code_Green/resources/recUpload/${recipe.file2 }" alt="">
                         </div>
                     </div>
                 </div>
+                </div>
+                
             </div>
-        </div>
     </section>
  <!-------------------------------------------- 레시피 끝---------------------------------------->
 

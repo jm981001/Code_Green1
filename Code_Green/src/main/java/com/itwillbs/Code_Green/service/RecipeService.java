@@ -35,20 +35,26 @@ public class RecipeService {
 	public List<BoardVO> getRecipeList(String searchType, String keyword) {
 		return mapper.selectRecipeFile(searchType, keyword);
 	}
-
+	
 	// 레시피 상세보기 원글 불러오기
 	public BoardVO getRecipe(int board_idx) {
 		return mapper.selectRecipe(board_idx);
 	}
 
+	// 레시피 상세보기에서 사용한 상품 불러오기
+	public ItemVO getUseItem(int board_idx) {
+		return mapper.selectUseItem(board_idx);
+	}
+	
+	
 	// 레시피 파일 수정
 	public int modifyRecipeFile(File_boardVO fileBoard) {
 		return mapper.updateRecipeFile(fileBoard);
 	}
 
 	// 레시피 글 수정
-	public int modifyRecipe(BoardVO board) {
-		return mapper.updateRecipe(board);
+	public int modifyRecipe(BoardVO board, int use_item_idx) {
+		return mapper.updateRecipe(board, use_item_idx);
 	}
 
 	// 레시피 삭제 전 파일명(file1) 조회  
@@ -70,6 +76,8 @@ public class RecipeService {
 	public int removeRecipeFile(int board_idx) {
 		return mapper.deleteRecipeFile(board_idx);
 	}
+
+	
 
 	
 

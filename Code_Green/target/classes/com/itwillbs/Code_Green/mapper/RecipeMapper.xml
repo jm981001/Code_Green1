@@ -115,6 +115,24 @@
 	 	 	    b.board_idx = ${board_idx}  		
 	</select>
 	
+	<!-- 레시피 상세보기에서 사용한 상품 불러오기 -->
+	<select id="selectUseItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT i.item_name,
+			   i.item_price,
+			   m.manager_brandname,
+			   f.file1,
+			   f.file2
+		 FROM  item i
+		 JOIN  manager m
+		   ON  i.re_manager_idx = m.manager_idx
+		 JOIN  file_item f
+		   ON  f.rf_item_idx = i.item_idx
+		 JOIN  board b
+		   ON  b.board_item_idx = i.item_idx
+		WHERE  b.board_idx = #{board_idx} 	   
+	</select>
+	
+	
 	<!-- 레시피 파일 수정 -->
 	<update id="updateRecipeFile">
 		UPDATE 
@@ -134,12 +152,13 @@
 		UPDATE
 			    board
 		   SET
-				board_subject = #{board_subject},
-				board_content = #{board_content}
+				board_subject = #{board.board_subject},
+				board_content = #{board.board_content},
+				board_item_idx = #{use_item_idx}
 		 WHERE
 				board_type = '레시피'
 		   AND
-				board_idx = #{board_idx}	
+				board_idx = #{board.board_idx}	
 	</update>
 	
 	<!-- 레시피 삭제 전 파일명(file1) 조회  -->	

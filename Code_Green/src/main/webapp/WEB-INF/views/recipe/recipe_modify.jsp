@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,28 @@ h{
 	margin-top: 5px;
 }
 </style>
+
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+	function myItem(value) {
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_idx';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+	//		subForm.submit(); //form Submit
+	
+	}
+</script>
+
 </head>
 <body>
 	<!-- 헤더 삽입 -->
@@ -82,7 +105,7 @@ h{
                    		<div class="ps-block--vendor-dashboard">
                     		<div class="ps-block__content">
 	                        	<div class="table-responsive">
-                    				<form action="recipe_modifyPro.bo?board_idx=${recipe.board_idx }" method="post" enctype="multipart/form-data">
+                    				<form action="recipe_modifyPro.bo?board_idx=${recipe.board_idx }" method="post" enctype="multipart/form-data" id="sub_form">
 		                           		<input type="hidden" name="file1" value="${recipe.file1}">  
 	                    				<input type="hidden" name="file2" value="${recipe.file2}">  
 	                           		 <table class="table ps-table ps-table--vendor">
@@ -100,6 +123,17 @@ h{
 	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60">${recipe.board_content }</textarea>
 	                                    	</td>
 	                                    </tr>
+	                                    <tr>
+	                                   		<td>사용한 상품</td>
+	                                   		<td>
+		                                   		<select class="form-select" aria-label="Default select example" onchange="myItem(this.value)" style="float: none;">
+												  	<option value="">선택하세요</option>
+	                                   				<c:forEach  var="myItem" items="${myItem }">
+												  		<option value="${myItem.item_idx }">${myItem.item_idx } ${myItem.item_name }</option>
+			                                   		</c:forEach>
+												</select>
+	                                   		</td>
+	                                   </tr>
 	                                   
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
