@@ -33,6 +33,7 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
+	<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 	
 	<script type="text/javascript">
 		function recipe_modify_auth() {
@@ -59,7 +60,7 @@
 						},
 						success: function(){
 							alert("삭제가 완료되었습니다.");
-							location.href="recipe_main.bo";
+							location.href = "recipe_main.bo";
 						},
 						fail: function () {
 							alert("삭제가 실패되었습니다. 다시 시도해 주세요.");

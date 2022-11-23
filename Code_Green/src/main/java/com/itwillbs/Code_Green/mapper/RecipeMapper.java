@@ -6,11 +6,15 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
+import com.itwillbs.Code_Green.vo.ItemVO;
 
 public interface RecipeMapper {
 
+	// 기업이 올린 상품 조회
+	List<ItemVO> selectMyItem(String id);
+	
 	// 레시피 작성(글)
-	int insertRecipe(BoardVO board);
+	int insertRecipe(@Param("board") BoardVO board, @Param("use_item_idx") int use_item_idx);
 
 	// 레시피 작성(파일)
 	int insertRecipeFile(File_boardVO fileBoard);
@@ -38,6 +42,8 @@ public interface RecipeMapper {
 
 	// 레시피 파일 삭제
 	int deleteRecipeFile(int board_idx);
+
+	
 
 	// 레시피 목록(사진) 불러오기
 //	List<File_boardVO> selectRecipeFileList();

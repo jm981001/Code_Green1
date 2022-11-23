@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.Code_Green.mapper.RecipeMapper">
 	
+	<!-- 기업이 올린 상품 조회 -->
+	<select id="selectMyItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT  
+				i.item_idx,
+        		i.item_name,
+        		i.item_price,
+       			m.manager_brandname
+		  FROM  
+		        item i
+          JOIN
+	            manager m
+	        ON  
+	            i.re_manager_idx = m.manager_idx
+	     WHERE 
+	            m.manager_id = #{id}        
+	</select>
+	
+	
 	<!-- 레시피 등록(글) -->
 	<insert id="insertRecipe">
 		INSERT 
@@ -9,12 +27,12 @@
 	            board 
 	    VALUES  (
 				IFNULL((SELECT MAX(board_idx) FROM board b),0) + 1,
-				'0',
+				#{use_item_idx},
 				'레시피',
-				#{board_id},
+				#{board.board_id},
 				'N',
-				#{board_subject},
-				#{board_content},
+				#{board.board_subject},
+				#{board.board_content},
 				'0',
 				date_format(now(),'%Y%m%d')
 				)

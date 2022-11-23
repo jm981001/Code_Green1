@@ -6,22 +6,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.RecipeService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
+import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
@@ -38,7 +43,7 @@ public class RecipeController {
 							  Model model) {
 		
 		List<BoardVO> recipeList = service.getRecipeList(searchType, keyword);
-		System.out.println(recipeList);
+//		System.out.println(recipeList);
 		
 //		List<File_boardVO> recipe_fileList = service.getRecipeFileList();
 		model.addAttribute("recipeList", recipeList);
@@ -49,14 +54,33 @@ public class RecipeController {
 	
 	// 레시피 폼
 	@GetMapping(value = "/recipe_write.bo")
-	public String recipe_write() {
+	public String recipe_write(@RequestParam String id, Model model) {
+		
+		// 해당 기업이 올린 상품 조회
+		List<ItemVO> myItem = service.getmyItem(id);
+		
+		model.addAttribute("myItem", myItem);
 		
 		return "recipe/recipe_write";
 	}
 	
 	// 레시피 작성
 	@PostMapping(value = "/recipe_writePro.bo")
-	public String recipe_writePro(@ModelAttribute BoardVO board, @ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
+	public String recipe_writePro(
+								  @ModelAttribute BoardVO board, 
+			                      @ModelAttribute File_boardVO fileBoard,
+			                      @RequestParam(name = "item_idx", required = false) String item_idx,
+			                      Model model, 
+			                      HttpSession session) {
+		
+		
+		
+		System.out.println(board);
+		System.out.println(fileBoard);
+		
+		int use_item_idx = Integer.parseInt(item_idx);
+		
+		System.out.println("item_idx : " + item_idx);
 		
 		// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
 		// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
@@ -102,7 +126,7 @@ public class RecipeController {
 		
 		// ===========================================================
 
-		int insertCount = service.writeRecipe(board);
+		int insertCount = service.writeRecipe(board, use_item_idx);
 		int file_insertCount = service.writeRecipeFile(fileBoard);
 		
 		if(insertCount > 0) {
@@ -291,14 +315,9 @@ public class RecipeController {
 		String realFile1 = service.getRealFile1(board_idx);
 		String realFile2 = service.getRealFile2(board_idx);
 		
-		System.out.println("realFile1 -> "+realFile1);
-		System.out.println("realFile2 -> "+realFile2);
-		
 		int deleteCount = service.removeRecipe(board_idx);
 		int deleteFileCount = service.removeRecipeFile(board_idx);
 		
-		System.out.println("deleteCount 갯수 -> "+deleteCount);
-		System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
 		// ----------------------------------------------------------
 		
 		if(deleteCount > 0) {

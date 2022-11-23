@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.Code_Green.mapper.RecipeMapper;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
+import com.itwillbs.Code_Green.vo.ItemVO;
 
 @Service
 public class RecipeService {
@@ -15,9 +16,14 @@ public class RecipeService {
 	@Autowired
 	private RecipeMapper mapper;
 
+	// 기업이 올린 상품 조회
+	public List<ItemVO> getmyItem(String id) {
+		return mapper.selectMyItem(id);
+	}
+	
 	// 레시피 작성(글)
-	public int writeRecipe(BoardVO board) {
-		return mapper.insertRecipe(board);
+	public int writeRecipe(BoardVO board, int use_item_idx) {
+		return mapper.insertRecipe(board, use_item_idx);
 	}
 
 	// 레시피 작성(파일)
@@ -64,6 +70,8 @@ public class RecipeService {
 	public int removeRecipeFile(int board_idx) {
 		return mapper.deleteRecipeFile(board_idx);
 	}
+
+	
 
 	// 레시피 목록(사진) 불러오기
 //	public List<File_boardVO> getRecipeFileList() {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,52 @@ h{
 	margin-top: 5px;
 }
 </style>
+
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+
+
+	function myItem(value) {
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_idx';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+// 		subForm.submit(); //form Submit
+
+	}
+
+	
+
+
+// 	function myItem(value) {
+// 		let item_idx = parseInt(value, 10);
+		
+// 		$.ajax({
+// 			url: "recipe_writePro.bo",
+// 			type: "POST",
+// 			data: {
+// 				item_idx : item_idx				
+// 			},
+// 			success: function(){
+// 				alert("레시피 등록이 완료되었습니다.");
+// 				location.href = "recipe_main.bo";
+// 			},
+// 			fail: function () {
+// 				alert("레시피 등록이 실패되었습니다. 다시 시도해 주세요.");
+// 			}
+// 		});
+// 	}
+
+</script>
 </head>
 <body>
 	<!-- 헤더 삽입 -->
@@ -82,7 +129,7 @@ h{
                    		<div class="ps-block--vendor-dashboard">
                     		<div class="ps-block__content">
 	                        	<div class="table-responsive">
-                    				<form action="recipe_writePro.bo" method="post" enctype="multipart/form-data">
+                    				<form action="recipe_writePro.bo" method="post" enctype="multipart/form-data" id="sub_form">
 	                           		 <table class="table ps-table ps-table--vendor">
 	                                    <tr>
 	                                        <td>작성자</td>
@@ -101,7 +148,17 @@ h{
 	                                    		
 	                                    	</td>
 	                                    </tr>
-	                                   
+	                                   <tr>
+	                                   		<td>사용한 상품</td>
+	                                   		<td>
+		                                   		<select class="form-select" aria-label="Default select example" onchange="myItem(this.value)" style="float: none;">
+												  	<option value="">선택하세요</option>
+	                                   				<c:forEach  var="myItem" items="${myItem }">
+												  		<option value="${myItem.item_idx }">${myItem.item_idx } ${myItem.item_name }</option>
+			                                   		</c:forEach>
+												</select>
+	                                   		</td>
+	                                   </tr>
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
 	                                    	<td>썸네일</td>
