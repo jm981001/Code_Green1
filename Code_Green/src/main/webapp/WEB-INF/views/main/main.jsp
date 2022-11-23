@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>코드그린</title>
+    <title>베지터틀</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -99,7 +100,7 @@
                     <h3>새롭게 만나는 상품들</h3>
                     <ul class="ps-section__links">
                        
-                        <li><a href="shop-grid.html">더보기</a></li>
+                        <li><a href="ItemList.bo">더보기</a></li>
                     </ul>
                 </div>
                 <div class="ps-section__content">
@@ -107,211 +108,39 @@
                        
                        
                        <!-- 1 -->
+                       <c:forEach var="item" items="${mainList1 }">
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="item_detail"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+                                 <ul class="ps-product__actions">
+                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
+                                 </ul>
                             </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="#">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >${item.manager_brandname }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >${item.item_name }</a>
+                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
+       										<c:forEach var="i" begin="1" end="5">
+                                         	<c:choose>
+                                         		<c:when test="${i <= item.score}">
+                                         			<option value="1">${i }</option>
+                                         		</c:when>
+                                         		<c:otherwise>
+                                         			<option value="2">${i }</option>
+                                         		</c:otherwise>
+                                         	</c:choose>
+                                         </c:forEach>
+                                        </select><span>${item.board_star_score }</span>
                                     </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
                         </div>
+                        </c:forEach>
                         
-                        
-                        
-                        <!-- 2 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 3 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 4 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 5 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 6 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 7 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
                         
                         
                     </div>
@@ -328,225 +157,45 @@
                     <h3>고객님들의 혼자알기 아까운 상품들</h3>
                     <ul class="ps-section__links">
                        
-                        <li><a href="shop-grid.html">더보기</a></li>
+                        <li><a href="ItemList.bo">더보기</a></li>
                     </ul>
                 </div>
                 <div class="ps-section__content">
                     <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2" data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
                        
                        
-                       <!-- 1 -->
+                       <c:forEach var="item" items="${mainList2 }">
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+                                 <ul class="ps-product__actions">
+                                     <li><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                     <li><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
+                                 </ul>
                             </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
+       										<c:forEach var="i" begin="1" end="5">
+                                         	<c:choose>
+                                         		<c:when test="${i <= item.score}">
+                                         			<option value="1">${i }</option>
+                                         		</c:when>
+                                         		<c:otherwise>
+                                         			<option value="2">${i }</option>
+                                         		</c:otherwise>
+                                         	</c:choose>
+                                         </c:forEach>
+                                        </select><span>${item.board_star_score }</span>
                                     </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        <!-- 2 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 3 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 4 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 5 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 6 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 7 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                         
                         
                     </div>
@@ -596,226 +245,45 @@
                     <h3>내 취향을 잘 아는 상품들</h3>
                      <ul class="ps-section__links">
                        
-                        <li><a href="shop-grid.html">더보기</a></li>
+                        <li><a href="ItemList.bo">더보기</a></li>
                     </ul>
                 </div>
                 <div class="ps-section__content">
                     <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false" data-owl-speed="10000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2" data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
                        
                        
-                       <!-- 1 -->
+                        <c:forEach var="item" items="${mainList3 }">
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
+                            <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+                                 <ul class="ps-product__actions">
+                                     <li><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                     <li><a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
+                                 </ul>
                             </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
+                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
+                                <div class="ps-product__content"><a class="ps-product__title" href="#">${item.item_name }</a>
+                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
+       										<c:forEach var="i" begin="1" end="5">
+                                         	<c:choose>
+                                         		<c:when test="${i <= item.score}">
+                                         			<option value="1">${i }</option>
+                                         		</c:when>
+                                         		<c:otherwise>
+                                         			<option value="2">${i }</option>
+                                         		</c:otherwise>
+                                         	</c:choose>
+                                         </c:forEach>
+                                        </select><span>${item.board_star_score }</span>
                                     </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
+                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
+                                    <h4 class="ps-product__price">${item.item_price }원</h4>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        <!-- 2 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 3 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 4 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 5 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 6 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <!-- 7 -->
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="/Code_Green/resources/img/products/electronic/12.jpg" alt="" /></a>
-                                <div class="ps-product__badge">-40%</div>
-                                <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-placement="top" title="Quick View" data-toggle="modal" data-target="#product-quickview"><i class="icon-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__container"><a class="ps-product__vendor" href="#">브랜드명</a>
-                                <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <div class="ps-product__rating">
-                                        <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
-                                        </select><span>01</span>
-                                    </div>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                                <div class="ps-product__content hover"><a class="ps-product__title" href="product-default.html">상품명 올자립니당</a>
-                                    <p class="ps-product__price sale">2,500원 <del>57,000원 </del></p>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                         
                         
                     </div>

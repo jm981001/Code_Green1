@@ -182,7 +182,12 @@
 		
 			wish_count();
 	});
+	</script>
 	
+	
+	
+	
+	<script type="text/javascript">
 	$(document).ready(function(){
 		$('#cartBtn').click(function() {
 			$.ajax({
@@ -278,7 +283,7 @@
                                 <div class="ps-product__desc">
                                 <br>
                                     <ul class="ps-list--dot">
-                                        <li>판매자 &nbsp;${item.manager_brandname }</li><br>
+                                        <li>판매자 &nbsp;&nbsp;&nbsp;${item.manager_brandname }</li><br>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li><br>
                                         <li>카테고리 &nbsp; ${item.item_category }</li>
                                     </ul>
@@ -360,58 +365,6 @@
                                 </div>
  <!-- ==========상세정보 끝 =========================================================================================================     -->   
  
-	<script type="text/javascript">
-  // 	추천기능
-	$(function(){
-			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#best_update").click(function(){
-				
-				if(${sessionScope.sId == null}){
-					alert("로그인 후 사용가능합니다!");
-				} else {
-					
-					$.ajax({
-						url: "ReviewBest.bo",
-						type: "GET",
-						data: {
-							member_id: '${sessionScope.sId}',
-							manager_brandname: '${param.manager_brandname}',
-							item_category: '${param.item_category}',
-							item_idx:${param.item_idx},
-							board_idx : ${board.board_idx }
-						},
-						success: function(){
-							bestCount();
-						}
-					});
-				}	
-			});
-			
-			// 게시글 추천수
-			function bestCount(){
-				url: "ReviewBest_Count.bo",
-				type: "POST",
-				data:{
-					member_id: '${sessionScope.sId}',
-					item_idx: ${param.item_idx},
-					pageNum: ${param.pageNum},
-					manager_brandname: '${param.manager_brandname}',
-					item_category: '${param.item_category}',
-					board_idx : ${board.board_idx }
-					
-					
-				},
-				success: function(count){
-					$(".best_count").html(count);
-				}
-			}
-		
-		bestCount();	// 처음 시작했을때 실행되도록 해당 함수 호출
-	});
-	
-	
-	
-	</script>
 	
 	
     <script type="text/javascript">
@@ -509,7 +462,7 @@
                                             <form class="ps-form--review" action=""  method="get"  >
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
+												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 베지터틀 내 1:1 문의에 남겨주세요.</p>
 													<select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
 													  <option value="new">최근 등록순</option>
 													  <option value="best">추천 많은순</option>
@@ -528,7 +481,7 @@
 												                <th scope="col">제목</th>  
 												                <th scope="col">작성자</th>  
 												                <th scope="col">작성일</th>  
-												                <th scope="col">도움</th>  
+												                <th scope="col">추천</th>  
 												            </tr>  
 												        </thead>
 												  </table>
@@ -555,7 +508,6 @@
 																			<br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
-																		    <button class="ps-btn-best_jm"  onclick="best_ajax('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')"><span class="best_count"></span></button>
 																		    <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
 <%-- 																		    <input type="button"  class="ps-btn-best_jm"  class="best" onclick="location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }'">${board.best_count } --%>
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
@@ -580,7 +532,7 @@
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
-													                <td width="10%">12</td>  
+													                <td width="10%">${board.best_count }</td>  
 													            </tr>  
 													            <tr class="hide" >  
 													                <td colspan="5">  
@@ -590,7 +542,7 @@
 																			<br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		 <div align="right">
-<!-- 																			<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
+																		  <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
@@ -611,7 +563,7 @@
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>  
-													                <td width="10%">12</td>  
+													                <td width="10%">${board.best_count }</td>  
 													            </tr>  
 													            <tr class="hide" >  
 													                <td colspan="5">  
@@ -621,7 +573,7 @@
 																		 <br><br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
-<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
+																		 <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
@@ -642,7 +594,7 @@
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
-													                <td width="10%">12</td>  
+													                <td width="10%">${board.best_count }</td>  
 													            </tr>  
 													            <tr class="hide" >  
 													                <td colspan="5">
@@ -652,7 +604,7 @@
 																		 <br><br><br><br>${board.board_content }<br><br>
 																			
 																		<div align="right">
-<!-- 																		 	<button class="ps-btn-best_jm" id="best_update"><span class="best_count"></span></button> -->
+																		 <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
 																		    <c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">
 																				<input type="button" value="수정" onclick="location.href='ReviewModify.bo?board_idx=${param.board_idx }'">
 																				<input type="button" value="삭제" onclick="confirmDelete('${board.board_idx}&item_category=${param.item_category}&manager_brandname=${param.manager_brandname}')">
@@ -698,10 +650,25 @@
 								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
-								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} '"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
-								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="javascript:changePageDown() "><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() <= pageInfo.getMaxPage()) {%><a href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                        	
+								                            <%--  <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
+								                        	
 								                        </ul>
 								                    </div>
+								                    <script type="text/javascript">
+								                    	function changePageUp() {
+								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}";
+// 								                    		location.href = "#tab-3";
+								                    	}
+								                    	function changePageDown() {
+								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}";
+// 								                    		location.href = "#tab-3";
+								                    	}
+								                    	
+								                    </script>
+								                  
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
@@ -768,7 +735,7 @@
                                             <form class="ps-form--review" action="ReviewWritePro.bo" method="post" name="reviewForm" enctype="multipart/form-data">
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
+												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 베지터틀 내 1:1 문의에 남겨주세요.</p>
                                                 <div class="form-group form-group__rating">
                                                     <label>별점을 매겨주세요</label>
                                                     <select class="ps-rating" data-read-only="false" id="board_star_score" name="board_star_score" required="required">
@@ -814,7 +781,7 @@
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p>
 	                                                <sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-													<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
+													<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 베지터틀 내 1:1 문의에 남겨주세요.
 												</p>
 <!-- 													<table cellspacing="0" border="1" class="recruit" > -->
 													<table border="1" class="recruit" >
@@ -987,7 +954,7 @@
                                                 
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
+												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 베지터틀 내 1:1 문의에 남겨주세요.</p>
                                                 <div class="form-group">
                                                 	<input type="hidden" name="qna_id" value="${sessionScope.sId}" />
                                                 	<input type="hidden" name="item_idx" value="${item.item_idx}" />
@@ -1004,7 +971,7 @@
 확인가능합니다
 주문취소
 * 배송 단계별로 주문취소 방법이 상이합니다. 
-* [입금확인] 단계 : [마켓터틀> 주문내역 상세페이지] 에서 직접 취소 가능
+* [입금확인] 단계 : [베지터틀> 주문내역 상세페이지] 에서 직접 취소 가능
 * [입금확인] 이후 단계 : 고객센터로 문의
 * 주문상품의 부분 취소는 불가능합니다. 전체 주문 취소 후 재구매 해주세요.
 배송

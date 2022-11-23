@@ -105,9 +105,21 @@ public class ItemService {
 		return mapper.deleteWish(member_idx, heart_idx);
 	}
 
+	//메인 새롭게 만나는 상품들
+	public List<ItemVO> mainList1() {
+		return mapper.mainList1();
+	}
 
 
+	//고객님들의 혼자알기 아까운 상품들
+	public List<ItemVO> mainList2() {
+		return mapper.mainList2();
+	}
 
+	//내 취향을 잘 아는 상품들
+	public List<ItemVO> mainList3() {
+		return mapper.mainList3();
+	}
 
 
 

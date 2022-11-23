@@ -72,7 +72,7 @@ public class ItemController {
 				
 				//상품 후기 추천 많은순
 				List<BoardVO> bestList = service.selectBestList(startRow, listLimit, item_idx);
-				
+				 
 				//상품 후기 별점낮은순
 				List<BoardVO> worstList = service.selectWorstList(startRow, listLimit, item_idx);
 				

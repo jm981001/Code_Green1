@@ -202,7 +202,8 @@
 			                group by RF_BOARD_IDX) v 
                   on b.board_idx = v.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY b.board_date  desc ,b.board_idx  desc;     
+			ORDER BY b.board_date  desc ,b.board_idx  desc
+			LIMIT #{startRow}, #{listLimit}  
    </select>
 	
 <!-- 	상품 후기 별점높은순 -->
@@ -215,12 +216,19 @@
                 b.BOARD_DATE,
                 f.FILE1,
                 f.FILE2,
-                s.board_star_score
+                s.board_star_score,
+                ifnull( v.count,0)as best_count
 			FROM board b left join file_board f 
-               on b.BOARD_IDX = f.RF_BOARD_IDX
-			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+             	  on b.BOARD_IDX = f.RF_BOARD_IDX
+			   left join board_star s
+			   	  on b.BOARD_IDX = s.RF_BOARD_IDX
+   			   left join (select  RF_BOARD_IDX,count(*) as count
+			                from board_best
+			                group by RF_BOARD_IDX) v 
+                  on b.board_idx = v.RF_BOARD_IDX
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  desc ,b.board_idx  desc;  
+			ORDER BY s.board_star_score  desc ,b.board_idx  desc
+			LIMIT #{startRow}, #{listLimit}   
    </select>
 	
 	
@@ -234,12 +242,19 @@
                 b.BOARD_DATE,
                 f.FILE1,
                 f.FILE2,
-                s.board_star_score
+                s.board_star_score,
+                ifnull( v.count,0)as best_count
 			FROM board b left join file_board f 
-               on b.BOARD_IDX = f.RF_BOARD_IDX
-			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+                    on b.BOARD_IDX = f.RF_BOARD_IDX
+			   left join board_star s 
+			    	on b.BOARD_IDX = s.RF_BOARD_IDX
+   			   left join (select  RF_BOARD_IDX,count(*) as count
+			                from board_best
+			                group by RF_BOARD_IDX) v 
+                    on b.board_idx = v.RF_BOARD_IDX			   	
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  desc ,b.board_idx  desc;  
+			ORDER BY s.board_star_score  desc ,b.board_idx  desc
+			LIMIT #{startRow}, #{listLimit}   
    </select>
    
    
@@ -253,12 +268,18 @@
                 b.BOARD_DATE,
                 f.FILE1,
                 f.FILE2,
-                s.board_star_score
+                s.board_star_score,
+                ifnull( v.count,0)as best_count
 			FROM board b left join file_board f 
                on b.BOARD_IDX = f.RF_BOARD_IDX
 			   left join board_star s on b.BOARD_IDX = s.RF_BOARD_IDX
+   			   left join (select  RF_BOARD_IDX,count(*) as count
+			                from board_best
+			                group by RF_BOARD_IDX) v 
+                    on b.board_idx = v.RF_BOARD_IDX					   
             WHERE  board_item_idx = #{item_idx}
-			ORDER BY s.board_star_score  ASC ,b.board_idx  desc;   
+			ORDER BY s.board_star_score  ASC ,b.board_idx  desc
+			LIMIT #{startRow}, #{listLimit}     
    </select>
 	
 	
@@ -298,15 +319,21 @@
 			   i.item_sale, 
 			   i.item_category,
 			   f.file1,
-			   m.manager_brandname
+			   m.manager_brandname,
+			   truncate( a.board_star_score,1) AS board_star_score
 			from item i 
 				LEFT JOIN file_item f
 					ON i.item_idx = f.rf_item_idx
 				LEFT JOIN manager m 
 					ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) as board_star_score
+						  	FROM board b join board_star s on b.board_idx = s.rf_board_idx
+						 	group by b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 				
 			WHERE i.item_category = #{i.item_category}
 			ORDER BY
-				i.item_category  LIMIT 6
+				rand()  LIMIT 6
 	</select>
 	
 	
@@ -335,6 +362,7 @@
 				WHERE
 					q.qna_item_idx = #{item_idx}
 				ORDER BY q.qna_idx DESC 
+				LIMIT #{startRow}, #{listLimit}   
 	</select>
 	
 	
@@ -349,15 +377,21 @@
 			   i.item_sale, 
 			   i.item_category,
 			   f.file1,
-			   m.manager_brandname
+			   m.manager_brandname,
+			   truncate( a.board_star_score,1) AS board_star_score
 			FROM item i
 				LEFT JOIN  file_item f
 					ON i.item_idx = f.rf_item_idx
 				LEFT JOIN manager m 
 					ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) as board_star_score
+						  	FROM board b join board_star s on b.board_idx = s.rf_board_idx
+						 	group by b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 					
 			WHERE  m.manager_brandname = #{ m.manager_brandname}
 			ORDER BY
-				m.manager_brandname  LIMIT 2
+				rand()  LIMIT 2  
 	</select>
 	
 	
@@ -402,6 +436,82 @@
 				AND rf_member_idx=${member_idx};
 	</delete>
 	
+<!-- 	새롭게 만나는 상품들 -->
+		<select id="mainList1" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_category,
+			   f.file1,
+			   m.manager_brandname,
+			   truncate( a.board_star_score,1) AS board_star_score
+			from item i 
+				LEFT JOIN file_item f
+					ON i.item_idx = f.rf_item_idx
+				LEFT JOIN manager m 
+					ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) as board_star_score
+						  	FROM board b join board_star s on b.board_idx = s.rf_board_idx
+						 	group by b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 				
+			ORDER BY
+				item_idx desc  LIMIT 7
+	</select>
 	
 	
+	<!-- 	고객님들의 혼자알기 아까운 상품들 -->
+		<select id="mainList2" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_category,
+			   f.file1,
+			   m.manager_brandname,
+			   truncate( a.board_star_score,1) AS board_star_score
+			from item i 
+				LEFT JOIN file_item f
+					ON i.item_idx = f.rf_item_idx
+				LEFT JOIN manager m 
+					ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) as board_star_score
+						  	FROM board b join board_star s on b.board_idx = s.rf_board_idx
+						 	group by b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 				
+			ORDER BY
+				item_idx asc  LIMIT 7
+	</select>
+	
+	
+	
+	
+	<!-- 	내 취향을 잘 아는 상품들 -->
+		<select id="mainList3" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_category,
+			   f.file1,
+			   m.manager_brandname,
+			   truncate( a.board_star_score,1) AS board_star_score
+			from item i 
+				LEFT JOIN file_item f
+					ON i.item_idx = f.rf_item_idx
+				LEFT JOIN manager m 
+					ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) as board_star_score
+						  	FROM board b join board_star s on b.board_idx = s.rf_board_idx
+						 	group by b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 				
+			ORDER BY
+				a.board_star_score desc  LIMIT 7   
+	</select>
 </mapper>
