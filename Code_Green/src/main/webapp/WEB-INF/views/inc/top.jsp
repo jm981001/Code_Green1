@@ -54,7 +54,7 @@
 				<div class="header__right">
                     <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i><span>
                     <c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null}">
-                    <i>${0 }</i>
+                    <i>0</i>
                     </c:if>
                     <i>${WishlistCount }</i>
                     </span></a>

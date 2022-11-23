@@ -35,7 +35,7 @@ public class SellService {
 		return sell_mapper.selectSellListCount();
 	}
 
-	//상품구매 상세 목록
+	//마이페이지 리뷰 가능상품 목록
 	public List<SellVO> getSellDetailList(String member_id) {
 		return sell_mapper.getSellDetailList(member_id);
 	}

@@ -85,13 +85,19 @@ public class ItemController {
 				//상세상세페이지 같은 브랜드상품 2개
 				List<ItemVO> sameBrand = service.sameBrand(manager_brandname);
 				
-				int listCount = service.getReviewListCount(searchType);
+//				int listCount = 9;
+				int listCount = service.getReviewListCount(item_idx);
 				
 				int maxPage = (int)Math.ceil((double)listCount / listLimit);
+				
 				// 시작 페이지 번호 계산
 				int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 				// 끝 페이지 번호 계산
 				int endPage = startPage + pageListLimit - 1;
+				System.out.println("maxPage -> " + maxPage);
+				System.out.println("startPage -> " + startPage);
+				System.out.println("listCount -> " + listCount);
+				
 				// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
 				// 끝 페이지 번호를 최대 페이지 번호로 교체
 				if(endPage > maxPage) {

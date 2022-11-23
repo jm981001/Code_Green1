@@ -253,12 +253,12 @@ public class MypageController {
 //	}
 //	
 	
-	//------------마이페이지 상품상세-------------------------------------------
+	//------------마이페이지 리뷰 가능상품-------------------------------------------
 		@GetMapping(value = "/myPageReview.my")
 		public String myPage_review_detail( @RequestParam(defaultValue = "1") int pageNum, Model model
 				                           ,@RequestParam String member_id) {
 			
-		//상품구매 상세 목록
+		//리뷰 가능상품 목록
 		List<SellVO> sellDetailList = Sservice.getSellDetailList(member_id);	
 			
 			

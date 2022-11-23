@@ -494,7 +494,24 @@
 												        <c:forEach var="board" items="${itemList }">
 													        <tbody>  
 													            <tr class="item">  
-													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="70%">${board.board_subject }
+														                 <div class="ps-product" style="float:left;">
+				                                                            <div class="ps-product__rating" style="float:left;">
+				                                                                <select class="ps-rating" data-read-only="true">
+							              										 	<c:forEach var="i" begin="1" end="5">
+										                                             	<c:choose>
+										                                             		<c:when test="${i <= board.board_star_score}">
+										                                             			<option value="1">${i }</option>
+										                                             		</c:when>
+										                                             		<c:otherwise>
+										                                             			<option value="2">${i }</option>
+										                                             		</c:otherwise>
+										                                             	</c:choose>
+										                                             </c:forEach>
+				                                                                </select>
+				                                                            </div>
+			                                                            </div>
+									                                </td>
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> 
@@ -528,7 +545,24 @@
 												        <c:forEach var="board" items="${goodList }">
 													        <tbody>  
 													            <tr class="item">  
-													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="70%">${board.board_subject }
+ 																		<div class="ps-product" style="float:left;">
+				                                                            <div class="ps-product__rating" style="float:left;">
+				                                                                <select class="ps-rating" data-read-only="true">
+							              										 	<c:forEach var="i" begin="1" end="5">
+										                                             	<c:choose>
+										                                             		<c:when test="${i <= board.board_star_score}">
+										                                             			<option value="1">${i }</option>
+										                                             		</c:when>
+										                                             		<c:otherwise>
+										                                             			<option value="2">${i }</option>
+										                                             		</c:otherwise>
+										                                             	</c:choose>
+										                                             </c:forEach>
+				                                                                </select>
+				                                                            </div>
+			                                                            </div>
+									                                </td>
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
@@ -559,7 +593,24 @@
 												        <c:forEach var="board" items="${bestList }">
 													        <tbody>  
 													            <tr class="item">  
-													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="70%">${board.board_subject }
+																		 <div class="ps-product" style="float:left;">
+				                                                            <div class="ps-product__rating" style="float:left;">
+				                                                                <select class="ps-rating" data-read-only="true">
+							              										 	<c:forEach var="i" begin="1" end="5">
+										                                             	<c:choose>
+										                                             		<c:when test="${i <= board.board_star_score}">
+										                                             			<option value="1">${i }</option>
+										                                             		</c:when>
+										                                             		<c:otherwise>
+										                                             			<option value="2">${i }</option>
+										                                             		</c:otherwise>
+										                                             	</c:choose>
+										                                             </c:forEach>
+				                                                                </select>
+				                                                            </div>
+			                                                            </div>
+									                                </td>
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>  
@@ -590,7 +641,24 @@
 												        <c:forEach var="board" items="${worstList }">
 													        <tbody>  
 													            <tr class="item">  
-													                <td width="70%">${board.board_subject } (별점:${board.board_star_score })</td>  
+													                <td width="70%">${board.board_subject }
+ 																		<div class="ps-product" style="float:left;">
+				                                                            <div class="ps-product__rating" style="float:left;">
+				                                                                <select class="ps-rating" data-read-only="true">
+							              										 	<c:forEach var="i" begin="1" end="5">
+										                                             	<c:choose>
+										                                             		<c:when test="${i <= board.board_star_score}">
+										                                             			<option value="1">${i }</option>
+										                                             		</c:when>
+										                                             		<c:otherwise>
+										                                             			<option value="2">${i }</option>
+										                                             		</c:otherwise>
+										                                             	</c:choose>
+										                                             </c:forEach>
+				                                                                </select>
+				                                                            </div>
+			                                                            </div>
+									                                </td>
 													                <td width="10%">${board.board_id }</td>  
 													                <fmt:parseDate var="dateString" value="${board.board_date}" pattern="yyyyMMdd" />
 													                <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
@@ -651,7 +719,7 @@
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
 								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="javascript:changePageDown() "><%}%>Prev<i class="icon-chevron-left"></i></a></li>
-								                            <li><%if(pageInfo.getPageNum() <= pageInfo.getMaxPage()) {%><a href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 								                        	
 								                            <%--  <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="BoardList.bo?board_idx=${board.board_idx} "><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
 								                        	
@@ -672,11 +740,13 @@
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
-												   <div align="right">
-							                            <ul class="ps-tab-list" >
-							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
-							                            </ul>
-						                            </div> 
+													 <c:if test="${sessionScope.sId ne null}">
+													   <div align="right">
+								                            <ul class="ps-tab-list" >
+								                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
+								                            </ul>
+							                            </div> 
+						                            </c:if>
 						                            <!--리뷰작성 버튼 끝 -->
                                             </form>
                                         </div>
@@ -921,12 +991,14 @@
 				                    <!-- 페이징 버튼들 끝 -->
 								    
 								    <!-- 문의작성 버튼 -->
-								   <div align="right">
-			                            <ul class="ps-tab-list" >
-			                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
-			                            </ul>
-		                            </div> 
-		                            <!-- 문의작성 버튼 끝 -->
+								     <c:if test="${sessionScope.sId ne null}">
+									   <div align="right">
+				                            <ul class="ps-tab-list" >
+				                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
+				                            </ul>
+			                            </div> 
+			                         </c:if>
+			                        <!-- 문의작성 버튼 끝 -->
                                         </form>
                                     </div>
 							</div>

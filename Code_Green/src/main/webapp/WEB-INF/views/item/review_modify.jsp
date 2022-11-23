@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-
+    <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
 
 <body>
     <!-- 헤더 삽입 -->
@@ -69,14 +69,32 @@
 								<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
 								<input type="hidden" name="item_category" value="${param.item_category}" />
                                 <input type="hidden" name="manager_brandname" value="${param.manager_brandname}" />
+
                                 <input type="hidden" name="file1" value="${param.file1}" />
                                 <input type="hidden" name="file2" value="${param.file2}" />
+                                
 								<textarea class="form-control" id="board_subject"
 									name="board_subject" rows="1">${board.board_subject  }</textarea>
 								<textarea class="form-control" id="board_content"
 									name="board_content" rows="6">${board.board_content}</textarea>
-								<input type="file" name="file_1" id="file_1">${param.file1 }<br>
-                                <input type="file" name="file_2" id="file_2">${param.file2 }
+								<div>
+								<input type="file" name="file_1" id="file_1">
+									            <c:if test="${param.file1 ne '' }">(기존파일:<span id="this1"></span>)
+	                                		        <script>
+											       		let name1 = '${param.file1}';
+											       		let result1 = name1.split('_');
+											       		$('#this1').text(result1[1]);
+											      	</script>
+										      	</c:if>
+								</div>		      	
+                                <input type="file" name="file_2" id="file_2">
+                                			   <c:if test="${param.file2 ne '' }">(기존파일:<span id="this2"></span>)
+	                                		        <script>
+											       		let name2 = '${param.file2}';
+											       		let result2 = name2.split('_');
+											       		$('#this2').text(result2[1]);
+											      	</script>
+										      	</c:if>
 							</div>
 							<div align="right">
 								<div class="form-group submit">
@@ -98,7 +116,7 @@
     	<!-- ---------------------------------------------------------- 푸터푸터 끝 ---------------------------------------------------------- -->
     
 
-    <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
+
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins/owl-carousel/owl.carousel.min.js"></script>

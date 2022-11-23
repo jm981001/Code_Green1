@@ -150,7 +150,6 @@
 						                                             	</c:choose>
 						                                             </c:forEach>
                                                                 </select><span>${item.board_star_score }</span>
-                                                               
                                                             </div>
                                                             
                                                             <!-- 가격 -->

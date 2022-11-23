@@ -20,7 +20,7 @@ public interface SellMapper {
 	//상품구매 목록 갯수
 	int selectSellListCount();
 
-	//상품구매 상세 목록
+	//마이페이지 리뷰 가능상품 목록
 	List<SellVO> getSellDetailList(@Param("member_id")String member_id);
 
 	//마이페이지 상품후기작성

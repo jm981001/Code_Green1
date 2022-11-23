@@ -49,8 +49,8 @@ public class ItemService {
 	}
 
 	// 상품 후기 갯수 조회
-	public int getReviewListCount(String searchType) {
-		return mapper.selectReviewListCount(searchType);
+	public int getReviewListCount(int item_idx) {
+		return mapper.selectReviewListCount(item_idx);
 	}
 
 

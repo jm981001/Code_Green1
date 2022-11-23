@@ -33,7 +33,7 @@ public interface ItemMapper {
 	List<BoardVO> selectWorstList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("item_idx")int item_idx);
 	
 	//리뷰 갯수 조회
-	int selectReviewListCount(String searchType);
+	int selectReviewListCount(int item_idx);
 
 	//상품 갯수 조회
 	int selectItemListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
