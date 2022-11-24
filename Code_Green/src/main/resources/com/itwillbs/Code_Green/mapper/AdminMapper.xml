@@ -22,26 +22,36 @@
 		SELECT COUNT(*)
 		FROM sell
 	</select>
-
-<!-- 	<select id="selectSellChart" resultType="com.itwillbs.Code_Green.vo.TotalVO"> -->
-<!-- 		SELECT -->
-<!-- 		m.manager_brandname, -->
-<!-- 		sum((i.item_price * s.sell_amount)) as brandtotal -->
-<!-- 		FROM manager m JOIN item i  -->
-<!-- 		ON m.manager_idx = i.re_manager_idx -->
-<!-- 		JOIN sell_detail s -->
-<!-- 		ON i.item_idx = s.rf_item_idx -->
-<!-- 		WHERE -->
-<!-- 			m.manager_adminauth='Y' AND m.manager_del_yn ='N' -->
-<!-- 		GROUP BY -->
-<!-- 			i.re_manager_idx -->
-<!-- 	</select> -->
-
-
-
-
-
-
+	
+	<!-- 매출 3순위 -->
+	<select id="selectTopSaleList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT
+			m.manager_brandname,
+			SUM(sd.sell_amount)   AS sellCount,
+			COUNT(sd.sell_amount) AS orderCount,
+			f.brand_follower,
+			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
+			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		FROM
+			manager m
+		LEFT JOIN
+			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+		ON
+			m.manager_idx = f.rf_manager_idx
+		LEFT JOIN
+			item i
+		ON
+			i.re_manager_idx = m.manager_idx
+		INNER JOIN
+			sell_detail sd
+		ON
+			i.item_idx = sd.rf_item_idx
+		GROUP BY
+			m.manager_idx
+		LIMIT 3;
+	</select>
+	
+	
 
 
 <!-- 아래부터 페이지 기능 -->

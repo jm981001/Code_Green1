@@ -59,9 +59,11 @@ public class AdminController {
 			model.addAttribute("msg", " 잘못된 접근입니다!");
 			return "admin/ad_fail_back";
 		} 
+		//매출 3순위
+		List<ManagerVO> topSale = service.getTopSale();
+//		System.out.println(topSale);
+
 		
-
-
 		SellVO sellTotal = service.getTotalMoney();
 //		System.out.println("돈돈돈돈 = " + sellTotal); //총매출
 		
@@ -70,12 +72,11 @@ public class AdminController {
 		
 		
 		
-//		List<TotalVO> sellChart = service.getChart();
-//		System.out.println("오늘안에하고싶다 : " + sellChart);
+
 		
 		model.addAttribute("sellTotal", sellTotal);
 		model.addAttribute("sellCount", sell_count);
-//		model.addAttribute("sellChart", sellChart);
+		model.addAttribute("topSale", topSale);
 		
 		return "admin/index";
 		

@@ -122,50 +122,28 @@
                                             <th>브랜드명</th>
                                             <th>매출</th>
                                             <th>팔로워</th>
-                                            <th>주문건</th>
-                                            <th>취소건</th>
+                                            <th>주문건수</th>
+                                            <th>판매수량</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="top" items="${topSale }">
                                         <tr>
-                                            <td>1위</td>
-                                            <td><strong>잇츠베러</strong></td>
-                                            <td><a href="order-detail.html"><strong>50,000원</strong></a></td>
-                                            <td><span class="ps-badge success">1873명</span>
+                                            <td>${top.ranking }위</td>
+                                            <td><strong>${top.manager_brandname }</strong></td>
+                                            <td><a href="order-detail.html"><strong><fmt:formatNumber value="${top.brandtotal }" pattern="#,###원"/></strong></a></td>
+                                            <td><span class="ps-badge success">${top.brand_follower }명</span>
                                             </td>
-                                            <td><span>398건</span>
+                                            <td><span>${top.orderCount }건</span>
                                             </td>
-                                            <td><strong>37건</strong></td>
+                                            <td><strong>${top.sellCount }건</strong></td>
                                             <td>
 
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2위</td>
-                                            <td><strong>매일유업</strong></td>
-                                            <td><a href="order-detail.html"><strong>30,000원</strong></a></td>
-                                            <td><span class="ps-badge success">187명</span>
-                                            </td>
-                                            <td><span>318건</span>
-                                            </td>
-                                            <td><strong>35건</strong></td>
-                                            <td>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3위</td>
-                                            <td><strong>브링그린</strong></td>
-                                            <td><a href="order-detail.html"><strong>30,000원</strong></a></td>
-                                            <td><span class="ps-badge success">17명</span>
-                                            </td>
-                                            <td><span>38건</span>
-                                            </td>
-                                            <td><strong>3건</strong></td>
-                                            <td>
-                                            </td>
-                                        </tr>
+                                        </c:forEach>
+                                        
                                        
                                         
                                         

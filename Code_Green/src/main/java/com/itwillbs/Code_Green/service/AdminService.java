@@ -372,15 +372,17 @@ public class AdminService {
 		return mapper.selectTotalsellCount();
 	}
 	
+	//매출 3순위
+	public List<ManagerVO> getTopSale() {
+		// TODO Auto-generated method stub
+		return mapper.selectTopSaleList();
+	}
 	
 	
 	
 	
-	//매출 차트
-//	public List<TotalVO> getChart() {
-//		
-//		return mapper.selectSellChart();
-//	}
+	
+
 	
 
 

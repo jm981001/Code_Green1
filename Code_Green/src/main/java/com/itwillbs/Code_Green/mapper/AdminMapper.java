@@ -247,12 +247,13 @@ public interface AdminMapper {
 	//총주문수
 	public int selectTotalsellCount();
 
+	//매출 3순위
+	public List<ManagerVO> selectTopSaleList();
 
 
 
-	//차트입니다
-//	public List<TotalVO> selectSellChart();
 
+	
 	
 
 	
