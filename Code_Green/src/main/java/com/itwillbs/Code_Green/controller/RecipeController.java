@@ -187,7 +187,7 @@ public class RecipeController {
 		ItemVO use_item = service.getUseItem(board_idx);
 		
 		// 레시피 작성자(브랜드) 관련상품 불러오기
-		List<ItemVO> related_item = service.getRelatedItem(board_idx);
+		List<ItemVO> related_item = service.getRelatedItem(recipe.getBoard_id());
 		
 		model.addAttribute("recipe", recipe);
 		
@@ -202,14 +202,14 @@ public class RecipeController {
 	
 	// 레시피 수정 - 원본글 불러오기
 	@GetMapping(value = "/recipe_modify.bo")
-	public String recipe_modify(@RequestParam int board_idx, @RequestParam String id, Model model) {
+	public String recipe_modify(@RequestParam int board_idx, Model model) {
 	
 		BoardVO recipe = service.getRecipe(board_idx);
 		
 		model.addAttribute("recipe", recipe);
 		
 		// 해당 기업이 올린 상품 조회
-		List<ItemVO> myItem = service.getmyItem(id);
+		List<ItemVO> myItem = service.getmyItem(recipe.getBoard_id());
 		
 		model.addAttribute("myItem", myItem);
 		
