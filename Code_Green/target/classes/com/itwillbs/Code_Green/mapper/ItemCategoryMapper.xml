@@ -43,7 +43,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 	
 		 
@@ -90,7 +90,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 			
 	</select>
 		
@@ -135,7 +135,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 
 	</select>
 	
@@ -180,7 +180,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 	</select>
 
@@ -225,7 +225,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 	</select>
 
@@ -305,7 +305,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY i.item_date DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
              
 	</select>
 	
@@ -402,7 +402,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -457,7 +457,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -513,7 +513,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -570,7 +570,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -627,7 +627,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -684,7 +684,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 		
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -741,7 +741,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -798,7 +798,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -855,7 +855,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -912,7 +912,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -969,7 +969,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->
@@ -1026,7 +1026,7 @@
 		</choose>                                            
 	  </if>                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
-             LIMIT #{startRow}, #{listLimit};
+             LIMIT #{startRow}, #{listLimit}
 	
 <!-- 		SELECT *  -->
 <!-- 		 FROM( -->

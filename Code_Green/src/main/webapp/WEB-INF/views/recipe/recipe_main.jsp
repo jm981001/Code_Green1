@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -194,16 +195,20 @@
 				<div>
        			
        				<!-- 페이징 버튼들 시작 -->
+	                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 	                    <div class="ps-pagination">
 	                        <ul class="pagination">
-	                            <li><a href=""><i class="icon-chevron-left"></i>Prev</a></li>
-	                               <li class="active"><a href="#"></a></li>
-	                               <li><a class="pageLink" href=""></a></li>
-	                            <li><a href="">Next<i class="icon-chevron-right"></i></a></li>
+	                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="recipe_main.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+	                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+	                               <c:choose>
+	                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+	                                  <c:otherwise><li><a class="pageLink" href="recipe_main.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+	                               </c:choose>
+	                            </c:forEach>
+	                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="recipe_main.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 	                        </ul>
 	                    </div>
-	                <!-- 페이징 버튼들 끝 -->	
-	                
+				    <!-- 페이징 버튼들 끝 -->	
 			   	</div>
 		   	</div>
 

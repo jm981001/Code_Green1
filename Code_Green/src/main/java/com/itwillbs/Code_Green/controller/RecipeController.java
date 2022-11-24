@@ -39,14 +39,39 @@ public class RecipeController {
 	// 레시피 메인(리스트)
 	@GetMapping(value = "/recipe_main.bo")
 	public String recipe_main(@RequestParam(defaultValue = "") String keyword,
+							  @RequestParam(defaultValue = "1") int pageNum,
 							  Model model) {
 		
-		List<BoardVO> recipeList = service.getRecipeList(keyword);
-//		System.out.println(recipeList);
+		int listLimit = 6; 
 		
-//		List<File_boardVO> recipe_fileList = service.getRecipeFileList();
+		int pageListLimit = 10; 
+
+		int startRow = (pageNum - 1) * listLimit;
+		
+		List<BoardVO> recipeList = service.getRecipeList(startRow, listLimit, keyword);
+		
+		// 레시피 글 목록 갯수 조회
+		int listCount = service.getRecipeCount();
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		model.addAttribute("recipeList", recipeList);
-//		model.addAttribute("recipe_fileList", recipe_fileList);
+
+		model.addAttribute("pageInfo", pageInfo);
+		
+		System.out.println(pageInfo);
+		
 		return "recipe/recipe_main";
 	}
 	

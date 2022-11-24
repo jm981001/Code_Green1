@@ -117,13 +117,16 @@
 			                        <h5>사용한 상품</h5>
 			                        <div class="widget__content">
 			                         <div class="ps-product">
-			                            <div class="ps-product__thumbnail"><img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 300px;">
+			                            <div class="ps-product__thumbnail">
+			                            	<a href="ItemDetail.bo?item_idx=${use_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${use_item.manager_brandname}&item_category=${use_item.item_category}">
+			                            		<img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 300px;">
+			                            	</a>
 			                                <ul class="ps-product__actions">
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
 			                                </ul>
 			                            </div>
-			                            <div class="ps-product__container"><a class="ps-product__vendor">${use_item.manager_brandname }</a>
+			                            <div class="ps-product__container"><a class="ps-product__vendor" >${use_item.manager_brandname }</a>
 			                                <div class="ps-product__content">${use_item.item_name }
 			                                   <h4 class="ps-product__price">${use_item.item_price }원</h4>
 			                                </div>

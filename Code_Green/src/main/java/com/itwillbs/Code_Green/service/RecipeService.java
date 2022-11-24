@@ -32,8 +32,13 @@ public class RecipeService {
 	}
 
 	// 레시피 목록(글) 불러오기
-	public List<BoardVO> getRecipeList(String keyword) {
-		return mapper.selectRecipeFile(keyword);
+	public List<BoardVO> getRecipeList(int startRow, int listLimit, String keyword) {
+		return mapper.selectRecipeFile(startRow, listLimit, keyword);
+	}
+	
+	// 레시피 글 목록 갯수 조회
+	public int getRecipeCount() {
+		return mapper.selectRecipeCount();
 	}
 	
 	// 레시피 상세보기 원글 불러오기
@@ -76,6 +81,8 @@ public class RecipeService {
 	public int removeRecipeFile(int board_idx) {
 		return mapper.deleteRecipeFile(board_idx);
 	}
+
+	
 
 	
 
