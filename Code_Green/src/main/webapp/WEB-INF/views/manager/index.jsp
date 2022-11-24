@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,12 +135,16 @@
                                 <table class="table ps-table">
                                     <thead>
                                        <tr>
-                                    <th>상품번호</th>
-                                    <th>날짜</th>
-                                    <th>상품명</th>
-                                    <th>결제</th>
+                                     <th>주문번호</th>
+                                    <th>회원번호</th>
+                                    <th>주문상품</th>
+                                    <th>주문날짜</th>
+                                    <th>상품가격</th>
                                     <th>주문상태</th>
                                     <th>총금액</th>
+                                    <th>결제여부</th>
+                                    <th>결제일</th>
+                                    <th>상품브랜드</th>
                                     <th></th>
                                 </tr>
                                     </thead>

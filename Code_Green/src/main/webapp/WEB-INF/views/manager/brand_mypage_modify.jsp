@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -112,24 +113,12 @@
                             <hr>
                             <br>
                           <!-- 파일 업로드 부분 -->
-                          <form action="brand_mypage_modifyPro.bo?" method="get" enctype="multipart/form-data" id="modifyForm"">
-		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">  
-	                    	<input type="hidden" name="orginal_file" value="${brandInfo.manager_original_file}">  
+<!--                           <form action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data" id="modifyForm"> -->
+<%-- 		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">   --%>
                           <div class="card" style="width: 25rem;">
 						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
 						    <p class="card-text">${brandInfo.manager_original_file }</p>
-						    <input type="file"class="파일선택1" id="manager_original_file"name="manager_original_file"value="${brandInfo.manager_original_file }">
-						    	<c:if test="${manager_orginal_file ne 'N' }">(기존파일:${brandInfo.manager_original_file }<span id="here"></span>)
-		                                   		 <script>
-										       		let name = '${manager_original_file}';
-										       		let result = name.split('_');
-										       		$('#here').text(result[1]);
-										      	</script>
-	                            </c:if>
-						      </form>
-                            <!-- 파일 업로드 부분 -->
-                                          
                                     </div>
                                     </div>
                                     </div>
@@ -137,7 +126,14 @@
 						    
 						 
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get"name="modifyForm">
+                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data">
+                          		<input type="hidden" name="manager_realfile" value="${brandInfo.manager_realfile }" />
+								<input type="hidden" name="manager_original_file" value="${brandInfo.manager_original_file }" />
+				               
+				                	<input type="file" class="파일선택" name="file">
+                                
+                                
+                                
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

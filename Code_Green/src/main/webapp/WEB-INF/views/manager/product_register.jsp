@@ -23,6 +23,78 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+
+
+	function addProduct(value) {
+		
+		
+		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_packing';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+	function addCategory(value) {
+		
+		
+		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_category';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+	function changeStock(value) {
+		
+		
+		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_stock';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+
+	
+	
+	
+	
+	
+
+</script>
 </head>
 
 <body>
@@ -76,11 +148,11 @@
                         <ul class="menu">
                                 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 						</ul>
@@ -102,7 +174,7 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form class="ps-form ps-form--new-product" action="index.html" method="get">
+                <form class="ps-form ps-form--new-product" action="product_registerPro.bo" method="get"enctype="multipart/form-data" id="sub_form">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -112,33 +184,29 @@
                                         <div class="form-group">
                                             <label>상품번호<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="상품명을 기재해주세요" />
+                                            <input class="form-control" type="text" name="item_idx"placeholder="상품명을 기재해주세요" />
                                         </div>
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="상품번호를 기재해주세요" />
+                                            <input class="form-control" type="text" name="item_name"placeholder="상품번호를 기재해주세요" />
                                         </div>
                                         <div class="form-group">
                                             <label>정상가격<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="정상가를 입력해주세요" />
+                                            <input class="form-control" type="text" name="item_price"placeholder="정상가를 입력해주세요" />
                                         </div>
-                                        <div class="form-group">
-                                            <label>할인가격<sup>*</sup>
-                                            </label>
-                                            <input class="form-control" type="text" placeholder="할인가를 입력해주세요" />
-                                        </div>
+
                                              <div class="form-group">
                                             <label>포장상태<sup>*</sup>
                                             </label>
                                            
                                    <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">포장상태</option>
-                                        <option value="2">냉장</option>
-                                        <option value="3">냉동</option>
-                                        <option value="4">실온</option>
+                                    <select class="ps-select"onchange="addProduct(this.value)" >
+                                        <option value="포장상태">포장상태</option>
+                                        <option value="냉장">냉장</option>
+                                        <option value="냉동">냉동</option>
+                                        <option value="실온">실온</option>
                                     </select>
                                 </div>
                                  </div>
@@ -147,14 +215,14 @@
                                             <label>상품카테고리<sup>*</sup>
                                             </label>
                                      <div class="form-group">
-                                    <select class="ps-select">
-                                        <option value="1">상품 카테고리</option>
-                                        <option value="1">특가상품</option>
-                                        <option value="2">과일/채소</option>
-                                        <option value="3">유제품/음료</option>
-                                        <option value="4">냉동 식품 / 간편 식품</option>
-                                        <option value="6">해산물</option>
-                                        <option value="7">간식류</option>
+                                    <select class="ps-select"onchange="addCategory(this.value)">
+                                        <option value="상품카테고리">상품카테고리</option>
+                                        <option value="특가상품">특가상품</option>
+                                        <option value="과일/채소">과일/채소</option>
+                                        <option value="유제품/음료">유제품/음료</option>
+                                        <option value="냉동 식품 / 간편 식품">냉동 식품 / 간편 식품</option>
+                                        <option value="해산물">해산물</option>
+                                        <option value="간식류">간식류</option>
                                     </select>
                                 </div>
    
@@ -190,11 +258,13 @@
                                             <label>재고상태
                                             </label>
                                             <div class="form-group__content">
-                                                <select class="ps-select" title="Status">
-                                                    <option value="1">재입고</option>
-                                                    <option value="2">품절</option>
-                                                    <option value="3">판매중</option>
-                                                    <option value="4">판매중지</option>
+                                            
+                                                <select class="ps-select" onchange="changeStock(this.value)">
+                                                    <option value="재고상태">재고상태</option>
+                                                    <option value="재입고">재입고</option>
+                                                    <option value="품절">품절</option>
+                                                    <option value="판매중">판매중</option>
+                                                    <option value="판매중지">판매중지</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -210,9 +280,8 @@
                         </div>
                     </div>
                    <div class="ps-form__submit text-center	">
-                    <button class="ps-btn">상품등록</button>
+                    <button class="ps-btn"type="submit">상품등록</button>
                     <a class="ps-btn ps-btn--black" href="products">상품페이지이동</a>
-<!--                         <button class="ps-btn ps-btn--gray">취소</button> -->
                     </div>
                 </form>
             </section>

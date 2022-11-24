@@ -141,7 +141,7 @@
 						
 						<br>
 						<div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="index.html" method="get">
+                            <form class="ps-form--account-settings" action="product_modify" method="get">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -264,19 +264,7 @@
 	                                    	</c:if>
 	                                    	</td>
 	                                    </tr>
-	                                    <tr>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_3">
-	                                    	<c:if test="${board.file3 ne 'N' }">(기존파일:<span id="here3"></span>)
-	                                    	<button onclick="deleteOriginalFile()">삭제</button>
-	                                    		<script>
-										       		let name = '${board.file3}';
-										       		let result = name.split('_');
-										       		$('#here3').text(result[3]);
-										      	</script>
-	                                    	</c:if>
-	                                    	</td>
-	                                    </tr>
-										<tr> 
+	                             
                              
                     <br>
                     
@@ -288,7 +276,7 @@
                      <div class="ps-form__submit text-center">
                      				<br>
                                     <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                                    <button class="ps-btn success">상품등록</button>
+                                    <button class="ps-btn success">상품수정</button>
                                 </div>
 
         </div>

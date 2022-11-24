@@ -1,5 +1,7 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -39,8 +41,6 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-            
-            
                                 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
@@ -136,8 +136,8 @@
                                 <tr>
                                     <th>주문번호</th>
                                     <th>회원번호</th>
-                                    <th>주문날짜</th>
                                     <th>주문상품</th>
+                                    <th>주문날짜</th>
                                     <th>상품가격</th>
                                     <th>주문상태</th>
                                     <th>총금액</th>
@@ -148,114 +148,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
-                     <c:forEach var="item" items="${orderList}" >
+                     <c:forEach var="order" items="${orderList}" >
 						    <tr>
-						     <td>${sell.sell_idx}</td>
-						     <td onclick="location.href='order_detail?sell_idx=${sell.sell_idx}'"><strong>${sell.item_name }</strong></td>
-						     <td>${sell.rf_member_idx}</td>
-						     <td>${sell.sell_date}</td>
-						     <td>${sell.item_name}</td>
-						     <td>${sell.item_price}</td>
-						     <td>${sell.sell_status}</td>
-						     <td>${sell.sell_total_price}</td>
-						     <td>${sell.sell_pay_status}</td>
-						     <td>${sell.sell_pay_date}</td>
-						     <td>${sell.manager_brandname}</td>
+						     <td>${order.sell_idx}</td>
+						     <td onclick="location.href='order_detail?sell_idx=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
+						     <td>${order.item_name }</td>
+						     <td>${order.sell_date}</td>
+						     <td>${order.item_price}</td>
+						     <td>${order.sell_status}</td>
+						     <td>${order.sell_total_price}</td>
+						     <td>${order.sell_pay_status}</td>
+						     <td>${order.sell_pay_date}</td>
+						     <td>${order.manager_brandname}</td>
 						    </tr>     
+                            
 					</c:forEach>
 						</tbody>
 						</table>
-                            
-                            
-                            
-                            
-<!--                                 <tr> -->
-<!--                                     <td><a href="order-detail">#A580</a></td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail"><strong>Unero Black Military</strong></a></td> -->
-<!--                                     <td><span class="ps-badge success">결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment success">배송</span> -->
-<!--                                     </td> -->
-<!--                                     <td><strong>$56.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><a href="order-detail">#B260</a></td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td> -->
-<!--                                     <td><span class="ps-badge gray">미결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment success">배송 접수</span> -->
-<!--                                     </td> -->
-<!--                                     <td><strong>$56.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                                      <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><a href="order-detail">#A583</a></td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail"><strong>Lined Blend T-Shirt</strong></a></td> -->
-<!--                                     <td><span class="ps-badge success">결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment warning">주문 접수</span> -->
-<!-- <!--                                     </td>order In Progress --> 
-<!--                                     <td><strong>$516.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td><a href="order-detail">#A583</a></td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail"><strong>DJI MAcvic Quadcopter</strong></a></td> -->
-<!--                                     <td><span class="ps-badge gray">미결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment success">배송 접수</span> -->
-<!--                                     </td> -->
-<!--                                     <td><strong>$112.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                     <td>#A112</td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail"><strong>Black T-Shirt</strong></a></td> -->
-<!--                                     <td><span class="ps-badge success">결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment danger">주문 취소</span> -->
-<!--                                     </td> -->
-<!--                                     <td><strong>$30.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
+             
                     </div>
                 </div>
-                <div class="ps-section__footer">
-                    <p>Show 10 in 30 items.</p>
-                    <ul class="pagination">
-                        <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-                    </ul>
+                   <div class="ps-section__footer">
+                   <!-- 페이징 버튼들 시작 -->
+				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+				                    <div class="ps-pagination">
+				                        <ul class="pagination">
+				                           
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				                               <c:choose>
+				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+				                                  <c:otherwise><li><a href="orders?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
+				                               </c:choose>
+				                            </c:forEach>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                        </ul>
+				                    </div>
+				  <!-- 페이징 버튼들 끝 -->
                 </div>
             </section>
         </div>
