@@ -593,7 +593,13 @@ public class ManagerController {
 		
 		
 		
-	//------------매니저페이지 브랜드별 주문현황(페이징처리같이)-------------------------------------------
+	//------------매니저페이지 주문조회-------------------------------------------
+//		@RequestMapping(value = "orders", method = RequestMethod.GET)
+//		public String orders() {
+//			return "manager/orders";
+//		}
+//		
+		
 		@GetMapping(value = "/orders")
 		public String orderList ( Model model, HttpSession session,
 								@RequestParam(defaultValue = "1")int pageNum,
@@ -602,7 +608,6 @@ public class ManagerController {
 			
 			String id = (String)session.getAttribute("sId");
 			System.out.println("id : " + id );
-//			System.out.println("sell : " + sell );
 			System.out.println("searchType : " + searchType);
 			System.out.println("keyword : " + keyword);
 			
@@ -613,12 +618,12 @@ public class ManagerController {
 			// 조회 시작 게시물 번호(행 번호) 계산
 			int startRow = (pageNum -1) * listLimit;
 			
-			// Service 객체의 getOrderList() 메서드를 호출하여 게시물 목록 조회
+			// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
-			// => 리턴타입 : List<SellVO>(orderList)
+			// => 리턴타입 : List<ItemVO>(itemList)
 			List<SellVO> orderList = service.getOrderList(id, startRow, listLimit, searchType, keyword);
 			
-			// Service 객체의 getOrderListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
+			// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
 			int listCount = service.getOrderListCount(searchType, keyword);
 //			System.out.println("검색결과(목록 수)" + listCount);
@@ -649,22 +654,22 @@ public class ManagerController {
 			// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("pageInfo", pageinfo);
-			System.out.println("주문목록" + orderList);
+//			System.out.println("주문목록" + orderList);
 			
 			return "manager/orders";
 		}
 		
 		
 		
-	
 		
-	//------------매니저페이지 주문상세조회----------------------------------------
+		
+			
+		
+	//------------매니저페이지 주문관리----------------------------------------
 		@RequestMapping(value = "order_detail", method = RequestMethod.GET)
 		public String order_detail() {
 			return "manager/order_detail";
-		}	
-		
-		
+		}		
 		
 		//------------매니저페이지 배송관리----------------------------------------
 		
@@ -765,27 +770,29 @@ public class ManagerController {
 			System.out.println("문의글 상세 : " + QnaInfo);
 			
 			model.addAttribute("QnaInfo", QnaInfo);
-			model.addAttribute("qna_idx", qna_idx);
 			
 			return "manager/qnaboard_detail";
 		}
 		
 		//------------ 문의글 답변작성-------------------------------------------
-		@GetMapping(value = "qnaboard_answer")
+		@GetMapping(value = "qnaboard_answer_detailPro")
 		public String qnaboard_answer_detailPro(Model model, HttpSession session, QnaVO qna) {
 			
 			String sId = (String)session.getAttribute("sId");
-			System.out.println("답변작성 : " + qna);
-		
-			int updateCount = service.registQnaAnswer(qna);
-			model.addAttribute("qna", qna);
 			
 		
+			int updateCount = service.registQnaboard(qna);
+			
+			//빨리하자ㅠㅠㅠ
+			
 			
 			
 			return"manager/qnaboard_detail";
 			
 		}
+		
+		
+		
 		
 		
 		
@@ -795,18 +802,11 @@ public class ManagerController {
 			
 			String sId = (String)session.getAttribute("sId");
 			
-			int updateCount = service.modifyQnaAnswer(qna);
-			System.out.println("답변수정" + updateCount);
-			System.out.println("답변정보" + qna);
-			model.addAttribute("qna", qna);
+			int updateCount = service.registQnaboard(qna);
 			
-			if(updateCount > 0) {
-				model.addAttribute("msg", "수정 성공!");
-				return "redirect:/qnaboard_modify?idx=" + qna.getQna_idx();
-			}
+			//빨리하자ㅠㅠㅠ
 			
-			
-			return "qnaboard_list";
+			return "qnaboard_answer_detail";
 		}
 		
 		
@@ -850,7 +850,6 @@ public class ManagerController {
 //	
 //	return "manager/follower_list";
 //}		
-		
 		
 	//------------매니저페이지 정산-------------------------------------------
 		@RequestMapping(value = "sales_management", method = RequestMethod.GET)

@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -127,6 +124,10 @@
                      <div class="ps-card">
                         <div class="ps-card__header">
                          <br>
+                         <br>
+	                         <br>
+                        <hr>
+                         <br>
                          <td><a href="orders"><strong><h4>최근 주문</h4></strong></a></td>
                             
                         </div>
@@ -135,41 +136,39 @@
                                 <table class="table ps-table">
                                     <thead>
                                        <tr>
-                                     <th>주문번호</th>
+                                    <th>주문번호</th>
                                     <th>회원번호</th>
                                     <th>주문상품</th>
                                     <th>주문날짜</th>
-                                    <th>상품가격</th>
                                     <th>주문상태</th>
                                     <th>총금액</th>
                                     <th>결제여부</th>
                                     <th>결제일</th>
-                                    <th>상품브랜드</th>
                                     <th></th>
                                 </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
-                                          <tr>
-                                    <td>#A580</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Unero Black Military</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
+                                 <c:forEach var="order" items="${orderList}" >
+						             <tr>
+						            <td>${order.sell_idx}</td>
+                                    <td>${order.rf_member_idx}</td>
+                                    <td><a href="order-detail"><strong>${order.item_name }</strong></a></td>
+                                    <td><span class="ps-badge success">${order.sell_date }</span>
                                     </td>
-                                    <td><span class="ps-fullfillment success">배송</span>
+                                    <td><span class="ps-fullfillment success">${order.sell_status}</span>
                                     </td>
-                                    <td><strong>$56.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
+                                    <td><strong>${order.sell_total_price}</strong></td>
+                                    <td>${order.sell_pay_status}</td>
+						            <td>${order.sell_pay_date}</td>
+                                    
                                 </tr>
+                                </c:forEach>
                                 <tr>
                                     <td>#B260</td>
                                     <td><strong> Aug, 15, 2020</strong></td>
                                     <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td>
-                                    <td><span class="ps-badge gray">미결제</span>
+                                    <td><span class="ps-badge gray">${order.sell_pay_status}</span>
                                     </td>
                                     <td><span class="ps-fullfillment success">배송 접수</span>
                                     </td>

@@ -1,7 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -108,17 +108,16 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="orderInfo" method="get">
+                        <form class="ps-form--filter" action="orders" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Search..." />
                                 </div>
                                 <div class="form-group">
-                                    <select class="ps-select">
+                                       <select class="ps-select" name="searchType">
                                         <option value="sell_status">주문상태</option>
                                         <option value="sell_name">주문상품</option>
                                         <option value="sell_pay_status">결제여부</option>
-<!--                                         <option value="3">주문취소</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -151,9 +150,9 @@
                      <c:forEach var="order" items="${orderList}" >
 						    <tr>
 						     <td>${order.sell_idx}</td>
-						     <td onclick="location.href='order_detail?sell_idx=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
+						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
 						     <td>${order.item_name }</td>
-						     <td>${order.sell_date}</td>
+						     <td>${order.sell_date }</td>
 						     <td>${order.item_price}</td>
 						     <td>${order.sell_status}</td>
 						     <td>${order.sell_total_price}</td>
