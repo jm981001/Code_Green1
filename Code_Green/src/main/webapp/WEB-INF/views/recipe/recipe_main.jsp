@@ -66,6 +66,28 @@
 		.cf-filter{
 			margin-bottom: 70px;
 		}
+		
+		#slider {
+		   overflow:hidden;
+		   position:relative;
+		   width:1440px;  // 이미지 보여지는 뷰 부분
+		   height:200px;
+		}
+		.image-box {
+		   width:5280px; // 원본+클론의 총 합
+		   height:100%;
+		   display:flex;
+		   flex-wrap:nowrap;
+		   animation: bannermove 15s linear infinite;
+		}
+		@keyframes bannermove {
+		  0% {
+		      transform: translate(0, 0);
+		}
+		100% {
+		     transform: translate(-50%, 0);
+		}
+}
 	</style>
 </head>
 
@@ -99,64 +121,21 @@
     <section class="recipe-section spad">
         <div class="categories-filter-section spad">
           <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="filter-item">
-                        <ul>
-                            <li class="active" data-filter="*">과일 / 채소</li>
-                            <li data-filter=".mostpopular">유제품 / 음료</li>
-                            <li data-filter=".meatlover">냉동 / 간편식품</li>
-                            <li data-filter=".glutenfree">해산물</li>
-                            <li data-filter=".glutenfree2">간식류</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             
-            
-            
-<!------------------------------------상단 카테고리---------------------------------------------------->
+<!------------------------------------상단 카테고리 이미지 슬라이드---------------------------------------------------->
             <div class="cf-filter" id="category-filter">
-                <div class="cf-item mix all mostpopular">
-                    <div class="cf-item-pic">
-                        <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-1.jpg" alt="" onclick="location.href='recipe_detail'">
-                    </div>
-                    <div class="cf-item-text">
-                        <h5>제목</h5>
-                    </div>
-                </div>
-                <div class="cf-item mix all mostpopular">
-                    <div class="cf-item-pic">
-                        <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-2.jpg" alt="" onclick="location.href='recipe_detail'">
-                    </div>
-                    <div class="cf-item-text">
-                        <h5>제목</h5>
-                    </div>
-                </div>
-                <div class="cf-item mix all meatlover mostpopular">
-                    <div class="cf-item-pic">
-                        <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-3.jpg" alt="" onclick="location.href='recipe_detail'">
-                    </div>
-                    <div class="cf-item-text">
-                        <h5>제목</h5>
-                    </div>
-                </div>
-                <div class="cf-item mix all meatlover">
-                    <div class="cf-item-pic glutenfree">
-                        <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-4.jpg" alt="" onclick="location.href='recipe_detail'">
-                    </div>
-                    <div class="cf-item-text">
-                        <h5>제목</h5>
-                    </div>
-                </div>
-                <div class="cf-item mix all meatlover glutenfree2">
-                    <div class="cf-item-pic">
-                        <img src="/Code_Green/resources/img/recipe/cate-feature/cate-filter-5.jpg" alt="" onclick="location.href='recipe_detail'">
-                    </div>
-                    <div class="cf-item-text">
-                        <h5>제목</h5>
-                    </div>
-                </div>
+				<div id="slider">
+				   <div class="image-box">
+					 <c:forEach var="recipe" items="${recipeList }">				    
+				      <div>
+				      	<a href="recipe_detail.bo?board_idx=${recipe.board_idx }&id=${sessionScope.sId}">
+				      		<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
+				      	</a>	
+				      	</div>
+				      </c:forEach>
+				   </div>
+				</div>
+					                
             </div>
             <div>
 	            <div class="ps-form--quick-search--com" align="left" style="margin-bottom: 70px;">

@@ -48,6 +48,7 @@ public class RecipeController {
 
 		int startRow = (pageNum - 1) * listLimit;
 		
+		// 전체 레시피 목록 조회
 		List<BoardVO> recipeList = service.getRecipeList(startRow, listLimit, keyword);
 		
 		// 레시피 글 목록 갯수 조회
@@ -67,10 +68,7 @@ public class RecipeController {
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		model.addAttribute("recipeList", recipeList);
-
 		model.addAttribute("pageInfo", pageInfo);
-		
-		System.out.println(pageInfo);
 		
 		return "recipe/recipe_main";
 	}

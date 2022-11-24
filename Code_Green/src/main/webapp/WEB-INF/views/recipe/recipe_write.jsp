@@ -137,12 +137,12 @@ h{
 	                                    </tr>
 	                                    <tr>
 	                                        <td>제목</td>
-	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%"></td>
+	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%" required="required"></td>
 	                                    </tr>
 	                                    <tr>
 	                                    	<td>내용</td>
 	                                    	<td colspan="2">
-	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60" placeholder=
+	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60" required="required" placeholder=
 "* 썸네일, 본문에 업로드할 사진 한장씩 올려주세요.
 * 내용엔 간단한 설명글을 올려주세요."></textarea>
 	                                    		
@@ -162,11 +162,11 @@ h{
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
 	                                    	<td>썸네일</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1"></td>
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1" required="required"></td>
 	                                    </tr>
 	                                    <tr>
 	                                    	<td>본문 사진</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2"></td>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2" required="required"></td>
 	                                    </tr>
 										<tr> 
 											<td colspan="2">
