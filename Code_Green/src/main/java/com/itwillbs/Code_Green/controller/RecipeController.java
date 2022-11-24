@@ -178,7 +178,7 @@ public class RecipeController {
 	
 	// 레시피 상세보기
 	@GetMapping(value = "/recipe_detail.bo")
-	public String recipe_detail(@RequestParam int board_idx,  Model model) {
+	public String recipe_detail(@RequestParam int board_idx, Model model) {
 		
 		// 등록한 레시피 불러오기
 		BoardVO recipe = service.getRecipe(board_idx);

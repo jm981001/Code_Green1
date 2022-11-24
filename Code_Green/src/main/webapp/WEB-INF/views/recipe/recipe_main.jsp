@@ -147,7 +147,7 @@
           		 <c:forEach var="recipe" items="${recipeList }">
 	                <div class="col-lg-4 col-sm-6">
 		                    <div class="recipe-item" style="margin-bottom: 200px;">
-		                        <a href="recipe_detail.bo?board_idx=${recipe.board_idx }&manager_id=${recipe.manager_id }&id=${sessionScope.sId}">
+		                        <a href="recipe_detail.bo?board_idx=${recipe.board_idx }&id=${sessionScope.sId}">
 		                        	<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
 		                        </a>
 		                        <div class="ri-text">
