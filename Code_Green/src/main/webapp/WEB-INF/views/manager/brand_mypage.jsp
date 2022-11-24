@@ -34,6 +34,7 @@
 			location.href="brand_mypage_delete?manager_id=" + manager_id;
 		}
 	}
+	
 </script>
 
 </head>

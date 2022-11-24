@@ -82,6 +82,7 @@
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 	                     </ul>
+	                     
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">

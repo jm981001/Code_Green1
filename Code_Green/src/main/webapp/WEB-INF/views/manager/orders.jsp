@@ -39,6 +39,8 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
+            
+            
                                 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->

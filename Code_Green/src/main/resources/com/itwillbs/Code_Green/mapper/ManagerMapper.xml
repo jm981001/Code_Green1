@@ -323,8 +323,6 @@
 
              ORDER BY s.SELL_DETAIL_IDX DESC  LIMIT #{startRow}, #{listLimit};
 			
-			
-			
 	</select>
 	
 	

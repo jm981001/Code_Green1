@@ -109,7 +109,6 @@
                         <div class="ps-card__header">
                             <h4>${brandInfo.manager_id }님의 페이지</h4>
                             
-
                             <hr>
                             <br>
                           <!-- 파일 업로드 부분 -->

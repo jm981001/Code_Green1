@@ -80,8 +80,6 @@ public interface ManagerMapper {
 	public int deleteQnaboard(@Param("idx") String idx, @Param("id") String id);
 	
 	
-	
-	
 	//총매출
 	public SellVO selectTotalMoney();
 

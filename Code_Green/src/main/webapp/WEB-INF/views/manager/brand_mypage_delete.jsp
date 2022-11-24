@@ -37,7 +37,6 @@
 </script>
 </head>
 
-
 <body>
     <header class="header--mobile">
         <div class="header__left">

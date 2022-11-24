@@ -27,7 +27,6 @@ public class MemberService {
 //		return mapper.loginMember(member);
 //	}
 
-
 	// 회원 정보 조회 수행 getMemberInfo()
 	// => 파라미터 : 아이디, 리턴타입 : MemberVO(member)
 	public MemberVO getMemberInfo(String member_id) {
