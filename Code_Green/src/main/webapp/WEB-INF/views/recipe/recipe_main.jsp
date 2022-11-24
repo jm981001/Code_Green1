@@ -111,7 +111,7 @@
 	<div class="ps-vendor-dashboard">
 		 <div class="container">
 			<div class="ps-section__header">
-		       <h3>Recipe</h3>
+		       <h3>레시피</h3>
 		    </div>
 		</div>
 	</div>
@@ -137,19 +137,6 @@
 				</div>
 					                
             </div>
-            <div>
-	            <div class="ps-form--quick-search--com" align="left" style="margin-bottom: 70px;">
-		            <div style="float: left">
-			            <form action="recipe_main.bo" method="get">
-							<input type="text" name="keyword" id="recipeSearchInput">
-							<input type="submit" id="recipeSearchBtn" value="검색">
-						</form>
-					</div>
-			       	 <div style="float: right">
-			       		<button onclick="recipe_write_auth()" style="float: left">글쓰기</button>
-			       	</div>
-			  </div>
-		   </div>			
         </div>
     </div>
     
@@ -160,7 +147,7 @@
           		 <c:forEach var="recipe" items="${recipeList }">
 	                <div class="col-lg-4 col-sm-6">
 		                    <div class="recipe-item" style="margin-bottom: 200px;">
-		                        <a href="recipe_detail.bo?board_idx=${recipe.board_idx }&id=${sessionScope.sId}">
+		                        <a href="recipe_detail.bo?board_idx=${recipe.board_idx }&manager_id=${recipe.manager_id }&id=${sessionScope.sId}">
 		                        	<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
 		                        </a>
 		                        <div class="ri-text">
@@ -171,6 +158,19 @@
 			            </div>
           		 </c:forEach>
 				</div>
+				<div>
+	            <div class="ps-form--quick-search--com" align="left" style="margin-bottom: 70px;">
+		            <div style="float: left">
+			            <form action="recipe_main.bo" method="get">
+							<input type="text" name="keyword" id="recipeSearchInput">
+							<input type="submit" id="recipeSearchBtn" value="검색">
+						</form>
+					</div>
+			       	 <div style="float: right">
+			       		<button onclick="recipe_write_auth()" style="float: left">글쓰기</button>
+			       	</div>
+				  </div>
+			   </div>
 				<div>
        			
        				<!-- 페이징 버튼들 시작 -->

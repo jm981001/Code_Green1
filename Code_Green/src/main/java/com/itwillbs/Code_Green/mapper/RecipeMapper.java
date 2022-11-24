@@ -25,12 +25,15 @@ public interface RecipeMapper {
 	// 레시피 글 목록 갯수 조회
 	int selectRecipeCount();
 	
-	// 레시피 상세보기에서 사용한 상품 불러오기
-	ItemVO selectUseItem(int board_idx);
-	
 	// 레시피 상세보기 원글 불러오기
 	BoardVO selectRecipe(int board_idx);
+	
+	// 레시피 상세보기에서 사용한 상품 불러오기
+	ItemVO selectUseItem(int board_idx);
 
+	// 레시피 작성자(브랜드) 관련상품 불러오기
+	List<ItemVO> selectRelatedItem(String manager_id);
+	
 	// 레시피 파일 수정
 	int updateRecipeFile(File_boardVO fileBoard);
 
@@ -48,6 +51,8 @@ public interface RecipeMapper {
 
 	// 레시피 파일 삭제
 	int deleteRecipeFile(int board_idx);
+
+	
 
 	
 

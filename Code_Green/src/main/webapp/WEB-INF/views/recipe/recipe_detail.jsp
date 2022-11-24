@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -9,7 +10,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>레시피</title>
+    <title>레시피 - ${recipe.board_subject }</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;
@@ -103,8 +104,8 @@
                         <div class="intro-item">
                             <img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt="">
                        		<div class="ps-form--quick-search--com">
-						       	<button onclick="recipe_modify_auth()">글 수정</button>
-						       	<button onclick="recipe_delete_auth()">글 삭제</button>
+						       	<button onclick="recipe_modify_auth()">레시피 수정</button>
+						       	<button onclick="recipe_delete_auth()">레시피 삭제</button>
 						   </div>
                         </div>
                         <div class="ingredient-list">
@@ -113,9 +114,9 @@
                             	${recipe.board_content }
                             	
                             	
-			                        <div class="ps-page__left"  style="margin-top: 100px;">
-			                        <h5>사용한 상품</h5>
-			                        <div class="widget__content">
+		                        <div class="ps-page__left" style="margin-top: 100px;">
+			                      <h5 style="color: #5FA30F">사용한 상품</h5>
+			                      <div class="widget__content">
 			                         <div class="ps-product">
 			                            <div class="ps-product__thumbnail">
 			                            	<a href="ItemDetail.bo?item_idx=${use_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${use_item.manager_brandname}&item_category=${use_item.item_category}">
@@ -134,9 +135,38 @@
 			                                     <h4 class="ps-product__price">${use_item.item_price }원</h4>
 			                                </div>
 			                            </div>
-			                        </div>
+			                          </div>
 			                        </div>
 			                     </div>
+			                     
+			                      <div class="ps-page__left"  style="margin-top: 100px;">
+			                      <h5 style="color: #5FA30F">관련 상품</h5>
+			                         <c:forEach var="related_item" items="${related_item }">
+			                      <div class="widget__content" style="">
+			                         <div class="ps-product" style="margin-bottom: 100px;">
+			                            <div class="ps-product__thumbnail">
+			                            	<a href="ItemDetail.bo?item_idx=${related_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${related_item.manager_brandname}&item_category=${related_item.item_category}">
+			                            		<img  src="/Code_Green/resources/item/${related_item.file1 }" alt="" style="height: 300px;">
+			                            	</a>
+			                                <ul class="ps-product__actions">
+			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+			                                </ul>
+			                            </div>
+			                            <div class="ps-product__container"><a class="ps-product__vendor" >${related_item.manager_brandname }</a>
+			                                <div class="ps-product__content">${related_item.item_name }
+			                                   <h4 class="ps-product__price">${related_item.item_price }원</h4>
+			                                </div>
+			                                <div class="ps-product__content hover">${related_item.item_name }
+			                                     <h4 class="ps-product__price">${related_item.item_price }원</h4>
+			                                </div>
+			                            </div>
+			                          </div>
+			                        </div>
+			                          </c:forEach>
+			                     </div>
+			                     
+			                     
 			                	</div>
                             </div>
                         </div>

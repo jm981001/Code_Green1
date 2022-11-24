@@ -51,6 +51,10 @@ public class RecipeService {
 		return mapper.selectUseItem(board_idx);
 	}
 	
+	// 레시피 작성자(브랜드) 관련상품 불러오기
+	public List<ItemVO> getRelatedItem(String manager_id) {
+		return mapper.selectRelatedItem(manager_id);
+	}
 	
 	// 레시피 파일 수정
 	public int modifyRecipeFile(File_boardVO fileBoard) {
@@ -81,6 +85,8 @@ public class RecipeService {
 	public int removeRecipeFile(int board_idx) {
 		return mapper.deleteRecipeFile(board_idx);
 	}
+
+	
 
 	
 	

@@ -64,7 +64,8 @@
 			    b.board_idx,
 			    b.board_subject,	   
 			    f.file1,
-			    m.manager_brandname
+			    m.manager_brandname,
+			    m.manager_id
 		  FROM  
 		  	    board b
      LEFT JOIN  
@@ -143,9 +144,38 @@
 		   ON  
 		   	   b.board_item_idx = i.item_idx
 		WHERE
-			   b.board_idx = #{board_idx} 	   
+			   b.board_idx = #{board_idx}
 	</select>
 	
+	<!-- 레시피 작성자(브랜드) 관련상품 불러오기 -->
+	<select id="selectRelatedItem" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT 
+			   i.item_idx,
+			   i.item_category,
+			   i.item_name,
+			   i.item_price,
+			   m.manager_brandname,
+			   f.file1,
+			   f.file2
+		 FROM  
+		 	   item i
+		 JOIN  
+		 	   manager m
+		   ON  
+		   	   i.re_manager_idx = m.manager_idx
+		 JOIN  
+		 	   file_item f
+		   ON  
+		   	   f.rf_item_idx = i.item_idx
+		 JOIN  
+		 	   board b
+		   ON  
+		   	   b.board_item_idx = i.item_idx
+		WHERE
+			   m.manager_id = #{manager_id}
+	 ORDER BY
+			   rand() LIMIT 2	    	
+	</select>
 	
 	<!-- 레시피 파일 수정 -->
 	<update id="updateRecipeFile">

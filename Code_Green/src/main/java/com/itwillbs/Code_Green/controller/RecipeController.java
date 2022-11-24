@@ -68,6 +68,8 @@ public class RecipeController {
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
 		model.addAttribute("recipeList", recipeList);
+		
+		System.out.println(recipeList);
 		model.addAttribute("pageInfo", pageInfo);
 		
 		return "recipe/recipe_main";
@@ -176,15 +178,25 @@ public class RecipeController {
 	
 	// 레시피 상세보기
 	@GetMapping(value = "/recipe_detail.bo")
-	public String recipe_detail(@RequestParam int board_idx, Model model) {
-	
+	public String recipe_detail(@RequestParam int board_idx, @RequestParam String manager_id, Model model) {
+		
+		System.out.println(manager_id);
+		// 등록한 레시피 불러오기
 		BoardVO recipe = service.getRecipe(board_idx);
 		
+		// 레시피에 사용한 상품 불러오기
 		ItemVO use_item = service.getUseItem(board_idx);
+		
+		// 레시피 작성자(브랜드) 관련상품 불러오기
+		List<ItemVO> related_item = service.getRelatedItem(manager_id);
 		
 		model.addAttribute("recipe", recipe);
 		
 		model.addAttribute("use_item" ,use_item);
+
+		model.addAttribute("related_item" ,related_item);
+		
+		System.out.println(related_item);
 		
 		return "recipe/recipe_detail";
 	}
@@ -325,7 +337,7 @@ public class RecipeController {
 			return "member/fail_back";
 		}
 		
-		return "redirect:/recipe_detail.bo?board_idx=" + board_idx;
+		return "redirect:/recipe_detail.bo?board_idx=" + board_idx + "&manager_id=" + board.getBoard_id();
 	}
 	
 	// 레시피 삭제 폼
