@@ -87,12 +87,12 @@
     	}
     </style>
      <script type="text/javascript">
-	 	window.onload = function(){
+// 	 	window.onload = function(){
 			
-			$('#sort').val('${sort}')
-			sortItemList($('#sort').val());
+// 			$('#sort').val('${sort}')
+// 			sortItemList($('#sort').val());
 			
-		}	
+// 		}	
     
     	var sortItemList = function(value) {
     		
@@ -284,7 +284,7 @@
                                 <div class="ps-product__desc">
                                 <br>
                                     <ul class="ps-list--dot">
-                                        <li>판매자 &nbsp;&nbsp;&nbsp;${item.manager_brandname }</li><br>
+                                        <li>판매자 &nbsp;${item.manager_brandname }</li><br>
                                         <li>포장타입 &nbsp; ${item.item_packing }</li><br>
                                         <li>카테고리 &nbsp; ${item.item_category }</li>
                                     </ul>
@@ -312,7 +312,7 @@
                                 <li class="active"><a href="#tab-1">상품설명</a></li>
                                 <li><a href="#tab-2">상세정보</a></li>
                                 <li><a href="#tab-3">후기 ${item.count }</a></li><!--tab-3-1은 작성폼 -->
-                                <li><a href="#tab-4">문의 ${Qna_listCount }</a></li> <!--tab-4-1은 작성폼 -->
+                                <li><a href="#tab-4">문의</a></li> <!--tab-4-1은 작성폼 -->
                             </ul>
                             <div class="ps-tabs">
                             
@@ -357,7 +357,7 @@
                                                     <td>수입식품에 해당하는경우"식품위생법에 따른 수입신고를 필함" 의 문구</td>
                                                     <td>식품위생법에 따른 수입신고를 필함</td>
                                                     <td>소비자 상담관련 전화번호</td>
-                                                    <td>베지터틀 고객센터(803-0909)</td>
+                                                    <td>ㅇㅇㅇ마켓 고객센터(803-0909)</td>
                                                 </tr>
                                               
                                             </tbody>
@@ -368,7 +368,11 @@
  
 	
 	
-      
+    <script type="text/javascript">
+		function best(item_idx, board_idx ,item_category, manager_brandname, sId){
+			location.href='ReviewBest.bo?item_idx=${item.item_idx }&board_idx='+board_idx+'&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&member_id=${sessionScope.sId }';
+		}
+	</script>   
  <!-- ==========상품후기 목록=========================================================================================================     -->                                 
                      
                                 <div class="ps-tab" id="tab-3">
@@ -419,7 +423,7 @@
                                             <form class="ps-form--review" action=""  method="get"  >
                                                 <h4>PRODUCT REVIEW</h4>
                                                 <p><sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.<br>
-												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 베지터틀 내 1:1 문의에 남겨주세요.</p>
+												<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 비건마켓 내 1:1 문의에 남겨주세요.</p>
 													<select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)">
 													  <option value="new">최근 등록순</option>
 													  <option value="best">추천 많은순</option>
@@ -671,35 +675,50 @@
 												    </script>  
 												    <br>
 												    
-				                                     <!-- 페이징 버튼들 시작 -->
+				                                        <!-- 페이징 버튼들 시작 -->
 								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
 <!-- 								                         class="pageLink"  -->
-								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href='javascript:void(0);' onclick="changePageDown();"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
-								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href='javascript:void(0);' onclick="changePageUp();"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink page3" href="javascript:void(0);" onclick="changePage('P');"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+<%-- 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink page3" href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum+1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink page3" href="javascript:void(0);" onclick="changePage('N');"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 <%-- 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a  href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
 								                        	
 								                        	
 								                        </ul>
 								                    </div>
-								                    <script type="text/javascript">
+		                  					  <script type="text/javascript">
 								                    	function changePageUp() {
 								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
 								                    	}
-								                    	function changePageDown() {
+								                    	function changePage(data) {
+								                    		let pageNum = ${pageInfo.pageNum};
+								                    		pageNum += data == 'P' ? -1 : 1;
 								                    		$.ajax({ 
-									                    			url: "ItemDetail.bo", 
+// 									                    			url: "ItemDetail.bo", 
+									                    			url: "ItemDetailAjax.bo",
 									                    			type: "GET", 
 									                    			data: {
 									                    				item_idx: ${item.item_idx},
-									                    				pageNum: ${pageInfo.pageNum-1},
+// 									                    				pageNum: ${pageInfo.pageNum-1},
+									                    				pageNum: pageNum,
 									                    				Qna_pageNum: ${Qna_pageInfo.qna_pageNum},
 									                    				manager_brandname: '${item.manager_brandname}',
 									                    				item_category: '${item.item_category}',
-									                    				sort: '${sort}'
+// 									                    				board_star_score : '${board.board_star_score}',
+									                    				sort: $('#sort').val()
 									                    			},
 									                    			success: function(data){
+									                    				let json = JSON.parse(data);
+									                    				
+									                    				let bestList = a.bestList;
+									                    				let goodList = a.goodList;
+									                    				let itemList = a.itemList;
+									                    				let worstList = a.worstList;
+									                    				
+									                    				
+									                    				
 									            						let comments="";
 									            						let space ="";
 									                    				
@@ -708,6 +727,65 @@
 									        							console.log("에러 : " + error);
 									        						}
 									        						});
+								                    	}
+								                    	
+								                    	function drawTable(){
+								                    		let table = $('#itemList');
+								                    		table.empty();
+								                    		
+								                    		let str = 
+								                    		
+								                    			'<tbody>'  
+								                    			+= '<tr class="item">'  
+								                    				+= '<td width="70%">'+this.board_subject
+								                    					+= '<div class="ps-product" style="float:left;">'
+								                    						+= '<div class="ps-product__rating" style="float:left;">'
+								                    							+= '<div class="br-wrapper br-theme-fontawesome-stars">'
+								                    							
+								                    							
+								                    							
+								                    							   
+								                    							   
+								                    							   
+								                    							+= '</div>'
+								                    						+= '</div>'
+								                    					+= '</td>'
+								                    				+= '<td width="10%">'+this.board_id+'</td>'  
+								                    				
+								                    				+= '<td>'+this.board_date+'</td>'
+								                    				+= '<td width="10%">'+this.best_count+'</td>'  
+								                    			+= '</tr>  '
+								                    			+= '<tr class="hide">'  
+								                    				+= '<td colspan="5">'
+								                    					 += '<br><br>'
+								                    					 += '<img src="/Code_Green/resources/commUpload/'+this.file1+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display='+'none'">'
+								                    					 += '<img src="/Code_Green/resources/commUpload/'+this.file2+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display='+'none'">'
+								                    						+= '<br><br><br><br>'+this.board_content+'<br><br><br>'
+								                    						
+								                    					 += '<div align="right">'
+								                    					  += '<input type="button" class="ps-btn-best_jm" onclick="best('+this.item_idx+','+this.board_idx+','+this.item_category+','+this.manager_brandname+',${sessionScope.sId})">'+this.best_count
+								                    					
+								                    					  
+								                    					  
+								                    					  
+								                    					  += '<c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">'
+								                    					  += '<input type="button" value="수정" onclick="location.href='+'ReviewModify.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&file1=${board.file1 }&file2=${board.file2 }'">
+								                    					  += '<input type="button" value="삭제" onclick="confirmDelete('+this.board_idx+'&item_category='+this.item_category+'&manager_brandname='+this.manager_brandname+')">'
+								                    					  += '</c:if>
+								                    					
+								                    					  
+								                    					  
+								                    					  
+								                    					  += '</div>'
+								                    				+= '</td>'  
+								                    			+= '</tr>'
+								                    		+= '</tbody>'
+								                    		
+								                    		
+								                    		;
+								                    		
+								                    		table.append(str);
+								                    		
 								                    	}
 								                    	
 								                    	
@@ -720,13 +798,11 @@
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
-													 <c:if test="${sessionScope.sId ne null}">
-													   <div align="right">
-								                            <ul class="ps-tab-list" >
-								                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
-								                            </ul>
-							                            </div> 
-						                            </c:if>
+												   <div align="right">
+							                            <ul class="ps-tab-list" >
+							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
+							                            </ul>
+						                            </div> 
 						                            <!--리뷰작성 버튼 끝 -->
                                             </form>
                                         </div>
@@ -959,7 +1035,7 @@
 										    </table>  
 									    <br>
 												    
-								     <!-- 페이징 버튼들 시작 -->
+								     	     <!-- 페이징 버튼들 시작 -->
 				                  	<%Qna_PageInfo Qna_pageInfo = (Qna_PageInfo)request.getAttribute("Qna_pageInfo"); %>
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
@@ -984,14 +1060,12 @@
 								                    <!-- 페이징 버튼들 끝 -->
 								    
 								    <!-- 문의작성 버튼 -->
-								     <c:if test="${sessionScope.sId ne null}">
-									   <div align="right">
-				                            <ul class="ps-tab-list" >
-				                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
-				                            </ul>
-			                            </div> 
-			                         </c:if>
-			                        <!-- 문의작성 버튼 끝 -->
+								   <div align="right">
+			                            <ul class="ps-tab-list" >
+			                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
+			                            </ul>
+		                            </div> 
+		                            <!-- 문의작성 버튼 끝 -->
                                         </form>
                                     </div>
 							</div>
