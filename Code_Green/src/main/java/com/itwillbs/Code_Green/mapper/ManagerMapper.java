@@ -96,16 +96,6 @@ public interface ManagerMapper {
 	public int selectOrderListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 
-
-
-
-
-
-
-
-
-
-	
 	
 
 

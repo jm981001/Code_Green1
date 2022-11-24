@@ -321,7 +321,7 @@
 				</choose>
 	</if>
 
-             ORDER BY s.SELL_DETAIL_IDX DESC  LIMIT #{startRow}, #{listLimit}; 
+             ORDER BY s.SELL_DETAIL_IDX DESC  LIMIT #{startRow}, #{listLimit};
 			
 			
 			

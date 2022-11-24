@@ -594,11 +594,7 @@ public class ManagerController {
 		
 		
 	//------------매니저페이지 브랜드별 주문현황(페이징처리같이)-------------------------------------------
-//		@RequestMapping(value = "orders", method = RequestMethod.GET)
-//		public String orders() {
-//			return "manager/orders";
-//		}
-		
+
 		@GetMapping(value = "/orders")
 		public String orderList ( Model model, HttpSession session,
 								@RequestParam(defaultValue = "1")int pageNum,

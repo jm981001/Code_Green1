@@ -96,7 +96,6 @@ public class ManagerService {
 	public int getQnaBoardListCount(String searchType, String keyword) {
 		return mapper.selectQnaBoardListCount(searchType, keyword);
 	}
-
 	
 	// 문의글 상세조회
 	public QnaVO getQnaInfo(String qna_idx) {
