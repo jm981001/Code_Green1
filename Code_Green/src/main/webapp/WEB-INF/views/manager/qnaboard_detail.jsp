@@ -61,8 +61,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+				  				<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -93,8 +92,7 @@
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+				     			<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 	                     </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -111,9 +109,6 @@
                     <h3>답변관리</h3>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
                     </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
@@ -121,12 +116,14 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="get">
+  		<form class="ps-form--search-bar" action="qnaboard_answer?qna_idx="${QnaInfo.qna_idx }" method="get"name="answerForm">
+  				<input type="hidden" id="qna_idx" name="qna_idx" value="${QnaInfo.qna_idx }">
+                 <input type="hidden" id="qna_id" name="qna_id" value="${QnaInfo.qna_id }">
 
  
        <table class="table ps-table">
               
-                    <h2>게시판 답글 관리</h2>
+                    <h2>게시판 답변 관리</h2>
                     <hr>
                        <thead>
                                 <tr>
@@ -163,11 +160,14 @@
                 <!-- ---게시판글쓰기api -->
                 
                      <div class="ps-form__submit text-center">
-                     	<br>
-                          <button class="ps-btn success">답변등록</button>
-                          <button class="ps-btn ps-btn--gray mr-3"><a href="qnaboard_list"> 취소</a></button>
-                    </div>
+                     <br>
+<!--                      	<button class="ps-btn success"type="submit">답변등록1</button> -->
+                        <input type="button" button class="ps-btn success"type="submit"value="답변등록2" onclick="location.href='qnaboard_answer?qna_idx=${QnaInfo.qna_idx}&manager_brandname=${param.manager_brandname }'">
+                        <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
 
+
+                    </div>
+					</div>
        
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

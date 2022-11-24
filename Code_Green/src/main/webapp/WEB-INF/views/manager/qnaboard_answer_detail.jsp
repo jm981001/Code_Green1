@@ -36,7 +36,22 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- 글쓰기  API -->
+<script type="text/javascript" src="jquery-3.6.1.js"></script>    
+<script type="text/javascript">
 
+	
+	$(document).ready(function() {
+		  $('#summernote').summernote({
+	 	    	placeholder: '내용을 작성해주세요',
+		        minHeight: 370,
+		        maxHeight: null,
+		        focus: true, 
+		        lang : 'ko-KR'
+		  });
+		  // Summernote에 글 내용 추가하는 코드
+		  $("#summernote").summernote('code',  '${QnaInfo.qna_answer }');
+		});
+</script>   
 </head>
 <body>
     <header class="header--mobile">
@@ -162,8 +177,8 @@
                 
                      <div class="ps-form__submit text-center">
                      	<br>
-                          <button class="ps-btn success">답변등록</button>
-                          <button class="ps-btn ps-btn--gray mr-3"><a href="qnaboard_list"> 취소</a></button>
+                          <button class="ps-btn success"type="submit">답변등록</button>
+                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
 
        

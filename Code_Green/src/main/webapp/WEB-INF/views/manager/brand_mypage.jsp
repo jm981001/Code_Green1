@@ -212,6 +212,7 @@
                                 <div class="ps-form__submit text-center	">
                                     <button class="ps-btn success" type="submit">수정페이지이동</button>
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
+
                                 </div>
                             </form>
                         </div>

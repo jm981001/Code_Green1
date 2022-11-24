@@ -73,14 +73,27 @@ public interface ManagerMapper {
 			@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 	//문의글 답변등록
-	public int updateQnaboard(QnaVO qna);
+	public int updateQnaAnswer(QnaVO qna);
+	//문의글 수정
+	public int updateQna(QnaVO qna);
 	//문의글 삭제
 	public int deleteQnaboard(@Param("idx") String idx, @Param("id") String id);
+	
+	
+	
+	
 	//총매출
 	public SellVO selectTotalMoney();
 
 	//총주문수
 	public int selectTotalsellCount();
+	
+	//주문 내역 조회
+	public List<SellVO> selectOrderList(@Param("id") String id, @Param("startRow") int startRow,
+			                            @Param("listLimit") int listLimit,@Param("searchType") String searchType,
+			                            @Param("keyword") String keyword);
+    //주문 내역 갯수 조회
+	public int selectOrderListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 
 

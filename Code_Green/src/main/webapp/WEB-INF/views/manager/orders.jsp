@@ -39,16 +39,15 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-              		            <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -71,16 +70,15 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                         		<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                             	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -98,9 +96,9 @@
 <!--                     <p>Martfury orders listings</p> -->
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index.html" method="get">
-                        <input class="form-control" type="text" placeholder="Search something" />
-                        <button><i class="icon-magnifier"></i></button>
+                    <form class="ps-form--search-bar" action="order_Info" method="get">
+<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
+<!--                         <button><i class="icon-magnifier"></i></button> -->
                     </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
@@ -108,17 +106,17 @@
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="index.html" method="get">
+                        <form class="ps-form--filter" action="orderInfo" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Search..." />
                                 </div>
                                 <div class="form-group">
                                     <select class="ps-select">
-                                        <option value="1">배송접수</option>
-                                        <option value="2">배송</option>
-                                        <option value="3">주문접수</option>
-                                        <option value="3">주문취소</option>
+                                        <option value="sell_status">주문상태</option>
+                                        <option value="sell_name">주문상품</option>
+                                        <option value="sell_pay_status">결제여부</option>
+<!--                                         <option value="3">주문취소</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -127,7 +125,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="ps-section__actions"><a class="ps-btn success" href="order_detail"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="products"><i class="icon icon-download2 mr-2"></i>상품목록</a></div>
+                    <div class="ps-section__actions"><a class="ps-btn success" href="order"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
                 </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">
@@ -135,92 +133,116 @@
                             <thead>
                                 <tr>
                                     <th>주문번호</th>
+                                    <th>회원번호</th>
                                     <th>주문날짜</th>
                                     <th>주문상품</th>
-                                    <th>결제</th>
+                                    <th>상품가격</th>
                                     <th>주문상태</th>
                                     <th>총금액</th>
+                                    <th>결제여부</th>
+                                    <th>결제일</th>
+                                    <th>상품브랜드</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="order-detail">#A580</a></td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Unero Black Military</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송</span>
-                                    </td>
-                                    <td><strong>$56.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail">#B260</a></td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td>
-                                    <td><span class="ps-badge gray">미결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송 접수</span>
-                                    </td>
-                                    <td><strong>$56.00</strong></td>
-                                    <td>
-                                                     <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail">#A583</a></td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Lined Blend T-Shirt</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment warning">주문 접수</span>
-<!--                                     </td>order In Progress -->
-                                    <td><strong>$516.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-detail">#A583</a></td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>DJI MAcvic Quadcopter</strong></a></td>
-                                    <td><span class="ps-badge gray">미결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송 접수</span>
-                                    </td>
-                                    <td><strong>$112.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#A112</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Black T-Shirt</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment danger">주문 취소</span>
-                                    </td>
-                                    <td><strong>$30.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            
+                     <c:forEach var="item" items="${orderList}" >
+						    <tr>
+						     <td>${sell.sell_idx}</td>
+						     <td onclick="location.href='order_detail?sell_idx=${sell.sell_idx}'"><strong>${sell.item_name }</strong></td>
+						     <td>${sell.rf_member_idx}</td>
+						     <td>${sell.sell_date}</td>
+						     <td>${sell.item_name}</td>
+						     <td>${sell.item_price}</td>
+						     <td>${sell.sell_status}</td>
+						     <td>${sell.sell_total_price}</td>
+						     <td>${sell.sell_pay_status}</td>
+						     <td>${sell.sell_pay_date}</td>
+						     <td>${sell.manager_brandname}</td>
+						    </tr>     
+					</c:forEach>
+						</tbody>
+						</table>
+                            
+                            
+                            
+                            
+<!--                                 <tr> -->
+<!--                                     <td><a href="order-detail">#A580</a></td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail"><strong>Unero Black Military</strong></a></td> -->
+<!--                                     <td><span class="ps-badge success">결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment success">배송</span> -->
+<!--                                     </td> -->
+<!--                                     <td><strong>$56.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                     <td><a href="order-detail">#B260</a></td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td> -->
+<!--                                     <td><span class="ps-badge gray">미결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment success">배송 접수</span> -->
+<!--                                     </td> -->
+<!--                                     <td><strong>$56.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                                      <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="inventory_manage">수정</a><a class="dropdown-item" href="#">삭제</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                     <td><a href="order-detail">#A583</a></td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail"><strong>Lined Blend T-Shirt</strong></a></td> -->
+<!--                                     <td><span class="ps-badge success">결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment warning">주문 접수</span> -->
+<!-- <!--                                     </td>order In Progress --> 
+<!--                                     <td><strong>$516.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                     <td><a href="order-detail">#A583</a></td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail"><strong>DJI MAcvic Quadcopter</strong></a></td> -->
+<!--                                     <td><span class="ps-badge gray">미결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment success">배송 접수</span> -->
+<!--                                     </td> -->
+<!--                                     <td><strong>$112.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                     <td>#A112</td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail"><strong>Black T-Shirt</strong></a></td> -->
+<!--                                     <td><span class="ps-badge success">결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment danger">주문 취소</span> -->
+<!--                                     </td> -->
+<!--                                     <td><strong>$30.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
                     </div>
                 </div>
                 <div class="ps-section__footer">

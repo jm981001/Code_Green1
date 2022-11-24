@@ -84,7 +84,7 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	            <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            	 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -162,8 +162,8 @@
                 
                      <div class="ps-form__submit text-center">
                      	<br>
-                          <button class="ps-btn success">답변등록</button>
-                          <button class="ps-btn ps-btn--gray mr-3"><a href="qnaboard_list"> 취소</a></button>
+                          <button class="ps-btn success"type="submit">답변등록</button>
+                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
 
        

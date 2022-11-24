@@ -44,14 +44,13 @@
             <ul class="menu">
                				    <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -76,14 +75,13 @@
                         <ul class="menu">
                             	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-<!-- 				                <li><a href="brand_settings"><i class="icon-cog"></i>브랜드정보수정</a></li> -->
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">

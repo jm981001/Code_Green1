@@ -63,11 +63,11 @@
                         <ul class="menu">
                                 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
+<!-- 				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
+<!-- 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
@@ -122,6 +122,7 @@
                     </div>
                      <div class="ps-card">
                         <div class="ps-card__header">
+                         <br>
                          <td><a href="orders"><strong><h4>최근 주문</h4></strong></a></td>
                             
                         </div>
@@ -251,17 +252,17 @@
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
-                                <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
+                                <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
                                      <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
-                                <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
+                                <div class="ps-block__left"><span><i class="icon-heart"></i></span></div>
                                 <div class="ps-block__content">
-                                    <p>이번달매출</p>
-                                    <h4>$2,567<small class="desc"><i class="icon-arrow-down"></i><span>0.32%</span></small></h4>
+                                    <p>팔로우 수 </p>
+                                    <h4>5<small class="desc"><i class="icon-arrow-down"></i><span></span></small></h4>
                                 </div>
                             </div>
                         </div>

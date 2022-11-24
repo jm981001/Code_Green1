@@ -25,23 +25,8 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script type="text/javascript">
-	function myItem(value) {
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = '';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-	//		subForm.submit(); //form Submit
+
 	
-	}
 </script>
 </head>
 
@@ -100,6 +85,7 @@
 				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+
                         </ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -127,7 +113,7 @@
                             <hr>
                             <br>
                           <!-- 파일 업로드 부분 -->
-                          <form action="_brand_mypage_modifyPro.bo?" method="get" enctype="multipart/form-data" id="modifyForm"">
+                          <form action="brand_mypage_modifyPro.bo?" method="get" enctype="multipart/form-data" id="modifyForm"">
 		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">  
 	                    	<input type="hidden" name="orginal_file" value="${brandInfo.manager_original_file}">  
                           <div class="card" style="width: 25rem;">

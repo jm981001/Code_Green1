@@ -112,12 +112,25 @@ public class ManagerService {
 		return mapper.selectTotalsellCount();
 	}
 	//문의글 삭제
-	public int removeQnaboard(String idx, String id) {
-		return mapper.deleteQnaboard(idx,id);
+	public int removeQnaboard(String idx, String sId) {
+		return mapper.deleteQnaboard(idx,sId);
 	}
 	//문의글 답글
-	public int registQnaboard(QnaVO qna) {
-		return mapper.updateQnaboard(qna);
+	public int registQnaAnswer(QnaVO qna) {
+		return mapper.updateQnaAnswer(qna);
+	}
+	//문의글 수정
+	public int modifyQnaAnswer(QnaVO qna) {
+		return mapper.updateQna(qna);
+	}
+	
+	//주문내역조회
+	public List<SellVO> getOrderList(String id, int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectOrderList(id,startRow,listLimit,searchType,keyword);
+	}
+	//주문내역 갯수 조회
+	public int getOrderListCount(String searchType, String keyword) {
+		return mapper.selectOrderListCount(searchType, keyword);
 	}
 	
 
