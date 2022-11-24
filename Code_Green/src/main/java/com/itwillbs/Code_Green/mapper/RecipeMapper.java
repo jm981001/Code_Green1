@@ -32,7 +32,7 @@ public interface RecipeMapper {
 	ItemVO selectUseItem(int board_idx);
 
 	// 레시피 작성자(브랜드) 관련상품 불러오기
-	List<ItemVO> selectRelatedItem(String manager_id);
+	List<ItemVO> selectRelatedItem(int board_idx);
 	
 	// 레시피 파일 수정
 	int updateRecipeFile(File_boardVO fileBoard);

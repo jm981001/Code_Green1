@@ -52,8 +52,8 @@ public class RecipeService {
 	}
 	
 	// 레시피 작성자(브랜드) 관련상품 불러오기
-	public List<ItemVO> getRelatedItem(String manager_id) {
-		return mapper.selectRelatedItem(manager_id);
+	public List<ItemVO> getRelatedItem(int board_idx) {
+		return mapper.selectRelatedItem(board_idx);
 	}
 	
 	// 레시피 파일 수정

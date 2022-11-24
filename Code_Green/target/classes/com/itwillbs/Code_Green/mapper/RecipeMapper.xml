@@ -172,7 +172,7 @@
 		   ON  
 		   	   b.board_item_idx = i.item_idx
 		WHERE
-			   m.manager_id = #{manager_id}
+			   b.board_idx = #{board_idx}
 	 ORDER BY
 			   rand() LIMIT 2	    	
 	</select>
