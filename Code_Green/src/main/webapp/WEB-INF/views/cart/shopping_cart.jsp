@@ -103,9 +103,9 @@ function deleteItem(cart_idx) {
 								</tr>
 							</thead>
 							<c:forEach var="row" items="${cartList}" varStatus="i">
-<%-- 								<input type="hidden" name="cart_idx" value="${row.cart_idx}"> --%>
-<%-- 								<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}"> --%>
-<%-- 								<input type="hidden" name="cart_amount"value="${row.cart_amount}"> --%>
+								<input type="hidden" name="cart_idx" value="${row.cart_idx}">
+								<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
+								<input type="hidden" name="cart_amount"value="${row.cart_amount}">
 							<tr>
 								<td data-label="Product">
 									<div class="ps-product--cart">

@@ -57,7 +57,7 @@ public class CartController {
 //			return mav;
 
 		if (sId == null) { //로그인 안하면 못들어감
-			mav.setViewName("main/main");
+			mav.setViewName("redirect:/login");
 			return mav;
 		} else {
 			List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보

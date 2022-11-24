@@ -58,8 +58,13 @@
                     </c:if>
                     <i>${WishlistCount }</i>
                     </span></a>
-                        <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span><i>0</i></span></a>
-                        </div>
+                        <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span>
+                       	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
+	                   	<i>0</i>
+    	              	</c:if>
+                       	<i>${cartCount }</i>
+                        </span></a>
+                   		</div>
 				<c:choose>
                       	  <c:when test="${empty sessionScope.sId }">
 	                        <div class="ps-block--user-header">
