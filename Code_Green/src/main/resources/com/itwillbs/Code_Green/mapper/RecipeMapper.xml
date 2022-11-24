@@ -83,11 +83,14 @@
 		        #{startRow}, #{listLimit}                 
 	</select>
 	
+	<!-- 레시피 글 목록 갯수 조회 -->
 	<select id="selectRecipeCount" resultType="integer">
 		SELECT 
-		COUNT(*) 
-		FROM board
-		WHERE board_type = '레시피'
+		 COUNT(*) 
+		  FROM 
+			    board
+		 WHERE 
+			    board_type = '레시피'
 	</select>
 	
 	<!-- 상세보기 -->
@@ -125,14 +128,22 @@
 			   m.manager_brandname,
 			   f.file1,
 			   f.file2
-		 FROM  item i
-		 JOIN  manager m
-		   ON  i.re_manager_idx = m.manager_idx
-		 JOIN  file_item f
-		   ON  f.rf_item_idx = i.item_idx
-		 JOIN  board b
-		   ON  b.board_item_idx = i.item_idx
-		WHERE  b.board_idx = #{board_idx} 	   
+		 FROM  
+		 	   item i
+		 JOIN  
+		 	   manager m
+		   ON  
+		   	   i.re_manager_idx = m.manager_idx
+		 JOIN  
+		 	   file_item f
+		   ON  
+		   	   f.rf_item_idx = i.item_idx
+		 JOIN  
+		 	   board b
+		   ON  
+		   	   b.board_item_idx = i.item_idx
+		WHERE
+			   b.board_idx = #{board_idx} 	   
 	</select>
 	
 	
