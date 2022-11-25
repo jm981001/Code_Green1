@@ -2,8 +2,11 @@ package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface MemberMapper {
 	
@@ -23,11 +26,38 @@ public interface MemberMapper {
 	// 5. 회원 가입시 기본 적립금 추가
 	public void setCoin(int member_idx);
 
-	// 마이페이지 - 팔로우브랜드 리스트
-	public List<FollowVO> selectFollowList(String member_id);
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// ============================================ 마이페이지 ================================================================
+	
+	
 	// 마이페이지 - 내정보 카운트 테이블
 	public MemberVO selectMyCountInfo(int member_idx);
+	
+	// 마이페이지 - 메인:최근주문목록(1개월내)
+	public List<SellVO> selectMyRecentOrderList(@Param("sIdx") int sIdx, @Param("month")int month);
+
+	// 마이페이지 - 팔로우브랜드 리스트
+	public List<FollowVO> selectFollowList(@Param("startRow")int startRow,@Param("listLimit") int listLimit,@Param("member_id") String member_id);
+
+	// 마이페이지 - 팔로우브랜드 리스트 카운트
+	public int selectFollowListCount(int member_idx);
+	
+	// 마이페이지 - 팔로우브랜드 언팔로우
+	public int deleteFollowBrand(@Param("rf_member_idx")int rf_member_idx, @Param("rf_manager_idx") int rf_manager_idx);
+	
+
+	
+
+	
 
 
 

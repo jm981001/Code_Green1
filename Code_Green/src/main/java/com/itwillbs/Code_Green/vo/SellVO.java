@@ -5,7 +5,7 @@ public class SellVO {
 	// 전체적인 주문 내역
 	// 주문에 대한 상세는 SellDetailVO => 후에 만들 것
 	
-	private int sell_idx; // 주문 번호
+	private int sell_idx; // 주문테이블 인덱스 번호
 	private int rf_member_idx; // 회원 번호
 	private String sell_amount; // 총 구매 수량 // 상품당 구매 수량은 detail
 	private String sell_use_coin; // 사용한 적립금
@@ -19,7 +19,7 @@ public class SellVO {
 	private String sell_pay_type; // 결제수단
 	private String sell_pay_status; // 결제여부 / default 'N'
 	private String sell_pay_date; // 결제일
-	
+	private String sell_order_number; // 주문번호
 	
 	private String sell_detail_idx; // 주문상세번호
 	private String item_name; // 상품명
@@ -124,6 +124,14 @@ public class SellVO {
 	public void setSell_pay_date(String sell_pay_date) {
 		this.sell_pay_date = sell_pay_date;
 	}
+	public String getSell_order_number() {
+		return sell_order_number;
+	}
+
+	public void setSell_order_number(String sell_order_number) {
+		this.sell_order_number = sell_order_number;
+	}
+
 	public String getSell_detail_idx() {
 		return sell_detail_idx;
 	}
@@ -167,59 +175,6 @@ public class SellVO {
 		this.file1 = file1;
 	}
 
-	
-
-	
-
-	@Override
-	public String toString() {
-		return "SellVO [sell_idx=" + sell_idx + ", rf_member_idx=" + rf_member_idx + ", sell_amount=" + sell_amount
-				+ ", sell_use_coin=" + sell_use_coin + ", sell_total_price=" + sell_total_price + ", sell_status="
-				+ sell_status + ", sell_postcode=" + sell_postcode + ", sell_address=" + sell_address + ", sell_phone="
-				+ sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date=" + sell_date + ", sell_pay_type="
-				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
-				+ ", sell_detail_idx=" + sell_detail_idx + ", item_name=" + item_name + ", item_price=" + item_price
-				+ ", item_idx=" + item_idx + ", item_category=" + item_category + ", manager_brandname="
-				+ manager_brandname + ", file1=" + file1 + ", total=" + total + ", sell_count=" + sell_count
-				+ ", brandtotal=" + brandtotal + "]";
-	}
-
-
-
-	public SellVO(int sell_idx, int rf_member_idx, String sell_amount, String sell_use_coin, String sell_total_price,
-			String sell_status, String sell_postcode, String sell_address, String sell_phone, String sell_receiver,
-			String sell_date, String sell_pay_type, String sell_pay_status, String sell_pay_date,
-			String sell_detail_idx, String item_name, String item_price, String item_idx, String item_category,
-			String manager_brandname, String file1, int total, int sell_count, int brandtotal) {
-		super();
-		this.sell_idx = sell_idx;
-		this.rf_member_idx = rf_member_idx;
-		this.sell_amount = sell_amount;
-		this.sell_use_coin = sell_use_coin;
-		this.sell_total_price = sell_total_price;
-		this.sell_status = sell_status;
-		this.sell_postcode = sell_postcode;
-		this.sell_address = sell_address;
-		this.sell_phone = sell_phone;
-		this.sell_receiver = sell_receiver;
-		this.sell_date = sell_date;
-		this.sell_pay_type = sell_pay_type;
-		this.sell_pay_status = sell_pay_status;
-		this.sell_pay_date = sell_pay_date;
-		this.sell_detail_idx = sell_detail_idx;
-		this.item_name = item_name;
-		this.item_price = item_price;
-		this.item_idx = item_idx;
-		this.item_category = item_category;
-		this.manager_brandname = manager_brandname;
-		this.file1 = file1;
-		this.total = total;
-		this.sell_count = sell_count;
-		this.brandtotal = brandtotal;
-	}
-
-
-
 	public int getTotal() {
 		return total;
 	}
@@ -247,6 +202,24 @@ public class SellVO {
 	public void setBrandtotal(int brandtotal) {
 		this.brandtotal = brandtotal;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "SellVO [sell_idx=" + sell_idx + ", rf_member_idx=" + rf_member_idx + ", sell_amount=" + sell_amount
+				+ ", sell_use_coin=" + sell_use_coin + ", sell_total_price=" + sell_total_price + ", sell_status="
+				+ sell_status + ", sell_postcode=" + sell_postcode + ", sell_address=" + sell_address + ", sell_phone="
+				+ sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date=" + sell_date + ", sell_pay_type="
+				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
+				+ ", sell_order_number=" + sell_order_number + ", sell_detail_idx=" + sell_detail_idx + ", item_name="
+				+ item_name + ", item_price=" + item_price + ", item_idx=" + item_idx + ", item_category="
+				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", total=" + total
+				+ ", sell_count=" + sell_count + ", brandtotal=" + brandtotal + "]";
+	}
+	
+	
+	
 	
 	
 	

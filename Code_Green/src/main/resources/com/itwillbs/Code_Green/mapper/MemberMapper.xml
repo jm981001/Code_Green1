@@ -92,9 +92,25 @@
 					mb.member_id=#{member_id}
 			ORDER BY 
 					f.follow_date DESC
-	
+			LIMIT #{startRow}, #{listLimit}
 	</select>
 	
+	<!-- 마이페이지 - 팔로우브랜드 리스트 카운트 -->
+	<select id="selectFollowListCount" resultType="integer">
+		SELECT count(*)
+			FROM follow
+			WHERE rf_member_idx = #{member_idx}
+	</select>
+	
+	<!-- 마이페이지 - 팔로우브랜드 언팔로우 -->
+	<delete id="deleteFollowBrand">
+		DELETE
+			FROM follow
+			WHERE 
+				rf_member_idx = #{rf_member_idx}
+				AND 
+				rf_manager_idx = #{rf_manager_idx}
+	</delete>
 	
 	<!-- 마이페이지 // 내정보 카운트 테이블 -->
 	<select id="selectMyCountInfo" resultType="com.itwillbs.Code_Green.vo.MemberVO">
@@ -127,9 +143,21 @@
 			LEFT JOIN 
 					(SELECT rf_member_idx, count(*) AS order_count FROM sell group by rf_member_idx) AS s
 			ON m.member_idx = s.rf_member_idx 
-			WHERE m.member_idx = #{member_idx};
+			WHERE m.member_idx = #{member_idx}
 	
 	</select>
 	
+	
+	
+	
+	<!-- 마이페이지 // 메인:최근주문목록(1개월내) -->
+	<select id="selectMyRecentOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell 
+			WHERE rf_member_idx = #{sIdx}
+			AND 
+				TIMESTAMPDIFF(month , now(), SELL_DATE)>-#{month}
+			ORDER BY sell_date DESC
+	</select>
 	
 </mapper>

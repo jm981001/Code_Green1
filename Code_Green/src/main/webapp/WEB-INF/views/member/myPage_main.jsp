@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,11 +97,11 @@
                 	 							<a href="myPageEmoney.my?member_id=${sessionScope.sId}">${myCountInfo.coin_total }원</a>
                 	 						</li>
                 	 						 <c:choose>
-                                              	<c:when test="${empty mycountInfo.order_count}">
+                                              	<c:when test="${empty myCountInfo.order_count}">
                                               		<li class="brandlist-li"><a href="myPage_buyList">0건</a></li>
                                               	</c:when>
                                               	<c:otherwise>
-                                              		<li class="brandlist-li"><a href="myPage_buyList">${mycountInfo.order_count}건</a></li>
+                                              		<li class="brandlist-li"><a href="myPage_buyList">${myCountInfo.order_count}건</a></li>
                                               	</c:otherwise>
                                              </c:choose>
                 	 						<li class="brandlist-li">
@@ -126,8 +127,10 @@
                                     
                                     <div class="ps-section--account-setting">
                                     	<br>
-                                    	<h4>최근주문목록(1개월내)</h4>
+                                    	<h4>최근주문목록</h4>
+                                    	<small>최근 1개월내의 주문내역만 보여집니다.</small>
                                     	<br>
+                                    	<p>
                                        <div class="table-responsive">
                                         <table class="table ps-table">
                                             <thead>
@@ -141,41 +144,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:if test="${empty recentOrderList }">
+                                            	<td colspan="6">최근주문내역이 없습니다.</td>
+                                            </c:if>
+                                            
+                                            <c:forEach var="list" items="${recentOrderList }">
                                                 <tr>
-                                                	<td><span>2022-10-28 12시50분</span></td>
+                                                	<fmt:parseDate var="dateString" value="${list.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+		                        					<td>
+		                        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
+		                        					</td>
                                                     <td>
                                                         <div class="ps-product--cart">
-                                                            <div class="ps-product__content"><a href="myPage_buyList.jsp">20221028-00000123</a></div>
+                                                            <div class="ps-product__content"><a href="myPage_buyList.jsp">${list.sell_order_number }</a></div>
                                                         </div>
                                                     </td>
-                                                    <td><span>5건</span></td>
-                                                    <td>카카오페이</td>
-                                                    <td><span>56,000원</span></td>
-                                                    <td>결제완료</td>
+                                                    <td><span>${list.sell_amount }건</span></td>
+                                                    <td>${list.sell_pay_type }</td>
+                                                    <td><span>${list.sell_total_price }원</span></td>
+                                                    <td>${list.sell_status }</td>
                                                 </tr>
-                                                <tr>
-                                                	<td><span>2022-10-23 01시50분</span></td>
-                                                    <td>
-                                                        <div class="ps-product--cart">
-                                                            <div class="ps-product__content"><a href="product-default.html">20221023-00000573</a></div>
-                                                        </div>
-                                                    </td>
-                                                    <td><span>2건</span></td>
-                                                    <td>신용카드</td>
-                                                    <td><span>8,000원</span></td>
-                                                    <td>배송완료</td>
-                                                </tr>
-                                                
+                                               </c:forEach> 
                                             </tbody>
                                         </table>
+                                      </div>
                                     </div>
-                                    
-                                    </div>
-                                    
                                 </div>
-                                
-                                
-                                
                             </div>
                         </div>
                     </div>

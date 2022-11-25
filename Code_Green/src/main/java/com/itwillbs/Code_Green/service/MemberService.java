@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.mapper.MemberMapper;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.SellVO;
 
 @Service
 public class MemberService {
@@ -44,15 +46,42 @@ public class MemberService {
 		mapper.setCoin(member_idx);
 	}
 
-	// 마이페이지 - 팔로우브랜드 리스트
-	public List<FollowVO> getFollowList(String member_id) {
-		return mapper.selectFollowList(member_id);
-	}
-
+	
+	
+	
+	
+	
+	
+	// ================================== 마이페이지 ============================================
+	
+	
 	// 마이페이지 - 내정보 카운트 테이블
 	public MemberVO getMyCountInfo(int member_idx) {
 		return mapper.selectMyCountInfo(member_idx);
 	}
+	
+	// 마이페이지 - 최근주문목록(1개월내)
+	public List<SellVO> getMyRecentOrderList(int sIdx, int month) {
+		return mapper.selectMyRecentOrderList(sIdx, month);
+	}
+
+	// 마이페이지 - 팔로우브랜드 리스트
+	public List<FollowVO> getFollowList(int startRow, int listLimit, String member_id) {
+		return mapper.selectFollowList(startRow, listLimit, member_id);
+	}
+
+	// 마이페이지 - 팔로우브랜드 리스트 카운트
+	public int getFollowListCount(int member_idx) {
+		return mapper.selectFollowListCount(member_idx);
+		}
+	
+	
+	// 마이페이지 - 팔로우브랜드 언팔로우
+	public int deleteFollow(int rf_member_idx, int rf_manager_idx) {
+		return mapper.deleteFollowBrand(rf_member_idx, rf_manager_idx);
+	}
+
+	
 
 	
 

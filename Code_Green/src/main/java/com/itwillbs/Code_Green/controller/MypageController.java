@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.ItemService;
@@ -45,14 +47,12 @@ public class MypageController {
 	@Autowired
 	private SellService Sservice;
 	
-	//------------마이페이지 메인-------------------------------------------
+	//====================================== 마이페이지 메인 ========================================== 
 		@GetMapping(value = "/MemberInfo.me")
 		public String getMemberInfo(Model model, HttpSession session) {
 			// 세션 아이디 가져와서 sId 변수에 저장
 			String sId = (String)session.getAttribute("sId");
 			int sIdx = (int) session.getAttribute("sIdx");
-//			System.out.println("sId : " + sId);
-			System.out.println("sIdx : " + sIdx);
 			
 			
 			if(sId == null || sId.equals("")) {
@@ -66,6 +66,9 @@ public class MypageController {
 				MemberVO myCountInfo = Mservice.getMyCountInfo(sIdx);
 				model.addAttribute("myCountInfo", myCountInfo);
 				
+				// 마이페이지 - 최근주문목록(1개월내)
+				List<SellVO> recentOrderList = Mservice.getMyRecentOrderList(sIdx,1);
+				model.addAttribute("recentOrderList", recentOrderList);
 				
 				return "member/myPage_main";
 			}
@@ -148,17 +151,64 @@ public class MypageController {
 	}
 	
 	
-	//------------마이페이지 팔로우-------------------------------------------
+	//====================================== 마이페이지 팔로우브랜드 목록 ========================================== 
 	
 	@GetMapping(value = "/myPageFollowingList.my")
-	public String myFollowingList(HttpSession session, Model model) {
+	public String myFollowingList(@RequestParam(defaultValue = "1") int pageNum, HttpSession session, Model model) {
 		
 		String member_id = (String)session.getAttribute("sId");
-		List<FollowVO> followList = Mservice.getFollowList(member_id);
+		int member_idx = (int)session.getAttribute("sIdx");
+		
+		int listLimit = 8; 
+		int pageListLimit = 8; 
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		//팔로우브랜드 목록
+		List<FollowVO> followList = Mservice.getFollowList(startRow, listLimit, member_id);
+		
+		//팔로우브랜드 목록 갯수
+		int listCount = Mservice.getFollowListCount(member_idx);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
 		model.addAttribute("followList", followList);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		
 		
 		return "member/myPage_following";
 	}
+	
+	
+	//====================================== 마이페이지 팔로우브랜드 언팔로우 ==========================================
+	@ResponseBody
+	@PostMapping(value = "/UnfollowBrand.my",produces = "application/text; charset=utf8")
+	public String unFollowBrand(@RequestParam int rf_member_idx, @RequestParam int rf_manager_idx) {
+		
+		int unFollowResult = Mservice.deleteFollow(rf_member_idx,rf_manager_idx);
+		System.out.println(unFollowResult);
+		
+		String msg = "";
+		if(unFollowResult > 0) {
+			msg += "해당브랜드를 언팔로우했습니다!";
+		}
+		
+		return msg;
+	}
+	
+	
+	
 	
 	
 	//------------마이페이지 적립금-------------------------------------------
@@ -208,16 +258,16 @@ public class MypageController {
 	
 	
 	
-	//------------마이페이지 주문목록-------------------------------------------
-	@RequestMapping(value = "myPage_buyListNull", method = RequestMethod.GET)
+	//====================================== 마이페이지 주문상세내역 ========================================== 
+	@RequestMapping(value = "buyListDetail", method = RequestMethod.GET)
 	public String myPage_buyListNull() {
-		return "member/myPage_buyListNull";
+		return "member/myPage_buyList";
 	}
 	
-	//------------마이페이지 구매목록-------------------------------------------
+	//====================================== 마이페이지 주문목록 ========================================== 
 	@RequestMapping(value = "myPage_buyList", method = RequestMethod.GET)
 	public String myPage_buyList() {
-		return "member/myPage_buyList";
+		return "member/myPage_buyListNull";
 	}
 	
 	//------------마이페이지 상품후기-------------------------------------------
@@ -299,8 +349,8 @@ public class MypageController {
 		return "member/myPage_review_Write";
 	}
 	
-	//------------마이페이지 문의내역-------------------------------------------
-	@GetMapping(value = "/myPageQnaDetail.my")
+	//====================================== 마이페이지 1:1 문의내역 ========================================== 
+	@GetMapping(value = "/myPageQnaDetail.bo")
 	public String myPageQnaDetail(Model model,HttpSession session) {
 		
 		String qna_id = (String)session.getAttribute("sId");

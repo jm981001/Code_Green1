@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -39,7 +40,32 @@
 		color:green;
 	}
 	
+	
 </style>
+<script>
+
+	// 언팔로우 버튼
+	function unFollow(rf_manager_idx){
+		
+		let check = confirm("팔로우를 취소하시겠습니까?");
+		if(check){
+			$.ajax({
+				url:"UnfollowBrand.my",
+				type:"post",
+				data:{
+					rf_manager_idx: rf_manager_idx,
+					rf_member_idx: ${sessionScope.sIdx}
+				},
+				success: function(msg){
+					alert(msg);
+					location.reload();
+				},
+			})
+		}		
+	};
+
+
+</script>
 <body>
 
     <!-- 헤더 삽입 -->
@@ -76,13 +102,30 @@
                                                 <tr>
                                                     <td><img src="<%=request.getContextPath() %>/resources/img/brand_logo/${follow.manager_original_file}" width="140px" height="40px"></td>
                                                     <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">  ${follow.store_follower_cnt }</i></td>
-                                                    <td><button id="unfollowBtn"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
+                                                    <td><button id="unfollowBtn" onclick="unFollow(${follow.rf_manager_idx})"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
                                                 </tr>
                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                
+                                
+                                <!-- 페이징 버튼들 시작 -->
+			   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+			                    <div class="ps-pagination">
+			                        <ul class="pagination">
+			                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageFollowingList.my?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+			                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			                            	<c:choose>
+			                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+			                            		<c:otherwise><li><a href="myPageFollowingList.my?pageNum=${i }">${i }</a></li></c:otherwise>
+			                            	</c:choose>
+			                            </c:forEach>
+			                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageFollowingList.my?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+			                        </ul>
+			                    </div>
+			                    <!-- 페이징 버튼들 끝 -->
                             </div>
                         </div>
                     </div>
