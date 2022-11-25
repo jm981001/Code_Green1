@@ -15,13 +15,14 @@ public interface CartMapper {
 	// 3. 장바구니 삭제
 	public int deleteCart(int cart_idx);
 	// 4. 장바구니 수정
-	public int modifyCart(CartVO cart);
+	public int modifyCart(@Param("cart_amount")int cart_amount,@Param("cart_idx")int cart_idx);
 	// 5. 장바구니 금액 합계
 	public String sumMoney(int member_idx);
 	// 6. 장바구니 상품수량 변경
 	public int updateCart(CartVO vo);
 	// 6. 장바구니 수
 	public int cartCount(@Param("member_idx")int member_idx);
+	
 	public int getCartCount(@Param("member_idx")int member_idx);
 
 	

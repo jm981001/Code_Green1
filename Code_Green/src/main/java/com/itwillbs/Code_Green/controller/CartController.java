@@ -6,20 +6,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.vo.CartVO;
-import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
 public class CartController {
@@ -106,12 +103,14 @@ public class CartController {
 	// 장바구니 수정
 	@ResponseBody
 	@GetMapping("updateCart")
-	public String update(@ModelAttribute CartVO cart,@RequestParam int cart_idx,@RequestParam int cart_amount, HttpSession session, Model model) {
+	public String update(@ModelAttribute CartVO cart, HttpSession session, Model model,@RequestParam String member_id,@RequestParam int cart_amount,@RequestParam int cart_idx) {
 		String sId = (String) session.getAttribute("sId");
-		System.out.println(cart_idx);
-		System.out.println(cart_amount);
-		int update = service.modifyCart(cart);
+		List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
+		System.out.println("cart_amount : "+cartList.get(0).getCart_amount());
+		System.out.println("cart_amount : "+cartList.get(0).getCart_idx());
 		
+		int update = service.modifyCart(cart_amount,cart_idx);
+		System.out.println(update+"");
 		if(update > 0 ) {
 			return update+"";
 		} else {
@@ -119,7 +118,6 @@ public class CartController {
 			return "redirect:/cart/fail_back.jsp";
 		}
 	}
-	
 	
 	
 	

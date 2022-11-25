@@ -27,8 +27,8 @@ public class CartService {
 		return mapper.deleteCart(cart_idx);
 	}
 	// 4. 장바구니 수정
-	public int modifyCart(CartVO cart) {
-		return mapper.modifyCart(cart);
+	public int modifyCart(int cart_amount,int cart_idx) {
+		return mapper.modifyCart(cart_amount,cart_idx);
 	}
 	// 5. 장바구니 금액 합계
 	public String sumMoney(int member_idx) {

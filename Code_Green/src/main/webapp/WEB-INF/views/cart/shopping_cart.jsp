@@ -30,34 +30,55 @@
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	// 상품 리스트 페이지로 이동 (돌아가기 버튼))
-	$("#btnList").click(function(){
-		location.href="ItemList.bo";
-	});
-});
+	$(document).ready(function() {
+		// 상품 리스트 페이지로 이동 (돌아가기 버튼))
+		$("#btnList").click(function() {
+			location.href = "ItemList.bo";
+		});
+		$("#btnRefresh	").click(function() {
+			location.reload();
+		});
 
-//장바구니 항목삭제	
-function deleteItem(cart_idx) {
-// alert(cart_idx);
+	});
+
+	//장바구니 항목삭제	
+	function deleteItem(cart_idx) {
+		// alert(cart_idx);
 		$.ajax({
 			type : 'get',
 			url : 'deleteCart',
-			data: {
-				cart_idx: cart_idx,
+			data : {
+				cart_idx : cart_idx,
 			},
-			success : function (data) {
-//					console.log("data : " +  data);
-//					code =data;
+			success : function(data) {
+				//					console.log("data : " +  data);
+				//					code =data;
 				alert('삭제완료.')
 				location.reload();
 			}
 		});
-}
-
-
-
-
+	}
+	function updateCart(member_id) {
+		// alert(cart_idx);
+// 		debugger;
+		let cart_idx = $("input[name=cart_idx]").val();
+		let count = $("#quan").val();
+		$.ajax({
+			type : 'get',
+			url : 'updateCart',
+			data : {
+				"member_id" : '${sessionScope.sId }',
+				"cart_amount" : count,
+				"cart_idx" : cart_idx,
+			},
+			success : function(data) {
+				//					console.log("data : " +  data);
+				//					code =data;
+				alert('수정완료.')
+				location.reload();
+			}
+		});
+	}
 </script>
 </head>
 
@@ -133,10 +154,15 @@ function deleteItem(cart_idx) {
 										<input class="form-control" type="text" id="quan"
 											placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1"><!-- 수량 -->
 									</div> 
-<%-- 									<button type="button" class="quantity_modify_btn" data-cart_idx="${row.cart_idx}">변경</button> --%>
-									<button type="button" class="quantity_modify_btn" data-cart_idx="${row.cart_idx} "
-										id="UpdateBtn" style="border: none;">변경</button>
-									
+									<button type="button" class="quantity_modify_btn" onclick="updateCart('${sessionScope.sId }')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
+								
+								
+									<!-- 수량 조정 form -->
+								<form action="updateCart" method="get" class="quantity_update_form">
+									<input type="hidden" name="cart_idx" class="update_cart_idx">
+									<input type="hidden" name="item_amount" class="update_item_amount">
+									<input type="hidden" name="member_id" value="${sessionScope.sId }">
+								</form>	
 
 								</td>
 								<td data-label="Total"><fmt:formatNumber value="${row.cart_total*row.cart_amount }" pattern="#,###"/>
@@ -151,6 +177,7 @@ function deleteItem(cart_idx) {
 
 				<div class="ps-section__cart-actions">
 				<button class="ps-btn" id="btnList">돌아가기</button>
+				<button class="ps-btn" id="btnRefresh">새로고침</button>
 
 				</div>
 
