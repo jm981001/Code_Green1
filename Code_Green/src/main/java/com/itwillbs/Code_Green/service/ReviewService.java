@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.Code_Green.mapper.ReviewMapper;
 import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 
@@ -85,6 +86,10 @@ public class ReviewService {
 	//리뷰 상태 변경
 	public void updateStatus(int sell_idx, int item_idx) {
 		mapper.updateStatus(sell_idx,item_idx);
+	}
+	//리뷰작성시 적립금
+	public int CoinScore(CoinVO coin) {
+		return mapper.CoinScore(coin);
 	}
 
 

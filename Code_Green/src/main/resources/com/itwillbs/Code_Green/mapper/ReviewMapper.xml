@@ -40,6 +40,27 @@
 	</insert>
 	
 	
+	<!-- 	리뷰 작성시 적립금 -->
+	<insert id="CoinScore">
+		<selectKey keyProperty="coin_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(coin_idx) FROM coin
+		</selectKey>
+		INSERT 
+			INTO coin
+			VALUES (
+					 #{coin_idx} + 1
+					, (select member_idx
+									from member
+                            		where member_id = #{board_id})
+					,"리뷰작성 적립금 1000원"
+					,"1000"
+					,"0"
+					,"0"
+					,"..."
+					,date_format(now(),'%Y%m%d')
+					)
+	</insert>
+	
 	<!-- 별점 등록 -->
 	<insert id="insertStar">
 		<selectKey keyProperty="board_star_idx" resultType="integer" order="BEFORE">

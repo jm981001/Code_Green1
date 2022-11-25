@@ -12,8 +12,15 @@ public class CoinVO {
 	private String coin_date;
 	private String member_idx;
 	private String total;
+	private String board_id;
 	
 	
+	public String getBoard_id() {
+		return board_id;
+	}
+	public void setBoard_id(String board_id) {
+		this.board_id = board_id;
+	}
 	public int getCoin_idx() {
 		return coin_idx;
 	}

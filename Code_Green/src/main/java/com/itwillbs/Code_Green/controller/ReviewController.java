@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
@@ -30,7 +31,7 @@ public class ReviewController {
 	//------------리뷰작성-------------------------------------------
 	@PostMapping(value = "/ReviewWritePro.bo")
 	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star
-								 ,@RequestParam String item_category,@RequestParam String manager_brandname) {
+								 ,@RequestParam String item_category,@RequestParam String manager_brandname, @ModelAttribute CoinVO coin) {
 //		@RequestParam String board_idx
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
@@ -60,9 +61,11 @@ public class ReviewController {
 		int insertCount = service.registReview(board);
 		int file_insertCount = service.registReview_file(file);
 		int starCount= service.StarScore(star);
+		int coinCount= service.CoinScore(coin);
 		model.addAttribute("item_idx", item_idx);
 		model.addAttribute("item_category", item_category);
 		model.addAttribute("manager_brandname", manager_brandname);
+		model.addAttribute("coinCount", coinCount);
 
 		
 		

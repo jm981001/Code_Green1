@@ -42,8 +42,17 @@ public interface ItemMapper {
 	int selectItemListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
 	//상품 목록
-	List<ItemVO> selectItemList(@Param("startRow") int startRow, @Param("listLimit") int listLimit,
-									@Param("searchType") String searchType, @Param("keyword") String keyword);
+	List<ItemVO> selectItemList();
+	
+	//신상품리스트 판매순
+	List<ItemVO> selectItemList_sales();
+	
+	//신상품리스트 가격 낮은순
+	List<ItemVO> selectItemList_cheap();
+
+	//신상품리스트 가격 높은순
+	List<ItemVO> selectItemList_ex();
+	
 	//베스트리스트
 	List<ItemVO> selectItemBestList(@Param("startRow")int startRow, @Param("listLimit") int listLimit, @Param("searchType") String searchType, @Param("keyword") String keyword);
 
@@ -76,6 +85,9 @@ public interface ItemMapper {
 
 	//내 취향을 잘 아는 상품들
 	List<ItemVO> mainList3();
+
+
+
 	
 
 

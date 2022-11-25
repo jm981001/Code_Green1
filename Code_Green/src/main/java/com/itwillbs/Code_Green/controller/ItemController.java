@@ -28,36 +28,37 @@ public class ItemController {
 	private ItemService service;
 	
 	//------------ 신상품리스트 -------------------------------------------
-
 	@GetMapping(value = "/ItemList.bo")
-	public String itemList(@RequestParam(defaultValue = "") String searchType, 
-			@RequestParam(defaultValue = "") String keyword, 
-			@RequestParam(defaultValue = "1") int pageNum, Model model) {
-	
-		int listLimit = 16; // 한 페이지 당 표시할 게시물 목록 갯수 
-		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
-		int startRow = (pageNum - 1) * listLimit;
-		int listCount = service.getItemListCount(searchType, keyword);
-		int maxPage = (int)Math.ceil((double)listCount / listLimit);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pageInfo = new PageInfo(
-				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-		
-		List<ItemVO> itemList = service.itemList(startRow, listLimit, searchType, keyword);
-		
-		model.addAttribute("pageInfo", pageInfo);
+	public String itemList(Model model) {
+		List<ItemVO> itemList = service.itemList();
 		model.addAttribute("itemList", itemList);
 		
 		return "item/item_list";
 	}
-	
-	
+	//------------ 신상품리스트 판매순 -------------------------------------------
+	@GetMapping(value = "/ItemList_sales.bo")
+	public String itemList_sales(Model model) {
+		List<ItemVO> itemList_sales = service.itemList_sales();
+		model.addAttribute("itemList_sales", itemList_sales);
+		
+		return "item/item_list_sales";
+	}
+	//------------ 신상품리스트 가격 낮은순 -------------------------------------------
+	@GetMapping(value = "/ItemList_cheap.bo")
+	public String itemList_cheap(Model model) {
+		List<ItemVO> itemList_cheap = service.itemList_cheap();
+		model.addAttribute("itemList_cheap", itemList_cheap);
+		
+		return "item/item_list_cheap";
+	}
+	//------------ 신상품리스트 가격 높은순 -------------------------------------------
+	@GetMapping(value = "/ItemList_ex.bo")
+	public String itemList_ex(Model model) {
+		List<ItemVO> itemList_ex = service.itemList_ex();
+		model.addAttribute("itemList_ex", itemList_ex);
+		
+		return "item/item_list_ex";
+	}
 	//------------ 상품 상세 페이지 -------------------------------------------
 	@GetMapping(value = "/ItemDetail.bo")
 	public String item_detail(

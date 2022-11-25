@@ -357,7 +357,7 @@
                                                     <td>수입식품에 해당하는경우"식품위생법에 따른 수입신고를 필함" 의 문구</td>
                                                     <td>식품위생법에 따른 수입신고를 필함</td>
                                                     <td>소비자 상담관련 전화번호</td>
-                                                    <td>ㅇㅇㅇ마켓 고객센터(803-0909)</td>
+                                                    <td>베지터틀 고객센터(803-0909)</td>
                                                 </tr>
                                               
                                             </tbody>
@@ -744,7 +744,7 @@
 								                    							
 								                    							
 								                    							
-								                    							   
+								                    							   //별
 								                    							   
 								                    							   
 								                    							+= '</div>'
@@ -880,7 +880,7 @@
                                                 	<input type="hidden" name="manager_brandname" value="${item.manager_brandname}" />
                                                 	<input type="hidden" id="pageNum" name="pageNum" value="${param.pageNum }" />
                                                     <textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요" required="required"></textarea>
-                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?" required="required"></textarea>
+                                                    <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금 1000원을 드립니다." required="required"></textarea>
                                                 </div>
                                                 <div align="right">
 	                                                <div class="form-group submit">

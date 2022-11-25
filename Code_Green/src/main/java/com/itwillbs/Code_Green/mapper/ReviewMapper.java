@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.BoardStarVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 
 public interface ReviewMapper {
@@ -50,6 +51,10 @@ public interface ReviewMapper {
 
 	//리뷰 상태 변경
 	void updateStatus(@Param("sell_idx") int sell_idx, @Param("item_idx") int item_idx);
+
+	//리뷰작성시 적립금
+	int CoinScore(CoinVO coin);
+
 	
 
 

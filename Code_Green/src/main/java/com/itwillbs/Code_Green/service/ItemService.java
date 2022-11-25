@@ -58,9 +58,24 @@ public class ItemService {
 		return mapper.selectQnaListCount(item_idx);
 	}
 
-	//상품 리스트
-	public List<ItemVO> itemList(int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectItemList(startRow, listLimit, searchType, keyword);
+	//신상품리스트
+	public List<ItemVO> itemList() {
+		return mapper.selectItemList();
+	}
+
+	//신상품리스트 판매순
+	public List<ItemVO> itemList_sales() {
+		return mapper.selectItemList_sales();
+	}
+	
+	//신상품리스트 가격 낮은순
+	public List<ItemVO> itemList_cheap() {
+		return mapper.selectItemList_cheap();
+	}
+
+	//신상품리스트 가격 높은순
+	public List<ItemVO> itemList_ex() {
+		return mapper.selectItemList_ex();
 	}
 
 	//상품 갯수
@@ -124,6 +139,9 @@ public class ItemService {
 	public List<ItemVO> mainList3() {
 		return mapper.mainList3();
 	}
+
+
+
 
 
 
