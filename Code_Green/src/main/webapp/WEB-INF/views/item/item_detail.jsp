@@ -798,11 +798,13 @@
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
+												   <c:if test="${reviewBtn ne 0 }">
 												   <div align="right">
 							                            <ul class="ps-tab-list" >
-							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
+							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성${reviewBtn }</a></li>
 							                            </ul>
 						                            </div> 
+						                            </c:if>
 						                            <!--리뷰작성 버튼 끝 -->
                                             </form>
                                         </div>

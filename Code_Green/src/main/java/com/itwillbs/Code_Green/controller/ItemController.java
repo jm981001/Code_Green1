@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,11 +67,10 @@ public class ItemController {
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "1") int Qna_pageNum,
 			@RequestParam int item_idx, Model model,@RequestParam String item_category,@RequestParam String manager_brandname,
-			@RequestParam(defaultValue = "new") String sort) {
-		
-		System.out.println("ItemDetail");
-		
+			@RequestParam(defaultValue = "new") String sort, HttpSession session ) {
 		//--------상품문의 페이징처리 ---------------------------------------------------------------------------
+		int sIdx = (int)session.getAttribute("sIdx");
+		
 		int listLimit = 5;  
 		int pageListLimit = 3;  
 		int startRow = (pageNum - 1) * listLimit;
@@ -134,6 +135,8 @@ public class ItemController {
 		//상품 상세정보 조회
 		ItemVO item = service.getItem(item_idx);
 		
+		//상품구매 유무 (리뷰 버튼)
+		int reviewBtn = service.reviewBtn(sIdx,item_idx);
 		model.addAttribute("sort", sort);
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("goodList", goodList);
@@ -146,6 +149,7 @@ public class ItemController {
 		model.addAttribute("qnaList", qnaList);
 		model.addAttribute("itemList6", itemList6);
 		model.addAttribute("sameBrand", sameBrand);
+		model.addAttribute("reviewBtn", reviewBtn);
 		
 		return "item/item_detail";
 	}

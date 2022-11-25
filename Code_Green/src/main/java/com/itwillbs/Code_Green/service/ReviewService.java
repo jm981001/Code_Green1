@@ -92,6 +92,12 @@ public class ReviewService {
 		return mapper.CoinScore(coin);
 	}
 
+	//리뷰게시판 리뷰 상태 변경
+	public void reviewStatus(int item_idx, int sIdx) {
+		mapper.reviewStatus(item_idx, sIdx);
+		
+	}
+
 
 
 

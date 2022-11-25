@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ItemVO {
 	
 	private int item_idx;
+	private int sIdx;
 	private String re_manager_idx;
 	private String item_name;
 	private String item_info;
@@ -37,6 +38,12 @@ public class ItemVO {
 	private MultipartFile file_1;
 	private MultipartFile file_2;
 	 
+	public int getsIdx() {
+		return sIdx;
+	}
+	public void setsIdx(int sIdx) {
+		this.sIdx = sIdx;
+	}
 	public int getItem_idx() {
 		return item_idx;
 	}

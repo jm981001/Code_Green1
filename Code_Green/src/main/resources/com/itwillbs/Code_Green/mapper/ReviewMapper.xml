@@ -61,6 +61,26 @@
 					)
 	</insert>
 	
+	<!-- 	마이페이지 리뷰 상태 변경 방금 -->
+	<update id="reviewStatus">
+		UPDATE sell_detail
+			SET
+			     sell_review_status = "Y"
+			WHERE
+					rf_sell_idx = (select SELL_IDX from
+									(select s.SELL_IDX
+										from sell_detail d
+											left join sell s
+											on d.SELL_DETAIL_IDX = s.SELL_IDX
+											left join member m
+											on m.MEMBER_IDX= s.RF_MEMBER_IDX
+										where m.MEMBER_IDX=#{sIdx}
+											 and d.RF_ITEM_IDX=#{item_idx}
+											 and d.SELL_REVIEW_STATUS = 'N'
+										limit 1)
+									  a)
+				and rf_item_idx = #{item_idx};
+	</update>
 	<!-- 별점 등록 -->
 	<insert id="insertStar">
 		<selectKey keyProperty="board_star_idx" resultType="integer" order="BEFORE">

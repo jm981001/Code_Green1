@@ -140,6 +140,11 @@ public class ItemService {
 		return mapper.mainList3();
 	}
 
+	//상품구매 유무 (리뷰 버튼)
+	public int reviewBtn(int sIdx, int item_idx) {
+		return mapper.reviewBtn(sIdx,item_idx);
+	}
+
 
 
 

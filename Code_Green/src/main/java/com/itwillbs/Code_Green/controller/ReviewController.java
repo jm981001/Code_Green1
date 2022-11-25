@@ -33,6 +33,7 @@ public class ReviewController {
 	public String reviewWritePro( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star
 								 ,@RequestParam String item_category,@RequestParam String manager_brandname, @ModelAttribute CoinVO coin) {
 //		@RequestParam String board_idx
+		int sIdx = (int)session.getAttribute("sIdx");
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
@@ -62,6 +63,9 @@ public class ReviewController {
 		int file_insertCount = service.registReview_file(file);
 		int starCount= service.StarScore(star);
 		int coinCount= service.CoinScore(coin);
+		
+		service.reviewStatus(item_idx, sIdx);//리뷰 상태 변경
+		
 		model.addAttribute("item_idx", item_idx);
 		model.addAttribute("item_category", item_category);
 		model.addAttribute("manager_brandname", manager_brandname);
@@ -126,6 +130,7 @@ public class ReviewController {
 		int insertCount = service.registReview(board);
 		int file_insertCount = service.registReview_file(file);
 		int starCount= service.StarScore(star);
+		
 	    service.updateStatus(sell_idx,item_idx);//리뷰 상태 변경
 	    
 		model.addAttribute("item_idx", item_idx);

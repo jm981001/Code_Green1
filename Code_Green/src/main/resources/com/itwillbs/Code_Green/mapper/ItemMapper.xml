@@ -629,4 +629,16 @@
 			ORDER BY
 				a.board_star_score desc  LIMIT 7   
 	</select>
+	
+<!-- 	상품구매 유무 (리뷰 버튼) -->
+	<select id="reviewBtn" resultType="integer">
+	select count(*) 
+		from sell_detail d
+			left join sell s 
+				on d.RF_SELL_IDX = s.SELL_IDX
+	            
+		where d.RF_ITEM_IDX=${item_idx} 
+			and s.RF_MEMBER_IDX=${sIdx}
+			and d.SELL_REVIEW_STATUS='N'  
+	</select> 
 </mapper>

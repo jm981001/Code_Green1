@@ -86,6 +86,9 @@ public interface ItemMapper {
 	//내 취향을 잘 아는 상품들
 	List<ItemVO> mainList3();
 
+	//상품구매 유무 (리뷰 버튼)
+	int reviewBtn(@Param("sIdx")int sIdx,@Param("item_idx")int item_idx);
+
 
 
 	
