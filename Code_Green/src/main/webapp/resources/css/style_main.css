@@ -14674,8 +14674,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   padding: 60px 0;
 }
 
+/* 지영 */
 .ps-section--account .ps-section__header {
-  padding-bottom: 30px;
+  padding-bottom: 40px;
 }
 
 .ps-section--account .ps-section__header h3 {

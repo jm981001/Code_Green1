@@ -46,25 +46,30 @@ public class MypageController {
 	private SellService Sservice;
 	
 	//------------마이페이지 메인-------------------------------------------
-	@GetMapping(value = "/MemberInfo.me")
-	public String getMemberInfo(Model model, HttpSession session) {
-		// 세션 아이디 가져와서 sId 변수에 저장
-		String sId = (String)session.getAttribute("sId");
-		System.out.println("sId : " + sId);
-		
-		
-		if(sId == null || sId.equals("")) {
-			model.addAttribute("msg", "잘못된 접근입니다!");
-			return "member/fail_back";
-		} else {
-			MemberVO member = Mservice.getMemberInfo(sId); // 파라미터는 검색할 아이디 전달
-			// Model 객체에 "member" 속성명으로 MemberVO 객체 저장
-//			System.out.println(member);
-			model.addAttribute("member", member);
-			// member/member_info.jsp 페이지로 이동
-			return "member/myPage_main";
+		@GetMapping(value = "/MemberInfo.me")
+		public String getMemberInfo(Model model, HttpSession session) {
+			// 세션 아이디 가져와서 sId 변수에 저장
+			String sId = (String)session.getAttribute("sId");
+			int sIdx = (int) session.getAttribute("sIdx");
+//			System.out.println("sId : " + sId);
+			System.out.println("sIdx : " + sIdx);
+			
+			
+			if(sId == null || sId.equals("")) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "member/fail_back";
+			} else {
+				MemberVO member = Mservice.getMemberInfo(sId); // 파라미터는 검색할 아이디 전달
+				model.addAttribute("member", member);
+				
+				// 마이페이지 - 내정보 카운트 테이블
+				MemberVO myCountInfo = Mservice.getMyCountInfo(sIdx);
+				model.addAttribute("myCountInfo", myCountInfo);
+				
+				
+				return "member/myPage_main";
+			}
 		}
-	}
 	
 	//------------마이페이지 찜한상품-------------------------------------------
 	@GetMapping(value = "/myPageWishList.my")

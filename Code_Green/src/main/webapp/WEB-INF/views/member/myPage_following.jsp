@@ -75,7 +75,7 @@
                                               <c:forEach var="follow" items="${followList }">
                                                 <tr>
                                                     <td><img src="<%=request.getContextPath() %>/resources/img/brand_logo/${follow.manager_original_file}" width="140px" height="40px"></td>
-                                                    <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">${follow.store_follower_cnt }</i></td>
+                                                    <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">  ${follow.store_follower_cnt }</i></td>
                                                     <td><button id="unfollowBtn"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
                                                 </tr>
                                                </c:forEach>

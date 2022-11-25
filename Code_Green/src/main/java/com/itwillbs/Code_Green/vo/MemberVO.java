@@ -14,6 +14,17 @@ public class MemberVO {
 	private String  member_address;
 	private String  member_del_yn;
 	private String  member_date;
+	
+	// 마이페이지때문에 추가한 항목들
+	private String coin_total;		// 적립금 잔액
+	private String heart_count;		// 좋아요 수
+	private String board_count;		// 나의 글 수 
+	private String follow_count;	// 팔로우 수
+	private String qna_count;		// 1:1문의 수
+	private String order_count;		// 주문내역 수
+	
+	
+	
 	public int getMember_idx() {
 		return member_idx;
 	}
@@ -80,36 +91,62 @@ public class MemberVO {
 	public void setMember_date(String member_date) {
 		this.member_date = member_date;
 	}
-	public MemberVO() {
-		// TODO Auto-generated constructor stub
+	public String getCoin_total() {
+		return coin_total;
+	}
+	public void setCoin_total(String coin_total) {
+		this.coin_total = coin_total;
+	}
+	public String getHeart_count() {
+		return heart_count;
+	}
+	public void setHeart_count(String heart_count) {
+		this.heart_count = heart_count;
+	}
+	public String getBoard_count() {
+		return board_count;
+	}
+	public void setBoard_count(String board_count) {
+		this.board_count = board_count;
+	}
+	public String getFollow_count() {
+		return follow_count;
+	}
+	public void setFollow_count(String follow_count) {
+		this.follow_count = follow_count;
+	}
+	public String getQna_count() {
+		return qna_count;
+	}
+	public void setQna_count(String qna_count) {
+		this.qna_count = qna_count;
+	}
+	public String getOrder_count() {
+		return order_count;
+	}
+	public void setOrder_count(String order_count) {
+		this.order_count = order_count;
 	}
 	
 	
-	public MemberVO(int member_idx, String member_id, String member_pass, String member_name, String member_phone,
-			String member_email, String member_email_auth, String member_postcode, String member_address,
-			String member_del_yn, String member_date) {
-		super();
-		this.member_idx = member_idx;
-		this.member_id = member_id;
-		this.member_pass = member_pass;
-		this.member_name = member_name;
-		this.member_phone = member_phone;
-		this.member_email = member_email;
-		this.member_email_auth = member_email_auth;
-		this.member_postcode = member_postcode;
-		this.member_address = member_address;
-		this.member_del_yn = member_del_yn;
-		this.member_date = member_date;
-	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [member_idx=" + member_idx + ", member_id=" + member_id + ", member_pass=" + member_pass
 				+ ", member_name=" + member_name + ", member_phone=" + member_phone + ", member_email=" + member_email
 				+ ", member_email_auth=" + member_email_auth + ", member_postcode=" + member_postcode
 				+ ", member_address=" + member_address + ", member_del_yn=" + member_del_yn + ", member_date="
-				+ member_date + "]";
+				+ member_date + ", coin_total=" + coin_total + ", heart_count=" + heart_count + ", board_count="
+				+ board_count + ", follow_count=" + follow_count + ", qna_count=" + qna_count + ", order_count="
+				+ order_count + "]";
 	}
-
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

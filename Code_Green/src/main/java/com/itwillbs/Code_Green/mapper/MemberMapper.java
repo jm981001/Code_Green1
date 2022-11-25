@@ -26,6 +26,9 @@ public interface MemberMapper {
 	// 마이페이지 - 팔로우브랜드 리스트
 	public List<FollowVO> selectFollowList(String member_id);
 
+	// 마이페이지 - 내정보 카운트 테이블
+	public MemberVO selectMyCountInfo(int member_idx);
+
 
 
 }

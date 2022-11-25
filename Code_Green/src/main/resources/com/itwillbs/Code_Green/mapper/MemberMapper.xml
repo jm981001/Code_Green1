@@ -80,18 +80,54 @@
 	       		 m.manager_original_file
 			FROM follow f
 			LEFT JOIN
-				(SELECT rf_manager_idx,count(*) AS store_follower_cnt FROM follow GROUP BY rf_manager_idx) AS ff
+					(SELECT rf_manager_idx,count(*) AS store_follower_cnt FROM follow GROUP BY rf_manager_idx) AS ff
 			ON f.rf_manager_idx = ff.rf_manager_idx
 			LEFT JOIN
-				(SELECT member_idx, member_id from member) AS mb
+					(SELECT member_idx, member_id from member) AS mb
 			ON f.rf_member_idx = mb.member_idx
 			LEFT JOIN 
-				(SELECT manager_idx, manager_brandname,manager_original_file FROM manager) AS m
+					(SELECT manager_idx, manager_brandname,manager_original_file FROM manager) AS m
 			ON f.rf_manager_idx = m.manager_idx
 			WHERE 
-				mb.member_id=#{member_id}
+					mb.member_id=#{member_id}
 			ORDER BY 
-				f.follow_date DESC
+					f.follow_date DESC
+	
+	</select>
+	
+	
+	<!-- 마이페이지 // 내정보 카운트 테이블 -->
+	<select id="selectMyCountInfo" resultType="com.itwillbs.Code_Green.vo.MemberVO">
+		SELECT	m.member_idx,
+			    m.member_id,
+			    m.member_name,
+			    m.member_email,
+			    c.coin_total,
+			    h.heart_count,
+			    b.board_count,
+			    f.follow_count,
+			    q.qna_count,
+			    s.order_count
+			FROM member m
+			LEFT JOIN 
+					(SELECT rf_member_idx, coin_total FROM coin GROUP BY rf_member_idx) AS c
+			ON m.member_idx = c.rf_member_idx
+			LEFT JOIN 
+					(SELECT rf_member_idx, count(*) AS heart_count FROM heart GROUP BY rf_member_idx) AS h
+			ON m.member_idx = h.rf_member_idx
+			LEFT JOIN 
+					(SELECT board_id, count(*) AS board_count FROM board WHERE board_type='커뮤' GROUP BY board_id) AS b
+			ON m.member_id = b.board_id
+			LEFT JOIN 
+					(SELECT rf_member_idx, count(*) AS follow_count FROM follow GROUP BY rf_member_idx) AS f
+			ON m.member_idx = f.rf_member_idx
+			LEFT JOIN 
+					(SELECT qna_id, count(*) AS qna_count FROM qna WHERE qna_type='1:1문의' GROUP BY qna_id) AS q
+			ON m.member_id = q.qna_id
+			LEFT JOIN 
+					(SELECT rf_member_idx, count(*) AS order_count FROM sell group by rf_member_idx) AS s
+			ON m.member_idx = s.rf_member_idx 
+			WHERE m.member_idx = #{member_idx};
 	
 	</select>
 	

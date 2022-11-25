@@ -49,6 +49,11 @@ public class MemberService {
 		return mapper.selectFollowList(member_id);
 	}
 
+	// 마이페이지 - 내정보 카운트 테이블
+	public MemberVO getMyCountInfo(int member_idx) {
+		return mapper.selectMyCountInfo(member_idx);
+	}
+
 	
 
 }

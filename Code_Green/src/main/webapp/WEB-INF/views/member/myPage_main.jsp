@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!-- headers-->
-<html lang="en">
-
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,10 +31,37 @@
 <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
 <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    
-    
 </head>
+<style>
+	.brandlist-ul {
+		display: grid;
+	    grid-template-columns: repeat(3, 150px);
+	    gap: 20px 130px;
+	    overflow: hidden;
+	    margin-bottom: 40px;
+	    padding: 30px 40px;
+	    border: 1px solid rgb(226, 226, 226);
+	    line-height: 20px;
+	    justify-items: center;
+	}
+	
+	.brandlist-li {
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    color: green;
+	    font-weight: bold;
+	}
 
+	.brandlist-li-head {
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    text-align: center;
+	    font-weight: bold;
+	}
+	
+</style>
 <body>
 
     <!-- 헤더 삽입 -->
@@ -60,35 +86,47 @@
                                 
                                 <div class="ps-section__content">
                                 	<!-- 그리드 시작 -->
-                                    <div class="table-responsive">
-                                        <table class="table ps-table-m ps-table--notification" rules="none">
-                                            
-                                                <tr>
-                                                    <td width="30%"><i class="fi fi-ss-coins"></i><br>보유적립금</td>
-                                                    <td width="30%"><i class="fi fi-rs-boxes"></i><br>주문내역</td>
-                                                    <td width="30%"><i class="fi fi-sr-heart"></i><br>찜상품</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4500원</td>
-                                                    <td>15 건</td>
-                                                    <td>46 개</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><i class="fi fi-rr-edit"></i><br>작성글</td>
-                                                    <td><i class="fi fi-rr-shop"></i><br>팔로우</td>
-                                                    <td><i class="fi fi-rr-question-square"></i><br>문의글</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>20 개</td>
-                                                    <td>12 곳</td>
-                                                    <td>0 개</td>
-                                                </tr>
-                                          </table>
+                                    <div id="listlist">
+                	 					<ul class="brandlist-ul">
+                	 						<li class="brandlist-li-head"><i class="fi fi-ss-coins"></i><br>적립금</li>
+                	 						<li class="brandlist-li-head"><i class="fi fi-rs-boxes"></i><br>주문내역</li>
+                	 						<li class="brandlist-li-head"><i class="fi fi-sr-heart"></i><br>찜상품</li>
+                	 						
+                	 						<li class="brandlist-li">
+                	 							<a href="myPageEmoney.my?member_id=${sessionScope.sId}">${myCountInfo.coin_total }원</a>
+                	 						</li>
+                	 						 <c:choose>
+                                              	<c:when test="${empty mycountInfo.order_count}">
+                                              		<li class="brandlist-li"><a href="myPage_buyList">0건</a></li>
+                                              	</c:when>
+                                              	<c:otherwise>
+                                              		<li class="brandlist-li"><a href="myPage_buyList">${mycountInfo.order_count}건</a></li>
+                                              	</c:otherwise>
+                                             </c:choose>
+                	 						<li class="brandlist-li">
+                	 							<a href="myPageWishList.my?member_id=${sessionScope.sId }">${myCountInfo.heart_count }개</a>
+                	 						</li>
+                	 						
+                	 						<li class="brandlist-li-head"><i class="fi fi-rr-edit"></i><br>작성글</li>
+                	 						<li class="brandlist-li-head"><i class="fi fi-rr-shop"></i><br>팔로우</li>
+                	 						<li class="brandlist-li-head"><i class="fi fi-rr-question-square"></i><br>1:1문의글</li>
+                	 						
+                	 						<li class="brandlist-li">
+                	 							<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">${myCountInfo.board_count }개</a>
+                	 						</li>
+                	 						<li class="brandlist-li">
+                	 							<a href="myPageFollowingList.my">${myCountInfo.follow_count } 브랜드</a>
+                	 						</li>
+                	 						<li class="brandlist-li">
+                	 							<a href="myPageQnaDetail.my">${myCountInfo.qna_count }개</a>
+                	 						</li>
+                						</ul>
                                     </div>
                                     <!-- 그리드 끝 -->
+                                    
                                     <div class="ps-section--account-setting">
                                     	<br>
-                                    	<h4>최근주문목록</h4>
+                                    	<h4>최근주문목록(1개월내)</h4>
                                     	<br>
                                        <div class="table-responsive">
                                         <table class="table ps-table">
