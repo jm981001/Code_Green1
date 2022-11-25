@@ -256,6 +256,10 @@ public interface AdminMapper {
 	public int updateAdminAuth(ManagerVO manager);
 	//매출 랭킹
 	public List<ManagerVO> selectRanking();
+	//기업 별점 순위
+	public List<ManagerVO> selectStarRankingList();
+	//기업 팔로워 순위
+	public List<ManagerVO> selectFollowerRankingList();
 
 	
 

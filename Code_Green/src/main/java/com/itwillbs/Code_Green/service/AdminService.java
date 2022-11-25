@@ -386,6 +386,16 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
+	//기업 별점 순위
+	public List<ManagerVO> getStarRanking() {
+		// TODO Auto-generated method stub
+		return mapper.selectStarRankingList();
+	}
+	//기업 팔로워 순위
+	public List<ManagerVO> getFollowerRanking() {
+		// TODO Auto-generated method stub
+		return mapper.selectFollowerRankingList();
+	}
 	
 	
 	

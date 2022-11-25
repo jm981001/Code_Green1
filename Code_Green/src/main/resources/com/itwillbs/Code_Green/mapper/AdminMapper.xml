@@ -26,36 +26,32 @@
 	<!-- 매출 3순위 -->
 	<select id="selectTopSaleList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
-																   m.manager_brandname,
-													SUM(sd.sell_amount)  AS  sellCount,
-												   COUNT(sd.sell_amount) AS orderCount,
-																	  f.brand_follower,
-									SUM((i.item_price * sd.sell_amount)) AS brandtotal,
+			m.manager_brandname,
+			SUM(sd.sell_amount)   AS sellCount,
+			COUNT(sd.sell_amount) AS orderCount,
+			f.brand_follower,
+			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
 			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
 		FROM
-				manager m
+			manager m
 		LEFT JOIN
-				(SELECT
-					   rf_manager_idx, COUNT(*) AS brand_follower 
-				 FROM
-				 	   follow 
-				 GROUP BY 
-				 	   rf_manager_idx) AS f 
-			   ON
-				 m.manager_idx = f.rf_manager_idx
+			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+		ON
+			m.manager_idx = f.rf_manager_idx
 		LEFT JOIN
-			 	 item i
-			   ON
-				 i.re_manager_idx = m.manager_idx
+			item i
+		ON
+			i.re_manager_idx = m.manager_idx
 		INNER JOIN
-				 sell_detail sd
-			   ON
-				 i.item_idx = sd.rf_item_idx
+			sell_detail sd
+		ON
+			i.item_idx = sd.rf_item_idx
 		GROUP BY
-				 m.manager_idx
+			m.manager_idx
 		LIMIT 3;
 	</select>
 	
+	<!-- 매출 랭킹 -->
 	<select id="selectRanking" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
 			m.manager_brandname,
@@ -79,8 +75,121 @@
 		ON
 			i.item_idx = sd.rf_item_idx
 		GROUP BY
-			m.manager_idx
+			m.manager_idx;
 	</select>
+	
+	<!-- 기업 별점 순위 -->
+	<select id="selectStarRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT
+			m.manager_brandname,
+		    f.brand_follower,
+		    SUM(sd.sell_amount) AS sellCount,
+		    COUNT(sd.sell_amount) AS orderCount,
+		    truncate(bs.board_star_score,1) AS star_score,
+		    SUM((i.item_price * sd.sell_amount)) AS brandtotal,
+		    DENSE_RANK() OVER (ORDER BY truncate(bs.board_star_score, 1) DESC) AS ranking
+		FROM
+			manager m
+		LEFT JOIN
+				(SELECT
+						rf_manager_idx,
+				 		COUNT(*) AS brand_follower
+				 FROM
+				 		follow
+				 GROUP BY
+				 		rf_manager_idx)
+				 AS 	f 
+		ON
+			m.manager_idx = f.rf_manager_idx
+		LEFT JOIN
+			item i
+		ON
+			i.re_manager_idx = m.manager_idx
+		LEFT JOIN
+			sell_detail sd
+		ON
+			i.item_idx = sd.rf_item_idx
+		LEFT JOIN
+			board b
+		ON
+			b.board_item_idx = i.item_idx
+		INNER JOIN
+				(SELECT
+						b.board_item_idx,
+						s.rf_board_idx,
+						AVG(s.board_star_score) AS board_star_score
+				 FROM
+						board b
+				 JOIN
+						board_star s
+				 ON
+						b.board_idx = s.rf_board_idx
+				 GROUP BY
+						b.board_item_idx)
+				 AS 	bs
+		ON
+			bs.rf_board_idx = b.board_idx
+		GROUP BY
+			m.manager_idx;
+	</select>
+	
+	<!-- 기업 팔로워 순위 -->
+	<select id="selectFollowerRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT
+			m.manager_brandname,
+		    f.brand_follower,
+		    SUM(sd.sell_amount) AS sellCount,
+		    COUNT(sd.sell_amount) AS orderCount,
+		    ROUND(bs.board_star_score,1) AS star_score,
+		    SUM((i.item_price * sd.sell_amount)) AS brandtotal,
+		    DENSE_RANK() OVER (ORDER BY f.brand_follower DESC) AS ranking
+		FROM
+			manager m
+		LEFT JOIN
+				(SELECT
+						rf_manager_idx,
+				 		COUNT(*) AS brand_follower
+				 FROM
+				 		follow
+				 GROUP BY
+				 		rf_manager_idx)
+				 AS 	f 
+		ON
+			m.manager_idx = f.rf_manager_idx
+		LEFT JOIN
+			item i
+		ON
+			i.re_manager_idx = m.manager_idx
+		LEFT JOIN
+			sell_detail sd
+		ON
+			i.item_idx = sd.rf_item_idx
+		LEFT JOIN
+			board b
+		ON
+			b.board_item_idx = i.item_idx
+		INNER JOIN
+				(SELECT
+						b.board_item_idx,
+						s.rf_board_idx,
+						AVG(s.board_star_score) AS board_star_score
+				 FROM
+						board b
+				 JOIN
+						board_star s
+				 ON
+						b.board_idx = s.rf_board_idx
+				 GROUP BY
+						b.board_item_idx)
+				 AS 	bs
+		ON
+			bs.rf_board_idx = b.board_idx
+		GROUP BY
+			m.manager_idx;
+	</select>
+	
+
+
 
 
 <!-- 아래부터 페이지 기능 -->

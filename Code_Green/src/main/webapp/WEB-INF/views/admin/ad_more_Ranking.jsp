@@ -18,7 +18,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>기업관리 페이지</title>
+    <title>랭킹 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -29,6 +29,44 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
     
+    <style type="text/css">
+    	#starScoreList{
+    		display: none;	
+    	}
+    	
+    	#followerList{
+    		display: none;	
+    	}
+    	
+    	
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#selectBox').change(function() {
+    			
+			    var result = $('#selectBox option:selected').val();
+			    
+			    if (result == 'topSale') {
+			    	$('#topSaleList').show();
+			    	$('#starScoreList').hide();
+			    	$('#followerList').hide();
+			    } else if (result == 'starScore') {
+			    	$('#starScoreList').show();
+			    	$('#topSaleList').hide();
+			    	$('#followerList').hide();
+			    } else {
+			    	$('#followerList').show();
+			    	$('#topSaleList').hide();
+			    	$('#starScoreList').hide();
+			    }
+			    
+			  }); 
+    	});
+    	
+    	
+    </script>
 </head>
 
 <body>
@@ -96,14 +134,14 @@
                     <div class="ps-section__filter">
                         <form class="ps-form--filter" action="ad_Manager_manage" method="get">
                             <div class="ps-form__left">
+<!--                                 <div class="form-group"> -->
+<!--                                     <input class="form-control" type="text" name="keyword" placeholder="Search..." /> -->
+<!--                                 </div> -->
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
-                                </div>
-                                <div class="form-group">
-                                    <select class="ps-select" name="searchType">
-                                        <option value="brandName">기업명</option>
-                                        <option value="name">이름</option>
-                                        <option value="id">아이디</option>
+                                    <select class="ps-select" name="searchType" id="selectBox">
+                                        <option value="topSale">매출순</option>
+                                        <option value="starScore">별점순</option>
+                                        <option value="follower">팔로워순</option>
                                     </select>
                                 </div>
                             </div>
@@ -115,7 +153,7 @@
 <!--                     <div class="ps-section__actions"><a class="ps-btn success" href="#"><i class="icon icon-plus mr-2"></i>입점관리</a></div> -->
                 </div>
                 
-                <div class="ps-section__content">
+                <div class="ps-section__content" id="topSaleList">
                     <div class="table-responsive">
                         <table class="table ps-table">
                             <thead>
@@ -149,7 +187,76 @@
                         </table>
                     </div>
                 </div>
-               
+<!-- 별점순 -->
+               <div class="ps-section__content" id="starScoreList">
+                    <div class="table-responsive">
+                        <table class="table ps-table">
+                            <thead>
+                                <tr>
+                                   <th>Top</th>
+                                   <th>브랜드명</th>
+                                   <th>별점</th>
+                                   <th>매출</th>
+                                   <th>팔로워</th>
+                                   <th>주문건수</th>
+                                   <th></th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                           <c:forEach var="star" items="${starRanking }">
+                               <tr>
+                                   <td>${star.ranking }위</td>
+                                   <td><strong>${star.manager_brandname }</strong></td>
+                                   <td>${star.star_score }</td>
+                                   <td><a href="order-detail.html"><strong><fmt:formatNumber value="${star.brandtotal }" pattern="#,###원"/></strong></a></td>
+                                   <td><span class="ps-badge success">${star.brand_follower }명</span></td>
+                                   <td><span>${star.orderCount }건</span></td>
+                                   <td></td>
+                               </tr>
+                           </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+<!-- 팔로워순 -->
+				<div class="ps-section__content" id="followerList">
+                    <div class="table-responsive">
+                        <table class="table ps-table">
+                            <thead>
+                                <tr>
+                                   <th>Top</th>
+                                   <th>브랜드명</th>
+                                   <th>팔로워</th>
+                                   <th>매출</th>
+                                   <th>주문건수</th>
+                                   <th>판매수량</th>
+                                   <th></th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                           <c:forEach var="follower" items="${followerRanking }">
+                               <tr>
+                                   <td>${follower.ranking }위</td>
+                                   <td><strong>${follower.manager_brandname }</strong></td>
+                                   <td><span class="ps-badge success">${follower.brand_follower }명</span>
+                                   <td><a href="order-detail.html"><strong><fmt:formatNumber value="${follower.brandtotal }" pattern="#,###원"/></strong></a></td>
+                                   </td>
+                                   <td><span>${follower.orderCount }건</span>
+                                   </td>
+                                   <td><strong>${follower.sellCount }건</strong></td>
+                                   <td>
+
+                                   </td>
+                               </tr>
+                           </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+		
+
+
             </section>
             
             

@@ -88,9 +88,17 @@ public class AdminController {
 	@GetMapping(value = "ad_more_Ranking")
 	public String moreRanking(Model model, HttpSession session) {
 		
-		List<ManagerVO> ranking = service.getRanking();
-		System.out.println(ranking);
+		List<ManagerVO> ranking = service.getRanking();				//매출순위
+//		System.out.println(ranking);
 		model.addAttribute("ranking", ranking);
+		
+		List<ManagerVO> starRanking = service.getStarRanking();		//별점순위
+//		System.out.println(starRanking);
+		model.addAttribute("starRanking", starRanking);
+		
+		List<ManagerVO> followerRanking = service.getFollowerRanking();
+//		System.out.println(followerRanking);
+		model.addAttribute("followerRanking", followerRanking);
 		
 		return "admin/ad_more_Ranking";
 	}
