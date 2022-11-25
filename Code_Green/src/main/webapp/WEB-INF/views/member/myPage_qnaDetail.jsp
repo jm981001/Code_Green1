@@ -119,6 +119,25 @@
                                         </table>
                                     </div>
                                 </div>
+                              
+                            <!-- 페이징 버튼들 시작 -->
+<%-- 		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
+<!-- 		                    <div class="ps-pagination"> -->
+<!-- 		                        <ul class="pagination"> -->
+		                           
+<%-- 		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li> --%>
+<%-- 		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
+<%-- 		                            	<c:choose> --%>
+<%-- 		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when> --%>
+<%-- 		                            		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise> --%>
+<%-- 		                            	</c:choose> --%>
+<%-- 		                            </c:forEach> --%>
+<%-- 		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
+<!-- 		                        </ul> -->
+<!-- 		                    </div> -->
+		                    <!-- 페이징 버튼들 끝 -->  
+                                
+                                
                             </div>
                         </div>
                      </div>

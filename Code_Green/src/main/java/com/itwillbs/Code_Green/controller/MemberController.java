@@ -59,15 +59,13 @@ public class MemberController {
 			MemberVO getMem = service.getMemberInfo(member.getMember_id());
 			session.setAttribute("sId", member.getMember_id());  //세션아이디
 			session.setAttribute("sIdx", getMem.getMember_idx());//세션 IDX
+			session.setAttribute("sEmail", getMem.getMember_email());	// 세션 이메일
+			
 			//장바구니 갯수
 			int cartCount = cartService.getCartCount(getMem.getMember_idx());
 			session.setAttribute("cartCount", cartCount);
 			model.addAttribute("cartCount",cartCount);
-			//찜목록 갯수
-			int WishlistCount = Iservice.getWishListCount( member.getMember_id());
-			session.setAttribute("WishlistCount", WishlistCount);
-			model.addAttribute("item_category",WishlistCount);
-			
+		
 			
 			return "redirect:/";
 		}

@@ -33,17 +33,15 @@
 						<div class="ps-section__left">
 							<aside class="ps-widget--account-dashboard">
 								<div class="ps-widget__header">
-									<img src="/Code_Green/resources/img/users/3.jpg" alt="" />
+									<img src="/Code_Green/resources/img/winkya.jpg"/>
 									<figure>
 										<figcaption>${sessionScope.sId}</figcaption>
-										<p>
-											<a href="#">${member.member_email }</a>
-										</p>
+										<p>${sessionScope.sEmail }</p>
 									</figure>
 								</div>
 								<div class="ps-widget__content">
 									<ul>
-									 	<li><a href="MemberInfo.me?member_id=${sessionScope.sId }"><i class="icon-store"></i> 마이페이지</a></li>
+									 	<li><a href="MemberInfo.me"><i class="icon-store"></i> 마이페이지</a></li>
 										<li><a href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i>찜한 상품</a></li>
 										<li><a href="myPageFollowingList.my"><i class="icon-star"></i>팔로우 브랜드</a></li>
 										<li><a href="myPageEmoney.my?member_id=${sessionScope.sId}"><i class="icon-list"></i>적립금내역</a></li>

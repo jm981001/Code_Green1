@@ -84,7 +84,7 @@
                    	   		</c:when>
                    	   		
                    	   		<c:otherwise>
-                   	   		  <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                   	   		  <a href="MemberInfo.me">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
                    	   		</c:otherwise>
                    	    </c:choose>
 		</div>

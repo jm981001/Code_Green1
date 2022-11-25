@@ -47,18 +47,19 @@ public class MypageController {
 	
 	//------------마이페이지 메인-------------------------------------------
 	@GetMapping(value = "/MemberInfo.me")
-	public String getMemberInfo(
-			@RequestParam String member_id, Model model, HttpSession session) {
+	public String getMemberInfo(Model model, HttpSession session) {
 		// 세션 아이디 가져와서 sId 변수에 저장
 		String sId = (String)session.getAttribute("sId");
-		System.out.println(member_id + ", " + sId);
-		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+		System.out.println("sId : " + sId);
+		
+		
+		if(sId == null || sId.equals("")) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "member/fail_back";
 		} else {
-			MemberVO member = Mservice.getMemberInfo(member_id); // 파라미터는 검색할 아이디 전달
+			MemberVO member = Mservice.getMemberInfo(sId); // 파라미터는 검색할 아이디 전달
 			// Model 객체에 "member" 속성명으로 MemberVO 객체 저장
-			System.out.println(member);
+//			System.out.println(member);
 			model.addAttribute("member", member);
 			// member/member_info.jsp 페이지로 이동
 			return "member/myPage_main";

@@ -17,7 +17,7 @@
                             <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
 		                     	<!-- 브랜드별 로고띄우기 -->
-	                     		   <img src="<%=request.getContextPath() %>/resources/brand_logo/${ brandDetail.manager_original_file}">
+	                     		   <img src="<%=request.getContextPath() %>/resources/img/brand_logo/${ brandDetail.manager_original_file}" width="250px" height="200px">
 		                           <div class="brand_info">
 		                           		${ brandDetail.manager_info}<br>
 		                           		<c:choose>
