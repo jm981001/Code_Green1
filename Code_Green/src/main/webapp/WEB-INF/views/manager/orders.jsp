@@ -126,7 +126,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="ps-section__actions"><a class="ps-btn success" href="order"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
+                    <div class="ps-section__actions"><a class="ps-btn success" href="orders"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
                 </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">

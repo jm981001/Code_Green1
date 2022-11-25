@@ -73,7 +73,9 @@
 		    manager_phone = #{manager_phone},
  	        manager_email = #{manager_email}, 
 			manager_postcode = #{manager_postcode}, 
-			manager_address = #{manager_address} 
+			manager_address = #{manager_address} ,
+			manager_realfile  = #{manager_realfile},  
+	        manager_original_file =#{manager_original_file}
 			
 		WHERE 
 			manager_id = #{manager_id}
@@ -105,7 +107,7 @@
 			   i.item_status,  
 			   i.item_readcount,  
 			   i.item_date,
-			   m.manager_brandname 
+			   m.manager_brandname
 			  
 		 FROM item i  JOIN manager m  ON i.re_manager_idx= m. manager_idx 
 		 WHERE m.manager_id= #{ id}
@@ -157,7 +159,35 @@
 	
 
 	<!--새로운 상품 등록 -->
-
+	<insert id="addNewProducts">
+	
+	INSERT INTO ITEM
+	
+	VALUES(
+			IFNULL(
+					(SELECT 
+						MAX(item_idx)
+					 FROM ITEM i
+					),0
+				  )+ 1, 
+			#{manager_idx},
+			#{item.item_name}, 
+			#{item.item_info}, 
+			#{item.item_packing}, 
+			#{item.item_category}, 
+			#{item.item_price}, 
+			#{item.item_sale}, 
+			#{item.item_stock}, 
+			#{item.item_status}, 
+			'0',
+			date_format(now(),'%Y%m%d')
+			)
+	</insert>
+	
+	
+	
+	
+	
 
 
 	<!-- 상품수정 -->
@@ -309,7 +339,7 @@
 		            
 		             where i.RE_MANAGER_IDX =(select manager_idx
 		                           from manager
-		                                  where manager_id = "ottogi")
+		                                  where manager_id = #{manager_id})
 		                                      ORDER BY s.SELL_DETAIL_IDX DESC  LIMIT  #{startRow}, #{listLimit}  
 
 	</select>	

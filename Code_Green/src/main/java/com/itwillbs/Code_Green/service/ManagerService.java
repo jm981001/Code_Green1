@@ -65,10 +65,14 @@ public class ManagerService {
 	public ItemVO getItemInfo(String item_idx) {
 		return mapper.selectItemInfo(item_idx);
 	}
-    // 새 상품등록(파일제외)
-	public int newProducts(ItemVO item) {
-		return mapper.addNewProducts(item);
+	
+	
+	
+	// 새 상품등록(파일제외)
+	public int newProducts(ItemVO item, int manager_idx) {
+		return mapper.addNewProducts(item,manager_idx);
 	}
+	
 
 	// 새 상품등록- 파일업로드
 	public int newProductsFile(File_ItemVO fileItem) {
@@ -109,8 +113,8 @@ public class ManagerService {
 		return mapper.deleteQnaboard(qna_idx);
 	}
 	//주문조회
-	public List<SellVO> getOrderList(String id, int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectOrderList(id, startRow, listLimit, searchType, keyword);
+	public List<SellVO> getOrderList(String manager_id, int startRow, int listLimit, String searchType, String keyword) {
+		return mapper.selectOrderList(manager_id, startRow, listLimit, searchType, keyword);
 	}
 	//주문 갯수조회
 	public int getOrderListCount(String searchType, String keyword) {

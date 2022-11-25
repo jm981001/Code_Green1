@@ -65,11 +65,9 @@
                         <ul class="menu">
                                 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
@@ -171,24 +169,18 @@
                                 
                                 
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <tr>
                                 </from>
                                     <td>#B260</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td>
-                                    <td><span class="ps-badge gray">${order.sell_pay_status}</span>
+                                    <td><strong>15</strong></td>
+                                    <td><a href="order-detail"><strong>김회원</strong></a></td>
+                                    <td>Aug, 15, 2020</span>
                                     </td>
                                     <td><span class="ps-fullfillment success">배송 접수</span>
                                     </td>
                                     <td><strong>$56.00</strong></td>
+                                    <td><span class="ps-badge gray"><strong> 결제</strong></td>
+                                    <td><strong> Aug, 15, 2020</strong></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>

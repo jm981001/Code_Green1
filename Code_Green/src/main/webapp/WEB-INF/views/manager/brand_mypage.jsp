@@ -122,7 +122,7 @@
                             <hr>
                             <br>
                                  <div class="card" style="width: 18rem;">
-						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
+						  <img src="/Code_Green/resources/bmnUpload/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
 						    <h5 class="card-title">${brandInfo.manager_brandname }</h5>
 						    <p class="card-text">${brandInfo.manager_realfile }</p>
@@ -131,7 +131,7 @@
 						</div>
                         </div>
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modify?id=${sessionScope.sId}" method="get"name="brandInfo">
+                            <form class="ps-form--account-settings" action="brand_mypage_modify?id=${sessionScope.sId}" method="post"name="brandInfo">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

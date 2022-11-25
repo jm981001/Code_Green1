@@ -30,7 +30,7 @@
 	function addProduct(value) {
 		
 		
-		alert(value);
+// 		alert(value);
 		
 		let subForm = document.getElementById('sub_form');
 		
@@ -50,7 +50,7 @@
 	function addCategory(value) {
 		
 		
-		alert(value);
+// 		alert(value);
 		
 		let subForm = document.getElementById('sub_form');
 		
@@ -67,10 +67,10 @@
 
 	}
 	
-	function changeStock(value) {
+	function changeStatus(value) {
 		
 		
-		alert(value);
+// 		alert(value);
 		
 		let subForm = document.getElementById('sub_form');
 		
@@ -78,7 +78,7 @@
 		
 		input.type   = 'hidden';
 		
-		input.name  = 'item_stock';
+		input.name  = 'item_status';
 		
 		input.value  = value;
 		
@@ -174,7 +174,7 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form class="ps-form ps-form--new-product" action=product_registerPro.bo method="get"enctype="multipart/form-data" id="sub_form">
+                <form class="ps-form ps-form--new-product" action=product_registerPro.bo method="post"enctype="multipart/form-data" id="sub_form">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -184,7 +184,7 @@
                                         <div class="form-group">
                                             <label>상품번호<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_idx"placeholder="상품명을 기재해주세요" />
+                                            <input class="form-control" type="text" placeholder="상품명을 기재해주세요" />
                                         </div>
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
@@ -196,8 +196,13 @@
                                             </label>
                                             <input class="form-control" type="text" name="item_price"placeholder="정상가를 입력해주세요" />
                                         </div>
-
-                                             <div class="form-group">
+									
+ 										<div class="form-group">
+                                            <label>할인가격<sup>*</sup>
+                                            </label>
+                                            <input class="form-control" type="text" name="item_sale"value="0" />
+                                        </div>                                             
+                                        <div class="form-group">
                                             <label>포장상태<sup>*</sup>
                                             </label>
                                            
@@ -246,7 +251,7 @@
                                        
                                         <div class="form-group">
                                             <label>상품 설명<sup>*</sup></label>
-                                            <input class="form-control" type="text" placeholder="상품소개를 입력해주세요" />
+                                            <input class="form-control" type="text"name="item_info" placeholder="상품소개를 입력해주세요" />
                                         </div>
                                     </div>
                                 </figure>
@@ -259,7 +264,7 @@
                                             </label>
                                             <div class="form-group__content">
                                             
-                                                <select class="ps-select" onchange="changeStock(this.value)">
+                                                <select class="ps-select" onchange="changeStatus(this.value)">
                                                     <option value="재고상태">재고상태</option>
                                                     <option value="재입고">재입고</option>
                                                     <option value="품절">품절</option>
@@ -271,7 +276,7 @@
                                             <div class="form-group">
                                             <label>재고수량<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" placeholder="" />
+                                            <input class="form-control" type="text"name="item_stock" placeholder="" />
                                         </div>
                                     </div>
                                 </figure>

@@ -23,7 +23,7 @@ public interface ManagerMapper {
 
 	// 3. 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
-	public ManagerVO selectManagerInfo(String id);
+	public ManagerVO selectManagerInfo(String manager_id);
     
 	// 브랜드 상세정보조회(브랜드마이페이지)
 	public ManagerVO selectBrandInfo(String manager_id);
@@ -45,13 +45,12 @@ public interface ManagerMapper {
 
 	//상품 상세 조회
      public ItemVO selectItemInfo(String item_idx);
-	
 	//상품 갯수 조회
 	public int selectItemListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 	
 	// 새 상품등록 - 텍스트
-	public int addNewProducts(ItemVO item);
+	public int addNewProducts(@Param("item")ItemVO item, @Param("manager_idx")int manager_idx);
 	
 	// 새 상품등록 - 파일업로드
 	public int addNewProductsFile(File_ItemVO fileItem);
@@ -84,11 +83,12 @@ public interface ManagerMapper {
 	
     // 주문조회
 	public List<SellVO> selectOrderList(
-			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			@Param("manager_id") String manager_id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	//주문 갯수 조회
 	public int selectOrderListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
+
 
 
 

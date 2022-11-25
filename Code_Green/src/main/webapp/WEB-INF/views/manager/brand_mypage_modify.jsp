@@ -115,7 +115,7 @@
                           <!-- 파일 업로드 부분 -->
 <%-- 		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">   --%>
                           <div class="card" style="width: 25rem;">
-						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
+						  <img src="/Code_Green/resources/bmnUpload/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
 						    <p class="card-text">${brandInfo.manager_original_file }</p>
                                     </div>
@@ -125,7 +125,8 @@
 						    
 						 
                         <div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data">
+<!--                             <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data"> -->
+                            	<form action="brand_mypage_modifyPro.bo" method="post" name="brand_mypage_modify" enctype="multipart/form-data">
                           		<input type="hidden" name="manager_realfile" value="${brandInfo.manager_realfile }" />
 								<input type="hidden" name="manager_original_file" value="${brandInfo.manager_original_file }" />
 				               
@@ -134,7 +135,7 @@
                                 
 <!--                           <form action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data" id="modifyForm"> -->
                                 
-                                <div class="row">
+                                <div class="row">	
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>기업번호</label>

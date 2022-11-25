@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,7 @@ public class ManagerController {
 	
 	@Autowired
 	private ManagerService service;
+	
 
 	@PostMapping(value = "/ManagerLoginPro.me")
 	public String managerloginPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session,
@@ -198,8 +200,8 @@ public class ManagerController {
 	}
 	
 	//------------매니저페이지 내브랜드정보 수정----------------------------
-	@GetMapping(value = "brand_mypage_modify")
-	public String modifyManager(Model model, HttpSession session) {
+	@PostMapping(value = "brand_mypage_modify")
+	public String modifyManager(@ModelAttribute ManagerVO manager,Model model, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
 		System.out.println("sId : " + sId );
@@ -208,24 +210,49 @@ public class ManagerController {
 		model.addAttribute("brandInfo",brandInfo);
 		
 		return "manager/brand_mypage_modify";
+//		return "redirect:/
 	}
+	
+	
+//	int updateCount = service.modifyManager(manager);
+//	System.out.println("정보수정" + updateCount);
+//	
+//	if(updateCount > 0) {
+//		model.addAttribute("msg", "수정 성공!");
+//		model.addAttribute("manager",manager);
+//		return "redirect:/brand_mypage?id=" + manager.getManager_id();
+//	}
+//	model.addAttribute("fail", "수정 실패!");
+//	return "manager/mn_fail_back";
+//}
+
+	
+	
 	
 	
 	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
-	@GetMapping(value = "brand_mypage_modifyPro.bo")
+	@PostMapping(value = "brand_mypage_modifyPro.bo")
 	public String modifyManagerPro(@ModelAttribute ManagerVO manager,
 									Model model, HttpSession session) {
 
 		
+		
+		// 선택된 수정 업로드 파일명과 기존 파일명 출력
+				System.out.println("기존 파일명 : " + manager.getManager_realfile());
+				System.out.println("기존 실제 파일명 : " + manager.getManager_original_file());
+				System.out.println("새 파일 객체 : " + manager.getFile());
+				System.out.println("새 파일명 : " + manager.getFile().getOriginalFilename());
+		
 
 		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
-		String oldRealFile1 = manager.getManager_realfile();
-		String oldRealFile2 = manager.getManager_original_file();
+		String oldRealFile = manager.getManager_original_file();
 		
-		String uuid = UUID.randomUUID().toString();
-		String uploadDir = "/resources/commUpload";	// 가상의 업로드 경로
+		String uploadDir = "/resources/bmnUpload";	// 가상의 업로드 경로
+		// => webapp/resources 폴더 내에 bmnUpload 폴더 생성 필요
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
+		System.out.println("실제 업로드 경로 : " + saveDir);
+
 		
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
 		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
@@ -234,49 +261,81 @@ public class ManagerController {
 			f.mkdirs();
 		}	
 		// ManagerVO 객체에 전달된 MultipartFile 객체 꺼내기
-		MultipartFile mFile1 = manager.getFile();
+		MultipartFile mFile = manager.getFile();
 		
-		// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
-		boolean isNewFile1 = false; 
-		
-		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
-		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
-		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
-		if(!mFile1.getOriginalFilename().equals("")) {
-			String originalFileName = mFile1.getOriginalFilename();
-			System.out.println("파일명1 : " + originalFileName);
-			
-			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
-			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
-			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
-			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-			manager.setManager_original_file(uuid + "_" + originalFileName);
-			// 새 파일 업로드 표시
-			isNewFile1 = true;
-		} 
-		
+		// 새 파일 업로드 여부와 관계없이 무조건 파일명을 가져와서 BoardVO 객체에 저장
+				String originalFileName = mFile.getOriginalFilename();
+				long fileSize = mFile.getSize();
+				System.out.println("파일명 : " + originalFileName);
+				System.out.println("파일크기 : " + fileSize + " Byte");
+				
+				String uuid = UUID.randomUUID().toString();
+				System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+				
+				manager.setManager_realfile(originalFileName);
+				manager.setManager_original_file(uuid + "_" + originalFileName);
+				
+				// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
+				// Service - modifyBoard() 메서드 호출하여 수정 작업 요청
+				// => 파라미터 : BoardVO 객체, 리턴타입 : int(updateCount)
+				int updateCount = service.modifyManager(manager);
+				
+				// 수정 실패 시 "수정 실패!" 메세지 저장 후 mn_fail_back.jsp 페이지로 포워딩
+				
+				if(updateCount == 0) { // 수정 실패 시
+					// 임시 폴더에 업로드 파일이 저장되어 있으며
+					// transferTo() 메서드를 호출하지 않으면 임시 폴더의 파일은 자동 삭제됨
+					model.addAttribute("msg", "수정 실패!");
+					return "manager/mn_fail_back";
+				} else { // 수정 성공 시
+					// 수정 작업 성공 시 새 파일이 존재할 경우에만 실제 폴더 위치에 파일 업로드 수행
+					// => 임시 폴더에 있는 업로드 파일을 실제 업로드 경로로 이동
+					// => 새 파일 존재 여부는 업로드 할 파일명이 널스트링("") 이 아닌 것으로 판별
+					if(!originalFileName.equals("")) {
+						try {
+							mFile.transferTo(new File(saveDir, manager.getManager_original_file()));
+							
+							// 기존 업로드 된 실제 파일 삭제
+							File f2 = new File(saveDir, oldRealFile);
+							if(f2.exists()) {
+								f2.delete();
+							}
+						} catch (IllegalStateException e) {
+							System.out.println("IllegalStateException");
+							e.printStackTrace();
+						} catch (IOException e) {
+							System.out.println("IOException");
+							e.printStackTrace();
+						}
+					}
+					
+//					return "manager/brand_mypage_modify";
+		return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
+				}
+	}
+				
 		
 		// ======================정보수정 ======================
 		
-		String sId = (String)session.getAttribute("sId");
-		System.out.println("sId : " + sId );
-		
-		int updateCount = service.modifyManager(manager);
-		System.out.println("정보수정" + updateCount);
-		System.out.println("수정정보" + manager );
-		
-		ManagerVO brandInfo = service.getBrandInfo(sId);
-		model.addAttribute("brandInfo",brandInfo);
-		
-		if(updateCount > 0) {
-//			model.addAttribute("msg", "수정 성공!");
-//			model.addAttribute("manager",manager);
-			return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
-		}
-		model.addAttribute("fail", "수정 실패!");
-		return "manager/mn_fail_back";
-	}
-	
+//		String sId = (String)session.getAttribute("sId");
+//		System.out.println("sId : " + sId );
+//		
+//		int updateCount = service.modifyManager(manager);
+//		System.out.println("정보수정" + updateCount);
+//		System.out.println("수정정보" + manager );
+//		
+//		ManagerVO brandInfo = service.getBrandInfo(sId);
+//		model.addAttribute("brandInfo",brandInfo);
+//		
+//		if(updateCount > 0) {
+////			model.addAttribute("msg", "수정 성공!");
+////			model.addAttribute("manager",manager);
+//			return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
+//		}
+//		model.addAttribute("fail", "수정 실패!");
+//		return "manager/mn_fail_back";
+//	}
+//	
 		//------------매니저페이지 내브랜드정보 삭제----------------------------
 		
 	@GetMapping(value = "brand_mypage_delete")
@@ -311,8 +370,8 @@ public class ManagerController {
 	public String itemList ( Model model, HttpSession session,
 							@RequestParam(defaultValue = "1")int pageNum,
 							@RequestParam(defaultValue = "")String searchType,
-							@RequestParam(defaultValue = "")String keyword) {
-		
+							@RequestParam(defaultValue = "")String keyword ) {
+								
 		String id = (String)session.getAttribute("sId");
 		System.out.println("id : " + id );
 		System.out.println("searchType : " + searchType);
@@ -399,9 +458,20 @@ public class ManagerController {
 				
 //		product_registerPro.bo
 	//------------매니저페이지 상품등록-------------------------------------------
-		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.GET)
+		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
 		public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
-				                           Model model, HttpSession session ) {
+										 Model model, HttpSession session
+										) {
+			
+			String id = (String)session.getAttribute("sId");
+			System.out.println("아이디 : " + id);
+			ManagerVO manager = service.getManagerInfo(id);
+			
+			
+//			System.out.println("p : " + item_packing);
+//			System.out.println("c : " +item_category);
+//			System.out.println("s : " +item_status);
+//			System.out.println("i : " +item);
 			
 			String uploadDir = "/resources/itemUpload";
 			String saveDir = session.getServletContext().getRealPath(uploadDir);
@@ -436,7 +506,7 @@ public class ManagerController {
 		
 			// ===========================================================
 			
-			int insertCount = service.newProducts(item);
+			int insertCount = service.newProducts(item,manager.getManager_idx());
 			int file_insertCount = service.newProductsFile(fileItem);
 			
 			if(insertCount > 0) {
@@ -474,10 +544,13 @@ public class ManagerController {
 		
 		
 	 //------------매니저페이지 상품수정 업데이트-------------------------------------------
-		@GetMapping(value = "product_modify")
+		@PostMapping(value = "product_modify")
 		public String edit_product(@ModelAttribute ItemVO item, 
-									@ModelAttribute File_ItemVO fileItem, 
+									@ModelAttribute File_ItemVO fileItem,
+									
+									
                                     Model model, HttpSession session ) { 
+			
 			
 			
 			// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
@@ -601,12 +674,16 @@ public class ManagerController {
 		public String orderList ( Model model, HttpSession session,
 								@RequestParam(defaultValue = "1")int pageNum,
 								@RequestParam(defaultValue = "")String searchType,
-								@RequestParam(defaultValue = "")String keyword) {
+								@RequestParam(defaultValue = "")String keyword,
+								@RequestParam String manager_id) {
 			
 			String id = (String)session.getAttribute("sId");
 			System.out.println("id : " + id );
 			System.out.println("searchType : " + searchType);
 			System.out.println("keyword : " + keyword);
+			System.out.println("manager_id : " + manager_id);
+			
+			
 			
 			//페이징처리
 			int listLimit = 10;// 한 페이지 당 표시할 게시물 목록 갯수 
@@ -618,7 +695,7 @@ public class ManagerController {
 			// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
 			// => 리턴타입 : List<ItemVO>(itemList)
-			List<SellVO> orderList = service.getOrderList(id, startRow, listLimit, searchType, keyword);
+			List<SellVO> orderList = service.getOrderList(manager_id, startRow, listLimit, searchType, keyword);
 			
 			// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
