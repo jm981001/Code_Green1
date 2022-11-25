@@ -112,7 +112,6 @@
 	        
 	        function coin(){
 	        	$(".sell_coin_use_btn").on("click",function(){
-	        		
 	        		<!-- 적립금 사용 -->
 	        		let sell_coin_total = $('.sell_coin_total').val();
 	        		let sell_use_coin = $('.sell_use_coin').val();
@@ -318,7 +317,7 @@
 	                                        <div class="ps-block__content">
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 		                                        	보유 적립금
-		                                        	<input type="text" value="${coin.coin_total }" class="sell_coin_total" style="color: #5fa30f;">
+		                                        	<input type="text" value="${coin.coin_total }" class="sell_coin_total" style="color: #5fa30f;" readonly="readonly">
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 												 사용할 적립금
@@ -362,31 +361,32 @@
 			                                         </c:forEach> 
 			                                         	<tr>
 			                                           		<td>주문 총 금액</td>
-			                                           		<td colspan="6">
-			                                           			${cart.cart_total*cart.cart_amount }
+			                                           		<td >
+			                                           			<span class="sell_item_total_price"></span>
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
 			                                           		<td>배송비</td>
-			                                           		<td colspan="6">
-			                                           			<input type="text" value="2500" class="sell_shipping_fee">
+			                                           		<td>
+			                                           			<span class="sell_shipping_fee"></span>
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
 			                                           		<td>사용한 적립금</td>
-			                                           		<td colspan="6" class="sell_use_coin">
+			                                           		<td>
+			                                           			<span class="sell_use_coin"></span>
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
 			                                           		<td>결제 금액</td>
-			                                           		<td colspan="6">
+			                                           		<td>
 			                                           			<span class="sell_total_price"></span>
 			                                           		</td>
 			                                        	</tr>	
 			                                        </table>
 			                                     </div>
 			                                 </div>
-			                                  
+<!-- 			                                   colspan="6" -->
 			                                  
 			                                  
 			                                  <!-- 주문하기 버튼 -->
