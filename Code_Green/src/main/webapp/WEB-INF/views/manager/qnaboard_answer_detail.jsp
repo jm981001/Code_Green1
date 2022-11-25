@@ -127,7 +127,7 @@
                     <h3>답변관리</h3>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index method="get">
+                    <form class="ps-form--search-bar" action="qnaboard_an method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
@@ -137,7 +137,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="get">
+  		<form class="ps-form--search-bar" action="qnaboard_answer_detailPro.bo" method="get">
 
  
        <table class="table ps-table">

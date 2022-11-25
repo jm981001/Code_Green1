@@ -142,6 +142,8 @@ public class ManagerController {
 		if(manager_id == null || sId == null || manager_id.equals("") || (!manager_id.equals(sId) && !sId.equals("admin"))) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "member/fail_back";
+			
+			
 		} else {
 			ManagerVO Manager = service.getManagerInfo(manager_id); ; // 파라미터는 검색할 아이디 전달
 			
@@ -150,11 +152,20 @@ public class ManagerController {
 			
 		}
 		
-		SellVO sellTotal = service.getTotalMoney();
-		int sell_count = service.getTotalsellCount();
 		
-		model.addAttribute("sellTotal", sellTotal);
-		model.addAttribute("sellCount", sell_count);
+		//주문 목록조회
+//		List<SellVO> orderList = service.getOrderList(id, startRow, listLimit, searchType, keyword);
+//		model.addAttribute("orderList", orderList);
+//		
+		
+		
+		
+		//매출 순위(매니저아이디 받아와서 베스트 상품 3?5?순위 노출하기/ 총주문수 노출하기)
+//		SellVO sellTotal = service.getTotalMoney();
+//		int sell_count = service.getTotalsellCount();
+//		
+//		model.addAttribute("sellTotal", sellTotal);
+//		model.addAttribute("sellCount", sell_count);
 		
 		return "manager/index";
 		
@@ -171,7 +182,7 @@ public class ManagerController {
 	//------------매니저페이지 내브랜드정보조회-------------------------------------------
 		
 	@GetMapping(value = "brand_mypage")
-	public String brand_mypage(@RequestParam String id, Model model, HttpSession session) {
+	public String brand_mypage(@RequestParam String manager_id, Model model, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");
 		System.out.println("sId : " + sId );
@@ -199,7 +210,6 @@ public class ManagerController {
 		return "manager/brand_mypage_modify";
 	}
 	
-		
 	
 	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
@@ -247,15 +257,21 @@ public class ManagerController {
 		
 		
 		// ======================정보수정 ======================
+		
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId : " + sId );
+		
 		int updateCount = service.modifyManager(manager);
 		System.out.println("정보수정" + updateCount);
 		System.out.println("수정정보" + manager );
 		
+		ManagerVO brandInfo = service.getBrandInfo(sId);
+		model.addAttribute("brandInfo",brandInfo);
 		
 		if(updateCount > 0) {
 //			model.addAttribute("msg", "수정 성공!");
 //			model.addAttribute("manager",manager);
-			return "redirect:/brand_mypage?id=" + manager.getManager_id();
+			return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
 		}
 		model.addAttribute("fail", "수정 실패!");
 		return "manager/mn_fail_back";
@@ -381,7 +397,7 @@ public class ManagerController {
 				return "manager/product_register";
 			}		
 				
-		
+//		product_registerPro.bo
 	//------------매니저페이지 상품등록-------------------------------------------
 		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.GET)
 		public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
@@ -564,7 +580,7 @@ public class ManagerController {
 				}
 				
 			}
-			return "";
+			return "products";
 		}
 		// ========================= 상품 내용 수정 ===============================
 
@@ -578,28 +594,9 @@ public class ManagerController {
 		
 		
 		
-	//------------매니저페이지 상품수정 업데이트-------------------------------------------
-				
-				
-		
-	//------------매니저페이지 재고관리-------------------------------------------
-		@RequestMapping(value = "inventory_management", method = RequestMethod.GET)
-		public String inventory_management() {
-			return "manager/inventory_management";
-		}
-		
-		
-		
-		
-		
 		
 	//------------매니저페이지 주문조회-------------------------------------------
-//		@RequestMapping(value = "orders", method = RequestMethod.GET)
-//		public String orders() {
-//			return "manager/orders";
-//		}
-//		
-		
+
 		@GetMapping(value = "/orders")
 		public String orderList ( Model model, HttpSession session,
 								@RequestParam(defaultValue = "1")int pageNum,
@@ -775,60 +772,47 @@ public class ManagerController {
 		}
 		
 		//------------ 문의글 답변작성-------------------------------------------
-		@GetMapping(value = "qnaboard_answer_detailPro")
-		public String qnaboard_answer_detailPro(Model model, HttpSession session, QnaVO qna) {
-			
-			String sId = (String)session.getAttribute("sId");
-			
-		
-			int updateCount = service.registQnaboard(qna);
-			
-			//빨리하자ㅠㅠㅠ
-			
-			
-			
-			return"manager/qnaboard_detail";
-			
-		}
-		
-		
-		
-		
-		
-		
-		//------------ 문의글 답변수정-------------------------------------------	
-		@GetMapping(value = "qnaboard_modify")
-		public String qnaboard_modify(Model model, HttpSession session, QnaVO qna) {
-			
-			String sId = (String)session.getAttribute("sId");
-			
-			int updateCount = service.registQnaboard(qna);
-			
-			//빨리하자ㅠㅠㅠ
-			
-			return "qnaboard_answer_detail";
-		}
+	      @PostMapping(value = "qnaboard_answer_detailPro")
+	      public String qnaboard_answer_detailPro(Model model, HttpSession session, QnaVO qna) {
+	         
+	         String sId = (String)session.getAttribute("sId");
+	         
+	      
+	         int updateCount = service.registQnaboard(qna);
+	         model.addAttribute("updateCount", updateCount);
+	         System.out.println("updateCount" + updateCount);
+	         if(updateCount == 0 ) {
+	            model.addAttribute("msg", "실패~!");
+	            return "member/fail_back";
+	         }
+	         
+	         return "redirect:/qnaboard_list";
+	         
+	      }
+	      
 		
 		
 		//------------ 문의글 답변삭제-------------------------------------------	
 		
-		@GetMapping(value = "qnaboard_delete")
-		public String qnaboard_delete(@RequestParam String id, String idx, Model model, HttpSession session) {
-			
-			String sId = (String)session.getAttribute("sId");
-			
-		
-			int delectCount = service.removeQnaboard(idx,id);
-			System.out.println(delectCount);
-			
-			if(delectCount > 0) {
-				return "qnaboard_list";
-			}
-			
-			model.addAttribute("fail", "삭제실패!");
-			return "manager/qnaboard_list";
-		}
-		
+	         @GetMapping(value = "qnaboard_delete")
+	         public String qnaboard_delete(@RequestParam String qna_idx, Model model, HttpSession session) {
+	            
+	            String sId = (String)session.getAttribute("sId");
+	            
+	         
+	            int delectCount = service.removeQnaboard(qna_idx);
+	            System.out.println(delectCount);
+	            
+	            if(delectCount == 0) {
+	               model.addAttribute("msg", "실패~!");
+	               return "member/fail_back";
+	            }
+	            
+	            model.addAttribute("delectCount", delectCount);
+	            return "redirect:/qnaboard_list";
+	         }
+	         
+
 		
 		
 

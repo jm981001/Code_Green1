@@ -37,14 +37,11 @@ public class ManagerService {
 	}
 	
 	// 브랜드 상세정보조회(브랜드마이페이지)
-	public ManagerVO getBrandInfo(String id) {
-		return mapper.selectBrandInfo(id);
+	public ManagerVO getBrandInfo(String manager_id) {
+		return mapper.selectBrandInfo(manager_id);
 	}
 	
-	// 브랜드 정보수정조회(브랜드마이페이지)
-//	public ManagerVO getModifyInfo(String sid) {
-//		return mapper.modifyBrandInfo(sid);
-//	}
+
 	// 브랜드 정보수정(브랜드마이페이지)
 	public int modifyManager(ManagerVO manager) {
 		return mapper.updateBrandInfo(manager);
@@ -54,10 +51,6 @@ public class ManagerService {
 	public int deleteManager(String manager_id) {
 		return mapper.deleteBrand(manager_id);
 	}
-//	//팔로우 목록조회
-//	public MemberVO followInfo(String idx) {
-//		return mapper.selectFollowInfo(idx);
-//	}
 	//상품 목록 조회
 	
 	public List<ItemVO> getItemList(String id, int startRow, int listLimit, String searchType, String keyword) {
@@ -103,21 +96,17 @@ public class ManagerService {
 		return mapper.selectQnaInfo(qna_idx);
 	}
 	
-	//총매출
-	public SellVO getTotalMoney() {
-		return mapper.selectTotalMoney(); 
-	}
 	//총주문수
 	public int getTotalsellCount() {
 		return mapper.selectTotalsellCount();
 	}
-	//문의글 삭제
-	public int removeQnaboard(String idx, String id) {
-		return mapper.deleteQnaboard(idx,id);
-	}
 	//문의글 답글
 	public int registQnaboard(QnaVO qna) {
 		return mapper.updateQnaboard(qna);
+	}
+	//문의글 삭제-수정
+	public int removeQnaboard(String qna_idx) {
+		return mapper.deleteQnaboard(qna_idx);
 	}
 	//주문조회
 	public List<SellVO> getOrderList(String id, int startRow, int listLimit, String searchType, String keyword) {
@@ -127,7 +116,14 @@ public class ManagerService {
 	public int getOrderListCount(String searchType, String keyword) {
 		return mapper.selectOrderListCount(searchType,keyword);
 	}
-	
 
+//	//팔로우 목록조회
+//	public MemberVO followInfo(String idx) {
+//		return mapper.selectFollowInfo(idx);
+//	}
+	//총매출
+	public SellVO getTotalMoney() {
+		return mapper.selectTotalMoney(); 
+	}
 
 }

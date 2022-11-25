@@ -4,7 +4,7 @@ public class QnaVO {
 	private int qna_idx;
 	private int qna_item;
 	private String qna_type;
-	private String qna_category;
+	private String qna_category;//답변상태(상품문의)
 	private String qna_answer;
 	private String qna_id;
 	private String qna_pass;

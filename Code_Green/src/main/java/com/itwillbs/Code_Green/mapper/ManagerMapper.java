@@ -26,7 +26,7 @@ public interface ManagerMapper {
 	public ManagerVO selectManagerInfo(String id);
     
 	// 브랜드 상세정보조회(브랜드마이페이지)
-	public ManagerVO selectBrandInfo(String id);
+	public ManagerVO selectBrandInfo(String manager_id);
 	
 	// 브랜드 정보수정조회(브랜드마이페이지)
 //	public ManagerVO modifyBrandInfo(String sId);
@@ -75,7 +75,7 @@ public interface ManagerMapper {
 	//문의글 답변등록
 	public int updateQnaboard(QnaVO qna);
 	//문의글 삭제
-	public int deleteQnaboard(@Param("idx") String idx, @Param("id") String id);
+	 public int deleteQnaboard(String qna_idx);
 	//총매출
 	public SellVO selectTotalMoney();
 

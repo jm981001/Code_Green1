@@ -53,15 +53,15 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                 				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                             <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+<!--                         <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
+                            <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
+                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
+                            <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
+<!--                         <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
+                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             
             </ul>
         </div>
@@ -85,16 +85,16 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-	                     </ul>
+                               <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+<!--                         <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
+                            <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
+                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
+                            <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
+<!--                         <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
+                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                        </ul>
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
@@ -115,10 +115,10 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
 
- 		<div class="ps-main__wrapper">
-  		<div class="header__center">
-  		<form class="ps-form--search-bar" action="qnaboard_answer?qna_idx="${QnaInfo.qna_idx }" method="get"name="answerForm">
-  				<input type="hidden" id="qna_idx" name="qna_idx" value="${QnaInfo.qna_idx }">
+       <div class="ps-main__wrapper">
+        <div class="header__center">
+        <form class="ps-form--search-bar" action="qnaboard_answer?qna_idx="${QnaInfo.qna_idx }" method="get"name="answerForm">
+              <input type="hidden" id="qna_idx" name="qna_idx" value="${QnaInfo.qna_idx }">
                  <input type="hidden" id="qna_id" name="qna_id" value="${QnaInfo.qna_id }">
 
  
@@ -128,10 +128,10 @@
                     <hr>
                        <thead>
                                 <tr>
-                                	<th>번호</th>
-                                	<th>질문타입</th>
+                                   <th>번호</th>
+                                   <th>질문타입</th>
                                     <th>제목</th>
-                                   	<th>내용</th>
+                                      <th>내용</th>
                                     <th>작성자</th>
                                      <th>처리상태</th>
                                     <th>작성일</th>
@@ -141,8 +141,8 @@
                             <tbody>
                             
                                 <tr>
-                                	<td>${QnaInfo.qna_idx }</td>
-                                	<td>${QnaInfo.qna_type }</td>
+                                   <td>${QnaInfo.qna_idx }</td>
+                                   <td>${QnaInfo.qna_type }</td>
                                     <td>${QnaInfo.qna_subject }</td>
                                     <td>${QnaInfo.qna_content }</td>
                                     <td>${QnaInfo.qna_id }</td>
@@ -153,23 +153,34 @@
                     </tbody>
                     </table>
                     </form>
-					</div>
-					</div>                                    
-
-				<!-- ---게시판글쓰기api -->
-                <textarea id="summernote" name="editordata"></textarea>
+               </div>
+               </div>                                    
+      <form class="ps-form--review" action="qnaboard_answer_detailPro" method="post" name="modifyForm">
+            <!-- ---게시판글쓰기api -->
+                <textarea id="summernote" name="qna_answer">                                                        
+ <br>안녕하세요 베지터틀 입니다. 
+순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
+<br>
+먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
+상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
+<br>
+문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
+<br>
+추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
+<br>
+앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
+<br>
+감사합니다.</textarea>
                 <!-- ---게시판글쓰기api -->
-                
-                     <div class="ps-form__submit text-center">
-                     <br>
-<!--                      	<button class="ps-btn success"type="submit">답변등록1</button> -->
-                        <input type="button" button class="ps-btn success"type="submit"value="답변등록2" onclick="location.href='qnaboard_answer?qna_idx=${QnaInfo.qna_idx}&manager_brandname=${param.manager_brandname }'">
-                        <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
-
-
+                <input type="hidden" name="qna_idx" value="${param.qna_idx}" />
+                     <div class="ps-form__submit text-center"> 
+                        <br>
+                          <button class="ps-btn success" type="submit">답변등록</button>
+                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
-					</div>
-       
+
+             
+          </form>
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

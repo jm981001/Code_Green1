@@ -131,6 +131,9 @@
                          <td><a href="orders"><strong><h4>최근 주문</h4></strong></a></td>
                             
                         </div>
+                        
+                        
+                          <form class="ps-form--filter" action="orders" method="get">
                             <div class="ps-card__content">
                             <div class="table-responsive">
                                 <table class="table ps-table">
@@ -164,7 +167,20 @@
                                     
                                 </tr>
                                 </c:forEach>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <tr>
+                                </from>
                                     <td>#B260</td>
                                     <td><strong> Aug, 15, 2020</strong></td>
                                     <td><a href="order-detail"><strong>Marsh Speaker</strong></a></td>

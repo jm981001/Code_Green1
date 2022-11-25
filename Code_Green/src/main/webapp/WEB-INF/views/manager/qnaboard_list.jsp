@@ -156,11 +156,10 @@
                                     <td onclick="location.href='qnaboard_detail?qna_idx=${qnaList.qna_idx }'"><strong>${qnaList.qna_subject }</strong></td>
                                     <td>${qnaList.qna_id }</td>
                                     <td>${qnaList.qna_category }</td>
-                                    <td>${qnaList.qna_answer }</td>
                                     <td>${qnaList.qna_date }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?id=${qnaList.qna_id }">Delete</a></div>
+                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="qnaboard_delete?qna_idx=${qnaList.qna_idx }">Delete</a></div>
                                         </div>
                                     </td>
                                 </tr>

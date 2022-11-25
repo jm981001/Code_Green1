@@ -113,7 +113,6 @@
                             <hr>
                             <br>
                           <!-- 파일 업로드 부분 -->
-<!--                           <form action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data" id="modifyForm"> -->
 <%-- 		                    <input type="hidden" name="realfile" value="${brandInfo.manager_realfile}">   --%>
                           <div class="card" style="width: 25rem;">
 						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
@@ -133,6 +132,7 @@
 				                	<input type="file" class="파일선택" name="file">
                                 
                                 
+<!--                           <form action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data" id="modifyForm"> -->
                                 
                                 <div class="row">
                                     <div class="col-sm-6">
