@@ -24,6 +24,31 @@ public class AdminService {
 	public AdminVO loginAdmin(AdminVO admin) {
 		return mapper.loginAdmin(admin);
 	}
+	
+	//----------------------
+	
+	//총매출
+	public SellVO getTotalMoney() {
+		// TODO Auto-generated method stub
+		return mapper.selectTotalMoney(); 
+	}
+	//총주문수
+	public int getTotalsellCount() {
+		// TODO Auto-generated method stub
+		return mapper.selectTotalsellCount();
+	}
+	
+	//매출 3순위
+	public List<ManagerVO> getTopSale() {
+		// TODO Auto-generated method stub
+		return mapper.selectTopSaleList();
+	}
+	
+	//매출 랭킹
+	public List<ManagerVO> getRanking() {
+		// TODO Auto-generated method stub
+		return mapper.selectRanking();
+	}
 
 	//----------------------
 	
@@ -361,22 +386,8 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateAdminAuth(manager);
 	}
-	//총매출
-	public SellVO getTotalMoney() {
-		// TODO Auto-generated method stub
-		return mapper.selectTotalMoney(); 
-	}
-	//총주문수
-	public int getTotalsellCount() {
-		// TODO Auto-generated method stub
-		return mapper.selectTotalsellCount();
-	}
 	
-	//매출 3순위
-	public List<ManagerVO> getTopSale() {
-		// TODO Auto-generated method stub
-		return mapper.selectTopSaleList();
-	}
+	
 	
 	
 	

@@ -153,7 +153,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="ps-card__footer"><a class="ps-card__morelink" href="orders.htmls">순위 더 알아보기(더 수정해야함)<i class="icon icon-chevron-right"></i></a></div>
+                        <div class="ps-card__footer"><a class="ps-card__morelink" href="ad_more_Ranking">순위 더 알아보기<i class="icon icon-chevron-right"></i></a></div>
                     </div>
                 </div>
                 <div class="ps-section__right">

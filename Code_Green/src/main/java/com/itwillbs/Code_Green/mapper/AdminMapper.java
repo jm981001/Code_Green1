@@ -19,6 +19,20 @@ public interface AdminMapper {
 	// => 파라미터 : AdminVO 객체(admin), 리턴타입 : AdminVO
 	public AdminVO loginAdmin(AdminVO admin);
 	
+	//-----------관리자페이지 메인----------------------------------------------
+	
+	
+	//총매출
+	public SellVO selectTotalMoney();
+
+	//총주문수
+	public int selectTotalsellCount();
+
+	//매출 3순위
+	public List<ManagerVO> selectTopSaleList();
+
+	
+	
 	
 	//----------------------------------------------------------
 	
@@ -240,16 +254,10 @@ public interface AdminMapper {
 
 	//기업 가입 승인
 	public int updateAdminAuth(ManagerVO manager);
+	//매출 랭킹
+	public List<ManagerVO> selectRanking();
 
-	//총매출
-	public SellVO selectTotalMoney();
-
-	//총주문수
-	public int selectTotalsellCount();
-
-	//매출 3순위
-	public List<ManagerVO> selectTopSaleList();
-
+	
 
 
 

@@ -84,7 +84,17 @@ public class AdminController {
 	
 	
 	
-	
+	//------------매출 순위 더 보기----------------------------
+	@GetMapping(value = "ad_more_Ranking")
+	public String moreRanking(Model model, HttpSession session) {
+		
+		List<ManagerVO> ranking = service.getRanking();
+		System.out.println(ranking);
+		model.addAttribute("ranking", ranking);
+		
+		return "admin/ad_more_Ranking";
+	}
+
 	
 	
 	
