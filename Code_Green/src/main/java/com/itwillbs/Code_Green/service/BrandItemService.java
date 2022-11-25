@@ -25,5 +25,15 @@ public class BrandItemService {
 		return mapper.selectBrandFollow(manager_idx,member_id);
 	}
 	
+	// 브랜드별 아이템리스트 출력
+	public List<ItemVO> selectBrandItemList(int manager_idx) {
+		return mapper.selectBrandItemList(manager_idx);
+	}
+	
+	// 브랜드별 정보 및 아이템수 출력
+	public ManagerVO selectBrandDetail(int manager_idx) {
+		return mapper.selectBrandDetail(manager_idx);
+	}
+	
 	
 }

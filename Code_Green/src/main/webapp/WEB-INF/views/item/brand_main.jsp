@@ -98,6 +98,9 @@
 	
 	
 	window.onload = function(){
+	
+		goWholeList();
+		
 		if(${sessionScope.sId == null}){
 			$(".brandfollowbtn").hide();
 		} else {
@@ -105,28 +108,29 @@
 		}
 	}
 	
-// 	//브랜드 팔로우 상태
-// 	window.onload = function(){
-// 		if(${sessionScope.sId != null}){
-// 			$(".brandfollowbtn").show();
-// 			$.ajax({
-// 				url:"FollowCheck.br",
-// 				type:"post",
-// 				data:{
-// 					manager_idx : ${brand.manager_idx },
-// 					member_id: '${sessionScope.sId}'
-// 				},
-// 				success:function(status){
-// 					if(status > 0){
-// 						$(".brandfollowbtn img").attr("src", "/Code_Green/resources/img/forzero/fheart.png");
-// 					}
-// 				}
-// 			});
-// 		} else {
-// 			$(".brandfollowbtn").hide();
-// 		}
-// 	}
+	function goWholeList(){
+		$.ajax({
+			url:"GetWholeItemList.br",
+			type:"post",
+			success:function(data){
+				$(".ps-section__wrapper").html(data);
+			}
+		});
+	}
 	
+	
+	function goBrandList(manager_idx){
+		$.ajax({
+			url:"GetBrandItemList.br",
+			type:"post",
+			data: {
+				manager_idx: manager_idx
+			},
+			success:function(data){
+				$(".ps-section__wrapper").html(data);
+			}
+		});
+	};
 
 	
 </script>
@@ -152,138 +156,20 @@
                 <input type="button" id="brandlist-header" value="입점브랜드 목록 ▼" onclick="togglefun(this.value)">
                 <div id="listlist">
                 	<ul class="brandlist-ul">
-               			<li class="brandlist-li"><a href="BrandMain.br"><strong>전체보기</strong></a></li>
-               			
+               			<li class="brandlist-li"><a href="#" onclick="goWholeList()"><strong>전체보기</strong></a></li>
 	                	<c:forEach var="brand" items="${brandList }">
-               			<li class="brandlist-li"><a href="#" >${brand.manager_brandname }</a></li>
+               			<li class="brandlist-li"><a href="#" onclick="goBrandList('${brand.manager_idx}')">${brand.manager_brandname }</a></li>
                			</c:forEach>
-               			
                 	</ul>
                 </div>
                 
        <!-- ============================================================ 브랜드리스트 박스공간 끝 ====================================================================== -->         
-              <div class="ps-section__wrapper">
-                    <div class="ps-section__left">
-                        <aside class="widget widget--vendor">
-                           
-                            <h3 class="widget-title">브랜드명</h3>
-	                           
-	                            <div class="brandfollowbtn" style="display: none">
-		                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
-		<!--                             <div class="brandfollowbtn"><a class="ps-block__inquiry" href="FollowBrand.mo">Follow</a></div> -->
-		                            <a class="ps-block__inquiry" href="#">Follow</a>
-	                            </div>
-	                            
-                            <div class="ps-block__user" >
-		                     	<div class="ps-block__user-avatar">
-		                     	<!-- 브랜드별 로고띄우기 -->
-	                     		   <img src="/Code_Green/resources/img/winkya.jpg">
-		                           <div class="brand_info">
-		                           		브랜드 상세정보
-		                           		
-		                           </div>
-		                    	</div>
-		                    </div>
-	<!-- =========================================== 사이드바 시작 ======================================================== -->
-
-					<aside class="widget widget_shop">
-		                <h4 class="widget-title">BY BRANDS</h4>
-		                <figure class="ps-custom-scrollbar" data-height="250">
-		                  <c:forEach var="brand" items="${brandList }">
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-${brand.manager_idx }" name="${brand.manager_idx }" />
-		                        <label for="m-brand-${brand.manager_idx }">${brand.manager_brandname }</label>
-		                    </div>
-		                   </c:forEach>
-		                </figure>
-		                
-		                <figure>
-		                	<!-- 가격검색 목록 -->    
-		                    <h4 class="widget-title">By Price</h4>
-		                    <div class="leftbar_searchbyprice">
-		                            <form action="SearchByPrice.mo" method="get">
-			                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
-			                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
-			                            <input type="submit" value="검색" >
-		                            </form>
-		                     </div>
-		                </figure>
-		                
-					</aside>
-                 </aside>
-             </div>
-	<!-- =========================================== 사이드바 끝======================================================== -->
+              <div class="ps-section__wrapper"></div>
+                  
 	
-	<!-- =========================================== 상품리스트 시작=====================================================-->
-                    
-          <!-- 상품리스트 헤더  -->
-                    <div class="ps-section__right">
-                        <div class="ps-shopping ps-tab-root">
-                            <div class="ps-shopping__header">
-<!--                                 <p>총<strong> 6 </strong> 개의 상품 </p> -->
-                               <div id="orderbylist"><a href="#">최근순</a>  |  <a href="#">판매량순</a></div>
-                            </div>
-                            
-                    <div class="ps-tabs">
-                        <div class="ps-tab active" id="tab-1">
-                            <div class="ps-shopping-product">
-                                <div class="row">
-                                
-           <!-- ===================================== 상품 1개당 ================================================== --> 
-           						<c:forEach var="brand" items="${brandPageList }">
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                                        <div class="ps-product">
-                                            <div class="ps-product__thumbnail">
-                                            
-                                            <a href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}" ><img src="/Code_Green/resources/item/${brand.file1 }"/></a>
-                                                <ul class="ps-product__actions">
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                           <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.manager_brandname }</a>
-                                               <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
-                                                    <div class="ps-product__rating">
-                                                   	 <select class="ps-rating" data-read-only="true">
-                                                        <c:forEach var="i" begin="1" end="5">
-			                                             	<c:choose>
-			                                             		<c:when test="${i <= brand.score}">
-			                                             			<option value="1">${i }</option>
-			                                             		</c:when>
-			                                             		<c:otherwise>
-			                                             			<option value="2">${i }</option>
-			                                             		</c:otherwise>
-			                                             	</c:choose>
-			                                             </c:forEach>
-                                                      </select><span>${brand.board_star_score }</span>
-                                                    </div>
-                                                    
-                                                    
-                                                    
-                                                  <h4 class="ps-product__price">${brand.item_price }원</h4>
-                                                </div>
-                                                <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
-                                                <h4 class="ps-product__price">${brand.item_price }원</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                               </c:forEach>     
-          <!-- =========================================== 상품리스트 끝=====================================================-->
-                
-                                </div>
-                            </div>
-                                    
-                                </div>
-                           </div>
-                       </div>
-                    </div>
-                </div>
+
     
-                
-                
-                
-                
+                   
             </div>
         </section>
 	</div>
@@ -295,8 +181,6 @@
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 		<!-- 푸터 삽입 -->
    
-    
-    
     
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>

@@ -22,7 +22,7 @@ public class ManagerVO {
 	private String     	manager_del_yn; 
 	private String		manager_date;
 	private MultipartFile file;// 파일 처리(input type="file")를 위한 MultipartFile 타입 선언 s
-	
+	private String 		brand_itemCnt; // 브랜드별 아이템수 집계
 	private int 		sellCount;	//판매수량
 	private int 		orderCount;	//주문건수
 	private int 		brandtotal;	//브랜드매출
@@ -177,6 +177,14 @@ public class ManagerVO {
 		this.file = file;
 	}
 
+	public String getBrand_itemCnt() {
+		return brand_itemCnt;
+	}
+
+	public void setBrand_itemCnt(String brand_itemCnt) {
+		this.brand_itemCnt = brand_itemCnt;
+	}
+
 	public int getSellCount() {
 		return sellCount;
 	}
@@ -221,7 +229,8 @@ public class ManagerVO {
 			String manager_brandname, String manager_info, String manager_storecode, String manager_phone,
 			String manager_email, String manager_email_auth, String manager_postcode, String manager_address,
 			String manager_adminauth, String manager_realfile, String manager_original_file, String manager_del_yn,
-			String manager_date, MultipartFile file, int sellCount, int orderCount, int brandtotal, int ranking, String brand_follower) {
+			String manager_date, MultipartFile file, String brand_itemCnt, int sellCount, int orderCount,
+			int brandtotal, int ranking, String brand_follower) {
 		super();
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
@@ -241,6 +250,7 @@ public class ManagerVO {
 		this.manager_del_yn = manager_del_yn;
 		this.manager_date = manager_date;
 		this.file = file;
+		this.brand_itemCnt = brand_itemCnt;
 		this.sellCount = sellCount;
 		this.orderCount = orderCount;
 		this.brandtotal = brandtotal;
@@ -248,7 +258,6 @@ public class ManagerVO {
 		this.brand_follower = brand_follower;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "ManagerVO [manager_idx=" + manager_idx + ", manager_id=" + manager_id + ", manager_pass=" + manager_pass
@@ -258,11 +267,13 @@ public class ManagerVO {
 				+ ", manager_postcode=" + manager_postcode + ", manager_address=" + manager_address
 				+ ", manager_adminauth=" + manager_adminauth + ", manager_realfile=" + manager_realfile
 				+ ", manager_original_file=" + manager_original_file + ", manager_del_yn=" + manager_del_yn
-				+ ", manager_date=" + manager_date + ", file=" + file + ", sellCount=" + sellCount + ", orderCount="
-				+ orderCount + ", brandtotal=" + brandtotal + ", ranking=" + ranking + ", brand_follower="
-				+ brand_follower + "]";
+				+ ", manager_date=" + manager_date + ", file=" + file + ", brand_itemCnt=" + brand_itemCnt
+				+ ", sellCount=" + sellCount + ", orderCount=" + orderCount + ", brandtotal=" + brandtotal
+				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + "]";
 	}
 
+	
+	
 	
 
 	

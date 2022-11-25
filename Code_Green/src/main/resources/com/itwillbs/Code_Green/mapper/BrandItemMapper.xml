@@ -3,21 +3,94 @@
 <mapper namespace="com.itwillbs.Code_Green.mapper.BrandItemMapper">
 
 
-	<!-- 메인페이지 / 브랜드정보 및 브랜드리스트(한글-영어-숫자 순) 출력 -->
+	<!-- 메인페이지 / 브랜드정보 및 브랜드리스트(한글-영어-숫자 순) 출력(전체브랜드,브랜드별정보담음) -->
 	<select id="selectBrandList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT * 
-			FROM manager
-			WHERE manager_adminauth = 'Y'
-			ORDER BY 
-				(
-				CASE 
-		          WHEN ASCII(SUBSTRING(manager_brandname,1)) BETWEEN 48 AND 57 THEN 3
-				  WHEN ASCII(SUBSTRING(manager_brandname,1)) > 123 THEN 1 ELSE 2 END
-				), manager_brandname
+		SELECT  m.manager_idx,
+				m.manager_brandname,
+		        m.manager_info,
+		        m.MANAGER_ADMINAUTH,
+		        m.manager_original_file,
+				m.manager_del_yn,
+		        cnt.brand_itemCnt
+			FROM manager m
+			LEFT JOIN 
+				(select re_manager_idx, count(*) AS brand_itemCnt FROM item GROUP BY re_manager_idx ) AS cnt
+			ON 
+				m.manager_idx = cnt.re_manager_idx
+			WHERE 
+				m.manager_adminauth = 'Y' 
+				AND m.manager_del_yn = 'N'
+			ORDER BY (
+						CASE 
+					        WHEN ASCII(SUBSTRING(manager_brandname,1)) BETWEEN 48 AND 57 THEN 3
+							WHEN ASCII(SUBSTRING(manager_brandname,1)) > 123 THEN 1 ELSE 2 END
+					  ), manager_brandname 
+	</select>
+	
+	<!-- 개별 브랜드 정보(한개브랜드) -->
+	<select id="selectBrandDetail" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT  m.manager_idx,
+				m.manager_brandname,
+		        m.manager_info,
+		        m.MANAGER_ADMINAUTH,
+		        m.manager_original_file,
+				m.manager_del_yn,
+		        cnt.brand_itemCnt,
+		        f.brand_follower
+			FROM manager m
+			LEFT JOIN 
+				(select re_manager_idx, count(*) AS brand_itemCnt FROM item GROUP BY re_manager_idx ) AS cnt
+			ON 
+				m.manager_idx = cnt.re_manager_idx
+			LEFT JOIN 
+                (SELECT rf_manager_idx,count(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f
+			ON m.manager_idx = f.rf_manager_idx
+			WHERE 
+				m.manager_adminauth = 'Y' 
+				AND m.manager_del_yn = 'N'
+				AND m.manager_idx = #{manager_idx}
+			
 	</select>
 
-
-
+	<!-- 브랜드별 아이템리스트 출력 -->
+	<select id="selectBrandItemList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT     i.item_idx, 
+				   i.re_manager_idx,
+				   i.item_name,
+				   i.item_info,
+				   i.item_packing, 
+				   i.item_category, 
+				   i.item_price,
+				   i.item_sale, 
+				   i.item_stock, 
+				   i.item_status,  
+				   i.item_readcount,  
+				   i.item_date, 
+				   f.file1,
+				   m.manager_brandname,
+				   m.manager_original_file,
+				   round(truncate( a.board_star_score,1),0) AS score,
+				   truncate( a.board_star_score,1) AS board_star_score,
+                   cnt.brand_itemCnt 
+				FROM item i 
+            	LEFT JOIN file_item f 
+              		ON i.item_idx = f.rf_item_idx 
+			 	JOIN manager m 
+               		ON i.re_manager_idx =  m.manager_idx
+            	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) AS board_star_score
+						  	FROM board b join board_star s ON b.board_idx = s.rf_board_idx
+						 	GROUP BY b.BOARD_ITEM_IDX) a 
+                	ON i.item_idx = a.BOARD_ITEM_IDX 
+				LEFT JOIN (select re_manager_idx, count(*) AS brand_itemCnt FROM item GROUP BY re_manager_idx ) AS cnt
+					ON m.manager_idx = cnt.RE_MANAGER_IDX
+			 WHERE f.file1 NOT LIKE '%상세%' 
+			 <if test="manager_idx!=0">
+			 	AND i.re_manager_idx = #{manager_idx}
+			 </if>
+			 ORDER BY i.item_idx DESC
+		
+	</select>
 
 	<!-- 브랜드 팔로우 유무 -->
 	<select id="selectBrandFollow" resultType="integer">

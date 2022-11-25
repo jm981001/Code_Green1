@@ -33,6 +33,7 @@ public class ItemVO {
 	private String heart_idx;
 	private String score;
 	private String brand_itemCnt;
+	private String manager_original_file;
 	private MultipartFile file_1;
 	private MultipartFile file_2;
 	 
@@ -204,11 +205,18 @@ public class ItemVO {
 	public void setScore(String score) {
 		this.score = score;
 	}
+	
 	public String getBrand_itemCnt() {
 		return brand_itemCnt;
 	}
 	public void setBrand_itemCnt(String brand_itemCnt) {
 		this.brand_itemCnt = brand_itemCnt;
+	}
+	public String getManager_original_file() {
+		return manager_original_file;
+	}
+	public void setManager_original_file(String manager_original_file) {
+		this.manager_original_file = manager_original_file;
 	}
 	public MultipartFile getFile_1() {
 		return file_1;
@@ -227,13 +235,13 @@ public class ItemVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	public ItemVO(int item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
 			String item_category, String item_price, String item_sale, String item_stock, String item_status,
 			String item_readcount, String item_date, String file1, String file2, String manager_brandname,
 			String manager_info, String board_star_score, String count, String star1, String star2, String star3,
 			String star4, String star5, String heart, String member_id, String member_idx, String heart_idx,
-			String score, String brand_itemCnt, MultipartFile file_1, MultipartFile file_2) {
+			String score, String brand_itemCnt, String manager_original_file, MultipartFile file_1,
+			MultipartFile file_2) {
 		super();
 		this.item_idx = item_idx;
 		this.re_manager_idx = re_manager_idx;
@@ -264,9 +272,11 @@ public class ItemVO {
 		this.heart_idx = heart_idx;
 		this.score = score;
 		this.brand_itemCnt = brand_itemCnt;
+		this.manager_original_file = manager_original_file;
 		this.file_1 = file_1;
 		this.file_2 = file_2;
 	}
+	
 	@Override
 	public String toString() {
 		return "ItemVO [item_idx=" + item_idx + ", re_manager_idx=" + re_manager_idx + ", item_name=" + item_name
@@ -277,9 +287,11 @@ public class ItemVO {
 				+ ", manager_info=" + manager_info + ", board_star_score=" + board_star_score + ", count=" + count
 				+ ", star1=" + star1 + ", star2=" + star2 + ", star3=" + star3 + ", star4=" + star4 + ", star5=" + star5
 				+ ", heart=" + heart + ", member_id=" + member_id + ", member_idx=" + member_idx + ", heart_idx="
-				+ heart_idx + ", score=" + score + ", brand_itemCnt=" + brand_itemCnt + ", file_1=" + file_1
-				+ ", file_2=" + file_2 + "]";
+				+ heart_idx + ", score=" + score + ", brand_itemCnt=" + brand_itemCnt + ", manager_original_file="
+				+ manager_original_file + ", file_1=" + file_1 + ", file_2=" + file_2 + "]";
 	}
+	
+	
 	
 	
 	

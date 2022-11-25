@@ -32,9 +32,34 @@ public class BrandItemController {
 	}
 	
 	
+	@PostMapping(value = "/GetBrandItemList.br")
+	public String getBrandItemList(@RequestParam(defaultValue = "0") int manager_idx,Model model) {
+		
+		System.out.println(manager_idx);
+		
+		List<ItemVO> brandItemList = service.selectBrandItemList(manager_idx);
+		List<ManagerVO> brandList = service.selectBrandList();
+		ManagerVO brandDetail = service.selectBrandDetail(manager_idx);
+		
+		model.addAttribute("brandItemList", brandItemList);
+		model.addAttribute("brandList", brandList);
+		model.addAttribute("brandDetail", brandDetail);
+		
+		System.out.println(brandItemList);
+		return "item/brand_inner";
+	}
 	
-	
-	
+	@PostMapping(value = "/GetWholeItemList.br")
+	public String getWholeItemList(Model model) {
+		
+		List<ItemVO> brandItemList = service.selectBrandItemList(0);
+		List<ManagerVO> brandList = service.selectBrandList();
+		
+		model.addAttribute("brandItemList", brandItemList);
+		model.addAttribute("brandList", brandList);
+		
+		return "item/brand_whole";
+	}
 	
 	// 브랜드 팔로우 유무체크
 	@PostMapping(value = "/FollowCheck.br")

@@ -14,6 +14,12 @@ public interface BrandItemMapper {
 
 	// 브랜드 팔로우 유무확인
 	int selectBrandFollow(@Param("manager_idx")int manager_idx, @Param("member_id") String member_id);
+	
+	// 브랜드별 아이템리스트 출력
+	List<ItemVO> selectBrandItemList(@Param("manager_idx")int manager_idx);
+	
+	// 브랜드별 정보 및 아이템수 출력
+	ManagerVO selectBrandDetail(int manager_idx);
 
 
 }
