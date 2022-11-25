@@ -9,7 +9,7 @@
                             <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
 		                     	<!-- 브랜드별 로고띄우기 -->
-	                     		   <img src="<%=request.getContextPath() %>/resources/brand_logo/winkya.jpg">
+	                     		   <img src="<%=request.getContextPath() %>/resources/img/winkya.jpg">
 		                           <div class="brand_info">
 		                           		브랜드별 상품을<br>
 		                           		편리하게 둘러보세요!<br><br>
