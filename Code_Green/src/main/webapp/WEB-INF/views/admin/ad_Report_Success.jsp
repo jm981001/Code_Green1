@@ -154,14 +154,14 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="ad_Report_Success?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="ad_Report_Success?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i></a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="ad_Report_Success?pageNum=${i }">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="ad_Report_Success?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="ad_Report_Success?pageNum=${pageInfo.pageNum + 1}"><%}%><i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="ad_Report_Success?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->

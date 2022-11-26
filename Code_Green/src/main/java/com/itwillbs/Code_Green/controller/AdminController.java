@@ -177,6 +177,8 @@ public class AdminController {
 			
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 //			System.out.println("회원목록" + memberList);
 			return "admin/ad_member_Manage"; 
 			
@@ -320,7 +322,9 @@ public class AdminController {
 					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 			
 			model.addAttribute("managerList", managerList);
-			model.addAttribute("pageInfo", pageinfo); 
+			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			System.out.println(managerList);
 			return "admin/ad_Manager_manage";
 		}
@@ -372,6 +376,8 @@ public class AdminController {
 			
 			model.addAttribute("managerAuthList", managerAuthList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			System.out.println(managerAuthList);
 			return "admin/ad_Manager_auth";
 		}
@@ -481,7 +487,8 @@ public class AdminController {
 			
 			model.addAttribute("itemQnaList", itemQnaList);
 			model.addAttribute("pageInfo", pageinfo);
-			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			
 			
 			return "admin/ad_Item_Qna";
@@ -533,7 +540,8 @@ public class AdminController {
 			
 			model.addAttribute("itemAnswerList", itemAnswerList);
 			model.addAttribute("pageInfo", pageinfo);
-			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			
 			
 			return "admin/ad_Item_Answer";
@@ -657,6 +665,8 @@ public class AdminController {
 			
 			model.addAttribute("OneQnaList", OneQnaList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 //			System.out.println("야야야야야" + OneQnaList);
 			
 				return "admin/ad_One_Board";
@@ -756,6 +766,8 @@ public class AdminController {
 			
 			model.addAttribute("OneQnaAnswerList", OneQnaAnswerList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 //					System.out.println("야야야야야" + OneQnaList);
 			
 				return "admin/ad_One_Answer";
@@ -878,6 +890,8 @@ public class AdminController {
 			
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 //			System.out.println(boardList);
 			
 			return "admin/ad_Board_Management";
@@ -1018,6 +1032,8 @@ public class AdminController {
 			
 			model.addAttribute("reviewList", reviewList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			
 			return "admin/ad_Board_Review";
 		}
@@ -1095,6 +1111,8 @@ public class AdminController {
 			
 			model.addAttribute("recipeList", recipeList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			
 			return "admin/ad_Board_Recipe";
 		}
@@ -1176,6 +1194,8 @@ public class AdminController {
 			
 			model.addAttribute("reportList", reportList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 //			System.out.println(reportList);
 			return "admin/ad_Report_Management";
 		}
@@ -1226,6 +1246,8 @@ public class AdminController {
 			
 			model.addAttribute("reportSuccessList", reportSuccessList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 					System.out.println(reportSuccessList);
 			return "admin/ad_Report_Success";
 		}
@@ -1373,6 +1395,7 @@ public class AdminController {
 			System.out.println(noticeList);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageInfo", pageinfo);
+			
 			
 			return "admin/ad_Notice";
 		}
