@@ -45,6 +45,9 @@ public interface CommunityMapper {
 	// 추천수 카운팅 
 	int countBoardBest(int rf_board_idx);
 
+	// 댓글 수 카운팅
+	int countReply(int reply_bo_ref);
+	
 	// 댓글 쓰기 (기본)
 	int insertReply(ReplyVO replyVO);
 
@@ -86,9 +89,9 @@ public interface CommunityMapper {
 
 	// 글 수정하기 -> 글수정
 	int updateBoard(BoardVO board);
+	
+	
 
-//	// 글 수정폼 페이지에 파일데이터 가져오기
-//	File_boardVO selectFileModify(int board_idx);
 
 	
 	

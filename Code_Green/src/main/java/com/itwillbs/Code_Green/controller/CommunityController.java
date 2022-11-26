@@ -520,7 +520,14 @@ public class CommunityController {
 		return count;
 	}
 		
-	
+	//------------------------------- 댓글수 카운팅 -------------------------------------------
+	@ResponseBody
+	@PostMapping("/ReplyCounting.bo")
+	public int ReplyCounting(int reply_bo_ref) {
+		
+		int rCount = service.countReply(reply_bo_ref);
+		return rCount;
+	}
 	
 	
 	//-------------------------------- 댓글 작성 -------------------------------------------

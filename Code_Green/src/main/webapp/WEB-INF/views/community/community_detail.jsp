@@ -132,6 +132,7 @@
 // ============================ 페이지 로딩시 댓글목록 불러오기 ===================================		
 	$(document).ready(function(){
 		getReplyList();			
+		replyCount();
 	});
 
 // ================================== 댓글목록 출력 ==========================================	
@@ -165,7 +166,7 @@
 							space += '<img src="<%=request.getContextPath() %>/resources/img/re.png" width="20px" height="20px">&nbsp;';
 						}
 						
-						comments +=  space + '<span id="commentPart"><b>'+this.reply_id+'</b>&nbsp;&nbsp;&nbsp;<small>' + this.reply_date+ '</small>';
+						comments +=  space + '<span id="commentPart"><b>'+this.reply_id+'</b>&nbsp;<img src="/Code_Green/resources/img/turtleturtle.png" width="25px" height="25px"/>&nbsp;&nbsp;&nbsp;<small>' + this.reply_date+ '</small>';
 						
 						if(this.reply_re_lev > 0) {
 							var arrow = '&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -214,7 +215,8 @@
 				data: $("#form").serialize(),
 				datatype:"json",
 				success:function(){
-					getReplyList();	
+					getReplyList();
+					replyCount();
 				},
 			})
 	   }
@@ -255,6 +257,7 @@
 						},
 						success: function(result){
 							getReplyList();					// 댓글목록불러오는 함수
+							replyCount();
 							$("#reply_content").val('');
 							// 댓글칸 비우기
 						}
@@ -265,6 +268,24 @@
 				 }
 			  }
 			})
+			
+			// 댓글 수 카운팅
+			function replyCount(){
+			
+				$.ajax({
+					url: "ReplyCounting.bo",
+					type: "POST",
+					data:{
+						reply_bo_ref: ${cBoard.board_idx}
+					},
+					success: function(rCount){
+						$(".reply_count").html(rCount);
+					},
+				})
+			};
+			
+			// 로딩시 자동실행되서 댓글수 카운팅
+			replyCount();
 	});
 
 // ============================ 오른쪽 사이드바: 새글쓰기 로그인여부 확인 ===================================
@@ -302,7 +323,8 @@
 		                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
 	                            / ${cBoard.board_id }
 	                            / 조회수 ${cBoard.board_readcount }
-	                            / 댓글(${cBoard.reply_cnt }) 
+<%-- 	                            / 댓글(${cBoard.reply_cnt })  --%>
+	                            / 댓글(<span class="reply_count"></span>) 
 	                            / 추천수 <span class="bestcnt_count"></span>
                             </p>
                             </div>
@@ -374,13 +396,13 @@
 	                        <button class="ps-btn" id="replyWrite"> 댓글쓰기</button>
 	                    </div>
 	            <!-- 댓글쓰기 영역 -->
-                <h4> 댓글(${cBoard.reply_cnt }) </h4>
+                <h4> 댓글(<span class="reply_count"></span>) </h4>
        
           
                 
                 <div class="ps-block--comment">
 <!--                     <div class="ps-block__thumbnail"> -->
-<!--                     	<img src="http://1.gravatar.com/avatar/af7935f33b10cec23f77b8d9717641df?s=70&amp;d=mm&amp;r=g"> -->
+<!--                     	<img src="/Code_Green/resources/img/turtle4searchbox.png" width="25px" height="25px"/> -->
 <!--                     </div> -->
 	                    <div class="ps-block__content" id="replyList"></div>
                 </div>

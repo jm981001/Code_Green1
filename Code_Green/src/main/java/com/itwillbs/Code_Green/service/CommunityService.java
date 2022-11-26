@@ -69,6 +69,11 @@ public class CommunityService {
 		return mapper.countBoardBest(rf_board_idx);
 	}
 	
+	// 댓글 수 카운팅 
+	public int countReply(int reply_bo_ref) {
+		return mapper.countReply(reply_bo_ref);
+	}
+	
 	// 댓글 쓰기등록 (기본)
 	public int writeReply(ReplyVO replyVO) {
 		System.out.println(replyVO);
@@ -144,6 +149,8 @@ public class CommunityService {
 	public int modifyBoard(BoardVO board) {
 		return mapper.updateBoard(board);
 	}
+
+	
 
 	
 

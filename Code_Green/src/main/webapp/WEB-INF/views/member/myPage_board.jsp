@@ -67,6 +67,9 @@
                                                     <th>날짜</th>
                                                 </tr>
                                             </thead>
+                                            <c:if test="${empty BoardList }">
+                                            	<td colspan="4">작성글이 없습니다.</td>
+                                            </c:if>
                                              <c:forEach var="board" items="${BoardList }">
 										        <tbody>  
 										            <tr class="item">  

@@ -30,6 +30,13 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/market-place-1.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+<style>
+	#admin_tr{
+		background-color: #fcfdf3;
+		font-weight: bold;
+	}
+	
+</style>
 </head>
 <script>
 	// 글쓰기 버튼 클릭시 (로그인 했거나 ,관리자여야 작동)
@@ -94,7 +101,14 @@
 		                                </thead>
 		                                <tbody>
 		                               	 <c:forEach var="board" items="${communityList }">
-		                                    <tr>
+		                               	<c:choose>
+		                               		<c:when test="${board.board_id eq 'admin' }">
+		                               			<tr id="admin_tr">
+		                               		</c:when>
+		                               		<c:otherwise>
+		                               			<tr>
+		                               		</c:otherwise>
+		                               	</c:choose>
 		                                        <td>[${board.board_category }]</td>
 		                                        
 		                                        <td>

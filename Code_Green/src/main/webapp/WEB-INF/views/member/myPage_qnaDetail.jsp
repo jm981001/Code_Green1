@@ -106,6 +106,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:if test="${empty mantomanList }">
+                                            	<td colspan="4">문의내역이 없습니다.</td>
+                                            </c:if>
+                                            
                                             	<c:forEach var="mtmList" items="${mantomanList }">
                                                 <tr>
                                                     <td>${mtmList.qna_category }</td>

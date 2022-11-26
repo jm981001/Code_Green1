@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>MyPage</title>
+<title>마이페이지 - 베지터틀</title>
  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
@@ -98,12 +98,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:if test="${empty followList }">
+                                            	<tr><td colspan="3">현재 팔로우중인 브랜드가 없습니다.</td></tr>
+                                            </c:if>
                                               <c:forEach var="follow" items="${followList }">
-                                                <tr>
-                                                    <td><img src="<%=request.getContextPath() %>/resources/img/brand_logo/${follow.manager_original_file}" width="140px" height="40px"></td>
-                                                    <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">  ${follow.store_follower_cnt }</i></td>
-                                                    <td><button id="unfollowBtn" onclick="unFollow(${follow.rf_manager_idx})"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
-                                                </tr>
+                                                	 <tr>
+	                                                    <td><img src="<%=request.getContextPath() %>/resources/img/brand_logo/${follow.manager_original_file}" width="140px" height="40px"></td>
+	                                                    <td>${follow.manager_brandname }<br><i class="fi fi-sr-following">  ${follow.store_follower_cnt }</i></td>
+	                                                    <td><button id="unfollowBtn" onclick="unFollow(${follow.rf_manager_idx})"><i class="fi fi-rr-cross-circle">unfollow</i></button></td>
+	                                                 </tr>
                                                </c:forEach>
                                             </tbody>
                                         </table>

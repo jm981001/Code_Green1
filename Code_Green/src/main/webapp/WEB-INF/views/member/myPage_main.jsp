@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>마이페이지 메인</title>
+<title>마이페이지 - 베지터틀</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
@@ -93,34 +93,86 @@
                 	 						<li class="brandlist-li-head"><i class="fi fi-rs-boxes"></i><br>주문내역</li>
                 	 						<li class="brandlist-li-head"><i class="fi fi-sr-heart"></i><br>찜상품</li>
                 	 						
-                	 						<li class="brandlist-li">
-                	 							<a href="myPageEmoney.my?member_id=${sessionScope.sId}">${myCountInfo.coin_total }원</a>
-                	 						</li>
+                	 						<!-- 적립금 -->
                 	 						 <c:choose>
-                                              	<c:when test="${empty myCountInfo.order_count}">
+                                              	<c:when test="${empty myCountInfo.coin_total || myCountInfo.coin_total eq ''}">
+                                              		<li class="brandlist-li"><a href="myPageEmoney.my?member_id=${sessionScope.sId}">0원</a></li>
+                                              	</c:when>
+                                              	<c:otherwise>
+	                	 							<li class="brandlist-li">
+	                	 								<a href="myPageEmoney.my?member_id=${sessionScope.sId}">${myCountInfo.coin_total }원</a>
+	                	 							</li>
+                	 						</c:otherwise>
+                	 						</c:choose>
+                	 						
+                	 						<!-- 주문내역 -->
+                	 						 <c:choose>
+                                              	<c:when test="${empty myCountInfo.order_count || myCountInfo.order_count eq ''}">
                                               		<li class="brandlist-li"><a href="myPage_buyList">0건</a></li>
                                               	</c:when>
                                               	<c:otherwise>
                                               		<li class="brandlist-li"><a href="myPage_buyList">${myCountInfo.order_count}건</a></li>
                                               	</c:otherwise>
                                              </c:choose>
-                	 						<li class="brandlist-li">
-                	 							<a href="myPageWishList.my?member_id=${sessionScope.sId }">${myCountInfo.heart_count }개</a>
-                	 						</li>
-                	 						
+                                             
+                                             <!-- 찜상품 -->
+                                             <c:choose>
+                                             	<c:when test="${empty myCountInfo.heart_count || myCountInfo.heart_count eq ''}">
+                                             		<li class="brandlist-li">
+                                             			<a href="myPageWishList.my?member_id=${sessionScope.sId }">0개</a>
+                                             		</li>
+                                             	</c:when>
+                                             	<c:otherwise>
+		                	 						<li class="brandlist-li">
+		                	 							<a href="myPageWishList.my?member_id=${sessionScope.sId }">${myCountInfo.heart_count }개</a>
+		                	 						</li>
+                                             	</c:otherwise>	
+											</c:choose>
+											                	 						
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-edit"></i><br>작성글</li>
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-shop"></i><br>팔로우</li>
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-question-square"></i><br>1:1문의글</li>
                 	 						
-                	 						<li class="brandlist-li">
-                	 							<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">${myCountInfo.board_count }개</a>
-                	 						</li>
-                	 						<li class="brandlist-li">
-                	 							<a href="myPageFollowingList.my">${myCountInfo.follow_count } 브랜드</a>
-                	 						</li>
-                	 						<li class="brandlist-li">
-                	 							<a href="myPageQnaDetail.my">${myCountInfo.qna_count }개</a>
-                	 						</li>
+                	 						
+                	 						<!-- 작성글 -->
+                	 						<c:choose>
+                	 							<c:when test="${empty myCountInfo.board_count}">
+                	 								<li class="brandlist-li">
+                	 									<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">0개</a>
+                	 								</li>
+                	 							</c:when>
+                	 							<c:otherwise>
+		                	 						<li class="brandlist-li">
+		                	 							<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">${myCountInfo.board_count }개</a>
+		                	 						</li>
+                	 							</c:otherwise>
+                	 						</c:choose>
+                	 						
+                	 						<!-- 팔로우 -->
+                	 						<c:choose>
+	                	 						<c:when test="${empty myCountInfo.follow_count}">
+	                	 							<li class="brandlist-li">
+	                	 								<a href="myPageFollowingList.my">0 브랜드</a>
+	                	 							</li>
+	                	 						</c:when>
+	                	 						<c:otherwise>
+		                	 						<li class="brandlist-li">
+		                	 							<a href="myPageFollowingList.my">${myCountInfo.follow_count } 브랜드</a>
+		                	 						</li>
+	                	 						</c:otherwise>
+                	 						</c:choose>
+                	 						
+                	 						<!-- 1:1문의글-->
+                	 						<c:choose>
+	                	 						<c:when test="${empty myCountInfo.qna_count}">
+	                	 							<li class="brandlist-li"><a href="myPageQnaDetail.my">0개</a></li>
+	                	 						</c:when>
+	                	 						<c:otherwise>
+		                	 						<li class="brandlist-li">
+		                	 							<a href="myPageQnaDetail.my">${myCountInfo.qna_count }개</a>
+		                	 						</li>
+	                	 						</c:otherwise>
+                	 						</c:choose>
                 						</ul>
                                     </div>
                                     <!-- 그리드 끝 -->

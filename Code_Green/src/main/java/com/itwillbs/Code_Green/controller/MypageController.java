@@ -181,7 +181,6 @@ public class MypageController {
 		
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-		
 		model.addAttribute("followList", followList);
 		model.addAttribute("pageInfo", pageInfo);
 		

@@ -11484,9 +11484,9 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #000;
 }
 
+/* 지영 */
 .ps-table--vendor tbody tr td a {
   color: #000;
-  color: #0066cc;
 }
 
 .ps-table--vendor tbody tr td a:hover {

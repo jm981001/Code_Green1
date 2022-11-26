@@ -57,6 +57,9 @@
 								<div class="table-responsive">
 									<table class="table ps-table--whishlist ps-table--responsive">
 										<tbody>
+											<c:if test="${empty WishList }">
+                                            	<tr><td colspan="5">현재 찜한 상품이 없습니다.</td></tr>
+                                            </c:if>
 										   <c:forEach var="item" items="${WishList }">
 										
 											<tr>
