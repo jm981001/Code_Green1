@@ -89,7 +89,14 @@ public interface ManagerMapper {
 	public int selectOrderListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 
+	  //정민 매출 3순위
+	   public List<ItemVO> getTop3(String sId);
 
+	   //정민 팔로우 수
+	   public int follow(String sId);
+
+	 //총매출,총주문건수
+	   public ManagerVO selectTotalMoneyOrder(String sId);
 
 
 

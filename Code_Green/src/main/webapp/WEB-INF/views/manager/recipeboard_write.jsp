@@ -1,9 +1,9 @@
-<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,14 +25,39 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-</head>
 
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+
+
+	function myItem(value) {
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_idx';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+
+	
+
+
+</script>
+</head>
 <body>
     <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
-        <div class="header__center"><a class="ps-logo" href="#"><img src="../img/logo.png" alt=""></a></div>
+        <div class="header__center"><a class="ps-logo" href="#"><img src="img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
     <aside class="ps-drawer--mobile">
@@ -42,7 +67,7 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                   				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                 				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -60,20 +85,20 @@
             <div class="ps-sidebar">
                 <div class="ps-sidebar__top">
                     <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="../img/user/admin.jpg" alt="" /></div>
+                        <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
                             <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>Earning</small>
+                    <div class="ps-block--earning-count"><small>수익</small>
                         <h3>$12,560.55</h3>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -82,112 +107,113 @@
 <!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-                        
-                        </ul>
+	                     
+	                     </ul>
                     </div>
                     <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="../img/logo.png" alt="">
-                              <p>&copy;2022 CODE GREEN. <br/> All rights reversed.</p>
+                        <div class="ps-copyright"><img src="img/logo.png" alt="">
+                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ps-main__wrapper">
+     <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>답변관리</h3>
-<!--                     <p>Martfury Customers</p> -->
+                    <h3>레시피작성</h3>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
-            </header>
+             </header>
             <section class="ps-items-listing">
-                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
+<%--                     <div class="ps-section__actions"><a class="ps-btn success" href="recipeboard_write?manager_id=${sessionScope.sId }"><i class="icon icon-plus mr-2"></i>레시피등록</a></div> --%>
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
                         <form class="ps-form--filter" action="qnaboard_list" method="get">
                             <div class="ps-form__left">
-                                <div class="form-group">
-                                    <select class="ps-select"name="searchType">
-                                        <option value="qna_subject">제목</option>
-                                        <option value="qna_category">답변상태</option>
-                                        <option value="qna_id">작성자</option>
-                                        <option value="qna_answer">답변</option>
-                                    </select>
-                                </div>
+<!--                                 <div class="form-group"> -->
+<!--                                     <select class="ps-select"name="searchType"> -->
+<!--                                     	<option value="board_idx">글번호</option> -->
+<!--                                         <option value="board_subject">제목</option> -->
+<!--                                         <option value="board_content">내용</option> -->
+<!--                                         <option value="board_date">작성일</option> -->
+<!--                                         <option value="item_name">사용한상품</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
                             </div>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
+                           <div class="form-group">
+<!--                                     <input class="form-control" type="text" name="keyword" placeholder="Search..." /> -->
                                 </div>
                             <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
+<!--                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button> -->
                             </div>
                         </form>
                 </div>
                     </div>
-                <div class="ps-section__content">
-                    <div class="table-responsive">
-                        <table class="table ps-table">
-                            <thead>
-                                <tr>
-                                	
-                                	<th>문의번호</th>
-                                    <th>질문분류</th>
-                                   	<th>제목</th>
-                                    <th>작성자</th>
-                                     <th>처리상태</th>
-<!--                                      <th>답변</th> -->
-                                    <th>작성일</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                            
-                              <c:forEach var="qnaList" items="${QnaBoardList }">
-                                <tr>
-                                	<td>${qnaList.qna_idx }</td>
-                                	<td>${qnaList.qna_type }</td>
-                                    <td onclick="location.href='qnaboard_detail?qna_idx=${qnaList.qna_idx }'"><strong>${qnaList.qna_subject }</strong></td>
-                                    <td>${qnaList.qna_id }</td>
-                                    <td>${qnaList.qna_category }</td>
-                                    <td>${qnaList.qna_date }</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="qnaboard_delete?qna_idx=${qnaList.qna_idx }">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                            
-                              <div class="ps-section__footer">
-                   <!-- 페이징 버튼들 시작 -->
-				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-				                    <div class="ps-pagination">
-				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				                               <c:choose>
-				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
-				                               </c:choose>
-				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-				                        </ul>
-				                    </div>
-				  <!-- 페이징 버튼들 끝 -->
-
-                </div>
+             
+             
+             
+     <!-- 블로그 본문 시작  -->
+              		<div class="ps-post__content">
+                   		<div class="ps-block--vendor-dashboard">
+                    		<div class="ps-block__content">
+	                        	<div class="table-responsive">
+                    				<form action="recipeboard_writePro.bo" method="post" enctype="multipart/form-data" id="sub_form">
+	                           		 <table class="table ps-table ps-table--vendor">
+	                                    <tr>
+	                                        <td>작성자</td>
+	                                        <td><input type="text" id="board_id" name="board_id" value="${sessionScope.sId }" readonly="readonly" style="width: 70%"></td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td>제목</td>
+	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%" required="required"></td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td>내용</td>
+	                                    	<td colspan="2">
+	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60" required="required" placeholder=
+"* 썸네일, 본문에 업로드할 사진 한장씩 올려주세요.
+* 내용엔 간단한 설명글을 올려주세요."></textarea>
+	                                    		
+	                                    	</td>
+	                                    </tr>
+	                                   <tr>
+	                                   		<td>사용한 상품</td>
+	                                   		<td>
+		                                   		<select class="form-select" aria-label="Default select example" onchange="myItem(this.value)" style="float: none;">
+												  	<option value="">선택하세요</option>
+	                                   				<c:forEach  var="myItem" items="${myItem }">
+												  		<option value="${myItem.item_idx }">${myItem.item_idx } ${myItem.item_name }</option>
+			                                   		</c:forEach>
+												</select>
+	                                   		</td>
+	                                   </tr>
+	                                   <!-- 파일 업로드 부분 -->
+	                                    <tr>
+	                                    	<td>썸네일</td>
+	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1" required="required"></td>
+	                                    </tr>
+	                                    <tr>
+	                                    	<td>본문 사진</td>
+	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2" required="required"></td>
+	                                    </tr>
+										<tr> 
+											<td colspan="2">
+												<input type="submit" value="글 등록" id="submitBtn">
+											</td> 
+										</tr>
+	                            	</table>
+                     			 </form> 
+                     					
+                       		   </div>
+                        	</div>
+                   		  </div>
+                   		</div>
+        
+       
+               </div>
             </section>
         </div>
     </main>
@@ -198,7 +224,6 @@
     <script src="/Code_Green/resources/plugins_manager/select2/dist/js/select2.full.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
-    <!-- custom code-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>
 

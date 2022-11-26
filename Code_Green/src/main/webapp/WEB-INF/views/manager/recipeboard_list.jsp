@@ -76,8 +76,8 @@
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
@@ -101,17 +101,18 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
             </header>
             <section class="ps-items-listing">
-                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
+                    <div class="ps-section__actions"><a class="ps-btn success" href="recipeboard_write?manager_id=${sessionScope.sId }"><i class="icon icon-plus mr-2"></i>레시피등록</a></div>
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
                         <form class="ps-form--filter" action="qnaboard_list" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select"name="searchType">
-                                        <option value="qna_subject">제목</option>
-                                        <option value="qna_category">답변상태</option>
-                                        <option value="qna_id">작성자</option>
-                                        <option value="qna_answer">답변</option>
+                                    	<option value="board_idx">글번호</option>
+                                        <option value="board_subject">제목</option>
+                                        <option value="board_content">내용</option>
+                                        <option value="board_date">작성일</option>
+                                        <option value="item_name">사용한상품</option>
                                     </select>
                                 </div>
                             </div>
@@ -130,29 +131,27 @@
                             <thead>
                                 <tr>
                                 	
-                                	<th>문의번호</th>
-                                    <th>질문분류</th>
+                                	<th>글번호</th>
                                    	<th>제목</th>
-                                    <th>작성자</th>
-                                     <th>처리상태</th>
-                                     <th>답변</th>
+                                     <th>사용한상품</th>
                                     <th>작성일</th>
                                    
                                 </tr>
                             </thead>
                             <tbody>
                             
-                              <c:forEach var="qnaList" items="${QnaBoardList }">
+                              <c:forEach var="recipeList" items="${recipeList }">
                                 <tr>
-                                	<td>${qnaList.qna_idx }</td>
-                                	<td>${qnaList.qna_type }</td>
-                                    <td onclick="location.href='qnaboard_detail?qna_idx=${qnaList.qna_idx }'"><strong>${qnaList.qna_subject }</strong></td>
-                                    <td>${qnaList.qna_id }</td>
-                                    <td>${qnaList.qna_category }</td>
-                                    <td>${qnaList.qna_date }</td>
+                                	<td>${recipeList.board_idx }</td>
+                                    <td><strong>${recipeList.board_subject }</strong></td>
+                                    <td>${recipeList.item_name }</td>
+                                    <td>${recipeList.board_date }</td>
                                     <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="qnaboard_delete?qna_idx=${qnaList.qna_idx }">Delete</a></div>
+                                       <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="recipeboard_modify?manager_id=${sessionScope.sId }&board_idx=${recipeList.board_idx}">수정</a>
+                                            <a class="dropdown-item" href="recipeboard_delete?manager_id=${sessionScope.sId }">삭제</a>
+                                        </div>
                                         </div>
                                     </td>
                                 </tr>

@@ -2,26 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <script>
-	function logout() {
-		let result = confirm("로그아웃 하시겠습니까?");
-		
-		if(result) {
-			location.href = "MemberLogout.me";
-		}
-	}
+   function logout() {
+      let result = confirm("로그아웃 하시겠습니까?");
+      
+      if(result) {
+         location.href = "MemberLogout.me";
+      }
+   }
 </script>
 
 <style>
-	/* 	거북스 넣어봤스...히히 */
-	.header--organic .ps-form--quick-search input::-webkit-input-placeholder{
-	
-	    background-image: url("/Code_Green/resources/img/turtle4searchbox.png");
-	    background-repeat: no-repeat;
-		background-size: 27px 27px;
-	    background-position:  40px center;
-	    background-repeat: no-repeat;
-	    text-indent: 0;
-	}
+   /*    거북스 넣어봤스...히히 */
+   .header--organic .ps-form--quick-search input::-webkit-input-placeholder{
+   
+       background-image: url("/Code_Green/resources/img/turtle4searchbox.png");
+       background-repeat: no-repeat;
+      background-size: 27px 27px;
+       background-position:  40px center;
+       background-repeat: no-repeat;
+       text-indent: 0;
+   }
 
 </style>
     
@@ -51,43 +51,38 @@
                         <button>search</button> <!-- 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
                     </form>
                 </div>
-				<div class="header__right">
-                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i><span>
-                    <c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || WishlistCount eq '' || WishlistCount eq null}">
-                    <i>0</i>
-                    </c:if>
-                    <i>${WishlistCount }</i>
-                    </span></a>
+            <div class="header__right">
+                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
                         <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span>
-                       	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
-	                   	<i>0</i>
-    	              	</c:if>
-                       	<i>${cartCount }</i>
+                          <c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
+                         <i>0</i>
+                        </c:if>
+                          <i>${cartCount }</i>
                         </span></a>
-                   		</div>
-				<c:choose>
-                      	  <c:when test="${empty sessionScope.sId }">
-	                        <div class="ps-block--user-header">
-	                            <div class="ps-block__left"><i class="icon-user"></i></div>
-	                            <div class="ps-block__right"><a href="login">Login</a><a href="join">Join</a></div>
-	                        </div>
-	                       </c:when>
-	                       
-	                       <c:when test="${sessionScope.sId eq 'admin' }">
-	                         <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                   	   		 <a href="AdminMain.me">관리자페이지</a>
-                   	   		</c:when>
-                   	   		
-                   	   		<c:when test="${not empty sessionScope.sCode}">
-                   	   		 <a href="brand_mypage?manager_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                   	   		 <a href="manager_index">기업관리자페이지</a>
-                   	   		</c:when>
-                   	   		
-                   	   		<c:otherwise>
-                   	   		  <a href="MemberInfo.me">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                   	   		</c:otherwise>
-                   	    </c:choose>
-		</div>
+                         </div>
+            <c:choose>
+                           <c:when test="${empty sessionScope.sId }">
+                           <div class="ps-block--user-header">
+                               <div class="ps-block__left"><i class="icon-user"></i></div>
+                               <div class="ps-block__right"><a href="login">Login</a><a href="join">Join</a></div>
+                           </div>
+                          </c:when>
+                          
+                          <c:when test="${sessionScope.sId eq 'admin' }">
+                            <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                                <a href="AdminMain.me">관리자페이지</a>
+                               </c:when>
+                               
+                               <c:when test="${not empty sessionScope.sCode}">
+                                <a href="brand_mypage?manager_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                                <a href="ManagerInfo.me?manager_id=${sessionScope.sId }">기업관리자페이지</a>
+                               </c:when>
+                               
+                               <c:otherwise>
+                                 <a href="MemberInfo.me">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
+                               </c:otherwise>
+                          </c:choose>
+      </div>
                 </div>
             </div>
         </div>

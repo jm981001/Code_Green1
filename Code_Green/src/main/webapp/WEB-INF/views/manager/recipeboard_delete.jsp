@@ -1,9 +1,9 @@
-<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,14 +25,25 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-</head>
+<!-- 글쓰기  API -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
+<!-- 글쓰기  API -->
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- 글쓰기  API -->
+
+</head>
 <body>
     <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
-        <div class="header__center"><a class="ps-logo" href="#"><img src="../img/logo.png" alt=""></a></div>
+        <div class="header__center"><a class="ps-logo" href="#"><img src="img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
     <aside class="ps-drawer--mobile">
@@ -42,7 +53,7 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                   				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                 				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -60,20 +71,20 @@
             <div class="ps-sidebar">
                 <div class="ps-sidebar__top">
                     <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="../img/user/admin.jpg" alt="" /></div>
+                        <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
                         <div class="ps-block__right">
                             <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>Earning</small>
+                    <div class="ps-block--earning-count"><small>수익</small>
                         <h3>$12,560.55</h3>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 <!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
 				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
@@ -82,12 +93,12 @@
 <!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-                        
-                        </ul>
+	                     
+	                     </ul>
                     </div>
                     <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="../img/logo.png" alt="">
-                              <p>&copy;2022 CODE GREEN. <br/> All rights reversed.</p>
+                        <div class="ps-copyright"><img src="img/logo.png" alt="">
+                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>
@@ -97,99 +108,66 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>답변관리</h3>
-<!--                     <p>Martfury Customers</p> -->
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
+                    <form class="ps-form--search-bar" action="index method="get">
+                        <input class="form-control" type="text" placeholder="Search something" />
+                        <button><i class="icon-magnifier"></i></button>
+                    </form>
                 </div>
-                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
-            <section class="ps-items-listing">
-                    <div class="ps-section__actions"><a class="ps-btn success" href="review_board_manage"><i class="icon icon-plus mr-2"></i>답변관리</a></div>
-                <div class="ps-section__header simple">
-                    <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="qnaboard_list" method="get">
-                            <div class="ps-form__left">
-                                <div class="form-group">
-                                    <select class="ps-select"name="searchType">
-                                        <option value="qna_subject">제목</option>
-                                        <option value="qna_category">답변상태</option>
-                                        <option value="qna_id">작성자</option>
-                                        <option value="qna_answer">답변</option>
-                                    </select>
-                                </div>
-                            </div>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
-                                </div>
-                            <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
-                            </div>
-                        </form>
-                </div>
-                    </div>
-                <div class="ps-section__content">
-                    <div class="table-responsive">
-                        <table class="table ps-table">
-                            <thead>
+
+ 		<div class="ps-main__wrapper">
+  		<div class="header__center">
+  		<form class="ps-form--search-bar" action="index.html" method="get">
+
+ 
+       <table class="table ps-table">
+              
+                    <h2>게시판 답글 관리</h2>
+                    <hr>
+                       <thead>
                                 <tr>
-                                	
-                                	<th>문의번호</th>
-                                    <th>질문분류</th>
-                                   	<th>제목</th>
+                                	<th>번호</th>
+                                	<th>질문타입</th>
+                                    <th>제목</th>
+                                   	<th>내용</th>
                                     <th>작성자</th>
                                      <th>처리상태</th>
-<!--                                      <th>답변</th> -->
                                     <th>작성일</th>
-                                   
+                                     <th>답변</th>
                                 </tr>
                             </thead>
                             <tbody>
                             
-                              <c:forEach var="qnaList" items="${QnaBoardList }">
                                 <tr>
-                                	<td>${qnaList.qna_idx }</td>
-                                	<td>${qnaList.qna_type }</td>
-                                    <td onclick="location.href='qnaboard_detail?qna_idx=${qnaList.qna_idx }'"><strong>${qnaList.qna_subject }</strong></td>
-                                    <td>${qnaList.qna_id }</td>
-                                    <td>${qnaList.qna_category }</td>
-                                    <td>${qnaList.qna_date }</td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="qnaboard_delete?qna_idx=${qnaList.qna_idx }">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                            
-                              <div class="ps-section__footer">
-                   <!-- 페이징 버튼들 시작 -->
-				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-				                    <div class="ps-pagination">
-				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				                               <c:choose>
-				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
-				                               </c:choose>
-				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-				                        </ul>
-				                    </div>
-				  <!-- 페이징 버튼들 끝 -->
+                                	<td>${QnaInfo.qna_idx }</td>
+                                	<td>${QnaInfo.qna_type }</td>
+                                    <td>${QnaInfo.qna_subject }</td>
+                                    <td>${QnaInfo.qna_content }</td>
+                                    <td>${QnaInfo.qna_id }</td>
+                                    <td>${QnaInfo.qna_category }</td>
+                                    <td>${QnaInfo.qna_date }</td>
+                                    <td>${QnaInfo.qna_answer }</td>
+                                 </tr>   
+                    </tbody>
+                    </table>
+                    </form>
+					</div>
+					</div>                                    
 
-                </div>
-            </section>
-        </div>
+				<!-- ---게시판글쓰기api -->
+                <textarea id="summernote" name="editordata"></textarea>
+                <!-- ---게시판글쓰기api -->
+                
+                     <div class="ps-form__submit text-center">
+                     	<br>
+                          <button class="ps-btn ps-btn--gray mr-3">취소</button>
+                          <button class="ps-btn success">답변달기</button>
+                    </div>
+
+       
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>
@@ -198,7 +176,6 @@
     <script src="/Code_Green/resources/plugins_manager/select2/dist/js/select2.full.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
-    <!-- custom code-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>
 

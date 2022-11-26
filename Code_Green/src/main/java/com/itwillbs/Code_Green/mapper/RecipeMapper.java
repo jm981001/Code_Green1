@@ -11,7 +11,7 @@ import com.itwillbs.Code_Green.vo.ItemVO;
 public interface RecipeMapper {
 
 	// 기업이 올린 상품 조회
-	List<ItemVO> selectMyItem(String board_id);
+	List<ItemVO> selectMyItem(String sId);
 	
 	// 레시피 작성(글)
 	int insertRecipe(@Param("board") BoardVO board, @Param("use_item_idx") int use_item_idx);
@@ -52,7 +52,13 @@ public interface RecipeMapper {
 	// 레시피 파일 삭제
 	int deleteRecipeFile(int board_idx);
 
-	
+	// 브랜드 페이지 내 등록한 레시피 조회
+	   List<BoardVO> selectMyRecipeList(@Param("startRow") int startRow, @Param("listLimit") int listLimit, @Param("keyword") String keyword, @Param("sId") String sId);
+
+	   // 브랜드 페이지 내 등록한 레시피 갯수 조회
+	   int selectMyRecipeCount(@Param("keyword") String keyword, @Param("sId") String sId);
+	   
+	   
 
 	
 
