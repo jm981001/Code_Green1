@@ -31,22 +31,22 @@ public interface ItemCategoryMapper {
 	
 	
 	// 전체 글 목록 갯수 조회(전체 상품)
-	int selectAllListCount();
+	int selectAllListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 전체 글 목록 갯수 조회(유제품/음료)
-	int selectDairyDrinkListCount();
+	int selectDairyDrinkListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 전체 글 목록 갯수 조회(해산물)
-	int selectFishListCount();
+	int selectFishListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 전체 글 목록 갯수 조회(과일/채소)
-	int selectFruitVegiListCount();
+	int selectFruitVegiListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 전체 글 목록 갯수 조회(냉동/간편식품)
-	int selectIcedEasyListCount();
+	int selectIcedEasyListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	// 전체 글 목록 갯수 조회(간식류)
-	int selectSnackListCount();
+	int selectSnackListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
 
 	
 	

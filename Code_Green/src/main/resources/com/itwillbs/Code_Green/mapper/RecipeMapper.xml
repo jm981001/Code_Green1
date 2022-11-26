@@ -62,10 +62,12 @@
 	<select id="selectRecipeFile" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT
 			    b.board_idx,
-			    b.board_subject,	   
+			    b.board_subject,
+			    b.board_date,	   
 			    f.file1,
 			    m.manager_brandname,
-			    m.manager_id
+			    m.manager_id,
+			    i.item_name
 		  FROM  
 		  	    board b
      LEFT JOIN  
@@ -76,6 +78,10 @@
 		  	    manager m 
 		    ON  
 		        b.board_id = m.manager_id
+	 LEFT JOIN 	
+				item i
+			ON
+				b.board_item_idx = i.item_idx       
 		 WHERE  
 		 	    b.board_type = '레시피'
 		   AND 
@@ -92,6 +98,8 @@
 			    board
 		 WHERE 
 			    board_type = '레시피'
+		   AND 
+		        board_subject LIKE '%${keyword}%'	    
 	</select>
 	
 	<!-- 상세보기 -->

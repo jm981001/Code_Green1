@@ -14,7 +14,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>커뮤니티 - 글 수정</title>
+    <title>커뮤니티 - 베지터틀</title>
      <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">

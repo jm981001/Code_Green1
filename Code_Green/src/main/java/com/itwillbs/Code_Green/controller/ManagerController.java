@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.ManagerService;
+import com.itwillbs.Code_Green.service.RecipeService;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_ItemVO;
+import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
@@ -37,6 +39,8 @@ public class ManagerController {
 	
 	@Autowired
 	private ManagerService service;
+	@Autowired
+	private RecipeService recipe_service;
 	
 
 	@PostMapping(value = "/ManagerLoginPro.me")
@@ -210,25 +214,9 @@ public class ManagerController {
 		model.addAttribute("brandInfo",brandInfo);
 		
 		return "manager/brand_mypage_modify";
-//		return "redirect:/
 	}
 	
-	
-//	int updateCount = service.modifyManager(manager);
-//	System.out.println("정보수정" + updateCount);
-//	
-//	if(updateCount > 0) {
-//		model.addAttribute("msg", "수정 성공!");
-//		model.addAttribute("manager",manager);
-//		return "redirect:/brand_mypage?id=" + manager.getManager_id();
-//	}
-//	model.addAttribute("fail", "수정 실패!");
-//	return "manager/mn_fail_back";
-//}
 
-	
-	
-	
 	
 	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
@@ -309,33 +297,12 @@ public class ManagerController {
 						}
 					}
 					
-//					return "manager/brand_mypage_modify";
-		return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
+							return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
 				}
-	}
+	
+		}
 				
-		
-		// ======================정보수정 ======================
-		
-//		String sId = (String)session.getAttribute("sId");
-//		System.out.println("sId : " + sId );
-//		
-//		int updateCount = service.modifyManager(manager);
-//		System.out.println("정보수정" + updateCount);
-//		System.out.println("수정정보" + manager );
-//		
-//		ManagerVO brandInfo = service.getBrandInfo(sId);
-//		model.addAttribute("brandInfo",brandInfo);
-//		
-//		if(updateCount > 0) {
-////			model.addAttribute("msg", "수정 성공!");
-////			model.addAttribute("manager",manager);
-//			return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
-//		}
-//		model.addAttribute("fail", "수정 실패!");
-//		return "manager/mn_fail_back";
-//	}
-//	
+
 		//------------매니저페이지 내브랜드정보 삭제----------------------------
 		
 	@GetMapping(value = "brand_mypage_delete")
@@ -420,6 +387,8 @@ public class ManagerController {
 		// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageinfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 //		System.out.println("상품목록" + itemList);
 		
 		return "manager/products";
@@ -728,6 +697,8 @@ public class ManagerController {
 			// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword",keyword);
 //			System.out.println("주문목록" + orderList);
 			
 			return "manager/orders";
@@ -823,6 +794,8 @@ public class ManagerController {
 			// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("QnaBoardList", QnaBoardList);
 			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword",keyword);
 
 			System.out.println(QnaBoardList);
 			
@@ -892,6 +865,186 @@ public class ManagerController {
 
 		
 		
+	       //------------ 레시피 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
+	     	
+	 		@GetMapping(value = "/recipeboard_list")
+	 		public String recipe_Board( Model model, HttpSession session,
+	 				@RequestParam(defaultValue = "1")int pageNum,
+	 				@RequestParam(defaultValue = "")String searchType,
+	 				@RequestParam(defaultValue = "")String keyword) {
+	 			
+	 		
+	 			String sId = (String)session.getAttribute("sId");
+//	 			System.out.println(pageNum);
+	 			
+	 			// 페이징 처리를 위한 계산 작업
+	 			int listLimit = 10; // 한 페이지 당 표시할 게시물 목록 갯수 
+	 			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+	 			
+	 			// 조회 시작 게시물 번호(행 번호) 계산
+	 			int startRow = (pageNum - 1) * listLimit;
+	 			
+	 			System.out.println(startRow);
+	 			System.out.println(listLimit);
+	 			System.out.println(pageListLimit);
+	 			
+	 			// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
+	 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
+	 			// => 리턴타입 : List<BoardVO>(boardList)
+	 			List<BoardVO> recipeList = recipe_service.getRecipeList(startRow, listLimit, keyword);
+
+	 			
+	 		// 레시피 글 목록 갯수 조회
+	 			int listCount = recipe_service.getRecipeCount();
+	 			
+	 			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+	 			
+	 			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+	 			
+	 			int endPage = startPage + pageListLimit - 1;
+	 			
+	 			if(endPage > maxPage) {
+	 				endPage = maxPage;
+	 			}
+	 			
+	 			PageInfo pageInfo = new PageInfo(
+	 					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+	 			
+	 			model.addAttribute("recipeList", recipeList);
+	 			
+	 			System.out.println(recipeList);
+	 			model.addAttribute("pageInfo", pageInfo);
+	 			
+	 			return "manager/recipeboard_list";
+	 		}
+	 		
+	 		
+	 	// 레시피 폼
+	 		@GetMapping(value = "/recipeboard_write")
+	 		public String recipe_write(@RequestParam String id, Model model) {
+	 			
+	 			// 해당 기업이 올린 상품 조회
+	 			List<ItemVO> myItem = recipe_service.getmyItem(id);
+	 			
+	 			model.addAttribute("myItem", myItem);
+	 			
+	 			return "manager/recipeboard_write";
+	 		}
+	 		
+	 		// 레시피 작성
+	 		@PostMapping(value = "/recipeboard_writePro.bo")
+	 		public String recipe_writePro(
+	 									  @ModelAttribute BoardVO board, 
+	 				                      @ModelAttribute File_boardVO fileBoard,
+	 				                      @RequestParam(name = "item_idx", required = false) String item_idx,
+	 				                      Model model, 
+	 				                      HttpSession session) {
+	 			
+	 			// 레시피에 사용한 아이템 번호
+	 			int use_item_idx = Integer.parseInt(item_idx);
+	 			
+	 			// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
+	 			// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
+	 			//    (request 객체에 해당 메서드 없음)
+	 			String uploadDir = "/resources/recUpload"; // 가상의 업로드 경로
+//	 					// => webapp/resources 폴더 내에 upload 폴더 생성 필요
+	 			String saveDir = session.getServletContext().getRealPath(uploadDir);
+//	 					System.out.println("실제 업로드 경로 : " + saveDir);
+	 			
+	 			File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+	 			// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+	 			if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+	 				// 경로 상의 존재하지 않는 모든 경로 생성
+	 				f.mkdirs();
+	 			}
+	 			
+	 			// BoardVO 객체에 전달된 MultipartFile 객체 꺼내기
+	 			// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
+	 			// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
+//	 							MultipartFile mFile = board.getFile();
+	 			
+	 			String uuid = UUID.randomUUID().toString();
+	 			
+	 		
+	 			MultipartFile mFile1 = fileBoard.getFile_1();
+	 			MultipartFile mFile2 = fileBoard.getFile_2();
+	 			
+	 			String originalFileName1 = mFile1.getOriginalFilename();
+	 			String originalFileName2 = mFile2.getOriginalFilename();
+
+	 			
+	 			// ========================================================
+	 			
+	 			if(!originalFileName1.equals("")) {
+	 				fileBoard.setFile1(uuid + "_" + originalFileName1);
+//	 						System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+	 			}
+
+	 			if(!originalFileName2.equals("")) {
+	 				fileBoard.setFile2(uuid + "_" + originalFileName2);
+//	 						System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+	 			}
+	 			
+	 			// ===========================================================
+
+	 			int insertCount = recipe_service.writeRecipe(board, use_item_idx);
+	 			int file_insertCount = recipe_service.writeRecipeFile(fileBoard);
+	 			
+	 			if(insertCount > 0) {
+	 				if(file_insertCount > 0) {
+	 					try {
+	 						if(fileBoard.getFile1() != null) {
+	 							mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+	 						}
+	 						if(fileBoard.getFile2() != null) {
+	 							mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+	 						}
+	 					} catch (IllegalStateException e) {
+	 						e.printStackTrace();
+	 					} catch (IOException e) {
+	 						e.printStackTrace();
+	 					}
+
+	 					return "redirect:/recipeboard_list";
+	 				} else {
+	 					model.addAttribute("msg", "파일 업로드가 되지 않았습니다.<br>다시 시도해 주세요.");
+	 					return "manager/mn_fail_back";
+	 				}
+	 				
+	 			} else {
+	 				
+	 				model.addAttribute("msg", "레시피 등록이 되지 않았습니다<br>다시 시도해 주세요.");
+	 				return "manager/mn_fail_back";
+	 			}
+	 		}
+	 		
+	 			
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	         
 
 	//------------매니저페이지 팔로워-------------------------------------------
 		@RequestMapping(value = "follower_list", method = RequestMethod.GET)

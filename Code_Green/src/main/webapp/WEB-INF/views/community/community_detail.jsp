@@ -14,7 +14,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>커뮤니티</title>
+    <title>커뮤니티 - 베지터틀</title>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -203,15 +203,21 @@
 	};	
 // ========================= 대댓작성을 위한 비동기 처리 ================================================
 	function callreReply(){
-		$.ajax({
-			url:"reReplyWrite.re",
-			type:"POST",
-			data: $("#form").serialize(),
-			datatype:"json",
-			success:function(){
-				getReplyList();	
-			},
-		})
+		if(${sessionScope.sId == null}){
+			
+			alert("로그인 후 사용가능합니다!");
+			
+		} else {
+			$.ajax({
+				url:"reReplyWrite.re",
+				type:"POST",
+				data: $("#form").serialize(),
+				datatype:"json",
+				success:function(){
+					getReplyList();	
+				},
+			})
+	   }
 	};
 // ============================ 답글버튼(대댓글) 클릭시 숨김/표시 처리 ===================================
 	function reReplyWrite(idNum){
@@ -394,7 +400,7 @@
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
 		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
 		                        <a href="#" onclick="writeNew();"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
-		                        <c:if test="${cBoard.board_id eq sessionScope.sId || cBoard.board_id eq 'admin'}">
+		                        <c:if test="${cBoard.board_id eq sessionScope.sId || sessionScope.sId eq 'admin'}">
 			                        <a href="CommunityModify.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }"><i class="fi fi-rr-scissors"></i> 글 수정</a>
 			                        <a href="CommunityDelete.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }" onclick="return deleteCheck();"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>
 		                        </c:if>

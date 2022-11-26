@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>답변관리페이지</title>
+    <title>레시피관리페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -44,11 +44,10 @@
             <ul class="menu">
                    				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
+				                <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
@@ -73,13 +72,12 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                               <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
+				                <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
@@ -97,13 +95,8 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>답변관리</h3>
-<!--                     <p>Martfury Customers</p> -->
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
             </header>
