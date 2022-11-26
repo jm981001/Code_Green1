@@ -557,6 +557,8 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/reReplyWrite.re")
 	public void reReplyWrite(@ModelAttribute ReplyVO reply, Model model) {
+		System.out.println("대댓내용 : " + reply);
+		
 		// 순서번호(reply_re_seq) 조정 
 		service.increaseReplyReSeq(reply);
 		
