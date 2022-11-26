@@ -17,8 +17,8 @@ public class RecipeService {
 	private RecipeMapper mapper;
 
 	// 기업이 올린 상품 조회
-	public List<ItemVO> getmyItem(String board_id) {
-		return mapper.selectMyItem(board_id);
+	public List<ItemVO> getmyItem(String sId) {
+		return mapper.selectMyItem(sId);
 	}
 	
 	// 레시피 작성(글)
@@ -86,7 +86,15 @@ public class RecipeService {
 		return mapper.deleteRecipeFile(board_idx);
 	}
 
-	
+	// 브랜드 페이지 내 등록한 레시피 조회
+	   public List<BoardVO> getMyRecipeList(int startRow, int listLimit, String keyword, String sId) {
+	      return mapper.selectMyRecipeList(startRow, listLimit, keyword, sId);
+	   }
+
+	   // 브랜드 페이지 내 레시피 갯수 조회
+	   public int getMyRecipeCount(String keyword, String sId) {
+	      return mapper.selectMyRecipeCount(keyword, sId);
+	   }
 
 	
 	

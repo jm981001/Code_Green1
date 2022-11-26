@@ -16,7 +16,7 @@
 	        ON  
 	            i.re_manager_idx = m.manager_idx
 	     WHERE 
-	            m.manager_id = #{board_id}        
+	            m.manager_id = #{sId}        
 	</select>
 	
 	
@@ -248,5 +248,41 @@
 		 WHERE  
 		 		rf_board_idx = #{board_idx} 	    
 	</delete>
+	
+	<!-- /////////////////////////////브랜드 페이지 내 ///////////////////////////////// -->   
+   
+   
+<!-- 브랜드 페이지내 -->   
+   <select id="selectMyRecipeList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+      SELECT 
+             b.board_idx,
+             b.board_subject,
+             b.board_date,
+             i.item_name
+       FROM
+              board b
+    LEFT JOIN
+              item i
+          ON      
+            b.board_item_idx = i.item_idx
+       WHERE
+             b.board_id = #{sId}
+       LIMIT 
+              #{startRow}, #{listLimit}       
+   </select>
+   
+   <select id="selectMyRecipeCount" resultType="integer">
+      SELECT 
+       COUNT(*) 
+        FROM 
+             board
+       WHERE 
+             board_type = '레시피'
+         AND 
+              board_subject LIKE '%${keyword}%'
+          OR
+               board_id = #{sId}     
+   </select>
+	
 	
 </mapper>

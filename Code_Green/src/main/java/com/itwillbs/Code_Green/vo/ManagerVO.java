@@ -17,23 +17,22 @@ public class ManagerVO {
 	private String  	manager_postcode; 
 	private String  	manager_address; 
 	private String      manager_adminauth;
-	private String      manager_realfile; 
-	private String     	manager_original_file; 
+	private String      manager_realfile; // 원본 파일명
+	private String     	manager_original_file; // 실제 업로드 된 파일명(중복처리 된 파일명)
 	private String     	manager_del_yn; 
 	private String		manager_date;
-	private MultipartFile file;// 파일 처리(input type="file")를 위한 MultipartFile 타입 선언 s
+	private MultipartFile file;// 파일 처리(input type="file")를 위한 MultipartFile 타입 선언 
 	private String 		brand_itemCnt; // 브랜드별 아이템수 집계
 	private int 		sellCount;	//판매수량
 	private int 		orderCount;	//주문건수
 	private int 		brandtotal;	//브랜드매출
 	private int 		ranking;	//순위
-	private String			star_score; //브랜드 별점(상품별점의 평균)
 	private String		brand_follower;//브랜드 팔로워 수
 	
-	
-	public ManagerVO() {}
+	public ManagerVO() {
+		// TODO Auto-generated constructor stub
+	}
 
-	
 	public int getManager_idx() {
 		return manager_idx;
 	}
@@ -217,15 +216,7 @@ public class ManagerVO {
 	public void setRanking(int ranking) {
 		this.ranking = ranking;
 	}
-
-	public String getStar_score() {
-		return star_score;
-	}
-
-	public void setStar_score(String star_score) {
-		this.star_score = star_score;
-	}
-
+	
 	public String getBrand_follower() {
 		return brand_follower;
 	}
@@ -234,13 +225,12 @@ public class ManagerVO {
 		this.brand_follower = brand_follower;
 	}
 
-
 	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
 			String manager_brandname, String manager_info, String manager_storecode, String manager_phone,
 			String manager_email, String manager_email_auth, String manager_postcode, String manager_address,
 			String manager_adminauth, String manager_realfile, String manager_original_file, String manager_del_yn,
 			String manager_date, MultipartFile file, String brand_itemCnt, int sellCount, int orderCount,
-			int brandtotal, int ranking, String star_score, String brand_follower) {
+			int brandtotal, int ranking, String brand_follower) {
 		super();
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
@@ -265,10 +255,8 @@ public class ManagerVO {
 		this.orderCount = orderCount;
 		this.brandtotal = brandtotal;
 		this.ranking = ranking;
-		this.star_score = star_score;
 		this.brand_follower = brand_follower;
 	}
-
 
 	@Override
 	public String toString() {
@@ -281,11 +269,8 @@ public class ManagerVO {
 				+ ", manager_original_file=" + manager_original_file + ", manager_del_yn=" + manager_del_yn
 				+ ", manager_date=" + manager_date + ", file=" + file + ", brand_itemCnt=" + brand_itemCnt
 				+ ", sellCount=" + sellCount + ", orderCount=" + orderCount + ", brandtotal=" + brandtotal
-				+ ", ranking=" + ranking + ", star_score=" + star_score + ", brand_follower=" + brand_follower + "]";
+				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + "]";
 	}
-
-	
-	
 
 	
 	

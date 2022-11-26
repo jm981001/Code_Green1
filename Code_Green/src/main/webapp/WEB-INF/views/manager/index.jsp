@@ -68,7 +68,7 @@
 				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
 				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
 				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
@@ -118,121 +118,40 @@
                         </div>
                         
 <!-- 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트-->
-					<br>
+				<!-- 정민수정-->
+               <br>
                     </div>
-                     <div class="ps-card">
+                    <div class="ps-card">
                         <div class="ps-card__header">
-                         <br>
-                         <br>
-	                         <br>
-                        <hr>
-                         <br>
-                         <td><a href="orders"><strong><h4>최근 주문</h4></strong></a></td>
-                            
+                        <br>
+                            <h4>베스트상품</h4>
                         </div>
-                        
-                        
-                          <form class="ps-form--filter" action="orders" method="get">
-                            <div class="ps-card__content">
+                        <div class="ps-card__content">
                             <div class="table-responsive">
                                 <table class="table ps-table">
                                     <thead>
-                                       <tr>
-                                    <th>주문번호</th>
-                                    <th>회원번호</th>
-                                    <th>주문상품</th>
-                                    <th>주문날짜</th>
-                                    <th>주문상태</th>
-                                    <th>총금액</th>
-                                    <th>결제여부</th>
-                                    <th>결제일</th>
-                                    <th></th>
-                                </tr>
+                                        <tr>
+                                            <th>Top</th>
+                                            <th>상품명</th>
+                                            <th>후기</th>
+                                            <th>좋아요</th>
+                                            <th>평점</th>
+                                            <th>판매수량</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                 <c:forEach var="order" items="${orderList}" >
-						             <tr>
-						            <td>${order.sell_idx}</td>
-                                    <td>${order.rf_member_idx}</td>
-                                    <td><a href="order-detail"><strong>${order.item_name }</strong></a></td>
-                                    <td><span class="ps-badge success">${order.sell_date }</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">${order.sell_status}</span>
-                                    </td>
-                                    <td><strong>${order.sell_total_price}</strong></td>
-                                    <td>${order.sell_pay_status}</td>
-						            <td>${order.sell_pay_date}</td>
-                                    
-                                </tr>
-                                </c:forEach>
-                                
-                                
-                                
-                                
-                                <tr>
-                                </from>
-                                    <td>#B260</td>
-                                    <td><strong>15</strong></td>
-                                    <td><a href="order-detail"><strong>김회원</strong></a></td>
-                                    <td>Aug, 15, 2020</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송 접수</span>
-                                    </td>
-                                    <td><strong>$56.00</strong></td>
-                                    <td><span class="ps-badge gray"><strong> 결제</strong></td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#A583</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Lined Blend T-Shirt</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment warning">주문 접수</span>
-<!--                                     </td>order In Progress -->
-                                    <td><strong>$516.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#A583</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>DJI MAcvic Quadcopter</strong></a></td>
-                                    <td><span class="ps-badge gray">미결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송 접수</span>
-                                    </td>
-                                    <td><strong>$112.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#A112</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail"><strong>Black T-Shirt</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment danger">주문 취소</span>
-                                    </td>
-                                    <td><strong>$30.00</strong></td>
-                                    <td>
-                                                <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                                </div>
-                                            </td>
+                                    <c:forEach var="top" items="${top3 }">
+                                        <tr>
+                                            <td>${top.ranking }위</td>
+                                            <td><strong>${top.item_name}</strong></td>
+                                            <td><a href=""><strong>${top.review}개</strong></a></td>
+<%--                                             <td><span class="ps-badge success">${top.brand_follower }명</span></td> --%>
+                                            <td><span><strong>${top.heart }개</strong></span></td>
+                                            <td><strong>${top.board_star_score }점</strong></td>
+                                            <td><span><strong>${top.count }개</strong></span></td>
                                         </tr>
+                                        </c:forEach>
+                                        
                                        
                                         
                                         
@@ -242,8 +161,13 @@
                                 </table>
                             </div>
                         </div>
-<!--                         <div class="ps-card__footer"><a class="ps-card__morelink" href="orders">순위 더 알아보기(더 수정해야함)<i class="icon icon-chevron-right"></i></a></div> -->
+<!--                         <div class="ps-card__footer"><a class="ps-card__morelink" href="ad_more_Ranking">순위 더 알아보기<i class="icon icon-chevron-right"></i></a></div> -->
                     </div>
+                    
+   <!-- 정민수정-->                 
+                    
+                    
+                    
                 </div>
                <div class="ps-section__right">
                     <section class="ps-card ps-card--statics">
@@ -260,25 +184,25 @@
                             </div>
                         </div>
                        <div class="ps-card__content">
-                            <div class="ps-block--stat yellow">
+                           <div class="ps-block--stat yellow">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
-                                    <p>총주문수</p>
-                                    <h4>${sellCount }<small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
+                                    <p>총매출</p>
+                                    <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
                                 <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>
                                 <div class="ps-block__content">
-                                    <p>총매출</p>
-                                     <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                    <p>총주문수</p>
+                                     <h4>${orderTotal.orderCount }<small class="asc"><i class="icon-arrow-up"></i></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-heart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>팔로우 수 </p>
-                                    <h4>5<small class="desc"><i class="icon-arrow-down"></i><span></span></small></h4>
+                                    <h4>${follow }<small class="desc"><i class="icon-arrow-down"></i><span></span></small></h4>
                                 </div>
                             </div>
                         </div>

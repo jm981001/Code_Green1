@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.ManagerMapper;
+import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
@@ -125,9 +126,20 @@ public class ManagerService {
 //	public MemberVO followInfo(String idx) {
 //		return mapper.selectFollowInfo(idx);
 //	}
-	//총매출
-	public SellVO getTotalMoney() {
-		return mapper.selectTotalMoney(); 
-	}
-
+	  //정민 매출 3순위
+	   public List<ItemVO> getTop3(String sId) {
+	      return mapper.getTop3(sId);
+	   }
+	   //정민 팔로우 수
+	   public int follow(String sId) {
+	      return mapper.follow(sId);
+	   }
+	 //총매출,주문수
+	   public ManagerVO getOrderTotal(String sId) {
+	   	return mapper.selectTotalMoneyOrder(sId);
+	   }
+	   
+	   
+	   
+	   
 }
