@@ -98,6 +98,8 @@
 			    board
 		 WHERE 
 			    board_type = '레시피'
+		   AND 
+		        board_subject LIKE '%${keyword}%'	    
 	</select>
 	
 	<!-- 상세보기 -->
