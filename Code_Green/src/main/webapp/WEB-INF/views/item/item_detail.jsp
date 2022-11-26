@@ -1062,10 +1062,13 @@
 								                    <!-- 페이징 버튼들 끝 -->
 								    
 								    <!-- 문의작성 버튼 -->
+								   
 								   <div align="right">
-			                            <ul class="ps-tab-list" >
-			                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
-			                            </ul>
+									   <c:if test="${sessionScope.sIdx ne null}">
+				                            <ul class="ps-tab-list" >
+				                                <li ><a href="#tab-4-1" class="ps-btn" style="color: white ">문의작성</a></li>
+				                            </ul>
+				                        </c:if>
 		                            </div> 
 		                            <!-- 문의작성 버튼 끝 -->
                                         </form>

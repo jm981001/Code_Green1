@@ -67,9 +67,12 @@ public class ItemController {
 			@RequestParam(defaultValue = "") String searchType,
 			@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "1") int Qna_pageNum,
 			@RequestParam int item_idx, Model model,@RequestParam String item_category,@RequestParam String manager_brandname,
-			@RequestParam(defaultValue = "new") String sort, HttpSession session ) {
+			@RequestParam(defaultValue = "new") String sort, HttpSession session) {
 		//--------상품문의 페이징처리 ---------------------------------------------------------------------------
-		int sIdx = (int)session.getAttribute("sIdx");
+		Integer sIdx = (Integer)session.getAttribute("sIdx");
+		if(sIdx == null) {
+			sIdx=0;
+		}
 		
 		int listLimit = 5;  
 		int pageListLimit = 3;  
@@ -137,6 +140,8 @@ public class ItemController {
 		
 		//상품구매 유무 (리뷰 버튼)
 		int reviewBtn = service.reviewBtn(sIdx,item_idx);
+		
+		
 		model.addAttribute("sort", sort);
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("goodList", goodList);
