@@ -52,33 +52,33 @@ public class ItemCategoryService {
 	
 	
 	// 전체 글 목록 갯수 조회(전체 상품)
-	public int selectAllListCount() {
-		return mapper.selectAllListCount();
+	public int selectAllListCount(String searchType, String keyword) {
+		return mapper.selectAllListCount(searchType, keyword);
 	}
 	
 	// 전체 글 목록 갯수 조회(유제품/음료)
-	public int selectDairyDrinkListCount() {
-		return mapper.selectDairyDrinkListCount();
+	public int selectDairyDrinkListCount(String searchType, String keyword) {
+		return mapper.selectDairyDrinkListCount(searchType, keyword);
 	}
 
 	// 전체 글 목록 갯수 조회(해산물)
-	public int selectFishListCount() {
-		return mapper.selectFishListCount();
+	public int selectFishListCount(String searchType, String keyword) {
+		return mapper.selectFishListCount(searchType, keyword);
 	}
 
 	// 전체 글 목록 갯수 조회(과일/채소)
-	public int selectFruitVegiListCount() {
-		return mapper.selectFruitVegiListCount();
+	public int selectFruitVegiListCount(String searchType, String keyword) {
+		return mapper.selectFruitVegiListCount(searchType, keyword);
 	}
 
 	// 전체 글 목록 갯수 조회(냉동/간편식품)
-	public int selectIcedEasyListCount() {
-		return mapper.selectIcedEasyListCount();
+	public int selectIcedEasyListCount(String searchType, String keyword) {
+		return mapper.selectIcedEasyListCount(searchType, keyword);
 	}
 
 	// 전체 글 목록 갯수 조회(간식류)
-	public int selectSnackListCount() {
-		return mapper.selectSnackListCount();
+	public int selectSnackListCount(String searchType, String keyword) {
+		return mapper.selectSnackListCount(searchType, keyword);
 	}
 	
 	

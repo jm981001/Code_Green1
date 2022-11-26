@@ -48,7 +48,7 @@ public class ItemCategoryController {
 		
 		itemList = service.select_all(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectAllListCount();
+		listCount = service.selectAllListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -65,6 +65,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
@@ -97,7 +99,7 @@ public class ItemCategoryController {
 
 		itemList = service.select_dairy_drink(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectDairyDrinkListCount();
+		listCount = service.selectDairyDrinkListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -114,6 +116,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
@@ -146,7 +150,7 @@ public class ItemCategoryController {
 		
 		itemList = service.select_fish(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectFishListCount();
+		listCount = service.selectFishListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -163,6 +167,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
@@ -195,7 +201,7 @@ public class ItemCategoryController {
 		
 		itemList = service.select_fruit_vegi(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectFruitVegiListCount();
+		listCount = service.selectFruitVegiListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -212,6 +218,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
@@ -244,7 +252,7 @@ public class ItemCategoryController {
 		
 		itemList = service.select_iced_easy(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectIcedEasyListCount();
+		listCount = service.selectIcedEasyListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -261,6 +269,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
@@ -304,7 +314,7 @@ public class ItemCategoryController {
 		
 		itemList = service.select_snack(startRow, listLimit, searchType, keyword);
 		
-		listCount = service.selectSnackListCount();
+		listCount = service.selectSnackListCount(searchType, keyword);
 		
 		maxPage = (int)Math.ceil((double)listCount / listLimit);
 		
@@ -321,6 +331,8 @@ public class ItemCategoryController {
 		
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 		model.addAttribute("sort", sort);
 		
 		// 후기 많은순
