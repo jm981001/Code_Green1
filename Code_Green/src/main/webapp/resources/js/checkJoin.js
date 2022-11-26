@@ -1,4 +1,4 @@
-debugger;
+//debugger;
 var checkEmailAuth = false
 //	멤버 주소
  	function Me_execDaumPostcode() {
@@ -49,6 +49,7 @@ $(document).ready(function(){
 			$('#userEamil2').attr('readonly',true);
 			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
 	        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+	        checkEmailAuth = true;
 		}else{
 			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
 			$resultMsg.css('color','red');

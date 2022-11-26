@@ -220,8 +220,7 @@ button {
 	</div>
 
 	<!-- ----------------------------------바디 시작------------------------------------  -->
-	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup_member"
-		onsubmit="return checkForm()">
+	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup_member" onsubmit="return checkForm()">
 		<!--------------------------------개인----------------------------------->
 		<div class="member">
 			<div class="field memberType">
