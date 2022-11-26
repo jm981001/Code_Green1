@@ -11,9 +11,9 @@
    <!-- 이메일 인증 관련 빈 등록 -->
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />
-      <property name="port" value="587" />
-      <property name="username" value="CodeGreen@gmail.com" />
-      <property name="password" value="kuhmyfixchczkmiu" />
+      <property name="port" value="587" /> <!-- 500에러뜨면 포트 587로 바꿔보기 -->
+      <property name="username" value="yhkim0966@gmail.com" />
+      <property name="password" value="esjjqjhbnaqtunly" />
       <property name="javaMailProperties">
          <props>
                 <prop key="mail.transport.protocol">smtp</prop>

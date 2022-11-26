@@ -100,6 +100,7 @@ $(document).ready(function(){
 	var checkNameResult = false, checkIdResult = false, checkPasswdResult = false;
 
 	function checkId(id) {
+		debugger;
 		let regex = /^[\w-.]{4,16}$/;
 		if(!regex.exec(id)) {
 			$("#checkIdResult").html("4 ~ 16자리 영문자, 숫자, 특수문자(-_.) 필수!");
@@ -406,7 +407,7 @@ button {
 				<div class="field">
 					<b>아이디</b>
 					<span class="placehold-text">
-					<input type="text" name="member_id" id="member_id" onchange="checkId(this.value)" maxlength='16' required="required">
+					<input type="text" name="member_id" id="member_id" onchange="checkId(this.value)" maxlength='16' required="required" placeholder="8-16자리 영문자,숫자,특수문자 조합">
 					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 					</span>
 				</div>
@@ -483,18 +484,18 @@ button {
 			<div id="companyDiv">
 				<div class="field">
 					<b>아이디</b> <span class="placehold-text">
-					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="checkId(this.value)" required="required"></span>
-					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="" required="required"></span>
+					<span id="checkIdResultMana"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				<div class="field">
 					<b>비밀번호</b> 
-					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
-					<span id="checkPasswdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
+					<span id="checkPasswdResultMana"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="field">
 					<b>기업관리자 이름</b> 
-					<input type="text" id="name" name="manager_name" maxlength="10" onchange="checkName(this.value)" required="required">
+					<input type="text" id="name" name="manager_name" maxlength="10" onchange="" required="required">
 				</div>
 
 				<div class="field">
@@ -519,9 +520,9 @@ button {
 				<div class="form-group email-form">
 					<label for="email">이메일</label>
 					<div class="input-group">
-						<input type="text" class="form-control" name="userEmail1"
-							id="userEmail1" placeholder="이메일"> <select
-							class="form-control" name="userEmail2" id="userEmail2">
+						<input type="text" class="form-control" name="userEmail3"
+							id="userEmail3" placeholder="이메일"> <select
+							class="form-control" name="userEmail4" id="userEmail4">
 							<option>@naver.com</option>
 							<option>@daum.net</option>
 							<option>@gmail.com</option>
