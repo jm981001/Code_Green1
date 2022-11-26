@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -152,12 +153,23 @@
 						     <td>${order.sell_idx}</td>
 						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
 						     <td>${order.item_name }</td>
+						     
 						     <td>${order.sell_date }</td>
+						     
+<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_date }" pattern="yyyyMMdd" /> --%>
+<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
+		                      
 						     <td>${order.item_price}</td>
 						     <td>${order.sell_status}</td>
 						     <td>${order.sell_total_price}</td>
 						     <td>${order.sell_pay_status}</td>
+						     
 						     <td>${order.sell_pay_date}</td>
+						     
+<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_pay_date }" pattern="yyyyMMdd" /> --%>
+<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
+						     
+						     
 						     <td>${order.manager_brandname}</td>
 						    </tr>     
                             
@@ -173,14 +185,14 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="orders?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="orders?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->

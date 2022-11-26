@@ -117,7 +117,7 @@
             <section class="ps-items-listing">
    
                  <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
-                 <div class="ps-section__actions" onclick="productsADD()"><i class="icon icon-plus mr-2"></i>새 상품 등록<a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
+<!--                  <div class="ps-section__actions" onclick="productsADD()"><i class="icon icon-plus mr-2"></i>새 상품 등록<a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div> -->
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
@@ -192,14 +192,14 @@
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
 				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="products?pageNum=${pageInfo.pageNum - 1}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="products?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				                               <c:choose>
 				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="products?pageNum=${i }&sort=${sort}">${i }</a></li></c:otherwise>
+				                                  <c:otherwise><li><a href="products?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
 				                               </c:choose>
 				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="products?pageNum=${pageInfo.pageNum + 1}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="products?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 				                        </ul>
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->

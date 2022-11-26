@@ -139,12 +139,34 @@
 	
 <!-- 상품 목록 갯수 조회 -->
 	
-	<select id="selectItemListCount" resultType="integer">
+<select id="selectItemListCount" resultType="integer">
 	
 		SELECT 
 		COUNT(*)
-			FROM item
+			 FROM item i  JOIN manager m  ON i.re_manager_idx= m. manager_idx 
+		
 	
+	<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+					<choose>
+					<when test="searchType.equals('item_name')">
+					WHERE i.item_name LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('item_category')">
+					WHERE i.item_category LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('item_packing')">
+					WHERE i.item_packing LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('item_stock')">
+					WHERE i.item_stock LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('brand_name')">
+					WHERE m.manager_brandname LIKE '%${keyword}%' 
+					</when>
+				</choose>
+	</if>
+			
 
     </select>
    
@@ -317,30 +339,50 @@
 
 
    		SELECT     
-		    s.SELL_DETAIL_IDX 
-		               ,s.RF_SELL_IDX 
+					   s.SELL_IDX
+					   ,s.RF_MEMBER_IDX
+		               ,s.SELL_AMOUNT
+		               ,s.SELL_USECOIN
+		               ,s.SELL_TOTAL_PRICE
+		               ,s.SELL_STATUS
+		               ,s.SELL_POSTCODE
+		               ,s.SELL_ADDRESS
+		               ,s.SELL_PHONE 
+					   ,s.SELL_RECIEVER 
+					   ,s.SELL_DATE 
+					   ,s.SELL_PAY_TYPE 
+					   ,s.SELL_PAY_STATUS 
+					   ,s.SELL_PAY_DATE 
+					   ,s.SELL_ORDER_NUMBER
+					   
+					   ,d.SELL_DETAIL_IDX
+					   ,d.RF_SELL_IDX
+					   ,d.RF_ITEM_IDX
+					   ,d.SELL_AMOUNT
+					   ,d.SELL_REVIEW_STATUS
+					    ,f.FILE1
 		                 ,i.ITEM_NAME 
 		                 ,i.ITEM_PRICE
 		                 ,i.ITEM_IDX
 		                 ,i.ITEM_CATEGORY
-		                 ,f.FILE1
-		               ,s.SELL_AMOUNT
 		                 ,m.MANAGER_BRANDNAME
-		                 ,l.sell_idx
-		         from sell_detail s 
+		                 
+		         from sell_detail d
+		         left join sell s
+		         on s.sell_idx = d.rf_sell_idx
 		            left join item i 
-		               on s.RF_ITEM_IDX = i.item_idx
+		               on d.RF_ITEM_IDX = i.item_idx
 		             left join file_item f 
-		               on s.RF_ITEM_IDX = f.RF_ITEM_IDX
-		            left join sell l
-		               on s.rf_sell_idx = l.sell_idx
+		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
+<!-- 		            left join sell l -->
+<!-- 		               on s.rf_sell_idx = l.sell_idx -->
 		            left join manager m
 		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
 		            
 		             where i.RE_MANAGER_IDX =(select manager_idx
 		                           from manager
 		                                  where manager_id = #{manager_id})
-		                                      ORDER BY s.SELL_DETAIL_IDX DESC  LIMIT  #{startRow}, #{listLimit}  
+		                                      ORDER BY d.SELL_DETAIL_IDX DESC  LIMIT  #{startRow}, #{listLimit}  
 
 	</select>	
 

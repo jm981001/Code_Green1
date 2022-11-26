@@ -210,25 +210,9 @@ public class ManagerController {
 		model.addAttribute("brandInfo",brandInfo);
 		
 		return "manager/brand_mypage_modify";
-//		return "redirect:/
 	}
 	
-	
-//	int updateCount = service.modifyManager(manager);
-//	System.out.println("정보수정" + updateCount);
-//	
-//	if(updateCount > 0) {
-//		model.addAttribute("msg", "수정 성공!");
-//		model.addAttribute("manager",manager);
-//		return "redirect:/brand_mypage?id=" + manager.getManager_id();
-//	}
-//	model.addAttribute("fail", "수정 실패!");
-//	return "manager/mn_fail_back";
-//}
 
-	
-	
-	
 	
 	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
 	
@@ -309,33 +293,12 @@ public class ManagerController {
 						}
 					}
 					
-//					return "manager/brand_mypage_modify";
-		return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
+							return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
 				}
-	}
+	
+		}
 				
-		
-		// ======================정보수정 ======================
-		
-//		String sId = (String)session.getAttribute("sId");
-//		System.out.println("sId : " + sId );
-//		
-//		int updateCount = service.modifyManager(manager);
-//		System.out.println("정보수정" + updateCount);
-//		System.out.println("수정정보" + manager );
-//		
-//		ManagerVO brandInfo = service.getBrandInfo(sId);
-//		model.addAttribute("brandInfo",brandInfo);
-//		
-//		if(updateCount > 0) {
-////			model.addAttribute("msg", "수정 성공!");
-////			model.addAttribute("manager",manager);
-//			return "redirect:/brand_mypage?manager_id=" + manager.getManager_id();
-//		}
-//		model.addAttribute("fail", "수정 실패!");
-//		return "manager/mn_fail_back";
-//	}
-//	
+
 		//------------매니저페이지 내브랜드정보 삭제----------------------------
 		
 	@GetMapping(value = "brand_mypage_delete")
@@ -420,6 +383,8 @@ public class ManagerController {
 		// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("pageInfo", pageinfo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword",keyword);
 //		System.out.println("상품목록" + itemList);
 		
 		return "manager/products";
@@ -728,6 +693,8 @@ public class ManagerController {
 			// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("pageInfo", pageinfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword",keyword);
 //			System.out.println("주문목록" + orderList);
 			
 			return "manager/orders";
@@ -823,6 +790,8 @@ public class ManagerController {
 			// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("QnaBoardList", QnaBoardList);
 			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword",keyword);
 
 			System.out.println(QnaBoardList);
 			
