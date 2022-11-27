@@ -1160,7 +1160,47 @@ public class ManagerController {
 	 			return "redirect:/recipeboard_list?board_idx=" + board_idx;
 	 		}
 	 		
-	         
+	 	// 레시피 삭제
+	          @PostMapping(value = "/recipeboard_deletePro.bo")
+	          public String recipe_deletePro(@RequestParam int board_idx, Model model, HttpSession session) {
+	             
+	             //글 삭제 전 실제 업로드된 파일 삭제작업
+	             String realFile1 = recipe_service.getRealFile1(board_idx);
+	             String realFile2 =  recipe_service.getRealFile2(board_idx);
+	             
+	             int deleteCount =  recipe_service.removeRecipe(board_idx);
+	             int deleteFileCount =  recipe_service.removeRecipeFile(board_idx);
+	             
+	             // ----------------------------------------------------------
+	             
+	             if(deleteCount > 0) {
+	                String uploadDir = "/resources/recUpload"; // 가상의 업로드 경로
+	                // => webapp/resources 폴더 내에 upload 폴더 생성 필요
+	                String saveDir = session.getServletContext().getRealPath(uploadDir);
+	                System.out.println("실제 업로드 경로 : " + saveDir);
+	                
+	                if(!realFile1.equals("N")) {
+	                   File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
+	                   if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
+	                      f1.delete();
+	                   }
+	                }
+	                if(!realFile2.equals("N")) {
+	                   File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
+	                   if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
+	                      f2.delete();
+	                   }
+	                }
+	                
+	                return "redirect:/recipe_main.bo";
+	                
+	             } else {
+	                model.addAttribute("msg", "레시피 삭제가 되지 않았습니다.<br>다시 시도해주세요.");
+	                return "member/fail_back";
+	             }
+	                
+	          } 
+	            
 	         
 	         
 	         

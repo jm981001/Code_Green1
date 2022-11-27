@@ -25,6 +25,30 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+    <script type="text/javascript">
+       function recipe_delete(value) {
+            
+          let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
+          
+          if(delete_confirm){
+             $.ajax({
+               url: "recipeboard_deletePro.bo",
+               type: "POST",
+               data: {
+                  board_idx: value
+               },
+               success: function(){
+                  alert("삭제가 완료되었습니다.");
+                  location.href = "recipeboard_list";
+               },
+               fail: function () {
+                  alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
+               }
+            });
+          } 
+      }
+    </script>
 </head>
 
 <body>
@@ -42,14 +66,14 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                   				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                               <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+                            <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
+                            <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
+                            <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
+                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -73,13 +97,13 @@
                     <div class="ps-sidebar__center">
                         <ul class="menu">
                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+                            <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
+                            <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+                            <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
                         </ul>
                     </div>
@@ -108,7 +132,7 @@
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select"name="searchType">
-                                    	<option value="board_idx">글번호</option>
+                                       <option value="board_idx">글번호</option>
                                         <option value="board_subject">제목</option>
                                         <option value="board_content">내용</option>
                                         <option value="board_date">작성일</option>
@@ -130,9 +154,9 @@
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                	
-                                	<th>글번호</th>
-                                   	<th>제목</th>
+                                   
+                                   <th>글번호</th>
+                                      <th>제목</th>
                                      <th>사용한상품</th>
                                     <th>작성일</th>
                                    
@@ -142,7 +166,7 @@
                             
                               <c:forEach var="recipeList" items="${recipeList }">
                                 <tr>
-                                	<td>${recipeList.board_idx }</td>
+                                   <td>${recipeList.board_idx }</td>
                                     <td><strong>${recipeList.board_subject }</strong></td>
                                     <td>${recipeList.item_name }</td>
                                     <td>${recipeList.board_date }</td>
@@ -150,7 +174,7 @@
                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="recipeboard_modify?manager_id=${sessionScope.sId }&board_idx=${recipeList.board_idx}">수정</a>
-                                            <a class="dropdown-item" href="recipeboard_delete?manager_id=${sessionScope.sId }">삭제</a>
+                                            <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a>
                                         </div>
                                         </div>
                                     </td>
@@ -163,21 +187,21 @@
                             
                               <div class="ps-section__footer">
                    <!-- 페이징 버튼들 시작 -->
-				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-				                    <div class="ps-pagination">
-				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				                               <c:choose>
-				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
-				                               </c:choose>
-				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-				                        </ul>
-				                    </div>
-				  <!-- 페이징 버튼들 끝 -->
+                               <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+                                <div class="ps-pagination">
+                                    <ul class="pagination">
+                                       
+                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                                        <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+                                           <c:choose>
+                                              <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+                                              <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
+                                           </c:choose>
+                                        </c:forEach>
+                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+              <!-- 페이징 버튼들 끝 -->
 
                 </div>
             </section>
