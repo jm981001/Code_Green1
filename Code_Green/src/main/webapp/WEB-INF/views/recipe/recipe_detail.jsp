@@ -10,7 +10,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>레시피 - ${recipe.board_subject }</title>
+    <title>베지터틀 - 레시피 : ${recipe.board_subject }</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;
@@ -35,17 +35,6 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
 	<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
-	
-	<script type="text/javascript">
-		function recipe_modify_auth() {
-			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
-				location.href="recipe_modify.bo?board_idx=" + ${recipe.board_idx} + "&id=" + "${sessionScope.sId}";
-			} else {
-				alert("수정 권한이 없습니다.");
-			}
-				
-		}
-	</script>
 	
 	<script type="text/javascript">
 		function recipe_delete_auth() {
@@ -104,7 +93,6 @@
                         <div class="intro-item">
                             <img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt="">
                        		<div class="ps-form--quick-search--com">
-						       	<button onclick="recipe_modify_auth()">레시피 수정</button>
 						       	<button onclick="recipe_delete_auth()">레시피 삭제</button>
 						   </div>
                         </div>

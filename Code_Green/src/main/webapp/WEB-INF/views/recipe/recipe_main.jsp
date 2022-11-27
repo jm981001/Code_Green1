@@ -10,7 +10,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>레시피</title>
+    <title>베지터틀 - 레시피</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;
@@ -36,17 +36,6 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
 	
-	<script type="text/javascript">
-		function recipe_write_auth() {
-			if(${sessionScope.sCode != null || sessionScope.sId == "admin"}){
-				location.href="recipe_write.bo?id=" + "${sessionScope.sId }";
-			} else {
-				alert("작성 권한이 없습니다.");
-			}
-				
-		}
-	
-	</script>
 	
 	<style type="text/css">
 		#recipeSearchBtn{
@@ -112,6 +101,7 @@
 		 <div class="container">
 			<div class="ps-section__header">
 		       <h3>레시피</h3>
+		       <p>베지터틀만의 신선하고 맛있는 레시피.<br>우리 함께 만들어 보실까요?</p>
 		    </div>
 		</div>
 	</div>
@@ -124,6 +114,12 @@
             
 <!------------------------------------상단 카테고리 이미지 슬라이드---------------------------------------------------->
             <div class="cf-filter" id="category-filter">
+				<div align="center">
+					<c:if test="${empty recipeList }">
+						<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
+						<h3>현재 작성한 레시피가 없습니다.</h3>
+				    </c:if>
+			    </div>
 				<div id="slider">
 				   <div class="image-box">
 					 <c:forEach var="recipe" items="${recipeList }">				    
@@ -166,9 +162,6 @@
 							<input type="submit" id="recipeSearchBtn" value="검색">
 						</form>
 					</div>
-			       	 <div style="float: right">
-			       		<button onclick="recipe_write_auth()" style="float: left">글쓰기</button>
-			       	</div>
 				  </div>
 			   </div>
 				<div>
