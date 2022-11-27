@@ -48,7 +48,7 @@
 										<li><a href="myPage_buyList"><i class="icon-papers"></i>주문목록</a></li>
 <!-- 										<li><a href="myPage_buyList"><i class="icon-papers"></i>주문별상세</a></li> -->
 										<li><a href="myPageReview.my?member_id=${sessionScope.sId}"><i class="icon-papers"></i>상품후기</a></li>
-										<li><a href="myPageQnaDetail.bo"><i class="icon-question"></i>1:1 문의내역</a></li>
+										<li><a href="myPageQnaList.bo"><i class="icon-question"></i>1:1 문의</a></li>
 										<li><a href="myPageBoard.bo?member_id=${sessionScope.sId} "><i class="icon-pen"></i>나의 글</a></li>
 										<li><a href="myPage_userInfo"><i class="icon-user"></i>개인정보 수정</a></li>
 										<li><a href="MemberLogout.me"><i class="icon-power-switch"></i>Logout</a></li>

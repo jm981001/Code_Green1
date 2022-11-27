@@ -30,14 +30,15 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/market-place-1.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+</head>
 <style>
-	#admin_tr{
+	/* 하 지금 이것도안되네 갑자기...왜이러냐 진짜.....내꺼....ㅠ */
+	.ps-table--vendor tbody #admintr{
 		background-color: #fcfdf3;
 		font-weight: bold;
 	}
 	
 </style>
-</head>
 <script>
 	// 글쓰기 버튼 클릭시 (로그인 했거나 ,관리자여야 작동)
 	function commu_write(){
@@ -102,12 +103,8 @@
 		                                <tbody>
 		                               	 <c:forEach var="board" items="${communityList }">
 		                               	<c:choose>
-		                               		<c:when test="${board.board_id eq 'admin' }">
-		                               			<tr id="admin_tr">
-		                               		</c:when>
-		                               		<c:otherwise>
-		                               			<tr>
-		                               		</c:otherwise>
+		                               		<c:when test="${board.board_id eq 'admin' }"><tr id="admintr"></c:when>
+		                               		<c:otherwise><tr></c:otherwise>
 		                               	</c:choose>
 		                                        <td>[${board.board_category }]</td>
 		                                        
@@ -128,6 +125,7 @@
 		                                        <td>${board.best_cnt }</td>
 		                                        <td>${board.board_readcount }</td>
 		                                    </tr>
+		                                   
 		                                 </c:forEach>
 		                                </tbody>
 		                            </table>
@@ -142,7 +140,7 @@
                   <!-- 검색 부분  -->
                     <div id="widget-search-select-together">
 		                 <form class="ps-form--widget-search" action="CommunityList.bo" method="get">
-	                         <select name="searchType">
+	                         <select name="searchType" required>
 	                               <option value="">카테고리</option>
 	                               <option value="category" <c:if test="${searchType eq 'category'}">selected</c:if>>말머리</option>
 	                               <option value="id" <c:if test="${searchType eq 'id'}">selected</c:if>>작성자</option>

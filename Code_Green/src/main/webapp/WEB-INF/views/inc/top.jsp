@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head><link rel="icon" href="/Code_Green/resources/img/favicon.png"></head>
 <script>
    function logout() {
       let result = confirm("로그아웃 하시겠습니까?");
@@ -14,75 +15,66 @@
 <style>
    /*    거북스 넣어봤스...히히 */
    .header--organic .ps-form--quick-search input::-webkit-input-placeholder{
-   
        background-image: url("/Code_Green/resources/img/turtle4searchbox.png");
        background-repeat: no-repeat;
-      background-size: 27px 27px;
+       background-size: 27px 27px;
        background-position:  40px center;
        background-repeat: no-repeat;
        text-indent: 0;
    }
 
 </style>
-    
-    
     <header class="header header--organic" data-sticky="true">
         <div class="header__top">
+        
+             <div class="ps-block--user-header">
+ 				<c:choose>
+            	<c:when test="${empty sessionScope.sId }">
+                <a href="join" style="color:green; font-weight: bold;">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="login">로그인</a>
+              	</c:when>
+               
+                 <c:when test="${sessionScope.sId eq 'admin' }">
+                 <a href="MemberInfo.me?member_id=${sessionScope.sId }" style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()">Logout</a>   
+                 &nbsp;&nbsp;|&nbsp;&nbsp;<a href="AdminMain.me">관리자페이지</a>
+                 </c:when>
+                    
+                 <c:when test="${not empty sessionScope.sCode}">
+                 <a href="brand_mypage?manager_id=${sessionScope.sId }"  style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()">Logout</a>
+                 &nbsp;&nbsp;|&nbsp;&nbsp;<a href="ManagerInfo.me?manager_id=${sessionScope.sId }">기업관리자페이지</a>
+                 </c:when>
+                    
+                 <c:otherwise>
+                 <a href="MemberInfo.me" style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()"> Logout</a>
+                 </c:otherwise>
+               </c:choose>
+               </div>
+                          
             <div class="container">
                 <div class="header__left">
-                   <a class="ps-logo" href="/Code_Green"><img src="/Code_Green/resources/img/logo-organic.png"></a>
+                   <a class="ps-logo" href="/Code_Green"><img src="/Code_Green/resources/img/한글베지터틀.png" width="230" height="100"></a>
                 </div>
                 
                 
                 <!-- 서치박스 -->
-                
                 <div class="header__center">
-                    <form class="ps-form--quick-search" action="index.html" method="get">
-                        <div class="form-group--icon"><i class="icon-chevron-down"></i>
-                            <select class="form-control">
-                                <option value="1">All</option>
-                                <option value="1">상품명</option>
-                                <option value="1">브랜드명</option>
-                                <option value="1">게시글</option>
-                                <option value="1">레시피</option>
-                            </select>
-                        </div>
+                    <form class="ps-form--quick-search" action="#" method="get">
                         <input class="form-control" type="text" placeholder=".............">
-                        <button>search</button> <!-- 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
+                        <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> <!-- 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
                     </form>
                 </div>
             <div class="header__right">
-                    <div class="header__actions"><a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
-                        <div class="ps-cart--mini"><a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span>
-                          <c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
-                         <i>0</i>
-                        </c:if>
-                          <i>${cartCount }</i>
-                        </span></a>
-                         </div>
-            <c:choose>
-                           <c:when test="${empty sessionScope.sId }">
-                           <div class="ps-block--user-header">
-                               <div class="ps-block__left"><i class="icon-user"></i></div>
-                               <div class="ps-block__right"><a href="login">Login</a><a href="join">Join</a></div>
-                           </div>
-                          </c:when>
-                          
-                          <c:when test="${sessionScope.sId eq 'admin' }">
-                            <a href="MemberInfo.me?member_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                                <a href="AdminMain.me">관리자페이지</a>
-                               </c:when>
-                               
-                               <c:when test="${not empty sessionScope.sCode}">
-                                <a href="brand_mypage?manager_id=${sessionScope.sId }">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                                <a href="ManagerInfo.me?manager_id=${sessionScope.sId }">기업관리자페이지</a>
-                               </c:when>
-                               
-                               <c:otherwise>
-                                 <a href="MemberInfo.me">${sessionScope.sId}님 </a> <a href="javascript:logout()">Logout</a>
-                               </c:otherwise>
-                          </c:choose>
-      </div>
+                    <div class="header__actions">
+                    	<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
+                        	<div class="ps-cart--mini">
+                        	<a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i><span>
+                          	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}"><i>0</i></c:if>
+                          	<i>${cartCount }</i></span></a>
+                        	</div>
+                        <c:if test="${not empty sessionScope.sId}">
+                        <a class="header__extra" href="MemberInfo.me"><i class="icon-user"></i></a></c:if>
+                        <c:if test="${empty sessionScope.sId }">
+                         <a class="header__extra" href="login"><i class="icon-user"></i></a></c:if>
+      				</div>
                 </div>
             </div>
         </div>
@@ -108,11 +100,8 @@
                     </div>
                 </div>
                 
-                
-                
                 <div class="navigation__right">
                     <ul class="menu menu--organic">
-                    
                         <li class="menu-item-has-children has-mega-menu"><a href="ItemList.bo">신상품</a><span class="sub-toggle"></span> </li>                     
                         <li class="menu-item-has-children has-mega-menu"><a href="BestItemList.bo">베스트</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun">어서와, 비건은 처음이지?</a></li>   

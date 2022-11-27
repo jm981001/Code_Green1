@@ -568,9 +568,13 @@ public class CommunityController {
 		
 		// 순서번호(reply_re_seq) 조정 
 		service.increaseReplyReSeq(reply);
+		System.out.println("순서번호 조정후 : " + reply);
+		
 		
 		// 대댓글 등록
 		int reResultCount = service.writeReReply(reply);
+		System.out.println("대댓등록 후 결과 : " + reply);
+		
 		String msg = "";
 		if(reResultCount > 0) {
 			msg += "답댓글작성 완료";

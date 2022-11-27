@@ -61,8 +61,50 @@
 			FROM qna
 			WHERE qna_type='1:1문의' 
 			AND   qna_id=#{qna_id}
+			ORDER BY qna_date DESC, qna_idx DESC
 	</select>
 
+
+	<!-- 1:1 문의글 작성 -->
+	<insert id="insertMtmQna">
+	<selectKey keyProperty="qna_idx" resultType="integer" order="BEFORE">
+		SELECT MAX(qna_idx) FROM qna
+		</selectKey>
+		INSERT 
+			INTO qna
+			VALUES (
+					#{qna_idx}+ 1,   
+					0, 
+					"1:1문의", 
+					#{qna_category}, 
+					"N", 
+					#{qna_id}, 
+					"N", 
+					#{qna_subject}, 
+					#{qna_content}, 
+					"답변대기",
+					"0",   
+					date_format(now(),'%Y%m%d')
+					)
+	</insert>
+
+	<!-- 1:1 문의글 내용가져오기 -->
+	<select id="selectMtmDetail" resultType="com.itwillbs.Code_Green.vo.QnaVO">
+		SELECT * 
+			FROM qna
+			WHERE 
+				qna_idx = #{qna_idx}
+				AND
+				qna_type = "1:1문의"
+	</select>
 	
+	<!-- 1:1 문의글 내용삭제 -->
+	<delete id="deleteMtm">
+		DELETE FROM qna
+			WHERE 
+				qna_type = "1:1문의"
+				AND
+				qna_idx = #{qna_idx}
+	</delete>
 	
 </mapper>

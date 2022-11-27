@@ -349,15 +349,40 @@ public class MypageController {
 	}
 	
 	//====================================== 마이페이지 1:1 문의내역 ========================================== 
-	@GetMapping(value = "/myPageQnaDetail.bo")
-	public String myPageQnaDetail(Model model,HttpSession session) {
+	@GetMapping(value = "/myPageQnaList.bo")
+	public String myPageQnaMtmList(Model model,HttpSession session) {
 		
 		String qna_id = (String)session.getAttribute("sId");
 		
 		List<QnaVO> mantomanList = Qservice.getMantomanList(qna_id);
 		
 		model.addAttribute("mantomanList", mantomanList);
+		return "member/myPage_qnaList";
+	}
+	
+	
+	//====================================== 마이페이지 1:1 문의글 개별내용확인 ========================================== 
+	@GetMapping(value = "/QnaMtmDetail.bo")
+	public String myPageQnaMtmDetail(@RequestParam int qna_idx,Model model) {
+		
+		QnaVO mtmDetail = Qservice.getMantomanDetail(qna_idx);
+		model.addAttribute("mtmDetail", mtmDetail);
+		
 		return "member/myPage_qnaDetail";
+	}
+
+	
+	
+	//====================================== 마이페이지 1:1 문의내역 삭제  ========================================== 
+	@GetMapping(value = "/DeleteMtmQna.bo")
+	public String myPageQnaMtmDelete(@RequestParam int qna_idx,Model model) {
+		int DeleteResult = Qservice.deleteMantoman(qna_idx);
+		if(DeleteResult == 0) {
+			model.addAttribute("msg", "글삭제에 실패했습니다.\n다시한번 시도해주세요");
+			return "member/fail_back";
+		} else {
+			return "redirect:/myPageQnaList.bo";
+		}
 	}
 	
 	//------------마이페이지 작성글-------------------------------------------

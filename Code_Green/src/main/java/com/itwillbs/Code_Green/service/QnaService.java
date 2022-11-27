@@ -37,6 +37,21 @@ public class QnaService {
 	public List<QnaVO> getMantomanList(String qna_id) {
 		return mapper.selectMantomanList(qna_id);
 	}
+	
+	// 1:1 문의글 작성
+	public int writeMtmQna(QnaVO qna) {
+		return mapper.insertMtmQna(qna);
+	}
+
+	// 1:1 문의글 내용보기
+	public QnaVO getMantomanDetail(int qna_idx) {
+		return mapper.selectMtmDetail(qna_idx);
+	}
+
+	// 1:1 문의글 내용삭제
+	public int deleteMantoman(int qna_idx) {
+		return mapper.deleteMtm(qna_idx);
+	}
 
 	
 

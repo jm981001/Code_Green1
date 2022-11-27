@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<!-- headers-->
 <html>
 
 <head>
@@ -15,7 +14,8 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>나의문의내역</title>
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
+<title>마이페이지 - 베지터틀</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -33,10 +33,27 @@
     
 </head>
 <style>
+
+	.writeBtn {
+	
+		float: right;
+		border: 2px solid black;
+		border-radius: 20px;
+		color: black;
+		font-weight: bold;
+		background-color: transparent;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		padding: 3px 15px;
+		 
+	
+	}
+
 	.btnbtnbtn .statusBtn1,.statusBtn2 {
-		
+		float: left;
+		font-size: 90%;
 		border: none;
-		border-radius: 0.25rem;
+		border-radius: 20px;
 		color: white;
 		margin-right: 10px;
 		margin-bottom: 10px;
@@ -45,13 +62,30 @@
 	}
 	
 	.btnbtnbtn .statusBtn1 {
-		background-color: #007bff;
+		background-color: #f34a4a;
 	}
 
 	.btnbtnbtn .statusBtn2 {
-		background-color: #f34a4a;
+		background-color: #007bff;
 	}
 	
+	.status_wait{
+		color:red;
+		padding: 0.25em 0.4em;
+	    font-size: 75%;
+	    font-weight: 700;
+	    line-height: 1;
+	    text-align: center;
+	}
+	
+	.status_complete{
+		color:#007bff;
+		padding: 0.25em 0.4em;
+	    font-size: 75%;
+	    font-weight: 700;
+	    line-height: 1;
+	    text-align: center;
+	}
 	
 	
 </style>
@@ -61,7 +95,7 @@
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
 
-	<!-- ==========왼쪽 사이드바=========================================================================================================     -->
+<!-- ==========왼쪽 사이드바=========================================================================================================     -->
 	<main class="ps-page--my-account">
 		<section class="ps-section--account">
 			<div class="container">
@@ -80,22 +114,11 @@
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
                                     	<div class="ps-section__right">
-                                    	
-                                    		<div class="settingForqna" style="float: right">
-		                                    	<select>    
-													<option value="">기간선택</option>
-													<option value="1">1개월</option>    
-													<option value="3">3개월</option>    
-													<option value="6">6개월</option>
-													<option value="">기간지정</option>
-												</select>
-											</div>
-											
-											<div class="btnbtnbtn">
-												<input type="button" class="statusBtn1" name="answerStatus" value="답변대기">
-												<input type="button" class="statusBtn2" name="answerStatus" value="답변완료">
-											</div>
-										<hr>	
+										<div class="btnbtnbtn">
+											<input type="button" class="writeBtn" name="answerStatus" onclick="location.href='WriteQna.bo'" value="문의하기">
+											<input type="button" class="statusBtn1" name="answerStatus" value="답변대기">
+											<input type="button" class="statusBtn2" name="answerStatus" value="답변완료">
+										</div>
                                         <table class="table ps-table ps-table--notification">
                                             <thead>
                                                 <tr>
@@ -113,10 +136,15 @@
                                             	<c:forEach var="mtmList" items="${mantomanList }">
                                                 <tr>
                                                     <td>${mtmList.qna_category }</td>
-                                                    <td onclick="location.href='#'" style="font-weight: bold">${mtmList.qna_subject }</td>
+                                                    <td onclick="location.href='QnaMtmDetail.bo?qna_idx=${mtmList.qna_idx}'" style="font-weight: bold">${mtmList.qna_subject }</td>
                                                     <fmt:parseDate var="dateString" value="${mtmList.qna_date}" pattern="yyyyMMdd" />
                                                     <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
-                                                    <td><span class="badge badge-primary">답변대기</span></td>
+                                                    <c:if test="${mtmList.qna_status eq '답변대기' }">
+                                                    	<td><span class="status_wait">답변대기</span></td>
+                                                    </c:if>
+                                                    <c:if test="${mtmList.qna_status eq '답변완료' }">
+                                                    	<td><span class="status_complete">답변완료</span></td>
+                                                    </c:if>
                                                 </tr>
                                                 </c:forEach>
                                             </tbody>

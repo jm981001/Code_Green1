@@ -12,6 +12,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <title>베지터틀</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -26,8 +27,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     <link rel="stylesheet" href="/Code_Green/resources/js/test.js">
-<%--     <script type="text/javascript" src="<%=request.getContextPath() %>/js/test.js"></script> --%>
-<%--     <link href="<c:url value='/resources/css/organic.css' />"  rel="stylesheet" /> --%>
 </head>
 <script type="text/javascript">
 </script>

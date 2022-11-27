@@ -22,5 +22,14 @@ public interface QnaMapper {
 	// 1:1문의 목록출력(첫화면)
 	List<QnaVO> selectMantomanList(String qna_id);
 
+	// 1:1 문의글 작성
+	int insertMtmQna(QnaVO qna);
+
+	// 1:1 문의글 내용보기
+	QnaVO selectMtmDetail(int qna_idx);
+
+	// 1:1 문의글 내용삭제
+	int deleteMtm(int qna_idx);
+
 
 }

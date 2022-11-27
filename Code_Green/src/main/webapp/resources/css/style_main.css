@@ -3788,10 +3788,14 @@ textarea.form-control {
   }
 }
 
+/* 지영 */
 .ps-block--user-header {
-  display: flex;
-  flex-flow: row nowrap;
-  text-align: left;
+/*   display: flex; */
+/*   flex-flow: row nowrap; */
+/*   text-align: left; */
+  position: absolute;
+  right: 440px;
+  top: 20px;
 }
 
 .ps-block--user-header .ps-block__left {
@@ -12034,12 +12038,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .ps-form--quick-search button {
-  background-color: #5FA30F;
-  color: #ffffff;
+  background-color: rgb(255, 255, 255);
+  color: #5FA30F;
   border: none;
   font-weight: 700;
   padding: 0 24px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 5px;
 }
 /* 지영 */
 .ps-form--quick-search--com button {
@@ -15987,10 +15991,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   color: #ffffff;
 }
 
+/* 지영 */
 .header .header__actions {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 110px;
 }
 
 .header .header__actions > * {
@@ -16007,23 +16013,31 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   display: none;
 }
 
+/* 지영 */
 .header .header__right {
-  max-width: 370px;
+  max-width: 200px;
 }
 
+/* 지영 */
 .header .header__top {
-  padding: 50px 0;
+  padding: 50px 0px 20px 0px;
   background-color: white;
 /*   border-bottom: 1px solid rgba(0, 0, 0, 0.15); */
 }
 
+/* 지영 */
 .header .header__top .ps-container, .header .header__top .container {
   display: flex;
   flex-flow: row nowrap;
+  margin-left: 300px;
 }
 
+/* 지영 */
 .header .header__top .ps-container > *, .header .header__top .container > * {
-  width: 100%;
+  width: 600px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
 }
 
 .header.header--sticky .menu--product-categories .menu__toggle i {
@@ -16034,13 +16048,14 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   font-size: 16px;
 }
 
+/* 지영 */
 .header.header--sticky .header__top {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   border-bottom: none;
-  padding: 10px 0;
+  padding-top: 40px;
 }
 
 .header.header--sticky .header__left .ps-logo {
@@ -16195,9 +16210,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   border: none;
 }
 
+/* 지영 */
 .header--standard .ps-form--quick-search input {
   border: 1px solid #e1e1e1;
-  border-left: none;
+  border-radius: 5px;
 }
 
 .header--standard .header__content {
