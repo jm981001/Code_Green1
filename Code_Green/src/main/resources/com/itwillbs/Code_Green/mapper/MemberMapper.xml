@@ -15,7 +15,7 @@
 				#{member_name},		<!--    MEMBER_NAME VARCHAR(10) NOT NULL, 			-->
 				#{member_phone},	<!-- 	MEMBER_PHONE VARCHAR(12) UNIQUE NOT NULL, 	-->
 				#{member_email},    <!-- 	MEMBER_EMAIL VARCHAR(30) UNIQUE NOT NULL, 	-->
-				'N',				<!-- 	MEMBER_EMAIL_AUTH VARCHAR(1) DEFAULT 'N', 	-->
+				'Y',				<!-- 	MEMBER_EMAIL_AUTH VARCHAR(1) DEFAULT 'N', 	-->
 				#{member_postcode},	<!-- 	MEMBER_POSTCODE VARCHAR(6) NOT NULL, 		-->
 				#{member_address},	<!-- 	MEMBER_ADDRESS VARCHAR(100) NOT NULL, 		-->
 				'N',				<!--	MEMBER_DEL_YN VARCHAR(1) DEFAULT 'N',		-->

@@ -256,14 +256,16 @@ button {
 				<div class="form-group email-form">
 					<label for="email">이메일</label>
 					<div class="input-group">
-						<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일">
-						<select class="form-control" name="userEmail2" id="userEmail2">
-							<option>@naver.com</option>
-							<option>@daum.net</option>
-							<option>@gmail.com</option>
-							<option>@hanmail.com</option>
-							<option>@yahoo.co.kr</option>
-						</select> </div>
+						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일">
+<!-- 						<select class="form-control" name="userEmail2" id="userEmail2"> -->
+<!-- 							<option>@naver.com</option> -->
+<!-- 							<option>@daum.net</option> -->
+<!-- 							<option>@gmail.com</option> -->
+<!-- 							<option>@hanmail.com</option> -->
+<!-- 							<option>@yahoo.co.kr</option> -->
+<!-- 						</select> -->
+					</div>
+					
 						<div class="input-group-addon">
 							<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
 						</div>
@@ -296,23 +298,24 @@ button {
 
 	<!--------------------------------기업----------------------------------->
 
-	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkForm()" enctype="multipart/form-data">
+	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkFormM()" enctype="multipart/form-data">
 		<div class="member">
 			<div id="companyDiv">
 				<div class="field">
 					<b>아이디</b> <span class="placehold-text">
-					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="" required="required"></span>
-					<span id="checkIdResultMana"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="checkIdM(this.value)" required="required"></span>
+					<span id="checkIdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				<div class="field">
 					<b>비밀번호</b> 
-					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
-					<span id="checkPasswdResultMana"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="checkPasswdM(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
+					<span id="checkPasswdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="field">
 					<b>기업관리자 이름</b> 
-					<input type="text" id="name" name="manager_name" maxlength="10" onchange="" required="required">
+					<input type="text" id="name" name="manager_name" maxlength="10" onchange="checkNameM(this.value)" required="required">
+					<span id="checkNameResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 
 				<div class="field">
@@ -334,28 +337,26 @@ button {
 					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20" required="required">
 				</div>
 
-<!-- 				<div class="form-group email-form"> -->
-<!-- 					<label for="email">이메일</label> -->
-<!-- 					<div class="input-group"> -->
-<!-- 						<input type="text" class="form-control" name="userEmail3" -->
-<!-- 							id="userEmail3" placeholder="이메일"> <select -->
-<!-- 							class="form-control" name="userEmail4" id="userEmail4"> -->
+				<div class="form-group email-form">
+					<label for="email">이메일</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일">
+<!-- 						<select class="form-control" name="userEmail4" id="userEmail4"> -->
 <!-- 							<option>@naver.com</option> -->
 <!-- 							<option>@daum.net</option> -->
 <!-- 							<option>@gmail.com</option> -->
 <!-- 							<option>@hanmail.com</option> -->
 <!-- 							<option>@yahoo.co.kr</option> -->
-<!-- 						</select> </div> -->
-<!-- 						<div class="input-group-addon"> -->
-<!-- 							<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button> -->
-<!-- 						</div> -->
-<!-- 						<div class="mail-check-box"> -->
-<!-- 							<input class="form-control mail-check-input" -->
-<!-- 								placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" -->
-<!-- 								maxlength="6" required="required"> -->
-<!-- 						</div> -->
-<!-- 						<span id="mail-check-warn"></span> -->
-<!-- 					</div> -->
+<!-- 						</select> -->
+					</div>
+						<div class="input-group-addon">
+							<button type="button" class="btn btn-primary" id="mail-Check-BtnM">본인인증</button>
+						</div>
+						<div class="mail-check-boxM">
+							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
+						</div>
+						<span id="mail-check-warnM"></span>
+					</div>
 				<div class="field post-code">
 						<b>주소</b>
 						<div>

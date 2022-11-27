@@ -98,7 +98,8 @@ public class MemberController {
 		if (insertCount > 0) { // 가입 성공
 			System.out.println("가입 성공!");
 			//가입 성공시 기본적립금 적립
-//			service.setCoin(member_idx);
+//			MemberVO getMem = service.getMemberInfo(member.getMember_id());
+//			service.setCoin(getMem);
 			
 			return "redirect:/join_result";
 		} else { // 가입 실패
