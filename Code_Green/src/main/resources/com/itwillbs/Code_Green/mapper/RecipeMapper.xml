@@ -147,7 +147,14 @@
 			   rand() LIMIT 2	    	
 	</select>
 	
-
+	<!-- 레시피 조회수 증가 -->
+	<update id="updateReadcount">
+		UPDATE board
+			SET 
+				board_readcount = board_readcount + 1
+			WHERE
+				board_idx = #{board_idx}
+	</update>
 	
 	
 	

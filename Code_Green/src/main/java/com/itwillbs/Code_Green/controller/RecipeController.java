@@ -89,6 +89,9 @@ public class RecipeController {
 		// 레시피 작성자(브랜드) 관련상품 불러오기
 		List<ItemVO> related_item = service.getRelatedItem(recipe.getBoard_id());
 		
+		// 레시피 조회수 증가
+		service.increaseReadcount(board_idx);
+		
 		model.addAttribute("recipe", recipe);
 		
 		model.addAttribute("use_item" ,use_item);

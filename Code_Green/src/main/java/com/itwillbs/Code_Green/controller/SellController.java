@@ -33,7 +33,7 @@ public class SellController {
 	
 	
 	@GetMapping(value = "/payment")
-	public String payment(@RequestParam String member_id, HttpSession session, Model model) {
+	public String payment(@RequestParam String member_id, HttpSession session, Model model, @RequestParam String cart_total,@RequestParam String shipping_fee) {
 		
 		MemberVO memberInfo = member_service.getMemberInfo(member_id);
 		// 주문자 기본 정보 불러오기
@@ -41,14 +41,16 @@ public class SellController {
 		session.setAttribute(member_id, "member_id");
 		
 		// 장바구니 정보 불러오기
-		List<CartVO> cartList = sell_service.selectCart(member_id);
+		List<CartVO> cartList = sell_service.getCart(member_id);
 		model.addAttribute("cartList", cartList);
 		
 		// 적립금 불러오기
-		CoinVO coin = sell_service.selectCoin(member_id);
+		CoinVO coin = sell_service.getCoin(member_id);
 		model.addAttribute("coin", coin);
-				
 		
+		model.addAttribute("cart_total", cart_total);
+		model.addAttribute("shipping_fee", shipping_fee);
+	
 		return "payment/payment";
 	}
 	
@@ -56,15 +58,17 @@ public class SellController {
 
 	// 주문하기
 	@PostMapping(value = "payment_success")
-	public String payment_success(@RequestParam String member_id, @ModelAttribute SellVO sell) {
+	public String payment_success(@RequestParam String member_id, @ModelAttribute SellVO sell, @RequestParam int member_idx) {
 		
 		List<CartVO> cartList = cart_service.selectCart(member_id); // 장바구니 정보
-		System.out.println("cartList"+cartList);
+		
+		System.out.println("cartList : " + cartList);
 		
 		System.out.println("member_id : " + member_id);
 		
 		System.out.println("sell : " + sell);
-		
+
+		System.out.println("member_idx : " + member_idx);
 		int orderNum = 0;
 
 //		int insertCount = sell_service.insertOrder(member_id, orderNum);

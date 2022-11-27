@@ -101,6 +101,11 @@ public class RecipeService {
    public int getMyRecipeCount(String keyword, String sId) {
       return mapper.selectMyRecipeCount(keyword, sId);
    }
+	
+   // 레시피 조회수 증가
+	public void increaseReadcount(int board_idx) {
+		mapper.updateReadcount(board_idx);
+	}
 
 	
 	

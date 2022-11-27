@@ -36,33 +36,6 @@
 	<link rel="stylesheet" href="/Code_Green/resources/css/recipe_style.css" type="text/css">
 	<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 	
-	<script type="text/javascript">
-		function recipe_delete_auth() {
-			if(${sessionScope.sId == "admin" || sessionScope.sId == recipe.board_id}){
-// 				location.href="recipe_delete.bo?board_idx=" + ${recipe.board_idx};
-					confirm("삭제하시겠습니까? 삭제하면 복구가 불가능합니다.");
-				
-					$.ajax({
-						url: "recipe_deletePro.bo",
-						type: "POST",
-						data: {
-							board_idx: ${recipe.board_idx}
-						},
-						success: function(){
-							alert("삭제가 완료되었습니다.");
-							location.href = "recipe_main.bo";
-						},
-						fail: function () {
-							alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
-						}
-					});
-				
-			} else {
-				alert("삭제 권한이 없습니다.");
-			}
-				
-		}
-	</script>
 </head>
 
 <body>
@@ -92,9 +65,6 @@
                     <div class="ingredients-item">
                         <div class="intro-item">
                             <img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt="">
-                       		<div class="ps-form--quick-search--com">
-						       	<button onclick="recipe_delete_auth()">레시피 삭제</button>
-						   </div>
                         </div>
                         <div class="ingredient-list">
                             <div class="list-item">

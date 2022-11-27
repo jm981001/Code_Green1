@@ -63,6 +63,9 @@ public interface RecipeMapper {
 
    // 브랜드 페이지 내 등록한 레시피 갯수 조회
    int selectMyRecipeCount(@Param("keyword") String keyword, @Param("sId") String sId);
+
+   // 레시피 조회수 증가
+   void updateReadcount(int board_idx);
 	   
 	   
 

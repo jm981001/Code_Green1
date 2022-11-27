@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>장바구니</title> 
+<title>장바구니 - 베지터틀</title> 
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -215,7 +215,7 @@
 					</div>
 				</div>
 				<a class="ps-btn ps-btn--fullwidth" style="width: auto"
-					href="payment?member_id=${sessionScope.sId }">결제 진행</a>
+					href="payment?member_id=${sessionScope.sId }&cart_total=${map.sumM }&shipping_fee=${map.fee}">결제 진행</a>
 			</div>
 		</div>
 	</div>

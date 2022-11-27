@@ -100,7 +100,7 @@
 	<div class="ps-vendor-dashboard">
 		 <div class="container">
 			<div class="ps-section__header">
-		       <h3>레시피</h3>
+		       <h3>Recipe</h3>
 		       <p>지구와 환경을 위한 발걸음, 베지터틀만의 레시피.<br>베지터틀의 상품을 더 맛있게 즐길 수 있는 방법!</p>
 		    </div>
 		</div>

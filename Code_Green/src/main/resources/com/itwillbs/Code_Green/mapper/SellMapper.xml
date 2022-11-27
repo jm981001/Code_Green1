@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.SellMapper">
 
-
+	<!-- 장바구니 목록 불러오기 -->
 	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT 
 			i.item_name,
@@ -22,7 +22,7 @@
 		WHERE r.member_id = #{member_id};
 	</select>
 
-
+	<!-- 적립금 불러오기 -->
 	<select id="selectCoin" resultType="com.itwillbs.Code_Green.vo.CoinVO">
 		SELECT  c.coin_idx,
 				c.rf_member_idx,
@@ -37,45 +37,7 @@
 		ORDER BY c.coin_date DESC limit 1;
 	</select>
 	
-<!-- <insert id="insertOrder"> -->
-<!-- 		<selectKey keyProperty="member_id" order="BEFORE"> -->
-<!-- 			SELECT  -->
-<!-- 				   c.rf_item_idx, -->
-<!-- 				   c.rf_member_idx, -->
-<!-- 				   c.cart_amount, -->
-<!-- 				   c.cart_total -->
-<!-- 			  FROM cart c -->
-<!-- 			  JOIN member m  -->
-<!-- 			    ON m.member_idx = c.rf_member_idx -->
-<!-- 			  JOIN sell s -->
-<!-- 			    ON s.rf_member_idx = c.rf_member_idx -->
-<!-- 			  JOIN item i  -->
-<!-- 			    ON c.item_idx = i.item_idx   -->
-<!-- 			 WHERE m.member_id = #{member_id} -->
-<!-- 		</selectKey> -->
-<!-- 			INSERT INTO sell  -->
-<!-- 							VALUES( -->
-<!-- 									<selectKey order="BEFORE"> -->
-<!-- 									   <if test="max(s.sell_idx) == null"> -->
-<!-- 									  	 s.sell_idx = 1, -->
-<!-- 									   </if>	  -->
-<!-- 									   <if test="max(s.sell_idx) != null"> -->
-<!-- 									   	s.sell_idx = max(s.sell_idx) + 1, -->
-<!-- 									   </if> -->
-<!-- 								  </selectKey> -->
-<!-- 								   s.rf_member_idx = c.rf_member_idx, -->
-<!-- 								   s.rf_item_idx = c.rf_item_idx, -->
-<!-- 								   s.sell_amount = c.cart_amount, -->
-<!-- 								  	 <if test=""> -->
-								  	 
-<!-- 								  	 </if> -->
-								   
-<!-- 								   <if test="sell_use_coin"></if> -->
-<!-- 							) -->
-		
-<!-- 	</insert>	 -->
-		
-<!-- 	상품구매 목록 -->
+	<!-- 리뷰 불러오기 -->
 	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		 select  SELL_IDX  
 				,RF_MEMBER_IDX  
@@ -100,7 +62,7 @@
 	                            where member_id = #{member_id})
 	</select>
 	
-<!-- 	상품구매 목록 갯수 -->
+	<!-- 상품구매 목록 갯수 -->
 	<select id="selectSellListCount" resultType="integer">
 		 select count(*)
 			from sell
@@ -109,7 +71,7 @@
                             		where member_id = #{member_id})
 	</select>
 	
-<!-- 	//마이페이지 리뷰 가능상품 목록 -->
+	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
            select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
@@ -137,7 +99,7 @@
 	</select>
 	
 	
-<!-- 	마이페이지 상품후기작성 -->
+	<!-- 마이페이지 상품후기작성 -->
 	<select id="getSellReview" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		select       s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
