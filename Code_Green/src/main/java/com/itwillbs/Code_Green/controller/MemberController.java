@@ -43,35 +43,43 @@ public class MemberController {
 		// => 파라미터 : 아이디 리턴타입 : String(passwd)
 		String passwd = service.getPasswd(member.getMember_id());
 //		System.out.println(passwd);
-		
 
-		// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
-		// 1) 아이디가 없을 경우(passwd 값이 null) 실패
-		// 2) 패스워드 비교(BCryptPasswordEncoder 객체의 matches() 메서드 활용)
-		// 2-1) 다를 경우 실패
-		// 2-2) 같을 경우 성공
-		if (passwd == null || !encoder.matches(member.getMember_pass(), passwd)) {
-			model.addAttribute("msg", "다시");
-//			System.out.println(member.getMember_id() + ", " + member.getMember_pass()+"로그인 실패..");
+		// 3. 탈퇴 여부 확인
+		String checkDel = service.checkDel(member.getMember_id());
+
+		if (checkDel.equals("Y")) {
+			System.out.println("탈퇴한 회원");
+			model.addAttribute("msg", "탈퇴한 회원입니다");
 			return "member/fail_back";
-		} else {
 
-			MemberVO getMem = service.getMemberInfo(member.getMember_id());
-			session.setAttribute("sId", member.getMember_id());  //세션아이디
-			session.setAttribute("sIdx", getMem.getMember_idx());//세션 IDX
-			session.setAttribute("sEmail", getMem.getMember_email());	// 세션 이메일
-			
-			//장바구니 갯수
-			int cartCount = cartService.getCartCount(getMem.getMember_idx());
-			session.setAttribute("cartCount", cartCount);
-			model.addAttribute("cartCount",cartCount);
-		
-			
-			return "redirect:/";
+		} else {
+			System.out.println("활동중인 회원");
+			// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
+			// 1) 아이디가 없을 경우(passwd 값이 null) 실패
+			// 2) 패스워드 비교(BCryptPasswordEncoder 객체의 matches() 메서드 활용)
+			// 2-1) 다를 경우 실패
+			// 2-2) 같을 경우 성공
+			if (passwd == null || !encoder.matches(member.getMember_pass(), passwd)) {
+				model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
+//			System.out.println(member.getMember_id() + ", " + member.getMember_pass()+"로그인 실패..");
+				return "member/fail_back";
+			} else {
+
+				MemberVO getMem = service.getMemberInfo(member.getMember_id());
+				session.setAttribute("sId", member.getMember_id()); // 세션아이디
+				session.setAttribute("sIdx", getMem.getMember_idx());// 세션 IDX
+				session.setAttribute("sEmail", getMem.getMember_email()); // 세션 이메일
+
+				// 장바구니 갯수
+				int cartCount = cartService.getCartCount(getMem.getMember_idx());
+				session.setAttribute("cartCount", cartCount);
+				model.addAttribute("cartCount", cartCount);
+
+				return "redirect:/";
+			}
 		}
 
 	}
-
 	
 	//회원가입 페이지 요청
 	@RequestMapping(value = "join", method = RequestMethod.GET)

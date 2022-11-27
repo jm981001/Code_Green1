@@ -26,7 +26,8 @@ public interface MemberMapper {
 	// 5. 회원 가입시 기본 적립금 추가
 	public void setCoin(int member_idx);
 
-	
+	// 6. 탈퇴 여부 확인
+	public String checkDel(String member_id);
 	
 	
 	
@@ -53,6 +54,8 @@ public interface MemberMapper {
 	
 	// 마이페이지 - 팔로우브랜드 언팔로우
 	public int deleteFollowBrand(@Param("rf_member_idx")int rf_member_idx, @Param("rf_manager_idx") int rf_manager_idx);
+
+	
 	
 
 	

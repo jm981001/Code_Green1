@@ -81,6 +81,10 @@ public class MemberService {
 		return mapper.deleteFollowBrand(rf_member_idx, rf_manager_idx);
 	}
 
+	public String checkDel(String member_id) {
+		return mapper.checkDel(member_id);
+	}
+
 	
 
 	
