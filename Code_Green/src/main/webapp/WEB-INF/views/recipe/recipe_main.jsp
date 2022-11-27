@@ -10,7 +10,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>베지터틀 - 레시피</title>
+    <title>레시피 - 베지터틀</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {
 		display: block;

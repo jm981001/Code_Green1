@@ -16,21 +16,9 @@ public class RecipeService {
 	@Autowired
 	private RecipeMapper mapper;
 
-	// 기업이 올린 상품 조회
-	public List<ItemVO> getmyItem(String sId) {
-		return mapper.selectMyItem(sId);
-	}
 	
-	// 레시피 작성(글)
-	public int writeRecipe(BoardVO board, int use_item_idx) {
-		return mapper.insertRecipe(board, use_item_idx);
-	}
-
-	// 레시피 작성(파일)
-	public int writeRecipeFile(File_boardVO fileBoard) {
-		return mapper.insertRecipeFile(fileBoard);
-	}
-
+	
+	//-------------------------레시피 페이지 내-----------------------------------
 	// 레시피 목록(글) 불러오기
 	public List<BoardVO> getRecipeList(int startRow, int listLimit, String keyword) {
 		return mapper.selectRecipeFile(startRow, listLimit, keyword);
@@ -54,6 +42,24 @@ public class RecipeService {
 	// 레시피 작성자(브랜드) 관련상품 불러오기
 	public List<ItemVO> getRelatedItem(String board_id) {
 		return mapper.selectRelatedItem(board_id);
+	}
+	
+	
+	
+	//------------------브랜드 페이지 내 레시피 관리-------------------------
+	// 기업이 올린 상품 조회
+	public List<ItemVO> getmyItem(String sId) {
+		return mapper.selectMyItem(sId);
+	}
+	
+	// 레시피 작성(글)
+	public int writeRecipe(BoardVO board, int use_item_idx) {
+		return mapper.insertRecipe(board, use_item_idx);
+	}
+
+	// 레시피 작성(파일)
+	public int writeRecipeFile(File_boardVO fileBoard) {
+		return mapper.insertRecipeFile(fileBoard);
 	}
 	
 	// 레시피 파일 수정
@@ -87,14 +93,14 @@ public class RecipeService {
 	}
 
 	// 브랜드 페이지 내 등록한 레시피 조회
-	   public List<BoardVO> getMyRecipeList(int startRow, int listLimit, String keyword, String sId) {
-	      return mapper.selectMyRecipeList(startRow, listLimit, keyword, sId);
-	   }
+   public List<BoardVO> getMyRecipeList(int startRow, int listLimit, String keyword, String sId) {
+      return mapper.selectMyRecipeList(startRow, listLimit, keyword, sId);
+   }
 
-	   // 브랜드 페이지 내 레시피 갯수 조회
-	   public int getMyRecipeCount(String keyword, String sId) {
-	      return mapper.selectMyRecipeCount(keyword, sId);
-	   }
+   // 브랜드 페이지 내 레시피 갯수 조회
+   public int getMyRecipeCount(String keyword, String sId) {
+      return mapper.selectMyRecipeCount(keyword, sId);
+   }
 
 	
 	
