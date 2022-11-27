@@ -47,6 +47,21 @@ public class SellService {
 		return sell_mapper.getSellReview(member_id, sell_idx,item_idx);
 	}
 
+	// 주문하기
+	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
+		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
+	}
+
+	// 주문내역 불러오기
+	public SellVO getOrderList(int member_idx, int orderList_sellIdx) {
+		return sell_mapper.selectOrderList(member_idx, orderList_sellIdx);
+	}
+
+	// 주문내역 불러오기 위한 sell_idx 불러오기
+	public int getSellIdx(int member_idx) {
+		return sell_mapper.selectSellIdx(member_idx);
+	}
+
 
 		
 	

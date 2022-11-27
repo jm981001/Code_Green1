@@ -84,7 +84,7 @@
                     <div class="ps-post--detail sidebar">
                         <div class="ps-post__header">
                             <h1>채식</h1>
-                            <p>지구를 살리는 첫 걸음. 채식과 함께.</p>
+                            <p>지구와 환경을 살리는 첫 걸음. 채식과 함께.</p>
                         </div>
                          <blockquote class="ps-blockquote">
                            <p>“채식주의 다이어트보다 인류의 건강을 증진하고 지구환경에서 살아남을 수 있는 기회를 많이 제공하는 것은 없다. 채식 음식은 우리의 본성에 깊은 인상을 남긴다. 전 세계가 채식주의를 채택하면 인류의 운명은 바뀔 수 있다." <br>- 알베르트 아인슈타인</p>
@@ -160,7 +160,7 @@
                            <p>“채식은 건강과 육체적 활력 뿐만 아니라 마음과 행동에도 지대한 영향을 미친다."<br>- 토마스 에디슨</p>
                         </blockquote>
                         <div class="ps-post__content">
-                        	 <h4>비건 요리 강습 클래스</h4><sub>출처 : https://www.vege.or.kr/free.html?mode=read&idx=66120&kwd=&page=1&page_list=1&db_name=a_4</sub>
+                        	 <h4>채식 요리 강습 클래스</h4><sub>출처 : https://www.vege.or.kr/free.html?mode=read&idx=66120&kwd=&page=1&page_list=1&db_name=a_4</sub>
                             <ul>
                             	<li><a href="https://blog.naver.com/ddobagiyuns/222295110205">또바기윤쓰</a></li>
                             	<li><a href="https://blog.naver.com/mongsil0010">로푸드팜(한국로푸드협회)</a></li>
@@ -172,7 +172,7 @@
                             </ul>
                         </div>
                         <div class="ps-post__content">
-                        	 <h4>비건 요리 레시피</h4>
+                        	 <h4>채식 요리 레시피</h4>
                         	 <iframe width="560" height="315" src="https://www.youtube.com/embed/rvgLxpsM8rU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         	 <iframe width="560" height="315" src="https://www.youtube.com/embed/lHlHKJBfdOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         	  <br><br><br>
@@ -180,10 +180,10 @@
                         	  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
   								<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
  								<path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
-							 </svg> 비건 마켓만의 레시피를 보고싶다면?</a>
+							 </svg> 베지터틀만의 레시피를 보고싶다면?</a>
                         </div>
                         <div class="ps-post__content">
-                        	 <h4>비건 요리 식당</h4>
+                        	 <h4>채식 요리 식당</h4>
                         	 <ul>
                             	<li>아케미  - 서울 성북구 길음동 (02)6409-0011</li>
                             	<li>바이두부 -  서울 용산구 용산동 (0507)1378-7019</li>

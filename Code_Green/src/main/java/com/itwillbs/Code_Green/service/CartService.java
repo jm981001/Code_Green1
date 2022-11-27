@@ -19,7 +19,7 @@ public class CartService {
 		return mapper.insertCart(cart);
 	}
 	// 2. 장바구니 목록
-	public List<CartVO> selectCart(String member_id) {
+	public List<CartVO> getCart(String member_id) {
 		return mapper.selectCart(member_id);
 	}
 	// 3. 장바구니 삭제

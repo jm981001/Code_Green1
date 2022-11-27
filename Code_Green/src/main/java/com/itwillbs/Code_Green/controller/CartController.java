@@ -57,7 +57,7 @@ public class CartController {
 			mav.setViewName("redirect:/login");
 			return mav;
 		} else {
-			List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
+			List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
 
 			Map<String, Object> map = new HashMap<String, Object>();
 
@@ -105,7 +105,7 @@ public class CartController {
 	@GetMapping("updateCart")
 	public String update(@ModelAttribute CartVO cart, HttpSession session, Model model,@RequestParam String member_id,@RequestParam int cart_amount,@RequestParam int cart_idx) {
 		String sId = (String) session.getAttribute("sId");
-		List<CartVO> cartList = service.selectCart(member_id); // 장바구니 정보
+		List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
 		System.out.println("cart_amount : "+cartList.get(0).getCart_amount());
 		System.out.println("cart_amount : "+cartList.get(0).getCart_idx());
 		

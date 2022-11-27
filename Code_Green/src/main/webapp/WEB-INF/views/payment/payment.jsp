@@ -40,45 +40,11 @@
     	}
     </style>
     
-    
-<!-- 결제 api 관련 js-->
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
- 
 <!-- 주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
     
 <script>
-<!-- 결제 api -->
-        var IMP = window.IMP; 
-        IMP.init("imp82131734"); 
-
-        function requestPay() {
-            IMP.request_pay({
-                pg : 'kcp',
-                pay_method : 'card',
-                merchant_uid: "202013444565", // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
-                name : '당근 10kg', // 주문할 상품명들
-                amount : 1004, // 금액
-                buyer_email : 'Iamport@chai.finance', // 주문자 메일주소
-                buyer_name : '아임포트 기술지원팀', // 주문자 이름
-                buyer_tel : '010-1234-5678', // 주문자 연락처
-                buyer_addr : '서울특별시 강남구 삼성동', // 주문자 주소
-                buyer_postcode : '123-456' // 주문자 우편번호
-            }, function (rsp) { // callback
-                if (rsp.success) {
-                    alert("결제가 완료되었습니다.");
-                    location.href="payment_success_card"; // 결제 완료창으로 넘어갈때 아이디 같이 보내기? sell or sell detail 테이블 보내기
-                } else {
-                    alert("결제가 완료되지 않았습니다.");
-                    history.back();
-                }
-            });
-        }
-        
 <!-- 기존 주소 / 변경 주소 -->
         function setDisplay(){    
         	if($('input:radio[id=basic_address]').is(':checked')){
@@ -104,8 +70,10 @@
 <!-- 적립금 사용 및 결제 금액 계산-->
         $(function() {
         	coin();
+        	orderCheck();
  		});
         
+        let sell_total_price;
         
         function coin(){
         	$(".sell_coin_use_btn").on("click",function(){
@@ -135,97 +103,34 @@
      			let sell_shipping_fee2 = parseInt(sell_shipping_fee, 10);
         		
      			<!-- 전체 결제 금액 = 전체 상품 금액 - 적립금 사용 + 배송비 -->
-        		let sell_total_price = sell_item_total_price2 - sell_use_coin2 + sell_shipping_fee2;
-     		
+        		sell_total_price = sell_item_total_price2 - sell_use_coin2 + sell_shipping_fee2;
         		$(".sell_total_price").html(sell_total_price);
         		
-        		
         	});
-        
-        }  
-        
-        
-        
- <!-- 주문 확인 alert -->       
-//         function orderConfirm() {
-// 			alert("주문을 완료하시겠습니까? \n확인을 클릭하시면 결제페이지로 이동합니다.");
-// 		}
-        
-
-// <!-- 장바구니 불러오기 -->
-//        	$(function() {
-//        		cartList();
-//        	});
-       		
-//            function cartList(){
-//         	   var member_id = "${sessionScope.sId }";
-//    	        $.ajax({
-//    				type: "GET",
-//    				url: "/Code_Green/cartListJson",
-//    				data:{
-//    					member_id : member_id
-//    				},
-//    				dataType: "json"
-//    			})
-//    			.done(function(cartList) {
-// //    				console.log(cartList)
-//    				for(let cart of cartList){ 
-// //    					console.log(cart)
-//    			let result = "<tr>"
-//    							+ "<td>" + "<img src='/Code_Green/resources/item/" + cart.file1 + "'>" + "</td>"
-//    							+ "<td id='rf_item_idx'>" + cart.rf_item_idx	+ "</td>" 
-//    							+ "<td id='rf_item_idx'>" + cart.manager_brandname +"</td>"
-//    							+ "<td id='rf_item_idx'>" + cart.item_name +"</td>"
-//    							+ "<td id='rf_item_idx'>" + cart.item_price +"</td>"
-//    							+ "<td id='rf_item_idx'>" + cart.cart_amount +"</td>"
-//    							+ "<td id='rf_item_idx'>" + cart.cart_total +"</td>"
-//    						+ "</tr>";
-   					
-//    					$(".ps-block__content > table").append(result);
-//    				}
-   	
-   	
-//    			})
-//    			.fail(function() { // 요청 실패 시
-//    				$(".ps-block__content > table").html("요청 실패!");
-//    			});
-   			
-//    	       }
-
-           
-           
-<!-- 주문 컨트롤러로 보내기 -->            
-//        	let sell_receiver = $("#sell_receiver").val();
-		
-// 		$(function() {
-// 			orderList();
-// 		});
-        
-		
-// 		function orderList(){  
-// 			var orderList = $("#orderList").serialize();
-			
-// 			$("#orderBtn").on("click",function(){
-				
-// 				$.ajax({
-// 					type:"POST",
-// 					data:orderList,
-// 					url:"/Code_Green/payment_success",
-// 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-// // 					dataType: "json",
-// 					success:function() {	
-// 						console.log("됨")
-// 					},
-// 					error:function() {
-// 						console.log("안됨")
-// 					}
-// 				});
-// 			});
-// 		}	
-             
-    </script>    
-         
-  
+        }	
+        	
+        	function orderCheck() {
+        		$("#orderBtn").on("click",function(){
+        		
+					let result = confirm('주문하시겠습니까?');
+					
+					if(result){
+						let subForm = document.getElementById('orderList');
+		        		
+		        		let input = document.createElement('input');
+		        		
+		        		input.type   = 'hidden';
+		        		
+		        		input.name  = 'sell_total_price';
+		        		
+		        		input.value  = sell_total_price;
+		        		
+		        		subForm.appendChild(input);	
+					}
+        		});	
+			} 
+        	
+    </script>
 </head>
 
 <body>
@@ -236,15 +141,15 @@
         <div class="ps-breadcrumb">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li>주문(ORDER)</li>
+                    <li><a href="/Code_Green">Home</a></li>
+                    <li>주문</li>
                 </ul>
             </div>
         </div>
         <section class="ps-section--account ps-checkout">
             <div class="container">
-                <div class="ps-section__header">
-                    <h3>주문(ORDER)</h3>
+                <div class="ps-section__header" style="text-align: center;">
+                    <h3>ORDER</h3>
                 </div>
                 <div class="form-check">
 				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="basic_address" checked onchange="setDisplay()">
@@ -267,6 +172,8 @@
 	                                     <!-- 기존 주소 -->
 	                                 <form action="payment_success?member_id=${sessionScope.sId }" method="post" id="orderList" name="orderList">
 	                                 	<input type="hidden" name="member_idx" value="${coin.rf_member_idx }">
+	                                 	<input type="hidden" name="shipping_fee" value=${shipping_fee }>
+	                                 	<input type="hidden" name="sell_item_total_price" value="${cart_total }">
 	                                 	<div class="ps-block__panel" id="basicDiv" style="width: 1200px;">
 	                                  		<div class="mb-3">
 												<label for="formGroupExampleInput" class="form-label">이름</label>
@@ -317,7 +224,7 @@
 	                                        <div class="ps-block__content">
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 		                                        	보유 적립금
-		                                        	<input type="text" value="${coin.coin_total }" class="sell_coin_total" style="color: #5fa30f;">
+		                                        	<input type="text" value="${coin.coin_total }" class="sell_coin_total" style="color: #5fa30f;" readonly="readonly">
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 												 사용할 적립금
@@ -362,13 +269,13 @@
 			                                         	<tr>
 			                                           		<td>주문 총 금액</td>
 			                                           		<td colspan="6">
-			                                           			<input type="text" value="${cart_total }" class="sell_item_total_price">
+			                                           			<input type="text" value="${cart_total }" class="sell_item_total_price" readonly="readonly">
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
 			                                           		<td>배송비</td>
 			                                           		<td colspan="6">
-			                                           			<input type="text" value="${shipping_fee }" class="sell_shipping_fee">
+			                                           			<input type="text" value="${shipping_fee }" class="sell_shipping_fee" readonly="readonly">
 			                                           		</td>
 				                                        </tr>	
 				                                         <tr>
@@ -385,7 +292,14 @@
 			                                        </table>
 			                                     </div>
 			                                 </div>
-			                                  
+			                                 <div class="ps-block--checkout-order">
+		                                        <div class="ps-block__content">
+		                                        	<div style="padding: 0 40px; margin: 0 20px; text-align: center;">
+				                                        <input type="radio" name="sell_pay_type" value="무통장입금">무통장입금
+				                                        <input type="radio" name="sell_pay_type" value="카드결제">카드결제
+		                                        	</div>
+		                                        </div>
+		                                       </div> 
 			                                  
 			                                  
 			                                  <!-- 주문하기 버튼 -->

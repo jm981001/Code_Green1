@@ -28,6 +28,16 @@ public interface SellMapper {
 	// 마이페이지 상품후기작성
 	List<SellVO> getSellReview(@Param("member_id")String member_id, @Param("sell_idx")int sell_idx, @Param("item_idx")int item_idx);
 
+	// 주문하기
+	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, @Param("sell")SellVO sell, @Param("sell_total_price")int sell_total_price);
+
+	// 주문내역 불러오기
+	SellVO selectOrderList(@Param("member_idx")int member_idx, @Param("orderList_sellIdx")int orderList_sellIdx);
+
+	// 주문내역 불러오기 위한 sell_idx 불러오기
+	int selectSellIdx(int member_idx);
+
+
 	
 	
 	

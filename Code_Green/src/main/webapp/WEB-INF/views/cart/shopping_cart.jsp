@@ -96,7 +96,7 @@
         <div class="ps-breadcrumb">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/Code_Green">Home</a></li>
                     <li>장바구니</li>
                 </ul>
             </div>
@@ -108,19 +108,20 @@
 	<div class="ps-section--shopping ps-shopping-cart">
 		<div class="container">
 			<div class="ps-section__header">
-				<h1>장바구니</h1>
+				<h1>Cart</h1>
 			</div>
 			<div class="ps-section__content">
 				<div class="table-responsive">
 				
 				
-						<table class="table ps-table--shopping-cart ps-table--responsive">
+						<table class="table ps-table--shopping-cart ps-table--responsive" style="text-align: center;">
 							<thead>
 								<tr>
 									<th>상품명</th>
 									<th>가격</th>
 									<th>수량</th>
-									<th>총합</th>
+									<th>총 금액</th>
+									<th></th>
 								</tr>
 							</thead>
 							<c:forEach var="row" items="${cartList}" varStatus="i">
@@ -134,7 +135,7 @@
 											<a href="product-default.html"><img
 												src="/Code_Green/resources/item/${row.file1 }"></a>
 										</div>
-										<div class="ps-product__content">
+										<div class="ps-product__content" style="text-align: left;">
 											<a href="product-default.html">${row.item_name}</a>
 
 											<p>
@@ -175,11 +176,11 @@
 						</table><!-- class="table ps-table--shopping-cart ps-table--responsive"> -->
 				</div><!--<div class="table-responsive"> -->
 
-				<div class="ps-section__cart-actions">
-				<button class="ps-btn" id="btnList">돌아가기</button>
-				<button class="ps-btn" id="btnRefresh">새로고침</button>
+<!-- 				<div class="ps-section__cart-actions"> -->
+<!-- 				<button class="ps-btn" id="btnList">돌아가기</button> -->
+<!-- 				<button class="ps-btn" id="btnRefresh">새로고침</button> -->
 
-				</div>
+<!-- 				</div> -->
 
 			</div>
 
@@ -190,9 +191,9 @@
 			</form>	
 
 			<!-- 합계 부분 -->
-			<div class="ps-section__footer">
+			<div class="ps-section__footer" style="margin: 100px 0;">
 				<div class="row"></div>
-				<div class="ps-block--shopping-total" style="width: 600px">
+				<div class="ps-block--shopping-total" style="width: 100%">
 
 					<div class="ps-block__header">
 						<p>
@@ -203,19 +204,21 @@
 						
 						<ul class="ps-block__product">
 							<li>
-								<h3>
+								<h3 style="color: #666;">
 									배송비 <span class="ps-block__shipping"><fmt:formatNumber value="${map.fee}" pattern="#,###"/> 원</span>
 								</h3>
 							</li>
 						</ul>
 						
-						<h3>
-							총합 <span class="ps-block__shipping"><fmt:formatNumber value="${map.allSum}" pattern="#,###"/> 원</span>
+						<h3 style="color: #666;">
+							총 주문 금액 <span class="ps-block__shipping"><fmt:formatNumber value="${map.allSum}" pattern="#,###"/> 원</span>
 						</h3>
 					</div>
 				</div>
-				<a class="ps-btn ps-btn--fullwidth" style="width: auto"
-					href="payment?member_id=${sessionScope.sId }&cart_total=${map.sumM }&shipping_fee=${map.fee}">결제 진행</a>
+				  <div class="form-group submit" align="right" style="margin-top: 80px;">
+				  	<a class="ps-btn ps-btn--fullwidth" style="width: auto"
+					href="payment?member_id=${sessionScope.sId }&cart_total=${map.sumM }&shipping_fee=${map.fee}">주문하기</a>
+                  </div>
 			</div>
 		</div>
 	</div>
