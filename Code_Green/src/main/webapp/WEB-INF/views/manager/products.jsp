@@ -1,9 +1,10 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>상품관리</title>
+    <title>상품관리-베지터틀</title>
    <link href="https://fonts.googleapis.com,,/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -47,19 +48,17 @@
     </header>
     <aside class="ps-drawer--mobile">
         <div class="ps-drawer__header">
-            <h4> Menu</h4>
             <button class="ps-drawer__close"><i class="icon icon-cross"></i></button>
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-               				    <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+  								<li><a  href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a class="active" href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
@@ -76,21 +75,20 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>수익</small>
-                        <h3>$12,560.55</h3>
+                     <div class="ps-block--earning-count"><small></small>
+<%--                         <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3> --%>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+ 								<li><a  href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a class="active" href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
                         
@@ -99,7 +97,7 @@
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
+                            <p>&copy;2022 CODE GREEN. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>
@@ -117,7 +115,6 @@
             <section class="ps-items-listing">
    
                  <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
-<!--                  <div class="ps-section__actions" onclick="productsADD()"><i class="icon icon-plus mr-2"></i>새 상품 등록<a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div> -->
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">

@@ -39,14 +39,13 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-               				  	<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+  								<li><a href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a class="active" href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 						</ul>
         </div>
@@ -63,22 +62,21 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>수익</small>
-                        <h3>$12,560.55</h3>
+                    <div class="ps-block--earning-count"><small></small>
+<!--                         <h3>$12,560.55</h3> -->
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            	 <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li>
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li>
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-				                 <li><a href="brand_mypage"><i class="icon-cog"></i>내브랜드정보</a></li>
+ 								<li><a href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a class="active" href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
 						</ul>
                     </div>
                     <div class="ps-sidebar__footer">
@@ -108,11 +106,6 @@
                     <section class="ps-card">
                         <div class="ps-card__header">
                         
-    
-    
-
- 
-
  
 <!--        <table class="table ps-table"> -->
 
@@ -120,6 +113,7 @@
   		
                             <h4>상품수정 & 삭제</h4>
                         </div>
+                            <form class="ps-form--account-settings" action="product_modify" method="post">
                         <div class="card" style="width: 18rem;">
 						  <img src="/Code_Green/resources/img/삼색이.jpg" class="card-img-top"alt="">
 						  <div class="card-body">
@@ -141,7 +135,7 @@
 						
 						<br>
 						<div class="ps-card__content">
-                            <form class="ps-form--account-settings" action="product_modify" method="get">
+                            <form class="ps-form--account-settings" action="product_modify" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

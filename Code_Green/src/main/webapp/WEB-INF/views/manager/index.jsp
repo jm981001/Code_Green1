@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>브랜드관리자페이지</title>
+    <title>브랜드관리자페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -56,20 +56,20 @@
                         </div>
                         <div class="ps-block__action"><a href=""><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>수익</small>
-                        <h3>$12,560.55</h3>
+                    <div class="ps-block--earning-count"><small>총매출</small>
+                        <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                                <li><a class="active" href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
 				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         </ul>
                     </div>
@@ -86,7 +86,7 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>매출현황</h3>
-                    <p>Sales Status</p>
+<!--                     <p>Sales Status</p> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -171,24 +171,25 @@
                 </div>
                <div class="ps-section__right">
                     <section class="ps-card ps-card--statics">
-                        <div class="ps-card__header">
-                            <h4>Statics</h4>
-                            <div class="ps-card__sortby"><i class="icon-calendar-empty"></i>
-                                <div class="form-group--select">
-                                    <select class="form-control">
-                                        <option value="1">Last 30 days</option>
-                                        <option value="2">Last 90 days</option>
-                                        <option value="3">Last 180 days</option>
-                                    </select><i class="icon-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
+<!--                         <div class="ps-card__header"> -->
+<!--                             <h4>Statics</h4> -->
+<!--                             <div class="ps-card__sortby"><i class="icon-calendar-empty"></i> -->
+<!--                                 <div class="form-group--select"> -->
+<!--                                     <select class="form-control"> -->
+<!--                                         <option value="1">Last 30 days</option> -->
+<!--                                         <option value="2">Last 90 days</option> -->
+<!--                                         <option value="3">Last 180 days</option> -->
+<!--                                     </select><i class="icon-chevron-down"></i> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
                        <div class="ps-card__content">
                            <div class="ps-block--stat yellow">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
                                     <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
+
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">

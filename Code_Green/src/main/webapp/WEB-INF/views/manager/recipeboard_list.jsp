@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>레시피관리페이지</title>
+    <title>레시피관리페이지 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -61,19 +61,19 @@
     </header>
     <aside class="ps-drawer--mobile">
         <div class="ps-drawer__header">
-            <h4> Menu</h4>
+<!--             <h4> Menu</h4> -->
             <button class="ps-drawer__close"><i class="icon icon-cross"></i></button>
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                               <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-                            <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-                            <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-                            <li><a href="recipeboard_list"><i class="icon-users2"></i>레시피관리</a></li>
-                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                                <li><a  href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a class="active" href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
     </aside>
@@ -89,21 +89,21 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>Earning</small>
-                        <h3>$12,560.55</h3>
+                    <div class="ps-block--earning-count"><small></small>
+<!--                         <h3>$12,560.55</h3> -->
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                               <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
-                            <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-                            <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-                            <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-                            <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-                            <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-                            <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
-                        <li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
+                                <li><a  href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a class="active" href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
                         </ul>
                     </div>
@@ -118,7 +118,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>답변관리</h3>
+                    <h3>레시피관리</h3>
                 </div>
                 <div class="header__center">
                 </div>
@@ -191,14 +191,14 @@
                                 <div class="ps-pagination">
                                     <ul class="pagination">
                                        
-                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="recipeboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
                                         <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
                                            <c:choose>
                                               <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-                                              <c:otherwise><li><a href="qnaboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
+                                              <c:otherwise><li><a href="recipeboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
                                            </c:choose>
                                         </c:forEach>
-                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="qnaboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="recipeboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
               <!-- 페이징 버튼들 끝 -->

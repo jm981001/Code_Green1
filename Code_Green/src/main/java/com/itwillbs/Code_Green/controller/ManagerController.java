@@ -176,13 +176,7 @@ public class ManagerController {
     
  }
 	
-		//------------매니저페이지 메인-------------------------------------------
-//		@RequestMapping(value = "manager_index", method = RequestMethod.GET)
-//		public String index() {
-//			return "manager/index";
-//		}
-//		
-	
+
 	//------------매니저페이지 내브랜드정보조회-------------------------------------------
 		
 	@GetMapping(value = "brand_mypage")
@@ -330,7 +324,7 @@ public class ManagerController {
 
 	
 	
-	//------------매니저페이지 (각브랜드별)상품목록조회(페이징처리같이)-------------------------------------------
+	//------------(각브랜드별) 상품 목록 조회(페이징처리같이)-------------------------------------------
 	@GetMapping(value = "/products")
 	public String itemList ( Model model, HttpSession session,
 							@RequestParam(defaultValue = "1")int pageNum,
@@ -635,20 +629,19 @@ public class ManagerController {
 		
 		
 		
-	//------------매니저페이지 주문조회-------------------------------------------
+	//------------주문 목록 조회-------------------------------------------
 
 		@GetMapping(value = "/orders")
 		public String orderList ( Model model, HttpSession session,
 								@RequestParam(defaultValue = "1")int pageNum,
 								@RequestParam(defaultValue = "")String searchType,
-								@RequestParam(defaultValue = "")String keyword,
-								@RequestParam String manager_id) {
+								@RequestParam(defaultValue = "")String keyword) {
 			
 			String id = (String)session.getAttribute("sId");
 			System.out.println("id : " + id );
 			System.out.println("searchType : " + searchType);
 			System.out.println("keyword : " + keyword);
-			System.out.println("manager_id : " + manager_id);
+//			System.out.println("manager_id : " + manager_id);
 			
 			
 			
@@ -661,8 +654,8 @@ public class ManagerController {
 			
 			// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
-			// => 리턴타입 : List<ItemVO>(itemList)
-			List<SellVO> orderList = service.getOrderList(manager_id, startRow, listLimit, searchType, keyword);
+			// => 리턴타입 : List<SellVO>(orderList)
+			List<SellVO> orderList = service.getOrderList(id, startRow, listLimit, searchType, keyword);
 			
 			// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
@@ -692,12 +685,12 @@ public class ManagerController {
 			PageInfo pageinfo = new PageInfo(
 					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
-			// 상품 목록(itemList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
+			// 주문 목록(orderList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("pageInfo", pageinfo);
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword",keyword);
-//			System.out.println("주문목록" + orderList);
+			System.out.println("주문목록" + orderList);
 			
 			return "manager/orders";
 		}
@@ -720,15 +713,6 @@ public class ManagerController {
 		
 		
 		
-		
-		
-	//------------매니저페이지 매출관리-------------------------------------------
-		@RequestMapping(value = "sales_main", method = RequestMethod.GET)
-		public String sales_main() {
-			return "manager/sales_main";
-		}
-
-
 
 		
 
@@ -789,7 +773,7 @@ public class ManagerController {
 					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 //			System.out.println(pageInfo);
 			// --------------------------------------------------------------------------------
-			// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
+			// 게시물 목록(QnaBoardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 			model.addAttribute("QnaBoardList", QnaBoardList);
 			model.addAttribute("pageInfo", pageInfo);
 			model.addAttribute("searchType", searchType);
@@ -1205,52 +1189,25 @@ public class ManagerController {
 	         
 	         
 	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	         
+	  		
+	  		
+	      	//------------매니저페이지 매출관리-------------------------------------------
+	      		@RequestMapping(value = "sales_main", method = RequestMethod.GET)
+	      		public String sales_main() {
+	      			return "manager/sales_main";
+	      		}
 
-	//------------매니저페이지 팔로워-------------------------------------------
-		@RequestMapping(value = "follower_list", method = RequestMethod.GET)
-		public String follower_list() {
-			return "manager/follower_list";
-		}
-		
-		//------------매니저페이지 팔로워 목록 불러오기 -------------------------------------------
-//		
-//@GetMapping(value = "/follower_list")
-//public String follower_list(@RequestParam String idx, Model model) {
-//	
-//	followVO follow = service.followInfo(idx);
-//	//조회된 회원 1명의 데이터를 model 객체에 저장 (팔로우)
-//	model.addAttribute("follow", follow);
-//	
-//	
-//	return "manager/follower_list";
-//}		
-		
-	//------------매니저페이지 정산-------------------------------------------
-		@RequestMapping(value = "sales_management", method = RequestMethod.GET)
-		public String sales_management() {
-			return "manager/sales_management";
-		}
-		
 
+
+
+		
+			//------------매니저페이지 정산-------------------------------------------
+				@RequestMapping(value = "sales_management", method = RequestMethod.GET)
+				public String sales_management() {
+					return "manager/sales_management";
+				}
+				
+		
 
 
 	

@@ -50,13 +50,13 @@ public interface ManagerMapper {
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
 	
 	// 새 상품등록 - 텍스트
-	public int addNewProducts(@Param("item")ItemVO item, @Param("manager_idx")int manager_idx);
+	public int insertProducts(@Param("item")ItemVO item, @Param("manager_idx")int manager_idx);
 	
 	// 새 상품등록 - 파일업로드
-	public int addNewProductsFile(File_ItemVO fileItem);
+	public int insertProductsFile(File_ItemVO fileItem);
 	
 	//상품수정하기- 파일수정
-	public int selectItemFileModify(File_ItemVO fileItem);
+	public int updateItemFileModify(File_ItemVO fileItem);
 	
 	
 	//문의글 목록 조회
@@ -83,7 +83,7 @@ public interface ManagerMapper {
 	
     // 주문조회
 	public List<SellVO> selectOrderList(
-			@Param("manager_id") String manager_id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	//주문 갯수 조회
 	public int selectOrderListCount(
@@ -100,6 +100,5 @@ public interface ManagerMapper {
 
 
 
-	//팔로우 목록조회
-//	public MemberVO selectFollowInfo(String idx);
+
 }

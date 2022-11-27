@@ -42,14 +42,13 @@
         </div>
         <div class="ps-drawer__content">
             <ul class="menu">
-                   				<li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                   				<li><a href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a  class="active" href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             </ul>
         </div>
@@ -66,21 +65,20 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>Earning</small>
-                        <h3>$12,560.55</h3>
+                    <div class="ps-block--earning-count"><small></small>
+<!--                         <h3>$12,560.55</h3> -->
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <li><a class="active" href="manager_index"><i class="icon-home"></i>관리자메인페이지</a></li>
+                                <li><a href="manager_index?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-<!-- 				            <li><a href="inventory_management"><i class="icon-database"></i>재고관리</a></li> -->
-				                <li><a href="orders"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list"><i class="icon-users2"></i>답변관리</a></li>
-<!-- 				            <li><a href="follower_list"><i class="icon-users2"></i>팔로우목록</a></li> -->
-				                <li><a href="sales_management"><i class="icon-percent-circle"></i>정산</a></li>
+				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
+				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
+				                <li><a  class="active" href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
+				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
+				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
                         
                         </ul>
@@ -142,7 +140,6 @@
                                    	<th>제목</th>
                                     <th>작성자</th>
                                      <th>처리상태</th>
-<!--                                      <th>답변</th> -->
                                     <th>작성일</th>
                                    
                                 </tr>
@@ -170,7 +167,7 @@
                 </div>
                             
                               <div class="ps-section__footer">
-                   <!-- 페이징 버튼들 시작 -->
+                       <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
 				                        <ul class="pagination">
