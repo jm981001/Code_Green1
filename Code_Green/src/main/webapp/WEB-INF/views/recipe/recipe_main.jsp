@@ -91,7 +91,7 @@
             <div class="container">
                 <ul class="breadcrumb">
                     <li><a href="/Code_Green">Home</a></li>
-                    <li><a href="recipe_main">레시피</a></li>
+                    <li><a href="recipe_main.bo">레시피</a></li>
                 </ul>
             </div>
         </div>
@@ -101,7 +101,7 @@
 		 <div class="container">
 			<div class="ps-section__header">
 		       <h3>레시피</h3>
-		       <p>베지터틀만의 신선하고 맛있는 레시피.<br>우리 함께 만들어 보실까요?</p>
+		       <p>지구와 환경을 위한 발걸음, 베지터틀만의 레시피.<br>베지터틀의 상품을 더 맛있게 즐길 수 있는 방법!</p>
 		    </div>
 		</div>
 	</div>
