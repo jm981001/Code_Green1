@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>신고글 상세조회</title>
+    <title>신고글 상세조회 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -116,7 +116,7 @@
 
 				 <div style="margin-left: 800px" ></div>  
 				                  
-			 <table class="table table-bordered" style="text-align: center; height: 200px">
+			 <table class="table table-bordered" style="text-align: center; height: auto;">
 				  <thead>
 				 	<tr>
 				    	<td scope="row" rowspan="2"><strong>신고자</strong></td>
@@ -131,6 +131,13 @@
 				    <tr>
 				    	<td colspan="4"><strong>${reportInfo.report_content }</strong></td>
 				    </tr>
+				  </thead>
+				</table>
+				
+				<br>
+				<!-- 원본글 -->
+				<table class="table table-bordered" style="text-align: center; height: auto;">
+				  <thead>
 				    <tr>
 				    	<td scope="col">제목</td>
 				    	<td scope="col" colspan="3">${originBoard.board_subject }</td>

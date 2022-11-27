@@ -381,6 +381,9 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateNotice(board);
 	}
+	
+	
+	
 	//기업 가입 승인
 	public int updateAuth(ManagerVO manager) {
 		// TODO Auto-generated method stub
@@ -395,6 +398,13 @@ public class AdminService {
 	public List<ManagerVO> getFollowerRanking() {
 		// TODO Auto-generated method stub
 		return mapper.selectFollowerRankingList();
+	}
+	
+	
+	//신고글 처리반려 요청
+	public int changeReportStatus(int report_idx) {
+		// TODO Auto-generated method stub
+		return mapper.updateReportReturn(report_idx);
 	}
 	
 	

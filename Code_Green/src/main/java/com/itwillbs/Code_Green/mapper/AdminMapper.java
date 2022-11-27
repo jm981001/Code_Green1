@@ -260,6 +260,8 @@ public interface AdminMapper {
 	public List<ManagerVO> selectStarRankingList();
 	//기업 팔로워 순위
 	public List<ManagerVO> selectFollowerRankingList();
+	//신고글 처리반려 
+	public int updateReportReturn(int report_idx);
 
 	
 

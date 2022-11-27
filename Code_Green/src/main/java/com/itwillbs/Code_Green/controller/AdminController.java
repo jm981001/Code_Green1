@@ -1343,7 +1343,17 @@ public class AdminController {
 			return "admin/ad_Report_Management";
 		}
 			
+		//신고글 처리반려 요청
+		@GetMapping(value = "/ad_ReportReturn")
+		public String statusReturn(Model model, int report_idx) {
 			
+			int updateCount = service.changeReportStatus(report_idx);
+			System.out.println("신고글 처리반려 : " + updateCount);
+			
+			return "redirect:/ad_Report_Management";
+		}
+		
+		
 			
 		//======================================여기부터는 공지관리행 열차입니다=====================================================
 		//======================================여기부터는 공지관리행 열차입니다=====================================================		

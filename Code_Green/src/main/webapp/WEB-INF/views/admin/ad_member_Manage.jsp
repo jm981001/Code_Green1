@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>회원관리 페이지</title>
+    <title>회원관리 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -136,7 +137,8 @@
                                     <td>${member.member_phone }</td>
                                     <td>${member.member_email }</td>
                                    
-                                    <td>${member.member_date }</td>
+                                    <fmt:parseDate var="dateString" value="${member.member_date }" pattern="yyyyMMddHH:mm:ss" />	
+                                    <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

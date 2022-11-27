@@ -628,6 +628,7 @@
 	<!--상품문의(답변완료) 갯수 조회 -->
 	<select id="selectItemAnswerListCount" resultType="Integer">
 		SELECT COUNT(*)
+		
 		FROM qna 
 		WHERE
 			qna_type='상품문의' AND qna_status='답변완료'
@@ -924,9 +925,10 @@
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard">
-		DELETE FROM board
-		WHERE
-			board_idx=#{board_idx }
+		DELETE 
+			FROM board
+			WHERE
+				board_idx=#{board_idx }
 	</delete>
 	
 	
@@ -936,125 +938,135 @@
 	<!-- 신고글(처리대기) 갯수 조회 -->
 	<select id="selectReportListCount" resultType="Integer">
 		SELECT COUNT(*) 
-		FROM report
-		WHERE 
-			report_status='처리대기'
-			<if test="!keyword.equals('')">
-			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-			<choose>
-				<when test="searchType.equals('id')">
-					AND reporter LIKE '%${keyword}%'
-				</when>
-				<when test="searchType.equals('content')">
-					AND report_content LIKE '%${keyword}%' 
-				</when>
-			</choose>
-			</if>
-		ORDER BY 
-			report_idx DESC
+			FROM report
+			WHERE 
+				report_status='처리대기'
+				<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('id')">
+						AND reporter LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('content')">
+						AND report_content LIKE '%${keyword}%' 
+					</when>
+				</choose>
+				</if>
+			ORDER BY 
+				report_idx DESC
 	</select>
 	
 	
 	<!-- 신고글 목록(처리대기) -->
 	<select id="selectReportList" resultType="com.itwillbs.Code_Green.vo.ReportVO">
-		SELECT * FROM report
-		WHERE 
-			report_status='처리대기'
-			<if test="!keyword.equals('')">
-			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-			<choose>
-				<when test="searchType.equals('id')">
-					AND reporter LIKE '%${keyword}%'
-				</when>
-				<when test="searchType.equals('content')">
-					AND report_content LIKE '%${keyword}%' 
-				</when>
-			</choose>
-			</if>
-		ORDER BY 
-			report_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+		SELECT *
+			FROM report
+			WHERE 
+				report_status='처리대기'
+				<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('id')">
+						AND reporter LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('content')">
+						AND report_content LIKE '%${keyword}%' 
+					</when>
+				</choose>
+				</if>
+			ORDER BY 
+				report_idx DESC
+			LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	<!-- 신고글(처리완료) 갯수 조회 -->
 	<select id="selectReportSuccessListCount" resultType="Integer">
 		SELECT COUNT(*) 
-		FROM report
-		WHERE 
-			report_status='처리완료'
-			<if test="!keyword.equals('')">
-			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-			<choose>
-				<when test="searchType.equals('id')">
-					AND reporter LIKE '%${keyword}%'
-				</when>
-				<when test="searchType.equals('content')">
-					AND report_content LIKE '%${keyword}%' 
-				</when>
-			</choose>
-			</if>
-		ORDER BY 
-			report_idx DESC
+			FROM report
+			WHERE 
+				report_status='처리완료'
+				<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('id')">
+						AND reporter LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('content')">
+						AND report_content LIKE '%${keyword}%' 
+					</when>
+				</choose>
+				</if>
+			ORDER BY 
+				report_idx DESC
 	</select>
 	
 	
 	<!-- 신고글 목록(처리완료) -->	
 	<select id="selectReportSuccessList" resultType="com.itwillbs.Code_Green.vo.ReportVO">
 		SELECT * FROM report
-		WHERE
-			report_status='처리완료'
-			<if test="!keyword.equals('')">
-			<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
-			<choose>
-				<when test="searchType.equals('id')">
-					AND reporter LIKE '%${keyword}%'
-				</when>
-				<when test="searchType.equals('content')">
-					AND report_content LIKE '%${keyword}%' 
-				</when>
-			</choose>
-			</if>
-		ORDER BY 
-			report_idx DESC
-		LIMIT #{startRow}, #{listLimit}
+			WHERE
+				report_status='처리완료'
+				<if test="!keyword.equals('')">
+				<!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
+				<choose>
+					<when test="searchType.equals('id')">
+						AND reporter LIKE '%${keyword}%'
+					</when>
+					<when test="searchType.equals('content')">
+						AND report_content LIKE '%${keyword}%' 
+					</when>
+				</choose>
+				</if>
+			ORDER BY 
+				report_idx DESC
+			LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	<!-- 신고글 상세조회 -->
 	<select id="selectReportInfo" resultType="com.itwillbs.Code_Green.vo.ReportVO">
-		SELECT * FROM report
-		WHERE
-			report_idx=#{report_idx}
+		SELECT *
+			FROM report
+			WHERE
+				report_idx=#{report_idx}
 	</select>
 	
 	<!-- 신고된 원본글 조회! -->
 	<select id="selectOriginBoard" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT 
-			*
-		from 
-			board b JOIN report r
-		ON 
-			b.board_idx = r.board_idx 
-		where
-			r.report_idx=#{report_idx}
+		SELECT *
+			FROM board b 
+			JOIN report r
+			ON 
+				b.board_idx = r.board_idx 
+			WHERE
+				r.report_idx=#{report_idx}
 	</select>
 	
 	<!-- 신고글 삭제 -->
 	<delete id="deleteReport">
-		DELETE FROM report
-		WHERE
-			report_idx=#{report_idx}
+		DELETE
+			FROM report
+			WHERE
+				report_idx=#{report_idx}
 	</delete>
 
 	<!-- 신고글 상태처리 -->
 	<update id="updateReportStatus">
-		UPDATE 
-			report
-		SET
-			report_status = '처리완료'
-		WHERE
-			board_idx=#{board_idx}
+		UPDATE  report
+			SET
+				report_status = '처리완료'
+			WHERE
+				board_idx=#{board_idx}
 	</update>
 	
+	<!-- 신고글 상태처리(처리반려) -->
+	<update id="updateReportReturn">
+		UPDATE report
+			SET
+				report_status= '처리반려'
+			WHERE
+				report_idx=#{report_idx} 
+			
+	</update>
 	
 	
 	
@@ -1065,32 +1077,30 @@
 	<!-- 공지 갯수 -->
 	<select id="selectNoticeListCount" resultType="integer">
 		SELECT COUNT(*)
-		FROM
-			board
-		WHERE
-			board_category='공지'
+			FROM
+				board
+			WHERE
+				board_category='공지'
 	</select>
 	
 	<!-- 공지 목록 -->
 	<select id="selectNoticeList" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT *
-		FROM
-			board
-		WHERE
-			board_category='공지'
-		ORDER BY
-			board_idx DESC
+			FROM board
+			WHERE
+				board_category='공지'
+			ORDER BY
+				board_idx DESC
 	</select>
 	
 	
 	<!-- 공지 상세조회 -->
 	<select id="selectNoticeDetail" resultType="com.itwillbs.Code_Green.vo.BoardVO">
-		SELECT
-			*
-		FROM
-			board
-		WHERE
-			board_idx = #{board_idx}
+		SELECT *
+			FROM
+				board
+			WHERE
+				board_idx = #{board_idx}
 	</select>
 	
 	<!-- 공지 등록 -->
@@ -1114,20 +1124,20 @@
 	
 	<!-- 공지 수정 -->
 	<update id="updateNotice">
-		UPDATE
-			board
-		SET
-			board_subject=#{board_subject},
-			board_content=#{board_content}
-		WHERE
-			board_idx=#{board_idx}
+		UPDATE board
+			SET
+				board_subject=#{board_subject},
+				board_content=#{board_content}
+			WHERE
+				board_idx=#{board_idx}
 	</update>
 
 	<!-- 공지 삭제 -->
 	<delete id="deleteNotice">
-		DELETE FROM board
-		WHERE
-			board_idx=#{board_idx}
+		DELETE
+			FROM board
+			WHERE
+				board_idx=#{board_idx}
 	</delete>
 
 

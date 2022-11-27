@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>신고글 관리 페이지</title>
+    <title>신고글 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -132,12 +133,16 @@
                                 	<td>${rList.report_idx }</td>
                                     <td onclick="location.href='ad_Report_Detail?report_idx=${rList.report_idx }'"><strong>${rList.report_content }</strong></td>
                                     <td>${rList.reporter }</td>
-                                    <td>${rList.report_date }</td>
+                                    <fmt:parseDate var="dateString" value="${rList.report_date }" pattern="yyyyMMddHH:mm:ss" />	
+                                    <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td><button class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_ReportRemove?report_idx=${rList.report_idx }">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">신고글 삭제</a>
+                                            <a class="dropdown-item" href="ad_ReportReturn?report_idx=${rList.report_idx }">처리반려</a>
+                                            <a class="dropdown-item" href="ad_ReportRemove?report_idx=${rList.report_idx }">신고글 삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>

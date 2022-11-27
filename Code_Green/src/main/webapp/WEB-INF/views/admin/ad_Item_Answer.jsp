@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link href="favicon.png" rel="icon">
-    <title>상품문의 페이지</title>
+    <title>상품문의 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -85,7 +85,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3><a href="ad_One_Board">1:1 문의</a> | <a href="ad_Item_Qna">상품문의</a> | 답변완료</h3>
+                    <h3><a href="ad_One_Board">1:1 문의</a> | <a href="ad_Item_Qna">상품문의</a> | <a href="ad_Item_Answer">답변완료</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
