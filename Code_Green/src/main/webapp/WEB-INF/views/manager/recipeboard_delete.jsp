@@ -97,7 +97,7 @@
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
+                            <p>&copy;2022 CODEGREEN marketplace. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>

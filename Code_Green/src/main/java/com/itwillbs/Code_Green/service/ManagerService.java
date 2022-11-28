@@ -154,6 +154,21 @@ public class ManagerService {
 	   public ManagerVO getOrderTotal(String sId) {
 	   	return mapper.selectTotalMoneyOrder(sId);
 	   }
+	// 상품 삭제 전 파일명(file1) 조회   
+	public String getRealFile1(int item_idx) {
+		return mapper.selectRealFile1(item_idx);
+	}
+	public String getRealFile2(int item_idx) {
+		return mapper.selectRealFile2(item_idx);
+	}
+	// 상품 글 삭제
+	public int removeItem(int item_idx) {
+		return mapper.deleteItem(item_idx);
+	}
+	// 상품 파일 삭제
+	public int removeItemFile(int item_idx) {
+		return mapper.deleteItemFile(item_idx);
+	}
 	
 	
 	   

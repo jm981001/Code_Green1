@@ -96,7 +96,7 @@
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2020 Marfury marketplace. <br/> All rights reversed.</p>
+                            <p>&copy;2022 CODEGREEN marketplace. <br/> All rights reversed.</p>
                         </div>
                     </div>
                 </div>
@@ -119,9 +119,9 @@
  		<div class="ps-main__wrapper">
   		<div class="header__center">
 <%--   		<form class="ps-form--search-bar" action="product_modifyPro?id=${sessionScope.sId}"  method="post"name="modifyForm"> --%>
+  		<form class="ps-form--search-bar" action="products_detail?id=${sessionScope.sId}"  method="post"name="detailForm">
                  <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }">
                  <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }">
-  		<form class="ps-form--search-bar" action="product_detail?id=${sessionScope.sId}"  method="post"name="detailForm">
 
  
        <table class="table ps-table">

@@ -156,7 +156,7 @@
 <!--                     </form> -->
                </div>
                </div>                                    
-      <form class="ps-form--review" action="qnaboard_answer_detailPro" method="post" name="modifyForm">
+      <form class="ps-form--review" action="recipeboard_detailPro" method="post" name="modifyForm">
             <!-- ---게시판글쓰기api -->
                 <textarea id="summernote" name="qna_answer">                                                        
  <br>안녕하세요 베지터틀 입니다. 

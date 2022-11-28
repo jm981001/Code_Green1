@@ -67,9 +67,22 @@ public interface ManagerMapper {
 	//상품 수정(글) 
 	public int updateItemModify(ItemVO item, int item_idx);
 	
+	//상품 삭제 전 파일명(file1) 조회   
+	public String selectRealFile1(int item_idx);
+	//상품 삭제 전 파일명(file2) 조회   
+	public String selectRealFile2(int item_idx);
+	// 상품 글 삭제
+	public int deleteItem(int item_idx);
+	// 상품 파일 삭제
+	public int deleteItemFile(int item_idx);
+
+	
 	
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
+			
+			
+			
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
 			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
 	
@@ -107,9 +120,7 @@ public interface ManagerMapper {
 
 	 //총매출,총주문건수
 	   public ManagerVO selectTotalMoneyOrder(String sId);
-
-	
-    
+	   
 
 
 

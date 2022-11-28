@@ -65,6 +65,7 @@
 	<update id="updateBrandInfo">
 		UPDATE manager
 		SET 
+		
 			manager_id = #{manager_id},
 			manager_pass = #{manager_pass},
 			manager_name = #{manager_name},
@@ -231,7 +232,7 @@
 	</insert>
 	
 
-	<!-- 상품수정(파일) -->
+	<!-- 상품 수정 (파일) -->
 		<update id="updateItemFileModify">
 		UPDATE 
 		        file_item
@@ -248,15 +249,15 @@
 	
 	
 
-	<!-- 상품수정(글) -->
+	<!-- 상품 수정 (글) -->
 		<update id="updateItemModify">
 		UPDATE
 			    item
 		   SET
 				item_name = #{{item.item_name},
 				item_price = #{item.item_price},
-				item_packing = #${item.item_packing},
-				item_category = #${item.item_category},
+				item_packing = #{item.item_packing},
+				item_category = #{item.item_category},
 				item_info = #{{item.item_info},
 				item_stock = #{item.item_stock},
 			 WHERE 
@@ -264,13 +265,50 @@
 	</update>
    
 	
-	  
-						     
 	
+	<!-- 상품 삭제 -->
+	<delete id="deleteItem">
+	DELETE
+		  FROM
+		  	    item
+		 WHERE  
+		 		item_idx = #{item_idx} 
+	</delete>
+
+	<!-- 상품 삭제 전 파일명(file1) 조회  -->	
+	<select id="selectRealFile1" resultType="string">
+		SELECT 
+		        file1
+		  FROM 
+		        file_item
+		  WHERE
+				rf_item_idx = #{item_idx}
+	</select>	
 	
+	<!-- 상품 삭제전 파일2 명 조회 -->	
+	<select id="selectRealFile2" resultType="string">
+		SELECT 
+				file2
+		  FROM  
+		  		file_item
+		 WHERE
+				rf_item_idx = #{item_idx}
+	</select>
 	
-	
-	<!-- 상품삭제 -->
+	<!-- 상품 삭제(파일) -->
+	<delete id="deleteItemFile">
+		DELETE
+		  FROM
+		  	    file_item
+		 WHERE  
+		 		rf_item_idx = #{item_idx} 	    
+	</delete>
+
+
+
+
+
+
 
 
 

@@ -651,6 +651,61 @@ public class ManagerController {
 		
 		
 		
+		// 상품 삭제
+        @PostMapping(value = "/product_deletePro.bo")
+        public String product_deletePro(@RequestParam int item_idx, Model model, HttpSession session) {
+           
+           //글 삭제 전 실제 업로드된 파일 삭제작업
+           String realFile1 = service.getRealFile1(item_idx);
+           String realFile2 = service.getRealFile2(item_idx);
+           
+           int deleteCount =  service.removeItem(item_idx);
+           int deleteFileCount = service.removeItemFile(item_idx);
+           
+           // ----------------------------------------------------------
+           
+           if(deleteCount > 0) {
+              String uploadDir = "/resources/mnUPload"; // 가상의 업로드 경로
+              // => webapp/resources 폴더 내에 upload 폴더 생성 필요
+              String saveDir = session.getServletContext().getRealPath(uploadDir);
+              System.out.println("실제 업로드 경로 : " + saveDir);
+              
+              if(!realFile1.equals("N")) {
+                 File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
+                 if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
+                    f1.delete();
+                 }
+              }
+              if(!realFile2.equals("N")) {
+                 File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
+                 if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
+                    f2.delete();
+                 }
+              }
+              
+              return "redirect:/products";
+              
+           } else {
+              model.addAttribute("msg", "상품 삭제가 되지 않았습니다.<br>다시 시도해주세요.");
+              return "manager/mn_fail_back";
+           }
+              
+        } 
+          
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
