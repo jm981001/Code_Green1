@@ -27,7 +27,8 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>로그인 | Login</title>
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
+<title>로그인 - 베지터틀</title>
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
 <!-- Css Styles -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">

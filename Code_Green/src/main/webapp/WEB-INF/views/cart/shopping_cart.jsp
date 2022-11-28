@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
 <title>장바구니 - 베지터틀</title> 
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -58,11 +59,11 @@
 			}
 		});
 	}
-	function updateCart(member_id) {
+	function updateCart(cart_idx) {
 		// alert(cart_idx);
 // 		debugger;
-		let cart_idx = $("input[name=cart_idx]").val();
-		let count = $("#quan").val();
+// 		let cart_idx = $("input[name=cart_idx]").val();
+		let count = $("#quan_"+cart_idx).val();
 		$.ajax({
 			type : 'get',
 			url : 'updateCart',
@@ -152,10 +153,10 @@
 									<div class="form-group--number">
 										<button type="button" class="up">+</button><!-- 수량 증가 버튼 -->
 										<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
-										<input class="form-control" type="text" id="quan"
+										<input class="form-control" type="text" id="quan_${row.cart_idx}"
 											placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1"><!-- 수량 -->
 									</div> 
-									<button type="button" class="quantity_modify_btn" onclick="updateCart('${sessionScope.sId }')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
+									<button type="button" class="quantity_modify_btn" onclick="updateCart('${row.cart_idx}')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
 								
 								
 									<!-- 수량 조정 form -->

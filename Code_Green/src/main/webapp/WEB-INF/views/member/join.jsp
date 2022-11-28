@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext"rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -42,7 +43,7 @@
 </style>
 
 
-<title>일반 회원가입</title>
+<title>회원가입 - 베지터틀</title>
 <style type="text/css">
 * {
 	box-sizing: border-box;

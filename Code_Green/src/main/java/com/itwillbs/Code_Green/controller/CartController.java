@@ -107,7 +107,7 @@ public class CartController {
 		String sId = (String) session.getAttribute("sId");
 		List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
 		System.out.println("cart_amount : "+cartList.get(0).getCart_amount());
-		System.out.println("cart_amount : "+cartList.get(0).getCart_idx());
+		System.out.println("cart_idx : "+cartList.get(0).getCart_idx());
 		
 		int update = service.modifyCart(cart_amount,cart_idx);
 		System.out.println(update+"");
