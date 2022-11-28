@@ -14,7 +14,7 @@
 	
 	if(result){
 		alert(result);
-		location.href ="manager/brand_mypage";
+		location.href ="manager/ManagerInfo.me";
 	} else if("${fail}") {
 		alert("${fail}");
 		history.back();
