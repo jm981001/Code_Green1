@@ -78,6 +78,32 @@
 		
 			wish_count();
 	});
+	
+// 	$(document).ready(function(){
+		$('#cartBtn').click(function() {
+			let citem_idx = $("#citem_idx_"+item_idx).val();
+			debugger;
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					rf_item_idx: citem_idx,
+					rf_member_idx: ${sessionScope.sIdx},
+					cart_amount: 1,
+					cart_total: '1',
+					item_name: '1',
+					manager_brandname: '1',
+					file1: '${item.file1 }'
+				},
+				success : function (data) {
+// 					console.log("data : " +  data);
+// 					code =data;
+					alert('장바구니에 담았습니다.')
+				}
+				
+			});
+		});
+// 	});
 	</script>
 <body>
     
@@ -128,8 +154,9 @@
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
+                                                        <input type="hidden" id="citem_idx" name="citem_idx_${item.item_idx}" value="${item.item_idx}">
                                                         <ul class="ps-product__actions">
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                            <li><input type="button" data-toggle="tooltip" data-placement="top" title="Add To Cart" id="cartBtn><i class="icon-bag2" "></i></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
