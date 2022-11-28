@@ -23,11 +23,6 @@ public class SellService {
 		return sell_mapper.selectCart(member_id);
 	}
 	
-	// 적립금 목록 불러오기
-	public CoinVO getCoin(String member_id) {
-		return sell_mapper.selectCoin(member_id);
-	}
-
 	// 상품구매 목록
 	public List<SellVO> getReviewList(int startRow, int listLimit, String member_id) {
 		return sell_mapper.getReviewList(startRow, listLimit, member_id);
@@ -57,6 +52,11 @@ public class SellService {
 	public SellVO getOrderList(String member_id) {
 		return sell_mapper.selectOrderList(member_id);
 	}
+
+	// 주문(sell_detail) 상세에 데이터 넣기
+//	public int insertOrderDetail(int sell_idx, List<CartVO> cartList) {
+//		return sell_mapper.insertOrderDetail(sell_idx, cartList);
+//	}
 	
 //	// 주문내역 불러오기
 //	public List<SellVO> getOrderList(String member_id) {

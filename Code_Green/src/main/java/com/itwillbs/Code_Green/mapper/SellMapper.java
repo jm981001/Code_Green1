@@ -14,9 +14,6 @@ public interface SellMapper {
 	// 장바구니 목록 불러오기
 	List<CartVO> selectCart(String member_id);
 
-	// 적립금 불러오기
-	CoinVO selectCoin(String member_id);
-
 	// 상품구매 목록
 	List<SellVO> getReviewList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("member_id")String member_id);
 
@@ -34,6 +31,9 @@ public interface SellMapper {
 
 	// 주문내역 불러오기
 	SellVO selectOrderList(@Param("member_id")String member_id);
+
+	// 주문(sell_detail) 상세에 데이터 넣기
+//	int insertOrderDetail(@Param("sell_idx")int sell_idx, @Param("cartList")List<CartVO> cartList);
 	
 //	// 주문내역 불러오기
 //	List<SellVO> selectOrderList(@Param("member_id")String member_id);

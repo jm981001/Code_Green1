@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.CartService;
+import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.CartVO;
@@ -34,6 +35,9 @@ public class SellController {
 	@Autowired
 	private CartService cart_service;
 	
+	@Autowired
+	private CoinService coin_service;
+	
 	// 주문하기
 	@GetMapping(value = "/payment")
 	public String payment(@RequestParam String member_id, HttpSession session, Model model, 
@@ -49,7 +53,7 @@ public class SellController {
 		model.addAttribute("cartList", cartList);
 		
 		// 적립금 불러오기
-		CoinVO coin = sell_service.getCoin(member_id);
+		CoinVO coin = coin_service.getCoin(member_id);
 		model.addAttribute("coin", coin);
 		
 		model.addAttribute("cart_total", cart_total);
@@ -73,17 +77,17 @@ public class SellController {
 		// 주문(sell)에 데이터 넣기
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
 
+		// 주문시 사용한 적립금
+		int insertOrderUseCoinCount = coin_service.insert_order_useCoin(sell.getSell_use_coin(),member_idx);
+		
+		// 주문시 결제 금액의 10% 적립
+		int insertOrderCoinAddCount = coin_service.insert_order_addCoin(sell_total_price, member_idx);
+		
 		// 주문내역 불러오기
 		SellVO orderList = sell_service.getOrderList(member_id);
-//		List<SellVO> orderList = sell_service.getOrderList(member_id);
-		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		
-//		map.put("cartList", cartList);
-//		map.put("orderList", orderList);
 		
 		// 주문(sell_detail) 상세에 데이터 넣기
-//		int sell_detail_insertCount = sell_service.insertOrderDetail(map);
+//		int sell_detail_insertCount = sell_service.insertOrderDetail(orderList.getSell_idx(), cartList);
 		
 		model.addAttribute("orderList", orderList);
 		

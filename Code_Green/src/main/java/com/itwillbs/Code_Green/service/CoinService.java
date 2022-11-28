@@ -12,12 +12,18 @@ import com.itwillbs.Code_Green.vo.CoinVO;
 public class CoinService {
 	@Autowired
 	private CoinMapper mapper;
-	//적립금 목록
+	
+	// 적립금 목록
 	public List<CoinVO> getCoinList(int startRow, int listLimit, String member_id) {
 		return mapper.selectCoinList(startRow, listLimit, member_id);
 	}
 	
-	//적립금 목록 갯수
+	// 적립금 목록 불러오기
+	public CoinVO getCoin(String member_id) {
+		return mapper.selectCoin(member_id);
+	}
+	
+	// 적립금 목록 갯수
 	public int getCoinListCount() {
 		return mapper.selectCoinListCount();
 	}
@@ -27,6 +33,15 @@ public class CoinService {
 		return mapper.selectTotalCoin(member_id);
 	}
 
+	// 주문시 적립금 사용
+	public int insert_order_useCoin(String sell_use_coin, int member_idx) {
+		return mapper.insert_order_useCoin(sell_use_coin, member_idx);
+	}
 
+	// 주문시 결제금액 10% 적립금 적립
+	public int insert_order_addCoin(int sell_total_price, int member_idx) {
+		return mapper.insert_order_addCoin(sell_total_price, member_idx);
+	}
+	
 
 }

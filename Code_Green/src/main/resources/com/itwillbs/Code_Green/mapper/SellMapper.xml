@@ -22,21 +22,6 @@
 		WHERE r.member_id = #{member_id};
 	</select>
 
-	<!-- 적립금 불러오기 -->
-	<select id="selectCoin" resultType="com.itwillbs.Code_Green.vo.CoinVO">
-		SELECT  c.coin_idx,
-				c.rf_member_idx,
-		        c.coin_add,
-		        c.coin_use,
-		        c.coin_charge,
-		        c.coin_total,
-		        c.coin_date
-		FROM coin c
-		JOIN member m ON c.rf_member_idx = m.member_idx
-		WHERE m.member_id = #{member_id}
-		ORDER BY c.coin_date DESC limit 1;
-	</select>
-	
 	<!-- 리뷰 불러오기 -->
 	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		 select  SELL_IDX  
@@ -194,9 +179,18 @@
 	<!--  -->
 <!-- 	<insert id="insertOrderDetail"> -->
 <!-- 		INSERT INTO  -->
-<!-- 					sell_detail -->
+<!-- 					 sell_detail -->
 <!-- 			VALUES( -->
-								
+<!-- 				 <foreach collection="cartList" item="cart"> -->
+<!-- 					  IFNULL( -->
+<!-- 				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0 -->
+<!-- 				 		 		) + 1, -->
+<!-- 			 		  #{sell_idx},	 -->
+<!-- 					  #{cart.rf_item_idx}, -->
+<!-- 					  #{cart.cart_amount}, -->
+<!-- 					  'N' -->
+<!-- 		 		 </foreach> -->
+		 		 	  		 			
 <!-- 			) -->
 <!-- 	</insert> -->
 	
