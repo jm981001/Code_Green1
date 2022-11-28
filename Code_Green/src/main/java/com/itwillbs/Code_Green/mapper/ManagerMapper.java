@@ -40,15 +40,15 @@ public interface ManagerMapper {
 	
 	//상품 목록 조회 (복수개의 파라미터는 @Param 어노테이션으로 이름 설정)
 	public List<ItemVO> selectItemList(
-			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
-			@Param("searchType") String searchType,@Param("keyword") String keyword);
+			@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
 
 	//상품 상세 조회
-     public ItemVO selectItemInfo(String item_idx);
+     public ItemVO selectItemInfo(int item_idx);
      
 	//상품 갯수 조회
 	public int selectItemListCount(
-			@Param("searchType") String searchType,@Param("keyword")  String keyword);
+			@Param("searchType") String searchType,@Param("keyword")  String keyword,@Param("id") String id);
 	
 	// 새 상품등록 - 텍스트
 	public int insertProducts(@Param("item")ItemVO item, @Param("manager_idx")int manager_idx);
@@ -71,11 +71,11 @@ public interface ManagerMapper {
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
-			@Param("searchType") String searchType,@Param("keyword") String keyword);
+			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
 	
 	//문의글 갯수 조회
 		public int selectQnaBoardListCount(
-				@Param("searchType") String searchType, @Param("keyword") String keyword);
+				@Param("searchType") String searchType, @Param("keyword") String keyword,@Param("id") String id);
 	//문의글 상세 조회
 	public QnaVO selectQnaInfo(String qna_idx);
 	

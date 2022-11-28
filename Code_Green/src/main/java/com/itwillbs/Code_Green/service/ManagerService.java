@@ -54,16 +54,18 @@ public class ManagerService {
 	}
 	//상품 목록 조회
 	
-	public List<ItemVO> getItemList(String id, int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectItemList (id, startRow, listLimit, searchType, keyword);
+	public List<ItemVO> getItemList( int startRow, int listLimit, String searchType, String keyword,String id) {
+		return mapper.selectItemList (startRow, listLimit, searchType, keyword,id);
 	}
+	
+		
 	// 상품 갯수 조회
-	public int getItemListCount(String searchType, String keyword) {
-		return mapper.selectItemListCount(searchType, keyword);
+	public int getItemListCount(String searchType, String keyword,String id) {
+		return mapper.selectItemListCount(searchType, keyword,id);
 	}
 	
 	// 상품 상세조회
-	public ItemVO getItemInfo(String item_idx) {
+	public ItemVO getItemInfo(int item_idx) {
 		return mapper.selectItemInfo(item_idx);
 	}
 	
@@ -102,14 +104,14 @@ public class ManagerService {
 	
 	
 //	 문의글 리스트
-	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectQnaBoardList(startRow,listLimit,searchType,keyword);
+	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword,String id) {
+		return mapper.selectQnaBoardList(startRow,listLimit,searchType,keyword,id);
 	}
 	
 	
 	//문의글 갯수 조회
-	public int getQnaBoardListCount(String searchType, String keyword) {
-		return mapper.selectQnaBoardListCount(searchType, keyword);
+	public int getQnaBoardListCount(String searchType, String keyword,String id) {
+		return mapper.selectQnaBoardListCount(searchType, keyword,id);
 	}
 
 	
@@ -152,6 +154,7 @@ public class ManagerService {
 	   public ManagerVO getOrderTotal(String sId) {
 	   	return mapper.selectTotalMoneyOrder(sId);
 	   }
+	
 	
 	   
 

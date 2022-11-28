@@ -121,6 +121,7 @@
               <input type="hidden" id="qna_idx" name="qna_idx" value="${QnaInfo.qna_idx }">
                  <input type="hidden" id="qna_id" name="qna_id" value="${QnaInfo.qna_id }">
 
+
  
        <table class="table ps-table">
               

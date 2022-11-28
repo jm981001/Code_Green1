@@ -118,7 +118,10 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="product_modifyPro?id=${sessionScope.sId}"  method="post"name="modifyForm">
+<%--   		<form class="ps-form--search-bar" action="product_modifyPro?id=${sessionScope.sId}"  method="post"name="modifyForm"> --%>
+                 <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }">
+                 <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }">
+  		<form class="ps-form--search-bar" action="product_detail?id=${sessionScope.sId}"  method="post"name="detailForm">
 
  
        <table class="table ps-table">

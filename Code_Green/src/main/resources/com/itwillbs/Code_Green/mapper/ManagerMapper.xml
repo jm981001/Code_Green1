@@ -83,12 +83,15 @@
 
 
 	
-	<!--브랜드 정보 삭제(탈퇴) -->
-	<delete id="deleteBrand">
-		DELETE from manager
-		WHERE manager_id = #{manager_id}
+	<!--브랜드 정보 삭제(탈퇴)- 영구삭제x,로그인안되게 -->
+	<update id="deleteBrand">
+		UPDATE  manager
+		SET
+			manager_del_yn = 'y'
+		WHERE
+		 	manager_id = #{manager_id}
 	
-	</delete>
+	</update>
 		
 
 
