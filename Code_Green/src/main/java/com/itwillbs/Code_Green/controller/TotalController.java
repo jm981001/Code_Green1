@@ -42,6 +42,27 @@ public class TotalController {
 	}
 	
 	
+	//------------브랜드관리자 메인----------------------------
+		@ResponseBody
+		@RequestMapping(value = "/brandChart", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+		public String brandChart(Model model, HttpSession session, String manager_id) { 
+
+			
+			System.out.println("얍얍" + manager_id);
+			 
+			Gson gson = new Gson();
+			
+			List<TotalVO> brandChart = service.brandChart(manager_id);
+			System.out.println("한시간 : " + brandChart);
+//			model.addAttribute("sellChart", sellChart);
+		
+			return gson.toJson(brandChart);
+			
+		}
+	
+	
+	
+	
 	
 	
 }

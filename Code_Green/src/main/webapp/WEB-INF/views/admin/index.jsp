@@ -282,15 +282,6 @@ function getGraph(){
 			
 	}//getGraph
 
-	
-	
-	
-
-	
-	
-	
-
-
 
 </script>
 </body>
