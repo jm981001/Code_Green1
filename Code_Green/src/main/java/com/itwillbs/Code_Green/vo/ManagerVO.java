@@ -28,6 +28,7 @@ public class ManagerVO {
 	private int 		brandtotal;	//브랜드매출
 	private int 		ranking;	//순위
 	private String		brand_follower;//브랜드 팔로워 수
+	private String star_score;
 	
 	public ManagerVO() {
 		// TODO Auto-generated constructor stub
@@ -224,13 +225,21 @@ public class ManagerVO {
 	public void setBrand_follower(String brand_follower) {
 		this.brand_follower = brand_follower;
 	}
+	
+	public String getStar_score() {
+		return star_score;
+	}
+
+	public void setStar_score(String star_score) {
+		this.star_score = star_score;
+	}
 
 	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
 			String manager_brandname, String manager_info, String manager_storecode, String manager_phone,
 			String manager_email, String manager_email_auth, String manager_postcode, String manager_address,
 			String manager_adminauth, String manager_realfile, String manager_original_file, String manager_del_yn,
 			String manager_date, MultipartFile file, String brand_itemCnt, int sellCount, int orderCount,
-			int brandtotal, int ranking, String brand_follower) {
+			int brandtotal, int ranking, String brand_follower, String star_score) {
 		super();
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
@@ -256,6 +265,7 @@ public class ManagerVO {
 		this.brandtotal = brandtotal;
 		this.ranking = ranking;
 		this.brand_follower = brand_follower;
+		this.star_score = star_score;
 	}
 
 	@Override
@@ -269,8 +279,11 @@ public class ManagerVO {
 				+ ", manager_original_file=" + manager_original_file + ", manager_del_yn=" + manager_del_yn
 				+ ", manager_date=" + manager_date + ", file=" + file + ", brand_itemCnt=" + brand_itemCnt
 				+ ", sellCount=" + sellCount + ", orderCount=" + orderCount + ", brandtotal=" + brandtotal
-				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + "]";
+				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + ", star_score=" + star_score + "]";
 	}
+
+	
+	
 
 	
 	
