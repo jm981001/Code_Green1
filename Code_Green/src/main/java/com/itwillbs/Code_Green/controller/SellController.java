@@ -1,6 +1,9 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,13 +34,13 @@ public class SellController {
 	@Autowired
 	private CartService cart_service;
 	
-	
+	// 주문하기
 	@GetMapping(value = "/payment")
 	public String payment(@RequestParam String member_id, HttpSession session, Model model, 
 						  @RequestParam int cart_total,@RequestParam int shipping_fee) {
 		
-		MemberVO memberInfo = member_service.getMemberInfo(member_id);
 		// 주문자 기본 정보 불러오기
+		MemberVO memberInfo = member_service.getMemberInfo(member_id);
 		model.addAttribute("memberInfo", memberInfo);
 		session.setAttribute(member_id, "member_id");
 		
@@ -57,7 +60,7 @@ public class SellController {
 	
 	
 
-	// 주문하기
+	// 주문완료
 	@PostMapping(value = "payment_success")
 	public String payment_success(@RequestParam String member_id, @ModelAttribute SellVO sell, 
 								  @RequestParam int member_idx, @RequestParam int sell_total_price,
@@ -67,31 +70,22 @@ public class SellController {
 		// 장바구니 정보
 		List<CartVO> cartList = cart_service.getCart(member_id); 
 		
-//		System.out.println("cartList : " + cartList);
-//		
-//		System.out.println("member_id : " + member_id);
-//		
-//		System.out.println("sell : " + sell);
-//
-//		System.out.println("member_idx : " + member_idx);
-//		
-//		System.out.println("sell_total_price : " + sell_total_price);
-//		
-//		System.out.println("sell_item_ total_price : " + sell_item_total_price);
-//		
-//		System.out.println("shipping_fee : " + shipping_fee);
-
-		// 주문하기
+		// 주문(sell)에 데이터 넣기
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
-		
-		int orderList_sellIdx = sell_service.getSellIdx(member_idx);
-		
+
 		// 주문내역 불러오기
-		SellVO orderList = sell_service.getOrderList(member_idx, orderList_sellIdx);
+		SellVO orderList = sell_service.getOrderList(member_id);
+//		List<SellVO> orderList = sell_service.getOrderList(member_id);
 		
-//		System.out.println(orderList);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("cartList", cartList);
+//		map.put("orderList", orderList);
 		
-		model.addAttribute("orderList" ,orderList);
+		// 주문(sell_detail) 상세에 데이터 넣기
+//		int sell_detail_insertCount = sell_service.insertOrderDetail(map);
+		
+		model.addAttribute("orderList", orderList);
 		
 		model.addAttribute("sell_item_total_price", sell_item_total_price);
 		

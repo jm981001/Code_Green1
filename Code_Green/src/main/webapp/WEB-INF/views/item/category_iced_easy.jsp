@@ -14,6 +14,7 @@
 	<meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
 	<title>냉동 식품 / 간편 식품 - 베지터틀</title>
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">

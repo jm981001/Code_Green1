@@ -2,6 +2,7 @@ package com.itwillbs.Code_Green.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,20 +48,31 @@ public class SellService {
 		return sell_mapper.getSellReview(member_id, sell_idx,item_idx);
 	}
 
-	// 주문하기
+	// 주문(sell)에 데이터 넣기
 	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
 		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
 	}
-
+	
 	// 주문내역 불러오기
-	public SellVO getOrderList(int member_idx, int orderList_sellIdx) {
-		return sell_mapper.selectOrderList(member_idx, orderList_sellIdx);
+	public SellVO getOrderList(String member_id) {
+		return sell_mapper.selectOrderList(member_id);
 	}
+	
+//	// 주문내역 불러오기
+//	public List<SellVO> getOrderList(String member_id) {
+//		return sell_mapper.selectOrderList(member_id);
+//	}
+	
+//	// 주문(sell_detail) 상세에 데이터 넣기
+//	public int insertOrderDetail(Map<String, Object> map) {
+//		return sell_mapper.insertOrderDetail(map);
+//	}
 
-	// 주문내역 불러오기 위한 sell_idx 불러오기
-	public int getSellIdx(int member_idx) {
-		return sell_mapper.selectSellIdx(member_idx);
-	}
+
+//	// 주문내역 불러오기 위한 sell_idx 불러오기
+//	public int getSellIdx(int member_idx) {
+//		return sell_mapper.selectSellIdx(member_idx);
+//	}
 
 
 		

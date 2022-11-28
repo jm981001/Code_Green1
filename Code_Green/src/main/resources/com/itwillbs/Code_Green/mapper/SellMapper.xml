@@ -140,47 +140,64 @@
 					 sell
 			VALUES(
 			 		 IFNULL(
-			 		 		(SELECT MAX(sell_idx) FROM sell s),0
+			 		 		(SELECT MAX(sell_idx) FROM sell s),1
 			 		 		) + 1, 									  <!-- sell_idx -->
 			 		 #{member_idx}, 								  <!-- rf_member_idx -->
-			 		 #{cart_amount},								  <!-- rf_member_idx --> <!-- 장바구니에서 불러오기 -->
+			 		 #{cart_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
 			 		 #{sell.sell_use_coin},							  <!-- sell_use_coin -->
 			 		 #{sell_total_price},							  <!-- sell_total_price -->
-			 		 '주문완료',										  <!-- sell_status --> <!-- 결제하고 나면 update 구문써서 바꿔주기 -->
+			 		 '주문완료',									  <!-- sell_status --> <!-- 결제하고 나면 update 구문써서 바꿔주기 -->
 			 		 #{sell.sell_postcode},							  <!-- sell_postcode -->
 			 		 #{sell.sell_address},							  <!-- sell_address -->
 			 		 #{sell.sell_phone},							  <!-- sell_phone -->
 			 		 #{sell.sell_receiver},						      <!-- sell_receiver -->
 			 		 now(),											  <!-- sell_date --> <!-- now()로 넣으면 2022-11-04 18:27:00 형식으로 들어감 / DATE_FORMAT(now(), '%h:%i:%s') 사용하던지--> 
 			 		 #{sell.sell_pay_type},							  <!-- sell_pay_type --> <!-- 주문시 디폴트로 무통장입금 걸어놓고 카드 결제 버튼 클릭시 update 구문써서 '카드결제' 바꿔주기 -->
-			 		 '결제대기중',										  <!-- sell_pay_status --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
+			 		 '결제대기중',									  <!-- sell_pay_status --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
 			 		 '',											  <!-- sell_pay_date --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
-			 		 ''											  	  <!-- sell_order_number --> <!-- '00000023-20221103' 형식으로 -->
+			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s WHERE SELL_IDX = 30), 8, 0)) <!-- sell_order_number -->
 			 	)			
 	</insert>
 	
 	<!-- 주문내역 불러오기 위한 sell_idx 불러오기 -->
-	<select id="selectSellIdx" resultType="integer">
-		SELECT
-		 		sell_idx 
-		  FROM 
-		  		sell
-		 WHERE 
-		 		rf_member_idx = #{member_idx}
-	  ORDER BY 
-	  			sell_idx DESC
-		 LIMIT 
-		  	    1
-	</select>
+<!-- 	<select id="selectSellIdx" resultType="integer"> -->
+<!-- 		SELECT -->
+<!-- 		 		sell_idx  -->
+<!-- 		  FROM  -->
+<!-- 		  		sell -->
+<!-- 		 WHERE  -->
+<!-- 		 		rf_member_idx = #{member_idx} -->
+<!-- 	  ORDER BY  -->
+<!-- 	  			sell_idx DESC -->
+<!-- 		 LIMIT  -->
+<!-- 		  	    1 -->
+<!-- 	</select> -->
 	
 	<!-- 주문내역 불러오기 -->
 	<select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		SELECT  * 
-		  FROM
-		  		sell
-		 WHERE
-				rf_member_idx = #{member_idx}
-		   AND
-		   		sell_idx = #{orderList_sellIdx}
+		 SELECT  
+		 		 *
+		   FROM
+		  		 sell s
+      LEFT JOIN 
+      			 member m
+        	 ON 
+        	 	 s.rf_member_idx = m.member_idx
+		  WHERE 
+		  		 m.member_id = #{member_id}
+       ORDER BY 
+       			 s.sell_idx DESC
+          LIMIT 
+          		 1
 	</select>
+	
+	<!--  -->
+<!-- 	<insert id="insertOrderDetail"> -->
+<!-- 		INSERT INTO  -->
+<!-- 					sell_detail -->
+<!-- 			VALUES( -->
+								
+<!-- 			) -->
+<!-- 	</insert> -->
+	
 </mapper>

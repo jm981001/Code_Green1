@@ -10,6 +10,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <title>레시피 : ${recipe.board_subject } - 베지터틀</title>
 	<style type="text/css">
 	.no-js .owl-carousel, .owl-carousel.owl-loaded {

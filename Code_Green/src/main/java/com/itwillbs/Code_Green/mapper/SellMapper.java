@@ -1,6 +1,7 @@
 package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -32,10 +33,16 @@ public interface SellMapper {
 	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, @Param("sell")SellVO sell, @Param("sell_total_price")int sell_total_price);
 
 	// 주문내역 불러오기
-	SellVO selectOrderList(@Param("member_idx")int member_idx, @Param("orderList_sellIdx")int orderList_sellIdx);
+	SellVO selectOrderList(@Param("member_id")String member_id);
+	
+//	// 주문내역 불러오기
+//	List<SellVO> selectOrderList(@Param("member_id")String member_id);
 
-	// 주문내역 불러오기 위한 sell_idx 불러오기
-	int selectSellIdx(int member_idx);
+//	// 주문(sell_detail) 상세에 데이터 넣기
+//	int insertOrderDetail(Map<String, Object> map);
+
+//	// 주문내역 불러오기 위한 sell_idx 불러오기
+//	int selectSellIdx(int member_idx);
 
 
 	
