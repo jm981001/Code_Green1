@@ -596,7 +596,7 @@ public class CommunityController {
 		return replyList;
 	}
 	
-	//-------------------------------- 댓글 삭제 ------------------------------------------- 여기서 비동기식으로 가게되면 어떻게처리할수있는지....
+	//-------------------------------- 댓글 삭제 ------------------------------------------- 
 	@GetMapping("/replyDelete.re")
 	public String deleteReply(@RequestParam int reply_idx,Model model,int pageNum, int board_idx) {
 		

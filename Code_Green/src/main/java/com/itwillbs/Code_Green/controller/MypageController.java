@@ -350,14 +350,78 @@ public class MypageController {
 	
 	//====================================== 마이페이지 1:1 문의내역 ========================================== 
 	@GetMapping(value = "/myPageQnaList.bo")
-	public String myPageQnaMtmList(Model model,HttpSession session) {
+	public String myPageQnaMtmList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "") String qna_status, Model model,HttpSession session) {
 		
 		String qna_id = (String)session.getAttribute("sId");
 		
-		List<QnaVO> mantomanList = Qservice.getMantomanList(qna_id);
+		int listLimit = 8; 
+		int pageListLimit = 8; 
 		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 1:1 문의내역 목록
+		List<QnaVO> mantomanList = Qservice.getMantomanList(startRow, listLimit, qna_id, qna_status);
+		
+		// 1:1 문의내역 목록 갯수
+		int listCount = Qservice.getMantomanListCount(qna_id, qna_status);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		model.addAttribute("mantomanList", mantomanList);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		
+		
 		return "member/myPage_qnaList";
+			
+		
+		
+	}
+	
+	//====================================== 마이페이지 1:1 문의내역 분류버튼 ========================================== 
+	@GetMapping(value = "/myPageQnaSelectList.bo")
+	public String myPageQnaMtmSelectList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "") String qna_status, Model model,HttpSession session) {
+		
+		String qna_id = (String)session.getAttribute("sId");
+		
+		int listLimit = 8; 
+		int pageListLimit = 8; 
+		
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 1:1 문의내역 목록
+		List<QnaVO> mantomanList = Qservice.getMantomanList(startRow, listLimit, qna_id, qna_status);
+		
+		// 1:1 문의내역 목록 갯수
+		int listCount = Qservice.getMantomanListCount(qna_id, qna_status);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		model.addAttribute("mantomanList", mantomanList);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("qna_status", qna_status);
+		
+		
+		return "member/myPage_qnaSelectList";
+		
+		
+		
 	}
 	
 	

@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
 <title>마이페이지 - 베지터틀</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
@@ -165,11 +166,11 @@
                 	 						<!-- 1:1문의글-->
                 	 						<c:choose>
 	                	 						<c:when test="${empty myCountInfo.qna_count}">
-	                	 							<li class="brandlist-li"><a href="myPageQnaDetail.my">0개</a></li>
+	                	 							<li class="brandlist-li"><a href="myPageQnaList.bo">0개</a></li>
 	                	 						</c:when>
 	                	 						<c:otherwise>
 		                	 						<li class="brandlist-li">
-		                	 							<a href="myPageQnaDetail.my">${myCountInfo.qna_count }개</a>
+		                	 							<a href="myPageQnaList.bo">${myCountInfo.qna_count }개</a>
 		                	 						</li>
 	                	 						</c:otherwise>
                 	 						</c:choose>

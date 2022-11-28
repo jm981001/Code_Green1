@@ -33,9 +33,14 @@ public class QnaService {
 		return mapper.updateQna(qna);
 	}
 
-	// 1:1문의 목록 출력(첫출력)
-	public List<QnaVO> getMantomanList(String qna_id) {
-		return mapper.selectMantomanList(qna_id);
+	// 1:1문의 목록 출력 - 첫메인 , 답변대기, 답변완료 별
+	public List<QnaVO> getMantomanList(int startRow, int listLimit, String qna_id, String qna_status) {
+		return mapper.selectMantomanList(startRow, listLimit, qna_id, qna_status);
+	}
+	
+	// 1:1문의 갯수카운트 - 첫메인 , 답변대기, 답변완료 별 갯수카운트
+	public int getMantomanListCount(String qna_id, String qna_status) {
+		return mapper.selectMantomanListCount(qna_id,qna_status);
 	}
 	
 	// 1:1 문의글 작성
@@ -52,6 +57,8 @@ public class QnaService {
 	public int deleteMantoman(int qna_idx) {
 		return mapper.deleteMtm(qna_idx);
 	}
+
+	
 
 	
 

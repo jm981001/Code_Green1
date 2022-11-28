@@ -1,3 +1,4 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -89,6 +90,19 @@
 	
 	
 </style>
+<script>
+	function goGetList(qna_status){
+			$.ajax({
+				url:"myPageQnaSelectList.bo",
+				type:"get",
+				data:{ qna_status : qna_status },
+				success: function(data){
+					$(".table_qnaList").html(data);
+				}
+			});
+		};
+
+</script>
 <body>
 
     <!-- 헤더 삽입 -->
@@ -116,9 +130,11 @@
                                     	<div class="ps-section__right">
 										<div class="btnbtnbtn">
 											<input type="button" class="writeBtn" name="answerStatus" onclick="location.href='WriteQna.bo'" value="문의하기">
-											<input type="button" class="statusBtn1" name="answerStatus" value="답변대기">
-											<input type="button" class="statusBtn2" name="answerStatus" value="답변완료">
+											<input type="button" class="statusBtn1" id="qna_status" value="답변대기" onclick="goGetList(this.value)">
+											<input type="button" class="statusBtn2" id="qna_status" value="답변완료" onclick="goGetList(this.value)">
 										</div>
+										
+										<div class="table_qnaList">
                                         <table class="table ps-table ps-table--notification">
                                             <thead>
                                                 <tr>
@@ -149,25 +165,28 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                           
+                            <!-- 페이징 버튼들 시작 -->
+		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+		                    <div class="ps-pagination">
+		                        <ul class="pagination">
+		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageQnaList.bo?pageNum=${pageInfo.pageNum - 1}&qna_status=${qna_status}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		                            	<c:choose>
+		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+		                            		<c:otherwise><li><a href="myPageQnaList.bo?pageNum=${i }&qna_status=${qna_status}">${i }</a></li></c:otherwise>
+		                            	</c:choose>
+		                            </c:forEach>
+		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageQnaList.bo?pageNum=${pageInfo.pageNum + 1}&qna_status=${qna_status}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+		                        </ul>
+		                    </div>
+		                    <!-- 페이징 버튼들 끝 -->  
+                                       
+                                        </div>
+                                        
                                     </div>
                                 </div>
                               
-                            <!-- 페이징 버튼들 시작 -->
-<%-- 		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
-<!-- 		                    <div class="ps-pagination"> -->
-<!-- 		                        <ul class="pagination"> -->
-		                           
-<%-- 		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li> --%>
-<%-- 		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
-<%-- 		                            	<c:choose> --%>
-<%-- 		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when> --%>
-<%-- 		                            		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise> --%>
-<%-- 		                            	</c:choose> --%>
-<%-- 		                            </c:forEach> --%>
-<%-- 		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
-<!-- 		                        </ul> -->
-<!-- 		                    </div> -->
-		                    <!-- 페이징 버튼들 끝 -->  
                                 
                                 
                             </div>
