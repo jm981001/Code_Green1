@@ -27,16 +27,30 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+ <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     <script type="text/javascript">
-    function productsADD() {
-		location.href="product_registerPro.bo?manager_id=${sessionScope.sId}";
-	}
-    
-    
-    
+       function recipe_delete(value) {
+            
+          let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
+          
+          if(delete_confirm){
+             $.ajax({
+               url: "product_deletePro.bo",
+               type: "POST",
+               data: {
+                  board_idx: value
+               },
+               success: function(){
+                  alert("삭제가 완료되었습니다.");
+                  location.href = "products";
+               },
+               fail: function () {
+                  alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
+               }
+            });
+          } 
+      }
     </script>
-    
-    
 </head>
 
 <body>
@@ -119,7 +133,7 @@
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="products" method="get">
+                        <form class="ps-form--filter" action="products" method="post">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select" name="searchType">
@@ -175,6 +189,14 @@
 						     <td>${item.item_date}</td>
 						     <td>${item.item_packing}</td>
 						     <td>${item.manager_brandname}</td>
+						        <td>
+                                       <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="product_modify?manager_id=${sessionScope.sId }&item_idx=${item.item_idx}">수정</a>
+                                            <a class="dropdown-item" href="product_delete?item_idx=${item.item_idx }">삭제</a>
+                                        </div>
+                                        </div>
+                                    </td>
 						    </tr>     
 					</c:forEach>
 						</tbody>

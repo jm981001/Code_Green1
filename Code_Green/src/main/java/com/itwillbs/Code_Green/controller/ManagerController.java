@@ -347,11 +347,11 @@ public class ManagerController {
 		// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
 		// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
 		// => 리턴타입 : List<ItemVO>(itemList)
-		List<ItemVO> itemList = service.getItemList(id, startRow, listLimit, searchType, keyword);
+		List<ItemVO> itemList = service.getItemList(startRow, listLimit, searchType, keyword, id);
 		
 		// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 		// => 파라미터 : 없음, 리턴타입 : int(listCount)
-		int listCount = service.getItemListCount(searchType, keyword);
+		int listCount = service.getItemListCount(searchType, keyword, id);
 //		System.out.println("검색결과(목록 수)" + listCount);
 		// 페이지 계산 작업 수행
 		// 전체 페이지 수 계산
@@ -486,8 +486,8 @@ public class ManagerController {
 		}		
 		
 		//------------ 상품 등록 상세 조회-------------------------------------------	
-		@RequestMapping(value = "/products_detail", method = RequestMethod.POST)
-		public String products_detail( Model model, HttpSession session, String item_idx) {
+		@PostMapping(value = "/products_detail")
+		public String products_detail( Model model, HttpSession session, int item_idx) {
 			
 			String sId = (String)session.getAttribute("sId");
 			
@@ -749,6 +749,9 @@ public class ManagerController {
 				@RequestParam(defaultValue = "")String searchType,
 				@RequestParam(defaultValue = "")String keyword) {
 			
+			
+			String id = (String)session.getAttribute("sId");
+
 		
 //			System.out.println(pageNum);
 			
@@ -766,11 +769,11 @@ public class ManagerController {
 			// Service 객체의 getBoardList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
 			// => 리턴타입 : List<BoardVO>(boardList)
-			List<QnaVO> QnaBoardList = service.getQnaBoardList(startRow, listLimit, searchType, keyword);
+			List<QnaVO> QnaBoardList = service.getQnaBoardList(startRow, listLimit, searchType, keyword,id);
 			
 			// Service 객체의 getBoardListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
-			int listCount = service.getQnaBoardListCount(searchType, keyword);
+			int listCount = service.getQnaBoardListCount(searchType, keyword,id);
 		
 			// 페이지 계산 작업 수행
 			// 전체 페이지 수 계산

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +16,7 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>상품수정/삭제-베지터틀</title>
+    <title>상품수정페이지-베지터틀</title>
      <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -23,6 +26,32 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+<script type="text/javascript">
+
+
+	function myItem(value) {
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_idx';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+
+	
+
+
+</script>
+
 </head>
 
 <body>
@@ -97,33 +126,28 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form class="ps-form ps-form--new-product" action=product_modifyPro.bo method="post"enctype="multipart/form-data" id="modifyForm">
+                <form action="product_modifyPro.bo?item_idx=${item.item_idx}" method="post"enctype="multipart/form-data" id="sub_form">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                 <figure class="ps-block--form-box">
                                     <figcaption>기본정보</figcaption>
-                                    <div class="ps-block__content">
-<!--                                         <div class="form-group"> -->
-<!--                                             <label>상품번호<sup>*</sup> -->
-<!--                                             </label> -->
-<!--                                             <input class="form-control" type="text" placeholder="상품명을 기재해주세요" /> -->
-<!--                                         </div> -->
+
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_name"placeholder="상품번호를 기재해주세요" />
+                                            <input class="form-control" type="text" name="item_name"value="${item.item_name}"placeholder="상품번호를 기재해주세요" />
                                         </div>
                                         <div class="form-group">
                                             <label>정상가격<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_price"placeholder="정상가를 입력해주세요" />
+                                            <input class="form-control" type="text" name="item_price"value="${item.item_price}"placeholder="정상가를 입력해주세요" />
                                         </div>
 									
  										<div class="form-group">
                                             <label>할인가격<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_sale"value="0" />
+                                            <input class="form-control" type="text" name="item_sale"value="${item.item_sale}"value="0" />
                                         </div>                                             
                                         <div class="form-group">
                                             <label>포장상태<sup>*</sup>
@@ -148,7 +172,7 @@
                                         <option value="특가상품">특가상품</option>
                                         <option value="과일/채소">과일/채소</option>
                                         <option value="유제품/음료">유제품/음료</option>
-                                        <option value="냉동 식품 / 간편 식품">냉동 식품 / 간편 식품</option>
+                                        <option value="냉동/간편 식품">냉동/간편 식품</option>
                                         <option value="해산물">해산물</option>
                                         <option value="간식류">간식류</option>
                                     </select>
@@ -174,7 +198,7 @@
                                        
                                         <div class="form-group">
                                             <label>상품 설명<sup>*</sup></label>
-                                            <input class="form-control" type="text"name="item_info" placeholder="상품소개를 입력해주세요" />
+                                            <input class="form-control" type="text"name="item_info" value="${item.item_info }"placeholder="상품소개를 입력해주세요" />
                                         </div>
                                     </div>
                                 </figure>
@@ -199,7 +223,7 @@
                                             <div class="form-group">
                                             <label>재고수량<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text"name="item_stock" placeholder="" />
+                                            <input class="form-control" type="text"name="item_stock" value="${item.item_stock }"placeholder="" />
                                         </div>
                                     </div>
                                 </figure>
@@ -208,7 +232,8 @@
                         </div>
                     </div>
                    <div class="ps-form__submit text-center	">
-                    <button class="ps-btn"type="submit">상품수정</button>
+                    <button class="ps-btn"type="submit"value="수정">상품수정</button>
+
                     <button class="ps-btn"type="reset"value="초기화하기" id="resetBtn">초기화</button>
                     <a class="ps-btn ps-btn--black" href="products">상품페이지이동</a>
                     </div>

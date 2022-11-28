@@ -16,7 +16,7 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>레시피수정페이지-베지터틀</title>
+    <title>레시피관리페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -26,32 +26,18 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+<!-- 글쓰기  API -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
-<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
-<script type="text/javascript">
+<!-- 글쓰기  API -->
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- 글쓰기  API -->
 
-
-	function myItem(value) {
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_idx';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-
-	
-
-
-</script>
 </head>
 <body>
     <header class="header--mobile">
@@ -120,84 +106,66 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>레시피수정</h3>
+                    <h3>답변관리</h3>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="recipeborad_modify" method="post" name="modifyForm"> -->
-<!-- <!--                         <input class="form-control" type="text" placeholder="Search something" /> --> 
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
+                    <form class="ps-form--search-bar" action="index method="get">
+                        <input class="form-control" type="text" placeholder="Search something" />
+                        <button><i class="icon-magnifier"></i></button>
+                    </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-<!--   		<form class="ps-form--search-bar" action="index.html" method="get"> -->
+  		<form class="ps-form--search-bar" action="index.html" method="get">
 
  
-                           <!-- 블로그 본문 시작  -->
-              		<div class="ps-post__content">
-                   		<div class="ps-block--vendor-dashboard">
-                    		<div class="ps-block__content">
-	                        	<div class="table-responsive">
-                    				<form action="recipeboard_modifyPro.bo?board_idx=${recipe.board_idx }" method="post" enctype="multipart/form-data" id="sub_form">
-		                           		<input type="hidden" name="file1" value="${recipe.file1}">  
-	                    				<input type="hidden" name="file2" value="${recipe.file2}">  
-	                           		 <table class="table ps-table ps-table--vendor">
-	                                    <tr>
-	                                        <td>작성자</td>
-	                                        <td><input type="text" id="board_id" name="board_id" value="${sessionScope.sId }" readonly="readonly" style="width: 70%"></td>
-	                                    </tr>
-	                                    <tr>
-	                                        <td>제목</td>
-	                                        <td><input type="text" id="board_subject" name="board_subject" style="width: 70%" value="${recipe.board_subject }"></td>
-	                                    </tr>
-	                                    <tr>
-	                                    	<td>내용</td>
-	                                    	<td colspan="2">
-	                                    		<textarea name="board_content" id="board_content" name="board_content" rows="15" cols="60" style="width: 70%" cols="60">${recipe.board_content }</textarea>
-	                                    	</td>
-	                                    </tr>
-	                                    <tr>
-	                                   		<td>사용한 상품</td>
-	                                   		<td>
-		                                   		<select class="form-select" aria-label="Default select example" onchange="myItem(this.value)" style="float: none;">
-												  	<option value="">선택하세요</option>
-	                                   				<c:forEach  var="myItem" items="${myItem }">
-												  		<option value="${myItem.item_idx }">${myItem.item_idx } ${myItem.item_name }</option>
-			                                   		</c:forEach>
-												</select>
-	                                   		</td>
-	                                   </tr>
-	                                   
-	                                   <!-- 파일 업로드 부분 -->
-	                                    <tr>
-	                                    	<td>썸네일</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${recipe.file1 }</td>
-	                                    </tr>
-	                                    <tr>
-	                                    	<td>본문 사진</td>
-	                                    	<td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${recipe.file2 }</td>
-	                                    </tr>
-										<tr> 
-											<td colspan="2">
-												<button class="ps-btn success" type="submit">수정</button>
-											</td> 
-										</tr>
-	                            	</table>
-                     			 </form> 
-                     					
-                       		   </div>
-                        	</div>
-                   		  </div>
-                   		</div>
-               
-             </div>
-            </div>
-                   </div>
-            </section>
-        </div>
+       <table class="table ps-table">
+              
+                    <h2>게시판 답글 관리</h2>
+                    <hr>
+                       <thead>
+                                <tr>
+                                	<th>번호</th>
+                                	<th>질문타입</th>
+                                    <th>제목</th>
+                                   	<th>내용</th>
+                                    <th>작성자</th>
+                                     <th>처리상태</th>
+                                    <th>작성일</th>
+                                     <th>답변</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <tr>
+                                	<td>${QnaInfo.qna_idx }</td>
+                                	<td>${QnaInfo.qna_type }</td>
+                                    <td>${QnaInfo.qna_subject }</td>
+                                    <td>${QnaInfo.qna_content }</td>
+                                    <td>${QnaInfo.qna_id }</td>
+                                    <td>${QnaInfo.qna_category }</td>
+                                    <td>${QnaInfo.qna_date }</td>
+                                    <td>${QnaInfo.qna_answer }</td>
+                                 </tr>   
+                    </tbody>
+                    </table>
+                    </form>
+					</div>
+					</div>                                    
+
+				<!-- ---게시판글쓰기api -->
+                <textarea id="summernote" name="editordata"></textarea>
+                <!-- ---게시판글쓰기api -->
+                
+                     <div class="ps-form__submit text-center">
+                     	<br>
+                          <button class="ps-btn ps-btn--gray mr-3">취소</button>
+                          <button class="ps-btn success">답변달기</button>
+                    </div>
+
        
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
