@@ -20,12 +20,6 @@ public interface SellMapper {
 	// 상품구매 목록 갯수
 	int selectSellListCount();
 
-	// 마이페이지 리뷰 가능상품 목록
-	List<SellVO> getSellDetailList(@Param("member_id")String member_id);
-
-	// 마이페이지 상품후기작성
-	List<SellVO> getSellReview(@Param("member_id")String member_id, @Param("sell_idx")int sell_idx, @Param("item_idx")int item_idx);
-
 	// 주문하기
 	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, @Param("sell")SellVO sell, @Param("sell_total_price")int sell_total_price);
 
@@ -44,8 +38,31 @@ public interface SellMapper {
 //	// 주문내역 불러오기 위한 sell_idx 불러오기
 //	int selectSellIdx(int member_idx);
 
+	
+	
+	
+	
+	
+	
+// =================================== 마이페이지 ==================================================
+	
+	// 마이페이지 리뷰 가능상품 목록
+	List<SellVO> getSellDetailList(@Param("member_id")String member_id);
 
+	// 마이페이지 상품후기작성
+	List<SellVO> getSellReview(@Param("member_id")String member_id, @Param("sell_idx")int sell_idx, @Param("item_idx")int item_idx);
 	
-	
+	// 마이페이지 - 내 주문목록 리스트들 불러오기
+	List<SellVO> selectMyBuyList(@Param("startRow") int startRow, @Param("listLimit") int listLimit,@Param("member_idx") int member_idx,@Param("period") String period);
+
+	// 마이페이지 - 내 주문목록 리스트들 카운트
+	int selectMyBuyListCount(@Param("member_idx") int member_idx,@Param("period") String period);
+
+	// 마이페이지 - 내 주문목록 리스트들 특정날짜범위로 불러오기
+	List<SellVO> getMyBuyListByDate(@Param("startRow") int startRow, @Param("listLimit") int listLimit,@Param("member_idx") int member_idx,@Param("date1") String date1,@Param("date2") String date2);
+
+	// 마이페이지 - 내 주문목록 리스트들 특정날짜범위로 불러온거 카운트
+	int getMyBuyListByDateCount(@Param("member_idx") int member_idx,@Param("date1") String date1,@Param("date2") String date2);
+		
 	
 }

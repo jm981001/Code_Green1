@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
 <title>마이페이지 - 베지터틀</title>
  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>

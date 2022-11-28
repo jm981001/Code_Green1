@@ -32,17 +32,7 @@ public class SellService {
 	public int getSellListCount() {
 		return sell_mapper.selectSellListCount();
 	}
-
-	// 마이페이지 리뷰 가능상품 목록
-	public List<SellVO> getSellDetailList(String member_id) {
-		return sell_mapper.getSellDetailList(member_id);
-	}
-
-	// 마이페이지 상품후기작성
-	public List<SellVO> getSellReview(String member_id, int sell_idx, int item_idx) {
-		return sell_mapper.getSellReview(member_id, sell_idx,item_idx);
-	}
-
+	
 	// 주문(sell)에 데이터 넣기
 	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
 		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
@@ -75,9 +65,42 @@ public class SellService {
 //	}
 
 
+	
+	
+	
+//========================================== 마이페이지 ==================================================================		
+
+	// 마이페이지 리뷰 가능상품 목록
+	public List<SellVO> getSellDetailList(String member_id) {
+		return sell_mapper.getSellDetailList(member_id);
+	}
+
+	// 마이페이지 상품후기작성
+	public List<SellVO> getSellReview(String member_id, int sell_idx, int item_idx) {
+		return sell_mapper.getSellReview(member_id, sell_idx,item_idx);
+	}
+
+	
+	// 마이페이지 - 내 주문목록 리스트들 불러오기
+	public List<SellVO> getMyBuyList(int startRow, int listLimit, int member_idx, String period) {
+		return sell_mapper.selectMyBuyList(startRow, listLimit, member_idx, period);
+	}
+
+	// 마이페이지 - 내 주문목록 리스트들 카운트
+	public int getMyBuyListCount(int member_idx, String period) {
+		return sell_mapper.selectMyBuyListCount(member_idx,period);
+	}
+	
+	// 마이페이지 - 내 주문목록 리스트들 특정날짜범위로 불러오기
+	public List<SellVO> getMyBuyListByDate(int startRow, int listLimit, int member_idx, String date1, String date2) {
+		return sell_mapper.getMyBuyListByDate(startRow, listLimit, member_idx, date1, date2);
+	}
+
+	// 마이페이지 - 내 주문목록 리스트들 특정날짜범위로 불러온거 카운트
+	public int getMyBuyListByDateCount(int member_idx, String date1, String date2) {
+		return sell_mapper.getMyBuyListByDateCount(member_idx,date1,date2);
+	}
 		
-	
-	
 	
 	
 }

@@ -47,6 +47,7 @@ public class MypageController {
 	@Autowired
 	private SellService Sservice;
 	
+	
 	//====================================== 마이페이지 메인 ========================================== 
 		@GetMapping(value = "/MemberInfo.me")
 		public String getMemberInfo(Model model, HttpSession session) {
@@ -74,6 +75,8 @@ public class MypageController {
 			}
 		}
 	
+		
+		
 	//------------마이페이지 찜한상품-------------------------------------------
 	@GetMapping(value = "/myPageWishList.my")
 	public String myPage_heart(@RequestParam(defaultValue = "1") int pageNum,
@@ -122,6 +125,8 @@ public class MypageController {
 		
 	}
 	
+	
+	
 	//------------마이페이지 찜한상품 삭제-------------------------------------------
 	@GetMapping(value = "/deleteWish")
 	public String deleteWish(@RequestParam(defaultValue = "1") int pageNum,
@@ -149,6 +154,7 @@ public class MypageController {
 			return "redirect:/myPageWishList.my";
 
 	}
+	
 	
 	
 	//====================================== 마이페이지 팔로우브랜드 목록 ========================================== 
@@ -210,6 +216,7 @@ public class MypageController {
 	
 	
 	
+	
 	//------------마이페이지 적립금-------------------------------------------
 	@GetMapping(value = "/myPageEmoney.my")
 	public String myPageEmoney(
@@ -257,17 +264,121 @@ public class MypageController {
 	
 	
 	
-	//====================================== 마이페이지 주문상세내역 ========================================== 
-	@RequestMapping(value = "buyListDetail", method = RequestMethod.GET)
-	public String myPage_buyListNull() {
+	//====================================== 마이페이지 주문목록 ========================================== 
+	@GetMapping(value = "/myBuyList.my")
+	public String myBuyList(@RequestParam(defaultValue = "1") int pageNum, 
+							@RequestParam(defaultValue = "") String period, Model model, HttpSession session) {
+		
+		int member_idx = (int)session.getAttribute("sIdx");
+		int listLimit = 8; 
+		int pageListLimit = 8; 
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 주문목록전체
+		List<SellVO> buyList = Sservice.getMyBuyList(startRow, listLimit, member_idx, period);
+		// 주문목록갯수 카운트
+		int listCount = Sservice.getMyBuyListCount(member_idx,period);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("buyList", buyList);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("period", period);
+		
 		return "member/myPage_buyList";
 	}
 	
-	//====================================== 마이페이지 주문목록 ========================================== 
-	@RequestMapping(value = "myPage_buyList", method = RequestMethod.GET)
-	public String myPage_buyList() {
-		return "member/myPage_buyListNull";
+	//====================================== 마이페이지 주문목록 - 개월수로 검색 ========================================== 
+	@GetMapping(value = "/myBuyListbyMonth.my")
+	public String myBuyListByMonth(@RequestParam(defaultValue = "1") int pageNum, 
+			@RequestParam(defaultValue = "") String period, Model model, HttpSession session) {
+		
+		int member_idx = (int)session.getAttribute("sIdx");
+		System.out.println(member_idx + ", " + period);
+		int listLimit = 8; 
+		int pageListLimit = 8; 
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 주문목록전체
+		List<SellVO> buyList = Sservice.getMyBuyList(startRow, listLimit, member_idx, period);
+		// 주문목록갯수 카운트
+		int listCount = Sservice.getMyBuyListCount(member_idx,period);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("buyList", buyList);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("period", period);
+		
+		return "member/myPage_buyListDate";
 	}
+	
+	//====================================== 마이페이지 주문목록 - 특정날짜범위 ========================================== 
+	@GetMapping(value = "/myBuyListbySelect.my")
+	public String myBuyListbySelect(@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam(defaultValue = "")String date1,@RequestParam(defaultValue = "") String date2, Model model, HttpSession session) {
+		
+		int member_idx = (int)session.getAttribute("sIdx");
+		System.out.println(member_idx + ", " + date1 + ", " + date2);
+		int listLimit = 8; 
+		int pageListLimit = 8; 
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 주문목록전체
+		List<SellVO> buyList = Sservice.getMyBuyListByDate(startRow, listLimit, member_idx, date1, date2);
+		// 주문목록갯수 카운트
+		int listCount = Sservice.getMyBuyListByDateCount(member_idx,date1, date2);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("buyList", buyList);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("date1", date1);
+		model.addAttribute("date2", date2);
+		
+		return "member/myPage_buyListSelect";
+	}
+	
+	
+	//====================================== 마이페이지 주문상세내역 ========================================== 
+	@GetMapping(value = "/myBuyListDetail.my")
+	public String myBuyListDetail() {
+		return "member/myPage_buyListDetail";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//------------마이페이지 상품후기-------------------------------------------
 //	@GetMapping(value = "/myPageReview.my")
@@ -377,7 +488,7 @@ public class MypageController {
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		model.addAttribute("mantomanList", mantomanList);
 		model.addAttribute("pageInfo", pageInfo);
-		
+		model.addAttribute("qna_status", qna_status);
 		
 		
 		return "member/myPage_qnaList";
@@ -421,7 +532,6 @@ public class MypageController {
 		return "member/myPage_qnaSelectList";
 		
 		
-		
 	}
 	
 	
@@ -448,6 +558,10 @@ public class MypageController {
 			return "redirect:/myPageQnaList.bo";
 		}
 	}
+	
+	
+	
+	
 	
 	//------------마이페이지 작성글-------------------------------------------
 	@GetMapping(value = "/myPageBoard.bo")
