@@ -140,7 +140,7 @@
 					 sell
 			VALUES(
 			 		 IFNULL(
-			 		 		(SELECT MAX(sell_idx) FROM sell s),0
+			 		 		(SELECT MAX(sell_idx) FROM sell s), 0
 			 		 		) + 1, 									  <!-- sell_idx -->
 			 		 #{member_idx}, 								  <!-- rf_member_idx -->
 			 		 #{cart_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
