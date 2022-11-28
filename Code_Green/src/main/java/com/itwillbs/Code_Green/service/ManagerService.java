@@ -80,12 +80,23 @@ public class ManagerService {
 		return mapper.insertProductsFile(fileItem);
 	}
 	
+	
+	 // 상품 등록 원글 불러오기  
+		public ItemVO getProducts(int item_idx) {
+			return mapper.selectProducts(item_idx);
+		}
+
+	
 	//상품 파일 수정
 	public int modifyItemFile(File_ItemVO fileItem) {
 		return mapper.updateItemFileModify(fileItem);
 	}
 	
+	
 	// 상품 글 수정
+	public int modifyProducts(ItemVO item, int item_idx) {
+		return mapper.updateItemModify(item,item_idx);
+	}
 
 
 	
@@ -120,18 +131,15 @@ public class ManagerService {
 		return mapper.deleteQnaboard(qna_idx);
 	}
 	//주문조회
-	public List<SellVO> getOrderList(String id, int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectOrderList(id, startRow, listLimit, searchType, keyword);
+	public List<SellVO> getOrderList(int startRow, int listLimit, String searchType, String keyword,String id) {
+		return mapper.selectOrderList(startRow, listLimit, searchType, keyword,id);
 	}
 	//주문 갯수조회
-	public int getOrderListCount(String searchType, String keyword) {
-		return mapper.selectOrderListCount(searchType,keyword);
+	public int getOrderListCount(String searchType, String keyword,String id) {
+		return mapper.selectOrderListCount(searchType,keyword,id);
 	}
 
-//	//팔로우 목록조회
-//	public MemberVO followInfo(String idx) {
-//		return mapper.selectFollowInfo(idx);
-//	}
+
 	  //정민 매출 3순위
 	   public List<ItemVO> getTop3(String sId) {
 	      return mapper.getTop3(sId);
@@ -144,6 +152,12 @@ public class ManagerService {
 	   public ManagerVO getOrderTotal(String sId) {
 	   	return mapper.selectTotalMoneyOrder(sId);
 	   }
+	
+	   
+
+	   
+	
+
 	   
 	   
 	   

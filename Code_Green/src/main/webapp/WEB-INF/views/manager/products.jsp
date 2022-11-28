@@ -15,6 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>상품관리-베지터틀</title>
    <link href="https://fonts.googleapis.com,,/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -114,7 +115,7 @@
             </header>
             <section class="ps-items-listing">
    
-                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
+                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify?manager_id=${sessionScope.sId}"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">

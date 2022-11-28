@@ -14,6 +14,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>레시피관리페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -77,8 +78,8 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>수익</small>
-                        <h3>$12,560.55</h3>
+                    <div class="ps-block--earning-count"><small></small>
+<!--                         <h3>$12,560.55</h3> -->
                     </div>
                 </div>
                 <div class="ps-sidebar__content">

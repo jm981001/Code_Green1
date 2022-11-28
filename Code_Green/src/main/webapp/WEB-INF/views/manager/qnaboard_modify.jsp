@@ -14,6 +14,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>답변관리페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -108,7 +109,7 @@
                     <h3>답변관리</h3>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="qnaboard_modify method="get"name="modifyForm">
+                    <form class="ps-form--search-bar" action="qnaboard_modify method="get" name="modifyForm">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
@@ -118,7 +119,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="get">
+  		<form class="ps-form--search-bar" action="qnaboard_modify" method="get">
 
  
        <table class="table ps-table">

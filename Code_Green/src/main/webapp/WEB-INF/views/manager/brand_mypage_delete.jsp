@@ -11,6 +11,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>탈퇴</title>
     

@@ -45,6 +45,7 @@ public interface ManagerMapper {
 
 	//상품 상세 조회
      public ItemVO selectItemInfo(String item_idx);
+     
 	//상품 갯수 조회
 	public int selectItemListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword);
@@ -55,8 +56,16 @@ public interface ManagerMapper {
 	// 새 상품등록 - 파일업로드
 	public int insertProductsFile(File_ItemVO fileItem);
 	
+	
+	//상품 상세보기 원글 불러오기   
+		public ItemVO selectProducts(int item_idx);
+	
+	
 	//상품수정하기- 파일수정
 	public int updateItemFileModify(File_ItemVO fileItem);
+	
+	//상품 수정(글) 
+	public int updateItemModify(ItemVO item, int item_idx);
 	
 	
 	//문의글 목록 조회
@@ -64,12 +73,13 @@ public interface ManagerMapper {
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	
+	//문의글 갯수 조회
+		public int selectQnaBoardListCount(
+				@Param("searchType") String searchType, @Param("keyword") String keyword);
 	//문의글 상세 조회
 	public QnaVO selectQnaInfo(String qna_idx);
 	
-	//문의글 갯수 조회
-	public int selectQnaBoardListCount(
-			@Param("searchType") String searchType, @Param("keyword") String keyword);
+	
 
 	//문의글 답변등록
 	public int updateQnaboard(QnaVO qna);
@@ -81,13 +91,13 @@ public interface ManagerMapper {
 	//총주문수
 	public int selectTotalsellCount();
 	
-    // 주문조회
+    // 주문 목록 조회
 	public List<SellVO> selectOrderList(
-			@Param("id") String id,@Param("startRow") int startRow,@Param("listLimit") int listLimit,
-			@Param("searchType") String searchType,@Param("keyword") String keyword);
+			@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
 	//주문 갯수 조회
 	public int selectOrderListCount(
-			@Param("searchType") String searchType,@Param("keyword")  String keyword);
+			@Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
 
 	  //정민 매출 3순위
 	   public List<ItemVO> getTop3(String sId);
@@ -97,6 +107,9 @@ public interface ManagerMapper {
 
 	 //총매출,총주문건수
 	   public ManagerVO selectTotalMoneyOrder(String sId);
+
+	
+    
 
 
 

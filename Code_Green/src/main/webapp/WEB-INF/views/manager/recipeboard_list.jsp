@@ -14,6 +14,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>레시피관리페이지 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -96,7 +97,7 @@
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                                <<li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
+                                <li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
 				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
 				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
 				                <li><a href="sales_main"><i class="icon-papers"></i>매출관리</a></li>
@@ -128,15 +129,15 @@
                     <div class="ps-section__actions"><a class="ps-btn success" href="recipeboard_write?manager_id=${sessionScope.sId }"><i class="icon icon-plus mr-2"></i>레시피등록</a></div>
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="qnaboard_list" method="get">
+                        <form class="ps-form--filter" action="recipeboard_list" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select"name="searchType">
                                        <option value="board_idx">글번호</option>
                                         <option value="board_subject">제목</option>
-                                        <option value="board_content">내용</option>
-                                        <option value="board_date">작성일</option>
                                         <option value="item_name">사용한상품</option>
+                                        <option value="board_date">작성일</option>
+                                        <option value="board_readcount">조회수</option>
                                     </select>
                                 </div>
                             </div>
@@ -159,6 +160,7 @@
                                       <th>제목</th>
                                      <th>사용한상품</th>
                                     <th>작성일</th>
+                                    <th>조회수</th>
                                    
                                 </tr>
                             </thead>
@@ -170,6 +172,7 @@
                                     <td><strong>${recipeList.board_subject }</strong></td>
                                     <td>${recipeList.item_name }</td>
                                     <td>${recipeList.board_date }</td>
+                                    <td>${recipeList.board_readcount }</td>
                                     <td>
                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

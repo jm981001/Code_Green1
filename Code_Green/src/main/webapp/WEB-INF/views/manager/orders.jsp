@@ -16,6 +16,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>주문관리-베지터틀</title>
      <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -66,8 +67,8 @@
                         </div>
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
-                    <div class="ps-block--earning-count"><small>총매출</small>
-                        <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3>
+                    <div class="ps-block--earning-count"><small></small>
+<%--                         <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3> --%>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
@@ -119,7 +120,7 @@
                                 </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Search..." />
+                                    <input class="form-control" type="text"name="keyword" placeholder="Search..." />
                                 </div>
                             <div class="ps-form__right">
                                  <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
@@ -183,22 +184,22 @@
                     </div>
                 </div>
                    <div class="ps-section__footer">
-                          <!-- 페이징 버튼들 시작 -->
-				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-				                    <div class="ps-pagination">
-				                        <ul class="pagination">
-				                           
-				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				                               <c:choose>
-				                                  <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-				                                  <c:otherwise><li><a href="orders?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
-				                               </c:choose>
-				                            </c:forEach>
-				                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-				                        </ul>
-				                    </div>
-				  <!-- 페이징 버튼들 끝 -->
+                         <!-- 페이징 버튼들 시작 -->
+                               <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+                                <div class="ps-pagination">
+                                    <ul class="pagination">
+                                       
+                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                                        <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+                                           <c:choose>
+                                              <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+                                              <c:otherwise><li><a href="orders?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
+                                           </c:choose>
+                                        </c:forEach>
+                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+              <!-- 페이징 버튼들 끝 -->
                 </div>
             </section>
         </div>

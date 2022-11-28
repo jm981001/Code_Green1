@@ -41,6 +41,7 @@ public class ManagerController {
 	private ManagerService service;
 	@Autowired
 	private RecipeService recipe_service;
+	private Object item_idx;
 	
 
 	@PostMapping(value = "/ManagerLoginPro.me")
@@ -390,25 +391,6 @@ public class ManagerController {
 		
 		
 	
-	//------------ 상품 상세 조회-------------------------------------------	
-	@RequestMapping(value = "/products_detail", method = RequestMethod.GET)
-	public String qna_Item_Detail( Model model, HttpSession session, String item_idx) {
-		
-		String sId = (String)session.getAttribute("sId");
-		
-		System.out.println("item_idx : " + item_idx);
-		
-	
-		ItemVO ItemInfo = service.getItemInfo(item_idx);
-		System.out.println("상품 상세 : " + ItemInfo);
-		
-		model.addAttribute("ItemInfo", ItemInfo);
-		
-		return "manager/products_detail";
-	}
-	
-	
-		
 
 		
 	//------------매니저페이지 상품등록 폼페이지-------------------------------------------
@@ -503,14 +485,49 @@ public class ManagerController {
 			
 		}		
 		
+		//------------ 상품 등록 상세 조회-------------------------------------------	
+		@RequestMapping(value = "/products_detail", method = RequestMethod.POST)
+		public String products_detail( Model model, HttpSession session, String item_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			System.out.println("item_idx : " + item_idx  );
+			
 		
-	 //------------매니저페이지 상품수정 업데이트-------------------------------------------
-		@PostMapping(value = "product_modify")
+			ItemVO ItemInfo = service.getItemInfo(item_idx);
+			System.out.println("상품 상세 : " + ItemInfo);
+			
+			model.addAttribute("ItemInfo", ItemInfo);
+			
+			return "manager/products_detail";
+		}
+		
+		
+		
+		//------------상품 수정 - 원본글 불러오기------------------------------------------
+		
+ 		@GetMapping(value = "/product_modify")
+ 		public String product_modify(@ModelAttribute ItemVO item, 
+				                     @ModelAttribute File_ItemVO fileItem,
+				                      Model model, HttpSession session,
+				                      @RequestParam int item_idx) {
+ 		
+ 			ItemVO products = service.getProducts(item_idx);
+ 			
+ 			model.addAttribute("products", products);
+ 			System.out.println("번호:" + item_idx);
+ 			
+ 			
+ 			return "manager/product_modify";
+ 		}
+ 			
+		
+	 //------------상품 수정 업데이트 글 수정 / 파일 수정-------------------------------------------
+		@PostMapping(value = "product_modifyPro.bo")
 		public String edit_product(@ModelAttribute ItemVO item, 
 									@ModelAttribute File_ItemVO fileItem,
-									
-									
-                                    Model model, HttpSession session ) { 
+									Model model, HttpSession session,
+									@RequestParam int item_idx) { 
 			
 			
 			
@@ -572,8 +589,8 @@ public class ManagerController {
 			
 			if(updateFileCount == 0) {
 				
-				model.addAttribute("msg","파일수정 실패");
-				return "member/fail_back";
+				model.addAttribute("msg","파일 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
+				return "manager/fail_back";
 				
 			} else {
 				if(isNewFile1) {
@@ -614,11 +631,21 @@ public class ManagerController {
 				}
 				
 			}
-			return "products";
-		}
-		// ========================= 상품 내용 수정 ===============================
+	
+		// ========================= 상품  글 내용 수정 ===============================
 
-//		int updateCount = service.modifyProducts(item);
+		int updateCount = service.modifyProducts(item,item_idx);
+		
+			
+			System.out.println(updateCount);
+			
+			if(updateCount == 0) {
+				model.addAttribute("msg", "레시피 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
+				return "manager/mn_fail_back";
+			}
+			
+			return "redirect:/products?item_idx=" + item_idx;
+		}
 		
 		
 		
@@ -627,9 +654,7 @@ public class ManagerController {
 		
 		
 		
-		
-		
-	//------------주문 목록 조회-------------------------------------------
+	//------------주문 목록 조회(페이징, 검색기능추가)-------------------------------------------
 
 		@GetMapping(value = "/orders")
 		public String orderList ( Model model, HttpSession session,
@@ -638,12 +663,11 @@ public class ManagerController {
 								@RequestParam(defaultValue = "")String keyword) {
 			
 			String id = (String)session.getAttribute("sId");
-			System.out.println("id : " + id );
+			System.out.println(pageNum);
+//			System.out.println("id : " + id );
 			System.out.println("searchType : " + searchType);
 			System.out.println("keyword : " + keyword);
 //			System.out.println("manager_id : " + manager_id);
-			
-			
 			
 			//페이징처리
 			int listLimit = 10;// 한 페이지 당 표시할 게시물 목록 갯수 
@@ -655,11 +679,11 @@ public class ManagerController {
 			// Service 객체의 getItemList() 메서드를 호출하여 게시물 목록 조회
 			// => 파라미터 : 시작행번호, 페이지 당 목록 갯수
 			// => 리턴타입 : List<SellVO>(orderList)
-			List<SellVO> orderList = service.getOrderList(id, startRow, listLimit, searchType, keyword);
+			List<SellVO> orderList = service.getOrderList(startRow, listLimit, searchType, keyword, id);
 			
 			// Service 객체의 getItemListCount() 메서드를 호출하여 전체 게시물 목록 갯수 조회
 			// => 파라미터 : 없음, 리턴타입 : int(listCount)
-			int listCount = service.getOrderListCount(searchType, keyword);
+			int listCount = service.getOrderListCount(searchType, keyword,id);
 //			System.out.println("검색결과(목록 수)" + listCount);
 			// 페이지 계산 작업 수행
 			// 전체 페이지 수 계산
@@ -691,6 +715,7 @@ public class ManagerController {
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword",keyword);
 			System.out.println("주문목록" + orderList);
+//			System.out.println("페이징" + pageinfo);
 			
 			return "manager/orders";
 		}
@@ -847,7 +872,7 @@ public class ManagerController {
 
 		
 		
-	       //------------ 레시피 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------   
+	       //------------ 레시피 목록 불러오기(페이징, 검색기능추가)-------------------------------------------   
 	           
 	          @GetMapping(value = "/recipeboard_list")
 	          public String recipe_Board( Model model, HttpSession session,
@@ -1193,8 +1218,25 @@ public class ManagerController {
 	  		
 	      	//------------매니저페이지 매출관리-------------------------------------------
 	      		@RequestMapping(value = "sales_main", method = RequestMethod.GET)
-	      		public String sales_main() {
+	      		public String sales_main( @RequestParam String manager_id, Model model, HttpSession session) {
+	      			
+	      			 String sId = (String)session.getAttribute("sId");
+	      			 
+	      			 
+	      			 //정민 매출 3순위
+	      			 	
+	      		    List<ItemVO> top3 = service.getTop3(sId);
+	      		    model.addAttribute("top3", top3);
+	      		    
+	      		    
+	      		    //총매출 ,주문수
+	      		    ManagerVO orderTotal = service.getOrderTotal(sId);
+	      		    model.addAttribute("orderTotal", orderTotal);
+	      		    
 	      			return "manager/sales_main";
+	      			
+	      			
+	      			
 	      		}
 
 

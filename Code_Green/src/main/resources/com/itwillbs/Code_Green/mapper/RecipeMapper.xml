@@ -169,7 +169,8 @@
              b.board_idx,
              b.board_subject,
              b.board_date,
-             i.item_name
+             i.item_name,
+             b.board_readcount
        FROM
               board b
     LEFT JOIN

@@ -11,6 +11,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>내 브랜드 정보 - 베지터틀</title>
     
@@ -211,6 +212,7 @@
                                 <div class="ps-form__submit text-center	">
                                     <button class="ps-btn success" type="submit">수정페이지이동</button>
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
+
 
                                 </div>
                             </form>

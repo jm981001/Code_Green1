@@ -14,8 +14,9 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>상품상세페이지</title>
+    <title>상품상세페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -117,7 +118,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="product_detail" method="post">
+  		<form class="ps-form--search-bar" action="product_modifyPro?id=${sessionScope.sId}"  method="post"name="modifyForm">
 
  
        <table class="table ps-table">
@@ -183,9 +184,10 @@
 <!-- 			<!-------------등록된 상품이미지 ------------> 
                             
                             
-                          <button class="ps-btn success"> <a href="product_modify">상품수정</a></button>
-                         <button class="ps-btn ps-btn--gray mr-3"><a href="products"> 취소</a></button>
+                          <button class="ps-btn success"type="submit">상품수정</button>
+                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </table>
+                    
                     </div>
                     
                     

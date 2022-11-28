@@ -15,6 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>브랜드관리자페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -161,7 +162,6 @@
                                 </table>
                             </div>
                         </div>
-<!--                         <div class="ps-card__footer"><a class="ps-card__morelink" href="ad_more_Ranking">순위 더 알아보기<i class="icon icon-chevron-right"></i></a></div> -->
                     </div>
                     
    <!-- 정민수정-->                 
