@@ -3,32 +3,28 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
-    <link href="favicon.png" rel="icon">
-    <title>내 브랜드 정보수정 -베지터틀</title>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/owl-carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
-    <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="apple-touch-icon.png" rel="apple-touch-icon">
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
+<link href="favicon.png" rel="icon">
+<title>내 브랜드 정보수정 -베지터틀</title>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/owl-carousel/assets/owl.carousel.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
+<link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
-<script type="text/javascript">
-
-	
-</script>
 </head>
 
 <body>
@@ -193,6 +189,7 @@
                                      <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>기업 우편번호</label>
+                                            <input type="button" onclick="execDaumPostcode()" name="adressBtn" id="adressBtn" value="주소찾기">
                                             <input type="text" class="form-control" id="manager_postcode"name="manager_postcode" value="${brandInfo.manager_postcode }" />
                                         </div>
                                     </div>
@@ -229,6 +226,21 @@
     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
     <!-- custom code-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
+    <!-- 주소 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">
+// $(document).ready(function(){
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            document.getElementById("manager_postcode").value = data.zonecode;
+	            document.getElementById("manager_address").value = data.roadAddress;
+	        }
+	    }).open();
+	}
+// });	
+</script>
+	
 </body>
 
 </html>
