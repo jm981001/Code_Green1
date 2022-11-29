@@ -37,7 +37,6 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- 글쓰기  API -->
-
 </head>
 <body>
     <header class="header--mobile">

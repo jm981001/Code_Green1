@@ -29,14 +29,14 @@
  
  <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     <script type="text/javascript">
-       function recipe_delete(value) {
+       function product_delete(value) {
             
           let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
           
           if(delete_confirm){
              $.ajax({
-               url: "product_deletePro.bo",
-               type: "POST",
+               url: "product_delete",
+               type: "GET",
                data: {
                   board_idx: value
                },
@@ -133,7 +133,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="post">
+  		<form class="ps-form--search-bar" action="index.html" method="get">
 
  
        <table class="table ps-table">
@@ -169,7 +169,6 @@
                     </form>
 					</div>
 					</div>                                    
-
 				<!-- ---게시판글쓰기api -->
                 <textarea id="summernote" name="editordata"></textarea>
                 <!-- ---게시판글쓰기api -->
@@ -177,10 +176,9 @@
                      <div class="ps-form__submit text-center">
                      	<br>
                           <button class="ps-btn ps-btn--gray mr-3">취소</button>
-                          <button class="ps-btn success">답변달기</button>
+                          <button class="ps-btn success">삭제</button>
                     </div>
 
-       
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

@@ -29,15 +29,6 @@ public class ManagerService {
 	public String getPasswd(String manager_id) {
 		return mapper.selectPasswd(manager_id);
 	}
-	//탈퇴여부
-	public String checkDel(String manager_id) {
-		return mapper.checkDel(manager_id);
-	}
-	//관리자 승인여부
-	public String checkAuth(String manager_id) {
-		return mapper.checkAuth(manager_id);
-
-	}
 	
 	
 	//----------------------브랜드 정보 -------------------------------
@@ -170,9 +161,6 @@ public class ManagerService {
 	
 	
 	
-	
-	
-	
 	//총주문수
 	public int getTotalsellCount() {
 		return mapper.selectTotalsellCount();
@@ -182,11 +170,11 @@ public class ManagerService {
 	   	return mapper.selectTotalMoneyOrder(sId);
 	   }
 
-	 //정민 매출 3순위
+	//매출 3순위
 	 public List<ItemVO> getTop3(String sId) {
 	    return mapper.getTop3(sId);
 	  }
-	 //정민 팔로우 수
+	//팔로우 수
 	 public int follow(String sId) {
 	    return mapper.follow(sId);
 	  }

@@ -24,12 +24,6 @@ public interface ManagerMapper {
 	// 3. 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
 	public ManagerVO selectManagerInfo(String manager_id);
-	
-	// 탈퇴 여부
-	public String checkDel(String manager_id);
-	// 관리자 승인여부
-	public String checkAuth(String manager_id);
-	
     
 	// 브랜드 상세정보조회(브랜드마이페이지)
 	public ManagerVO selectBrandInfo(String manager_id);
@@ -95,7 +89,6 @@ public interface ManagerMapper {
 	//문의글 상세 조회
 	public QnaVO selectQnaInfo(String qna_idx);
 	
-	
 
 	//문의글 답변등록
 	public int updateQnaboard(QnaVO qna);
@@ -115,13 +108,13 @@ public interface ManagerMapper {
 	public int selectOrderListCount(
 			@Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
 
-	  //정민 매출 3순위
+	 // 매출 3순위
 	   public List<ItemVO> getTop3(String sId);
 
-	   //정민 팔로우 수
+	//팔로우 수
 	   public int follow(String sId);
 
-	 //총매출,총주문건수
+	//총매출,총주문건수
 	   public ManagerVO selectTotalMoneyOrder(String sId);
 	   
 

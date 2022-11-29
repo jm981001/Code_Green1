@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
-
 <body>
     <header class="header--mobile">
         <div class="header__left">

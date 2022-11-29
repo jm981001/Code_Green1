@@ -30,7 +30,6 @@
     <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     <script type="text/javascript">
        function recipe_delete(value) {
-            
           let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
           
           if(delete_confirm){

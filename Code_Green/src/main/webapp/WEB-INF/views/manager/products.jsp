@@ -203,8 +203,6 @@
 						</tbody>
 						</table>
                             
-                          
-                       
                     </div>
                 </div>
                 <div class="ps-section__footer">
@@ -224,7 +222,6 @@
 				                        </ul>
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->
-
                 </div>
             </section>
         </div>

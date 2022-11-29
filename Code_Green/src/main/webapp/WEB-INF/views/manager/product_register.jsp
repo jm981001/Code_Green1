@@ -88,8 +88,6 @@
 
 	}
 	
-
-	
 	
 	
 	
@@ -173,7 +171,7 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form class="ps-form ps-form--new-product" action=product_registerPro.bo method="get"enctype="multipart/form-data" id="sub_form">
+                <form class="ps-form ps-form--new-product" action=product_registerPro.bo method="post"enctype="multipart/form-data" id="sub_form">
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">

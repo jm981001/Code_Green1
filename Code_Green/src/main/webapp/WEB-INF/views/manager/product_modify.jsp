@@ -29,7 +29,6 @@
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script type="text/javascript">
 
-
 	function myItem(value) {
 		
 		let subForm = document.getElementById('sub_form');

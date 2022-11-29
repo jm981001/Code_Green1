@@ -241,7 +241,6 @@
                 
              }
              
-
              
              new Chart(document.getElementById('myChart'), {
                  // ①차트의 종류(String)
@@ -278,7 +277,6 @@
              });
                 
           }
-          
           });//ajax
              
        }//getGraph

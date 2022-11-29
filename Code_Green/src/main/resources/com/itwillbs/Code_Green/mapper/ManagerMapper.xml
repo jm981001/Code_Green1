@@ -28,19 +28,7 @@
 					date_format(now(),'%Y%m%d%T')<!--	MANAGER_DATE VARCHAR(14) NOT NULL 				-->
 					)
 	</insert>
-	<!-- 탈퇴 여부 -->
-	<select id="checkDel" resultType="string">
-		SELECT manager_del_yn 
-			FROM manager 
-				WHERE manager_id = #{manager_id}
-	</select>
-	
-	<!-- 관리자 승인 여부 -->
-	<select id="checkAuth" resultType="string">
-		SELECT manager_adminauth 
-			FROM manager 
-				WHERE manager_id = #{manager_id}
-	</select>
+
 
 <!-- 
 	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
@@ -303,7 +291,6 @@
 			 WHERE 
 		 	    item_idx = #{item_idx}
 	</update>
-   
 	
 	
 	<!-- 상품 삭제 -->
@@ -574,7 +561,7 @@
     </select>
 
 
-<!-- 정민 매출 3순위 -->
+<!-- 매출 3순위 -->
    <select id="getTop3" resultType="com.itwillbs.Code_Green.vo.ItemVO">
        select    i.item_idx, 
                i.re_manager_idx,
@@ -635,7 +622,7 @@
     </select>
 
 
-<!-- 정민 팔로우 수 -->
+<!-- 팔로우 수 -->
    <select id="follow" resultType="integer">
            select count(*) as follow
               from follow

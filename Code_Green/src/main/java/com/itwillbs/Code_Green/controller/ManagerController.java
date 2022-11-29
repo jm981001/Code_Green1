@@ -30,7 +30,6 @@ import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
-import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.SellVO;
@@ -60,38 +59,25 @@ public class ManagerController {
 		// => 파라미터 : 아이디 리턴타입 : String(passwd)
 		String passwd = service.getPasswd(manager.getManager_id());
 //				System.out.println(passwd);
-		String checkDel = service.checkDel(manager.getManager_id());
-		String checkAuth = service.checkAuth(manager.getManager_id());
+
 		// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
 		// 1) 아이디가 없을 경우(passwd 값이 null) 실패
 		// 2) 패스워드 비교(BCryptPasswordEncoder 객체의 matches() 메서드 활용)
 		// 2-1) 다를 경우 실패
 		// 2-2) 같을 경우 성공
-		// 탈퇴 여부 확인
-		ManagerVO checkId = service.getManagerInfo(manager_id);
-		System.out.println("checkId"+checkId);
-		if(checkId==null) {
-			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
-			return "member/fail_back";
-		}
-		if (checkDel.equals("Y") || checkAuth.equals("N")) {
-			model.addAttribute("msg", "사용 불가능한 계정입니다 (탈퇴,관리자 승인 거부)");
+
+		if (passwd == null || !encoder.matches(manager.getManager_pass(), passwd)) {
+			model.addAttribute("msg", "기업 로그인 실패! 힝~");
+//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
 			return "member/fail_back";
 		} else {
-
-			if (passwd == null || !encoder.matches(manager.getManager_pass(), passwd)) {
-				model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
-//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
-				return "member/fail_back";
-			} else {
-				session.setAttribute("sId", manager.getManager_id());
-				if (selectManager.getManager_storecode() != null) {
-					session.setAttribute("sCode", selectManager.getManager_storecode());
-				}
-				return "redirect:/";
+			session.setAttribute("sId", manager.getManager_id());
+			if (selectManager.getManager_storecode() != null) {
+				session.setAttribute("sCode", selectManager.getManager_storecode());
 			}
-
+			return "redirect:/";
 		}
+
 	}
 
 	@PostMapping(value = "/ManagerJoinPro.me")
@@ -174,17 +160,18 @@ public class ManagerController {
 	}
    
     
-    //정민 매출 3순위
+    //매출 3순위
     List<ItemVO> top3 = service.getTop3(sId);
     model.addAttribute("top3", top3);
     
-    //정민 팔로우 수
-    int follow = service.follow(sId);
-    model.addAttribute("follow", follow);
-
     //총매출 ,주문수
     ManagerVO orderTotal = service.getOrderTotal(sId);
     model.addAttribute("orderTotal", orderTotal);
+    
+    //팔로우 수
+    int follow = service.follow(sId);
+    model.addAttribute("follow", follow);
+
     
     return "manager/index";
     
@@ -409,96 +396,98 @@ public class ManagerController {
 
 		
 	//------------상품 등록 폼페이지-------------------------------------------
-		@RequestMapping(value = "product_register", method = RequestMethod.GET)
-		public String product_register() {
-				return "manager/product_register";
-			}		
+	@RequestMapping(value = "product_register", method = RequestMethod.GET)
+	public String product_register() {
+			return "manager/product_register";
+		}		
+				
 				
 //		product_registerPro.bo
 	//------------상품 등록-------------------------------------------
-		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
-		public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
-										 Model model, HttpSession session
-										) {
-			
-			String id = (String)session.getAttribute("sId");
-			System.out.println("아이디 : " + id);
-			ManagerVO manager = service.getManagerInfo(id);
-			
-			
-//			System.out.println("p : " + item_packing);
-//			System.out.println("c : " +item_category);
-//			System.out.println("s : " +item_status);
-//			System.out.println("i : " +item);
-			
-			String uploadDir = "/resources/itemUpload";
-			String saveDir = session.getServletContext().getRealPath(uploadDir);
-
-			File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
-			// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
-			if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
-				// 경로 상의 존재하지 않는 모든 경로 생성
-				f.mkdirs();
-			}
-			
-			String uuid = UUID.randomUUID().toString();
-			
-
-			MultipartFile mFile1 = fileItem.getFile_1();
-			MultipartFile mFile2 = fileItem.getFile_2();
-			
-			String originalFileName1 = mFile1.getOriginalFilename();
-			String originalFileName2 = mFile2.getOriginalFilename();
-
-			// ========================================================
-			
-			if(!originalFileName1.equals("")) {
-				fileItem.setFile1(uuid + "_" + originalFileName1);
-//				System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
-			}
-
-			if(!originalFileName2.equals("")) {
-				fileItem.setFile2(uuid + "_" + originalFileName2);
-//				System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
-			}
+	@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
+	public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
+									 Model model, HttpSession session
+									) {
 		
-			// ===========================================================
-			
-			int insertCount = service.newProducts(item,manager.getManager_idx());
-			int file_insertCount = service.newProductsFile(fileItem);
-			
-			if(insertCount > 0) {
-				if(file_insertCount > 0) {
-					try {
-						if(fileItem.getFile1() != null) {
-							mFile1.transferTo(new File(saveDir, fileItem.getFile1()));
-						}
-						if(fileItem.getFile2() != null) {
-							mFile2.transferTo(new File(saveDir, fileItem.getFile2()));
-						}
-						
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+		String id = (String)session.getAttribute("sId");
+		System.out.println("아이디 : " + id);
+		ManagerVO manager = service.getManagerInfo(id);
+		
+		
+//		System.out.println("p : " + item_packing);
+//		System.out.println("c : " +item_category);
+//		System.out.println("s : " +item_status);
+//		System.out.println("i : " +item);
+		
+		String uploadDir = "/resources/itemUpload";
+		String saveDir = session.getServletContext().getRealPath(uploadDir);
 
-					return "redirect:/products";
-				} else {
-					model.addAttribute("msg", "파일 업로드 실패!");
-					return "manager/mn_fail_back";
+		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
+		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
+		if(!f.exists()) { // 해당 경로가 존재하지 않을 경우
+			// 경로 상의 존재하지 않는 모든 경로 생성
+			f.mkdirs();
+		}
+		
+		String uuid = UUID.randomUUID().toString();
+		
+
+		MultipartFile mFile1 = fileItem.getFile_1();
+		MultipartFile mFile2 = fileItem.getFile_2();
+		
+		String originalFileName1 = mFile1.getOriginalFilename();
+		String originalFileName2 = mFile2.getOriginalFilename();
+
+		// ========================================================
+		
+		if(!originalFileName1.equals("")) {
+			fileItem.setFile1(uuid + "_" + originalFileName1);
+//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+		}
+
+		if(!originalFileName2.equals("")) {
+			fileItem.setFile2(uuid + "_" + originalFileName2);
+//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+		}
+	
+		// ===========================================================
+		
+		int insertCount = service.newProducts(item,manager.getManager_idx());
+		int file_insertCount = service.newProductsFile(fileItem);
+		
+		if(insertCount > 0) {
+			if(file_insertCount > 0) {
+				try {
+					if(fileItem.getFile1() != null) {
+						mFile1.transferTo(new File(saveDir, fileItem.getFile1()));
+					}
+					if(fileItem.getFile2() != null) {
+						mFile2.transferTo(new File(saveDir, fileItem.getFile2()));
+					}
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				
+
+				return "redirect:/products";
 			} else {
-				
-				model.addAttribute("msg", "상품 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
+				model.addAttribute("msg", "파일 업로드 실패!");
 				return "manager/mn_fail_back";
 			}
+			
+		} else {
+			
+			model.addAttribute("msg", "상품 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
+			return "manager/mn_fail_back";
+		}
+
+		
+		
+		
+	}		
 	
-			
-			
-			
-		}		
 		//------------ 상품 등록 상세 조회-------------------------------------------	
 		@GetMapping(value = "/products_detail")
 		public String products_detail( Model model, HttpSession session, int item_idx) {
@@ -670,21 +659,23 @@ public class ManagerController {
 		
 		
 		// 상품 삭제
-        @PostMapping(value = "/product_deletePro.bo")
+        @GetMapping(value = "/product_delete")
         public String product_deletePro(@RequestParam int item_idx, 
         		                        Model model, HttpSession session) {
            
         	System.out.println("번호 : " + item_idx);
 	
         	
-        	
            //글 삭제 전 실제 업로드된 파일 삭제작업
            String realFile1 = service.getRealFile1(item_idx);
            String realFile2 = service.getRealFile2(item_idx);
+           System.out.println("realFile1 -> "+realFile1);
+   		   System.out.println("realFile2 -> "+realFile2);
            
            int deleteCount =  service.removeItem(item_idx);
            int deleteFileCount = service.removeItemFile(item_idx);
-           
+           System.out.println("deleteCount 갯수 -> "+deleteCount);
+   		   System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
            // ----------------------------------------------------------
            
            if(deleteCount > 0) {
@@ -1297,7 +1288,6 @@ public class ManagerController {
 	      			 String sId = (String)session.getAttribute("sId");
 	      			 
 	      			 
-	      			 //정민 매출 3순위
 	      			 	
 	      		    List<ItemVO> top3 = service.getTop3(sId);
 	      		    model.addAttribute("top3", top3);

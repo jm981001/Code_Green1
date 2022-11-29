@@ -79,7 +79,6 @@
 								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
             
             
-            
             </ul>
         </div>
     </aside>

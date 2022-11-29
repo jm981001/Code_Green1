@@ -14,7 +14,6 @@
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
     <title>탈퇴</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">

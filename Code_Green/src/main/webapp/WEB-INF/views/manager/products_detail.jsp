@@ -37,8 +37,8 @@
           
           if(delete_confirm){
              $.ajax({
-               url: "product_deletePro.bo",
-               type: "POST",
+               url: "product_delete",
+               type: "GET",
                data: {
                   board_idx: value
                },
@@ -203,13 +203,12 @@
 <!-- 					  <tr> -->
 <!-- 					</table> -->
 					
-											
 <!-- 			<!-------------등록된 상품이미지 ------------> 
                             
-                            
                          <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">상품수정</button></a>
-                         <a href= "product_delete?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">삭제</button></a>
-                         <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a>
+                         <a href= "product_delete?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">삭제1</button></a>
+                         <button class="ps-btn success"type="submit"onclick="product_delete(${ItemInfo.item_idx })">삭제2</button>
+<%--                          <a class="dropdown-item" onclick="product_delete(${recipeList.board_idx })">삭제</a> --%>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </table>
                     
