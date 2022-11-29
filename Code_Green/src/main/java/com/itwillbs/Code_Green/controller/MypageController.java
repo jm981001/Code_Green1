@@ -645,9 +645,15 @@ public class MypageController {
 	
 	
 	//------------마이페이지 개인정보 수정-------------------------------------------
-	@RequestMapping(value = "myPage_userInfo", method = RequestMethod.GET)
-	public String myPage_userInfo() {
+	@GetMapping(value = "myPage_userInfo")
+	public String myPage_userInfo(@ModelAttribute MemberVO member, Model model, HttpSession session) {
+		String sId = (String) session.getAttribute("sId");
+		
+		MemberVO memberInfo = Mservice.getMemberInfo(sId);
+		model.addAttribute("member", memberInfo);
+		
 		return "member/myPage_userInfo";
+		
 	}
 	
 	
