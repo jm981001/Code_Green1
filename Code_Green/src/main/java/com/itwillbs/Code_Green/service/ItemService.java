@@ -161,6 +161,12 @@ public class ItemService {
 	}
 
 
+	//작성 가능 후기 갯수
+	public int getReviewListCount(String member_id) {
+		return  mapper.getReviewListCount(member_id);
+	}
+
+
 
 
 

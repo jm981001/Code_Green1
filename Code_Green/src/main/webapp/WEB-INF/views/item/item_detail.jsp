@@ -18,7 +18,8 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>베지터틀-${item.item_name }</title>
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
+    <title>[${item.manager_brandname }]${item.item_name }-베지터틀</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -971,21 +972,8 @@
 												       				 <td colspan="4"><br>
 													            		${qna.qna_content }
 													            		<br><br><br>
-													            	
-													                	(관리자의 답글)<br>
-													                    안녕하세요 베지터틀 입니다. <br>
-																		순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																		<br>
-																		먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																		상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																		<br>
-																		문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																		<br>
-																		추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																		<br>
-																		앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																		<br>
-																		감사합니다.
+													            		(관리자 답글) 
+													            		${qna.qna_answer }
 													                    <br><br><br>
 													                  <div align="right"><br><br>
 													                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
@@ -1006,21 +994,10 @@
 												                <td colspan="4"><br>
 												            		${qna.qna_content }
 												            		<br><br><br>
-												            	
-												                	(관리자의 답글)<br>
-												                    안녕하세요 베지터틀 입니다. <br>
-																	순차적인 문의 확인으로 답변 지연이 발생된 점 깊이 사과드립니다.<br>
-																	<br>
-																	먼저 필요하시어 주문해주신 상품으로 불편함을 드려 죄송합니다. <br>
-																	상품 생산 및 포장과정에서 검수가 미흡하여 불편함을 드린 부분으로 말씀주신 사항은 유관부서로 전달하여 개선 요청하겠습니다.<br>
-																	<br>
-																	문의해 주신 사항 관련하여 학인 및 처리 도움드렸습니다. <br>
-																	<br>
-																	추후 상품 문의 외 배송관련 또는 상품 CS 조치 필요할 경우 1:1문의를 통해 남겨주시면 감사하겠습니다<br>
-																	<br>
-																	앞으로 정확한 상품으로 마켓컬리 이용에 만족을 드리고자 더욱 노력하겠습니다.<br>
-																	<br>
-																	감사합니다.
+												            			<c:if test="${qna.qna_answer ne 'N' }" >
+													            		(관리자 답글) 
+													            		${qna.qna_answer }
+													            		</c:if>
 												                    <br><br><br>
 												                  <div align="right"><br><br>
 												                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">

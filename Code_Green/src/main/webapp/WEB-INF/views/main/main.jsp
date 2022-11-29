@@ -156,7 +156,7 @@
                     <h3>고객님들의 혼자알기 아까운 상품들</h3>
                     <ul class="ps-section__links">
                        
-                        <li><a href="ItemList.bo">더보기</a></li>
+                        <li><a href="BestItemList.bo">더보기</a></li>
                     </ul>
                 </div>
                 <div class="ps-section__content">

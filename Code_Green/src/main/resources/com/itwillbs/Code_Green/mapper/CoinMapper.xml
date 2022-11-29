@@ -32,7 +32,7 @@
 		FROM coin c
 		JOIN member m ON c.rf_member_idx = m.member_idx
 		WHERE m.member_id = #{member_id}
-		ORDER BY c.coin_idx DESC limit 1;
+		ORDER BY c.coin_date DESC limit 1;
 	</select>
 
 	<!-- 적립금 목록 갯수 -->
@@ -46,13 +46,14 @@
 
 	<!-- 적립금 목록 -->
    <select id="selectTotalCoin" resultType="com.itwillbs.Code_Green.vo.CoinVO">
-             SELECT max(coin_idx)
-             	   ,c.COIN_TOTAL as total
+            SELECT c.coin_idx
+         	   , c.COIN_TOTAL as total
 			 FROM coin c
 				left join member m
 					on c.RF_MEMBER_IDX = m.MEMBER_IDX
 			 WHERE 
-			 	  m.MEMBER_ID =  #{member_id};
+			 	  m.MEMBER_ID = #{member_idx}
+		     order by coin_idx desc limit 1;
 	</select>
 
 	<!-- 주문시 적립금 사용 -->

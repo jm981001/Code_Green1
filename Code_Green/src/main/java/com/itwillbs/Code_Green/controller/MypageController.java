@@ -263,7 +263,6 @@ public class MypageController {
 	
 	
 	
-	
 	//====================================== 마이페이지 주문목록 ========================================== 
 	@GetMapping(value = "/myBuyList.my")
 	public String myBuyList(@RequestParam(defaultValue = "1") int pageNum, 
@@ -423,41 +422,71 @@ public class MypageController {
 //	
 	
 	//------------마이페이지 리뷰 가능상품-------------------------------------------
-		@GetMapping(value = "/myPageReview.my")
-		public String myPage_review_detail( @RequestParam(defaultValue = "1") int pageNum, Model model
-				                           ,@RequestParam String member_id,HttpSession session) {
+			@GetMapping(value = "/myPageReview.my")
+			public String myPage_review_detail( @RequestParam(defaultValue = "1") int pageNum, Model model
+					                           ,@RequestParam String member_id,HttpSession session) {
+				
+			String sId = (String)session.getAttribute("sId");
+			if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+				model.addAttribute("msg", "잘못된 접근입니다");
+				return "member/fail_back";
+			}
 			
-		String sId = (String)session.getAttribute("sId");
-		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
-			model.addAttribute("msg", "잘못된 접근입니다");
-			return "member/fail_back";
+			int listLimit = 7; // 한 페이지 당 표시할 게시물 목록 갯수 
+			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
+			int startRow = (pageNum - 1) * listLimit;
+			
+//			//마이페이지 찜한 상품 리스트
+//			List<ItemVO> WishList = Iservice.wishList(startRow, listLimit, member_id );
+			
+			//작성 가능 후기 갯수
+			int listCount = Iservice.getReviewListCount(member_id);
+//			System.out.println(listCount + "   listCount");
+//			session.setAttribute("listCount", listCount);
+			
+			int maxPage = (int)Math.ceil((double)listCount / listLimit);
+			// 시작 페이지 번호 계산
+			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+			// 끝 페이지 번호 계산
+			int endPage = startPage + pageListLimit - 1;
+			System.out.println(maxPage + "maxPage");
+			System.out.println(endPage + "endPage");
+			// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
+			// 끝 페이지 번호를 최대 페이지 번호로 교체
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			PageInfo pageInfo = new PageInfo(
+					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+			
+			
+			//리뷰 가능상품 목록
+			List<SellVO> sellDetailList = Sservice.getSellDetailList(startRow, listLimit,member_id);	
+				
+			model.addAttribute("pageInfo", pageInfo);	
+			model.addAttribute("listCount", listCount);	
+			model.addAttribute("member_id", member_id);
+			model.addAttribute("sellDetailList", sellDetailList);
+			return "member/myPage_review_detail";
 		}
-		//리뷰 가능상품 목록
-		List<SellVO> sellDetailList = Sservice.getSellDetailList(member_id);	
-			
-			
-		model.addAttribute("member_id", member_id);
-		model.addAttribute("sellDetailList", sellDetailList);
-		return "member/myPage_review_detail";
-	}
-	
-	//------------마이페이지 상품후기 작성-------------------------------------------
-	@RequestMapping(value = "myPage_review_Write.my", method = RequestMethod.GET)
-	public String myPage_review_Write(Model model ,@RequestParam String member_id,@RequestParam int sell_idx,@RequestParam int item_idx, HttpSession session) {
-		String sId = (String)session.getAttribute("sId");
-		if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
-			model.addAttribute("msg", "잘못된 접근입니다");
-			return "member/fail_back";
-		}
-		//마이페이지 상품후기작성
-		List<SellVO> sellReview = Sservice.getSellReview(member_id, sell_idx, item_idx);	
 		
-		model.addAttribute("member_id", member_id);
-		model.addAttribute("sell_idx", sell_idx);
-		model.addAttribute("item_idx", item_idx);
-		model.addAttribute("sellReview", sellReview);
-		return "member/myPage_review_Write";
-	}
+		//------------마이페이지 상품후기 작성-------------------------------------------
+		@RequestMapping(value = "myPage_review_Write.my", method = RequestMethod.GET)
+		public String myPage_review_Write(Model model ,@RequestParam String member_id,@RequestParam int sell_idx,@RequestParam int item_idx, HttpSession session) {
+			String sId = (String)session.getAttribute("sId");
+			if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
+				model.addAttribute("msg", "잘못된 접근입니다");
+				return "member/fail_back";
+			}
+			//마이페이지 상품후기작성
+			List<SellVO> sellReview = Sservice.getSellReview(member_id, sell_idx, item_idx);	
+			
+			model.addAttribute("member_id", member_id);
+			model.addAttribute("sell_idx", sell_idx);
+			model.addAttribute("item_idx", item_idx);
+			model.addAttribute("sellReview", sellReview);
+			return "member/myPage_review_Write";
+		}
 	
 	//====================================== 마이페이지 1:1 문의내역 ========================================== 
 	@GetMapping(value = "/myPageQnaList.bo")
@@ -564,7 +593,7 @@ public class MypageController {
 	
 	
 	//------------마이페이지 작성글-------------------------------------------
-	@GetMapping(value = "/myPageBoard.bo")
+	@GetMapping(value = "/myPageBoard.my")
 	public String myPageBoard(@RequestParam(defaultValue = "1") int pageNum, Model model, @RequestParam String member_id,@ModelAttribute BoardVO board, HttpSession session) {
 		
 		String sId = (String)session.getAttribute("sId");

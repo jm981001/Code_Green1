@@ -97,6 +97,9 @@ public interface ItemMapper {
 	
 	//베스트리스트_가격 높은순
 	List<ItemVO> selectItemBestList_ex();
+	
+	//작성 가능 후기 갯수
+	int getReviewListCount(String member_id);
 
 
 

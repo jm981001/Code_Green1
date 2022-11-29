@@ -22,13 +22,13 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String itemList(Model model) {
 		
-		//새롭게 만나는 상품들
+		//새롭게 만나는 상품들 (신상품 30개 중에 랜덤 7개)
 		List<ItemVO> mainList1 = service.mainList1();
 
-		//고객님들의 혼자알기 아까운 상품들
+		//고객님들의 혼자알기 아까운 상품들 (리뷰많은 상품 30개 중에 랜덤 7개)
 		List<ItemVO> mainList2 = service.mainList2();
 		
-		//내 취향을 잘 아는 상품들
+		//내 취향을 잘 아는 상품들 (좋아요 많은 상품 30개 중에 랜덤 7개)
 		List<ItemVO> mainList3 = service.mainList3();
 		
 		model.addAttribute("mainList1", mainList1);

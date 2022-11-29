@@ -8,30 +8,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="author" content="">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<title>베지터틀 -신상품</title>
-<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
-<link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
-<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
-<link rel="stylesheet" href="/Code_Green/resources/css/autopart.css">
-<link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
-<link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
+    <title>신상품 - 베지터틀</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/owl-carousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/slick/slick/slick.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/lightGallery-master/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
+    <link rel="stylesheet" href="/Code_Green/resources/css/autopart.css">
+    <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
+    <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+
+
+</head>
 <script type="text/javascript">
 // 	추천기능
 	$(function(){
@@ -76,37 +79,33 @@
 		
 			wish_count();
 	});
-</script>
-
-<script type="text/javascript">
-// $(document).ready(function(){
-// 	$("#cartBtn").click(function(){
-	function addCart(item_idx) {
-		let cart_total = $("#cart_total_"+item_idx).val();
-		let	item_name = $("#item_name_"+item_idx).val();
-		let manager_brandname = $("#manager_brandname_"+item_idx).val();
-		let file1 = $("#file1_"+item_idx).val();
-		
-		$.ajax({
-			type : 'get',
-			url : 'addCart',
-			data: {
-				'rf_item_idx' 		: item_idx,
-				'rf_member_idx'		: ${sessionScope.sIdx},
-				'cart_amount'		: 1,
-				'cart_total'		: cart_total,
-				'item_name'			: item_name,
-				'manager_brandname'	: manager_brandname,
-				'file1'				: file1,
-			},
-			success : function (data) {
-				alert('장바구니에 담았습니다.')
-			}
+	
+// 	$(document).ready(function(){
+		$('#cartBtn').click(function() {
+			let citem_idx = $("#citem_idx_"+item_idx).val();
+			debugger;
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					rf_item_idx: citem_idx,
+					rf_member_idx: ${sessionScope.sIdx},
+					cart_amount: 1,
+					cart_total: '1',
+					item_name: '1',
+					manager_brandname: '1',
+					file1: '${item.file1 }'
+				},
+				success : function (data) {
+// 					console.log("data : " +  data);
+// 					code =data;
+					alert('장바구니에 담았습니다.')
+				}
+				
+			});
 		});
-	}
-// });
-</script>
-</head>
+// 	});
+	</script>
 <body>
     
     
@@ -156,14 +155,9 @@
                                                     	
                                                     	<!-- 상품 이미지 -->
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" ><img src="/Code_Green/resources/item/${item.file1 }" alt="" /></a>
-
-                                                        <!-- 장바구니 담을 정보 -->
-                                                        <input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
-                                                        <input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
-                                                        <input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
-                                                        <input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+                                                        <input type="hidden" id="citem_idx" name="citem_idx_${item.item_idx}" value="${item.item_idx}">
                                                         <ul class="ps-product__actions">
-                                                            <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2" onclick="addCart('${item.item_idx}')"></i></a></li>
+                                                            <li><input type="button" data-toggle="tooltip" data-placement="top" title="Add To Cart" id="cartBtn><i class="icon-bag2" "></i></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
