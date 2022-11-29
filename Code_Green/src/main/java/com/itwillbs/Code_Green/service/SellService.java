@@ -38,7 +38,15 @@ public class SellService {
 		return sell_mapper.selectOrderList(member_id);
 	}
 
-
+	// 주문 상세내역 불러오기
+	public List<SellVO> getOrderDetailList(int sell_idx) {
+		return sell_mapper.selectOrderDetailList(sell_idx);
+	}
+	
+	// 결제 완료(카드)
+	public int modifyCardOrder(int sell_idx) {
+		return sell_mapper.updateCardOrder(sell_idx);
+	}
 	
 	
 	
@@ -54,10 +62,9 @@ public class SellService {
 		return sell_mapper.selectSellListCount();
 	}
 	
-
 	// 마이페이지 리뷰 가능상품 목록
-	public List<SellVO> getSellDetailList(int startRow, int listLimit, String member_id) {
-		return sell_mapper.getSellDetailList(startRow, listLimit,member_id);
+	public List<SellVO> getSellDetailList(String member_id) {
+		return sell_mapper.getSellDetailList(member_id);
 	}
 
 	// 마이페이지 상품후기작성
@@ -85,15 +92,11 @@ public class SellService {
 	public int getMyBuyListByDateCount(int member_idx, String date1, String date2) {
 		return sell_mapper.getMyBuyListByDateCount(member_idx,date1,date2);
 	}
-		
-	// 마이페이지 - 내주문목록 주문별 상세내용 
-	public SellVO getMyBuyListDetail(int member_idx, String sell_order_number) {
-		return sell_mapper.getMyBuyListDetail(member_idx,sell_order_number);
-	}
+
 	
-	// 마이페이지 - 내주문목록 아이템리스트 출력
-	public List<SellVO> getMyBuyItemList(String sell_order_number) {
-		return sell_mapper.getMyBuyItemList(sell_order_number);
-	}
+
+
+		
+	
 	
 }

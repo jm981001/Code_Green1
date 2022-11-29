@@ -20,7 +20,7 @@ public class SellVO {
 	private String sell_pay_status; // 결제여부 / default 'N'
 	private String sell_pay_date; // 결제일
 	private String sell_order_number; // 주문번호
-	
+
 	private String sell_detail_idx; // 주문상세번호
 	private String item_name; // 상품명
 	private String item_price; // 상품가격
@@ -28,6 +28,8 @@ public class SellVO {
 	private String item_category; // 상품 카테고리
 	private String manager_brandname; // 상품 브랜드
 	private String file1; // 상품사진
+	private String member_email; // 카드결제시 필요한 이메일
+	
 	
 	private int total;//총매출
 	private int sell_count;//총주문수
@@ -191,16 +193,23 @@ public class SellVO {
 		this.sell_count = sell_count;
 	}
 
-
-
 	public int getBrandtotal() {
 		return brandtotal;
 	}
 
-
-
 	public void setBrandtotal(int brandtotal) {
 		this.brandtotal = brandtotal;
+	}
+
+
+	public String getMember_email() {
+		return member_email;
+	}
+
+
+
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
 	}
 
 
@@ -214,9 +223,11 @@ public class SellVO {
 				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
 				+ ", sell_order_number=" + sell_order_number + ", sell_detail_idx=" + sell_detail_idx + ", item_name="
 				+ item_name + ", item_price=" + item_price + ", item_idx=" + item_idx + ", item_category="
-				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", total=" + total
-				+ ", sell_count=" + sell_count + ", brandtotal=" + brandtotal + "]";
+				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", member_email="
+				+ member_email + ", total=" + total + ", sell_count=" + sell_count + ", brandtotal=" + brandtotal + "]";
 	}
+
+	
 	
 	
 	

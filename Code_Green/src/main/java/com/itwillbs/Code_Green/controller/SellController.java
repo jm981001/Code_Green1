@@ -71,8 +71,6 @@ public class SellController {
 								  @RequestParam int sell_item_total_price, @RequestParam int shipping_fee,
 								  Model model) {
 		
-		System.out.println(sell);
-		
 		// 장바구니 정보
 		List<CartVO> cartList = cart_service.getCart(member_id); 
 		
@@ -99,8 +97,12 @@ public class SellController {
 		// 주문내역 불러오기
 		SellVO orderList = sell_service.getOrderList(member_id);
 		
+		// 주문 상세내역 불러오기
+		List<SellVO> orderDetailList = sell_service.getOrderDetailList(orderList.getSell_idx());
 		
 		model.addAttribute("orderList", orderList);
+		
+		model.addAttribute("orderDetailList" , orderDetailList);
 		
 		model.addAttribute("sell_item_total_price", sell_item_total_price);
 		
@@ -108,5 +110,20 @@ public class SellController {
 		
 		return "payment/payment_success";
 	}	
+	
+	// 결제(카드)
+	@PostMapping(value = "payment_success_card")
+	public void payment_success_card(@RequestParam int sell_idx) {
+		
+	int cardOrderModifyCount = sell_service.modifyCardOrder(sell_idx);
+		
+	}
+	
+	// 결제완료(카드) 페이지
+	@GetMapping(value = "payment_success_card_thanks")
+	public String payment_success_card_thanks() {
+		return "payment/payment_success_card";
+	}
+	
 
 }

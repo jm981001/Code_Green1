@@ -43,152 +43,16 @@
             <div class="container">
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li>주문완료</li>
+                    <li>결제완료</li>
                 </ul>
             </div>
         </div>
         <section class="ps-section--account">
             <div class="container">
                 <div class="ps-block--payment-success">
-                    <h3>주문 완료 되었습니다 !</h3>
+                    <h3>결제 완료 되었습니다 !</h3>
                     <p>주문하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="user-information.html"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
                 </div>
-	         	<div class="col-lg-8" style="margin-top: 50px;">
-	                <div class="ps-section__right">
-	                    <div class="ps-section--account-setting">
-	                        <div class="ps-section__header">
-	                        
-	                        	<!-- 난수로 결정???????????????????  -->
-	                            <h3 style="color: #666">주문 번호 #500884010</h3>
-	                            <h3 style="color: #666">주문일 2022-10-23</h3>
-	                        </div>
-	                        
-	                        <div class="accordion" id="accordionExample">
-						  <div class="accordion-item">
-						    <h2 class="accordion-header" id="headingOne">
-						      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 15px; color: #669900">
-						        주문 내역
-						      </button>
-						    </h2>
-						    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-						      <div class="accordion-body">
-						       <div class="ps-section__content">
-	                            <div class="table-responsive">
-	                                <table class="table ps-table">
-	                                    <thead style="text-align: center;">
-	                                        <tr>
-	                                            <th><strong>상품명</strong></th>
-	                                            <th><strong>상품 금액</strong></th>
-	                                            <th><strong>수량</strong></th>
-	                                            <th><strong>총 구매 금액</strong></th>
-	                                        </tr>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                            <td>
-	                                                <div class="ps-product--cart">
-	                                                    <div class="ps-product__content"><a href="product-default.html">풀무원 치즈</a>
-	                                                       <p>판매자:<strong> 풀무원</strong></p>
-	                                                   	</div>
-	                                                </div>
-	                                            </td>
-	                                            <td style="text-align: center;">2500원</td>
-	                                            <td style="text-align: center;">1개</td>
-	                                            <td style="text-align: center;">2500원</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>
-	                                                <div class="ps-product--cart">
-	                                                    <div class="ps-product__content"><a href="product-default.html">상하목장 우유</a>
-	                                                       <p>판매자:<strong> 상하목장</strong></p>
-	                                                   	</div>
-	                                                </div>
-	                                            </td>
-	                                            <td style="text-align: center;">2500원</td>
-	                                            <td style="text-align: center;">1개</td>
-	                                            <td style="text-align: center;">2500원</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
-	                            </div>
-	                        </div>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="accordion-item">
-					    <h2 class="accordion-header" id="headingTwo">
-					      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 15px; color: #669900">
-					        결제 정보
-					      </button>
-					    </h2>
-					    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-					      <div class="accordion-body">
-					        <div class="ps-section__content">  
-		                        <div class="table-responsive">
-	                                <table class="table ps-table" style="text-align: center;">
-	                                    <thead>
-	                                        <tr>
-	                                            <th><strong>결제 방식</strong></th>
-	                                            <th><strong>총 구매 금액</strong></th>
-	                                            <th><strong>배송비</strong></th>
-	                                            <th><strong>사용한 적립금</strong></th>
-	                                            <th><strong>결제할 금액</strong></th>
-	                                            <th><strong>결제일</strong></th>
-	                                        </tr>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                            <td>카드</td>
-	                                            <td>5000원</td>
-	                                            <td>+2500원</td>
-	                                            <td>-3000원</td>
-	                                            <td>4500원</td>
-	                                            <td>2022-10-23</td>
-				                                        </tr>
-				                                    </tbody>
-				                                </table>
-					                          </div>
-					                        </div>
-									      </div>
-									    </div>
-									  </div>
-									  <div class="accordion-item">
-									    <h2 class="accordion-header" id="headingThree">
-									      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 15px; color: #669900">
-									        배송지 정보
-									      </button>
-									    </h2>
-									    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-									      <div class="accordion-body">
-									         <div class="ps-section__content">  
-						                        <div class="table-responsive">
-					                                <table class="table ps-table" style="text-align: center;">
-					                                    <thead>
-					                                        <tr>
-					                                            <th><strong>이름</strong></th>
-					                                            <th><strong>연락처</strong></th>
-					                                            <th><strong>우편번호</strong></th>
-					                                            <th><strong>주소</strong></th>
-					                                        </tr>
-					                                    </thead>
-				                                    <tbody>
-				                                        <tr>
-				                                            <td>박보슬</td>
-				                                            <td>010-1111-2222</td>
-				                                            <td>35222</td>
-				                                            <td>부산광역시 서면</td>
-				                                        </tr>
-				                                    </tbody>
-				                                </table>
-					                          </div>
-					                         </div>
-									      </div>
-									    </div>
-									  </div>
-									</div>
-					           </div>
-					       </div>
-					   </div>
 					</div>    
 			       </section>
 			       

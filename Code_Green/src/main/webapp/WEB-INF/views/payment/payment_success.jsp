@@ -50,18 +50,33 @@
 	        IMP.request_pay({
 	            pg : 'kcp',
 	            pay_method : 'card',
-	            merchant_uid: "202013444565", // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
-	            name : '당근 10kg', // 주문할 상품명들
-	            amount : 1004, // 금액
-	            buyer_email : 'Iamport@chai.finance', // 주문자 메일주소
-	            buyer_name : '아임포트 기술지원팀', // 주문자 이름
-	            buyer_tel : '010-1234-5678', // 주문자 연락처
-	            buyer_addr : '서울특별시 강남구 삼성동', // 주문자 주소
-	            buyer_postcode : '123-456' // 주문자 우편번호
+	            merchant_uid: ${orderList.sell_order_number }, // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
+	            name : '당근', // 주문할 상품명들
+	            amount :  ${orderList.sell_total_price }, // 금액
+	            buyer_email : '${orderList.member_email}', // 주문자 메일주소
+	            buyer_name : '${orderList.sell_receiver}', // 주문자 이름
+	            buyer_tel : '${orderList.sell_phone}', // 주문자 연락처
+	            buyer_addr : '${orderList.sell_address}', // 주문자 주소
+	            buyer_postcode : '${orderList.sell_postcode}' // 주문자 우편번호
 	        }, function (rsp) { // callback
 	            if (rsp.success) {
 	                alert("결제가 완료되었습니다.");
-	                location.href="payment_success_card"; // 결제 완료창으로 넘어갈때 아이디 같이 보내기? sell or sell detail 테이블 보내기
+	                location.href = "payment_success_card_thanks";
+	                $.ajax({
+	                       url: "payment_success_card",
+	                       type: "POST",
+	                       data: {
+	                          sell_idx : ${orderList.sell_idx}
+	                       },
+	                       success: function(){
+	                          alert("결제가 성공되었습니다.");
+	                       },
+	                       fail: function () {
+	                          alert("결제가 실패되었습니다.");
+	                       }
+	                    });
+					
+	                
 	            } else {
 	                alert("결제가 완료되지 않았습니다.");
 	                history.back();
@@ -121,30 +136,21 @@
 			                                        </tr>
 			                                    </thead>
 			                                    <tbody>
+			                                    <c:forEach var="orderDetailList" items="${orderDetailList }">
 			                                        <tr>
-			                                            <td>
+			                                            <td style="text-align: left;">
 			                                                <div class="ps-product--cart">
-			                                                    <div class="ps-product__content"><a href="product-default.html">풀무원 치즈</a>
-			                                                       <p>판매자:<strong> 풀무원</strong></p>
+			                                                    <div class="ps-product__content">${orderDetailList.item_name }
+			                                                       <p>판매자:<strong>${orderDetailList.manager_brandname }</strong></p>
 			                                                   	</div>
 			                                                </div>
 			                                            </td>
-			                                            <td style="text-align: center;">2500원</td>
-			                                            <td style="text-align: center;">1개</td>
-			                                            <td style="text-align: center;">2500원</td>
+			                                            <td style="text-align: center;">${orderDetailList.item_price }</td>
+			                                            <td style="text-align: center;">${orderDetailList.sell_amount }</td>
+			                                            <td style="text-align: center;" ><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount }"></fmt:formatNumber>
+			                                          </td>
 			                                        </tr>
-			                                        <tr>
-			                                            <td>
-			                                                <div class="ps-product--cart">
-			                                                    <div class="ps-product__content"><a href="product-default.html">상하목장 우유</a>
-			                                                       <p>판매자:<strong> 상하목장</strong></p>
-			                                                   	</div>
-			                                                </div>
-			                                            </td>
-			                                            <td style="text-align: center;">2500원</td>
-			                                            <td style="text-align: center;">1개</td>
-			                                            <td style="text-align: center;">2500원</td>
-			                                        </tr>
+			                                       </c:forEach> 
 			                                    </tbody>
 			                                </table>
 			                            </div>
