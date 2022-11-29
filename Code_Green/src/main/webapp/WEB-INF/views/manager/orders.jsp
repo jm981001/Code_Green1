@@ -140,10 +140,11 @@
                                     <th>주문번호</th>
                                     <th>회원번호</th>
                                     <th>주문상품</th>
-                                    <th>주문날짜</th>
                                     <th>상품가격</th>
-                                    <th>주문상태</th>
+                                    <th>주문수량</th>
                                     <th>총금액</th>
+                                    <th>주문상태</th>
+                                    <th>주문날짜</th>
                                     <th>결제여부</th>
                                     <th>결제일</th>
                                     <th>상품브랜드</th>
@@ -157,16 +158,16 @@
 						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
 						     <td>${order.item_name }</td>
 						     
-						     <td>${order.sell_date }</td>
 						     
 <%-- 						      <fmt:parseDate var="dateString" value="${order.sell_date }" pattern="yyyyMMdd" /> --%>
 <%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
 		                      
 						     <td>${order.item_price}</td>
-						     <td>${order.sell_status}</td>
+						     <td>${order.sell_amount}</td>
 						     <td>${order.sell_total_price}</td>
+						     <td>${order.sell_status}</td>
+						     <td>${order.sell_date }</td>
 						     <td>${order.sell_pay_status}</td>
-						     
 						     <td>${order.sell_pay_date}</td>
 						     
 <%-- 						      <fmt:parseDate var="dateString" value="${order.sell_pay_date }" pattern="yyyyMMdd" /> --%>

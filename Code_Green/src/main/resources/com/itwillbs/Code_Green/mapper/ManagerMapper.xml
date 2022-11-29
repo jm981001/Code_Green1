@@ -87,7 +87,7 @@
 	<update id="deleteBrand">
 		UPDATE  manager
 		SET
-			manager_del_yn = 'y'
+			manager_del_yn = 'Y'
 		WHERE
 		 	manager_id = #{manager_id}
 	
