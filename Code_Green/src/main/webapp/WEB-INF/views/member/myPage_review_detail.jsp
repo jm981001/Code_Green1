@@ -15,7 +15,8 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>나의상품후기</title>
+<link rel="icon" href="/Code_Green/resources/img/favicon.png">
+<title>마이페이지 - 베지터틀</title>
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
@@ -48,7 +49,7 @@
 <!-- ==========Q&A=========================================================================================================     -->
 					<div class="col-lg-9">
 					<div class="ps-section--shopping ps-whishlist">
-					<h3>작성 가능 후기 ${listCount }</h3>
+					<h3>작성 가능 후기 ${listCount }</h3><br><br>
 							<div class="ps-section__content">
 								<div class="table-responsive">
 									<table class="table ps-table--whishlist ps-table--responsive">

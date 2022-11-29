@@ -14,7 +14,8 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>qna_modify</title>
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
+    <title>상품문의 수정 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -52,17 +53,6 @@
 								게시판으로 이동될 수 있습니다.<br> <sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및
 								요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
 							</p>
-							<div class="form-group form-group__rating">
-								<label>별점을 매겨주세요</label> <select class="ps-rating"
-									data-read-only="false">
-									<option value="0">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
 							<div class="form-group">
 								<input type="hidden" id="qna_idx" name="qna_idx"value="${qna.qna_idx}" /> 
 								<input type="hidden" id="item_idx" name="item_idx" value="${param.item_idx}" /> 

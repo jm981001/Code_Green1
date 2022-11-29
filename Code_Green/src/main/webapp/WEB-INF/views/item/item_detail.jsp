@@ -88,12 +88,12 @@
     	}
     </style>
      <script type="text/javascript">
-// 	 	window.onload = function(){
+	 	window.onload = function(){
 			
-// 			$('#sort').val('${sort}')
-// 			sortItemList($('#sort').val());
+			$('#sort').val('${sort}')
+			sortItemList($('#sort').val());
 			
-// 		}	
+		}	
     
     	var sortItemList = function(value) {
     		
@@ -680,122 +680,21 @@
 								                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 								                    <div class="ps-pagination">
 								                        <ul class="pagination">
-<!-- 								                         class="pageLink"  -->
-								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink page3" href="javascript:void(0);" onclick="changePage('P');"><%}%>Prev<i class="icon-chevron-left"></i></a></li>
-<%-- 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink page3" href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum+1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
-								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink page3" href="javascript:void(0);" onclick="changePage('N');"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-<%-- 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a  href="javascript:changePageUp()"><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
-								                        	
-								                        	
+								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href='ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum-1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"' ><%}%>Prev<i class="icon-chevron-left"></i></a></li>
+								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href='ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum+1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"' ><%}%>Next<i class="icon-chevron-right"></i></a></li>
 								                        </ul>
 								                    </div>
-		                  					  <script type="text/javascript">
-								                    	function changePageUp() {
-								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-								                    	}
-								                    	function changePage(data) {
-								                    		let pageNum = ${pageInfo.pageNum};
-								                    		pageNum += data == 'P' ? -1 : 1;
-								                    		$.ajax({ 
-// 									                    			url: "ItemDetail.bo", 
-									                    			url: "ItemDetailAjax.bo",
-									                    			type: "GET", 
-									                    			data: {
-									                    				item_idx: ${item.item_idx},
-// 									                    				pageNum: ${pageInfo.pageNum-1},
-									                    				pageNum: pageNum,
-									                    				Qna_pageNum: ${Qna_pageInfo.qna_pageNum},
-									                    				manager_brandname: '${item.manager_brandname}',
-									                    				item_category: '${item.item_category}',
-// 									                    				board_star_score : '${board.board_star_score}',
-									                    				sort: $('#sort').val()
-									                    			},
-									                    			success: function(data){
-									                    				let json = JSON.parse(data);
-									                    				
-									                    				let bestList = json.bestList;
-									                    				let goodList = json.goodList;
-									                    				let itemList = json.itemList;
-									                    				let worstList = json.worstList;
-									                    				
-									                    				drawTable(itemList);
-									                    				
-									            						let comments="";
-									            						let space ="";
-									                    				
-									                    			}
-									        						, error: function(error){
-									        							console.log("에러 : " + error);
-									        						}
-									        						});
-								                    	}
-								                    	
-								                    	function drawTable(data){
-								                    		let table = $('#itemList');
-								                    		table.empty();
-								                    		data.forEach((value, index) => {
-								                    			let str = 
-										                    		  +	'<tbody>'  
-										                    			+ '<tr class="item">'  
-										                    				+ '<td width="70%">'+value.board_subject
-										                    					+ '<div class="ps-product" style="float:left;">'
-										                    						+ '<div class="ps-product__rating" style="float:left;">'
-										                    							+ '<div class="br-wrapper br-theme-fontawesome-stars">'
-										                    							
-										                    							
-										                    							
-										                    							   //별
-										                    							   
-										                    							   
-										                    							+ '</div>'
-										                    						+ '</div>'
-										                    					+ '</td>'
-										                    				+ '<td width="10%">'+value.board_id+'</td>'  
-										                    				
-										                    				+ '<td>'+value.board_date+'</td>'
-										                    				+ '<td width="10%">'+value.best_count+'</td>'  
-										                    			+ '</tr>  '
-										                    			+ '<tr class="hide">'  
-										                    				+ '<td colspan="5">'
-										                    					 + '<br><br>'
-										                    					 + '<img src="/Code_Green/resources/commUpload/'+value.file1+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display=none">'
-										                    					 + '<img src="/Code_Green/resources/commUpload/'+value.file2+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display=none">'
-										                    						+ '<br><br><br><br>'+value.board_content+'<br><br><br>'
-										                    						
-										                    					 + '<div align="right">'
-										                    					  + '<input type="button" class="ps-btn-best_jm" onclick="best('+value.item_idx+','+value.board_idx+','+value.item_category+','+value.manager_brandname+',${sessionScope.sId})">'+value.best_count
-										                    					
-										                    					  
-										                    					  
-										                    					  
-//		 								                    					  + '<c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">'
-										                    					  + '<input type="button" value="수정" onclick="location.href=ReviewModify.bo?item_idx='+value.item_idx+'&board_idx='+value.board_idx+'&item_category='+value.item_category+'&manager_brandname='+value.manager_brandname+'&file1='+value.file1+'&file2='+value.file2">
-										                    					  + '<input type="button" value="삭제" onclick="confirmDelete('+value.board_idx+'&item_category='+value.item_category+'&manager_brandname='+value.manager_brandname+')">'
-//		 								                    					  + '</c:if>
-										                    					
-										                    					  
-										                    					  
-										                    					  
-										                    					  + '</div>'
-										                    				+ '</td>'  
-										                    			+ '</tr>'
-										                    		+ '</tbody>';
-										                    		
-										                    		table.append(str);
-								                    		});
-								                    		
-// 															debugger;                    		
-								                    		
-								                    		
-								                    	}
-								                    	
-								                    	
-// 								                    	function changePageDown() {
-// 								                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum-1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// 								                    	}
-								                    	
-								                    </script>
-								                  
+		                  					<script type="text/javascript">
+// 						                    	function changePageUp() {
+// 							                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
+// // 								                    		location.href = "#tab-3";
+// 							                    	}
+// 						                    	function changePageDown() {
+// 						                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
+// // 								                    		location.href = "#tab-3";
+// 						                    	}
+		                  					
+		                  					</script>
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->

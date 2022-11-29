@@ -84,7 +84,7 @@
 							<p>
 								<sup>*</sup>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 이동될 수 있습니다.<br> 
 								<sup>*</sup>배송관련, 주문(취소/교환/환불)관련 문의 및
-								요청사항은 비건마켓 내 1:1 문의에 남겨주세요.
+								요청사항은 베지터틀 내 1:1 문의에 남겨주세요.
 							</p>
 							<div class="form-group form-group__rating">
 								<label>별점을 매겨주세요</label> 
@@ -105,7 +105,7 @@
                                 <input type="hidden" name="manager_brandname" value="${param.manager_brandname } " />
                                 <input type="hidden" name="sell_idx" value="${param.sell_idx } " />
 								<textarea class="form-control" id="board_subject" name="board_subject" rows="1" placeholder="상품후기를 남겨주세요" required="required"></textarea>
-                                <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금을 드립니다?!?!?!?!?!?!?" required="required"></textarea>
+                                <textarea class="form-control" id="board_content" name="board_content" rows="6" placeholder="상품후기를 남겨주시면 적립금 1000원을 드립니다." required="required"></textarea>
 							</div>
 							<div class="form-group submit">
 								<input type="file" name="file_1" id="file_1">

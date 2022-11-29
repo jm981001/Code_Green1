@@ -52,7 +52,7 @@
 					<!-- ==========찜한 상품=========================================================================================================     -->
 					<div class="col-lg-9">
 					<div class="ps-section--shopping ps-whishlist">
-					<h3>찜한 상품 ${listCount }</h3>
+					<h3>찜한 상품 ${listCount }</h3><br><br>
 							<div class="ps-section__content">
 								<div class="table-responsive">
 									<table class="table ps-table--whishlist ps-table--responsive">
