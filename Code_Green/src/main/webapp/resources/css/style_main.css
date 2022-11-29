@@ -7739,7 +7739,6 @@ textarea.form-control {
 .ps-widget--account-dashboard .ps-widget__header img {
   flex-basis: 60px;
   max-width: 60px;
-  border-radius: 50%;
 }
 
 .ps-widget--account-dashboard .ps-widget__header figure {

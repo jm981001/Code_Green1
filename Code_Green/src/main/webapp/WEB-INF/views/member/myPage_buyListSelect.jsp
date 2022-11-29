@@ -114,6 +114,7 @@
 									<form action="myBuyListbySelect.my"  id="dates">
 										<input type="date" name="date1" value="${date1}" required="required"> - <input type="date" name="date2" value="${date2}" required="required">
 										<input type="submit" id="dateSet" value="검색" >
+										<input type="reset" id="dateSet" value="초기화" >
 									</form>
 								</div>
 							
