@@ -71,23 +71,34 @@ public class SellController {
 								  @RequestParam int sell_item_total_price, @RequestParam int shipping_fee,
 								  Model model) {
 		
+		System.out.println(sell);
+		
 		// 장바구니 정보
 		List<CartVO> cartList = cart_service.getCart(member_id); 
 		
 		// 주문(sell)에 데이터 넣기
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
 
+//		System.out.println(cartList.get(1).getRf_item_idx());
+
+		// 주문 상세(sell_detail)에 데이터 넣기
+		for(int i = 0; i < cartList.size(); i++) {
+			int rf_item_idx = cartList.get(i).getRf_item_idx();
+			int sell_amount = cartList.get(i).getCart_amount();
+			
+			int insertOrderDetailCount = sell_service.insertOrderDetail(rf_item_idx, sell_amount, member_idx);
+			
+		}
+		
 		// 주문시 사용한 적립금
 		int insertOrderUseCoinCount = coin_service.insert_order_useCoin(sell.getSell_usecoin(),member_idx);
 		
-		// 주문시 결제 금액의 10% 적립
+		// 주문시 결제 금액의 3% 적립
 		int insertOrderCoinAddCount = coin_service.insert_order_addCoin(sell_total_price, member_idx);
 		
 		// 주문내역 불러오기
 		SellVO orderList = sell_service.getOrderList(member_id);
 		
-		// 주문(sell_detail) 상세에 데이터 넣기
-//		int sell_detail_insertCount = sell_service.insertOrderDetail(orderList.getSell_idx(), cartList);
 		
 		model.addAttribute("orderList", orderList);
 		

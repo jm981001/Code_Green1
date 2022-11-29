@@ -32,7 +32,7 @@
 		FROM coin c
 		JOIN member m ON c.rf_member_idx = m.member_idx
 		WHERE m.member_id = #{member_id}
-		ORDER BY c.coin_date DESC limit 1;
+		ORDER BY c.coin_idx DESC limit 1;
 	</select>
 
 	<!-- 적립금 목록 갯수 -->

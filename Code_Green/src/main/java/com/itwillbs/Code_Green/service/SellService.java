@@ -23,6 +23,27 @@ public class SellService {
 		return sell_mapper.selectCart(member_id);
 	}
 	
+	// 주문(sell)에 데이터 넣기
+	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
+		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
+	}
+	
+	// 주문(sell_detail) 상세에 데이터 넣기
+	public int insertOrderDetail(int rf_item_idx, int sell_amount, int member_idx) {
+		return sell_mapper.insertOrderDetail(rf_item_idx, sell_amount, member_idx);
+	}
+	
+	// 주문내역 불러오기
+	public SellVO getOrderList(String member_id) {
+		return sell_mapper.selectOrderList(member_id);
+	}
+
+
+	
+	
+	
+//========================================== 마이페이지 ==================================================================		
+
 	// 상품구매 목록
 	public List<SellVO> getReviewList(int startRow, int listLimit, String member_id) {
 		return sell_mapper.getReviewList(startRow, listLimit, member_id);
@@ -33,43 +54,6 @@ public class SellService {
 		return sell_mapper.selectSellListCount();
 	}
 	
-	// 주문(sell)에 데이터 넣기
-	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
-		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
-	}
-	
-	// 주문내역 불러오기
-	public SellVO getOrderList(String member_id) {
-		return sell_mapper.selectOrderList(member_id);
-	}
-
-	// 주문(sell_detail) 상세에 데이터 넣기
-//	public int insertOrderDetail(int sell_idx, List<CartVO> cartList) {
-//		return sell_mapper.insertOrderDetail(sell_idx, cartList);
-//	}
-	
-//	// 주문내역 불러오기
-//	public List<SellVO> getOrderList(String member_id) {
-//		return sell_mapper.selectOrderList(member_id);
-//	}
-	
-//	// 주문(sell_detail) 상세에 데이터 넣기
-//	public int insertOrderDetail(Map<String, Object> map) {
-//		return sell_mapper.insertOrderDetail(map);
-//	}
-
-
-//	// 주문내역 불러오기 위한 sell_idx 불러오기
-//	public int getSellIdx(int member_idx) {
-//		return sell_mapper.selectSellIdx(member_idx);
-//	}
-
-
-	
-	
-	
-//========================================== 마이페이지 ==================================================================		
-
 	// 마이페이지 리뷰 가능상품 목록
 	public List<SellVO> getSellDetailList(String member_id) {
 		return sell_mapper.getSellDetailList(member_id);

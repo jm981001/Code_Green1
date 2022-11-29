@@ -22,17 +22,6 @@
 		WHERE r.member_id = #{member_id};
 	</select>
 
-	
-	<!-- 상품구매 목록 갯수 -->
-	<select id="selectSellListCount" resultType="integer">
-		 select count(*)
-			from sell
-		    where RF_MEMBER_IDX = (select member_idx
-									from member
-                            		where member_id = #{member_id})
-	</select>
-	
-	
 	<!-- 주문하기 -->
 	<!-- 아래코드 작동은 됨 -->
 	<insert id="insertOrder">
@@ -68,6 +57,35 @@
 			 	)			
 	</insert>
 	
+	<!-- 주문상세(sell_detail)에 데이터 넣기 -->
+	<insert id="insertOrderDetail">
+		<selectKey keyProperty="rf_sell_idx" order="BEFORE" resultType="string">
+			SELECT
+					MAX(sell_idx)
+		  	  FROM
+		  	  		sell
+		  	 WHERE
+		  	 		rf_member_idx = #{member_idx}
+		  ORDER BY
+		  			sell_idx desc
+		  	 LIMIT
+		  	 		1
+		</selectKey>
+		
+		INSERT INTO 
+					 sell_detail
+			VALUES(
+			 		  IFNULL(
+				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0
+				 		 		) + 1, 
+					  #{rf_sell_idx},
+					  #{rf_item_idx},
+					  #{sell_amount},
+					  'N'	  		 			
+			)
+	</insert>
+	
+	
 	
 	<!-- 주문내역 불러오기 -->
 	<select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
@@ -87,24 +105,7 @@
           		 1
 	</select>
 	
-	<!--  -->
-<!-- 	<insert id="insertOrderDetail"> -->
-<!-- 		INSERT INTO  -->
-<!-- 					 sell_detail -->
-<!-- 			VALUES( -->
-<!-- 				 <foreach collection="cartList" item="cart"> -->
-<!-- 					  IFNULL( -->
-<!-- 				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0 -->
-<!-- 				 		 		) + 1, -->
-<!-- 			 		  #{sell_idx},	 -->
-<!-- 					  #{cart.rf_item_idx}, -->
-<!-- 					  #{cart.cart_amount}, -->
-<!-- 					  'N' -->
-<!-- 		 		 </foreach> -->
-		 		 	  		 			
-<!-- 			) -->
-<!-- 	</insert> -->
-
+	
 
 
 
@@ -213,6 +214,16 @@
 			</if>
 			ORDER BY sell_date DESC
 			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	
+	<!-- 상품구매 목록 갯수 -->
+	<select id="selectSellListCount" resultType="integer">
+		 select count(*)
+			from sell
+		    where RF_MEMBER_IDX = (select member_idx
+									from member
+                            		where member_id = #{member_id})
 	</select>
 	
 	

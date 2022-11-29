@@ -259,7 +259,9 @@
 			                                           		<td>
 			                                           			<img src="/Code_Green/resources/item/${cart.file1 }">
 			                                           		</td>
-			                                           		<td>${cart.rf_item_idx }</td>
+			                                           		<td>
+			                                           			<input type="text" name="item_idx" value="${cart.rf_item_idx }">
+			                                           		</td>
 			                                           		<td>${cart.manager_brandname }</td>
 			                                           		<td>${cart.item_name }</td>
 			                                           		<td><fmt:formatNumber value="${cart.item_price }" pattern="#,###"/></td>

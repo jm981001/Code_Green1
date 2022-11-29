@@ -14,12 +14,6 @@ public interface SellMapper {
 	// 장바구니 목록 불러오기
 	List<CartVO> selectCart(String member_id);
 
-	// 상품구매 목록
-	List<SellVO> getReviewList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("member_id")String member_id);
-
-	// 상품구매 목록 갯수
-	int selectSellListCount();
-
 	// 주문하기
 	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, @Param("sell")SellVO sell, @Param("sell_total_price")int sell_total_price);
 
@@ -27,24 +21,18 @@ public interface SellMapper {
 	SellVO selectOrderList(@Param("member_id")String member_id);
 
 	// 주문(sell_detail) 상세에 데이터 넣기
-//	int insertOrderDetail(@Param("sell_idx")int sell_idx, @Param("cartList")List<CartVO> cartList);
-	
-//	// 주문내역 불러오기
-//	List<SellVO> selectOrderList(@Param("member_id")String member_id);
-
-//	// 주문(sell_detail) 상세에 데이터 넣기
-//	int insertOrderDetail(Map<String, Object> map);
-
-//	// 주문내역 불러오기 위한 sell_idx 불러오기
-//	int selectSellIdx(int member_idx);
-
-	
-	
+	int insertOrderDetail(@Param("rf_item_idx")int rf_item_idx, @Param("sell_amount")int sell_amount, @Param("member_idx")int member_idx);
 	
 	
 	
 	
 // =================================== 마이페이지 ==================================================
+	
+	// 상품구매 목록
+	List<SellVO> getReviewList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("member_id")String member_id);
+
+	// 상품구매 목록 갯수
+	int selectSellListCount();
 	
 	// 마이페이지 리뷰 가능상품 목록
 	List<SellVO> getSellDetailList(@Param("member_id")String member_id);
