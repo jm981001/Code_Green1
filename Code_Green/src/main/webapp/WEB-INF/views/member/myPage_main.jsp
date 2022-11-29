@@ -209,7 +209,7 @@
 		                        					</td>
                                                     <td>
                                                         <div class="ps-product--cart">
-                                                            <div class="ps-product__content"><a href="myPage_buyList.jsp">${list.sell_order_number }</a></div>
+                                                            <div class="ps-product__content"><a href="myBuyListDetail.my?sell_order_number=${list.sell_order_number }">${list.sell_order_number }</a></div>
                                                         </div>
                                                     </td>
                                                     <td><span>${list.sell_amount }건</span></td>

@@ -52,5 +52,9 @@ public interface SellMapper {
 	// 마이페이지 - 내 주문목록 리스트들 특정날짜범위로 불러온거 카운트
 	int getMyBuyListByDateCount(@Param("member_idx") int member_idx,@Param("date1") String date1,@Param("date2") String date2);
 		
-	
+	// 마이페이지 - 내주문목록 주문별 상세내용 
+	SellVO getMyBuyListDetail(@Param("member_idx") int member_idx,@Param("sell_order_number") String sell_order_number);
+
+	// 마이페이지 - 내주문목록 아이템리스트 출력
+	List<SellVO> getMyBuyItemList(String sell_order_number);
 }

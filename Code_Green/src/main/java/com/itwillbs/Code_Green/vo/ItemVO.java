@@ -39,7 +39,7 @@ public class ItemVO {
    private String review;
    private MultipartFile file_1;
    private MultipartFile file_2;
-    
+   private String sell_amount;			// 주문목록상세볼때 아이템별 수량출력
    
    public String getReview() {
       return review;
@@ -253,65 +253,32 @@ public class ItemVO {
       this.file_2 = file_2;
    }
 
-   public ItemVO() {
-      super();
-      // TODO Auto-generated constructor stub
-   }
-   public ItemVO(int item_idx, String re_manager_idx, String item_name, String item_info, String item_packing,
-         String item_category, String item_price, String item_sale, String item_stock, String item_status,
-         String item_readcount, String item_date, String file1, String file2, String manager_brandname,
-         String manager_info, String board_star_score, String count, String star1, String star2, String star3,
-         String star4, String star5, String heart, String member_id, String member_idx, String heart_idx,
-         String score, String brand_itemCnt, String manager_original_file, MultipartFile file_1,
-         MultipartFile file_2) {
-      super();
-      this.item_idx = item_idx;
-      this.re_manager_idx = re_manager_idx;
-      this.item_name = item_name;
-      this.item_info = item_info;
-      this.item_packing = item_packing;
-      this.item_category = item_category;
-      this.item_price = item_price;
-      this.item_sale = item_sale;
-      this.item_stock = item_stock;
-      this.item_status = item_status;
-      this.item_readcount = item_readcount;
-      this.item_date = item_date;
-      this.file1 = file1;
-      this.file2 = file2;
-      this.manager_brandname = manager_brandname;
-      this.manager_info = manager_info;
-      this.board_star_score = board_star_score;
-      this.count = count;
-      this.star1 = star1;
-      this.star2 = star2;
-      this.star3 = star3;
-      this.star4 = star4;
-      this.star5 = star5;
-      this.heart = heart;
-      this.member_id = member_id;
-      this.member_idx = member_idx;
-      this.heart_idx = heart_idx;
-      this.score = score;
-      this.brand_itemCnt = brand_itemCnt;
-      this.manager_original_file = manager_original_file;
-      this.file_1 = file_1;
-      this.file_2 = file_2;
+   public String getSell_amount() {
+	return sell_amount;
    }
    
-   @Override
-   public String toString() {
-      return "ItemVO [item_idx=" + item_idx + ", re_manager_idx=" + re_manager_idx + ", item_name=" + item_name
-            + ", item_info=" + item_info + ", item_packing=" + item_packing + ", item_category=" + item_category
-            + ", item_price=" + item_price + ", item_sale=" + item_sale + ", item_stock=" + item_stock
-            + ", item_status=" + item_status + ", item_readcount=" + item_readcount + ", item_date=" + item_date
-            + ", file1=" + file1 + ", file2=" + file2 + ", manager_brandname=" + manager_brandname
-            + ", manager_info=" + manager_info + ", board_star_score=" + board_star_score + ", count=" + count
-            + ", star1=" + star1 + ", star2=" + star2 + ", star3=" + star3 + ", star4=" + star4 + ", star5=" + star5
-            + ", heart=" + heart + ", member_id=" + member_id + ", member_idx=" + member_idx + ", heart_idx="
-            + heart_idx + ", score=" + score + ", brand_itemCnt=" + brand_itemCnt + ", manager_original_file="
-            + manager_original_file + ", file_1=" + file_1 + ", file_2=" + file_2 + "]";
-   }
+   public void setSell_amount(String sell_amount) {
+		this.sell_amount = sell_amount;
+	}
+   
+   
+	@Override
+	public String toString() {
+		return "ItemVO [item_idx=" + item_idx + ", sIdx=" + sIdx + ", re_manager_idx=" + re_manager_idx + ", item_name="
+				+ item_name + ", item_info=" + item_info + ", item_packing=" + item_packing + ", item_category="
+				+ item_category + ", item_price=" + item_price + ", item_sale=" + item_sale + ", item_stock=" + item_stock
+				+ ", item_status=" + item_status + ", item_readcount=" + item_readcount + ", item_date=" + item_date
+				+ ", file1=" + file1 + ", file2=" + file2 + ", manager_brandname=" + manager_brandname + ", manager_info="
+				+ manager_info + ", board_star_score=" + board_star_score + ", count=" + count + ", star1=" + star1
+				+ ", star2=" + star2 + ", star3=" + star3 + ", star4=" + star4 + ", star5=" + star5 + ", heart=" + heart
+				+ ", member_id=" + member_id + ", member_idx=" + member_idx + ", heart_idx=" + heart_idx + ", score="
+				+ score + ", brand_itemCnt=" + brand_itemCnt + ", manager_original_file=" + manager_original_file
+				+ ", ranking=" + ranking + ", review=" + review + ", file_1=" + file_1 + ", file_2=" + file_2
+				+ ", sell_amount=" + sell_amount + "]";
+	}
+
+   
+   
    
    
    

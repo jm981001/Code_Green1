@@ -50,45 +50,41 @@
                         <div class="ps-section__right">
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
-                                    <h3>주문번호 #20221028-00000123 -<strong> 결제완료</strong></h3>
+                                    <h3>주문상세내역</h3>
                                 </div>
-                                <div class="ps-section__content">
-                                    <div class="row">
-                                        <div class="col-md-4 col-12">
-                                            <figure class="ps-block--invoice">
-                                                <figcaption>주문자</figcaption>
-                                                <div class="ps-block__content">
-                                                	<strong>손정민</strong>
-                                                </div>
-                                                <figcaption>연락처</figcaption>
-                                                <div class="ps-block__content">
-                                                    <strong>010-1234-5678</strong>
-                                                </div>
-
-                                                <figcaption>배송지</figcaption>
-                                                <div class="ps-block__content">
-                                                    <strong>부산진구, 삼한골든게이트 7층</strong>
-                                                </div>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-4 col-12">
-                                            <figure class="ps-block--invoice">
-                                                <figcaption>배송비</figcaption>
-                                                <div class="ps-block__content">
-                                                    <p>무료</p>
-                                                </div>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-4 col-12">
-                                            <figure class="ps-block--invoice">
-                                                <figcaption>결제방법</figcaption>
-                                                <div class="ps-block__content">
-                                                    <p>카카오페이</p>
-                                                </div>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    
+                                
+                                <div class = "orderInfo_table">
+	                                <table border="1">
+	                                	<tr>
+	                                		<td colspan="2">주문번호</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td colspan="2">123456-789456</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td>주문상태</td>
+	                                		<td>결제방법</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td>결제완료</td>
+	                                		<td>카카오페이</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td>받는사람</td>
+	                                		<td>연락처</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td>김지영</td>
+	                                		<td>01062522047</td>
+	                                	</tr>
+	                               		<tr>
+	                                		<td colspan="2">배송지</td>
+	                                	</tr>
+	                                	<tr>
+	                                		<td colspan="2">동구범천로 112, 98-2</td>
+	                                	</tr>
+	                                </table>
+                                </div>
                                     <div class="table-responsive">
                                         <table class="table ps-table">
                                             <thead>
@@ -100,39 +96,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            	<c:forEach var="itemList" items="${MyBuyItemList }">
                                                 <tr>
                                                     <td>
                                                         <div class="ps-product--cart">
-                                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="../img/products/shop/5.jpg" alt=""></a></div>
-                                                            <div class="ps-product__content"><a href="product-default.html">두부치킨텐더 150g</a>
-                                                                <p><strong>풀무원</strong></p>
+                                                            <div class="ps-product__thumbnail">
+                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&item_category=${itemList.item_category}"><img src="/Code_Green/resources/item/${itemList.file1 }"></a></div>
+                                                            <div class="ps-product__content">
+                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&item_category=${itemList.item_category}">${itemList.item_name }</a>
+                                                                <p><strong>${itemList.manager_brandname }</strong></p>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><span>7,800원</span></td>
-                                                    <td>3</td>
-                                                    <td><span>23,400원</span></td>
+                                                    <td><span>${itemList.item_price }</span></td>
+                                                    <td>${itemList.sell_amount }</td>
+                                                    <td><span>${itemList.item_price }*${itemList.sell_amount }</span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="ps-product--cart">
-                                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img src="../img/products/shop/6.jpg" alt=""></a></div>
-                                                            <div class="ps-product__content"><a href="product-default.html">오가닉 오트밀크 900ml</a>
-                                                                <p><strong>오틀리</strong></p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><span> 4,800원</span></td>
-                                                    <td>7</td>
-                                                    <td><span> 33,600원</span></td>
-                                                </tr>
-                                                <tr>
-                                                <td colspan="4">배송비 = 0원</td>
-                                                </tr>
-                                                <tr>
-                                                <td colspan="4">배송비 0원  +  주문금액 54000원 = 총 54000원</td>
-                                                </tr>
+                                                </c:forEach>
                                                 
+                                                <!-- 총금액 및 배송비 출력 칸  -->
+                                                <tr>
+                                                	<td colspan="4">배송비 = 0원</td>
+                                                </tr>
+                                                <tr>
+                                               		<td colspan="4">배송비 0원  +  주문금액 54000원 = 총 ${buyDetail.sell_total_price}원</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

@@ -362,20 +362,17 @@ public class MypageController {
 	
 	//====================================== 마이페이지 주문상세내역 ========================================== 
 	@GetMapping(value = "/myBuyListDetail.my")
-	public String myBuyListDetail() {
+	public String myBuyListDetail(String sell_order_number, Model model, HttpSession session) {
+		
+		int member_idx = (int)session.getAttribute("sIdx");
+		SellVO buyDetail = Sservice.getMyBuyListDetail(member_idx,sell_order_number);
+		List<SellVO> MyBuyItemList = Sservice.getMyBuyItemList(sell_order_number);
+		
+		model.addAttribute("buyDetail", buyDetail);
+		model.addAttribute("MyBuyItemList", MyBuyItemList);
+		
 		return "member/myPage_buyListDetail";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
