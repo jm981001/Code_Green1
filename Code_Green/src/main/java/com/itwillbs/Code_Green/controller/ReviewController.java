@@ -62,18 +62,19 @@ public class ReviewController {
 		int insertCount = service.registReview(board);
 		int file_insertCount = service.registReview_file(file);
 		int starCount= service.StarScore(star);
-		int coinCount= service.CoinScore(coin);
+		
 		
 		service.reviewStatus(item_idx, sIdx);//리뷰 상태 변경
 		
 		model.addAttribute("item_idx", item_idx);
 		model.addAttribute("item_category", item_category);
 		model.addAttribute("manager_brandname", manager_brandname);
-		model.addAttribute("coinCount", coinCount);
 
 		
 		
 		if(insertCount > 0) {
+			int coinCount= service.CoinScore(coin);
+			model.addAttribute("coinCount", coinCount);
 			if(file_insertCount > 0) {
 				try {
 					mFile.transferTo(new File(saveDir, file.getFile1()));
@@ -100,7 +101,7 @@ public class ReviewController {
 	//------------마이페이지 리뷰작성-------------------------------------------
 	@PostMapping(value = "/ReviewWritePro.my")
 	public String reviewWritePro_my( @ModelAttribute BoardVO board,@ModelAttribute File_boardVO file, Model model,int item_idx , HttpSession session, @ModelAttribute BoardStarVO star
-								 ,@RequestParam String item_category,@RequestParam String manager_brandname,@RequestParam int sell_idx, @RequestParam String member_id) {
+								 ,@RequestParam String item_category,@RequestParam String manager_brandname,@RequestParam int sell_idx, @RequestParam String member_id,@ModelAttribute CoinVO coin) {
 //		@RequestParam String board_idx
 		
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
@@ -141,6 +142,7 @@ public class ReviewController {
 		
 		
 		if(insertCount > 0) {
+			int coinCount= service.CoinScore_my(coin);//마이페이지 후기 적립금
 			if(file_insertCount > 0) {
 				try {
 					mFile.transferTo(new File(saveDir, file.getFile1()));

@@ -66,6 +66,33 @@
 					,date_format(now(),'%Y%m%d')
 					)
 	</insert>
+		<!-- 	마이페이지 리뷰 작성시 적립금 -->
+	<insert id="CoinScore_my">
+		<selectKey keyProperty="coin_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(coin_idx) FROM coin
+		</selectKey>
+		INSERT 
+			INTO coin
+			VALUES (
+					 #{coin_idx} + 1
+					, (select member_idx
+									from member
+                            		where member_id = #{member_id})
+					,"리뷰작성 적립금 1000원"
+					,"1000"
+					,"0"
+					,"0"
+					,(SELECT c.COIN_TOTAL as total
+						 FROM coin c
+							left join member m
+								on c.RF_MEMBER_IDX = m.MEMBER_IDX
+						 WHERE
+							  m.MEMBER_ID = #{member_id}
+                              order by coin_idx desc limit 1)+1000
+					,date_format(now(),'%Y%m%d')
+					)
+	</insert>
+	
 	
 	<!-- 	리뷰 상태 변경 방금 -->
 	<update id="reviewStatus">

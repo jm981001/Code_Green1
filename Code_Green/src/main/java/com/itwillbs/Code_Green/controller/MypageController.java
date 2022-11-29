@@ -469,14 +469,16 @@ public class MypageController {
 		
 		//------------마이페이지 상품후기 작성-------------------------------------------
 		@RequestMapping(value = "myPage_review_Write.my", method = RequestMethod.GET)
-		public String myPage_review_Write(Model model ,@RequestParam String member_id,@RequestParam int sell_idx,@RequestParam int item_idx, HttpSession session) {
+		public String myPage_review_Write(Model model ,@RequestParam String member_id,@RequestParam int sell_idx,@RequestParam int item_idx, HttpSession session,@ModelAttribute CoinVO coin) {
 			String sId = (String)session.getAttribute("sId");
 			if(member_id == null || sId == null || member_id.equals("") || (!member_id.equals(sId) && !sId.equals("admin"))) {
 				model.addAttribute("msg", "잘못된 접근입니다");
 				return "member/fail_back";
 			}
 			//마이페이지 상품후기작성
-			List<SellVO> sellReview = Sservice.getSellReview(member_id, sell_idx, item_idx);	
+			List<SellVO> sellReview = Sservice.getSellReview(member_id, sell_idx, item_idx);
+				
+			
 			
 			model.addAttribute("member_id", member_id);
 			model.addAttribute("sell_idx", sell_idx);

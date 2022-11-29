@@ -63,8 +63,8 @@ public class SellService {
 	}
 	
 	// 마이페이지 리뷰 가능상품 목록
-	public List<SellVO> getSellDetailList(String member_id) {
-		return sell_mapper.getSellDetailList(member_id);
+	public List<SellVO> getSellDetailList(int startRow, int listLimit, String member_id) {
+		return sell_mapper.getSellDetailList(startRow,listLimit ,member_id);
 	}
 
 	// 마이페이지 상품후기작성
@@ -102,6 +102,7 @@ public class SellService {
 	public List<SellVO> getMyBuyItemList(String sell_order_number) {
 		return sell_mapper.getMyBuyItemList(sell_order_number);
 	}
+
 
 
 		

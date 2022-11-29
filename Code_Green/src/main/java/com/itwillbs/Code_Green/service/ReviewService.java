@@ -95,7 +95,11 @@ public class ReviewService {
 	//리뷰게시판 리뷰 상태 변경
 	public void reviewStatus(int item_idx, int sIdx) {
 		mapper.reviewStatus(item_idx, sIdx);
-		
+	}
+
+	//마이페이지 후기 적립금
+	public int CoinScore_my(CoinVO coin) {
+		return mapper.CoinScore_my(coin);
 	}
 
 

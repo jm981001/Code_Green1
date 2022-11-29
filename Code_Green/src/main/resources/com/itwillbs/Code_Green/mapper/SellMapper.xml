@@ -218,7 +218,7 @@
 	
 	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-           select  	 s.SELL_DETAIL_IDX 
+                     select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
 			        ,i.ITEM_NAME 
 			        ,i.ITEM_PRICE
@@ -240,7 +240,7 @@
 			    where l.RF_MEMBER_IDX =(select member_idx
 									from member
                             		where member_id = #{member_id})
-                      and s.SELL_REVIEW_STATUS="N";
+                      and s.SELL_REVIEW_STATUS="N"
 	</select>
 	
 	
@@ -270,6 +270,7 @@
 	</select>
 	
 
+	
 	<!-- 마이페이지 // 내 주문목록 리스트들 불러오기 -->
 	<select id="selectMyBuyList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT * 
