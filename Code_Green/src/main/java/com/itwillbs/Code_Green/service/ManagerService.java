@@ -30,6 +30,8 @@ public class ManagerService {
 		return mapper.selectPasswd(manager_id);
 	}
 	
+	
+	//----------------------브랜드 정보 -------------------------------
 
 //	 브랜드 정보 조회 수행 getManagerInfo()
 //	=> 파라미터 : 아이디, 리턴타입 : ManagerVO(manager)
@@ -41,7 +43,6 @@ public class ManagerService {
 	public ManagerVO getBrandInfo(String manager_id) {
 		return mapper.selectBrandInfo(manager_id);
 	}
-	
 
 	// 브랜드 정보수정(브랜드마이페이지)
 	public int modifyManager(ManagerVO manager) {
@@ -52,12 +53,14 @@ public class ManagerService {
 	public int deleteManager(String manager_id) {
 		return mapper.deleteBrand(manager_id);
 	}
-	//상품 목록 조회
 	
+	//-----------------------------상품------------------------
+	
+	
+	//상품 목록 조회
 	public List<ItemVO> getItemList( int startRow, int listLimit, String searchType, String keyword,String id) {
 		return mapper.selectItemList (startRow, listLimit, searchType, keyword,id);
 	}
-	
 		
 	// 상품 갯수 조회
 	public int getItemListCount(String searchType, String keyword,String id) {
@@ -68,7 +71,6 @@ public class ManagerService {
 	public ItemVO getItemInfo(int item_idx) {
 		return mapper.selectItemInfo(item_idx);
 	}
-	
 	
 	
 	// 새 상품등록(파일제외)
@@ -82,26 +84,41 @@ public class ManagerService {
 		return mapper.insertProductsFile(fileItem);
 	}
 	
-	
-	 // 상품 등록 원글 불러오기  
-		public ItemVO getProducts(int itemModify_idx) {
-			return mapper.selectProducts(itemModify_idx);
+	//상품 등록 원글 불러오기  
+   public ItemVO getProducts(int itemModify_idx) {
+		return mapper.selectProducts(itemModify_idx);
 		}
-
 	
 	//상품 파일 수정
 	public int modifyItemFile(File_ItemVO fileItem) {
 		return mapper.updateItemFileModify(fileItem);
 	}
 	
-	
 	// 상품 글 수정
-	public int modifyProducts(ItemVO item, int item_idx) {
-		return mapper.updateItemModify(item,item_idx);
+	public int modifyProducts(ItemVO item) {
+		return mapper.updateItemModify(item);
 	}
 
+	// 상품 글 삭제
+	public int removeItem(int item_idx) {
+		return mapper.deleteItem(item_idx);
+	}
+	// 상품 파일 삭제
+	public int removeItemFile(int item_idx) {
+		return mapper.deleteItemFile(item_idx);
+	}
+	
+	// 상품 삭제 전 파일명(file1) 조회   
+	public String getRealFile1(int item_idx) {
+		return mapper.selectRealFile1(item_idx);
+	}
+	// 상품 삭제 전 파일명(file2) 조회
+	public String getRealFile2(int item_idx) {
+		return mapper.selectRealFile2(item_idx);
+	}
 
 	
+	//------------------------------문의 글 관리---------------------------------
 	
 //	 문의글 리스트
 	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword,String id) {
@@ -113,17 +130,12 @@ public class ManagerService {
 	public int getQnaBoardListCount(String searchType, String keyword,String id) {
 		return mapper.selectQnaBoardListCount(searchType, keyword,id);
 	}
-
 	
 	// 문의글 상세조회
 	public QnaVO getQnaInfo(String qna_idx) {
 		return mapper.selectQnaInfo(qna_idx);
 	}
 	
-	//총주문수
-	public int getTotalsellCount() {
-		return mapper.selectTotalsellCount();
-	}
 	//문의글 답글
 	public int registQnaboard(QnaVO qna) {
 		return mapper.updateQnaboard(qna);
@@ -132,6 +144,8 @@ public class ManagerService {
 	public int removeQnaboard(String qna_idx) {
 		return mapper.deleteQnaboard(qna_idx);
 	}
+	
+	//---------------------------주문 관련------------------------------------
 	//주문조회
 	public List<SellVO> getOrderList(int startRow, int listLimit, String searchType, String keyword,String id) {
 		return mapper.selectOrderList(startRow, listLimit, searchType, keyword,id);
@@ -140,37 +154,34 @@ public class ManagerService {
 	public int getOrderListCount(String searchType, String keyword,String id) {
 		return mapper.selectOrderListCount(searchType,keyword,id);
 	}
-
-
-	  //정민 매출 3순위
-	   public List<ItemVO> getTop3(String sId) {
-	      return mapper.getTop3(sId);
-	   }
-	   //정민 팔로우 수
-	   public int follow(String sId) {
-	      return mapper.follow(sId);
-	   }
-	 //총매출,주문수
-	   public ManagerVO getOrderTotal(String sId) {
+	
+	//배송 상태 변경
+	//배송관리 
+	
+	
+	
+	
+	
+	
+	
+	//총주문수
+	public int getTotalsellCount() {
+		return mapper.selectTotalsellCount();
+	}
+	//총매출,주문수
+	 public ManagerVO getOrderTotal(String sId) {
 	   	return mapper.selectTotalMoneyOrder(sId);
 	   }
-	// 상품 삭제 전 파일명(file1) 조회   
-	public String getRealFile1(int item_idx) {
-		return mapper.selectRealFile1(item_idx);
-	}
-	public String getRealFile2(int item_idx) {
-		return mapper.selectRealFile2(item_idx);
-	}
-	// 상품 글 삭제
-	public int removeItem(int item_idx) {
-		return mapper.deleteItem(item_idx);
-	}
-	// 상품 파일 삭제
-	public int removeItemFile(int item_idx) {
-		return mapper.deleteItemFile(item_idx);
-	}
-	
-	
+
+	 //정민 매출 3순위
+	 public List<ItemVO> getTop3(String sId) {
+	    return mapper.getTop3(sId);
+	  }
+	 //정민 팔로우 수
+	 public int follow(String sId) {
+	    return mapper.follow(sId);
+	  }
+	 
 	   
 
 	   

@@ -192,7 +192,7 @@
 						        <td>
 <!--                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
 <!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
-<%-- <%--                                             <a class="dropdown-item" href="product_modify?manager_id=${sessionScope.sId }&item_idx=${item.item_idx}">수정</a> --%> --%>
+<%-- <%--                                             <a class="dropdown-item" href="product_modify?manager_id=${sessionScope.sId }&item_idx=${item.item_idx}">수정</a> --%> 
 <%--                                             <a class="dropdown-item" onclick="product_delete(${item.item_idx })">삭제</a> --%>
 <%--                                             <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a> --%>
 <!--                                         </div> -->

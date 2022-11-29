@@ -26,19 +26,33 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-<!-- 글쓰기  API -->
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-
-<!-- 글쓰기  API -->
-<!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<!-- 글쓰기  API -->
-
+ 
+ <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
+    <script type="text/javascript">
+       function recipe_delete(value) {
+            
+          let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
+          
+          if(delete_confirm){
+             $.ajax({
+               url: "product_deletePro.bo",
+               type: "POST",
+               data: {
+                  board_idx: value
+               },
+               success: function(){
+                  alert("삭제가 완료되었습니다.");
+                  location.href = "products";
+               },
+               fail: function () {
+                  alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
+               }
+            });
+          } 
+      }
+    </script>
 </head>
+
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -119,7 +133,7 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-  		<form class="ps-form--search-bar" action="index.html" method="get">
+  		<form class="ps-form--search-bar" action="index.html" method="post">
 
  
        <table class="table ps-table">

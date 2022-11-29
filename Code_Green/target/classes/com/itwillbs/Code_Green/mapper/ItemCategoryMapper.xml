@@ -316,47 +316,120 @@
 	<select id="selectAllListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
+		FROM item i
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   WHERE i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   WHERE m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
 	</select>
 	
 	<!-- 전체 게시물 목록 갯수 조회(유제품/음료) -->
 	<select id="selectDairyDrinkListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
-		WHERE item_category = "유제품/음료"
+		FROM item i
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
+		WHERE i.item_category = "유제품/음료"
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   AND i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
 	</select>
 	
 	<!-- 전체 게시물 목록 갯수 조회(해산물) -->
 	<select id="selectFishListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
+		FROM item i
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
 		WHERE item_category = "해산물"
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   AND i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
+		
 	</select>
 
 	<!-- 전체 게시물 목록 갯수 조회(과일/채소) -->
 	<select id="selectFruitVegiListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
+		FROM item i
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
 		WHERE item_category = "과일/채소"
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   AND i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
 	</select>
 
 	<!-- 전체 게시물 목록 갯수 조회(냉동/간편식품) -->
 	<select id="selectIcedEasyListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
+		FROM item i
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
 		WHERE item_category = "냉동/간편식품"
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   AND i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
 	</select>
 
 	<!-- 전체 게시물 목록 갯수 조회(간식류) -->
 	<select id="selectSnackListCount" resultType="integer">
 		SELECT 
 		COUNT(*) 
-		FROM item
+		FROM item i 
+		LEFT JOIN manager m
+		ON i.re_manager_idx = m.manager_idx
 		WHERE item_category = "간식류"
+		<if test="!keyword.equals('')">                         
+		<choose>                                            
+			<when test="searchType.equals('item_name')">     
+			   AND i.item_name LIKE '%${keyword}%'            
+			</when>                                        
+			<when test="searchType.equals('brand_name')">     
+			   AND m.manager_brandname LIKE '%${keyword}%'  
+			</when>                                          
+		</choose>                                            
+	  </if>   
 	</select>
 	
 	

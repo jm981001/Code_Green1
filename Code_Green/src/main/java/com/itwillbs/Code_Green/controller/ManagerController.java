@@ -485,7 +485,6 @@ public class ManagerController {
 			
 			
 		}		
-		
 		//------------ 상품 등록 상세 조회-------------------------------------------	
 		@GetMapping(value = "/products_detail")
 		public String products_detail( Model model, HttpSession session, int item_idx) {
@@ -528,9 +527,12 @@ public class ManagerController {
 		@PostMapping(value = "product_modifyPro.bo")
 		public String edit_product(@ModelAttribute ItemVO item, 
 									@ModelAttribute File_ItemVO fileItem,
-									Model model, HttpSession session,
-									@RequestParam int item_idx) { 
+									Model model, HttpSession session
+									) { 
 			
+			System.out.println("아이템 : " +item);
+			System.out.println("파일 :" + fileItem);
+			 
 			
 			
 			// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
@@ -636,7 +638,7 @@ public class ManagerController {
 	
 		// ========================= 상품  글 내용 수정 ===============================
 
-		int updateCount = service.modifyProducts(item,item_idx);
+		int updateCount = service.modifyProducts(item);
 		
 			
 			System.out.println(updateCount);
@@ -655,8 +657,13 @@ public class ManagerController {
 		
 		// 상품 삭제
         @PostMapping(value = "/product_deletePro.bo")
-        public String product_deletePro(@RequestParam int item_idx, Model model, HttpSession session) {
+        public String product_deletePro(@RequestParam int item_idx, 
+        		                        Model model, HttpSession session) {
            
+        	System.out.println("번호 : " + item_idx);
+	
+        	
+        	
            //글 삭제 전 실제 업로드된 파일 삭제작업
            String realFile1 = service.getRealFile1(item_idx);
            String realFile2 = service.getRealFile2(item_idx);
@@ -694,18 +701,6 @@ public class ManagerController {
               
         } 
           
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -1229,9 +1224,14 @@ public class ManagerController {
 	 			return "redirect:/recipeboard_list?board_idx=" + board_idx;
 	 		}
 	 		
+	 		
+	 		
+	 		
+	 		
 	 	// 레시피 삭제
 	          @PostMapping(value = "/recipeboard_deletePro.bo")
-	          public String recipe_deletePro(@RequestParam int board_idx, Model model, HttpSession session) {
+	          public String recipe_deletePro(@RequestParam int board_idx,
+	        		                         Model model, HttpSession session) {
 	             
 	             //글 삭제 전 실제 업로드된 파일 삭제작업
 	             String realFile1 = recipe_service.getRealFile1(board_idx);

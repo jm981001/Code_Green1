@@ -46,6 +46,73 @@
 		
 
 	}
+	
+	
+
+
+	function addProduct(value) {
+		
+		
+// 		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_packing';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+	function addCategory(value) {
+		
+		
+// 		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_category';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+	function changeStatus(value) {
+		
+		
+// 		alert(value);
+		
+		let subForm = document.getElementById('sub_form');
+		
+		let input = document.createElement('input');
+		
+		input.type   = 'hidden';
+		
+		input.name  = 'item_status';
+		
+		input.value  = value;
+		
+		subForm.appendChild(input);
+		
+
+	}
+	
+
+	
+	
 
 	
 
@@ -126,7 +193,7 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form action="product_modifyPro.bo?item_idx=${products.item_idx}" method="get"enctype="multipart/form-data" id="sub_form">
+                <form action="product_modifyPro.bo?item_idx=${products.item_idx}" method="post"enctype="multipart/form-data" id="sub_form">
                 	<input type="hidden" name="file1" value="${products.file1}">  
 	                <input type="hidden" name="file2" value="${products.file2}">  
                     <div class="ps-form__content">

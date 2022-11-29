@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itwillbs.Code_Green.mapper.SellMapper">
 
-
+	<!-- 장바구니 목록 불러오기 -->
 	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT 
 			i.item_name,
@@ -22,60 +22,108 @@
 		WHERE r.member_id = #{member_id};
 	</select>
 
-
-	<select id="selectCoin" resultType="com.itwillbs.Code_Green.vo.CoinVO">
-		SELECT  c.coin_idx,
-				c.rf_member_idx,
-		        c.coin_add,
-		        c.coin_use,
-		        c.coin_charge,
-		        c.coin_total,
-		        c.coin_date
-		FROM coin c
-		JOIN member m ON c.rf_member_idx = m.member_idx
-		WHERE m.member_id = #{member_id}
-		ORDER BY c.coin_date DESC limit 1;
+	
+	<!-- 상품구매 목록 갯수 -->
+	<select id="selectSellListCount" resultType="integer">
+		 select count(*)
+			from sell
+		    where RF_MEMBER_IDX = (select member_idx
+									from member
+                            		where member_id = #{member_id})
 	</select>
 	
-<!-- <insert id="insertOrder"> -->
-<!-- 		<selectKey keyProperty="member_id" order="BEFORE"> -->
-<!-- 			SELECT  -->
-<!-- 				   c.rf_item_idx, -->
-<!-- 				   c.rf_member_idx, -->
-<!-- 				   c.cart_amount, -->
-<!-- 				   c.cart_total -->
-<!-- 			  FROM cart c -->
-<!-- 			  JOIN member m  -->
-<!-- 			    ON m.member_idx = c.rf_member_idx -->
-<!-- 			  JOIN sell s -->
-<!-- 			    ON s.rf_member_idx = c.rf_member_idx -->
-<!-- 			  JOIN item i  -->
-<!-- 			    ON c.item_idx = i.item_idx   -->
-<!-- 			 WHERE m.member_id = #{member_id} -->
-<!-- 		</selectKey> -->
-<!-- 			INSERT INTO sell  -->
-<!-- 							VALUES( -->
-<!-- 									<selectKey order="BEFORE"> -->
-<!-- 									   <if test="max(s.sell_idx) == null"> -->
-<!-- 									  	 s.sell_idx = 1, -->
-<!-- 									   </if>	  -->
-<!-- 									   <if test="max(s.sell_idx) != null"> -->
-<!-- 									   	s.sell_idx = max(s.sell_idx) + 1, -->
-<!-- 									   </if> -->
-<!-- 								  </selectKey> -->
-<!-- 								   s.rf_member_idx = c.rf_member_idx, -->
-<!-- 								   s.rf_item_idx = c.rf_item_idx, -->
-<!-- 								   s.sell_amount = c.cart_amount, -->
-<!-- 								  	 <if test=""> -->
-								  	 
-<!-- 								  	 </if> -->
-								   
-<!-- 								   <if test="sell_use_coin"></if> -->
-<!-- 							) -->
-		
-<!-- 	</insert>	 -->
-		
-<!-- 	상품구매 목록 -->
+	
+	<!-- 주문하기 -->
+	<!-- 아래코드 작동은 됨 -->
+	<insert id="insertOrder">
+		<selectKey keyProperty="cart_amount" resultType="string" order="BEFORE">
+			SELECT 
+					sum(cart_amount)
+			  FROM
+					cart			
+			 WHERE
+			 		rf_member_idx = #{member_idx}	
+		</selectKey>
+	
+		INSERT INTO
+					 sell
+			VALUES(
+			 		 IFNULL(
+			 		 		(SELECT MAX(sell_idx) FROM sell s), 0
+			 		 		) + 1, 									  <!-- sell_idx -->
+			 		 #{member_idx}, 								  <!-- rf_member_idx -->
+			 		 #{cart_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
+			 		 #{sell.sell_usecoin},							  <!-- sell_use_coin -->
+			 		 #{sell_total_price},							  <!-- sell_total_price -->
+			 		 '주문완료',									  <!-- sell_status --> <!-- 결제하고 나면 update 구문써서 바꿔주기 -->
+			 		 #{sell.sell_postcode},							  <!-- sell_postcode -->
+			 		 #{sell.sell_address},							  <!-- sell_address -->
+			 		 #{sell.sell_phone},							  <!-- sell_phone -->
+			 		 #{sell.sell_receiver},						      <!-- sell_receiver -->
+			 		 now(),											  <!-- sell_date --> <!-- now()로 넣으면 2022-11-04 18:27:00 형식으로 들어감 / DATE_FORMAT(now(), '%h:%i:%s') 사용하던지--> 
+			 		 #{sell.sell_pay_type},							  <!-- sell_pay_type --> <!-- 주문시 디폴트로 무통장입금 걸어놓고 카드 결제 버튼 클릭시 update 구문써서 '카드결제' 바꿔주기 -->
+			 		 '결제대기중',									  <!-- sell_pay_status --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
+			 		 '',											  <!-- sell_pay_date --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
+			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s), 8, 0)) <!-- sell_order_number -->
+			 	)			
+	</insert>
+	
+	
+	<!-- 주문내역 불러오기 -->
+	<select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		 SELECT  
+		 		 *
+		   FROM
+		  		 sell s
+      LEFT JOIN 
+      			 member m
+        	 ON 
+        	 	 s.rf_member_idx = m.member_idx
+		  WHERE 
+		  		 m.member_id = #{member_id}
+       ORDER BY 
+       			 s.sell_idx DESC
+          LIMIT 
+          		 1
+	</select>
+	
+	<!--  -->
+<!-- 	<insert id="insertOrderDetail"> -->
+<!-- 		INSERT INTO  -->
+<!-- 					 sell_detail -->
+<!-- 			VALUES( -->
+<!-- 				 <foreach collection="cartList" item="cart"> -->
+<!-- 					  IFNULL( -->
+<!-- 				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0 -->
+<!-- 				 		 		) + 1, -->
+<!-- 			 		  #{sell_idx},	 -->
+<!-- 					  #{cart.rf_item_idx}, -->
+<!-- 					  #{cart.cart_amount}, -->
+<!-- 					  'N' -->
+<!-- 		 		 </foreach> -->
+		 		 	  		 			
+<!-- 			) -->
+<!-- 	</insert> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =============================================== 마이페이지 ================================================================= -->
+	
+	<!-- 리뷰 불러오기 -->
 	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		 select  SELL_IDX  
 				,RF_MEMBER_IDX  
@@ -100,16 +148,8 @@
 	                            where member_id = #{member_id})
 	</select>
 	
-<!-- 	상품구매 목록 갯수 -->
-	<select id="selectSellListCount" resultType="integer">
-		 select count(*)
-			from sell
-		    where RF_MEMBER_IDX = (select member_idx
-									from member
-                            		where member_id = #{member_id})
-	</select>
 	
-<!-- 	//마이페이지 리뷰 가능상품 목록 -->
+	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
            select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
@@ -137,7 +177,7 @@
 	</select>
 	
 	
-<!-- 	마이페이지 상품후기작성 -->
+	<!-- 마이페이지 상품후기작성 -->
 	<select id="getSellReview" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		select       s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
@@ -161,4 +201,53 @@
 			    where s.RF_SELL_IDX =  #{sell_idx}
                 and i.item_idx = #{item_idx};
 	</select>
+	
+
+	<!-- 마이페이지 // 내 주문목록 리스트들 불러오기 -->
+	<select id="selectMyBuyList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			<if test="!period.equals('')">
+				 AND TIMESTAMPDIFF(month , sysdate(), SELL_DATE)>-#{period}
+			</if>
+			ORDER BY sell_date DESC
+			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	
+	<!-- 마이페이지 //  내 주문목록 리스트들 카운트 -->
+	<select id="selectMyBuyListCount" resultType="integer">
+		SELECT count(*) 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			<if test="!period.equals('')">
+				 AND TIMESTAMPDIFF(month , sysdate(), SELL_DATE)>-#{period}
+			</if>
+	</select>
+	
+	
+	<!-- 마이페이지 // 내 주문목록 리스트들 특정날짜범위로 불러오기 -->
+	<select id="getMyBuyListByDate" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			AND 
+				sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
+			ORDER BY sell_date DESC
+			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	<!-- 마이페이지 // 내 주문목록 특정날짜범위 리스트들 카운트 -->
+	<select id="getMyBuyListByDateCount" resultType="integer">
+		SELECT count(*) 
+				FROM sell
+				WHERE rf_member_idx = #{member_idx}
+				AND 
+					sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
+	</select>
+	
+	
+	
+	
 </mapper>

@@ -45,7 +45,20 @@
 			<version>2.8.1</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<!-- 메일용 -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>5.3.9</version>
+		</dependency>
 		
 	
 
@@ -91,7 +104,66 @@
 		</dependency>
 		<!-- 1027추가 끝 -->
 
+<!-- 		파일처리 라이브러리  221108 추가  -->
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+<!-- 		파일처리 라이브러리  221108 추가  끝 -->	
 
+<!-- 		해싱에 사용할 BCryptPasswordEncoder 클래스 활용을 위한 라이브러리 221110 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.7.5</version>
+		</dependency>
+<!-- 		해싱에 사용할 BCryptPasswordEncoder 클래스 활용을 위한 라이브러리 221110 추가 끝-->
+<!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
+		</dependency>
+<!-- 		SQL로그에 사용할 log4jdbc-log4j2 라이브러리 221110추가-->
+
+<!-- 		json 라이브러리 추가 221116 -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20220924</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency> 		
+				
+				
+		<!-- AJAX -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.8.11</version>
+		</dependency>
+		
+		
+	<!-- responsebody에 필요 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.8</version>
+		</dependency>
 
 
 		<!-- AspectJ -->

@@ -65,7 +65,7 @@ public interface ManagerMapper {
 	public int updateItemFileModify(File_ItemVO fileItem);
 	
 	//상품 수정(글) 
-	public int updateItemModify(ItemVO item, int item_idx);
+	public int updateItemModify(ItemVO item);
 	
 	//상품 삭제 전 파일명(file1) 조회   
 	public String selectRealFile1(int item_idx);
