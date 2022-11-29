@@ -22,30 +22,6 @@
 		WHERE r.member_id = #{member_id};
 	</select>
 
-	<!-- 리뷰 불러오기 -->
-	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		 select  SELL_IDX  
-				,RF_MEMBER_IDX  
-				,RF_ITEM_IDX   
-				,SELL_AMOUNT   
-				,SELL_ITEM_TOTAL_PRICE  
-				,SELL_USECOIN  
-				,SELL_TOTAL_PAY_PRICE  
-				,SELL_STATUS  
-				,SELL_SHIPPING_FEE  
-				,SELL_POSTCODE 
-				,SELL_ADDRESS  
-				,SELL_PHONE  
-				,SELL_RECIEVER  
-				,SELL_DATE  
-				,SELL_PAY_TYPE  
-				,SELL_PAY_STATUS  
-				,SELL_PAY_DATE  
-		from sell
-	    where RF_MEMBER_IDX = (select member_idx
-								from member
-	                            where member_id = #{member_id})
-	</select>
 	
 	<!-- 상품구매 목록 갯수 -->
 	<select id="selectSellListCount" resultType="integer">
@@ -56,58 +32,6 @@
                             		where member_id = #{member_id})
 	</select>
 	
-	<!-- 마이페이지 리뷰 가능상품 목록 -->
-	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-           select  	 s.SELL_DETAIL_IDX 
-					,s.RF_SELL_IDX 
-			        ,i.ITEM_NAME 
-			        ,i.ITEM_PRICE
-			        ,i.ITEM_IDX
-			        ,i.ITEM_CATEGORY
-			        ,f.FILE1
-					,s.SELL_AMOUNT
-			        ,m.MANAGER_BRANDNAME
-			        ,l.sell_idx
-			from sell_detail s 
-				join item i 
-					on s.RF_ITEM_IDX = i.item_idx
-			    join file_item f 
-					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
-				join manager m
-					on m.MANAGER_IDX = i.RE_MANAGER_IDX
-				join sell l
-					on s.rf_sell_idx = l.sell_idx
-			    where l.RF_MEMBER_IDX =(select member_idx
-									from member
-                            		where member_id = #{member_id})
-                      and s.SELL_REVIEW_STATUS="N";
-	</select>
-	
-	
-	<!-- 마이페이지 상품후기작성 -->
-	<select id="getSellReview" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		select       s.SELL_DETAIL_IDX 
-					,s.RF_SELL_IDX 
-			        ,i.ITEM_NAME 
-			        ,i.ITEM_PRICE
-			        ,i.ITEM_IDX
-			        ,i.ITEM_CATEGORY
-			        ,f.FILE1
-					,s.SELL_AMOUNT
-			        ,m.MANAGER_BRANDNAME
-			        ,l.SELL_IDX  
-			from sell_detail s 
-				join item i 
-					on s.RF_ITEM_IDX = i.item_idx
-			    join file_item f 
-					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
-				join manager m
-					on m.MANAGER_IDX = i.RE_MANAGER_IDX
-				join sell l
-					on s.rf_sell_idx = l.sell_idx
-			    where s.RF_SELL_IDX =  #{sell_idx}
-                and i.item_idx = #{item_idx};
-	</select>
 	
 	<!-- 주문하기 -->
 	<!-- 아래코드 작동은 됨 -->
@@ -129,7 +53,7 @@
 			 		 		) + 1, 									  <!-- sell_idx -->
 			 		 #{member_idx}, 								  <!-- rf_member_idx -->
 			 		 #{cart_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
-			 		 #{sell.sell_use_coin},							  <!-- sell_use_coin -->
+			 		 #{sell.sell_usecoin},							  <!-- sell_use_coin -->
 			 		 #{sell_total_price},							  <!-- sell_total_price -->
 			 		 '주문완료',									  <!-- sell_status --> <!-- 결제하고 나면 update 구문써서 바꿔주기 -->
 			 		 #{sell.sell_postcode},							  <!-- sell_postcode -->
@@ -144,19 +68,6 @@
 			 	)			
 	</insert>
 	
-	<!-- 주문내역 불러오기 위한 sell_idx 불러오기 -->
-<!-- 	<select id="selectSellIdx" resultType="integer"> -->
-<!-- 		SELECT -->
-<!-- 		 		sell_idx  -->
-<!-- 		  FROM  -->
-<!-- 		  		sell -->
-<!-- 		 WHERE  -->
-<!-- 		 		rf_member_idx = #{member_idx} -->
-<!-- 	  ORDER BY  -->
-<!-- 	  			sell_idx DESC -->
-<!-- 		 LIMIT  -->
-<!-- 		  	    1 -->
-<!-- 	</select> -->
 	
 	<!-- 주문내역 불러오기 -->
 	<select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
@@ -212,6 +123,86 @@
 
 <!-- =============================================== 마이페이지 ================================================================= -->
 	
+	<!-- 리뷰 불러오기 -->
+	<select id="getReviewList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		 select  SELL_IDX  
+				,RF_MEMBER_IDX  
+				,RF_ITEM_IDX   
+				,SELL_AMOUNT   
+				,SELL_ITEM_TOTAL_PRICE  
+				,SELL_USECOIN  
+				,SELL_TOTAL_PAY_PRICE  
+				,SELL_STATUS  
+				,SELL_SHIPPING_FEE  
+				,SELL_POSTCODE 
+				,SELL_ADDRESS  
+				,SELL_PHONE  
+				,SELL_RECIEVER  
+				,SELL_DATE  
+				,SELL_PAY_TYPE  
+				,SELL_PAY_STATUS  
+				,SELL_PAY_DATE  
+		from sell
+	    where RF_MEMBER_IDX = (select member_idx
+								from member
+	                            where member_id = #{member_id})
+	</select>
+	
+	
+	<!-- 마이페이지 리뷰 가능상품 목록 -->
+	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+           select  	 s.SELL_DETAIL_IDX 
+					,s.RF_SELL_IDX 
+			        ,i.ITEM_NAME 
+			        ,i.ITEM_PRICE
+			        ,i.ITEM_IDX
+			        ,i.ITEM_CATEGORY
+			        ,f.FILE1
+					,s.SELL_AMOUNT
+			        ,m.MANAGER_BRANDNAME
+			        ,l.sell_idx
+			from sell_detail s 
+				join item i 
+					on s.RF_ITEM_IDX = i.item_idx
+			    join file_item f 
+					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
+				join manager m
+					on m.MANAGER_IDX = i.RE_MANAGER_IDX
+				join sell l
+					on s.rf_sell_idx = l.sell_idx
+			    where l.RF_MEMBER_IDX =(select member_idx
+									from member
+                            		where member_id = #{member_id})
+                      and s.SELL_REVIEW_STATUS="N";
+	</select>
+	
+	
+	<!-- 마이페이지 상품후기작성 -->
+	<select id="getSellReview" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		select       s.SELL_DETAIL_IDX 
+					,s.RF_SELL_IDX 
+			        ,i.ITEM_NAME 
+			        ,i.ITEM_PRICE
+			        ,i.ITEM_IDX
+			        ,i.ITEM_CATEGORY
+			        ,f.FILE1
+					,s.SELL_AMOUNT
+			        ,m.MANAGER_BRANDNAME
+			        ,l.SELL_IDX  
+			from sell_detail s 
+				join item i 
+					on s.RF_ITEM_IDX = i.item_idx
+			    join file_item f 
+					on s.RF_ITEM_IDX = f.RF_ITEM_IDX
+				join manager m
+					on m.MANAGER_IDX = i.RE_MANAGER_IDX
+				join sell l
+					on s.rf_sell_idx = l.sell_idx
+			    where s.RF_SELL_IDX =  #{sell_idx}
+                and i.item_idx = #{item_idx};
+	</select>
+	
+
 	<!-- 마이페이지 // 내 주문목록 리스트들 불러오기 -->
 	<select id="selectMyBuyList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT * 

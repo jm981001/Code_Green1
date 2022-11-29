@@ -78,7 +78,7 @@ public class SellController {
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
 
 		// 주문시 사용한 적립금
-		int insertOrderUseCoinCount = coin_service.insert_order_useCoin(sell.getSell_use_coin(),member_idx);
+		int insertOrderUseCoinCount = coin_service.insert_order_useCoin(sell.getSell_usecoin(),member_idx);
 		
 		// 주문시 결제 금액의 10% 적립
 		int insertOrderCoinAddCount = coin_service.insert_order_addCoin(sell_total_price, member_idx);

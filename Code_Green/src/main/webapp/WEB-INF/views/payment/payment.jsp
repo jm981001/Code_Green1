@@ -229,7 +229,7 @@
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 												 사용할 적립금
-		                                        	<input type="text" name="sell_use_coin" class="sell_use_coin" style="color: #5fa30f;">
+		                                        	<input type="text" name="sell_usecoin" class="sell_use_coin" style="color: #5fa30f;">
 		                                        	<input type="button" value="사용" class="sell_coin_use_btn">
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">

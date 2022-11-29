@@ -34,8 +34,8 @@ public class CoinService {
 	}
 
 	// 주문시 적립금 사용
-	public int insert_order_useCoin(String sell_use_coin, int member_idx) {
-		return mapper.insert_order_useCoin(sell_use_coin, member_idx);
+	public int insert_order_useCoin(String sell_usecoin, int member_idx) {
+		return mapper.insert_order_useCoin(sell_usecoin, member_idx);
 	}
 
 	// 주문시 결제금액 10% 적립금 적립

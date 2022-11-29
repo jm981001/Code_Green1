@@ -8,7 +8,7 @@ public class SellVO {
 	private int sell_idx; // 주문테이블 인덱스 번호
 	private int rf_member_idx; // 회원 번호
 	private String sell_amount; // 총 구매 수량 // 상품당 구매 수량은 detail
-	private String sell_use_coin; // 사용한 적립금
+	private String sell_usecoin; // 사용한 적립금
 	private String sell_total_price; // 결제할 금액
 	private String sell_status; // 주문상태  / default '결제대기중'
 	private String sell_postcode; // 받는 사람 우편번호
@@ -58,11 +58,11 @@ public class SellVO {
 	public void setSell_amount(String sell_amount) {
 		this.sell_amount = sell_amount;
 	}
-	public String getSell_use_coin() {
-		return sell_use_coin;
+	public String getSell_usecoin() {
+		return sell_usecoin;
 	}
-	public void setSell_use_coin(String sell_use_coin) {
-		this.sell_use_coin = sell_use_coin;
+	public void setSell_usecoin(String sell_usecoin) {
+		this.sell_usecoin = sell_usecoin;
 	}
 	public String getSell_total_price() {
 		return sell_total_price;
@@ -208,7 +208,7 @@ public class SellVO {
 	@Override
 	public String toString() {
 		return "SellVO [sell_idx=" + sell_idx + ", rf_member_idx=" + rf_member_idx + ", sell_amount=" + sell_amount
-				+ ", sell_use_coin=" + sell_use_coin + ", sell_total_price=" + sell_total_price + ", sell_status="
+				+ ", sell_usecoin=" + sell_usecoin + ", sell_total_price=" + sell_total_price + ", sell_status="
 				+ sell_status + ", sell_postcode=" + sell_postcode + ", sell_address=" + sell_address + ", sell_phone="
 				+ sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date=" + sell_date + ", sell_pay_type="
 				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date

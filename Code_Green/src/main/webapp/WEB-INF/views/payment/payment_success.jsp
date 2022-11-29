@@ -177,7 +177,7 @@
 			                                            <td>${orderList.sell_pay_type }</td>
 			                                            <td>${sell_item_total_price }</td>
 			                                            <td>${shipping_fee }</td>
-			                                            <td>${orderList.sell_use_coin }</td>
+			                                            <td>${orderList.sell_usecoin }</td>
 			                                            <td>${orderList.sell_total_price }</td>
 			                                        </tr>
 			                                    </tbody>

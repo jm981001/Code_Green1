@@ -21,7 +21,7 @@ public interface CoinMapper {
 	public List<CoinVO> selectTotalCoin(String member_id);
 
 	// 주문시 적립금 사용
-	public int insert_order_useCoin(@Param("sell_use_coin")String sell_use_coin, @Param("member_idx")int member_idx);
+	public int insert_order_useCoin(@Param("sell_usecoin")String sell_usecoin, @Param("member_idx")int member_idx);
 
 	// 주문시 결제금액 10% 적립금 적립
 	public int insert_order_addCoin(@Param("sell_total_price")int sell_total_price, @Param("member_idx")int member_idx);

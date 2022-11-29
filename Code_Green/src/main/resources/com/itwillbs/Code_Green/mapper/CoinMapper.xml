@@ -65,7 +65,7 @@
 			 WHERE 
 			 		rf_member_idx = #{member_idx}
 		  ORDER BY
-		  			coin_date DESC
+		  			coin_idx DESC
 		  	 LIMIT
 		  	 		1		   		
 		</selectKey>
@@ -78,13 +78,14 @@
 			 		 #{member_idx},
 			 		 '주문결제시 사용',
 			 		 '0',
-			 		 #{sell_use_coin},
+			 		 #{sell_usecoin},
 			 		 '0',
-			 		 #{coin_total} - #{sell_use_coin},
+			 		 #{coin_total} - #{sell_usecoin},
 			 		 DATE_FORMAT(now(),'%Y%m%d')
 			 )
 	</insert>
 
+	<!-- 주문시 적립금 3% 적립  -->
 	<insert id="insert_order_addCoin">
 		<selectKey keyProperty="coin_total" order="BEFORE" resultType="string">
 				SELECT 
@@ -94,7 +95,7 @@
 				 WHERE 
 				 		 rf_member_idx = #{member_idx}
 			  ORDER BY
-			  			 coin_date DESC
+			  			 coin_idx DESC
 			  	 LIMIT
 			  	 		 1		   		
 			</selectKey>
@@ -109,7 +110,7 @@
 				 		 ROUND(#{sell_total_price} * 0.03),
 				 		 '0',
 				 		 '0',
-				 		 #{coin_total} + (#{sell_total_price} * 0.03),
+				 		 ROUND(#{coin_total} + (#{sell_total_price} * 0.03)),
 				 		 DATE_FORMAT(now(),'%Y%m%d')
 				 )
 	
