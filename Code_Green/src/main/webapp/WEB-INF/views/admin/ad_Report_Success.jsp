@@ -15,7 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="favicon.png" rel="icon">
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <title>신고글 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
@@ -40,40 +40,9 @@
   
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
-        <div class="ps-main__sidebar">
-            <div class="ps-sidebar">
-                <div class="ps-sidebar__top">
-                    <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="/Code_Green/resources/img/users/admin.jpg" alt="" /></div>
-                        <div class="ps-block__right">
-                             <p>여기는<a href="#">총관리자</a></p>
-                        </div>
-                        <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
-                    </div>
-                    <div class="ps-block--earning-count"><small>총매출</small>
-                        <h3>3조5억</h3>
-                    </div>
-                </div>
-                <div class="ps-sidebar__content">
-                    <div class="ps-sidebar__center">
-                        <ul class="menu">
-                            <li><a class="active" href="index"><i class="icon-home"></i>매출현황조회</a></li>
-                            <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
-                            <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li>
-                            <li><a href="ad_Notice"><i class="icon-users2"></i>공지 관리</a></li>
-                            <li><a href="ad_Board_Management"><i class="icon-papers"></i>게시판 관리</a></li>
-                            <li><a href="ad_One_Board"><i class="icon-papers"></i>문의글 관리</a></li>
-                            <li><a href="ad_Report_Management"><i class="icon-papers"></i>신고글 관리</a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="/Code_Green/resources/img/logo.png" alt="">
-                            <p>&copy;2022 최고의 비건마켓 어쩌구. <br/> All rights reversed.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+       <jsp:include page="../inc/ad_menu.jsp"></jsp:include>
+       
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
