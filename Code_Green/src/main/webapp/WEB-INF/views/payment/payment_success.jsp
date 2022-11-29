@@ -35,55 +35,57 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     
-   <!-- 결제 api 관련 js-->
+    <!-- 결제 api 관련 js-->
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     
     <script type="text/javascript">
-	    <!-- 결제 api -->
-	    var IMP = window.IMP; 
-	    IMP.init("imp82131734"); 
-	
-	    function requestPay() {
-	        IMP.request_pay({
-	            pg : 'kcp',
-	            pay_method : 'card',
-	            merchant_uid: ${orderList.sell_order_number }, // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
-	            name : '당근', // 주문할 상품명들
-	            amount :  ${orderList.sell_total_price }, // 금액
-	            buyer_email : '${orderList.member_email}', // 주문자 메일주소
-	            buyer_name : '${orderList.sell_receiver}', // 주문자 이름
-	            buyer_tel : '${orderList.sell_phone}', // 주문자 연락처
-	            buyer_addr : '${orderList.sell_address}', // 주문자 주소
-	            buyer_postcode : '${orderList.sell_postcode}' // 주문자 우편번호
-	        }, function (rsp) { // callback
-	            if (rsp.success) {
-	                alert("결제가 완료되었습니다.");
-	                location.href = "payment_success_card_thanks";
-	                $.ajax({
-	                       url: "payment_success_card",
-	                       type: "POST",
-	                       data: {
-	                          sell_idx : ${orderList.sell_idx}
-	                       },
-	                       success: function(){
-	                          alert("결제가 성공되었습니다.");
-	                       },
-	                       fail: function () {
-	                          alert("결제가 실패되었습니다.");
-	                       }
-	                    });
-					
-	                
-	            } else {
-	                alert("결제가 완료되지 않았습니다.");
-	                history.back();
-	            }
-	        });
-	    }
-    	
+   		var jbRandom = Math.random();
+    
+       <!-- 결제 api -->
+       var IMP = window.IMP; 
+       IMP.init("imp82131734"); 
+   
+       function requestPay() {
+           IMP.request_pay({
+        	   pg : 'kcp',
+               pay_method : 'card',
+               merchant_uid: "${orderList.sell_order_number }" + jbRandom, // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
+               name : '당근 10kg',
+               amount : ${orderList.sell_total_price },
+               buyer_email : '${orderList.member_email }',
+               buyer_name : '${orderList.sell_receiver }',
+               buyer_tel : '${orderList.sell_phone }',
+               buyer_addr : '${orderList.sell_address }',
+               buyer_postcode : '${orderList.sell_postcode }'
+           }, function (rsp) { // callback
+               if (rsp.success) {
+                   alert("결제가 완료되었습니다.");
+                   location.href = "payment_success_card_thanks";
+                   $.ajax({
+                          url: "payment_success_card",
+                          type: "POST",
+                          data: {
+                             sell_idx : ${orderList.sell_idx}
+                          },
+                          success: function(){
+                             alert("결제가 성공되었습니다.");
+                          },
+                          fail: function () {
+                             alert("결제가 실패되었습니다.");
+                          }
+                       });
+                  
+                   
+               } else {
+                   alert("결제가 완료되지 않았습니다.");
+                   history.back();
+               }
+           });
+       }
+       
     </script>
 </head>
 

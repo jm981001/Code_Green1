@@ -195,26 +195,26 @@
 	                                    </div>
 	                                     	
 	                                     	
-	                                 <!-- 변경 주소 --> 	
-										<div class="ps-block__panel" id="newDiv" style="width: 1200px;">
-	                                      	<div class="mb-3">
-												<label for="formGroupExampleInput" class="form-label">이름</label>
-												<input type="text" class="form-control" name="sell_receiver" placeholder="받는 분의 이름을 입력하세요.">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">연락처</label>
-												<input type="text" class="form-control" name="sell_phone" placeholder="받는 분의 연락처를 입력하세요.">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">우편번호</label>
-												<input type="button" value="주소 검색" onclick="execDaumPostcode()">
-												<input type="text" class="form-control" id="postcode" name="sell_postcode" placeholder="받는 분의 우편번호를 입력하세요.">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">배송지 주소</label>
-												<input type="text" class="form-control" id="address" name="sell_address" placeholder="받는 분의 주소를 입력하세요.(주소 검색 클릭 후 상세 주소까지 입력해주세요.)">
-											</div>
-										</div>
+<!-- 	                                 변경 주소 	 -->
+<!-- 										<div class="ps-block__panel" id="newDiv" style="width: 1200px;"> -->
+<!-- 	                                      	<div class="mb-3"> -->
+<!-- 												<label for="formGroupExampleInput" class="form-label">이름</label> -->
+<!-- 												<input type="text" class="form-control" name="sell_receiver" placeholder="받는 분의 이름을 입력하세요."> -->
+<!-- 											</div> -->
+<!-- 											<div class="mb-3"> -->
+<!-- 												<label for="formGroupExampleInput2" class="form-label">연락처</label> -->
+<!-- 												<input type="text" class="form-control" name="sell_phone" placeholder="받는 분의 연락처를 입력하세요."> -->
+<!-- 											</div> -->
+<!-- 											<div class="mb-3"> -->
+<!-- 												<label for="formGroupExampleInput2" class="form-label">우편번호</label> -->
+<!-- 												<input type="button" value="주소 검색" onclick="execDaumPostcode()"> -->
+<!-- 												<input type="text" class="form-control" id="postcode" name="sell_postcode" placeholder="받는 분의 우편번호를 입력하세요."> -->
+<!-- 											</div> -->
+<!-- 											<div class="mb-3"> -->
+<!-- 												<label for="formGroupExampleInput2" class="form-label">배송지 주소</label> -->
+<!-- 												<input type="text" class="form-control" id="address" name="sell_address" placeholder="받는 분의 주소를 입력하세요.(주소 검색 클릭 후 상세 주소까지 입력해주세요.)"> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										
 										
 										

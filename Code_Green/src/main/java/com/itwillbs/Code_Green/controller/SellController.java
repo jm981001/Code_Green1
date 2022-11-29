@@ -74,6 +74,8 @@ public class SellController {
 		// 장바구니 정보
 		List<CartVO> cartList = cart_service.getCart(member_id); 
 		
+		System.out.println("sell" + sell);
+		
 		// 주문(sell)에 데이터 넣기
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
 
