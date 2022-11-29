@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +98,8 @@
 				      <td scope="row">작성자</td>
 				      <td>${noticeDetail.board_id }</td>
 				      <td>작성일</td>
-				      <td>${noticeDetail.board_date }</td>
+				      <fmt:parseDate var="dateString" value="${noticeDetail.board_date }" pattern="yyyyMMdd" />	
+                      <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
 				    </tr>
 				    <tr>
 				      <td scope="row" rowspan="2">내용</td>

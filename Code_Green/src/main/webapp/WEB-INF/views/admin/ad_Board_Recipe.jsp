@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,7 +107,8 @@
                                 	<td>${ReList.board_type }</td>
                                     <td onclick="location.href='ad_Recipe_Detail?board_idx=${ReList.board_idx }'"><strong>${ReList.board_subject }</strong></td>
                                     <td>${ReList.manager_brandname }</td>
-                                    <td>${ReList.board_date }</td>
+                                    <fmt:parseDate var="dateString" value="${ReList.board_date }" pattern="yyyyMMdd" />	
+                      				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td>${ReList.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

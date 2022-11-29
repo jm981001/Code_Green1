@@ -123,11 +123,12 @@
                         </table>
                     </div>
                 </div>
-                       <div class="ps-section__footer">
+                
+                       <div class="ps-section__footer" align="right">
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
-				                        <ul class="pagination">
+				                        <ul class="pagination" style="padding-left: 1150px">
 				                           
 				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="ad_member_Manage?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i></a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
@@ -141,6 +142,7 @@
 				                    </div>
 				  <!-- 페이징 버튼들 끝 -->
                 		</div>
+                
             </section>
 			</div>
     </main>

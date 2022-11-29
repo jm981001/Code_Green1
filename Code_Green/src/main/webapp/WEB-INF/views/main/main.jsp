@@ -29,6 +29,60 @@
     <link rel="stylesheet" href="/Code_Green/resources/js/test.js">
 </head>
 <script type="text/javascript">
+<!-- Channel Plugin Scripts -->
+
+if(${not empty sessionScope.sId && sessionScope.sId ne 'admin'} ) {
+	
+	(function() {
+	    var w = window;
+	    if (w.ChannelIO) {
+	      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+	    }
+	    var ch = function() {
+	      ch.c(arguments);
+	    };
+	    ch.q = [];
+	    ch.c = function(args) {
+	      ch.q.push(args);
+	    };
+	    w.ChannelIO = ch;
+	    function l() {
+	      if (w.ChannelIOInitialized) {
+	        return;
+	      }
+	      w.ChannelIOInitialized = true;
+	      var s = document.createElement('script');
+	      s.type = 'text/javascript';
+	      s.async = true;
+	      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+	      s.charset = 'UTF-8';
+	      var x = document.getElementsByTagName('script')[0];
+	      x.parentNode.insertBefore(s, x);
+	    }
+	    if (document.readyState === 'complete') {
+	      l();
+	    } else if (window.attachEvent) {
+	      window.attachEvent('onload', l);
+	    } else {
+	      window.addEventListener('DOMContentLoaded', l, false);
+	      window.addEventListener('load', l, false);
+	    }
+	  })();
+	  ChannelIO('boot', {
+	    "pluginKey": "f252da13-5fe8-41ed-8d2a-dc426cba9fd5",
+	    "memberId": "${sessionScope.sId }",
+	    	"profile": {
+	    	      "name": "${sessionScope.sId }",
+	    	      "id": "${sessionScope.sId }"
+	    	    }
+	  
+	  });
+}
+
+
+
+
+<!-- End Channel Plugin -->
 </script>
 <body>
     
@@ -156,7 +210,7 @@
                     <h3>고객님들의 혼자알기 아까운 상품들</h3>
                     <ul class="ps-section__links">
                        
-                        <li><a href="BestItemList.bo">더보기</a></li>
+                        <li><a href="ItemList.bo">더보기</a></li>
                     </ul>
                 </div>
                 <div class="ps-section__content">

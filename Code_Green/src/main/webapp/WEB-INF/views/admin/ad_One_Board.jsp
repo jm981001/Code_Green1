@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,7 +112,8 @@
                                 	<td>${qnaList.qna_category }</td>
                                     <td onclick="location.href='ad_One_Board_Detail?qna_idx=${qnaList.qna_idx }&id=${qnaList.qna_id }'"><strong>${qnaList.qna_subject }</strong></td>
                                     <td>${qnaList.qna_id }</td>
-                                    <td>${qnaList.qna_date }</td>
+                                    <fmt:parseDate var="dateString" value="${qnaList.qna_date }" pattern="yyyyMMdd" />	
+                      				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${qnaList.qna_status }</strong></button>
                                     </td>
                                     <td>

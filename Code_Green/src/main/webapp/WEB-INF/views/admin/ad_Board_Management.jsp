@@ -1,6 +1,7 @@
 <%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,7 +108,8 @@
                                 	<td>${bList.board_category }</td>
                                     <td onclick="location.href='ad_Board_Detail?board_idx=${bList.board_idx }'"><strong>${bList.board_subject }</strong></td>
                                     <td>${bList.board_id }</td>
-                                    <td>${bList.board_date }</td>
+                                    <fmt:parseDate var="dateString" value="${bList.board_date }" pattern="yyyyMMdd" />	
+                     				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td>${bList.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
@@ -129,7 +131,7 @@
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
-				                        <ul class="pagination">
+				                        <ul class="pagination" >
 				                           
 				                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="ad_Board_Management?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i></a></li>
 				                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
