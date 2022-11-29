@@ -38,7 +38,7 @@
                url: "product_delete",
                type: "GET",
                data: {
-                  board_idx: value
+                  item_idx: value
                },
                success: function(){
                   alert("삭제가 완료되었습니다.");
@@ -189,5 +189,4 @@
     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>
-
 </html>

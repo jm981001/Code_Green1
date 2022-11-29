@@ -88,7 +88,6 @@ public interface ManagerMapper {
 				@Param("searchType") String searchType, @Param("keyword") String keyword,@Param("id") String id);
 	//문의글 상세 조회
 	public QnaVO selectQnaInfo(String qna_idx);
-	
 
 	//문의글 답변등록
 	public int updateQnaboard(QnaVO qna);

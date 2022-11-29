@@ -120,7 +120,7 @@ public class ManagerService {
 	
 	//------------------------------문의 글 관리---------------------------------
 	
-//	 문의글 리스트
+//	 문의 목록
 	public List<QnaVO> getQnaBoardList(int startRow, int listLimit, String searchType, String keyword,String id) {
 		return mapper.selectQnaBoardList(startRow,listLimit,searchType,keyword,id);
 	}
@@ -146,7 +146,7 @@ public class ManagerService {
 	}
 	
 	//---------------------------주문 관련------------------------------------
-	//주문조회
+	//주문 목록 조회
 	public List<SellVO> getOrderList(int startRow, int listLimit, String searchType, String keyword,String id) {
 		return mapper.selectOrderList(startRow, listLimit, searchType, keyword,id);
 	}
@@ -157,7 +157,6 @@ public class ManagerService {
 	
 	//배송 상태 변경
 	//배송관리 
-	
 	
 	
 	

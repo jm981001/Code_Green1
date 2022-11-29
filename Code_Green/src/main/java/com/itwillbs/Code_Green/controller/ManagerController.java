@@ -326,7 +326,6 @@ public class ManagerController {
 	}
 
 	
-	
 	//------------(각브랜드별) 상품 목록 조회(페이징처리같이)-------------------------------------------
 	@GetMapping(value = "/products")
 	public String itemList ( Model model, HttpSession session,

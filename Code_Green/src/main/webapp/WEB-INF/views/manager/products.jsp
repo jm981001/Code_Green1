@@ -236,5 +236,4 @@
     <!-- custom c/Code_Green/resourcese-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>
-
 </html>

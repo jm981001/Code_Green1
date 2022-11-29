@@ -127,21 +127,20 @@
                     <hr>
                        <thead>
                                 <tr>
-                                   <th>번호</th>
-                                   <th>질문타입</th>
-                                    <th>제목</th>
-                                      <th>내용</th>
+                                    <th>문의번호</th>
+                                    <th>질문분류</th>
+                                   	<th>제목</th>
                                     <th>작성자</th>
-                                     <th>처리상태</th>
+                                    <th>처리상태</th>
                                     <th>작성일</th>
-                                     <th>답변</th>
+                                    <th>답변</th>
                                 </tr>
                             </thead>
                             <tbody>
                             
                                 <tr>
-                                   <td>${QnaInfo.qna_idx }</td>
-                                   <td>${QnaInfo.qna_type }</td>
+                                    <td>${QnaInfo.qna_idx }</td>
+                                    <td>${QnaInfo.qna_type }</td>
                                     <td>${QnaInfo.qna_subject }</td>
                                     <td>${QnaInfo.qna_content }</td>
                                     <td>${QnaInfo.qna_id }</td>
