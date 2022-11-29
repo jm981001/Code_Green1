@@ -193,5 +193,70 @@
 		 		 	  		 			
 <!-- 			) -->
 <!-- 	</insert> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =============================================== 마이페이지 ================================================================= -->
+	
+	<!-- 마이페이지 // 내 주문목록 리스트들 불러오기 -->
+	<select id="selectMyBuyList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			<if test="!period.equals('')">
+				 AND TIMESTAMPDIFF(month , sysdate(), SELL_DATE)>-#{period}
+			</if>
+			ORDER BY sell_date DESC
+			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	
+	<!-- 마이페이지 //  내 주문목록 리스트들 카운트 -->
+	<select id="selectMyBuyListCount" resultType="integer">
+		SELECT count(*) 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			<if test="!period.equals('')">
+				 AND TIMESTAMPDIFF(month , sysdate(), SELL_DATE)>-#{period}
+			</if>
+	</select>
+	
+	
+	<!-- 마이페이지 // 내 주문목록 리스트들 특정날짜범위로 불러오기 -->
+	<select id="getMyBuyListByDate" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell
+			WHERE rf_member_idx = #{member_idx}
+			AND 
+				sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
+			ORDER BY sell_date DESC
+			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	<!-- 마이페이지 // 내 주문목록 특정날짜범위 리스트들 카운트 -->
+	<select id="getMyBuyListByDateCount" resultType="integer">
+		SELECT count(*) 
+				FROM sell
+				WHERE rf_member_idx = #{member_idx}
+				AND 
+					sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
+	</select>
+	
+	
+	
 	
 </mapper>
