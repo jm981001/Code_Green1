@@ -133,7 +133,7 @@
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="products" method="post">
+                        <form class="ps-form--filter" action="products" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
                                     <select class="ps-select" name="searchType">
