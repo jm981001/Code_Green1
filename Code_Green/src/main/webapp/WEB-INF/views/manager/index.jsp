@@ -99,23 +99,7 @@
                         
                         <canvas id="myChart" width="800" height="400"></canvas>
                         
-<!-- 원래차트 원래차트 원래차트 원래차트 원래차트 원래차트-->
-<!--                             <div class="ps-card ps-card--sale-report"> -->
-<!--                                 <div class="ps-card__header"> -->
-<!--                                     <h4>Sales Reports</h4> -->
-<!--                                 </div> -->
-<!--                                 <div class="ps-card__content"> -->
-<!--                                     <div id="chart"></div> -->
-<!--                                 </div> -->
-<!--                                 <div class="ps-card__footer"> -->
-<!--                                     <div class="row"> -->
-<!--                                         <div class="col-md-8"> -->
-<!--                                             <p>Items Earning Sales ($)</p> -->
-<!--                                         </div> -->
-<!--                                         <div class="col-md-4"><a href="#">Export Report<i class="icon icon-cloud-download ml-2"></i></a></div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
+
                         </div>
                         
 <!-- 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트-->
@@ -146,7 +130,6 @@
                                             <td>${top.ranking }위</td>
                                             <td><strong>${top.item_name}</strong></td>
                                             <td><a href=""><strong>${top.review}개</strong></a></td>
-<%--                                             <td><span class="ps-badge success">${top.brand_follower }명</span></td> --%>
                                             <td><span><strong>${top.heart }개</strong></span></td>
                                             <td><strong>${top.board_star_score }점</strong></td>
                                             <td><span><strong>${top.count }개</strong></span></td>
@@ -185,15 +168,15 @@
 <!--                         </div> -->
                        <div class="ps-card__content">
                            <div class="ps-block--stat yellow">
-                                <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
+                                <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
-                                    <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i><span>12,5%</span></small></h4>
+                                    <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i><span></span></small></h4>
 
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
-                                <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>
+                                <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총주문수</p>
                                      <h4>${orderTotal.orderCount }<small class="asc"><i class="icon-arrow-up"></i></small></h4>
@@ -203,7 +186,7 @@
                                 <div class="ps-block__left"><span><i class="icon-heart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>팔로우 수 </p>
-                                    <h4>${follow }<small class="desc"><i class="icon-arrow-down"></i><span></span></small></h4>
+                                    <h4>${follow }<small class="desc"><i class="icon-arrow-up"></i><span></span></small></h4>
                                 </div>
                             </div>
                         </div>

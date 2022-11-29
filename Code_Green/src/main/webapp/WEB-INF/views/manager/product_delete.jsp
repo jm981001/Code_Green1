@@ -16,7 +16,7 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>레시피관리페이지-베지터틀</title>
+    <title>상품삭제페이지-베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -106,10 +106,10 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>답변관리</h3>
+                    <h3>상품관리</h3>
                 </div>
                 <div class="header__center">
-                    <form class="ps-form--search-bar" action="index method="get">
+                    <form class="ps-form--search-bar" action="product_deletePro.bo method="get">
                         <input class="form-control" type="text" placeholder="Search something" />
                         <button><i class="icon-magnifier"></i></button>
                     </form>
@@ -124,31 +124,31 @@
  
        <table class="table ps-table">
               
-                    <h2>게시판 답글 관리</h2>
+                    <h2>상품 관리</h2>
                     <hr>
                        <thead>
                                 <tr>
-                                	<th>번호</th>
-                                	<th>질문타입</th>
-                                    <th>제목</th>
-                                   	<th>내용</th>
-                                    <th>작성자</th>
-                                     <th>처리상태</th>
-                                    <th>작성일</th>
-                                     <th>답변</th>
+                 					<th>상품번호</th>
+                                	<th>상품명</th>
+                                    <th>상품소개</th>
+                                   	<th>재고</th>
+                                    <th>가격</th>
+                                    <th>상품분류</th>
+                                    <th>포장분류</th>
+                                    <th>등록일</th>
                                 </tr>
                             </thead>
                             <tbody>
                             
                                 <tr>
-                                	<td>${QnaInfo.qna_idx }</td>
-                                	<td>${QnaInfo.qna_type }</td>
-                                    <td>${QnaInfo.qna_subject }</td>
-                                    <td>${QnaInfo.qna_content }</td>
-                                    <td>${QnaInfo.qna_id }</td>
-                                    <td>${QnaInfo.qna_category }</td>
-                                    <td>${QnaInfo.qna_date }</td>
-                                    <td>${QnaInfo.qna_answer }</td>
+                                	<td>${ItemInfo.item_idx }</td>
+                                	<td>${ItemInfo.item_name }</td>
+                                    <td>${ItemInfo.item_info }</td>
+                                    <td>${ItemInfo.item_stock }</td>
+                                    <td>${ItemInfo.item_price }</td>
+                                    <td>${ItemInfo.item_category }</td>
+                                    <td>${ItemInfo.item_packing }</td>
+                                    <td>${ItemInfo.item_date}</td>
                                  </tr>   
                     </tbody>
                     </table>

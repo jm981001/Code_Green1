@@ -141,6 +141,37 @@
 	        LIMIT #{startRow}, #{listLimit}
 	</select>
 	
+	
+	<!-- 상품 목록(글) 조회 -->
+	<select id="selectProducts" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_info,
+			   i.item_packing, 
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_stock, 
+			   i.item_status,  
+			   i.item_readcount,  
+			   i.item_date,
+			   m.manager_brandname,
+			   f.file1,
+			   f.file2
+			  
+		 FROM item i  JOIN manager m  ON i.re_manager_idx= m. manager_idx 
+		  LEFT JOIN 	
+				file_item f 
+			ON  
+				i.item_idx = f.rf_item_idx
+						
+		 WHERE i.item_idx=#{item.itemModify_idx}
+	
+<!-- 	     ORDER BY i.item_idx DESC -->
+<!-- 	        LIMIT #{startRow}, #{listLimit} -->
+	</select>
+	
 <!-- 상품 목록 갯수 조회 -->
 	
 <select id="selectItemListCount" resultType="integer">
@@ -245,23 +276,20 @@
 		 	    rf_item_idx = #{item_idx}
 	</update>	
 	
-	
-	
-	
 
 	<!-- 상품 수정 (글) -->
 		<update id="updateItemModify">
 		UPDATE
 			    item
 		   SET
-				item_name = #{{item.item_name},
-				item_price = #{item.item_price},
-				item_packing = #{item.item_packing},
-				item_category = #{item.item_category},
-				item_info = #{{item.item_info},
-				item_stock = #{item.item_stock},
+				item_name = #{{item_name},
+				item_price = #{item_price},
+				item_packing = #{item_packing},
+				item_category = #{item_category},
+				item_info = #{{item_info},
+				item_stock = #{item_stock},
 			 WHERE 
-		 	    rf_item_idx = #{item_idx}
+		 	    item_idx = #{item_idx}
 	</update>
    
 	

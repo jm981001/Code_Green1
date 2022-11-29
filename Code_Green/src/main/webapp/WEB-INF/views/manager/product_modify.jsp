@@ -126,7 +126,9 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form action="product_modifyPro.bo?item_idx=${item.item_idx}" method="post"enctype="multipart/form-data" id="sub_form">
+                <form action="product_modifyPro.bo?item_idx=${products.item_idx}" method="get"enctype="multipart/form-data" id="sub_form">
+                	<input type="hidden" name="file1" value="${products.file1}">  
+	                <input type="hidden" name="file2" value="${products.file2}">  
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -136,18 +138,18 @@
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_name"value="${item.item_name}"placeholder="상품번호를 기재해주세요" />
+                                            <input class="form-control" type="text" id="item_name" name="item_name"value="${products.item_name}" />
                                         </div>
                                         <div class="form-group">
                                             <label>정상가격<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_price"value="${item.item_price}"placeholder="정상가를 입력해주세요" />
+                                            <input class="form-control" type="text" id="item_price" name="item_price"value="${products.item_price}" />
                                         </div>
 									
  										<div class="form-group">
                                             <label>할인가격<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" name="item_sale"value="${item.item_sale}"value="0" />
+                                            <input class="form-control" type="text" id="item_sale" name="item_sale"value="${products.item_sale}"value="0" />
                                         </div>                                             
                                         <div class="form-group">
                                             <label>포장상태<sup>*</sup>
@@ -198,7 +200,7 @@
                                        
                                         <div class="form-group">
                                             <label>상품 설명<sup>*</sup></label>
-                                            <input class="form-control" type="text"name="item_info" value="${item.item_info }"placeholder="상품소개를 입력해주세요" />
+                                            <input class="form-control" type="text"name="item_info" value="${products.item_info }" />
                                         </div>
                                     </div>
                                 </figure>
@@ -223,7 +225,7 @@
                                             <div class="form-group">
                                             <label>재고수량<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text"name="item_stock" value="${item.item_stock }"placeholder="" />
+                                            <input class="form-control" type="text"name="item_stock" value="${products.item_stock }"/>
                                         </div>
                                     </div>
                                 </figure>
@@ -234,8 +236,6 @@
                    <div class="ps-form__submit text-center	">
                     <button class="ps-btn"type="submit"value="수정">상품수정</button>
 
-                    <button class="ps-btn"type="reset"value="초기화하기" id="resetBtn">초기화</button>
-                    <a class="ps-btn ps-btn--black" href="products">상품페이지이동</a>
                     </div>
                 </form>
             </section>

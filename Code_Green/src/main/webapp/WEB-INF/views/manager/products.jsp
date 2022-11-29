@@ -129,7 +129,7 @@
             </header>
             <section class="ps-items-listing">
    
-                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a><a class="ps-btn ps-btn--gray" href="product_modify?manager_id=${sessionScope.sId}"><i class="icon icon-download2 mr-2"></i>상품 수정</a></div>
+                 <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a></div>
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
@@ -190,13 +190,13 @@
 						     <td>${item.item_packing}</td>
 						     <td>${item.manager_brandname}</td>
 						        <td>
-                                       <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="product_modify?manager_id=${sessionScope.sId }&item_idx=${item.item_idx}">수정</a>
-                                            <a class="dropdown-item" onclick="product_delete(${item.item_idx })">삭제</a>
-                                            <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a>
-                                        </div>
-                                        </div>
+<!--                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> -->
+<%-- <%--                                             <a class="dropdown-item" href="product_modify?manager_id=${sessionScope.sId }&item_idx=${item.item_idx}">수정</a> --%> --%>
+<%--                                             <a class="dropdown-item" onclick="product_delete(${item.item_idx })">삭제</a> --%>
+<%--                                             <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a> --%>
+<!--                                         </div> -->
+<!--                                         </div> -->
                                     </td>
 						    </tr>     
 					</c:forEach>

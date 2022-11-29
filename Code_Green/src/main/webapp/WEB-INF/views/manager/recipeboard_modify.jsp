@@ -197,7 +197,6 @@
             </div>
                    </div>
             </section>
-        </div>
        
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

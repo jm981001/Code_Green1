@@ -178,7 +178,7 @@ public class ManagerController {
  }
 	
 
-	//------------매니저페이지 내브랜드정보조회-------------------------------------------
+	//------------내 브랜드 정보조회-------------------------------------------
 		
 	@GetMapping(value = "brand_mypage")
 	public String brand_mypage(@RequestParam String manager_id, Model model, HttpSession session) {
@@ -196,7 +196,7 @@ public class ManagerController {
 	
 	}
 	
-	//------------매니저페이지 내브랜드정보 수정----------------------------
+	//------------내 브랜드 정보 수정----------------------------
 	@PostMapping(value = "brand_mypage_modify")
 	public String modifyManager(@ModelAttribute ManagerVO manager,Model model, HttpSession session) {
 		
@@ -211,7 +211,7 @@ public class ManagerController {
 	
 
 	
-	//------------매니저페이지 내브랜드정보 수정 업데이트(브랜드 로고 파일도 같이수정...)----------------------------
+	//------------내 브랜드 정보 수정 업데이트(브랜드 로고 파일도 같이수정)----------------------------
 	
 	@PostMapping(value = "brand_mypage_modifyPro.bo")
 	public String modifyManagerPro(@ModelAttribute ManagerVO manager,
@@ -296,11 +296,12 @@ public class ManagerController {
 		}
 				
 
-		//------------매니저페이지 내브랜드정보 삭제----------------------------
+		//------------내 브랜드정보 삭제----------------------------
 		
 	@GetMapping(value = "brand_mypage_delete")
-	public String brandDelete(@ModelAttribute ManagerVO manager, @RequestParam String manager_id,
-			                   Model model, HttpSession session) {
+	public String brandDelete(@ModelAttribute ManagerVO manager, 
+							 @RequestParam String manager_id,
+			                 Model model, HttpSession session) {
 	
 		String sId = (String)session.getAttribute("sId");
 		
@@ -393,14 +394,14 @@ public class ManagerController {
 	
 
 		
-	//------------매니저페이지 상품등록 폼페이지-------------------------------------------
+	//------------상품 등록 폼페이지-------------------------------------------
 		@RequestMapping(value = "product_register", method = RequestMethod.GET)
 		public String product_register() {
 				return "manager/product_register";
 			}		
 				
 //		product_registerPro.bo
-	//------------매니저페이지 상품등록-------------------------------------------
+	//------------상품 등록-------------------------------------------
 		@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
 		public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, 
 										 Model model, HttpSession session
@@ -486,7 +487,7 @@ public class ManagerController {
 		}		
 		
 		//------------ 상품 등록 상세 조회-------------------------------------------	
-		@PostMapping(value = "/products_detail")
+		@GetMapping(value = "/products_detail")
 		public String products_detail( Model model, HttpSession session, int item_idx) {
 			
 			String sId = (String)session.getAttribute("sId");
@@ -507,15 +508,16 @@ public class ManagerController {
 		//------------상품 수정 - 원본글 불러오기------------------------------------------
 		
  		@GetMapping(value = "/product_modify")
- 		public String product_modify(@ModelAttribute ItemVO item, 
-				                     @ModelAttribute File_ItemVO fileItem,
-				                      Model model, HttpSession session,
-				                      @RequestParam int item_idx) {
+ 		public String product_modify(Model model, HttpSession session,
+ 				@RequestParam(name = "item_idx", required = false) String item_idx) {
+ 			
+ 			int itemModify_idx = Integer.parseInt(item_idx);
  		
- 			ItemVO products = service.getProducts(item_idx);
+ 			ItemVO products = service.getProducts(itemModify_idx);
+ 			System.out.println("번호:" + item_idx);
  			
  			model.addAttribute("products", products);
- 			System.out.println("번호:" + item_idx);
+ 			model.addAttribute("item_idx",item_idx);
  			
  			
  			return "manager/product_modify";
@@ -640,7 +642,7 @@ public class ManagerController {
 			System.out.println(updateCount);
 			
 			if(updateCount == 0) {
-				model.addAttribute("msg", "레시피 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
+				model.addAttribute("msg", "상품 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
 				return "manager/mn_fail_back";
 			}
 			
@@ -781,13 +783,13 @@ public class ManagerController {
 		
 			
 		
-	//------------매니저페이지 주문관리----------------------------------------
+	//------------주문 상세----------------------------------------
 		@RequestMapping(value = "order_detail", method = RequestMethod.GET)
 		public String order_detail() {
 			return "manager/order_detail";
 		}		
 		
-		//------------매니저페이지 배송관리----------------------------------------
+		//------------배송 관리(배송 상태 변경)----------------------------------------
 		
 		
 		
@@ -1274,7 +1276,7 @@ public class ManagerController {
 	         
 	  		
 	  		
-	      	//------------매니저페이지 매출관리-------------------------------------------
+	      	//------------매출 관리-------------------------------------------
 	      		@RequestMapping(value = "sales_main", method = RequestMethod.GET)
 	      		public String sales_main( @RequestParam String manager_id, Model model, HttpSession session) {
 	      			
@@ -1301,7 +1303,7 @@ public class ManagerController {
 
 
 		
-			//------------매니저페이지 정산-------------------------------------------
+			//------------정산-------------------------------------------
 				@RequestMapping(value = "sales_management", method = RequestMethod.GET)
 				public String sales_management() {
 					return "manager/sales_management";

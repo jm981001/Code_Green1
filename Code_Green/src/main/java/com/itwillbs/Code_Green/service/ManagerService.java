@@ -84,8 +84,8 @@ public class ManagerService {
 	
 	
 	 // 상품 등록 원글 불러오기  
-		public ItemVO getProducts(int item_idx) {
-			return mapper.selectProducts(item_idx);
+		public ItemVO getProducts(int itemModify_idx) {
+			return mapper.selectProducts(itemModify_idx);
 		}
 
 	

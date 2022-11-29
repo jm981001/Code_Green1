@@ -58,7 +58,7 @@ public interface ManagerMapper {
 	
 	
 	//상품 상세보기 원글 불러오기   
-		public ItemVO selectProducts(int item_idx);
+		public ItemVO selectProducts(int itemModify_idx);
 	
 	
 	//상품수정하기- 파일수정
@@ -80,9 +80,6 @@ public interface ManagerMapper {
 	
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
-			
-			
-			
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
 			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
 	

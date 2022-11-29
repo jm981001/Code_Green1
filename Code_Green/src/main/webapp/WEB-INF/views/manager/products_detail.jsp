@@ -118,10 +118,9 @@
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-<%--   		<form class="ps-form--search-bar" action="product_modifyPro?id=${sessionScope.sId}"  method="post"name="modifyForm"> --%>
-  		<form class="ps-form--search-bar" action="products_detail?id=${sessionScope.sId}"  method="post"name="detailForm">
-                 <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }">
-                 <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }">
+  		<form class="ps-form--search-bar" action="products_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
+<%--                  <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }"> --%>
+<%--                  <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }"> --%>
 
  
        <table class="table ps-table">
@@ -129,6 +128,7 @@
                     <h2>상품상세보기</h2>
                     <hr>
                        <thead>
+                       
                                 <tr>
                                 	<th>상품번호</th>
                                 	<th>상품명</th>
@@ -187,7 +187,8 @@
 <!-- 			<!-------------등록된 상품이미지 ------------> 
                             
                             
-                          <button class="ps-btn success"type="submit">상품수정</button>
+                         <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">상품수정</button></a>
+                          <button class="ps-btn success"type="submit"onclick="location.href= 'product_delete'">삭제</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </table>
                     
