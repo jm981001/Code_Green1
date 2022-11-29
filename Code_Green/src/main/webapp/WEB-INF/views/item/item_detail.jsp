@@ -712,12 +712,12 @@
 									                    			success: function(data){
 									                    				let json = JSON.parse(data);
 									                    				
-									                    				let bestList = a.bestList;
-									                    				let goodList = a.goodList;
-									                    				let itemList = a.itemList;
-									                    				let worstList = a.worstList;
+									                    				let bestList = json.bestList;
+									                    				let goodList = json.goodList;
+									                    				let itemList = json.itemList;
+									                    				let worstList = json.worstList;
 									                    				
-									                    				
+									                    				drawTable(itemList);
 									                    				
 									            						let comments="";
 									            						let space ="";
@@ -729,62 +729,62 @@
 									        						});
 								                    	}
 								                    	
-								                    	function drawTable(){
+								                    	function drawTable(data){
 								                    		let table = $('#itemList');
 								                    		table.empty();
+								                    		data.forEach((value, index) => {
+								                    			let str = 
+										                    		  +	'<tbody>'  
+										                    			+ '<tr class="item">'  
+										                    				+ '<td width="70%">'+value.board_subject
+										                    					+ '<div class="ps-product" style="float:left;">'
+										                    						+ '<div class="ps-product__rating" style="float:left;">'
+										                    							+ '<div class="br-wrapper br-theme-fontawesome-stars">'
+										                    							
+										                    							
+										                    							
+										                    							   //별
+										                    							   
+										                    							   
+										                    							+ '</div>'
+										                    						+ '</div>'
+										                    					+ '</td>'
+										                    				+ '<td width="10%">'+value.board_id+'</td>'  
+										                    				
+										                    				+ '<td>'+value.board_date+'</td>'
+										                    				+ '<td width="10%">'+value.best_count+'</td>'  
+										                    			+ '</tr>  '
+										                    			+ '<tr class="hide">'  
+										                    				+ '<td colspan="5">'
+										                    					 + '<br><br>'
+										                    					 + '<img src="/Code_Green/resources/commUpload/'+value.file1+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display=none">'
+										                    					 + '<img src="/Code_Green/resources/commUpload/'+value.file2+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display=none">'
+										                    						+ '<br><br><br><br>'+value.board_content+'<br><br><br>'
+										                    						
+										                    					 + '<div align="right">'
+										                    					  + '<input type="button" class="ps-btn-best_jm" onclick="best('+value.item_idx+','+value.board_idx+','+value.item_category+','+value.manager_brandname+',${sessionScope.sId})">'+value.best_count
+										                    					
+										                    					  
+										                    					  
+										                    					  
+//		 								                    					  + '<c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">'
+										                    					  + '<input type="button" value="수정" onclick="location.href=ReviewModify.bo?item_idx='+value.item_idx+'&board_idx='+value.board_idx+'&item_category='+value.item_category+'&manager_brandname='+value.manager_brandname+'&file1='+value.file1+'&file2='+value.file2">
+										                    					  + '<input type="button" value="삭제" onclick="confirmDelete('+value.board_idx+'&item_category='+value.item_category+'&manager_brandname='+value.manager_brandname+')">'
+//		 								                    					  + '</c:if>
+										                    					
+										                    					  
+										                    					  
+										                    					  
+										                    					  + '</div>'
+										                    				+ '</td>'  
+										                    			+ '</tr>'
+										                    		+ '</tbody>';
+										                    		
+										                    		table.append(str);
+								                    		});
 								                    		
-								                    		let str = 
+// 															debugger;                    		
 								                    		
-								                    			'<tbody>'  
-								                    			+= '<tr class="item">'  
-								                    				+= '<td width="70%">'+this.board_subject
-								                    					+= '<div class="ps-product" style="float:left;">'
-								                    						+= '<div class="ps-product__rating" style="float:left;">'
-								                    							+= '<div class="br-wrapper br-theme-fontawesome-stars">'
-								                    							
-								                    							
-								                    							
-								                    							   //별
-								                    							   
-								                    							   
-								                    							+= '</div>'
-								                    						+= '</div>'
-								                    					+= '</td>'
-								                    				+= '<td width="10%">'+this.board_id+'</td>'  
-								                    				
-								                    				+= '<td>'+this.board_date+'</td>'
-								                    				+= '<td width="10%">'+this.best_count+'</td>'  
-								                    			+= '</tr>  '
-								                    			+= '<tr class="hide">'  
-								                    				+= '<td colspan="5">'
-								                    					 += '<br><br>'
-								                    					 += '<img src="/Code_Green/resources/commUpload/'+this.file1+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display='+'none'">'
-								                    					 += '<img src="/Code_Green/resources/commUpload/'+this.file2+' style="width: 400px; height: 400px; display: none;" onerror="this.style.display='+'none'">'
-								                    						+= '<br><br><br><br>'+this.board_content+'<br><br><br>'
-								                    						
-								                    					 += '<div align="right">'
-								                    					  += '<input type="button" class="ps-btn-best_jm" onclick="best('+this.item_idx+','+this.board_idx+','+this.item_category+','+this.manager_brandname+',${sessionScope.sId})">'+this.best_count
-								                    					
-								                    					  
-								                    					  
-								                    					  
-								                    					  += '<c:if test="${board.board_id eq sessionScope.sId || board.board_id eq 'admin' }">'
-								                    					  += '<input type="button" value="수정" onclick="location.href='+'ReviewModify.bo?item_idx=${item.item_idx }&board_idx=${board.board_idx }&item_category=${param.item_category}&manager_brandname=${param.manager_brandname }&file1=${board.file1 }&file2=${board.file2 }'">
-								                    					  += '<input type="button" value="삭제" onclick="confirmDelete('+this.board_idx+'&item_category='+this.item_category+'&manager_brandname='+this.manager_brandname+')">'
-								                    					  += '</c:if>
-								                    					
-								                    					  
-								                    					  
-								                    					  
-								                    					  += '</div>'
-								                    				+= '</td>'  
-								                    			+= '</tr>'
-								                    		+= '</tbody>'
-								                    		
-								                    		
-								                    		;
-								                    		
-								                    		table.append(str);
 								                    		
 								                    	}
 								                    	

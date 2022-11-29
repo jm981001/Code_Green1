@@ -54,7 +54,7 @@ public interface ItemMapper {
 	List<ItemVO> selectItemList_ex();
 	
 	//베스트리스트
-	List<ItemVO> selectItemBestList(@Param("startRow")int startRow, @Param("listLimit") int listLimit, @Param("searchType") String searchType, @Param("keyword") String keyword);
+	List<ItemVO> selectItemBestList();
 
 	//베스트리스트 갯수
 	int selectItemBestListCount(@Param("searchType")String searchType, @Param("keyword")String keyword);
@@ -88,6 +88,15 @@ public interface ItemMapper {
 
 	//상품구매 유무 (리뷰 버튼)
 	int reviewBtn(@Param("sIdx")int sIdx,@Param("item_idx")int item_idx);
+
+	//베스트리스트_판매순
+	List<ItemVO> selectItemBestList_slaes();
+
+	//베스트리스트_가격 낮은순
+	List<ItemVO> selectItemBestList_cheap();
+	
+	//베스트리스트_가격 높은순
+	List<ItemVO> selectItemBestList_ex();
 
 
 

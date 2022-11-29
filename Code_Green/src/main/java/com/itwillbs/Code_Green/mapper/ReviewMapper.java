@@ -46,7 +46,7 @@ public interface ReviewMapper {
 	// 삭제 전 실제 업로드 된 파일명 조회 작업 요청2
 	String selectRealFile2(int board_idx);
 
-	//파일삭제
+	//파일삭제 
 	int deleteFile(int board_idx);
 
 	//리뷰 상태 변경

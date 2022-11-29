@@ -84,8 +84,8 @@ public class ItemService {
 	}
 	
 	//베스트리스트
-	public List<ItemVO> itemBestList(int startRow, int listLimit, String searchType, String keyword) {
-		return mapper.selectItemBestList(startRow, listLimit, searchType, keyword);
+	public List<ItemVO> itemBestList() {
+		return mapper.selectItemBestList();
 	}
 
 	//베스트리스트 갯수
@@ -143,6 +143,21 @@ public class ItemService {
 	//상품구매 유무 (리뷰 버튼)
 	public int reviewBtn(int sIdx, int item_idx) {
 		return mapper.reviewBtn(sIdx,item_idx);
+	}
+
+	//베스트리스트_판매순
+	public List<ItemVO> itemBestList_sales() {
+		return mapper.selectItemBestList_slaes();
+	}
+
+	//베스트리스트_가격 낮은순
+	public List<ItemVO> itemBestList_cheap() {
+		return mapper.selectItemBestList_cheap();
+	}
+	
+	//베스트리스트_가격 높은순
+	public List<ItemVO> itemBestList_ex() {
+		return mapper.selectItemBestList_ex();
 	}
 
 

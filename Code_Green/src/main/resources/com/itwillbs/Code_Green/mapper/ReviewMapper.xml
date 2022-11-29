@@ -56,30 +56,39 @@
 					,"1000"
 					,"0"
 					,"0"
-					,"..."
+					,(SELECT c.COIN_TOTAL as total
+						 FROM coin c
+							left join member m
+								on c.RF_MEMBER_IDX = m.MEMBER_IDX
+						 WHERE
+							  m.MEMBER_ID = #{board_id}
+                              order by coin_idx desc limit 1)+1000
 					,date_format(now(),'%Y%m%d')
 					)
 	</insert>
 	
-	<!-- 	마이페이지 리뷰 상태 변경 방금 -->
+	<!-- 	리뷰 상태 변경 방금 -->
 	<update id="reviewStatus">
-		UPDATE sell_detail
+
+				
+			UPDATE sell_detail
 			SET
 			     sell_review_status = "Y"
 			WHERE
-					rf_sell_idx = (select SELL_IDX from
-									(select s.SELL_IDX
-										from sell_detail d
-											left join sell s
-											on d.SELL_DETAIL_IDX = s.SELL_IDX
-											left join member m
-											on m.MEMBER_IDX= s.RF_MEMBER_IDX
-										where m.MEMBER_IDX=#{sIdx}
-											 and d.RF_ITEM_IDX=#{item_idx}
-											 and d.SELL_REVIEW_STATUS = 'N'
-										limit 1)
+					sell_detail_idx = (select sell_detail_idx from
+										(select d.sell_detail_idx
+											from sell_detail d
+												left join sell s
+												on d.RF_SELL_IDX = s.SELL_IDX
+												left join member m
+												on m.MEMBER_IDX= s.RF_MEMBER_IDX
+											where m.MEMBER_IDX=${sIdx}
+												 and d.RF_ITEM_IDX=#{item_idx}
+												 and d.SELL_REVIEW_STATUS = 'N'
+											limit 1)
 									  a)
-				and rf_item_idx = #{item_idx};
+				and rf_item_idx = #{item_idx}
+				
 	</update>
 	<!-- 별점 등록 -->
 	<insert id="insertStar">

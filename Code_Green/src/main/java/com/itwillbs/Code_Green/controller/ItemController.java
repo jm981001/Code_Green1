@@ -267,34 +267,35 @@ public class ItemController {
 	
 	//------------ 베스트리스트 --------------------------------------------------------------------------------------
 	@GetMapping(value = "/BestItemList.bo")
-		public String bestItemList(@RequestParam(defaultValue = "") String searchType, 
-				@RequestParam(defaultValue = "") String keyword, 
-				@RequestParam(defaultValue = "1") int pageNum, Model model) {
-		
-			int listLimit = 16; // 한 페이지 당 표시할 게시물 목록 갯수 
-			int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
-			int startRow = (pageNum - 1) * listLimit;
-			
-			int listCount = service.getItemBestListCount(searchType, keyword);
-			int maxPage = (int)Math.ceil((double)listCount / listLimit);
-			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-			int endPage = startPage + pageListLimit - 1;
-			if(endPage > maxPage) {
-				endPage = maxPage;
-			}
-			PageInfo pageInfo = new PageInfo(
-					pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-			
-			List<ItemVO> itemBestList = service.itemBestList(startRow, listLimit, searchType, keyword);
-			
-			model.addAttribute("pageInfo", pageInfo);
+		public String bestItemList(Model model) {
+			List<ItemVO> itemBestList = service.itemBestList();
 			model.addAttribute("itemBestList", itemBestList);
-			
 			return "item/item_best_list";
-		}
-		
-
-
+	}
+	
+	//베스트리스트_판매순
+	@GetMapping(value = "/Item_best_sales.bo")
+	public String Item_best_sales(Model model) {
+		List<ItemVO> itemBestList_sales = service.itemBestList_sales();
+		model.addAttribute("itemBestList_sales", itemBestList_sales);
+		return "item/item_best_sales";
+	}	
+	
+	//베스트리스트_가격 낮은순
+	@GetMapping(value = "/Item_best_cheap.bo")
+	public String Item_best_cheap(Model model) {
+		List<ItemVO> itemBestList_cheap = service.itemBestList_cheap();
+		model.addAttribute("itemBestList_cheap", itemBestList_cheap);
+		return "item/item_best_cheap";
+	}
+	
+	//베스트리스트_가격 높은순
+	@GetMapping(value = "/Item_best_ex.bo")
+	public String Item_best_ex(Model model) {
+		List<ItemVO> itemBestList_ex = service.itemBestList_ex();
+		model.addAttribute("itemBestList_ex", itemBestList_ex);
+		return "item/item_best_ex";
+	}
 	
 	
 	

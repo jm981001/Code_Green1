@@ -78,7 +78,7 @@
 //                                                 	pageContext.setAttribute("score", score);
 													
                                                 %>
-                                        	<c:forEach var="item" items="${itemBestList }">
+                                        	<c:forEach var="item" items="${itemBestList_cheap }">
                                         	<!-- 상품 1개당 시작 -->
                                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
                                                 <div class="ps-product">
