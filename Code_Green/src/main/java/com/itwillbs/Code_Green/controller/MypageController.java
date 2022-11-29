@@ -644,7 +644,7 @@ public class MypageController {
 		
 	
 	
-	//------------마이페이지 개인정보 수정-------------------------------------------
+	//------------마이페이지 개인정보 수정페이지-------------------------------------------
 	@GetMapping(value = "myPage_userInfo")
 	public String myPage_userInfo(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		String sId = (String) session.getAttribute("sId");
@@ -654,6 +654,26 @@ public class MypageController {
 		
 		return "member/myPage_userInfo";
 		
+	}
+	
+	//------------마이페이지 개인정보 수정-------------------------------------------
+	@PostMapping(value = "myPage_userInfo_Update")
+	public String myPage_userInfo_Update(@ModelAttribute MemberVO member, Model model, HttpSession session) {
+		String sId = (String) session.getAttribute("sId");
+		int idx = (int) session.getAttribute("sIdx");
+		
+		System.out.println("member"+member);
+		MemberVO memberInfo = Mservice.getMemberInfo(sId);		
+		
+		
+		int updateCount = Mservice.modifyMemberInfo(member);
+		if(updateCount > 0) {
+			return "myPage_userInfo";
+		} else {
+//		
+		model.addAttribute("msg", "수정 실패");	
+		return "member/fail_back";
+		}
 	}
 	
 	

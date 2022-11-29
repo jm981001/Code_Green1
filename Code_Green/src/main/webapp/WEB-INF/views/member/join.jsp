@@ -268,7 +268,7 @@ button {
 					</div>
 					
 						<div class="input-group-addon">
-							<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+							<button type="button" class="btn btn-primary" id="mail-Check-Btn" style="background-color:#5fa30f">본인인증</button>
 						</div>
 						<div class="mail-check-box">
 							<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
@@ -351,7 +351,7 @@ button {
 <!-- 						</select> -->
 					</div>
 						<div class="input-group-addon">
-							<button type="button" class="btn btn-primary" id="mail-Check-BtnM">본인인증</button>
+							<button type="button" class="btn btn-primary" id="mail-Check-BtnM" style="background-color:#5fa30f">본인인증</button>
 						</div>
 						<div class="mail-check-boxM">
 							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">

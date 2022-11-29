@@ -18,21 +18,22 @@ public class MemberService {
 	@Autowired
 	private MemberMapper mapper;
 
+	// 로그인
 	// BCryptPasswordEncoder 활용한 로그인을 위해 패스워드 조회 - getPasswd()
 	// => 파라미터 : 아이디, 리턴타입 : String
 	public String getPasswd(String member_id) {
 		return mapper.selectPasswd(member_id);
 	}
-	
-	// 로그인
-//	public MemberVO loginMember(MemberVO member) {
-//		return mapper.loginMember(member);
-//	}
 
 	// 회원 정보 조회 수행 getMemberInfo()
 	// => 파라미터 : 아이디, 리턴타입 : MemberVO(member)
 	public MemberVO getMemberInfo(String member_id) {
 		return mapper.selectMemberInfo(member_id);
+	}
+	// 회원 수정 modifyMemberInfo()
+	// => 파라미터 : 아이디, 리턴타입 : MemberVO(member)
+	public int modifyMemberInfo(MemberVO member) {
+		return mapper.modifyMemberInfo(member);
 	}
 
 	// 회원 가입 joinMember() 메서드
@@ -79,6 +80,8 @@ public class MemberService {
 	public int deleteFollow(int rf_member_idx, int rf_manager_idx) {
 		return mapper.deleteFollowBrand(rf_member_idx, rf_manager_idx);
 	}
+
+	
 
 	
 

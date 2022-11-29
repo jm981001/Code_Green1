@@ -50,60 +50,65 @@
 
     <!-- ==========개인정보 수정=========================================================================================================     -->
 					<div class="col-lg-8">
-                        <div class="ps-section__right">
-                            <form class="ps-form--account-setting" action="index.html" method="get">
-                                <div class="ps-form__header">
-                                    <h3>개인정보 수정</h3>
-                                </div>
-                                <div class="ps-form__content">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input class="form-control" type="text" placeholder="Please enter your name...">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Phone Number</label>
-                                                <input class="form-control" type="text" placeholder="Please enter phone number...">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input class="form-control" type="text" placeholder="Please enter your email...">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Birthday</label>
-                                                <input class="form-control" type="text" placeholder="Please enter your birthday...">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Gender</label>
-                                                <select class="form-control">
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group submit">
-                                    <button class="ps-btn">Update</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+						<div class="ps-section__right">
+							<form class="ps-form--account-setting" action="myPage_userInfo_Update" method="post">
+								<div class="ps-form__header">
+									<h3>개인정보 수정</h3>
+								</div>
+								<div class="ps-form__content">
+									<div class="form-group">
+										<label>이름</label> <input class="form-control" name="member_name" type="text" value="${member.member_name} ">
+									</div>
+									<div class="row">
+										
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>아이디</label> <input class="form-control" type="text" name="member_id" value="${member.member_id}">
+											</div>
+										</div>
+<!-- 										<div class="col-sm-6"> -->
+<!-- 											<div class="form-group"> -->
+<!-- 												<label>패스워드</label> <input class="form-control" type="text" name="member_pass" value="***********" readonly="readonly"> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>전화번호</label> <input class="form-control" type="text" name="member_phone" value="${member.member_phone}">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>우편번호</label> <input class="form-control" type="text" id="member_postcode"name="member_postcode" value="${member.member_postcode}">
+                                            	<input type="button" onclick="execDaumPostcode()" name="adressBtn" id="adressBtn" value="주소찾기">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>주소</label> <input class="form-control" type="text" id="member_address"name="member_address" value="${member.member_address}">
+											</div>
+										</div>
+										
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>이메일 주소</label> <input class="form-control" type="text" name="member_email" value="${member.member_email}">
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="form-group submit">
+									<button class="ps-btn">Update</button>
+								</div>
+							</form>
+						</div>
+					</div>
 
-					
-					
-					
-					
-	
-	<!-- ---------------------------------------------------------- 나의 정보 끝 ---------------------------------------------------------- -->				
+
+
+
+
+
+					<!-- ---------------------------------------------------------- 나의 정보 끝 ---------------------------------------------------------- -->				
 				</div>
 			</div>
 		</section>
@@ -143,5 +148,19 @@
 	<script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
 	<!-- custom scripts-->
 	<script src="/Code_Green/resources/js/main.js"></script>
+	    <!-- 주소 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">
+// $(document).ready(function(){
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            document.getElementById("member_postcode").value = data.zonecode;
+	            document.getElementById("member_address").value = data.roadAddress;
+	        }
+	    }).open();
+	}
+// });	
+</script>
 </body>
 </html>
