@@ -24,6 +24,12 @@ public interface ManagerMapper {
 	// 3. 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
 	public ManagerVO selectManagerInfo(String manager_id);
+	
+	// 탈퇴 여부
+	public String checkDel(String manager_id);
+	// 관리자 승인여부
+	public String checkAuth(String manager_id);
+	
     
 	// 브랜드 상세정보조회(브랜드마이페이지)
 	public ManagerVO selectBrandInfo(String manager_id);

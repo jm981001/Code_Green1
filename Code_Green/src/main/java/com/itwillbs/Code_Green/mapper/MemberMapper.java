@@ -35,8 +35,6 @@ public interface MemberMapper {
 	
 	
 	
-	
-	
 	// ============================================ 마이페이지 ================================================================
 	
 	
@@ -54,6 +52,8 @@ public interface MemberMapper {
 	
 	// 마이페이지 - 팔로우브랜드 언팔로우
 	public int deleteFollowBrand(@Param("rf_member_idx")int rf_member_idx, @Param("rf_manager_idx") int rf_manager_idx);
+
+	;
 
 	
 	

@@ -34,7 +34,8 @@ public class MemberController {
 	
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
-	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session) {
+	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session,
+			@RequestParam String member_id) {
 		// ------------------ BCryptPasswordEncoder 활용한 로그인 판별 ----------------------
 		// 1. BCryptPasswordEncoder 객체 생성
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -46,7 +47,12 @@ public class MemberController {
 
 		// 3. 탈퇴 여부 확인
 		String checkDel = service.checkDel(member.getMember_id());
-
+		MemberVO checkId = service.getMemberInfo(member_id);
+		System.out.println("checkId"+checkId);
+		if(checkId==null) {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
+			return "member/fail_back";
+		}
 		if (checkDel.equals("Y")) {
 			System.out.println("탈퇴한 회원");
 			model.addAttribute("msg", "탈퇴한 회원입니다");
@@ -90,7 +96,7 @@ public class MemberController {
 	// "/MemberJoinPro.me" 요청에 대해 비즈니스 로직 처리할 joinPro() 메서드 정의 - POST
 	// => 파라미터 : 회원 가입 정보(MemberVO), Model 객체
 	@PostMapping(value = "/MemberJoinPro.me")
-	public String joinMemberPro(@ModelAttribute MemberVO member, Model model) {
+	public String joinMemberPro(@ModelAttribute MemberVO member, Model model, @RequestParam String member_id) {
 
 		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------
 
@@ -108,7 +114,7 @@ public class MemberController {
 			//가입 성공시 기본적립금 적립
 //			MemberVO getMem = service.getMemberInfo(member.getMember_id());
 //			service.setCoin(getMem);
-			
+//			
 			return "redirect:/join_result";
 		} else { // 가입 실패
 			model.addAttribute("msg", "가입 실패!");

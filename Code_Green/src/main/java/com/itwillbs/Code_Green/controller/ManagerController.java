@@ -30,6 +30,7 @@ import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
+import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.SellVO;
@@ -59,25 +60,38 @@ public class ManagerController {
 		// => 파라미터 : 아이디 리턴타입 : String(passwd)
 		String passwd = service.getPasswd(manager.getManager_id());
 //				System.out.println(passwd);
-
+		String checkDel = service.checkDel(manager.getManager_id());
+		String checkAuth = service.checkAuth(manager.getManager_id());
 		// 3. 조회 결과를 활용하여 로그인 성공 여부 판별
 		// 1) 아이디가 없을 경우(passwd 값이 null) 실패
 		// 2) 패스워드 비교(BCryptPasswordEncoder 객체의 matches() 메서드 활용)
 		// 2-1) 다를 경우 실패
 		// 2-2) 같을 경우 성공
-
-		if (passwd == null || !encoder.matches(manager.getManager_pass(), passwd)) {
-			model.addAttribute("msg", "기업 로그인 실패! 힝~");
-//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
+		// 탈퇴 여부 확인
+		ManagerVO checkId = service.getManagerInfo(manager_id);
+		System.out.println("checkId"+checkId);
+		if(checkId==null) {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
+			return "member/fail_back";
+		}
+		if (checkDel.equals("Y") || checkAuth.equals("N")) {
+			model.addAttribute("msg", "사용 불가능한 계정입니다 (탈퇴,관리자 승인 거부)");
 			return "member/fail_back";
 		} else {
-			session.setAttribute("sId", manager.getManager_id());
-			if (selectManager.getManager_storecode() != null) {
-				session.setAttribute("sCode", selectManager.getManager_storecode());
-			}
-			return "redirect:/";
-		}
 
+			if (passwd == null || !encoder.matches(manager.getManager_pass(), passwd)) {
+				model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
+//			System.out.println(manager.getManager_id() + ", " + manager.getManager_pass());
+				return "member/fail_back";
+			} else {
+				session.setAttribute("sId", manager.getManager_id());
+				if (selectManager.getManager_storecode() != null) {
+					session.setAttribute("sCode", selectManager.getManager_storecode());
+				}
+				return "redirect:/";
+			}
+
+		}
 	}
 
 	@PostMapping(value = "/ManagerJoinPro.me")

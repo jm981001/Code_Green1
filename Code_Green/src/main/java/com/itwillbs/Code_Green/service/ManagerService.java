@@ -29,6 +29,15 @@ public class ManagerService {
 	public String getPasswd(String manager_id) {
 		return mapper.selectPasswd(manager_id);
 	}
+	//탈퇴여부
+	public String checkDel(String manager_id) {
+		return mapper.checkDel(manager_id);
+	}
+	//관리자 승인여부
+	public String checkAuth(String manager_id) {
+		return mapper.checkAuth(manager_id);
+
+	}
 	
 	
 	//----------------------브랜드 정보 -------------------------------

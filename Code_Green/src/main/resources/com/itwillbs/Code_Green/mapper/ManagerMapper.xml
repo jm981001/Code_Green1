@@ -28,7 +28,19 @@
 					date_format(now(),'%Y%m%d%T')<!--	MANAGER_DATE VARCHAR(14) NOT NULL 				-->
 					)
 	</insert>
-
+	<!-- 탈퇴 여부 -->
+	<select id="checkDel" resultType="string">
+		SELECT manager_del_yn 
+			FROM manager 
+				WHERE manager_id = #{manager_id}
+	</select>
+	
+	<!-- 관리자 승인 여부 -->
+	<select id="checkAuth" resultType="string">
+		SELECT manager_adminauth 
+			FROM manager 
+				WHERE manager_id = #{manager_id}
+	</select>
 
 <!-- 
 	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
