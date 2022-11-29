@@ -85,6 +85,21 @@ public class CommunityService {
 		return mapper.selectReplyList(reply_bo_ref);
 	}
 
+	// 대댓글 순서번호(reply_re_seq) 조정
+	public void increaseReplyReSeq(ReplyVO reply) {
+		mapper.updateReplyReSeq(reply);
+	}
+	
+	// 대댓글 쓰기등록
+	public int writeReReply(ReplyVO reply) {
+		return mapper.insertReReply(reply);
+	}
+	
+	// 댓글 삭제 
+	public int deleteReply(int reply_idx) {
+		return mapper.deleteReply(reply_idx);
+	}
+	
 	// 새글 작성(사진제외)
 	public int writeCommunityBoard(BoardVO board) {
 		return mapper.insertCommunityBoard(board);
@@ -105,20 +120,6 @@ public class CommunityService {
 //		return mapper.selectFileModify(board_idx);
 //	}
 	
-	// 대댓글 순서번호(reply_re_seq) 조정
-	public void increaseReplyReSeq(ReplyVO reply) {
-		mapper.updateReplyReSeq(reply);
-	}
-		
-	// 대댓글 쓰기등록
-	public int writeReReply(ReplyVO reply) {
-		return mapper.insertReReply(reply);
-	}
-
-	// 댓글 삭제 
-	public int deleteReply(int reply_idx) {
-		return mapper.deleteReply(reply_idx);
-	}
 	
 	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 1  
 	public String getRealFile1(int board_idx) {

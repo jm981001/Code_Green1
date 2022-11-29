@@ -54,6 +54,15 @@ public interface CommunityMapper {
 	// 댓글 목록 출력
 	List<ReplyVO> selectReplyList(int reply_bo_ref);
 	
+	// 대댓글 순서번호 조정(reply_re_seq)
+	void updateReplyReSeq(ReplyVO reply);
+	
+	// 대댓글 쓰기
+	int insertReReply(ReplyVO reply);
+	
+	// 댓글 삭제
+	int deleteReply(int reply_idx);
+
 	// 새글 작성 - 텍스트 (사진제외)
 	int insertCommunityBoard(BoardVO board);
 	
@@ -63,14 +72,6 @@ public interface CommunityMapper {
 	// 글 수정폼 페이지에 글데이터 가져오기
 	BoardVO selectBoardModify(BoardVO board);
 
-	// 대댓글 순서번호 조정(reply_re_seq)
-	void updateReplyReSeq(ReplyVO reply);
-
-	// 대댓글 쓰기
-	int insertReReply(ReplyVO reply);
-
-	// 댓글 삭제
-	int deleteReply(int reply_idx);
 	
 	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 1  
 	String selectRealFile1(int board_idx);

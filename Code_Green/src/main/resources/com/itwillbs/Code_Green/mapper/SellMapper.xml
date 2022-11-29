@@ -324,6 +324,41 @@
 					sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
 	</select>
 	
+		<!-- 마이페이지 // 내주문목록 주문별 상세내용 -->
+	<select id="getMyBuyListDetail" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell 
+			WHERE rf_member_idx = #{member_idx} 
+				  AND 
+				  sell_order_number = #{sell_order_number};
+	
+	</select>
+	
+	<!-- 마이페이지 // 내주문목록 아이템리스트 출력 -->
+	<select id="getMyBuyItemList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT d.sell_amount,       	
+		       i.item_name,
+		       i.item_price,
+		       i.item_idx,
+		       i.item_category,
+		       m.manager_brandname,
+		       f.file1
+		  FROM sell_detail d
+		  LEFT JOIN sell s
+		  ON 
+		  			d.RF_SELL_IDX = s.sell_idx
+	      LEFT JOIN item i 
+	      ON 
+	      			d.rf_item_idx = i.item_idx
+	      LEFT JOIN manager m
+	      ON 
+	      			i.RE_MANAGER_IDX = m.MANAGER_IDX
+	      LEFT JOIN file_item f 
+	      ON 
+	      			i.item_idx = f.rf_item_idx
+	      WHERE 	s.sell_order_number = #{sell_order_number}
+	</select>
+	
 	
 	
 	

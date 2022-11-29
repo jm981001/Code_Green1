@@ -83,10 +83,21 @@
 		alert("신고가 완료되었습니다!\n관리자의 확인 후 처리됩니다. 감사합니다.");
 	};
 	
-// ============================ 글삭제여부 확인 =====================================	
-	function deleteCheck(){
-		return confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
-	}
+// ============================ 댓글삭제여부 확인 =====================================	
+	function deleteCheck(reply_idx){
+		let check = confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
+		if(check){
+			$.ajax({
+				url:"replyDelete.re",
+				data:{reply_idx : reply_idx},
+				success:function(msg){
+					alert(msg);
+					replyCount();
+					getReplyList();			
+				},
+			})
+		};
+	};
 	
 // ============================ 추천기능 ==========================================	
 	$(function(){
@@ -180,12 +191,11 @@
                         
 						<!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
                         if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
-	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="replyDelete.re?reply_idx='
-	                        			 + this.reply_idx +'&board_idx='+ this.reply_bo_ref +'&pageNum=' +${param.pageNum} + '" id="rep_delBtn" onclick="return deleteCheck();"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
+	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="#" id="rep_delBtn" onclick="deleteCheck('+ this.reply_idx +')"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
 	                        }
                         <!-- 대댓글 작성을 위한 폼 -->
 						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none">'
-									+ '<form action="#" method="post" id="form">'
+									+ '<form action="#" method="post" id="form'+ idNum +'">'
 									+ '<input type="hidden" name="reply_bo_ref" value="'+ this.reply_bo_ref +'">'
 									+ '<input type="hidden" name="reply_re_ref" value="'+ this.reply_re_ref +'">'
 									+ '<input type="hidden" name="reply_re_lev" value="'+ this.reply_re_lev +'">'
@@ -193,8 +203,9 @@
 									+ '<input type="hidden" name="reply_id" value="${sessionScope.sId}">'
 									+ '<input type="hidden" name="pageNum" value="${param.pageNum}">'
 									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
-									+ '<input type="button" id="goReReply" value="작성" onclick="callreReply()"></form></div>';
+									+ '<input type="button" id="goReReply" value="작성" onclick="callreReply('+ idNum +')"></form></div>';
                         comments += '</span><hr>';
+                        console.log(comments);
                         commentsResult += comments;
 					});
 				};
@@ -204,7 +215,7 @@
 		});
 	};	
 // ========================= 대댓작성을 위한 비동기 처리 ================================================
-	function callreReply(){
+	function callreReply(idNum){
 		if(${sessionScope.sId == null}){
 			
 			alert("로그인 후 사용가능합니다!");
@@ -213,7 +224,7 @@
 			$.ajax({
 				url:"reReplyWrite.re",
 				type:"POST",
-				data: $("#form").serialize(),
+				data: $("#form" + idNum).serialize(),
 				datatype:"json",
 				success:function(){
 					getReplyList();

@@ -597,11 +597,11 @@ public class CommunityController {
 	}
 	
 	//-------------------------------- 댓글 삭제 ------------------------------------------- 
+	@ResponseBody
 	@GetMapping("/replyDelete.re")
-	public String deleteReply(@RequestParam int reply_idx,Model model,int pageNum, int board_idx) {
+	public void deleteReply(@RequestParam int reply_idx) {
 		
 		int deleteReplyCount = service.deleteReply(reply_idx);
-		
 		String msg = "";
 		if(deleteReplyCount > 0) {
 			msg += "선택한 댓글이 삭제되었습니다.";
@@ -609,8 +609,6 @@ public class CommunityController {
 			msg += "댓글삭제에 실패하였습니다.\n 다시시도해주세요.";
 		}
 		
-		System.out.println(msg);
-		return "redirect:/CommunityDetail.bo?board_idx=" + board_idx + "&pageNum=" + pageNum;
 	}
 	
 	

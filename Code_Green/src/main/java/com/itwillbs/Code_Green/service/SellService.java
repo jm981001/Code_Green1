@@ -93,7 +93,15 @@ public class SellService {
 		return sell_mapper.getMyBuyListByDateCount(member_idx,date1,date2);
 	}
 
+	// 마이페이지 - 내주문목록 주문별 상세내용 
+	public SellVO getMyBuyListDetail(int member_idx, String sell_order_number) {
+		return sell_mapper.getMyBuyListDetail(member_idx,sell_order_number);
+	}
 	
+	// 마이페이지 - 내주문목록 아이템리스트 출력
+	public List<SellVO> getMyBuyItemList(String sell_order_number) {
+		return sell_mapper.getMyBuyItemList(sell_order_number);
+	}
 
 
 		
