@@ -670,7 +670,8 @@ public class MypageController {
 		
 		int updateCount = Mservice.modifyMemberInfo(member);
 		if(updateCount > 0) {
-			return "myPage_userInfo";
+			model.addAttribute("member", memberInfo);
+			return "member/myPage_userInfo";
 		} else {
 //		
 		model.addAttribute("msg", "수정 실패");	
