@@ -92,44 +92,7 @@
 							<h2>특가 상품</h2>
 						</div> 
 						<img src="/Code_Green/resources/img/특가상품.png" style="margin-left: 130px;">
-						
-<!--                        <nav class="ps-store-link"> -->
-<!--                         	<section id="buttonArea"> -->
-<!-- 							검색 기능 구현을 위한 form 태그 -->
-<!-- 								<form action="category_all" method="get" style="margin-left: 20px"> -->
-<!-- 									<select name="searchType"> -->
-<!-- 										<option value="item_name">상품명</option> -->
-<!-- 										<option value="brand_name">상호명</option> -->
-<!-- 									</select> -->
-<!-- 									<input type="text" name="keyword"> -->
-<!-- 									<input type="submit" value="검색"> -->
-<!-- 								</form> -->
-<!-- 							</section> -->
-<!--                             <select name="sortType" id="sort" class="form-select" aria-label="Default select example" onchange="sortItemList(this.value)"> -->
-<!-- 							  <option value="newDate">신상품순</option> -->
-<!-- 							  <option value="review">후기 많은순</option> -->
-<!-- 							  <option value="cheap">낮은 가격순</option> -->
-<!-- 							  <option value="expensive">높은 가격순</option> -->
-<!-- 							</select> -->
-<!--                         </nav> -->
-							
-                        
-                                        
                         <div class="ps-shopping ps-tab-root">
-<!--                             <div class="ps-shopping__header"> -->
-<!--                               <p>총<strong> 6</strong> 개의 상품</p> -->
-<!--                                 <div class="ps-shopping__actions"> -->
-                                	<!-- 이건혹시 만약 뷰 종류할거면 재활용 -->
-                                	
-<!--                                     <div class="ps-shopping__view"> -->
-<!--                                         <p>View</p> -->
-<!--                                         <ul class="ps-tab-list"> -->
-<!--                                             <li class="active"><a href="#tab-1"><i class="icon-grid"></i></a></li> -->
-<!--                                             <li><a href="#tab-2"><i class="icon-list4"></i></a></li> -->
-<!--                                         </ul> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
                             <div class="ps-tabs">
                                 <div class="ps-tab active" id="tab-1">
                                     <div class="ps-shopping-product">
@@ -166,8 +129,8 @@
                                                     <!-- 
                                                     * 브랜드명은 서브쿼리 사용하여 불러오기
                                                      -->
-                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
-                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>
+                                                        <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                                             
                                                             <!-- 별점 -->
                                                             <!-- 
@@ -192,7 +155,7 @@
                                                             <!-- 가격 -->
                                                             <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
                                                         </div>
-                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx }">${item.item_name }</a>
+                                                        <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                                             <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
                                                         </div>
                                                     </div>

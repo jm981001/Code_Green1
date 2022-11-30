@@ -449,6 +449,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -504,6 +505,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -559,6 +561,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -616,6 +619,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -673,6 +677,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -730,6 +735,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -787,6 +793,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -844,6 +851,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -901,6 +909,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -958,6 +967,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -1015,6 +1025,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -1072,6 +1083,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score
 						  FROM item i 
             		 LEFT JOIN file_item f 
@@ -1130,6 +1142,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
@@ -1193,6 +1206,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
@@ -1257,6 +1271,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
@@ -1321,6 +1336,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
@@ -1385,6 +1401,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
@@ -1449,6 +1466,7 @@
 							   i.item_date, 
 							   f.file1,
 							   m.manager_brandname,
+							   round(truncate( a.board_star_score,1),0) AS score,
 							   truncate( a.board_star_score,1) AS board_star_score,
 							   a.board_review
 						  FROM item i 
