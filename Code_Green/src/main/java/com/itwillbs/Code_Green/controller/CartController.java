@@ -106,11 +106,8 @@ public class CartController {
 	public String update(@ModelAttribute CartVO cart, HttpSession session, Model model,@RequestParam String member_id,@RequestParam int cart_amount,@RequestParam int cart_idx) {
 		String sId = (String) session.getAttribute("sId");
 		List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
-		System.out.println("cart_amount : "+cartList.get(0).getCart_amount());
-		System.out.println("cart_idx : "+cartList.get(0).getCart_idx());
 		
 		int update = service.modifyCart(cart_amount,cart_idx);
-		System.out.println(update+"");
 		if(update > 0 ) {
 			return update+"";
 		} else {

@@ -52,17 +52,12 @@
 				cart_idx : cart_idx,
 			},
 			success : function(data) {
-				//					console.log("data : " +  data);
-				//					code =data;
 				alert('삭제완료.')
 				location.reload();
 			}
 		});
 	}
 	function updateCart(cart_idx) {
-		// alert(cart_idx);
-// 		debugger;
-// 		let cart_idx = $("input[name=cart_idx]").val();
 		let count = $("#quan_"+cart_idx).val();
 		$.ajax({
 			type : 'get',
@@ -73,10 +68,9 @@
 				"cart_idx" : cart_idx,
 			},
 			success : function(data) {
-				//					console.log("data : " +  data);
-				//					code =data;
+				$('.qu').html(count);
 				alert('수정완료.')
-				location.reload();
+// 				location.reload();
 			}
 		});
 	}
@@ -153,7 +147,7 @@
 									<div class="form-group--number">
 										<button type="button" class="up">+</button><!-- 수량 증가 버튼 -->
 										<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
-										<input class="form-control" type="text" id="quan_${row.cart_idx}"
+										<input class="form-control" type="text" id="quan_${row.cart_idx}" name="qu"
 											placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1"><!-- 수량 -->
 									</div> 
 									<button type="button" class="quantity_modify_btn" onclick="updateCart('${row.cart_idx}')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
