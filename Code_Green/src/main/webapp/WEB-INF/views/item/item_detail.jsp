@@ -215,6 +215,31 @@
 	});
 	
 	</script>	
+	<script type="text/javascript">
+	function addCart(item_idx) {
+		let cart_total = $("#cart_total_"+item_idx).val();
+		let	item_name = $("#item_name_"+item_idx).val();
+		let manager_brandname = $("#manager_brandname_"+item_idx).val();
+		let file1 = $("#file1_"+item_idx).val();
+		
+		$.ajax({
+			type : 'get',
+			url : 'addCart',
+			data: {
+				'rf_item_idx' 		: item_idx,
+				'rf_member_idx'		: ${sessionScope.sIdx},
+				'cart_amount'		: 1,
+				'cart_total'		: cart_total,
+				'item_name'			: item_name,
+				'manager_brandname'	: manager_brandname,
+				'file1'				: file1,
+			},
+			success : function (data) {
+				alert('장바구니에 담았습니다.')
+			}
+		});
+	}
+</script>	
 	
 
 </head>
@@ -1022,10 +1047,15 @@
                         <h3> Same Brand</h3>
                         <div class="widget__content">
 						 <c:forEach var="item" items="${sameBrand }">
+						 <!-- 장바구니 담을 정보 -->
+						<input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
+						<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
+						<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
+						<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
                          <div class="ps-product">
                             <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
                                 <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                    <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>
@@ -1064,11 +1094,15 @@
                     <div class="ps-carousel--nav owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="2500" data-owl-gap="30" data-owl-nav="true" data-owl-dots="true" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
                        
                        <c:forEach var="item" items="${itemList6 }">
-                       
+                    	<!-- 장바구니 담을 정보 -->
+						<input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
+						<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
+						<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
+						<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
                         <div class="ps-product">
                             <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
                                 <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                    <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                 </ul>
                             </div>

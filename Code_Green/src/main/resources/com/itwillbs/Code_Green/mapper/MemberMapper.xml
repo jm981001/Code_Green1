@@ -35,7 +35,7 @@
 	<!-- 탈퇴여부 -->
 	<select id="checkDel" resultType="string">
 		SELECT member_del_yn 
-			FROM MEMBER 
+			FROM member 
 				WHERE member_id = #{member_id}
 	</select>
 	
