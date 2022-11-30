@@ -4,8 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+// 	$(document).ready(function(){
+// 		for(let i = 0; i < 2; i++) {
+			
+// 		location.href ="menuMoney";
+// 		}
+		
+// 	});
+</script>
 <body>
 
    <div class="ps-main__sidebar">

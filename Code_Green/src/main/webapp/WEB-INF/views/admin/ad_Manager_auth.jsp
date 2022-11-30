@@ -120,7 +120,8 @@
                                     <td>${aList.manager_email }</td>
 <!--                                     <td><span class="ps-badge success">active</span> -->
 <!--                                     </td> -->
-                                    <td>${aList.manager_date }</td>
+                                    <fmt:parseDate var="dateString" value="${aList.manager_date }" pattern="yyyyMMddHH:mm:ss" />	
+                     				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${fn:replace(aList.manager_adminauth, 'N', '승인대기')}</strong></button></td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>

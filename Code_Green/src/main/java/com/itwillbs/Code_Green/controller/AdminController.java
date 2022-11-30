@@ -48,6 +48,23 @@ public class AdminController {
 
 	}
 	
+	
+	//------------메뉴바----------------------------
+	@RequestMapping(value = "menuMoney", method = RequestMethod.GET)
+	public String menuMoney(Model model,HttpSession session) { 
+
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId= " + sId);
+		if(sId == null || !sId.equals("admin") || sId == "") {
+			model.addAttribute("msg", " 잘못된 접근입니다!");
+			return "admin/ad_fail_back";
+		} 
+		System.out.println("무야호");
+		
+		return "inc/ad_menu";
+		
+	}
+	
 
 	//------------전체관리자 메인----------------------------
 	@RequestMapping(value = "index", method = RequestMethod.GET)
