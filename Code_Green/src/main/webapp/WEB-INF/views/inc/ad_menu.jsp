@@ -19,7 +19,7 @@
                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
                     </div>
                     <div class="ps-block--earning-count"><small>총매출</small>
-                        <h3>바뀌었니</h3>
+                        <h3>${sellTotal.total }</h3>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">

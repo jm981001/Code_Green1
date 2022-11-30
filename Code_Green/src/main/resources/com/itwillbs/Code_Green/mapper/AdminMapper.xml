@@ -8,16 +8,13 @@
 		WHERE ADMIN_ID=#{admin_id} AND ADMIN_PASS=#{admin_pass}
 	</select>
 	
-	
+	<!-- 총매출 -->
 	<select id="selectTotalMoney" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		SELECT 
-			SUM(sell_total_price) 
-		AS 
-			total
-		FROM
-			sell
+		SELECT SUM(sell_total_price) AS total
+			,  SUM(sell_total_price) * 0.1 AS net
+		  FROM sell
 	</select>
-
+	<!-- 주문건수 -->
 	<select id="selectTotalsellCount" resultType="Integer">
 		SELECT COUNT(*)
 		FROM sell
@@ -25,64 +22,62 @@
 	
 	<!-- 매출 3순위 -->
 	<select id="selectTopSaleList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT
-			m.manager_brandname,
-			SUM(sd.sell_amount)   AS sellCount,
-			COUNT(sd.sell_amount) AS orderCount,
-			f.brand_follower,
-			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
-		FROM
-			manager m
-		LEFT JOIN
-			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
-		ON
-			m.manager_idx = f.rf_manager_idx
-		LEFT JOIN
-			item i
-		ON
-			i.re_manager_idx = m.manager_idx
-		INNER JOIN
-			sell_detail sd
-		ON
-			i.item_idx = sd.rf_item_idx
-		GROUP BY
-			m.manager_idx
-		LIMIT 3;
+		SELECT	m.manager_brandname
+		 	,	SUM(sd.sell_amount)   AS sellCount
+		 	,	COUNT(sd.sell_amount) AS orderCount
+		 	,	IFNULL(f.brand_follower, 0) AS brand_follower
+		 	,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
+		 	,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		  FROM
+				manager m
+		  LEFT JOIN
+				(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+			ON
+				m.manager_idx = f.rf_manager_idx
+		  LEFT JOIN
+				item i
+			ON
+				i.re_manager_idx = m.manager_idx
+		 INNER JOIN
+				sell_detail sd
+			ON
+				i.item_idx = sd.rf_item_idx
+		 GROUP BY
+				m.manager_idx
+		 LIMIT 3;
 	</select>
 	
 	<!-- 매출 랭킹 -->
 	<select id="selectRanking" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT
-			m.manager_brandname,
-			SUM(sd.sell_amount)   AS sellCount,
-			COUNT(sd.sell_amount) AS orderCount,
-			f.brand_follower,
-			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
-		FROM
-			manager m
-		LEFT JOIN
-			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
-		ON
-			m.manager_idx = f.rf_manager_idx
-		LEFT JOIN
-			item i
-		ON
-			i.re_manager_idx = m.manager_idx
-		INNER JOIN
-			sell_detail sd
-		ON
-			i.item_idx = sd.rf_item_idx
-		GROUP BY
-			m.manager_idx;
+		SELECT	m.manager_brandname
+			,	SUM(sd.sell_amount)   AS sellCount
+			,	COUNT(sd.sell_amount) AS orderCount
+			,	IFNULL(f.brand_follower, 0) AS brand_follower
+			,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
+			,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		  FROM
+				manager m
+		  LEFT JOIN
+				(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+			ON
+				m.manager_idx = f.rf_manager_idx
+		  LEFT JOIN
+				item i
+			ON
+				i.re_manager_idx = m.manager_idx
+		 INNER JOIN
+				sell_detail sd
+			ON
+				i.item_idx = sd.rf_item_idx
+		 GROUP BY
+				m.manager_idx;
 	</select>
 	
 	<!-- 기업 별점 순위 -->
 	<select id="selectStarRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
 			m.manager_brandname,
-		    f.brand_follower,
+		    IFNULL(f.brand_follower, 0) AS brand_follower,
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    truncate(bs.board_star_score,1) AS star_score,
@@ -137,7 +132,7 @@
 	<select id="selectFollowerRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
 			m.manager_brandname,
-		    f.brand_follower,
+		    IFNULL(f.brand_follower, 0) AS brand_follower,
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    ROUND(bs.board_star_score,1) AS star_score,

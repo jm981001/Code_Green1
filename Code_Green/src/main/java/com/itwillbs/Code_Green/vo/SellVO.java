@@ -34,7 +34,7 @@ public class SellVO {
 	private int total;//총매출
 	private int sell_count;//총주문수
 	private int brandtotal;
-	
+	private int	net;//순수익
 	
 	public SellVO() {
 		// TODO Auto-generated constructor stub
@@ -201,15 +201,57 @@ public class SellVO {
 		this.brandtotal = brandtotal;
 	}
 
-
 	public String getMember_email() {
 		return member_email;
 	}
 
-
-
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
+	}
+	
+	public int getNet() {
+		return net;
+	}
+
+	public void setNet(int net) {
+		this.net = net;
+	}
+
+
+	public SellVO(int sell_idx, int rf_member_idx, String sell_amount, String sell_usecoin, String sell_total_price,
+			String sell_status, String sell_postcode, String sell_address, String sell_phone, String sell_receiver,
+			String sell_date, String sell_pay_type, String sell_pay_status, String sell_pay_date,
+			String sell_order_number, String sell_detail_idx, String item_name, String item_price, String item_idx,
+			String item_category, String manager_brandname, String file1, String member_email, int total,
+			int sell_count, int brandtotal, int net) {
+		super();
+		this.sell_idx = sell_idx;
+		this.rf_member_idx = rf_member_idx;
+		this.sell_amount = sell_amount;
+		this.sell_usecoin = sell_usecoin;
+		this.sell_total_price = sell_total_price;
+		this.sell_status = sell_status;
+		this.sell_postcode = sell_postcode;
+		this.sell_address = sell_address;
+		this.sell_phone = sell_phone;
+		this.sell_receiver = sell_receiver;
+		this.sell_date = sell_date;
+		this.sell_pay_type = sell_pay_type;
+		this.sell_pay_status = sell_pay_status;
+		this.sell_pay_date = sell_pay_date;
+		this.sell_order_number = sell_order_number;
+		this.sell_detail_idx = sell_detail_idx;
+		this.item_name = item_name;
+		this.item_price = item_price;
+		this.item_idx = item_idx;
+		this.item_category = item_category;
+		this.manager_brandname = manager_brandname;
+		this.file1 = file1;
+		this.member_email = member_email;
+		this.total = total;
+		this.sell_count = sell_count;
+		this.brandtotal = brandtotal;
+		this.net = net;
 	}
 
 
@@ -224,8 +266,17 @@ public class SellVO {
 				+ ", sell_order_number=" + sell_order_number + ", sell_detail_idx=" + sell_detail_idx + ", item_name="
 				+ item_name + ", item_price=" + item_price + ", item_idx=" + item_idx + ", item_category="
 				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", member_email="
-				+ member_email + ", total=" + total + ", sell_count=" + sell_count + ", brandtotal=" + brandtotal + "]";
+				+ member_email + ", total=" + total + ", sell_count=" + sell_count + ", brandtotal=" + brandtotal
+				+ ", net=" + net + "]";
 	}
+
+	
+	
+	
+
+
+
+	
 
 	
 	

@@ -30,6 +30,7 @@ public class ManagerVO {
 	private String		brand_follower;//브랜드 팔로워 수
 	private String star_score;
 	
+	
 	public ManagerVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -233,6 +234,7 @@ public class ManagerVO {
 	public void setStar_score(String star_score) {
 		this.star_score = star_score;
 	}
+	
 
 	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
 			String manager_brandname, String manager_info, String manager_storecode, String manager_phone,
@@ -281,14 +283,7 @@ public class ManagerVO {
 				+ ", sellCount=" + sellCount + ", orderCount=" + orderCount + ", brandtotal=" + brandtotal
 				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + ", star_score=" + star_score + "]";
 	}
-
 	
-	
-
-	
-	
-	
-
 	
 	
 	
