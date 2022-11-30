@@ -36,50 +36,27 @@
 
 </head>
 <script type="text/javascript">
-// 	추천기능
-	$(function(){
-			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#wishBtn").click(function(){
-				if(${sessionScope.sId == null}){
-					
-					alert("로그인 후 사용가능합니다!!");
-					
-				} else {
-					
-					$.ajax({
-						url: "WishList.bo",
-						type: "GET",
-						data: {
-							member_id: '${sessionScope.sId}',
-							item_idx: ${item.item_idx},
-							manager_brandname: '${item.manager_brandname}',
-							item_category: '${item.item_category}'
-							
-						},
-						success: function(){
-							wish_count();
-						},
-					})
-				}	
-			});
-			
-// 			// 게시글 추천수
-			function wish_count(){
-				$.ajax({
-					url: "WishCount.bo",
-					type: "POST",
-					data:{
-						item_idx: ${item.item_idx}
-					},
-					success: function(count){
-						$(".wish_count").html(count);
-					},
-				})
-			};
-		
-			wish_count();
+function addHeart(item_idx) {
+	let manager_brandname = $("#manager_brandname_"+item_idx).val();
+	let item_category = $("#item_category_"+item_idx).val();
+	$.ajax({
+		type : 'get',
+		url : 'addHeart',
+		data: {
+			'item_idx' 		: item_idx,
+			'member_idx'		: ${sessionScope.sIdx},
+			'member_id'		: '${sessionScope.sId}',
+			'manager_brandname'	: manager_brandname,
+			'item_category' :item_category,
+		},
+		success : function (data) {
+			alert(data)
+		}
 	});
+}
 	</script>
+	
+	
 	<script type="text/javascript">
 	function addCart(item_idx) {
 		let cart_total = $("#cart_total_"+item_idx).val();
@@ -160,9 +137,12 @@
 														<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
 														<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
 														<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >                                                        
+														<input type="hidden" id="item_category_${item.item_idx}" name="item_category_${item.item_idx}" value="${item.item_category}" >                                                        
+                                                     	
+
                                                         <ul class="ps-product__actions">
                                                             <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
+                                                            <li><a data-toggle="tooltip" data-placement="top" title="Add to Whishlist" onclick="addHeart('${item.item_idx}')"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${item.item_idx}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.manager_brandname }</a>

@@ -31,6 +31,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+				and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			 ORDER BY i.item_idx 
 			 LIMIT 24
 	</select>
@@ -71,6 +73,8 @@
 							group by RF_ITEM_IDX) s
 					ON s.RF_ITEM_IDX = i.item_idx
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY s.count desc ,i.item_idx desc 
 	</select>
 
@@ -106,6 +110,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY CAST(i.item_price AS UNSIGNED)  asc
 	</select>
 	
@@ -141,6 +147,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY CAST(i.item_price AS UNSIGNED)  desc
 	</select>
 	
@@ -193,6 +201,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			 ORDER BY count desc
 	</select>
 	
@@ -246,6 +256,8 @@
 							group by RF_ITEM_IDX) s
 					ON s.RF_ITEM_IDX = i.item_idx
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			 ORDER BY s.sell_count desc
 	</select>
 
@@ -296,6 +308,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			 ORDER BY CAST(i.item_price AS UNSIGNED) asc
 	</select>
 	
@@ -345,6 +359,8 @@
 						 	group by b.BOARD_ITEM_IDX) a 
                 	ON i.item_idx = a.BOARD_ITEM_IDX 
 			 WHERE f.file1 NOT LIKE '%상세%'
+			 	and i.item_stock not in ("0")
+                and m.MANAGER_DEL_YN not in ("Y")
 			 ORDER BY CAST(i.item_price AS UNSIGNED) desc
 	</select>
 
@@ -771,6 +787,8 @@
                               on b.board_item_idx = i.item_idx
                               group by b.board_item_idx) b
                    ON b.board_item_idx = i.item_idx
+               WHERE i.item_stock not in ("0")
+           			     and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY rand()  LIMIT 7
 	</select>
 	
@@ -819,6 +837,8 @@
                               on b.board_item_idx = i.item_idx
                               group by b.board_item_idx) b
                    ON b.board_item_idx = i.item_idx
+               WHERE i.item_stock not in ("0")
+        			     and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY rand()  LIMIT 7
 	</select>
 	
@@ -863,6 +883,8 @@
 				LEFT JOIN (select RF_ITEM_IDX,  count(*) as count from sell_detail
 							group by RF_ITEM_IDX) s
 					ON s.RF_ITEM_IDX = i.item_idx 
+               WHERE i.item_stock not in ("0")
+      			     and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY rand()  LIMIT 7
 	</select>
 	
