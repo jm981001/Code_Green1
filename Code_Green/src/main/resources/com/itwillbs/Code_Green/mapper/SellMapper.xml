@@ -81,6 +81,7 @@
 					  #{rf_sell_idx},
 					  #{rf_item_idx},
 					  #{sell_amount},
+					  'N',
 					  'N'	  		 			
 			)
 	</insert>
