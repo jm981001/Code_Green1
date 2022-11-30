@@ -62,7 +62,7 @@
 	
 </style>
 <script>
-	
+
 // ============================ 신고하기 로그인 확인 ===================================	
 	function checkReport(){
 		if(${sessionScope.sId == null}){
@@ -85,18 +85,18 @@
 	
 // ============================ 댓글삭제여부 확인 =====================================	
 	function deleteCheck(reply_idx){
-		let check = confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
-		if(check){
+// 		let check = confirm("삭제하시겠습니까?\n삭제 시 복구가 불가능합니다.");
+		
 			$.ajax({
 				url:"replyDelete.re",
+				type:"GET",
 				data:{reply_idx : reply_idx},
 				success:function(msg){
-					alert(msg);
 					replyCount();
 					getReplyList();			
 				},
 			})
-		};
+		
 	};
 	
 // ============================ 추천기능 ==========================================	
@@ -191,7 +191,7 @@
                         
 						<!-- 로그인한 사람과 댓글작성자가 같을 경우 삭제버튼 표시 -->
                         if(('${sessionScope.sId}' == this.reply_id) || ('${sessionScope.sId}' == 'admin') ){
-	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="#" id="rep_delBtn" onclick="deleteCheck('+ this.reply_idx +')"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
+	                        comments +=  '<span id="reply_del_btn"><a class="ps-block__reply" href="#" id="rep_delBtn" onclick="deleteCheck('+ this.reply_idx +');return false;"><img src="<%=request.getContextPath() %>/resources/img/cross.png" width="23px" height="23px">  | </a></span>';
 	                        }
                         <!-- 대댓글 작성을 위한 폼 -->
 						comments += '<div id="reReplyBox'+ idNum++ +'" style="display:none">'
@@ -205,7 +205,6 @@
 									+ '<input type="text" id ="rereBox" name="reply_content" placeholder="댓글을 입력하세요.">&nbsp;&nbsp;'
 									+ '<input type="button" id="goReReply" value="작성" onclick="callreReply('+ idNum +')"></form></div>';
                         comments += '</span><hr>';
-                        console.log(comments);
                         commentsResult += comments;
 					});
 				};
@@ -227,8 +226,8 @@
 				data: $("#form" + idNum).serialize(),
 				datatype:"json",
 				success:function(){
-					getReplyList();
 					replyCount();
+					getReplyList();
 				},
 			})
 	   }
@@ -281,24 +280,26 @@
 			  }
 			})
 			
-			// 댓글 수 카운팅
-			function replyCount(){
-			
-				$.ajax({
-					url: "ReplyCounting.bo",
-					type: "POST",
-					data:{
-						reply_bo_ref: ${cBoard.board_idx}
-					},
-					success: function(rCount){
-						$(".reply_count").html(rCount);
-					},
-				})
-			};
-			
 			// 로딩시 자동실행되서 댓글수 카운팅
 			replyCount();
 	});
+
+// =========================== 댓글 수 카운팅 ================================================================
+	function replyCount(){
+	
+		$.ajax({
+			url: "ReplyCounting.bo",
+			type: "POST",
+			data:{
+				reply_bo_ref: ${cBoard.board_idx}
+			},
+			success: function(rCount){
+				$(".reply_count").html(rCount);
+			},
+		})
+	};
+
+
 
 // ============================ 오른쪽 사이드바: 새글쓰기 로그인여부 확인 ===================================
 	function writeNew(){
@@ -405,7 +406,7 @@
 	                        <textarea id="reply_content" class="form-control" rows="3" placeholder="댓글을 입력하세요" required="required"></textarea>
 	                    </div>
 	                    <div class="form-group submit">
-	                        <button class="ps-btn" id="replyWrite"> 댓글쓰기</button>
+	                        <button type="button" class="ps-btn" id="replyWrite"> 댓글쓰기</button>
 	                    </div>
 	            <!-- 댓글쓰기 영역 -->
                 <h4> 댓글(<span class="reply_count"></span>) </h4>

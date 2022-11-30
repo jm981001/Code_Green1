@@ -1,17 +1,16 @@
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-           
-           
-             <div class="ps-section__left">
+              <div class="ps-section__left">
                   <aside class="widget widget--vendor">
                            
                             <h3 class="widget-title" id="brandNameBar">${ brandDetail.manager_brandname}</h3>
 	                           
-	                            <div class="brandfollowbtn" style="display: none">
-		                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand">
+	                            <div class="brandfollowbtn">
+		                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_b">
 									<%--  팔로확인 할때 ${brandItemList.manager_idx }, ${sessionScope.sId} 가져가야함 --%>
-		                            <a class="ps-block__inquiry" href="#">Follow</a>
+		                            <a class="ps-block__inquiry" href="#" onclick="followCheck(${brandDetail.manager_idx}); return false;">Follow</a>
 	                            </div>
 	                            
                             <div class="ps-block__user" >
@@ -34,39 +33,7 @@
 		                    	</div>
 		                    </div>
 	<!-- =========================================== 사이드바 시작 ======================================================== -->
-
-					<aside class="widget widget_shop">
-		                <h4 class="widget-title">BY BRANDS</h4>
-		                <figure class="ps-custom-scrollbar" data-height="250">
-		                  <c:forEach var="brand" items="${brandList }" >
-		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-${brand.manager_idx }" name="${brand.manager_idx }" />
-		                        <label for="m-brand-${brand.manager_idx }">${brand.manager_brandname } 
-		                        <c:choose>
-		                        	<c:when test="${not empty brand.brand_itemCnt }">
-		                        	(${brand.brand_itemCnt })</label></c:when>
-		                        	<c:otherwise>(0)</label></c:otherwise>
-		                     	</c:choose>
-		                    </div>
-		                   </c:forEach>
-		                </figure>
-		                
-		                <figure>
-		                	<!-- 가격검색 목록 -->    
-		                    <h4 class="widget-title">By Price</h4>
-		                    <div class="leftbar_searchbyprice">
-		                            <form action="SearchByPrice.mo" method="get">
-		                            	<input type="hidden" name="manager_idx" value="${ brandDetail.manager_idx}">
-			                            <input type="text" class="num1" name="min_p" placeholder="최저가" style="width: 70px" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원 ~ 
-			                            <input type="text" class="num2" name="max_p" placeholder="최고가" style="width: 70px"onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원<br>  
-			                            <input type="submit" value="검색" >
-		                            </form>
-		                     </div>
-		                </figure>
-		                
-					</aside>
  	<!-- =========================================== 사이드바 끝======================================================== -->	
-					
                  </aside>
              </div>
          	 <div class="ps-section__right">
@@ -125,8 +92,26 @@
                                </c:forEach>     
                                 </div>
                             </div>
+                             <!-- 페이징 버튼들 시작 -->
+		 		 		<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+		                  <div class="ps-pagination">
+		                      <ul class="pagination">
+		                          <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum - 1}&manager_idx=${brand.item_idx}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+		                          <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		                          	<c:choose>
+		                          		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+		                          		<c:otherwise><li><a href="GetBrandItemList.br?pageNum=${i }&manager_idx=${brand.item_idx}">${i }</a></li></c:otherwise>
+		                          	</c:choose>
+		                          </c:forEach>
+		                          <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum + 1}&manager_idx=${brand.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+		                      </ul>
+		                  </div>
+                    <!-- 페이징 버튼들 끝 -->  
+                            
                                 </div>
                            </div>
                        </div>
 					</div>
+					
+					
 		<!-- =========================================== 상품리스트 끝=====================================================-->

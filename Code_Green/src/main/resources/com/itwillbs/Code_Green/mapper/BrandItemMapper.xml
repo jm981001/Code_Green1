@@ -85,26 +85,57 @@
 				LEFT JOIN (select re_manager_idx, count(*) AS brand_itemCnt FROM item GROUP BY re_manager_idx ) AS cnt
 					ON m.manager_idx = cnt.RE_MANAGER_IDX
 			 WHERE f.file1 NOT LIKE '%상세%' 
-			 <if test="manager_idx!=0">
-			 	AND i.re_manager_idx = #{manager_idx}
-			 </if>
-			 ORDER BY i.item_idx DESC
-		
+				 <if test="manager_idx!=0">
+				 	AND i.re_manager_idx = #{manager_idx}
+				 </if>
+			 ORDER BY 
+			 	<if test="manager_idx==0">
+			 		rand()
+			 	</if>
+			 	<if test="manager_idx!=0">
+			 		i.item_idx DESC
+			 	</if>
+			 LIMIT #{startRow}, #{listLimit}
 	</select>
+	
+	<!-- 브랜드별 아이템 수 카운트 -->
+	<select id="selectBrandListCount" resultType="integer">
+		SELECT count(*) 
+			FROM item
+			<if test="manager_idx!=0">
+				WHERE re_manager_idx = #{manager_idx}
+			</if>	
+	</select>
+
 
 	<!-- 브랜드 팔로우 유무 -->
 	<select id="selectBrandFollow" resultType="integer">
-	SELECT count(*) 
-		FROM follow 
-			WHERE rf_member_idx= (SELECT member_idx FROM member WHERE member_id=#{member_id}) 
-			AND rf_manager_idx = #{manager_idx};     
+		SELECT count(*) 
+			FROM follow 
+				WHERE rf_member_idx= #{member_idx}
+				AND rf_manager_idx = #{manager_idx};     
 	</select>
 
 
+	<!-- 팔로우 하기 -->
+	<insert id="insertFollow">
+		INSERT follow
+			VALUES (
+				IFNULL((SELECT MAX(follow_idx) FROM follow f),0) + 1,
+				#{member_idx},
+				#{manager_idx},
+				now()
+			)
+	</insert>
 
-
-
-
+	<!-- 언팔로우 하기 -->
+	<delete id="deleteFollow">
+		DELETE 
+			FROM follow
+			WHERE rf_member_idx = #{member_idx}
+			AND
+				  rf_manager_idx = #{manager_idx}
+	</delete>
 
 
 

@@ -21,18 +21,33 @@ public class BrandItemService {
 	}
 	
 	// 브랜드 팔로우 유무체크 
-	public int brandFollowCheck(int manager_idx, String member_id) {
-		return mapper.selectBrandFollow(manager_idx,member_id);
+	public int brandFollowCheck(int manager_idx, int member_idx) {
+		return mapper.selectBrandFollow(manager_idx,member_idx);
 	}
 	
 	// 브랜드별 아이템리스트 출력
-	public List<ItemVO> selectBrandItemList(int manager_idx) {
-		return mapper.selectBrandItemList(manager_idx);
+	public List<ItemVO> selectBrandItemList(int manager_idx, int startRow, int listLimit) {
+		return mapper.selectBrandItemList(manager_idx, startRow, listLimit);
 	}
 	
 	// 브랜드별 정보 및 아이템수 출력
 	public ManagerVO selectBrandDetail(int manager_idx) {
 		return mapper.selectBrandDetail(manager_idx);
+	}
+
+	// 팔로우하기
+	public int brandGoFollow(int manager_idx, int member_idx) {
+		return mapper.insertFollow(manager_idx, member_idx);
+	}
+	
+	// 언팔로우하기
+	public int brandUnFollow(int manager_idx, int member_idx) {
+		return mapper.deleteFollow(manager_idx, member_idx);
+	}
+	
+	// 전체브랜드아이템 갯수 카운트 
+	public int getBrandListCount(int manager_idx) {
+		return mapper.selectBrandListCount(manager_idx);
 	}
 	
 	
