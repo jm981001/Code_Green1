@@ -144,11 +144,11 @@ public class MemberController {
 
 	}
 
-	// 아이디 찾는 폼
-	@RequestMapping(value = "/find_id_form", method = { RequestMethod.GET, RequestMethod.POST })
-	public String find_id_form() throws Exception {
-		return "member/find_id_form";
-	}
+//	// 아이디 찾는 폼
+//	@RequestMapping(value = "/find_id_form", method = { RequestMethod.GET, RequestMethod.POST })
+//	public String find_id_form() throws Exception {
+//		return "member/find_id_form";
+//	}
 
 	// 아이디 찾는 이메일
 	@GetMapping("/idFintMail")
