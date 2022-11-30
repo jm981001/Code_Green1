@@ -229,7 +229,7 @@
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 												 사용할 적립금
-		                                        	<input type="text" name="sell_usecoin" class="sell_use_coin" style="color: #5fa30f;">
+		                                        	<input type="text" name="sell_usecoin" class="sell_use_coin" style="color: #5fa30f;" required="required">
 		                                        	<input type="button" value="사용" class="sell_coin_use_btn">
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
@@ -264,9 +264,9 @@
 			                                           		</td>
 			                                           		<td>${cart.manager_brandname }</td>
 			                                           		<td>${cart.item_name }</td>
-			                                           		<td><fmt:formatNumber value="${cart.item_price }" pattern="#,###"/></td>
+			                                           		<td><fmt:formatNumber value="${cart.item_price }"/></td>
 			                                           		<td >${cart.cart_amount }</td>
-			                                           		<td><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }" pattern="#,###"/></td>
+			                                           		<td><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/></td>
 			                                           	</tr>
 			                                         </c:forEach> 
 			                                         	<tr>

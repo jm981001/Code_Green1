@@ -13,7 +13,8 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>주문완료(카드)</title>
+    <link rel="icon" href="/Code_Green/resources/img/favicon.png">
+    <title>결제 완료 - 베지터틀</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
@@ -43,7 +44,7 @@
             <div class="container">
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li>결제완료</li>
+                    <li>결제 완료</li>
                 </ul>
             </div>
         </div>
@@ -51,14 +52,11 @@
             <div class="container">
                 <div class="ps-block--payment-success">
                     <h3>결제 완료 되었습니다 !</h3>
-                    <p>주문하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="user-information.html"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
+                    <p>베지터틀을 이용하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
                 </div>
-					</div>    
-			       </section>
-			       
-		       
-		   </main>
-   
+			</div>    
+		</section>
+	</main>
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
    
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>

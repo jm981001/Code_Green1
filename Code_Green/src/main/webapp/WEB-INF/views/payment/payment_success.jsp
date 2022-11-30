@@ -63,7 +63,7 @@
            }, function (rsp) { // callback
                if (rsp.success) {
                    alert("결제가 완료되었습니다.");
-                   location.href = "payment_success_card_thanks";
+                   location.href = "payment_success_card_thanks?member_id=${sessionScope.sId}";
                    $.ajax({
                           url: "payment_success_card",
                           type: "POST",
@@ -106,7 +106,7 @@
             <div class="container">
                 <div class="ps-block--payment-success">
                     <h3>주문 완료 되었습니다 !</h3>
-                    <p>주문하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myPage_buyList"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
+                    <p>주문하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
                 </div>
 	         	<div class="col-lg-8" style="margin-top: 50px;">
 	                <div class="ps-section__right">

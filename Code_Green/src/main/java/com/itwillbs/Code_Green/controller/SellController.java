@@ -74,8 +74,6 @@ public class SellController {
 		// 장바구니 정보
 		List<CartVO> cartList = cart_service.getCart(member_id); 
 		
-		System.out.println("sell" + sell);
-		
 		// 주문(sell)에 데이터 넣기
 		int insertCount = sell_service.insertOrder(member_id, member_idx, sell, sell_total_price);
 
@@ -123,7 +121,20 @@ public class SellController {
 	
 	// 결제완료(카드) 페이지
 	@GetMapping(value = "payment_success_card_thanks")
-	public String payment_success_card_thanks() {
+	public String payment_success_card_thanks(@RequestParam String member_id, Model model) {
+		
+		System.out.println(member_id);
+		
+		// 주문내역 불러오기
+		SellVO orderList = sell_service.getOrderList(member_id);
+		
+		// 주문 상세내역 불러오기
+		List<SellVO> orderDetailList = sell_service.getOrderDetailList(orderList.getSell_idx());
+		
+		model.addAttribute("orderList", orderList);
+		
+		model.addAttribute("orderDetailList" , orderDetailList);
+		
 		return "payment/payment_success_card";
 	}
 	
