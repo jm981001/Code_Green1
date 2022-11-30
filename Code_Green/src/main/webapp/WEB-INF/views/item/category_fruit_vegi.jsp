@@ -131,7 +131,31 @@
         $('#2019').attr('selected','selected');
     }
 </script>-->
-
+<script type="text/javascript">
+	function addCart(item_idx) {
+		let cart_total = $("#cart_total_"+item_idx).val();
+		let	item_name = $("#item_name_"+item_idx).val();
+		let manager_brandname = $("#manager_brandname_"+item_idx).val();
+		let file1 = $("#file1_"+item_idx).val();
+		
+		$.ajax({
+			type : 'get',
+			url : 'addCart',
+			data: {
+				'rf_item_idx' 		: item_idx,
+				'rf_member_idx'		: ${sessionScope.sIdx},
+				'cart_amount'		: 1,
+				'cart_total'		: cart_total,
+				'item_name'			: item_name,
+				'manager_brandname'	: manager_brandname,
+				'file1'				: file1,
+			},
+			success : function (data) {
+				alert('장바구니에 담았습니다.')
+			}
+		});
+	}
+</script>
     
     
 </head>
@@ -210,14 +234,16 @@
                                                     	<a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}" >
                                                     		<img src="/Code_Green/resources/item/${item.file1 }" alt="" />
                                                     	</a>
-                                                        	<ul class="ps-product__actions">
+                                                    	<!-- 장바구니 담을 정보 -->
+														<input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
+														<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
+														<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
+														<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+                                                       	<ul class="ps-product__actions">
+                                                        	
                                                         	
                                                         	<!-- 장바구니 및 찜 -->
-                                                        	<!-- 
-                                                        	* 장바구니 페이지로 이동
-                                                        	* 찜 페이지로 이동
-                                                        	 -->
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+															<li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
