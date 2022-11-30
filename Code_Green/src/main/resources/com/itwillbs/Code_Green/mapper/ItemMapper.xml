@@ -787,8 +787,7 @@
                               on b.board_item_idx = i.item_idx
                               group by b.board_item_idx) b
                    ON b.board_item_idx = i.item_idx
-               WHERE i.item_stock not in ("0")
-           			     and m.MANAGER_DEL_YN not in ("Y")
+
 			ORDER BY rand()  LIMIT 7
 	</select>
 	
@@ -837,8 +836,6 @@
                               on b.board_item_idx = i.item_idx
                               group by b.board_item_idx) b
                    ON b.board_item_idx = i.item_idx
-               WHERE i.item_stock not in ("0")
-        			     and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY rand()  LIMIT 7
 	</select>
 	
@@ -883,8 +880,6 @@
 				LEFT JOIN (select RF_ITEM_IDX,  count(*) as count from sell_detail
 							group by RF_ITEM_IDX) s
 					ON s.RF_ITEM_IDX = i.item_idx 
-               WHERE i.item_stock not in ("0")
-      			     and m.MANAGER_DEL_YN not in ("Y")
 			ORDER BY rand()  LIMIT 7
 	</select>
 	

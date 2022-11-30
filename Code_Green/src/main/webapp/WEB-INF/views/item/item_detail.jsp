@@ -186,7 +186,26 @@
 	});
 	</script>
 	
-	
+<script type="text/javascript">
+function addHeart(item_idx) {
+	let manager_brandname = $("#manager_brandname_"+item_idx).val();
+	let item_category = $("#item_category_"+item_idx).val();
+	$.ajax({
+		type : 'get',
+		url : 'addHeart',
+		data: {
+			'item_idx' 		: item_idx,
+			'member_idx'		: ${sessionScope.sIdx},
+			'member_id'		: '${sessionScope.sId}',
+			'manager_brandname'	: manager_brandname,
+			'item_category' :item_category,
+		},
+		success : function (data) {
+			alert(data)
+		}
+	});
+}
+	</script>
 	
 	
 	<script type="text/javascript">
@@ -1053,11 +1072,13 @@
 						<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
 						<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
 						<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+                        <input type="hidden" id="item_category_${item.item_idx}" name="item_category_${item.item_idx}" value="${item.item_category}" >                     
+                        
                          <div class="ps-product">
                             <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
                                 <ul class="ps-product__actions">
                                     <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+									<li><a data-toggle="tooltip" data-placement="top" title="Add to Whishlist" onclick="addHeart('${item.item_idx}')"><i class="icon-heart"></i></a></li>                               
                                 </ul>
                             </div>
                             <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
@@ -1098,10 +1119,16 @@
                        
                         <div class="ps-product">
                             <div class="ps-product__thumbnail"><a href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}"><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a>
+                                <input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
+								<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
+								<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
+								<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+                                <input type="hidden" id="item_category_${item.item_idx}" name="item_category_${item.item_idx}" value="${item.item_category}" >                     
+                                                       
                                 <ul class="ps-product__actions">
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                </ul>
+                                    <li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
+									<li><a data-toggle="tooltip" data-placement="top" title="Add to Whishlist" onclick="addHeart('${item.item_idx}')"><i class="icon-heart"></i></a></li>                               
+							    </ul>
                             </div>
                             <div class="ps-product__container"><a class="ps-product__vendor" href="#">${item.manager_brandname }</a>
                                 <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>

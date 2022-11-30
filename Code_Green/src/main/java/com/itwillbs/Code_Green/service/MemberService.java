@@ -81,9 +81,6 @@ public class MemberService {
 		return mapper.deleteFollowBrand(rf_member_idx, rf_manager_idx);
 	}
 
-	
-
-	
 
 	
 
