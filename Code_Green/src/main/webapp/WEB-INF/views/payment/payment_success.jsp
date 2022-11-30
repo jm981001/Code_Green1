@@ -53,7 +53,7 @@
         	   pg : 'kcp',
                pay_method : 'card',
                merchant_uid: "${orderList.sell_order_number }" + jbRandom, // 주문번호?결제번호? 중복되면 결제안됨 ! 결제 할때마다 다른 번호 넣어야함
-               name : '당근 10kg',
+               name : '베지터틀 상품',
                amount : ${orderList.sell_total_price },
                buyer_email : '${orderList.member_email }',
                buyer_name : '${orderList.sell_receiver }',

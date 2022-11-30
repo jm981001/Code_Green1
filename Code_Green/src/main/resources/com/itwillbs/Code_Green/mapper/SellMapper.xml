@@ -170,7 +170,9 @@
 		   SET
 		   		sell_status = '배송준비중',
 				sell_pay_status = '결제완료',
-				sell_pay_date = now()	
+				sell_pay_date = now()
+		 WHERE
+		 		sell_idx = #{sell_idx}			
 	</update>
 	
 
