@@ -30,8 +30,7 @@ public class MemberController {
 	private ItemService Iservice;
 	@Autowired
 	private CartService cartService;
-	
-	
+
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
 	public String loginPro(@ModelAttribute MemberVO member, Model model, HttpSession session,
@@ -48,8 +47,8 @@ public class MemberController {
 		// 3. 탈퇴 여부 확인
 		String checkDel = service.checkDel(member.getMember_id());
 		MemberVO checkId = service.getMemberInfo(member_id);
-		System.out.println("checkId"+checkId);
-		if(checkId==null) {
+		System.out.println("checkId" + checkId);
+		if (checkId == null) {
 			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
 			return "member/fail_back";
 		}
@@ -86,8 +85,15 @@ public class MemberController {
 		}
 
 	}
-	
-	//회원가입 페이지 요청
+
+	// MemberLogout.me 요청에 대한 로그아웃 처리
+	@GetMapping(value = "/MemberLogout.me")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+
+	// 회원가입 페이지 요청
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String join() {
 		return "member/join";
@@ -111,7 +117,7 @@ public class MemberController {
 
 		if (insertCount > 0) { // 가입 성공
 			System.out.println("가입 성공!");
-			//가입 성공시 기본적립금 적립
+			// 가입 성공시 기본적립금 적립
 //			MemberVO getMem = service.getMemberInfo(member.getMember_id());
 //			service.setCoin(getMem);
 //			
@@ -122,18 +128,10 @@ public class MemberController {
 		}
 	}
 
-	
-
+	// 가입 결과
 	@RequestMapping(value = "/join_result", method = RequestMethod.GET)
 	public String join_reult() {
 		return "member/join_result";
-	}
-
-	// MemberLogout.me 요청에 대한 로그아웃 처리
-	@GetMapping(value = "/MemberLogout.me")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
 	}
 
 	// 이메일 인증
@@ -143,6 +141,22 @@ public class MemberController {
 		System.out.println("이메일 인증 요청이 들어옴!");
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailService.joinEmail(email);
+
+	}
+
+	// 아이디 찾는 폼
+	@RequestMapping(value = "/find_id_form", method = { RequestMethod.GET, RequestMethod.POST })
+	public String find_id_form() throws Exception {
+		return "member/find_id_form";
+	}
+
+	// 아이디 찾는 이메일
+	@GetMapping("/idFintMail")
+	@ResponseBody
+	public String findIdMailCheck(@ModelAttribute MemberVO member, Model model, HttpSession session, String email) {
+		System.out.println("아이디 찾기 이메일 요청이 들어옴!");
+		System.out.println("아이디 찾을 이메일 : " + email);
+		return mailService.idFindEmail(email, session);
 
 	}
 
