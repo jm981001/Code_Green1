@@ -41,7 +41,12 @@
 			<property name="username" value="class3_220630_team2"></property>
 			<property name="password" value="1234"></property>
 		</bean>
-		
+<!-- 		<bean id = "hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
+<!-- 		<property name ="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
+<!-- 		<property name="jdbcUrl" value="jdbc:mysql://localhost/itwillbs17?serverTimezone=UTC"></property> -->
+<!-- 		<property name="username" value="itwillbs17"></property> -->
+<!-- 		<property name="password" value="itwillbs8030909"></property> -->
+<!-- 		</bean> -->
 <!-- 		hikariCP의 DataSource 객체 생성을 위해 HikariConfig 객체 전달 -->
 		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 			<constructor-arg ref="hikariConfig"></constructor-arg>
