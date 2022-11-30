@@ -13,8 +13,15 @@ public class CoinVO {
 	private String member_idx;
 	private String total;
 	private String board_id;
+	private String member_id;
 	
 	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
 	public String getBoard_id() {
 		return board_id;
 	}

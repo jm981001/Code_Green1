@@ -26,7 +26,7 @@ import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 @Controller
 public class ReviewController {
 	@Autowired
-	private ReviewService service;
+	private ReviewService service; 
 	
 	//------------리뷰작성-------------------------------------------
 	@PostMapping(value = "/ReviewWritePro.bo")

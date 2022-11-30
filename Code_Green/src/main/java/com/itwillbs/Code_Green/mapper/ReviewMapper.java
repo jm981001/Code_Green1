@@ -59,8 +59,10 @@ public interface ReviewMapper {
 //	리뷰게시판 리뷰 상태 변경
 	void reviewStatus(@Param("item_idx")int item_idx, @Param("sIdx")int sIdx);
 
-	
+	//마이페이지 후기 적립금
+	int CoinScore_my(CoinVO coin);
 
+	
 
 	
 }

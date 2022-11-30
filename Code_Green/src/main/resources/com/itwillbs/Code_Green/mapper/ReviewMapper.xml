@@ -94,6 +94,7 @@
 	</insert>
 	
 	
+	
 	<!-- 	리뷰 상태 변경 방금 -->
 	<update id="reviewStatus">
 

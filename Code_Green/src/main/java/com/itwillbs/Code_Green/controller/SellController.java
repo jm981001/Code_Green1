@@ -25,7 +25,7 @@ import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 @Controller
-public class SellController {
+public class SellController { 
 	@Autowired
 	private MemberService member_service;
 	
