@@ -53,7 +53,10 @@ public class MemberService {
 	public String checkDel(String member_id) {
 		return mapper.checkDel(member_id);
 	}
-	
+	//아이디 중복체크
+	public int idCheck(String member_id) {
+		return mapper.idCheck(member_id);
+	}
 	
 	
 	// ================================== 마이페이지 ============================================

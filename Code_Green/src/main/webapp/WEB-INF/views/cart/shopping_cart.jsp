@@ -70,7 +70,7 @@
 			success : function(data) {
 				$('.qu').html(count);
 				alert('수정완료.')
-// 				location.reload();
+				location.reload();
 			}
 		});
 	}

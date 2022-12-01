@@ -134,6 +134,22 @@ public class MemberController {
 		return "member/join_result";
 	}
 
+	// 아이디 중복 검사용
+	@RequestMapping(value = "/idDupCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberIdChkPOST(String member_id) throws Exception {
+
+		int result = service.idCheck(member_id);
+
+		if (result != 0) {
+			return "fail"; // 중복 아이디가 존재
+		} else {
+			return "success"; // 중복 아이디 x
+
+		}
+	}
+	
+	
 	// 이메일 인증
 	@GetMapping("/mailCheck")
 	@ResponseBody

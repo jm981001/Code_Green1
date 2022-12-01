@@ -137,6 +137,9 @@
 				}
 			});
 		});	
+		$(function(){$("#cartBtn").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
+		$(function(){$("#relB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
+		$(function(){$("#sameB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 	</script>
 	
 	<script type="text/javascript">

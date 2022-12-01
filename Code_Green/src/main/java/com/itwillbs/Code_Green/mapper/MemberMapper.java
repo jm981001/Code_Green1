@@ -27,6 +27,9 @@ public interface MemberMapper {
 	// => 파라미터 : MemberVO 객체(member), 리턴타입 : int
 	public int insertMember(MemberVO member);
 
+	//아이디 중복체크 
+	public int idCheck(String member_id);
+	
 	// 회원 가입시 기본 적립금 추가
 	public void setCoin(int member_idx);
 
