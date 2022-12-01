@@ -221,9 +221,12 @@
                          // ⑥dataset값(Array)
                          data: dayTotal,
                          // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//                          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                         backgroundColor: 'rgba(202, 161, 211, 0.2)',
                          // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                         borderColor: 'rgba(255, 99, 132, 1)',
+//                          borderColor: 'rgba(255, 99, 132, 1)',
+                         borderColor: 'rgba(202, 161, 211, 1)',
+                         
                          // ⑨dataset의 선 두께(Number)
                          borderWidth: 1
                      }]

@@ -76,7 +76,12 @@ public interface ManagerMapper {
 	// 상품 파일 삭제
 	public int deleteItemFile(int item_idx);
 
-	
+	// 재고 목록 조회
+		public List<ItemVO> selectStockList(
+				@Param("startRow") int startRow,@Param("listLimit") int listLimit,
+				@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
+	// 재고 갯수 조회
+		public int selectStockListCount(@Param("searchType") String searchType,@Param("keyword")  String keyword,@Param("id") String id);
 	
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
@@ -122,6 +127,7 @@ public interface ManagerMapper {
 
 	 //매출순위 더보기  
 	public List<ItemVO> getTop10(String sId);
+	
 
 
 	   

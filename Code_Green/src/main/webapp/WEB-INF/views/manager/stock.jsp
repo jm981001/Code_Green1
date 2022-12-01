@@ -5,8 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +16,7 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>주문관리-베지터틀</title>
+    <title>재고관리</title>
      <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -29,8 +27,9 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
+
 <body>
- <header class="header--mobile">
+    <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
@@ -42,94 +41,70 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
-    
-   
-        <div class="ps-main__wrapper">
+     
+      <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>주문현황</h3>
+                    <h3>재고관리</h3>
                 </div>
-                
-                
+								
+
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
-            
-                <div class="ps-section__actions"><a class="ps-btn success" href="order_detail"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
+   
+<%--                  <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a></div> --%>
                 
                 <div class="ps-section__header">
-              
-            
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="orders" method="get">
+                        <form class="ps-form--filter" action="products" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                       <select class="ps-select" name="searchType">
-                                        <option value="sell_status">주문상태</option>
-                                        <option value="item_name">주문상품</option>
-                                        <option value="sell_pay_status">결제여부</option>
+                                    <select class="ps-select" name="searchType">
+										<option value="item_name">상품명</option>
+										<option value="item_name">재고</option>
+                                        
                                     </select>
-                                </div>
-                                </div>
+                                    </div>
+                                    </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text"name="keyword" placeholder="Search..." />
+                                 <input class="form-control" type="text" name="keyword" placeholder="Search..." />
                                 </div>
+                                    
                             <div class="ps-form__right">
-                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
+                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
                     </div>
                     
-               <br>
+                    <br>
                     <div class="ps-section__search">
-              
-                    </div>
+                  </div>
                 </div>
-                <div class="ps-section__content">
+                     <div class="ps-section__content">
                     <div class="table-responsive">
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                    <th>주문번호</th>
-                                    <th>회원번호</th>
-                                    <th>주문상품</th>
-                                    <th>상품가격</th>
-                                    <th>주문수량</th>
-                                    <th>총금액</th>
-                                    <th>주문상태</th>
-                                    <th>주문날짜</th>
-                                    <th>결제여부</th>
-                                    <th>결제일</th>
-                                    <th>상품브랜드</th>
-                                    <th></th>
+                                    <th>상품번호</th>
+                                    <th>상품명</th>
+                                    <th>상품소개</th>
+                                    <th>재고</th>
+                                    <th>가격 </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
-                     <c:forEach var="order" items="${orderList}" >
+      						<c:forEach var="stock" items="${stockList}" >
 						    <tr>
-						     <td onclick="location.href='order_detail?sell_order_number=${order.sell_order_number}'"><strong>${order.sell_order_number}</strong></td>
-						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
-						     <td>${order.item_name }</td>
-						     <td>${order.item_price}</td>
-						     <td>${order.sell_amount}</td>
-						     <td>${order.sell_total_price}</td>
-						     <td>${order.sell_status}</td>
-						     <td>${order.sell_date }</td>
-						     <td>${order.sell_pay_status}</td>
-						     <td>${order.sell_pay_date}</td>
-						     
-<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_pay_date }" pattern="yyyyMMdd" /> --%>
-<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
-						     
-						     
-						     <td>${order.manager_brandname}</td>
-						      <td>
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<%--                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="order_detail?sell_idx=${order.sell_idx }">주문상태변경</a></div> --%>
-<!--                                         </div> -->
+						     <td>${stock.item_idx}</td>
+						     <td onclick="location.href='stock_detail?item_idx=${stock.item_idx}'"><strong>${stock.item_name }</strong></td>
+						     <td>${stock.item_info}</td>
+						     <td>${stock.item_stock}</td>
+						     <td>${stock.item_price}</td>
+						        <td>
                                     </td>
 						    </tr>     
-                            
 					</c:forEach>
 						</tbody>
 						</table>
@@ -142,14 +117,14 @@
                                 <div class="ps-pagination">
                                     <ul class="pagination">
                                        
-                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="stock?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
                                         <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
                                            <c:choose>
                                               <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-                                              <c:otherwise><li><a href="orders?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
+                                              <c:otherwise><li><a href="stock?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
                                            </c:choose>
                                         </c:forEach>
-                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="stock?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
               <!-- 페이징 버튼들 끝 -->

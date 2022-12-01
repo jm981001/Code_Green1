@@ -47,7 +47,7 @@
                 </div>
                 <div class="header__center">
                     <form class="ps-form--search-bar" action="sales_management" method="get">
-                        <input class="form-control" type="text" placeholder="Search something" />
+<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
                         <button><i class="icon-magnifier"></i></button>
                     </form>
                 </div>
@@ -79,7 +79,7 @@
 							         value="2077-06-15">
 							</label>
                                 <tr>
-                                    <th>연매출</th><br>
+                                   
                                     <th>이번달매출</th><br>
                                     <th>이번주매출</th><br>
                                     <th>오늘매출</th><br>
@@ -134,17 +134,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="ps-section__footer">
-                        <p>Show 5 in 30 items.</p>
-                        <ul class="pagination">
-                            <li><a href="#"><i class="icon icon-chevron-left"></i></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+                
 
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

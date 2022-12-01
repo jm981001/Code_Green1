@@ -140,20 +140,7 @@
 <!--                                 </tr> -->
            <table class="item_image"id="itemImage">
          		<div class="ps-form__submit text-center">
-<!--                   <br> -->
-<!--                    	<tr> -->
-<!--                       <td><div class="card" style="width: 18rem;"></div></td><td><td><div class="card" style="width: 18rem;"></div></td> -->
-<!--                     </tr> -->
-<!--                 </div> -->
-<!-- 			<!-------------등록된 상품이미지 ------------> 
 
-<!-- 					  <tr> -->
-<%-- 					    <td><img alt="${item.file1}" src="/Code_Green/resources/img/item/${file_item.file1 }"/></td><td><img alt="${file_item.file2}" src="/Code_Green/resources/img/item/${item.file2 }" /></td> --%>
-<%-- 						<td><h5 class="card-title">${ItemInfo.item_name }</h5></td><td><h5 class="card-title">${ItemInfo.item_name }</h5></td> --%>
-<!-- 					  <tr> -->
-<!-- 					</table> -->
-					
-<!-- 			<!-------------등록된 상품이미지 ------------> 
                             
                          <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">상품수정</button></a>
 <%--                          <a href= "product_delete?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">삭제1</button></a> --%>

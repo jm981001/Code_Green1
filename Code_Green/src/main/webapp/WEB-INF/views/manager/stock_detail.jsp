@@ -1,4 +1,3 @@
-<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -18,7 +17,7 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>주문관리-베지터틀</title>
+    <title>재고관리</title>
      <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -30,7 +29,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
 <body>
-<header class="header--mobile">
+    <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
@@ -42,77 +41,67 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
-    
- 
-        <div class="ps-main__wrapper">
+
+
+
+
+
+           <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>주문조회</h3>
+                    <h3>재고현황</h3>
+                    <p>재고수정&삭제</p>
                 </div>
-                
-                
-               <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__center">
+                    <form class="ps-form--search-bar" action="index.html" method="get">
+<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
+                        <button><i class="icon-magnifier"></i></button>
+                    </form>
+                </div>
+                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
-
- 		<div class="ps-main__wrapper">
-  		<div class="header__center">
-  		<form class="ps-form--search-bar" action="order_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
-
- 
-       <table class="table ps-table">
-              
-                    <h2>주문상세보기</h2>
-                    <hr>
-                       <thead>
-                                <tr>
-                                    <th>주문번호</th>
-                                    <th>회원번호</th>
-                                    <th>주문상품</th>
-                                    <th>상품가격</th>
-                                    <th>주문수량</th>
-                                    <th>총금액</th>
-                                    <th>주문상태</th>
-                                    <th>주문날짜</th>
-                                    <th>결제여부</th>
-                                    <th>결제일</th>
-                                    <th>상품브랜드</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-						    <tr>
-						     <td>${order.sell_order_number}</td>
-						     <td>${order.rf_member_idx}</td>
-						     <td>${order.item_name }</td>
-						     <td>${order.item_price}</td>
-						     <td>${order.sell_amount}</td>
-						     <td>${order.sell_total_price}</td>
-						     <td>${order.sell_status}</td>
-						     <td>${order.sell_date }</td>
-						     <td>${order.sell_pay_status}</td>
-						     <td>${order.sell_pay_date}</td>
-						     <td>
+            <section class="ps-dashboard ps-items-listing">
+                <div class="ps-section__left">
+                    <section class="ps-card">
+                        <div class="ps-card__header">
+                        
+                        
+  <figure class="ps-block--form-box">
+                                    <figcaption>재고</figcaption>
+                                    <div class="ps-block__content">
                                       
-                                    </td>
-						    </tr>     
-                            
-						</tbody>
-						</table>
-             
+                                        <div class="form-group form-group--select">
+                                            <label>재고상태
+                                            </label>
+                                            <div class="form-group__content">
+                                            
+                                                <select class="ps-select" onchange="changeStatus(this.value)">
+                                                    <option value="재고상태">재고상태</option>
+                                                    <option value="재입고">재입고</option>
+                                                    <option value="품절">품절</option>
+                                                    <option value="판매중">판매중</option>
+                                                    <option value="판매중지">판매중지</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                            <label>재고수량<sup>*</sup>
+                                            </label>
+                                            <input class="form-control" type="text"name="item_stock" value="${products.item_stock }"/>
+                                        </div>
+                                    </div>
+                                </figure>
+                               
+                            </div>
+                        </div>
                     </div>
-                </div>
-                           <table class="item_image"id="itemImage">
-         		<div class="ps-form__submit text-center">
+                      <div class="ps-form__submit text-center	">
+                    <button class="ps-btn"type="submit"value="수정">재고수정</button>
 
-
-                         <a href= "stock?item_idx=${order.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
-                         <button class="ps-btn success"type="submit"onclick="order_change=${ItemInfo.item_idx }">주문상태변경</button>
-                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
-                    </table>
-                    
-                    </div>
-                
+                <div class="ps-section__right"></div>
+            </section>
+        </div>
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

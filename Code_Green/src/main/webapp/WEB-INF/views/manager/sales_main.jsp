@@ -42,51 +42,71 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
-        <div class="ps-main__wrapper">
+     
+         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>매출관리</h3>
+                    <h3>매출 관리</h3>
                 </div>
-                <div class="header__center">
-                    <form class="ps-form--search-bar" action="sales_main" method="get">
-<!--                         <input class="form-control" type="text" placeholder="Search something"> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-                    </form>
-                </div>
+								
+
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
-            <section class="ps-dashboard">
-                <div class="ps-section__left">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="ps-card ps-card--sale-report">
-                                <div class="ps-card__header">
-                                 <h4><a href="sales_management.jsp">매출 현황</a></h4>
-                                </div>
-                                <div class="ps-card__content">
-                                    <div id="chart"></div>
-                                </div>
-                                <div class="ps-card__footer">
-                                    <div class="row">
-                                        <div class="col-md-8">
-<!--                                             <p>Items Earning Sales ($)</p> -->
-                                        </div>
-<!--                                         <div class="col-md-4"><a href="#">Export Report<i class="icon icon-cloud-download ml-2"></i></a></div> -->
+            <section class="ps-items-listing">
+   
+<%--                  <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a></div> --%>
+                
+                <div class="ps-section__header">
+                    <div class="ps-section__filter">
+                        <form class="ps-form--filter" action="products" method="get">
+                            <div class="ps-form__left">
+                                <div class="form-group">
+<!--                                     <select class="ps-select" name="searchType"> -->
+<!-- 										<option value="item_name">상품명</option> -->
+<!--                                         <option value="item_category">상품카테고리</option> -->
+<!--                                         <option value="item_packing">포장분류</option> -->
+<!--                                         <option value="item_stock">재고유무</option> -->
+<!--                                     </select> -->
                                     </div>
+                                    </div>
+                                <div class="form-group">
+<!--                                  <input class="form-control" type="text" name="keyword" placeholder="Search..." /> -->
                                 </div>
+                                    
+                            <div class="ps-form__right">
+<!--                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button> -->
                             </div>
+                        </form>
+                    </div>
+                    
+                    <br>
+                    <div class="ps-section__search">
+              
+                    </div>
+                </div>
+                <div class="ps-section__content">
+                    <div class="table-responsive">
+                        <table class="table ps-table">
+                        
+                        <thead>
+                        <tr>
+                        <h4><td>총 매출</td></h4>
+                        
+                        <td><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"></i><span></span></small></td>
+                        
+                        <h4><td>총 주문수</td></h4>
+                        <td>${orderTotal.orderCount }<small class="asc"></i></small></td>
+                     
+                        </tr>
+                        </thead>
+                        </table>
                         </div>
                         
-
-					<div class="ps-card">
-                        <div class="ps-card__header">
-                        <br>
-                           <h4>베스트상품</h4>
-                        </div>
-                        <div class="ps-card__content">
-                            <div class="table-responsive">
-                                <table class="table ps-table">
-                                    <thead>
+                         <div class="table-responsive">
+                        <table class="table ps-table">
+                            <thead>
+                            <br>
+                            <h4> 상품 순위</h4>
                                         <tr>
                                             <th>Top</th>
                                             <th>상품명</th>

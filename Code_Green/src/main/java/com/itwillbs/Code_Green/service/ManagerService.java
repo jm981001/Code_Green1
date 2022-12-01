@@ -118,6 +118,15 @@ public class ManagerService {
 	}
 
 	
+	// 재고 목록 조회
+	public List<ItemVO> getStockList(int startRow, int listLimit, String searchType, String keyword, String id) {
+		return mapper.selectStockList (startRow, listLimit, searchType, keyword,id);
+	}
+	//재고 갯수 조회
+	public int getStockListCount(String searchType, String keyword, String id) {
+		return mapper.selectStockListCount(searchType, keyword,id);
+		}
+	
 	//------------------------------문의 글 관리---------------------------------
 	
 //	 문의 목록
@@ -186,6 +195,7 @@ public class ManagerService {
 	public List<ItemVO> getTop10(String sId) {
 		return mapper.getTop10(sId);
 	}
+	
 	   
 
 	   

@@ -66,6 +66,7 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
+     
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
