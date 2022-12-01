@@ -103,7 +103,8 @@ if(${not empty sessionScope.sId && sessionScope.sId ne 'admin'} ) {
 				'manager_brandname'	: manager_brandname,
 				'file1'				: file1,
 			},
-			success : function (data) {
+			success : function (cartCount) {
+				$('#cartCount i').html(cartCount);
 				alert('장바구니에 담았습니다.')
 			}
 		});

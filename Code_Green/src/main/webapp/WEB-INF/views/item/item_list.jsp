@@ -76,8 +76,9 @@ function addHeart(item_idx) {
 				'manager_brandname'	: manager_brandname,
 				'file1'				: file1,
 			},
-			success : function (data) {
+			success : function (cartCount) {
 				alert('장바구니에 담았습니다.')
+				$('#cartCount i').html(cartCount);
 			}
 		});
 	}
