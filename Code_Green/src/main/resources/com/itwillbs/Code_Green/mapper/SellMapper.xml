@@ -53,7 +53,8 @@
 			 		 #{sell.sell_pay_type},							  <!-- sell_pay_type --> <!-- 주문시 디폴트로 무통장입금 걸어놓고 카드 결제 버튼 클릭시 update 구문써서 '카드결제' 바꿔주기 -->
 			 		 '결제대기중',									  <!-- sell_pay_status --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
 			 		 '',											  <!-- sell_pay_date --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
-			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s), 8, 0)) <!-- sell_order_number -->
+			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s), 8, 0)), <!-- sell_order_number -->
+			 		''
 			 	)			
 	</insert>
 	
@@ -182,7 +183,7 @@
 		UPDATE 
 				sell
 		   SET
-		   		sell_status = '취소요청'		
+		   		sell_cancel_status = '취소요청'		
 		 WHERE
 		 		sell_idx = #{sell_idx}	
 	</update>

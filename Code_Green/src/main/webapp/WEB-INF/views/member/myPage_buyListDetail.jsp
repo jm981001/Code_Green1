@@ -49,7 +49,7 @@
 			
 			if(cancelAuth){
 				
-				if('${buyDetail.sell_status}' =='취소요청') {
+				if('${buyDetail.sell_cancel_status}' == '취소요청') {
 					alert('이미 취소한 주문입니다.');
 				} else {
 					$.ajax({
