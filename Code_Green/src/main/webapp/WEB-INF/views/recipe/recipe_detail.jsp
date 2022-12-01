@@ -40,10 +40,6 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- 헤더 -->
      <jsp:include page="../inc/top.jsp"></jsp:include>
