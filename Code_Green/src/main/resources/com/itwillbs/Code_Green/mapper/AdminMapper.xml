@@ -183,6 +183,55 @@
 			m.manager_idx;
 	</select>
 	
+<!-- ==결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====-->
+	
+	<!-- 결제취소요청 목록 -->
+	<select id="selectCancleRequestList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_status = '취소요청'
+	</select>
+	
+	<!-- 결제취소승인 목록 -->
+	<select id="selectCancleSuccessList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_status = '주문취소' AND s.sell_pay_status = '결제취소'
+	</select>
+	
+	<!-- 결제취소반려 목록 -->
+	<select id="selectCancleReturnList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_status = '취소반려' AND s.sell_pay_status = '결제완료'
+	</select>
 
 
 

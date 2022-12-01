@@ -406,6 +406,21 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportReturn(report_idx);
 	}
+	//결제취소요청 목록
+	public List<SellVO> getCancleRequestList() {
+		// TODO Auto-generated method stub
+		return mapper.selectCancleRequestList();
+	}
+	//결제취소승인 목록
+	public List<SellVO> getCancleSuccessList() {
+		// TODO Auto-generated method stub
+		return mapper.selectCancleSuccessList();
+	}
+	//결제취소반려 목록
+	public List<SellVO> getCancleReturnList() {
+		// TODO Auto-generated method stub
+		return mapper.selectCancleReturnList();
+	}
 	
 	
 	

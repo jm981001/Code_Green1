@@ -50,20 +50,20 @@ public class AdminController {
 	
 	
 	//------------메뉴바----------------------------
-	@RequestMapping(value = "menuMoney", method = RequestMethod.GET)
-	public String menuMoney(Model model,HttpSession session) { 
-
-		String sId = (String)session.getAttribute("sId");
-		System.out.println("sId= " + sId);
-		if(sId == null || !sId.equals("admin") || sId == "") {
-			model.addAttribute("msg", " 잘못된 접근입니다!");
-			return "admin/ad_fail_back";
-		} 
-		System.out.println("무야호");
-		
-		return "inc/ad_menu";
-		
-	}
+//	@RequestMapping(value = "menuMoney", method = RequestMethod.GET)
+//	public String menuMoney(Model model,HttpSession session) { 
+//
+//		String sId = (String)session.getAttribute("sId");
+//		System.out.println("sId= " + sId);
+//		if(sId == null || !sId.equals("admin") || sId == "") {
+//			model.addAttribute("msg", " 잘못된 접근입니다!");
+//			return "admin/ad_fail_back";
+//		} 
+//		System.out.println("무야호");
+//		
+//		return "inc/ad_menu";
+//		
+//	}
 	
 
 	//------------전체관리자 메인----------------------------
@@ -142,7 +142,49 @@ public class AdminController {
 		public String main() {
 			return "main/main";
 		}
+		
+		
+		//======================================여기부터는 주문취소요청  열차입니다=====================================================
+		//======================================여기부터는 주문취소요청  열차입니다=====================================================
+		
+	
+		//------------결제취소요청 목록----------------------------
+		@RequestMapping(value = "ad_Cancle_Order", method = RequestMethod.GET)
+		public String CancleOrder(Model model,HttpSession session) { 
+
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			if(sId == null || !sId.equals("admin") || sId == "") {
+				model.addAttribute("msg", " 잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			} 
 			
+			//요청목록
+			List<SellVO> CancleRequest = service.getCancleRequestList();
+//			System.out.println("주문취소요청 = " + CancleRequest);
+			model.addAttribute("CancleRequest", CancleRequest);
+			//승인목록
+			List<SellVO> cancleSuccess = service.getCancleSuccessList();
+//			System.out.println("취소요청승인 = " + cancleSuccess);
+			model.addAttribute("cancleSuccess", cancleSuccess);
+			//뱐려목록
+			List<SellVO> cancleReturn = service.getCancleReturnList();
+//			System.out.println("취소요청승인 = " + cancleSuccess);
+			model.addAttribute("cancleReturn", cancleReturn);
+			
+			
+			return "admin/ad_Cancle_Order";
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//------------전체관리자 회원관리(전체목록)----------------------------
 		@GetMapping(value = "/ad_member_Manage")
@@ -1519,7 +1561,7 @@ public class AdminController {
 			return "admin/ad_fail_back";
 		}
 	
-	
+		
 		
 		
 		

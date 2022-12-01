@@ -36,6 +36,8 @@ public class SellVO {
 	private int brandtotal;
 	private int	net;//순수익
 	
+	private String member_id;//회원아이디
+	
 	public SellVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -217,13 +219,22 @@ public class SellVO {
 		this.net = net;
 	}
 
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+
 
 	public SellVO(int sell_idx, int rf_member_idx, String sell_amount, String sell_usecoin, String sell_total_price,
 			String sell_status, String sell_postcode, String sell_address, String sell_phone, String sell_receiver,
 			String sell_date, String sell_pay_type, String sell_pay_status, String sell_pay_date,
 			String sell_order_number, String sell_detail_idx, String item_name, String item_price, String item_idx,
 			String item_category, String manager_brandname, String file1, String member_email, int total,
-			int sell_count, int brandtotal, int net) {
+			int sell_count, int brandtotal, int net, String member_id) {
 		super();
 		this.sell_idx = sell_idx;
 		this.rf_member_idx = rf_member_idx;
@@ -252,6 +263,7 @@ public class SellVO {
 		this.sell_count = sell_count;
 		this.brandtotal = brandtotal;
 		this.net = net;
+		this.member_id = member_id;
 	}
 
 
@@ -267,7 +279,7 @@ public class SellVO {
 				+ item_name + ", item_price=" + item_price + ", item_idx=" + item_idx + ", item_category="
 				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", member_email="
 				+ member_email + ", total=" + total + ", sell_count=" + sell_count + ", brandtotal=" + brandtotal
-				+ ", net=" + net + "]";
+				+ ", net=" + net + ", member_id=" + member_id + "]";
 	}
 
 	

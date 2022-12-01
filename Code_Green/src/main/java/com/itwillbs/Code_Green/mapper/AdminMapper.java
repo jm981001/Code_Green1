@@ -262,6 +262,12 @@ public interface AdminMapper {
 	public List<ManagerVO> selectFollowerRankingList();
 	//신고글 처리반려 
 	public int updateReportReturn(int report_idx);
+	//결제취소요청 목록
+	public List<SellVO> selectCancleRequestList();
+	//결제취소승인 목록
+	public List<SellVO> selectCancleSuccessList();
+	//결제취소반려 목록
+	public List<SellVO> selectCancleReturnList();
 
 	
 
