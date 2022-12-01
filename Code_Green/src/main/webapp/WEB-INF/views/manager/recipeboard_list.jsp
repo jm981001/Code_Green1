@@ -169,7 +169,11 @@
                               <c:forEach var="recipeList" items="${recipeList }">
                                 <tr>
                                    <td>${recipeList.board_idx }</td>
-                                    <td><strong>${recipeList.board_subject }</strong></td>
+                                    <td>
+                                    	<a href="recipe_detail.bo?board_idx=${recipeList.board_idx }&id=${sessionScope.sId}">
+                                    		<strong>${recipeList.board_subject }</strong>
+                                    	</a>
+                                    </td>
                                     <td>${recipeList.item_name }</td>
                                     <td>${recipeList.board_date }</td>
                                     <td>${recipeList.board_readcount }</td>
