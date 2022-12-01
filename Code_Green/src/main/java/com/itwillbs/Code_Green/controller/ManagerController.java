@@ -1032,7 +1032,7 @@ public class ManagerController {
 	 			// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
 //	 							MultipartFile mFile = board.getFile();
 	 			
-	 			String uuid = UUID.randomUUID().toString();
+//	 			String uuid = UUID.randomUUID().toString();
 	 			
 	 		
 	 			MultipartFile mFile1 = fileBoard.getFile_1();
@@ -1045,12 +1045,12 @@ public class ManagerController {
 	 			// ========================================================
 	 			
 	 			if(!originalFileName1.equals("")) {
-	 				fileBoard.setFile1(uuid + "_" + originalFileName1);
+	 				fileBoard.setFile1(originalFileName1);
 //	 						System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
 	 			}
 
 	 			if(!originalFileName2.equals("")) {
-	 				fileBoard.setFile2(uuid + "_" + originalFileName2);
+	 				fileBoard.setFile2(originalFileName2);
 //	 						System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
 	 			}
 	 			
@@ -1119,7 +1119,7 @@ public class ManagerController {
 	 			String oldRealFile1 = fileBoard.getFile1();
 	 			String oldRealFile2 = fileBoard.getFile2();
 	 			
-	 			String uuid = UUID.randomUUID().toString();
+//	 			String uuid = UUID.randomUUID().toString();
 	 			String uploadDir = "/resources/recUpload";	// 가상의 업로드 경로
 	 			String saveDir = session.getServletContext().getRealPath(uploadDir);
 	 			
@@ -1148,7 +1148,7 @@ public class ManagerController {
 	 				// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
 	 				//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
 	 				//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-	 				fileBoard.setFile1(uuid + "_" + originalFileName);
+	 				fileBoard.setFile1(originalFileName);
 	 				// 새 파일 업로드 표시
 	 				isNewFile1 = true;
 	 			} 
@@ -1161,7 +1161,7 @@ public class ManagerController {
 	 				// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
 	 				//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
 	 				//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-	 				fileBoard.setFile2(uuid + "_" + originalFileName);
+	 				fileBoard.setFile2(originalFileName);
 	 				// 새 파일 업로드 표시
 	 				isNewFile2 = true;
 	 			}	
