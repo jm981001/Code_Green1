@@ -193,7 +193,7 @@
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>환불/취소 건</p>
-                                    <h4><small class="desc"><i class="icon-arrow-down"></i></small></h4>
+                                    <h4>${cancelSell }<small class="desc"><i class="icon-arrow-down"></i></small></h4>
                                 </div>
                             </div>
                         </div>

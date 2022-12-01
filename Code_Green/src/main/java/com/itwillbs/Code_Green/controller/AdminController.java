@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.AdminService;
+import com.itwillbs.Code_Green.service.ItemService;
+import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.AdminVO;
 import com.itwillbs.Code_Green.vo.BoardVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
@@ -30,6 +32,12 @@ public class AdminController {
 
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private SellService sell_service;
+	
+	@Autowired
+	private ItemService item_service;
 
 	//관리자 로그인
 	@PostMapping(value = "/AdminLoginPro.me")
@@ -70,10 +78,14 @@ public class AdminController {
 		List<ManagerVO> topSale = service.getTopSale(); 		//매출 3순위
 			   SellVO sellTotal = service.getTotalMoney(); 		//총매출
 				 int sell_count = service.getTotalsellCount();  //총주문수
+				 int cancelSell = service.getCancelCount();		//주문취소건수
+		
+		session.setAttribute("total", sellTotal.getNet());		//총매출(메뉴바)
 		
 		model.addAttribute("topSale", topSale);			//총주문수
 		model.addAttribute("sellTotal", sellTotal);		//매출 3순위
 		model.addAttribute("sellCount", sell_count);	//총매출
+		model.addAttribute("cancelSell", cancelSell);
 		
 		return "admin/index";
 		
@@ -173,13 +185,35 @@ public class AdminController {
 			
 			if(sell_cancel_status.equals("취소요청")) {
 				int updateCount = service.changeCancelStatus(sell_idx); //취소요청 승인
+				
+				if(updateCount > 0) {
+					// 취소 승인시 재고 다시 추가
+					List<SellVO> orderDetailList = sell_service.getOrderDetailList(sell_idx);
+					
+					for(int i = 0; i < orderDetailList.size(); i++) {
+						String item_idx1 = orderDetailList.get(i).getItem_idx();
+//								System.out.println("String item_idx1 : " + item_idx1);
+						String sell_amount1 = orderDetailList.get(i).getSell_amount();
+//								System.out.println("String sell_amount1 : " + sell_amount1);
+						
+						int item_idx2 = Integer.parseInt(item_idx1);
+//								System.out.println(item_idx2);
+						int sell_amount2 = Integer.parseInt(sell_amount1);
+//								System.out.println(sell_amount2);
+						
+					int modifyItemNumberCount = item_service.modifyItemNumber2(item_idx2, sell_amount2);
+//							System.out.println("modifyItemNumberCount : " + modifyItemNumberCount);
+				}
+			}	
+				
+				
 	//						System.out.println("승인완료" + updateCount);
 	
 				return "redirect:/ad_Cancel_Order";
-	
-			} 
-			return "redirect:/ad_Cancel_Order"; //수정쓰
-		}
+			
+					} 
+					return "redirect:/ad_Cancel_Order"; //수정쓰
+				}
 		
 		
 		

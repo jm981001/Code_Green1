@@ -101,7 +101,9 @@
 				    	<td scope="row" rowspan="2">내용</td>
 				    </tr>
 				    <tr>
-				    	<td colspan="4">${recipeDetail.board_content } ${recipeDetail.file1 }</td>
+				    	<td colspan="4">${recipeDetail.board_content } <br><img src="/Code_Green/resources/recUpload/${recipeDetail.file1 }">
+				    	<br> <img  src="/Code_Green/resources/recUpload/${recipeDetail.file2 }" alt="" style="height: 2850px; width: 750px;">
+				    	</td>
 				    </tr>
 				  </tbody>
 				</table>

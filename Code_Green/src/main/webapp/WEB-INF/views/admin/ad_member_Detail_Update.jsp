@@ -108,7 +108,7 @@
 			            
 			            <div class="col-md-6 mb-3">
 			              <label for="name">비밀번호</label>
-			              <input type="text" class="form-control" id="passwd" value="${member.member_pass }" readonly="readonly">
+			              <input type="text" class="form-control" id="passwd" placeholder="접근이 불가합니다" readonly="readonly">
 			            </div>
 			            
 			            

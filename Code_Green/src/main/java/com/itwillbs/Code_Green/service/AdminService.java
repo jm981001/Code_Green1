@@ -38,6 +38,12 @@ public class AdminService {
 		return mapper.selectTotalsellCount();
 	}
 	
+	//주문취소건수
+	public int getCancelCount() {
+		// TODO Auto-generated method stub
+		return mapper.selectCancelCount();
+	}
+	
 	//매출 3순위
 	public List<ManagerVO> getTopSale() {
 		// TODO Auto-generated method stub
@@ -425,6 +431,7 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateStatusApproval(sell_idx);
 	}
+	
 	
 	
 	

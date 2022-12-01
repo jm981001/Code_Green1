@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +26,10 @@
                         <div class="ps-block__right">
                             <p>여기는<a href="#">총관리자</a></p>
                         </div>
-                        <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
+                        <div class="ps-block__action"><a href="main"><i class="icon-exit"></i></a></div>
                     </div>
                     <div class="ps-block--earning-count"><small>총매출</small>
-                        <h3>${sellTotal.total }</h3>
+                        <h3>${sessionScope.total }</h3>
                     </div>
                 </div>
                 <div class="ps-sidebar__content">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="ps-sidebar__footer">
                         <div class="ps-copyright"><img src="/Code_Green/resources/img/logo.png" alt="">
-                            <p>&copy;2022 최고의 비건마켓 어쩌구. <br/> All rights reversed.</p>
+                            <p>&copy;2022 VEGETURTLE:CODE-GREEN TEAM FROM ITWILL-BUSAN.<br/> All rights reversed.</p>
                         </div>`
                     </div>
                 </div>

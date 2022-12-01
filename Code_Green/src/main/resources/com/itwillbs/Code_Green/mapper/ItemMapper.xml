@@ -392,8 +392,7 @@
 				f.file2,
 				m.manager_brandname,
 				a.count,
-              ifnull(truncate( b.board_star_score,1),0) AS board_star_score,
-              ifnull(round(truncate( b.board_star_score,1),0),0) AS score,
+                truncate( b.board_star_score,1) AS board_star_score,
 			 ifnull((select round(count(*) * 100.0 / (select count(*)
 												from board_star s 
 													left join board b 
@@ -913,6 +912,24 @@
 					item
 			   SET
 			   		item_stock = #{item_stock} - #{sell_amount2}
+			 WHERE
+			 		item_idx = #{item_idx2}   		 
+	</update>
+	
+		<!-- 주문시 재고 차감 -->
+	<update id="updateItemNumber2">
+		<selectKey keyProperty="item_stock" resultType="string" order="BEFORE">
+			SELECT
+					item_stock
+			  FROM
+			  		item
+			 WHERE
+			 		item_idx = #{item_idx2} 		
+		</selectKey>
+			UPDATE
+					item
+			   SET
+			   		item_stock = #{item_stock} + #{sell_amount2}
 			 WHERE
 			 		item_idx = #{item_idx2}   		 
 	</update>

@@ -160,7 +160,6 @@ public class ItemService {
 		return mapper.selectItemBestList_ex();
 	}
 
-
 	//작성 가능 후기 갯수
 	public int getReviewListCount(String member_id) {
 		return  mapper.getReviewListCount(member_id);
@@ -169,6 +168,12 @@ public class ItemService {
 	// 주문시 재고 차감
 	public int modifyItemNumber(int item_idx2, int sell_amount2) {
 		return  mapper.updateItemNumber(item_idx2, sell_amount2);
+	}
+
+	// 취소 승인시 재고 추가
+	public int modifyItemNumber2(int item_idx2, int sell_amount2) {
+		// TODO Auto-generated method stub
+		return mapper.updateItemNumber2(item_idx2, sell_amount2);
 	}
 
 

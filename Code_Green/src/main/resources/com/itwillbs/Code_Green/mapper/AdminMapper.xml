@@ -17,7 +17,13 @@
 	<!-- 주문건수 -->
 	<select id="selectTotalsellCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM sell
+		  FROM sell
+	</select>
+	<!-- 취소건수 -->
+	<select id="selectCancelCount" resultType="Integer">
+		SELECT COUNT(sell_status)
+		  FROM sell
+		 WHERE sell_status ='주문취소';
 	</select>
 	
 	<!-- 매출 3순위 -->

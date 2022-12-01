@@ -31,7 +31,21 @@ public interface AdminMapper {
 	//매출 3순위
 	public List<ManagerVO> selectTopSaleList();
 
+	//주문 취소 건 수
+	public int selectCancelCount();
 	
+	//매출 랭킹
+	public List<ManagerVO> selectRanking();
+	
+	//기업 별점 순위
+	public List<ManagerVO> selectStarRankingList();
+	
+	//기업 팔로워 순위
+	public List<ManagerVO> selectFollowerRankingList();
+	
+	//신고글 처리반려 
+	public int updateReportReturn(int report_idx);
+
 	
 	
 	//----------------------------------------------------------
@@ -254,24 +268,19 @@ public interface AdminMapper {
 
 	//기업 가입 승인
 	public int updateAdminAuth(ManagerVO manager);
-	//매출 랭킹
-	public List<ManagerVO> selectRanking();
-	//기업 별점 순위
-	public List<ManagerVO> selectStarRankingList();
-	//기업 팔로워 순위
-	public List<ManagerVO> selectFollowerRankingList();
-	//신고글 처리반려 
-	public int updateReportReturn(int report_idx);
 	
 	
+	//=== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ====== 결제취소요청 ==
 	
 	//결제취소요청 목록
 	public List<SellVO> selectCancelRequestList();
+	
 	//결제취소승인 목록
 	public List<SellVO> selectCancelSuccessList();
 	
-	//결제취소요청승인
+	//결제취소요청 승인
 	public int updateStatusApproval(int sell_idx);
+	
 	
 
 	

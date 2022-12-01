@@ -104,6 +104,9 @@ public interface ItemMapper {
 	// 주문시 재고 차감
 	int updateItemNumber(@Param("item_idx2")int item_idx2, @Param("sell_amount2")int sell_amount2);
 
+	// 주문시 재고 추가
+	int updateItemNumber2(@Param("item_idx2")int item_idx2, @Param("sell_amount2")int sell_amount2);
+
 
 
 	

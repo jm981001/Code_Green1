@@ -151,7 +151,7 @@ window.onload = function(){
 			            
 			            <div class="col-md-6 mb-3">
 			              <label for="name">비밀번호</label>
-			              <input type="text" class="form-control" id="passwd" value="${manager.manager_pass }" readonly="readonly">
+			              <input type="text" class="form-control" id="passwd" placeholder="접근이 불가합니다" readonly="readonly">
 			            </div>
 		 	<!-- 전화번호,이메일,주소 -->    
 			            <div class="col-md-6 mb-3">
