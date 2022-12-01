@@ -217,21 +217,7 @@
 		WHERE	s.sell_cancel_status = '취소승인' AND s.sell_pay_status = '결제취소'
 	</select>
 	
-	<!-- 결제취소반려 목록 -->
-	<select id="selectCancelReturnList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		SELECT 
-				m.member_id
-			,	s.sell_idx
-		    ,	s.sell_total_price
-		    ,	s.sell_cancel_status
-		    ,	s.sell_pay_status
-		    ,	s.sell_pay_date
-		    ,	s.sell_order_number
-		 FROM	sell s 
-		 LEFT JOIN member m
-		   ON	s.rf_member_idx = m.member_idx
-		WHERE	s.sell_cancel_status = '취소반려' AND s.sell_pay_status = '결제완료'
-	</select>
+	
 	<!-- 결제취소 승인 -->
 	<update id="updateStatusApproval">
 		UPDATE 		sell s 
@@ -245,18 +231,7 @@
 		 			s.sell_idx = #{sell_idx};
 	</update>
 	
-	<!-- 결제취소로 되돌리기 -->
-	<update id="updateStatusRequest">
-		UPDATE 		sell s 
-		  LEFT JOIN sell_detail sd 
-		    ON		s.sell_idx = sd.rf_sell_idx
-		   SET 		s.sell_cancel_status =	'취소요청'
-		   	   ,	s.sell_pay_status = '결제완료'
-		   	   ,	s.sell_status = '주문완료'
-		   	   ,	sd.sell_del_yn ='N'
-		 WHERE
-		 			s.sell_idx = #{sell_idx};
-	</update>
+
 
 
 <!-- 아래부터 페이지 기능 -->

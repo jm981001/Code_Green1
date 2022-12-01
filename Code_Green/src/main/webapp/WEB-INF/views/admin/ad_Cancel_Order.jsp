@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +40,7 @@
     	display: none;
     }
     
-    #cancelReturnList {
-    	display: none;
-    }
+    
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -53,16 +52,10 @@
 			    if (result == 'cancelRequest') {
 			    	$('#cancelRequestList').show();
 			    	$('#cancelSuccessList').hide();
-			    	$('#cancelReturnList').hide();
 			    } else if (result == 'cancelSuccess') {
 			    	$('#cancelSuccessList').show();
 			    	$('#cancelRequestList').hide();
-			    	$('#cancelReturnList').hide();
-			    } else {
-			    	$('#cancelReturnList').show();
-			    	$('#cancelRequestList').hide();
-			    	$('#cancelSuccessList').hide();
-			    }
+			    } 
 			    
 			  }); 
     	});
@@ -77,15 +70,6 @@
     			location.href="ad_statusChange?sell_idx=" + idx + "&sell_cancel_status=" + status;
     		}
     	}
-    	
-    	function returnRequest(idx, status) {
-    		let result = confirm("취소요청으로 되돌리시겠습니까?");
-    		
-    		if(result) {
-    			location.href="ad_statusChange?sell_idx=" + idx + "&sell_cancel_status=" + status;
-    		}
-    	}
-    	
     	
     	
     </script>
@@ -119,20 +103,14 @@
                 <div class="ps-section__header simple">
                     <div class="ps-section__filter">
                         <form class="ps-form--filter" action="ad_One_Board" method="get">
+                        
                             <div class="ps-form__left">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
-                                </div>
                                <div class="form-group">
                                     <select class="ps-select" name="searchType" id="selectBox">
                                         <option value="cancelRequest">취소요청</option>
                                         <option value="cancelSuccess" onclick="ad_cancelSuccess">승인목록</option>
-                                        <option value="cancelReturn" >취소반려</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
                     </div>
@@ -147,7 +125,7 @@
                                     <th>주문번호</th>
                                     <th>작성자(아이디)</th>
                                     <th>결제일</th>
-                                    <th>처리상태</th>
+                                    <th>취소요청</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -158,12 +136,12 @@
                                     <td>${cList.member_id }</td>
                                     <fmt:parseDate var="dateString" value="${cList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                       				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
-                                    <td><button type="button" class="btn btn-info" onclick="approval('${cList.sell_idx }','${cList.sell_cancel_status }')" style="font-size: 13px"><strong>${cList.sell_cancel_status }</strong></button>
+                                    <td><button type="button" class="btn btn-info" onclick="approval('${cList.sell_idx }','${cList.sell_cancel_status }')" style="font-size: 13px">
+                                    <strong>${fn:replace(cList.sell_cancel_status, '취소요청', '승인하기')}</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="">삭제하기</a>
                                             <a class="dropdown-item" href="#">반려하기</a></div>
                                         </div>
                                     </td>
@@ -185,7 +163,7 @@
                                     <th>주문번호</th>
                                     <th>작성자(아이디)</th>
                                     <th>결제일</th>
-                                    <th>처리상태</th>
+                                    <th>취소요청</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -196,12 +174,13 @@
                                     <td>${csList.member_id }</td>
                                     <fmt:parseDate var="dateString" value="${csList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                       				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
-                                    <td><button type="button" class="btn btn-info" onclick="returnRequest('${csList.sell_idx }', '${csList.sell_cancel_status }')" style="font-size: 13px"><strong>${csList.sell_cancel_status }</strong></button>
+                                    <td><button type="button" class="btn btn-info" style="font-size: 13px">
+                                    	<strong>${fn:replace(csList.sell_cancel_status, '취소승인', '승인완료')}</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">삭제하기</a></div>
+                                            <a class="dropdown-item" href="#">반려하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -211,42 +190,7 @@
                     </div>
                 </div>
                 
-<!-- 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려 취소반려-->
-                
-                 <div class="ps-section__content" id="cancelReturnList">
-                    <div class="table-responsive">                    
-                        <table class="table ps-table" style="text-align: center;">
-                            <thead>
-                                <tr>
-                                    <th>금액리턴</th>
-                                    <th>주문번호</th>
-                                    <th>작성자(아이디)</th>
-                                    <th>결제일</th>
-                                    <th>처리상태</th>
-                                </tr>
-                            </thead>
-                            <tbody >
-                            <c:forEach var="crList" items="${cancleReturn }">
-                                <tr>
-                                	<td><fmt:formatNumber value="${crList.sell_total_price }" pattern="#,###원"/></td>
-                                    <td onclick="location.href='#'"><strong>${crList.sell_order_number }</strong></td>
-                                    <td>${crList.member_id }</td>
-                                    <fmt:parseDate var="dateString" value="${crList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
-                      				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${crList.sell_cancel_status }</strong></button>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">삭제하기</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                               </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
 <!--                <div class="ps-section__footer"> -->
 <!--                    페이징 버튼들 시작 -->
 <%-- 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>

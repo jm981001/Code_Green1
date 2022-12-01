@@ -262,16 +262,17 @@ public interface AdminMapper {
 	public List<ManagerVO> selectFollowerRankingList();
 	//신고글 처리반려 
 	public int updateReportReturn(int report_idx);
+	
+	
+	
 	//결제취소요청 목록
 	public List<SellVO> selectCancelRequestList();
 	//결제취소승인 목록
 	public List<SellVO> selectCancelSuccessList();
-	//결제취소반려 목록
-	public List<SellVO> selectCancelReturnList();
+	
 	//결제취소요청승인
 	public int updateStatusApproval(int sell_idx);
-	//결제취소요청으로 되돌리기
-	public int updateStatusRequest(int sell_idx);
+	
 
 	
 	

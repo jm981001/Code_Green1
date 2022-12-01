@@ -406,6 +406,9 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReportReturn(report_idx);
 	}
+	
+	
+	
 	//결제취소요청 목록
 	public List<SellVO> getCancelRequestList() {
 		// TODO Auto-generated method stub
@@ -416,21 +419,13 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectCancelSuccessList();
 	}
-	//결제취소반려 목록
-	public List<SellVO> getCancelReturnList() {
-		// TODO Auto-generated method stub
-		return mapper.selectCancelReturnList();
-	}
+	
 	//결제취소요청승인
 	public int changeCancelStatus(int sell_idx) {
 		// TODO Auto-generated method stub
 		return mapper.updateStatusApproval(sell_idx);
 	}
-	//결제취소요청으로 되돌리기
-	public int changeReturnStatus(int sell_idx) {
-		// TODO Auto-generated method stub
-		return mapper.updateStatusRequest(sell_idx);
-	}
+	
 	
 	
 	

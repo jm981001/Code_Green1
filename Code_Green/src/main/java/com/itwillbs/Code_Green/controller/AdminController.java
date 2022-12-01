@@ -48,6 +48,36 @@ public class AdminController {
 
 	}
 	
+	//------------메인페이지----------------------------
+	@RequestMapping(value = "main", method = RequestMethod.GET)
+	public String main() {
+		return "main/main";
+	}
+	
+	
+
+	//------------전체관리자 메인----------------------------
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+	public String index(Model model,HttpSession session) { 
+
+		String sId = (String)session.getAttribute("sId");
+		System.out.println("sId= " + sId);
+		if(sId == null || !sId.equals("admin") || sId == "") {
+			model.addAttribute("msg", " 잘못된 접근입니다!");
+			return "admin/ad_fail_back";
+		} 
+		
+		List<ManagerVO> topSale = service.getTopSale(); 		//매출 3순위
+			   SellVO sellTotal = service.getTotalMoney(); 		//총매출
+				 int sell_count = service.getTotalsellCount();  //총주문수
+		
+		model.addAttribute("topSale", topSale);			//총주문수
+		model.addAttribute("sellTotal", sellTotal);		//매출 3순위
+		model.addAttribute("sellCount", sell_count);	//총매출
+		
+		return "admin/index";
+		
+	}
 	
 	//------------메뉴바----------------------------
 //	@RequestMapping(value = "menuMoney", method = RequestMethod.GET)
@@ -65,57 +95,19 @@ public class AdminController {
 //		
 //	}
 	
-
-	//------------전체관리자 메인----------------------------
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String index(Model model,HttpSession session) { 
-
-		String sId = (String)session.getAttribute("sId");
-		System.out.println("sId= " + sId);
-		if(sId == null || !sId.equals("admin") || sId == "") {
-			model.addAttribute("msg", " 잘못된 접근입니다!");
-			return "admin/ad_fail_back";
-		} 
-		//매출 3순위
-		List<ManagerVO> topSale = service.getTopSale();
-//		System.out.println(topSale);
-
-		
-		SellVO sellTotal = service.getTotalMoney();
-//		System.out.println("돈돈돈돈 = " + sellTotal); //총매출
-		
-		int sell_count = service.getTotalsellCount();
-//		System.out.println("총주문수 = " + sell_count); //총주문수
-		
-		
-		
-
-		
-		model.addAttribute("sellTotal", sellTotal);
-		model.addAttribute("sellCount", sell_count);
-		model.addAttribute("topSale", topSale);
-		
-		return "admin/index";
-		
-	}
-	
-	
 	
 	//------------매출 순위 더 보기----------------------------
 	@GetMapping(value = "ad_more_Ranking")
 	public String moreRanking(Model model, HttpSession session) {
 		
-		List<ManagerVO> ranking = service.getRanking();				//매출순위
-//		System.out.println(ranking);
-		model.addAttribute("ranking", ranking);
+		List<ManagerVO> ranking = service.getRanking();					//매출순위
+		List<ManagerVO> starRanking = service.getStarRanking();			//별점순위
+		List<ManagerVO> followerRanking = service.getFollowerRanking(); //팔로워순위
 		
-		List<ManagerVO> starRanking = service.getStarRanking();		//별점순위
-//		System.out.println(starRanking);
-		model.addAttribute("starRanking", starRanking);
+		model.addAttribute("ranking", ranking);							//매출순위
+		model.addAttribute("starRanking", starRanking);					//매출순위
+		model.addAttribute("followerRanking", followerRanking);			//팔로워순위
 		
-		List<ManagerVO> followerRanking = service.getFollowerRanking();
-//		System.out.println(followerRanking);
-		model.addAttribute("followerRanking", followerRanking);
 		
 		return "admin/ad_more_Ranking";
 	}
@@ -137,21 +129,16 @@ public class AdminController {
 //			
 //		}
 		
-		//------------메인페이지----------------------------
-		@RequestMapping(value = "main", method = RequestMethod.GET)
-		public String main() {
-			return "main/main";
-		}
 		
-		
-		//======================================여기부터는 주문취소요청  열차입니다=====================================================
-		//======================================여기부터는 주문취소요청  열차입니다=====================================================
-		
+	
+	//======================================여기부터는 주문취소요청  열차입니다=====================================================
+	//======================================여기부터는 주문취소요청  열차입니다=====================================================
+	
 	
 		//------------결제취소요청 목록----------------------------
 		@RequestMapping(value = "ad_Cancel_Order", method = RequestMethod.GET)
 		public String CancleOrder(Model model,HttpSession session) { 
-
+	
 			String sId = (String)session.getAttribute("sId");
 			System.out.println("sId= " + sId);
 			if(sId == null || !sId.equals("admin") || sId == "") {
@@ -161,48 +148,38 @@ public class AdminController {
 			
 			List<SellVO> CancelRequest = service.getCancelRequestList(); //요청목록
 			List<SellVO> cancelSuccess = service.getCancelSuccessList(); //승인목록
-			List<SellVO> cancelReturn = service.getCancelReturnList(); //반려목록
 			
 			model.addAttribute("CancelRequest", CancelRequest); //요청목록
 			model.addAttribute("cancelSuccess", cancelSuccess); //승인목록
-			model.addAttribute("cancelReturn", cancelReturn); 	//반려목록
 			
 			
 			return "admin/ad_Cancel_Order";
 			
 		}
 		
-		
+
 		//------------결제취소요청 목록----------------------------
-				@RequestMapping(value = "ad_statusChange", method = RequestMethod.GET)
-				public String statusChange(Model model,HttpSession session, int sell_idx, String sell_cancel_status ) { 
-
-					String sId = (String)session.getAttribute("sId");
-					System.out.println("sId= " + sId);
-					if(sId == null || !sId.equals("admin") || sId == "") {
-						model.addAttribute("msg", " 잘못된 접근입니다!");
-						return "admin/ad_fail_back";
-					} 
-					
-					System.out.println(sell_cancel_status);
-					if(sell_cancel_status.equals("취소요청")) {
-						int updateCount = service.changeCancelStatus(sell_idx); //취소요청 승인
-						System.out.println("승인완료" + updateCount);
-
-						return "redirect:/ad_Cancel_Order"; //수정쓰
-
-					} else {
-						int updateCount = service.changeReturnStatus(sell_idx);
-						System.out.println("되돌리기" + updateCount);
-						
-					}
-					
-					
-					
-					
-					return "redirect:/ad_Cancel_Order"; //수정쓰
-					
-				}
+		@RequestMapping(value = "ad_statusChange", method = RequestMethod.GET)
+		public String statusChange(Model model, HttpSession session,
+												@RequestParam int sell_idx,
+												@RequestParam String sell_cancel_status ) { 
+	
+			String sId = (String)session.getAttribute("sId");
+			System.out.println("sId= " + sId);
+			if(sId == null || !sId.equals("admin") || sId == "") {
+				model.addAttribute("msg", " 잘못된 접근입니다!");
+				return "admin/ad_fail_back";
+			} 
+			
+			if(sell_cancel_status.equals("취소요청")) {
+				int updateCount = service.changeCancelStatus(sell_idx); //취소요청 승인
+	//						System.out.println("승인완료" + updateCount);
+	
+				return "redirect:/ad_Cancel_Order";
+	
+			} 
+			return "redirect:/ad_Cancel_Order"; //수정쓰
+		}
 		
 		
 		
