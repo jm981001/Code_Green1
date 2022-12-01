@@ -29,7 +29,7 @@
 				COUNT(*) 
 				FROM coin
 				WHERE
-					rf_member_idx =1
+					rf_member_idx =(select member_idx from member where member_id = #{member_id})
 	</select>
 
 	<!-- 적립금 목록 -->
@@ -40,7 +40,7 @@
 				left join member m
 					on c.RF_MEMBER_IDX = m.MEMBER_IDX
 			 WHERE 
-			 	  m.MEMBER_ID = #{member_idx}
+			 	  m.MEMBER_ID = #{member_id}
 		     order by coin_idx desc limit 1;
 	</select>
 	

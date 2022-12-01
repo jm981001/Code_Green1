@@ -235,11 +235,11 @@ public class MypageController {
 		List<CoinVO> coinList = Cservice.getCoinList(startRow, listLimit,member_id);
 		
 		//적립금 목록 갯수
-		int listCount = Cservice.getCoinListCount();
-		
+		int listCount = Cservice.getCoinListCount(member_id);
+		System.out.println(listCount);
 		//적립금 총금액
 		List<CoinVO> TotalCoin = Cservice.getTotalCoin(member_id);
-		
+		System.out.println(TotalCoin);
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;

@@ -21,8 +21,8 @@ public class CoinService {
 	}
 	
 	// 적립금 목록 갯수
-	public int getCoinListCount() {
-		return mapper.selectCoinListCount();
+	public int getCoinListCount(String member_id) {
+		return mapper.selectCoinListCount(member_id);
 	}
 	
 	//적립금 총금액
