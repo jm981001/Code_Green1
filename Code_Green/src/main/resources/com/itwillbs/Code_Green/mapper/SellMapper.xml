@@ -141,6 +141,7 @@
 	<!-- 주문 상세내역 불러오기 -->
 	<select id="selectOrderDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		 SELECT  
+		 		 i.item_idx,
 		 		 i.item_name,
 		 		 i.item_price,
 		 		 m.manager_brandname,

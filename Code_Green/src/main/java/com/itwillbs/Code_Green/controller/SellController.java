@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.CoinService;
+import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.CartVO;
@@ -37,6 +38,9 @@ public class SellController {
 	
 	@Autowired
 	private CoinService coin_service;
+	
+	@Autowired
+	private ItemService item_service;
 	
 	// 주문하기
 	@GetMapping(value = "/payment")
@@ -115,7 +119,31 @@ public class SellController {
 	@PostMapping(value = "payment_success_card")
 	public void payment_success_card(@RequestParam int sell_idx) {
 		
-	int cardOrderModifyCount = sell_service.modifyCardOrder(sell_idx);
+		int cardOrderModifyCount = sell_service.modifyCardOrder(sell_idx);
+		
+		
+		// 주문시 재고 차감
+		if(cardOrderModifyCount > 0) {
+			List<SellVO> orderDetailList = sell_service.getOrderDetailList(sell_idx);
+			
+			for(int i = 0; i < orderDetailList.size(); i++) {
+				String item_idx1 = orderDetailList.get(i).getItem_idx();
+//				System.out.println("String item_idx1 : " + item_idx1);
+				String sell_amount1 = orderDetailList.get(i).getSell_amount();
+//				System.out.println("String sell_amount1 : " + sell_amount1);
+				
+				int item_idx2 = Integer.parseInt(item_idx1);
+//				System.out.println(item_idx2);
+				int sell_amount2 = Integer.parseInt(sell_amount1);
+//				System.out.println(sell_amount2);
+				
+			int modifyItemNumberCount = item_service.modifyItemNumber(item_idx2, sell_amount2);
+			
+//			System.out.println("modifyItemNumberCount : " + modifyItemNumberCount);
+			
+			}
+			
+		}
 		
 	}
 	

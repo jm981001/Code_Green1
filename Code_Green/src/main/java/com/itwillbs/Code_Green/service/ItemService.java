@@ -166,6 +166,11 @@ public class ItemService {
 		return  mapper.getReviewListCount(member_id);
 	}
 
+	// 주문시 재고 차감
+	public int modifyItemNumber(int item_idx2, int sell_amount2) {
+		return  mapper.updateItemNumber(item_idx2, sell_amount2);
+	}
+
 
 
 

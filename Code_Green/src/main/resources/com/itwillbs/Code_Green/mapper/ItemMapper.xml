@@ -897,4 +897,24 @@
 			and d.SELL_REVIEW_STATUS='N'  
 			and s.SELL_PAY_STATUS ="결제완료"
 	</select> 
+	
+	<!-- 주문시 재고 차감 -->
+	<update id="updateItemNumber">
+		<selectKey keyProperty="item_stock" resultType="string" order="BEFORE">
+			SELECT
+					item_stock
+			  FROM
+			  		item
+			 WHERE
+			 		item_idx = #{item_idx2} 		
+		</selectKey>
+			UPDATE
+					item
+			   SET
+			   		item_stock = #{item_stock} - #{sell_amount2}
+			 WHERE
+			 		item_idx = #{item_idx2}   		 
+	</update>
+	
+	
 </mapper>

@@ -101,6 +101,9 @@ public interface ItemMapper {
 	//작성 가능 후기 갯수
 	int getReviewListCount(String member_id);
 
+	// 주문시 재고 차감
+	int updateItemNumber(@Param("item_idx2")int item_idx2, @Param("sell_amount2")int sell_amount2);
+
 
 
 	
