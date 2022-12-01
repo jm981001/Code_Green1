@@ -172,28 +172,28 @@
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
-                                    <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                    <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>순수익</p>
-                                    <h4><fmt:formatNumber value="${sellTotal.net }" pattern="#,###" /><small class="desc"><i class="icon-arrow-down"></i></small></h4>
+                                    <h4><fmt:formatNumber value="${sellTotal.net }" pattern="#,###원" /><small class="desc"></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat pink">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총주문수</p>
-                                    <h4>${sellCount }<small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                    <h4>${sellCount }<small class="asc"></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>환불/취소 건</p>
-                                    <h4>${cancelSell }<small class="desc"><i class="icon-arrow-down"></i></small></h4>
+                                    <h4>${cancelSell }<small class="desc"></small></h4>
                                 </div>
                             </div>
                         </div>

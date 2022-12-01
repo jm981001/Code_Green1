@@ -62,8 +62,7 @@
     	
     	
     	function approval(idx, status) {
-    		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
-    		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+    		
     		let result = confirm("결제취소를 승인하시겠습니까?");
     		
     		if(result) {
@@ -81,7 +80,7 @@
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
         <div class="header__center"><a class="ps-logo" href="#"><img src="/Code_Green/resources/img/logo.png" alt=""></a></div>
-        <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
+        <div class="header__right"><a class="header__site-link" href="main"><i class="icon-exit-right"></i></a></div>
     </header>
   
     <div class="ps-site-overlay"></div>

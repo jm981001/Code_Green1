@@ -93,7 +93,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
