@@ -85,6 +85,11 @@ public class MemberService {
 		return mapper.deleteFollowBrand(rf_member_idx, rf_manager_idx);
 	}
 
+	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
+	public int memberDelete(MemberVO member) {
+		return mapper.memberDelete(member);
+	}
+
 
 	
 

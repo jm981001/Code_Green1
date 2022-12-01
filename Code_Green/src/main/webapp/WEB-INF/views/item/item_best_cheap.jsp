@@ -45,7 +45,7 @@ function addHeart(item_idx) {
 			'member_idx'		: ${sessionScope.sIdx},
 			'member_id'		: '${sessionScope.sId}',
 			'manager_brandname'	: manager_brandname,
-			'item_category' :item_category,
+			'item_category' :item_category
 		},
 		success : function (data) {
 			alert(data)

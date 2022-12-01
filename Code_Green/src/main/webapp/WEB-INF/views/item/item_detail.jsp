@@ -290,7 +290,7 @@ function addHeart(item_idx) {
                                 <figure>
                                     <div class="ps-wrapper">
 <!--                                         <div class="ps-product__gallery" data-arrow="true"> -->
-                                            <div class="item"><a href="/Code_Green/resources/item/${item.file1 } "><img  src="/Code_Green/resources/item/${item.file1 } " alt=""></a></div>
+                                            <div class="item"><a href="/Code_Green/resources/item/${item.file1 } "><img  src="/Code_Green/resources/item/${item.file1 } " style="width: 500px; height: 500px;"></a></div>
 <!--                                         </div> -->
                                     </div>
                                 </figure>

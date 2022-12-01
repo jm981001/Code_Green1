@@ -98,12 +98,23 @@
 								</div>
 								<div class="form-group submit">
 									<button class="ps-btn">Update</button>
+									<input type="button" value="탈퇴" class="ps-btn" onclick="memberDelete('${member.member_id}')">
 								</div>
 							</form>
 						</div>
 					</div>
 
-
+<script type="text/javascript">
+	function memberDelete(member_id) {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		let result = confirm("탈퇴하시겠습니까?");
+		
+		if(result) {
+			location.href="memberDelete.me?member_id=" + member_id;
+		}
+	}
+	</script>
 
 
 

@@ -231,7 +231,7 @@
 	
 	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-         select  	 s.SELL_DETAIL_IDX 
+          select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
 			        ,i.ITEM_NAME 
 			        ,i.ITEM_PRICE
@@ -254,9 +254,11 @@
 					on s.rf_sell_idx = l.sell_idx
 			    where l.RF_MEMBER_IDX =(select member_idx
 									from member
-                            		where member_id = #{member_id})
+                            		where member_id = "jm981001")
                       and s.SELL_REVIEW_STATUS="N"
                       and l.SELL_PAY_STATUS ="결제완료"
+                      and m.MANAGER_DEL_YN="N"
+
 	</select>
 	
 	

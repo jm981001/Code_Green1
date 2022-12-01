@@ -169,4 +169,15 @@ public class MemberController {
 		return "member/find_result";
 	}
 
+	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
+	@GetMapping("/memberDelete.me")
+	public String memberDelete(@ModelAttribute MemberVO member, Model model ,HttpSession session) {
+		int updateCount = service.memberDelete(member);
+		if (updateCount == 0) {
+			model.addAttribute("msg", "탈퇴실패");
+			return "member/fail_back";
+		}
+		session.invalidate();
+		return "redirect:/";
+	}
 }

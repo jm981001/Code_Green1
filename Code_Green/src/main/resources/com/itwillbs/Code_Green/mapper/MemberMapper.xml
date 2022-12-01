@@ -173,4 +173,11 @@
 			ORDER BY sell_date DESC
 	</select>
 	
+<!-- 	회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨) -->
+		<update id="memberDelete">
+        update  member
+         set member_del_yn = "Y"
+         where member_id = #{member_id}
+	</update>
+	
 </mapper>

@@ -57,6 +57,9 @@ public interface MemberMapper {
 	// 마이페이지 - 팔로우브랜드 언팔로우
 	public int deleteFollowBrand(@Param("rf_member_idx")int rf_member_idx, @Param("rf_manager_idx") int rf_manager_idx);
 
+	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
+	public int memberDelete(MemberVO member);
+
 	
 
 
