@@ -69,6 +69,7 @@
                         </div>
                         <div class="ingredient-list">
                             <div class="list-item">
+                            	<img src="/Code_Green/resources/img/turtleturtle.png" width="25px" height="25px"><br>
                             	${recipe.manager_brandname }<br>
                             	${recipe.board_content }
                             	
@@ -79,7 +80,7 @@
 			                         <div class="ps-product">
 			                            <div class="ps-product__thumbnail">
 			                            	<a href="ItemDetail.bo?item_idx=${use_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${use_item.manager_brandname}&item_category=${use_item.item_category}">
-			                            		<img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 300px;">
+			                            		<img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 450px; width: 450px;">
 			                            	</a>
 			                                <ul class="ps-product__actions">
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
@@ -105,7 +106,7 @@
 			                         <div class="ps-product" style="margin-bottom: 100px;">
 			                            <div class="ps-product__thumbnail">
 			                            	<a href="ItemDetail.bo?item_idx=${related_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${related_item.manager_brandname}&item_category=${related_item.item_category}">
-			                            		<img  src="/Code_Green/resources/item/${related_item.file1 }" alt="" style="height: 300px;">
+			                            		<img src="/Code_Green/resources/item/${related_item.file1 }" alt="" style="height: 450px; width: 450px;">
 			                            	</a>
 			                                <ul class="ps-product__actions">
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
