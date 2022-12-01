@@ -1,5 +1,6 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,10 @@ public class CartController {
 
 		} else {
 			int insertCount = service.insertCart(cart);
-			
+
 			if (insertCount > 0) {
 //				System.out.println((int)session.getAttribute("cartCount") +1);
-				session.setAttribute("cartCount", (int)session.getAttribute("cartCount") +1);
+				session.setAttribute("cartCount", (int) session.getAttribute("cartCount") + 1);
 				return session.getAttribute("cartCount") + ""; // 데이터만 전달 나머진 뷰페이지
 			} else {
 				model.addAttribute("msg", "담기 실패!");
@@ -53,6 +54,7 @@ public class CartController {
 	public ModelAndView cart(@RequestParam String member_id, HttpSession session, Model model, ModelAndView mav,
 			@ModelAttribute CartVO cart) {
 		String sId = (String) session.getAttribute("sId");
+		List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
 
 		// if(cart.get() <= 0) { //장바구니가 비어있을때 보여주는 페이지
 //			mav.setViewName("cart/shopping_cart");
@@ -62,9 +64,8 @@ public class CartController {
 			mav.setViewName("redirect:/login");
 			return mav;
 		} else {
-			List<CartVO> cartList = service.getCart(member_id); // 장바구니 정보
-			if (cartList == null) {
-				mav.setViewName("redirect:/cart/shopping_cart");
+			if (cartList.size() == 0) {
+				mav.setViewName("cart/shopping_cart");
 				return mav;
 			}
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -100,7 +101,7 @@ public class CartController {
 
 		int del = service.deleteCart(cart_idx);
 		if (del > 0) {
-			session.setAttribute("cartCount", (int)session.getAttribute("cartCount") -1);
+			session.setAttribute("cartCount", (int) session.getAttribute("cartCount") - 1);
 			return session.getAttribute("cartCount") + ""; // 데이터만 전달 나머진 뷰페이지
 		} else {
 			model.addAttribute("msg", "삭제 실패!");
@@ -118,7 +119,7 @@ public class CartController {
 
 		int update = service.modifyCart(cart_amount, cart_idx);
 		if (update > 0) {
-			session.setAttribute("cartCount", (int)session.getAttribute("cartCount"));
+			session.setAttribute("cartCount", (int) session.getAttribute("cartCount"));
 			return session.getAttribute("cartCount") + ""; // 데이터만 전달 나머진 뷰페이지
 		} else {
 			model.addAttribute("msg", "변경 실패!");

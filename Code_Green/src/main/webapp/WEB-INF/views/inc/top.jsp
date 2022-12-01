@@ -67,8 +67,9 @@
                         	<div class="ps-cart--mini">
                         	<a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i>
                         	<span id="cartCount">
-                          	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}"><i>0</i></c:if>
-                          	<i>${cartCount }</i>
+	                          	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
+	                          	</c:if>
+	                          	<i>${cartCount }</i>
                           	</span></a>
                         	</div>
                         <c:if test="${not empty sessionScope.sId}">
