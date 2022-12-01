@@ -20,6 +20,7 @@ public class SellVO {
 	private String sell_pay_status; // 결제여부 / default 'N'
 	private String sell_pay_date; // 결제일
 	private String sell_order_number; // 주문번호
+	private String sell_cancel_status; // 취소요청처리
 
 	private String sell_detail_idx; // 주문상세번호
 	private String item_name; // 상품명
@@ -226,15 +227,23 @@ public class SellVO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+	
+	public String getSell_cancel_status() {
+		return sell_cancel_status;
+	}
+
+	public void setSell_cancel_status(String sell_cancle_status) {
+		this.sell_cancel_status = sell_cancle_status;
+	}
 
 
 
 	public SellVO(int sell_idx, int rf_member_idx, String sell_amount, String sell_usecoin, String sell_total_price,
 			String sell_status, String sell_postcode, String sell_address, String sell_phone, String sell_receiver,
 			String sell_date, String sell_pay_type, String sell_pay_status, String sell_pay_date,
-			String sell_order_number, String sell_detail_idx, String item_name, String item_price, String item_idx,
-			String item_category, String manager_brandname, String file1, String member_email, int total,
-			int sell_count, int brandtotal, int net, String member_id) {
+			String sell_order_number, String sell_cancel_status, String sell_detail_idx, String item_name,
+			String item_price, String item_idx, String item_category, String manager_brandname, String file1,
+			String member_email, int total, int sell_count, int brandtotal, int net, String member_id) {
 		super();
 		this.sell_idx = sell_idx;
 		this.rf_member_idx = rf_member_idx;
@@ -251,6 +260,7 @@ public class SellVO {
 		this.sell_pay_status = sell_pay_status;
 		this.sell_pay_date = sell_pay_date;
 		this.sell_order_number = sell_order_number;
+		this.sell_cancel_status = sell_cancel_status;
 		this.sell_detail_idx = sell_detail_idx;
 		this.item_name = item_name;
 		this.item_price = item_price;
@@ -275,23 +285,13 @@ public class SellVO {
 				+ sell_status + ", sell_postcode=" + sell_postcode + ", sell_address=" + sell_address + ", sell_phone="
 				+ sell_phone + ", sell_receiver=" + sell_receiver + ", sell_date=" + sell_date + ", sell_pay_type="
 				+ sell_pay_type + ", sell_pay_status=" + sell_pay_status + ", sell_pay_date=" + sell_pay_date
-				+ ", sell_order_number=" + sell_order_number + ", sell_detail_idx=" + sell_detail_idx + ", item_name="
-				+ item_name + ", item_price=" + item_price + ", item_idx=" + item_idx + ", item_category="
-				+ item_category + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + ", member_email="
-				+ member_email + ", total=" + total + ", sell_count=" + sell_count + ", brandtotal=" + brandtotal
-				+ ", net=" + net + ", member_id=" + member_id + "]";
+				+ ", sell_order_number=" + sell_order_number + ", sell_cancel_status=" + sell_cancel_status
+				+ ", sell_detail_idx=" + sell_detail_idx + ", item_name=" + item_name + ", item_price=" + item_price
+				+ ", item_idx=" + item_idx + ", item_category=" + item_category + ", manager_brandname="
+				+ manager_brandname + ", file1=" + file1 + ", member_email=" + member_email + ", total=" + total
+				+ ", sell_count=" + sell_count + ", brandtotal=" + brandtotal + ", net=" + net + ", member_id="
+				+ member_id + "]";
 	}
-
-	
-	
-	
-
-
-
-	
-
-	
-	
 	
 	
 	

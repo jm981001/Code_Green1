@@ -186,58 +186,58 @@
 <!-- ==결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====-->
 	
 	<!-- 결제취소요청 목록 -->
-	<select id="selectCancleRequestList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	<select id="selectCancelRequestList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT 
 				m.member_id
 			,	s.sell_idx
 		    ,	s.sell_total_price
-		    ,	s.sell_status
+		    ,	s.sell_cancel_status
 		    ,	s.sell_pay_status
 		    ,	s.sell_pay_date
 		    ,	s.sell_order_number
 		 FROM	sell s 
 		 LEFT JOIN member m
 		   ON	s.rf_member_idx = m.member_idx
-		WHERE	s.sell_status = '취소요청'
+		WHERE	s.sell_cancel_status = '취소요청';
 	</select>
 	
 	<!-- 결제취소승인 목록 -->
-	<select id="selectCancleSuccessList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	<select id="selectCancelSuccessList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT 
 				m.member_id
 			,	s.sell_idx
 		    ,	s.sell_total_price
-		    ,	s.sell_status
+		    ,	s.sell_cancel_status
 		    ,	s.sell_pay_status
 		    ,	s.sell_pay_date
 		    ,	s.sell_order_number
 		 FROM	sell s 
 		 LEFT JOIN member m
 		   ON	s.rf_member_idx = m.member_idx
-		WHERE	s.sell_status = '주문취소' AND s.sell_pay_status = '결제취소'
+		WHERE	s.sell_cancel_status = '주문취소' AND s.sell_pay_status = '결제취소'
 	</select>
 	
 	<!-- 결제취소반려 목록 -->
-	<select id="selectCancleReturnList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	<select id="selectCancelReturnList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT 
 				m.member_id
 			,	s.sell_idx
 		    ,	s.sell_total_price
-		    ,	s.sell_status
+		    ,	s.sell_cancel_status
 		    ,	s.sell_pay_status
 		    ,	s.sell_pay_date
 		    ,	s.sell_order_number
 		 FROM	sell s 
 		 LEFT JOIN member m
 		   ON	s.rf_member_idx = m.member_idx
-		WHERE	s.sell_status = '취소반려' AND s.sell_pay_status = '결제완료'
+		WHERE	s.sell_cancel_status = '취소반려' AND s.sell_pay_status = '결제완료'
 	</select>
 
 	<update id="updateStatusApproval">
 		UPDATE 		sell s 
 		  LEFT JOIN sell_detail sd 
 		    ON		s.sell_idx = sd.rf_sell_idx
-		   SET 		s.sell_status 	  =	'주문취소'
+		   SET 		s.sell_cancel_status 	  =	'주문취소'
 		   	   ,	s.sell_pay_status = '결제취소'
 		   	   ,	sd.sell_del_yn ='Y'
 		 WHERE
@@ -249,7 +249,7 @@
 		UPDATE 		sell s 
 		  LEFT JOIN sell_detail sd 
 		    ON		s.sell_idx = sd.rf_sell_idx
-		   SET 		s.sell_status 	  =	'취소요청'
+		   SET 		s.sell_cancel_status =	'취소요청'
 		   	   ,	s.sell_pay_status = '결제완료'
 		   	   ,	sd.sell_del_yn ='N'
 		 WHERE

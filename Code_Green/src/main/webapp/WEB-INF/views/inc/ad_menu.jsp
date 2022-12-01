@@ -36,7 +36,7 @@
                     <div class="ps-sidebar__center">
                         <ul class="menu">
                             <li><a href="index"><i class="icon-home"></i>매출현황조회</a></li>
-                            <li><a href="ad_Cancle_Order"><i class="icon-papers"></i>결제취소관리</a></li>
+                            <li><a href="ad_Cancel_Order"><i class="icon-papers"></i>결제취소관리</a></li>
                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
                             <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li>
                             <li><a href="ad_Notice"><i class="icon-users2"></i>공지 관리</a></li>

@@ -407,22 +407,22 @@ public class AdminService {
 		return mapper.updateReportReturn(report_idx);
 	}
 	//결제취소요청 목록
-	public List<SellVO> getCancleRequestList() {
+	public List<SellVO> getCancelRequestList() {
 		// TODO Auto-generated method stub
-		return mapper.selectCancleRequestList();
+		return mapper.selectCancelRequestList();
 	}
 	//결제취소승인 목록
-	public List<SellVO> getCancleSuccessList() {
+	public List<SellVO> getCancelSuccessList() {
 		// TODO Auto-generated method stub
-		return mapper.selectCancleSuccessList();
+		return mapper.selectCancelSuccessList();
 	}
 	//결제취소반려 목록
-	public List<SellVO> getCancleReturnList() {
+	public List<SellVO> getCancelReturnList() {
 		// TODO Auto-generated method stub
-		return mapper.selectCancleReturnList();
+		return mapper.selectCancelReturnList();
 	}
 	//결제취소요청승인
-	public int changeCancleStatus(int sell_idx) {
+	public int changeCancelStatus(int sell_idx) {
 		// TODO Auto-generated method stub
 		return mapper.updateStatusApproval(sell_idx);
 	}

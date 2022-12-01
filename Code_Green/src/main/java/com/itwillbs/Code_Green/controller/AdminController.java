@@ -149,7 +149,7 @@ public class AdminController {
 		
 	
 		//------------결제취소요청 목록----------------------------
-		@RequestMapping(value = "ad_Cancle_Order", method = RequestMethod.GET)
+		@RequestMapping(value = "ad_Cancel_Order", method = RequestMethod.GET)
 		public String CancleOrder(Model model,HttpSession session) { 
 
 			String sId = (String)session.getAttribute("sId");
@@ -159,23 +159,23 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			} 
 			
-			List<SellVO> CancleRequest = service.getCancleRequestList(); //요청목록
-			List<SellVO> cancleSuccess = service.getCancleSuccessList(); //승인목록
-			List<SellVO> cancleReturn = service.getCancleReturnList(); //반려목록
+			List<SellVO> CancelRequest = service.getCancelRequestList(); //요청목록
+			List<SellVO> cancelSuccess = service.getCancelSuccessList(); //승인목록
+			List<SellVO> cancelReturn = service.getCancelReturnList(); //반려목록
 			
-			model.addAttribute("CancleRequest", CancleRequest); //요청목록
-			model.addAttribute("cancleSuccess", cancleSuccess); //승인목록
-			model.addAttribute("cancleReturn", cancleReturn); 	//반려목록
+			model.addAttribute("CancelRequest", CancelRequest); //요청목록
+			model.addAttribute("cancelSuccess", cancelSuccess); //승인목록
+			model.addAttribute("cancelReturn", cancelReturn); 	//반려목록
 			
 			
-			return "admin/ad_Cancle_Order";
+			return "admin/ad_Cancel_Order";
 			
 		}
 		
 		
 		//------------결제취소요청 목록----------------------------
 				@RequestMapping(value = "ad_statusChange", method = RequestMethod.GET)
-				public String statusChange(Model model,HttpSession session, int sell_idx, String sell_status ) { 
+				public String statusChange(Model model,HttpSession session, int sell_idx, String sell_cancel_status ) { 
 
 					String sId = (String)session.getAttribute("sId");
 					System.out.println("sId= " + sId);
@@ -184,12 +184,12 @@ public class AdminController {
 						return "admin/ad_fail_back";
 					} 
 					
-					System.out.println(sell_status);
-					if(sell_status.equals("취소요청")) {
-						int updateCount = service.changeCancleStatus(sell_idx); //취소요청 승인
+					System.out.println(sell_cancel_status);
+					if(sell_cancel_status.equals("취소요청")) {
+						int updateCount = service.changeCancelStatus(sell_idx); //취소요청 승인
 						System.out.println("승인완료" + updateCount);
 
-						return "redirect:/ad_Cancle_Order"; //수정쓰
+						return "redirect:/ad_Cancel_Order"; //수정쓰
 
 					} else {
 						int updateCount = service.changeReturnStatus(sell_idx);
@@ -200,7 +200,7 @@ public class AdminController {
 					
 					
 					
-					return "redirect:/ad_Cancle_Order"; //수정쓰
+					return "redirect:/ad_Cancel_Order"; //수정쓰
 					
 				}
 		
