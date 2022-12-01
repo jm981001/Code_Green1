@@ -265,7 +265,7 @@ function addHeart(item_idx) {
                                                         <ul class="ps-product__actions">
 															<li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
                                                             <li><a data-toggle="tooltip" data-placement="top" title="Add to Whishlist" onclick="addHeart('${item.item_idx}')"><i class="icon-heart"></i></a></li>
-                                                        </ul>s
+                                                        </ul>
                                                     </div>
                                                     
                                                     
