@@ -214,7 +214,7 @@
 		 FROM	sell s 
 		 LEFT JOIN member m
 		   ON	s.rf_member_idx = m.member_idx
-		WHERE	s.sell_cancel_status = '주문취소' AND s.sell_pay_status = '결제취소'
+		WHERE	s.sell_cancel_status = '취소승인' AND s.sell_pay_status = '결제취소'
 	</select>
 	
 	<!-- 결제취소반려 목록 -->
@@ -232,25 +232,27 @@
 		   ON	s.rf_member_idx = m.member_idx
 		WHERE	s.sell_cancel_status = '취소반려' AND s.sell_pay_status = '결제완료'
 	</select>
-
+	<!-- 결제취소 승인 -->
 	<update id="updateStatusApproval">
 		UPDATE 		sell s 
 		  LEFT JOIN sell_detail sd 
 		    ON		s.sell_idx = sd.rf_sell_idx
-		   SET 		s.sell_cancel_status 	  =	'주문취소'
+		   SET 		s.sell_cancel_status 	  =	'취소승인'
 		   	   ,	s.sell_pay_status = '결제취소'
+		   	   ,	s.sell_status = '주문취소'
 		   	   ,	sd.sell_del_yn ='Y'
 		 WHERE
 		 			s.sell_idx = #{sell_idx};
 	</update>
 	
-	
+	<!-- 결제취소로 되돌리기 -->
 	<update id="updateStatusRequest">
 		UPDATE 		sell s 
 		  LEFT JOIN sell_detail sd 
 		    ON		s.sell_idx = sd.rf_sell_idx
 		   SET 		s.sell_cancel_status =	'취소요청'
 		   	   ,	s.sell_pay_status = '결제완료'
+		   	   ,	s.sell_status = '주문완료'
 		   	   ,	sd.sell_del_yn ='N'
 		 WHERE
 		 			s.sell_idx = #{sell_idx};

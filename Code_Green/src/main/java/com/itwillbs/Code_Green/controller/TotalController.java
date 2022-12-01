@@ -34,7 +34,7 @@ public class TotalController {
 		Gson gson = new Gson();
 		
 		List<TotalVO> sellChart = service.getChart();
-		System.out.println("오늘안에하고싶다 : " + sellChart);
+//		System.out.println("총매출 차트 : " + sellChart);
 //		model.addAttribute("sellChart", sellChart);
 	
 		return gson.toJson(sellChart);
@@ -48,7 +48,7 @@ public class TotalController {
 		public String brandChart(Model model, HttpSession session, String manager_id) { 
 
 			
-			System.out.println("얍얍" + manager_id);
+//			System.out.println("얍얍" + manager_id);
 			 
 			Gson gson = new Gson();
 			
