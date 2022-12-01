@@ -138,5 +138,11 @@ public class SellController {
 		return "payment/payment_success_card";
 	}
 	
-
+	@PostMapping(value = "payment_cancel")
+	public void payment_cancel(@RequestParam int sell_idx) {
+		
+		// 주문 취소 요청
+		int cancelOrderCount = sell_service.modifyCancelOrder(sell_idx);
+		
+	}
 }

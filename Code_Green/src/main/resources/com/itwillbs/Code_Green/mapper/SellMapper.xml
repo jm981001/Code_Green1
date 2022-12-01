@@ -176,8 +176,15 @@
 		 		sell_idx = #{sell_idx}			
 	</update>
 	
-
-
+	<!-- 주문 취소 요청 -->
+	<update id="updateCancelOrder">
+		UPDATE 
+				sell
+		   SET
+		   		sell_status = '취소요청'		
+		 WHERE
+		 		sell_idx = #{sell_idx}	
+	</update>
 
 
 

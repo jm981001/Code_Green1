@@ -103,6 +103,11 @@ public class SellService {
 		return sell_mapper.getMyBuyItemList(sell_order_number);
 	}
 
+	// 주문 취소 요청
+	public int modifyCancelOrder(int sell_idx) {
+		return sell_mapper.updateCancelOrder(sell_idx);
+	}
+
 
 
 		

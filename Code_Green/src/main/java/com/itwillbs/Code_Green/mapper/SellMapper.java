@@ -65,6 +65,9 @@ public interface SellMapper {
 	// 마이페이지 리뷰 가능상품 목록
 	List<SellVO> getSellDetailList(@Param("startRow")int startRow, @Param("listLimit")int listLimit, @Param("member_id")String member_id);
 
+	// 주문 취소 요청
+	int updateCancelOrder(int sell_idx);
+
 		
 	
 }
