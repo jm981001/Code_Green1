@@ -301,18 +301,12 @@ function addHeart(item_idx) {
                                 <h4 class="ps-product__price">${item.item_price }원</h4>
                                 <div class="ps-product__meta">
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
-                                                <%
-                                                	MemberVO member = (MemberVO)request.getAttribute("member");
-                                                	ItemVO item = (ItemVO)request.getAttribute("item");
-                                                	int score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
-                                                	pageContext.setAttribute("score", score);
-                                                %>
                                     <div class="ps-product__rating" >
                                         <select class="ps-rating" data-read-only="true">
        										 <c:forEach var="i" begin="1" end="5">
                                              
                                              	<c:choose>
-                                             		<c:when test="${i <= score}">
+                                             		<c:when test="${i <= item.score}">
                                              			<option value="1">${i }</option>
                                              		</c:when>
                                              		<c:otherwise>
@@ -426,17 +420,13 @@ function addHeart(item_idx) {
                                         <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 ">
                                             <div class="ps-block--average-rating">
                                                 <div class="ps-block__header">
-                                                <%
-                                                	item = (ItemVO) request.getAttribute("item");
-                                                	score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
-                                                	pageContext.setAttribute("score", score);
-                                                %>
+
                                                     <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
                                                     <c:forEach var="i" begin="1" end="5">
                                                     
                                                     	<c:choose>
-                                                    		<c:when test="${i <= score}">
+                                                    		<c:when test="${i <= item.score}">
                                                     			<option value="1">${i }</option>
                                                     		</c:when>
                                                     		<c:otherwise>
@@ -766,17 +756,12 @@ function addHeart(item_idx) {
                                         <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 ">
                                             <div class="ps-block--average-rating">
                                                 <div class="ps-block__header">
-                                                    <%
-                                                	item = (ItemVO) request.getAttribute("item");
-                                                	score = (int)Math.round(Double.parseDouble(item.getBoard_star_score()));
-                                                	pageContext.setAttribute("score", score);
-                                         	        %>
                                                     <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
                                                     <c:forEach var="i" begin="1" end="5">
                                                     
                                                     	<c:choose>
-                                                    		<c:when test="${i <= score}">
+                                                    		<c:when test="${i <= item.score}">
                                                     			<option value="1">${i }</option>
                                                     		</c:when>
                                                     		<c:otherwise>
