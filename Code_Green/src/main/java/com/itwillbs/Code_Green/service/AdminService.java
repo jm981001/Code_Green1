@@ -421,6 +421,16 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectCancleReturnList();
 	}
+	//결제취소요청승인
+	public int changeCancleStatus(int sell_idx) {
+		// TODO Auto-generated method stub
+		return mapper.updateStatusApproval(sell_idx);
+	}
+	//결제취소요청으로 되돌리기
+	public int changeReturnStatus(int sell_idx) {
+		// TODO Auto-generated method stub
+		return mapper.updateStatusRequest(sell_idx);
+	}
 	
 	
 	

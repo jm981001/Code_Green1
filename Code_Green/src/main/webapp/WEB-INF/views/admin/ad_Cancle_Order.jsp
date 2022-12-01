@@ -68,6 +68,26 @@
     	});
     	
     	
+    	function approval(idx, status) {
+    		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+    		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+    		let result = confirm("결제취소를 승인하시겠습니까?");
+    		
+    		if(result) {
+    			location.href="ad_statusChange?sell_idx=" + idx + "&sell_status=" + status;
+    		}
+    	}
+    	
+    	function returnRequest(idx, status) {
+    		let result = confirm("취소요청으로 되돌리시겠습니까?");
+    		
+    		if(result) {
+    			location.href="ad_statusChange?sell_idx=" + idx + "&sell_status=" + status;
+    		}
+    	}
+    	
+    	
+    	
     </script>
 </head>
 
@@ -134,15 +154,17 @@
                             <c:forEach var="cList" items="${CancleRequest }">
                                 <tr>
                                 	<td><fmt:formatNumber value="${cList.sell_total_price }" pattern="#,###원"/></td>
-                                    <td onclick="location.href='ad_One_Board_Detail?qna_idx=${cList.sell_idx }&id=${cList.sell_idx }'"><strong>${cList.sell_order_number }</strong></td>
+                                    <td onclick="location.href='#'"><strong>${cList.sell_order_number }</strong></td>
                                     <td>${cList.member_id }</td>
                                     <fmt:parseDate var="dateString" value="${cList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                       				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${cList.sell_status }</strong></button>
+                                    <td><button type="button" class="btn btn-info" onclick="approval('${cList.sell_idx }','${cList.sell_status }')" style="font-size: 13px"><strong>${cList.sell_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="">삭제하기</a>
+                                            <a class="dropdown-item" href="#">반려하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -170,15 +192,16 @@
                             <c:forEach var="csList" items="${cancleSuccess }">
                                 <tr>
                                 	<td><fmt:formatNumber value="${csList.sell_total_price }" pattern="#,###원"/></td>
-                                    <td onclick="location.href='ad_One_Board_Detail?qna_idx=${csList.sell_idx }&id=${csList.sell_idx }'"><strong>${csList.sell_order_number }</strong></td>
+                                    <td onclick="location.href='#'"><strong>${csList.sell_order_number }</strong></td>
                                     <td>${csList.member_id }</td>
                                     <fmt:parseDate var="dateString" value="${csList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                       				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
-                                    <td><button type="button" class="btn btn-info" style="font-size: 13px"><strong>${csList.sell_status }</strong></button>
+                                    <td><button type="button" class="btn btn-info" onclick="returnRequest('${csList.sell_idx }', '${csList.sell_status }')" style="font-size: 13px"><strong>${csList.sell_status }</strong></button>
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -206,7 +229,7 @@
                             <c:forEach var="crList" items="${cancleReturn }">
                                 <tr>
                                 	<td><fmt:formatNumber value="${crList.sell_total_price }" pattern="#,###원"/></td>
-                                    <td onclick="location.href='ad_One_Board_Detail?qna_idx=${crList.sell_idx }&id=${crList.sell_idx }'"><strong>${crList.sell_order_number }</strong></td>
+                                    <td onclick="location.href='#'"><strong>${crList.sell_order_number }</strong></td>
                                     <td>${crList.member_id }</td>
                                     <fmt:parseDate var="dateString" value="${crList.sell_pay_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                       				<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
@@ -214,7 +237,8 @@
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>

@@ -268,6 +268,10 @@ public interface AdminMapper {
 	public List<SellVO> selectCancleSuccessList();
 	//결제취소반려 목록
 	public List<SellVO> selectCancleReturnList();
+	//결제취소요청승인
+	public int updateStatusApproval(int sell_idx);
+	//결제취소요청으로 되돌리기
+	public int updateStatusRequest(int sell_idx);
 
 	
 

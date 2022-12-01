@@ -159,18 +159,13 @@ public class AdminController {
 				return "admin/ad_fail_back";
 			} 
 			
-			//요청목록
-			List<SellVO> CancleRequest = service.getCancleRequestList();
-//			System.out.println("주문취소요청 = " + CancleRequest);
-			model.addAttribute("CancleRequest", CancleRequest);
-			//승인목록
-			List<SellVO> cancleSuccess = service.getCancleSuccessList();
-//			System.out.println("취소요청승인 = " + cancleSuccess);
-			model.addAttribute("cancleSuccess", cancleSuccess);
-			//뱐려목록
-			List<SellVO> cancleReturn = service.getCancleReturnList();
-//			System.out.println("취소요청승인 = " + cancleSuccess);
-			model.addAttribute("cancleReturn", cancleReturn);
+			List<SellVO> CancleRequest = service.getCancleRequestList(); //요청목록
+			List<SellVO> cancleSuccess = service.getCancleSuccessList(); //승인목록
+			List<SellVO> cancleReturn = service.getCancleReturnList(); //반려목록
+			
+			model.addAttribute("CancleRequest", CancleRequest); //요청목록
+			model.addAttribute("cancleSuccess", cancleSuccess); //승인목록
+			model.addAttribute("cancleReturn", cancleReturn); 	//반려목록
 			
 			
 			return "admin/ad_Cancle_Order";
@@ -178,7 +173,36 @@ public class AdminController {
 		}
 		
 		
-		
+		//------------결제취소요청 목록----------------------------
+				@RequestMapping(value = "ad_statusChange", method = RequestMethod.GET)
+				public String statusChange(Model model,HttpSession session, int sell_idx, String sell_status ) { 
+
+					String sId = (String)session.getAttribute("sId");
+					System.out.println("sId= " + sId);
+					if(sId == null || !sId.equals("admin") || sId == "") {
+						model.addAttribute("msg", " 잘못된 접근입니다!");
+						return "admin/ad_fail_back";
+					} 
+					
+					System.out.println(sell_status);
+					if(sell_status.equals("취소요청")) {
+						int updateCount = service.changeCancleStatus(sell_idx); //취소요청 승인
+						System.out.println("승인완료" + updateCount);
+
+						return "redirect:/ad_Cancle_Order"; //수정쓰
+
+					} else {
+						int updateCount = service.changeReturnStatus(sell_idx);
+						System.out.println("되돌리기" + updateCount);
+						
+					}
+					
+					
+					
+					
+					return "redirect:/ad_Cancle_Order"; //수정쓰
+					
+				}
 		
 		
 		
