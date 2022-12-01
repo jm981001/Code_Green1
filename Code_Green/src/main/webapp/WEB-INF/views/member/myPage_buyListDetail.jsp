@@ -28,7 +28,46 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-        
+    
+    <style type="text/css">
+    	#orderCancel{
+			margin-top: 80px;
+		    background: #5fa30f;
+		    border: none;
+		    border-radius: 3px;
+		    color: white;
+		    width: 100px;
+		    height: 50px;
+    	}
+    
+    </style>
+    
+    <script type="text/javascript">
+    	function myOrderCancel() {
+			
+			let cancelAuth = confirm('주문 취소 하시겠습니까? 취소하면 복구할 수 없는 점 참고 바랍니다.');
+			
+			if(cancelAuth){
+				
+				if('${buyDetail.sell_status}' =='취소요청') {
+					alert('이미 취소한 주문입니다.');
+				} else {
+					$.ajax({
+						type : 'POST',
+						url : 'payment_cancel',
+						data: {
+							sell_idx : ${buyDetail.sell_idx }
+						}
+					});
+					
+					alert('주문취소 완료되었습니다. 관리자에게 취소요청이 되었습니다.');
+				}
+				
+			}
+			
+		}
+    
+    </script>    
         
 </head>
 <body>
@@ -123,6 +162,9 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <div align="right">
+                                       	 	<button id="orderCancel"  onclick="myOrderCancel()">주문취소</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
