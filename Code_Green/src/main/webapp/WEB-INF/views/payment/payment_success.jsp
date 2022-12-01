@@ -33,6 +33,45 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_payment.css">
    	<link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
+   	<style type="text/css">
+   		
+   		.accordion{
+			width: 1000px;
+			margin-top: 60px;   		
+   		}
+   	
+   		.accordion-button{
+   			font-size: 15px; 
+   			color: #669900;
+   		}
+   	
+   		#orderList{
+   			border: border: 1px solid #E4E4E4;
+   			width: 970px;
+/*    			height: 500px; */
+   		}
+   		
+   		#orderList th{
+   			border: 1px solid #E4E4E4;
+   			color: #669900;
+   			text-align: center;
+   			font-size: 15px;
+   			
+   		} 
+   		
+   		#orderList td{
+	   		border: 1px solid #E4E4E4;
+	   		text-align: center;
+	   		
+   		}
+   		
+   		#cardOrderBtn{
+   			width: 1000px;
+   			margin-top: 100px;
+   		}
+   		
+   	</style>
+   
     <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
     
     <!-- 결제 api 관련 js-->
@@ -105,188 +144,180 @@
         <section class="ps-section--account">
             <div class="container">
                 <div class="ps-block--payment-success">
-                    <h3>주문 완료 되었습니다 !</h3>
-                    <p>주문하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
-                </div>
-	         	<div class="col-lg-8" style="margin-top: 50px;">
-	                <div class="ps-section__right">
-	                    <div class="ps-section--account-setting">
-	                    
-	                        <div class="ps-section__header">
-	                            <h3 style="color: #666">주문 번호 ${orderList.sell_order_number }</h3>
-	                            <h3 style="color: #666">주문일 ${orderList.sell_date }</h3>
-	                        </div>
-	                        
-	                        <div class="accordion" id="accordionExample">
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingOne">
-							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 15px; color: #669900">
-							        주문 내역
-							      </button>
-							    </h2>
-							    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-									<div class="ps-section__content">
-			                            <div class="table-responsive">
-			                                <table class="table ps-table">
-			                                    <thead style="text-align: center;">
-			                                        <tr>
-			                                            <th><strong>상품명</strong></th>
-			                                            <th><strong>상품 금액</strong></th>
-			                                            <th><strong>수량</strong></th>
-			                                            <th><strong>총 구매 금액</strong></th>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                    <c:forEach var="orderDetailList" items="${orderDetailList }">
-			                                        <tr>
-			                                            <td style="text-align: left;">
-			                                                <div class="ps-product--cart">
-			                                                    <div class="ps-product__content">${orderDetailList.item_name }
-			                                                       <p>판매자:<strong>${orderDetailList.manager_brandname }</strong></p>
-			                                                   	</div>
-			                                                </div>
-			                                            </td>
-			                                            <td style="text-align: center;">${orderDetailList.item_price }</td>
-			                                            <td style="text-align: center;">${orderDetailList.sell_amount }</td>
-			                                            <td style="text-align: center;" ><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount }"></fmt:formatNumber>
-			                                          </td>
-			                                        </tr>
-			                                       </c:forEach> 
-			                                    </tbody>
-			                                </table>
-			                            </div>
-			                        </div>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingTwo">
-							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size: 15px; color: #669900">
-							      	결제 정보
-							      </button>
-							    </h2>
-							    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-									<div class="ps-section__content">  
-				                        <div class="table-responsive">
-			                                <table class="table ps-table" style="text-align: center;">
-			                                    <thead>
-			                                        <tr>
-			                                            <th><strong>결제 방식</strong></th>
-			                                            <th><strong>총 구매 금액</strong></th>
-			                                            <th><strong>배송비</strong></th>
-			                                            <th><strong>사용한 적립금</strong></th>
-			                                            <th><strong>결제할 금액</strong></th>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                        <tr>
-			                                            <td>${orderList.sell_pay_type }</td>
-			                                            <td>${sell_item_total_price }</td>
-			                                            <td>${shipping_fee }</td>
-			                                            <td>${orderList.sell_usecoin }</td>
-			                                            <td>${orderList.sell_total_price }</td>
-			                                        </tr>
-			                                    </tbody>
-			                                </table>
-				                          </div>
-				                       </div>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingThree">
-							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 15px; color: #669900">
-							        배송지 정보
-							      </button>
-							    </h2>
-							    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-									 <div class="ps-section__content">  
-				                        <div class="table-responsive">
-			                                <table class="table ps-table" style="text-align: center;">
-			                                    <thead>
-			                                        <tr>
-			                                            <th><strong>이름</strong></th>
-			                                            <th><strong>연락처</strong></th>
-			                                            <th><strong>우편번호</strong></th>
-			                                            <th><strong>주소</strong></th>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                        <tr>
-			                                            <td>${orderList.sell_receiver }</td>
-			                                            <td>${orderList.sell_phone }</td>
-			                                            <td>${orderList.sell_postcode }</td>
-			                                            <td>${orderList.sell_address }</td>
-			                                        </tr>
-			                                    </tbody>
-			                                </table>
-				                           </div>
-				                       </div>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-							
-							 <div class="accordion" id="accordionExample" style="margin-top: 50px;">
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingFour">
-							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" style="font-size: 15px; color: #669900">
-							        무통장입금 정보
-							      </button>
-							    </h2>
-							    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-									<div class="ps-section__content">
-			                            <div class="table-responsive">
-			                                <table class="table ps-table" style="text-align: center;">
-			                                    <thead>
-			                                        <tr>
-			                                            <th><strong>은행명</strong></th>
-			                                            <th><strong>예금주</strong></th>
-			                                            <th><strong>계좌번호</strong></th>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                        <tr>
-			                                            <td>KB국민은행</td>
-			                                            <td>베지터틀</td>
-			                                            <td>333-1111-2222-00</td>
-			                                        </tr>
-			                                    </tbody>
-		                               		 </table>
-			                            </div>
-			                        </div>
-							      </div>
-							    </div>
-							  </div>
-							  
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingFive">
-							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 15px; color: #669900">
-							      	카드 정보
-							      </button>
-							    </h2>
-							    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-									<div class="ps-section__content">  
-				                        <div class="table-responsive">
-			                                <div class="ps-section__content" style="margin-top: 50px;">  
-			                                	<div class="form-group submit">
-                                                       <input type="button" class="ps-btn ps-btn--fullwidth" id="cardOrderBtn" value="카드결제" onclick="requestPay()">
-                                                 </div>
-					                  		</div>
-				                          </div>
-				                       </div>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-				         </div>
-		              </div>
-		            </div>
+                    <h3>고객님의 주문이 완료 되었습니다 !</h3>
+                    <p>베지터틀을 이용해 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p><br>
+                
+<!-- 	         	<div class="col-lg-8" style="margin-top: 70px;"> -->
+<!-- 	                <div class="ps-section__right"> -->
+                       <div class="ps-section__header">
+                           <p><img src="/Code_Green/resources/img/turtleturtle.png" width="50px" height="50px"><strong> 주문 번호 - ${orderList.sell_order_number }</strong></p>
+                           <p><img src="/Code_Green/resources/img/turtleturtle.png" width="50px" height="50px"><strong> 주문일 - ${orderList.sell_date }</strong></p>
+                       </div>
+	               </div>         
+                        <div class="accordion" id="accordionExample" align="center">
+						  <div class="accordion-item" align="center">
+						    <h2 class="accordion-header" id="headingOne">
+						      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						        주문 내역
+						      </button>
+						    </h2>
+						    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+						      <div class="accordion-body">
+								<div class="ps-section__content">
+		                            <div class="table-responsive">
+		                                <table id="orderList">
+		                                        <tr height="120px">
+		                                            <th></th>
+		                                            <th><strong>상품명</strong></th>
+		                                            <th><strong>상품 금액</strong></th>
+		                                            <th><strong>수량</strong></th>
+		                                            <th><strong>총 구매 금액</strong></th>
+		                                        </tr>
+		                                    <c:forEach var="orderDetailList" items="${orderDetailList }">
+		                                        <tr height="200px">
+		                                        	<td>
+		                                        		<img src="/Code_Green/resources/item/${orderDetailList.file1 }" width="200px" height="200px">
+		                                        	</td>
+		                                            <td>
+		                                                    ${orderDetailList.item_name }<br>
+		                                                    ${orderDetailList.manager_brandname }
+		                                            </td>
+		                                            <td>${orderDetailList.item_price }</td>
+		                                            <td>${orderDetailList.sell_amount }</td>
+		                                            <td><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount }"></fmt:formatNumber>
+		                                          </td>
+		                                        </tr>
+		                                       </c:forEach> 
+		                                </table>
+		                            </div>
+		                        </div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingTwo">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						      	결제 정보
+						      </button>
+						    </h2>
+						    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+						      <div class="accordion-body">
+								<div class="ps-section__content">  
+			                        <div class="table-responsive">
+		                                <table id="orderList">
+		                                        <tr height="120px">
+		                                            <th><strong>결제 방식</strong></th>
+		                                            <th><strong>총 구매 금액</strong></th>
+		                                            <th><strong>배송비</strong></th>
+		                                            <th><strong>사용한 적립금</strong></th>
+		                                            <th><strong>결제할 금액</strong></th>
+		                                        </tr>
+		                                        <tr height="200px">
+		                                            <td>${orderList.sell_pay_type }</td>
+		                                            <td>${sell_item_total_price }</td>
+		                                            <td>${shipping_fee }</td>
+		                                            <td>${orderList.sell_usecoin }</td>
+		                                            <td>${orderList.sell_total_price }</td>
+		                                        </tr>
+		                                </table>
+			                          </div>
+			                       </div>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingThree">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						        배송지 정보
+						      </button>
+						    </h2>
+						    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+						      <div class="accordion-body">
+								 <div class="ps-section__content">  
+			                        <div class="table-responsive">
+		                                <table id="orderList">
+		                                        <tr height="120px">
+		                                            <th><strong>이름</strong></th>
+		                                            <th><strong>연락처</strong></th>
+		                                            <th><strong>우편번호</strong></th>
+		                                            <th><strong>주소</strong></th>
+		                                        </tr>
+		                                        <tr height="200px">
+		                                            <td>${orderList.sell_receiver }</td>
+		                                            <td>${orderList.sell_phone }</td>
+		                                            <td>${orderList.sell_postcode }</td>
+		                                            <td>${orderList.sell_address }</td>
+		                                        </tr>
+		                                </table>
+			                           </div>
+			                       </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						
+<!-- 							<div class="ps-section__content" style="margin-top: 50px;">   -->
+<!--                                	<div class="form-group submit"> -->
+                                   <input type="button" class="ps-btn ps-btn--fullwidth" id="cardOrderBtn" value="결제하기" onclick="requestPay()">
+<!--                                 </div> -->
+<!-- 	                  		</div> -->
+						
+<!-- 							 <div class="accordion" id="accordionExample" style="margin-top: 50px;"> -->
+<!-- 							  <div class="accordion-item"> -->
+<!-- 							    <h2 class="accordion-header" id="headingFour"> -->
+<!-- 							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" style="font-size: 15px; color: #669900"> -->
+<!-- 							        무통장입금 정보 -->
+<!-- 							      </button> -->
+<!-- 							    </h2> -->
+<!-- 							    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample"> -->
+<!-- 							      <div class="accordion-body"> -->
+<!-- 									<div class="ps-section__content"> -->
+<!-- 			                            <div class="table-responsive"> -->
+<!-- 			                                <table class="table ps-table" style="text-align: center;"> -->
+<!-- 			                                    <thead> -->
+<!-- 			                                        <tr> -->
+<!-- 			                                            <th><strong>은행명</strong></th> -->
+<!-- 			                                            <th><strong>예금주</strong></th> -->
+<!-- 			                                            <th><strong>계좌번호</strong></th> -->
+<!-- 			                                        </tr> -->
+<!-- 			                                    </thead> -->
+<!-- 			                                    <tbody> -->
+<!-- 			                                        <tr> -->
+<!-- 			                                            <td>KB국민은행</td> -->
+<!-- 			                                            <td>베지터틀</td> -->
+<!-- 			                                            <td>333-1111-2222-00</td> -->
+<!-- 			                                        </tr> -->
+<!-- 			                                    </tbody> -->
+<!-- 		                               		 </table> -->
+<!-- 			                            </div> -->
+<!-- 			                        </div> -->
+<!-- 							      </div> -->
+<!-- 							    </div> -->
+<!-- 							  </div> -->
+						  
+<!-- 							  <div class="accordion-item"> -->
+<!-- 							    <h2 class="accordion-header" id="headingFive"> -->
+<!-- 							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="font-size: 15px; color: #669900"> -->
+<!-- 							      	카드 정보 -->
+<!-- 							      </button> -->
+<!-- 							    </h2> -->
+<!-- 							    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample"> -->
+<!-- 							      <div class="accordion-body"> -->
+<!-- 									<div class="ps-section__content">   -->
+<!-- 				                        <div class="table-responsive"> -->
+<!-- 			                                <div class="ps-section__content" style="margin-top: 50px;">   -->
+<!-- 			                                	<div class="form-group submit"> -->
+<!--                                                        <input type="button" class="ps-btn ps-btn--fullwidth" id="cardOrderBtn" value="카드결제" onclick="requestPay()"> -->
+<!--                                                  </div> -->
+<!-- 					                  		</div> -->
+<!-- 				                          </div> -->
+<!-- 				                       </div> -->
+<!-- 							      </div> -->
+<!-- 							    </div> -->
+<!-- 							  </div> -->
+<!-- 							</div> -->
+<!-- 		              </div> -->
+<!-- 		            </div> -->
 		          </div>   
 		        </section>
 		       

@@ -51,8 +51,8 @@
         <section class="ps-section--account">
             <div class="container">
                 <div class="ps-block--payment-success">
-                    <h3>결제 완료 되었습니다 !</h3>
-                    <p>베지터틀을 이용하여 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
+                    <h3>결제가 완료 되었습니다 !</h3>
+                    <p>베지터틀을 이용해 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
                 </div>
 			</div>    
 		</section>

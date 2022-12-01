@@ -247,7 +247,7 @@
 		                                           <table class="orderList">
 		                                           	 	<tr>
 			                                           		<td></td><!-- 파일 -->
-			                                           		<td>상품 번호</td>
+<!-- 			                                           		<td>상품 번호</td> -->
 			                                           		<td>브랜드명</td>
 			                                           		<td>상품명</td>
 			                                           		<td>가격</td>
@@ -259,12 +259,12 @@
 			                                           		<td>
 			                                           			<img src="/Code_Green/resources/item/${cart.file1 }">
 			                                           		</td>
-			                                           		<td>
-			                                           			<input type="text" name="item_idx" value="${cart.rf_item_idx }">
-			                                           		</td>
+<!-- 			                                           		<td> -->
+<%-- 			                                           			<input type="text" name="item_idx" value="${cart.rf_item_idx }"> --%>
+<!-- 			                                           		</td> -->
 			                                           		<td>${cart.manager_brandname }</td>
 			                                           		<td>${cart.item_name }</td>
-			                                           		<td><fmt:formatNumber value="${cart.item_price }"/></td>
+			                                           		<td>${cart.item_price }</td>
 			                                           		<td >${cart.cart_amount }</td>
 			                                           		<td><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/></td>
 			                                           	</tr>
@@ -298,7 +298,7 @@
 			                                 <div class="ps-block--checkout-order">
 		                                        <div class="ps-block__content">
 		                                        	<div style="padding: 0 40px; margin: 0 20px; text-align: center;">
-				                                        <input type="radio" name="sell_pay_type" value="무통장입금">무통장입금
+<!-- 				                                        <input type="radio" name="sell_pay_type" value="무통장입금">무통장입금 -->
 				                                        <input type="radio" name="sell_pay_type" value="카드결제">카드결제
 		                                        	</div>
 		                                        </div>

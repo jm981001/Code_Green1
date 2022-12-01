@@ -6789,6 +6789,7 @@ textarea.form-control {
 .ps-block--payment-success h3 {
   font-size: 48px;
   color: #669900;
+  margin: 70px 0;
 }
 
 .ps-block--payment-success p {
@@ -17484,7 +17485,7 @@ html .bg--parallax {
 
 /*보슬*/
 .orderList img{
-	width: 100px; 
+	width: 140px; 
 	height: 150px; 
 /* 	margin: 20px; */
 }
@@ -17499,6 +17500,7 @@ html .bg--parallax {
 .orderList tr:last-child > td {
     color: #5fa30f;
     font-weight: bold;
+    font-size: 20px;
 }
 
 /* .orderList tr:nth-child(n + 4):nth-child(-n + 8) > td { */
@@ -17508,7 +17510,7 @@ html .bg--parallax {
 
 /*보슬*/
 .orderList td{
-	font-size: 11px; 
+	font-size: 14px; 
 	color: gray;
 	padding: 30px 0px;
 /* 	text-align: center; */
