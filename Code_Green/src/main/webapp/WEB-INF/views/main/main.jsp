@@ -196,7 +196,6 @@ if(${not empty sessionScope.sId && sessionScope.sId ne 'admin'} ) {
                                      <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist" class="wishBtn"><i class="icon-heart"></i></a></li>
                                  </ul>
                             </div>
-                            장바구니 담을 정보
 						<input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
 						<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
 						<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >

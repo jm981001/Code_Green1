@@ -144,20 +144,29 @@ public class MemberController {
 
 	}
 
-//	// 아이디 찾는 폼
-//	@RequestMapping(value = "/find_id_form", method = { RequestMethod.GET, RequestMethod.POST })
-//	public String find_id_form() throws Exception {
-//		return "member/find_id_form";
-//	}
+	// 아이디 찾는 폼
+	@GetMapping(value = "/find_id_form")
+	public String find_id_form() {
+		return "member/find_id_form";
+	}
 
 	// 아이디 찾는 이메일
 	@GetMapping("/idFintMail")
-	@ResponseBody
-	public String findIdMailCheck(@ModelAttribute MemberVO member, Model model, HttpSession session, String email) {
+	public String findIdMailCheck(String email, Model model) {
 		System.out.println("아이디 찾기 이메일 요청이 들어옴!");
 		System.out.println("아이디 찾을 이메일 : " + email);
-		return mailService.idFindEmail(email, session);
+		String emai1l = mailService.idFindEmail(email);
+		if (emai1l == null) {
+			model.addAttribute("msg", "실패");
+			return "member/fail_back";
+		}
+		return "redirect:/find_result";
+	}
 
+	// 아이디 찾기 결과
+	@GetMapping(value = "/find_result")
+	public String find_result() {
+		return "member/find_result";
 	}
 
 }

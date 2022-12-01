@@ -18,6 +18,7 @@ public interface MemberMapper {
 	// 회원 정보 조회에 필요한 selectMemberInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : MemberVO
 	public MemberVO selectMemberInfo(String id);
+	public MemberVO selectMemberEmail(String email);
 
 	// 멤버 수정
 	public int modifyMemberInfo(MemberVO member);	

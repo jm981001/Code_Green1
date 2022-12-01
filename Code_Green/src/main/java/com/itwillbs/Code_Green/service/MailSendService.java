@@ -4,12 +4,12 @@ import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 import com.itwillbs.Code_Green.vo.MemberVO;
 
@@ -44,18 +44,21 @@ public class MailSendService {
 	}
 
 	// 아이디 찾아주는 이메일 양식
-	public String idFindEmail(String email,HttpSession session) {
-		String sId = (String)session.getAttribute("sId");
-		MemberVO member = mService.getMemberInfo(sId);
-		String memberId = member.getMember_id();
-		
+	public String idFindEmail(String email) {
+		System.out.println(email);
+		MemberVO member = mService.getMemberEmail(email);
+
+		String id = member.getMember_id();
 		String setFrom = "CodeGreen@gmail.com";
 		String toMail = email;
 		String title = "회원님의 아이디 입니다."; // 이메일 제목
 		String content = "" + // html 형식으로 작성 !
-				"<br><br>" + "아이디는 " + member.getMember_id() + " 입니다."; // 이메일 내용 삽입
+				"<br><br>" + "아이디는 " +id+ " 입니다."; // 이메일 내용 삽입
+		
 		mailSend(setFrom, toMail, title, content);
-		return memberId;
+		System.out.println("getId"+member.getMember_id());
+		return "msg";
+		
 	}
 
 	// 이메일 전송 메소드

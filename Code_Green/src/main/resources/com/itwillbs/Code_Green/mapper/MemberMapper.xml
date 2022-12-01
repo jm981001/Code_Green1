@@ -54,10 +54,17 @@
 	<select id="selectMemberInfo"
 		resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id}
+		WHERE member_id=#{member_id}
 	</select>
-	<!--브랜드 정보 수정 -->
-	
+
+	<select id="selectMemberEmail"
+		resultType="com.itwillbs.Code_Green.vo.MemberVO">
+		SELECT * FROM member
+		WHERE member_email = #{member_email}
+	</select>
+
+
+	<!-- 정보 수정 -->
 	<update id="modifyMemberInfo">
 		UPDATE member
 		SET 

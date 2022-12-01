@@ -30,6 +30,10 @@ public class MemberService {
 	public MemberVO getMemberInfo(String member_id) {
 		return mapper.selectMemberInfo(member_id);
 	}
+	public MemberVO getMemberEmail(String member_email) {
+		return mapper.selectMemberEmail(member_email);
+	}
+	
 	// 회원 수정 modifyMemberInfo()
 	// => 파라미터 : 아이디, 리턴타입 : MemberVO(member)
 	public int modifyMemberInfo(MemberVO member) {
