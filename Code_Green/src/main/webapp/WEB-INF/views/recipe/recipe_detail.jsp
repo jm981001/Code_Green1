@@ -83,7 +83,7 @@
 			                            		<img  src="/Code_Green/resources/item/${use_item.file1 }" alt="" style="height: 450px; width: 450px;">
 			                            	</a>
 			                                <ul class="ps-product__actions">
-			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+			                                    <li><a id="cartBtn" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
 			                                </ul>
 			                            </div>
@@ -108,8 +108,14 @@
 			                            	<a href="ItemDetail.bo?item_idx=${related_item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${related_item.manager_brandname}&item_category=${related_item.item_category}">
 			                            		<img src="/Code_Green/resources/item/${related_item.file1 }" alt="" style="height: 450px; width: 450px;">
 			                            	</a>
+			                            	<!-- 장바구니 담을 정보 -->
+											<input type="hidden" id="cart_total_${related_item.item_idx}" name="cart_total_${related_item.item_idx}" value="${related_item.item_price}">
+											<input type="hidden" id="item_name_${related_item.item_idx}" name="item_name_${related_item.item_idx}" value="${related_item.item_name}" >
+											<input type="hidden" id="item_file1_${related_item.item_idx}" name="item_file1_${related_item.item_idx}" value="${related_item.file1}" >
+											<input type="hidden" id="manager_brandname_${related_item.item_idx}" name="manager_brandname_${related_item.item_idx}" value="${related_item.manager_brandname}" >
+                                            <input type="hidden" id="item_category_${related_item.item_idx}" name="item_category_${related_item.item_idx}" value="${related_item.item_category}" >                     
 			                                <ul class="ps-product__actions">
-			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="icon-bag2"></i></a></li>
+												<li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${related_item.item_idx}')"><i class="icon-bag2" ></i></a></li>
 			                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
 			                                </ul>
 			                            </div>
@@ -156,6 +162,57 @@
     <script src="/Code_Green/resources/js/jquery.nice-select.min.js"></script>
     <script src="/Code_Green/resources/js/mixitup.min.js"></script>
     <script src="/Code_Green/resources/js/main_recipe.js"></script>
+    	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cartBtn').click(function() {
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					rf_item_idx: ${use_item.item_idx},
+					rf_member_idx: ${sessionScope.sIdx},
+					cart_amount: 1,
+					cart_total: '${use_item.item_price }',
+					item_name: '${use_item.item_name}',
+					manager_brandname: '${use_item.manager_brandname }',
+					file1: '${use_item.file1 }'
+				},
+				success : function (cartCount) {
+					alert('장바구니에 담았습니다.');
+					$('#cartCount i').html(cartCount);
+				}
+				
+			});
+		});
+	});
+	
+	</script>	
+	<script type="text/javascript">
+	function addCart(item_idx) {
+		let cart_total = $("#cart_total_"+item_idx).val();
+		let	item_name = $("#item_name_"+item_idx).val();
+		let manager_brandname = $("#manager_brandname_"+item_idx).val();
+		let file1 = $("#file1_"+item_idx).val();
+		
+		$.ajax({
+			type : 'get',
+			url : 'addCart',
+			data: {
+				'rf_item_idx' 		: item_idx,
+				'rf_member_idx'		: ${sessionScope.sIdx},
+				'cart_amount'		: 1,
+				'cart_total'		: cart_total,
+				'item_name'			: item_name,
+				'manager_brandname'	: manager_brandname,
+				'file1'				: file1,
+			},
+			success : function (cartCount) {
+				alert('장바구니에 담았습니다.');
+				$('#cartCount i').html(cartCount);
+			}
+		});
+	}
+</script>	
 </body>
 
 </html>
