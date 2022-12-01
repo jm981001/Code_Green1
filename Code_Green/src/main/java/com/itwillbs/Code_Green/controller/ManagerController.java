@@ -140,7 +140,7 @@ public class ManagerController {
 	}
 	
 	   //------------매니저페이지 메인(로그인시 각 브랜드별 페이지)-------------------------------------------
-    @GetMapping(value = "/ManagerInfo.me")
+    @GetMapping(value = "/ManagerInfo.me") 
     public String getManagerInfo(
        @RequestParam String manager_id, Model model, HttpSession session) {
     // 세션 아이디 가져와서 sId 변수에 저장
@@ -418,7 +418,7 @@ public class ManagerController {
 //		System.out.println("s : " +item_status);
 //		System.out.println("i : " +item);
 		
-		String uploadDir = "/resources/itemUpload";
+		String uploadDir = "/resources/item";
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
 
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
@@ -542,7 +542,7 @@ public class ManagerController {
 			String oldRealFile2 = fileItem.getFile2();
 			
 			String uuid = UUID.randomUUID().toString();
-			String uploadDir = "/resources/itemUpload";	// 가상의 업로드 경로
+			String uploadDir = "/resources/item";	// 가상의 업로드 경로
 			String saveDir = session.getServletContext().getRealPath(uploadDir);
 			
 			File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
@@ -780,22 +780,36 @@ public class ManagerController {
 		
 		
 		
-			
-		
-	//------------주문 상세----------------------------------------
+		//------------주문 상세----------------------------------------
 		@RequestMapping(value = "order_detail", method = RequestMethod.GET)
-		public String order_detail() {
+		public String order_detail(Model model, HttpSession session) {
+			String sId = (String)session.getAttribute("sId");
+		
+			List<SellVO> orderInfo = service.getOrderInfo(sId);
+			System.out.println("주문 상세 : " + orderInfo);
+			
+			model.addAttribute("orderInfo", orderInfo);
+		
 			return "manager/order_detail";
 		}		
 		
-		//------------배송 관리(배송 상태 변경)----------------------------------------
+				
+		
+		//------------주문 관리(주문 상태 변경)----------------------------------------
 		
 		
 		
+		//------------재고 관리(재고 상태 변경)----------------------------------------
 		
+		@RequestMapping(value = "inventory_management", method = RequestMethod.GET)
+			public String inventory_management() {
+			
+			
+			
+			return "manager/inventory_management";
+		}
 		
 
-		
 
 	//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
 	
@@ -1288,8 +1302,8 @@ public class ManagerController {
 	      			 
 	      			 
 	      			 	
-	      		    List<ItemVO> top3 = service.getTop3(sId);
-	      		    model.addAttribute("top3", top3);
+	      		    List<ItemVO> top10 = service.getTop10(sId);
+	      		    model.addAttribute("top3", top10);
 	      		    
 	      		    
 	      		    //총매출 ,주문수
@@ -1306,15 +1320,20 @@ public class ManagerController {
 
 
 		
-			//------------정산-------------------------------------------
+	      	//------------정산-------------------------------------------
 				@RequestMapping(value = "sales_management", method = RequestMethod.GET)
-				public String sales_management() {
+				
+				
+				public String sales_management(Model Model, HttpSession session ) {
+					
+					String sId = (String)session.getAttribute("sId");
+					
+					
+					
+					
 					return "manager/sales_management";
 				}
 				
-		
-
-
 	
 
 }

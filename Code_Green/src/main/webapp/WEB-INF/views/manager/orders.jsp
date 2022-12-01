@@ -30,67 +30,20 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
 <body>
-    <header class="header--mobile">
+ <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
         <div class="header__center"><a class="ps-logo" href="#"><img src="img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
-    <aside class="ps-drawer--mobile">
-        <div class="ps-drawer__header">
-            <button class="ps-drawer__close"><i class="icon icon-cross"></i></button>
-        </div>
-        <div class="ps-drawer__content">
-            <ul class="menu">
-                                <li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a class="active" href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-            </ul>
-        </div>
-    </aside>
+   
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
-        <div class="ps-main__sidebar">
-            <div class="ps-sidebar">
-                <div class="ps-sidebar__top">
-                    <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
-                        <div class="ps-block__right">
-                            <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
-                        </div>
-                        <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
-                    </div>
-                    <div class="ps-block--earning-count"><small></small>
-<%--                         <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3> --%>
-                    </div>
-                </div>
-                <div class="ps-sidebar__content">
-                    <div class="ps-sidebar__center">
-                        <ul class="menu">
-                                <li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a class="active" href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="img/logo.png" alt="">
-                              <p>&copy;2022 CODE GREEN. <br/> All rights reversed.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+     <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
+    
+   
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
@@ -102,7 +55,7 @@
             </header>
             <section class="ps-items-listing">
             
-                <div class="ps-section__actions"><a class="ps-btn success" href="orders"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
+                <div class="ps-section__actions"><a class="ps-btn success" href="order_detail"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
                 
                 <div class="ps-section__header">
               
@@ -154,14 +107,9 @@
                             <tbody>
                      <c:forEach var="order" items="${orderList}" >
 						    <tr>
-						     <td>${order.sell_idx}</td>
+						     <td>${order.sell_order_number}</td>
 						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
 						     <td>${order.item_name }</td>
-						     
-						     
-<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_date }" pattern="yyyyMMdd" /> --%>
-<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
-		                      
 						     <td>${order.item_price}</td>
 						     <td>${order.sell_amount}</td>
 						     <td>${order.sell_total_price}</td>
@@ -175,6 +123,11 @@
 						     
 						     
 						     <td>${order.manager_brandname}</td>
+						      <td>
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<%--                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="order_detail?sell_idx=${order.sell_idx }">주문상태변경</a></div> --%>
+<!--                                         </div> -->
+                                    </td>
 						    </tr>     
                             
 					</c:forEach>

@@ -154,6 +154,11 @@ public class ManagerService {
 	public int getOrderListCount(String searchType, String keyword,String id) {
 		return mapper.selectOrderListCount(searchType,keyword,id);
 	}
+	//주문 상세 조회
+	public List<SellVO> getOrderInfo(String sId) {
+		return mapper.selectOrderInfo(sId);
+	}
+	
 	
 	//배송 상태 변경
 	//배송관리 
@@ -177,7 +182,10 @@ public class ManagerService {
 	 public int follow(String sId) {
 	    return mapper.follow(sId);
 	  }
-	 
+	 //매출순위 더보기  
+	public List<ItemVO> getTop10(String sId) {
+		return mapper.getTop10(sId);
+	}
 	   
 
 	   

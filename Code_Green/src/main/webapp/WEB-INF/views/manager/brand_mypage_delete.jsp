@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +41,7 @@
 </script>
 </head>
 
+
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -45,61 +50,12 @@
         <div class="header__center"><a class="ps-logo" href="#"><img src="img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
-    <aside class="ps-drawer--mobile">
-        <div class="ps-drawer__header">
-            <h4> Menu</h4>
-            <button class="ps-drawer__close"><i class="icon icon-cross"></i></button>
-        </div>
-        <div class="ps-drawer__content">
-            <ul class="menu">
-                                <li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a class="active" href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-            </ul>
-        </div>
-    </aside>
+   
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
-        <div class="ps-main__sidebar">
-            <div class="ps-sidebar">
-                <div class="ps-sidebar__top">
-                    <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="img/user/admin.jpg" alt="" /></div>
-                        <div class="ps-block__right">
-                        <h4><strong>${sessionScope.sId }</strong> 님 환영합니다</h4>
-                        </div>
-                        <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div>
-                    </div>
-                    <div class="ps-block--earning-count"><small>수익</small>
-                        <h3>$12,560.55</h3>
-                    </div>
-                </div>
-                <div class="ps-sidebar__content">
-                    <div class="ps-sidebar__center">
-                        <ul class="menu">
-               					<li><a href="ManagerInfo.me?manager_id=${sessionScope.sId }"><i class="icon-home"></i>관리자메인페이지</a></li>
-				                <li><a href="products?manager_id=${sessionScope.sId }"><i class="icon-database"></i>상품관리</a></li>
-				                <li><a href="orders?manager_id=${sessionScope.sId }"><i class="icon-bag2"></i>주문관리</a></li>
-				                <li><a href="sales_main?manager_id=${sessionScope.sId }"><i class="icon-papers"></i>매출관리</a></li>
-				                <li><a href="qnaboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>답변관리</a></li>
-				                <li><a href="recipeboard_list?manager_id=${sessionScope.sId }"><i class="icon-users2"></i>레시피관리</a></li>
-				                <li><a href="sales_management?manager_id=${sessionScope.sId }"><i class="icon-percent-circle"></i>정산</a></li>
-								<li><a class="active" href="brand_mypage?manager_id=${sessionScope.sId }"><i class="icon-cog"></i>내브랜드정보</a></li>
-                        </ul>
-                    </div>
-                    <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="img/logo.png" alt="">
-                            <p>&copy;2022 CODE GREEN. <br/> All rights reversed.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+     <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
+
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
@@ -205,6 +161,7 @@
                                         <div class="form-group">
                                             <label>기업 상세정보 </label>
                                             <input type="text"class="form-control" id="manager_info" name="manager_info"value="${brandInfo.manager_info }"/>
+                                        </div>
                                         </div>
 
                                 <div class="ps-form__submit text-center	">

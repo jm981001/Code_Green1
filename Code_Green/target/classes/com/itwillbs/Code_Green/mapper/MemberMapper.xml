@@ -32,9 +32,10 @@
 				rf_member_idx = #{member_idx}
 	</update>
 	
+	<!-- 탈퇴여부 -->
 	<select id="checkDel" resultType="string">
 		SELECT member_del_yn 
-			FROM MEMBER 
+			FROM member 
 				WHERE member_id = #{member_id}
 	</select>
 	
@@ -46,23 +47,37 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
-<!-- 	<select id="loginMember" -->
-<!-- 		resultType="com.itwillbs.Code_Green.vo.MemberVO"> -->
-<!-- 		SELECT * FROM member -->
-<!-- 		WHERE MEMBER_ID=#{member_id} AND -->
-<!-- 		MEMBER_PASS=#{member_pass} -->
-<!-- 	</select> -->
 
-	<!-- 3. 회원 정보 조회 수행을 위한 select 태그 작성 -->
-	<!-- => MemberMapper 객체의 selectMemberInfo() 메서드명을 id 속성값으로 지정 -->
+	<!-- 멤버 조회 -->
 	<!-- => 파라미터는 메서드 전달된 파라미터 변수명과 동일한 이름 사용 -->
 	<!-- => 결과 타입은 1개 레코드 정보를 저장할 MemberVO 타입 지정 -->
-
 	<select id="selectMemberInfo"
 		resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member
-		WHERE MEMBER_ID=#{member_id}
+		WHERE member_id=#{member_id}
 	</select>
+
+	<select id="selectMemberEmail"
+		resultType="com.itwillbs.Code_Green.vo.MemberVO">
+		SELECT * FROM member
+		WHERE member_email = #{member_email}
+	</select>
+
+
+	<!-- 정보 수정 -->
+	<update id="modifyMemberInfo">
+		UPDATE member
+		SET 
+			member_id = #{member_id},
+			member_name = #{member_name},
+		    member_phone = #{member_phone},
+ 	        member_email = #{member_email}, 
+			member_postcode = #{member_postcode}, 
+			member_address = #{member_address}
+			
+		WHERE 
+			member_id = #{member_id}
+	</update>
 	
 	
 	

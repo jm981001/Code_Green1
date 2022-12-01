@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +27,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
-
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -39,6 +40,11 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
+
+
+
+
+
            <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">

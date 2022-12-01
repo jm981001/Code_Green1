@@ -93,28 +93,37 @@ public interface ManagerMapper {
 	public int updateQnaboard(QnaVO qna);
 	//문의글 삭제
 	 public int deleteQnaboard(String qna_idx);
+	 
+	 // 주문 목록 조회
+	 public List<SellVO> selectOrderList(
+			 @Param("startRow") int startRow,@Param("listLimit") int listLimit,
+			 @Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
+	 //주문 갯수 조회
+	 public int selectOrderListCount(
+			 @Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
+	 
+	 //주문 상세 조회  
+	 public List<SellVO> selectOrderInfo(String sId);
+	 
 	//총매출
 	public SellVO selectTotalMoney();
 
 	//총주문수
 	public int selectTotalsellCount();
 	
-    // 주문 목록 조회
-	public List<SellVO> selectOrderList(
-			@Param("startRow") int startRow,@Param("listLimit") int listLimit,
-			@Param("searchType") String searchType,@Param("keyword") String keyword,@Param("id") String id);
-	//주문 갯수 조회
-	public int selectOrderListCount(
-			@Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
-
-	 // 매출 3순위
+	//총매출,총주문건수
+	public ManagerVO selectTotalMoneyOrder(String sId);
+	
+	// 매출 3순위
 	   public List<ItemVO> getTop3(String sId);
 
 	//팔로우 수
 	   public int follow(String sId);
 
-	//총매출,총주문건수
-	   public ManagerVO selectTotalMoneyOrder(String sId);
+	 //매출순위 더보기  
+	public List<ItemVO> getTop10(String sId);
+
+
 	   
 
 

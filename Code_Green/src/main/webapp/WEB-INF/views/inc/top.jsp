@@ -76,6 +76,11 @@
                         <a class="header__extra" href="MemberInfo.me"><i class="icon-user"></i></a></c:if>
                         <c:if test="${empty sessionScope.sId }">
                          <a class="header__extra" href="login"><i class="icon-user"></i></a></c:if>
+                         
+                         
+                         
+                         
+                         
       				</div>
                 </div>
             </div>

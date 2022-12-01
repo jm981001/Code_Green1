@@ -8,16 +8,13 @@
 		WHERE ADMIN_ID=#{admin_id} AND ADMIN_PASS=#{admin_pass}
 	</select>
 	
-	
+	<!-- 총매출 -->
 	<select id="selectTotalMoney" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		SELECT 
-			SUM(sell_total_price) 
-		AS 
-			total
-		FROM
-			sell
+		SELECT SUM(sell_total_price) AS total
+			,  SUM(sell_total_price) * 0.1 AS net
+		  FROM sell
 	</select>
-
+	<!-- 주문건수 -->
 	<select id="selectTotalsellCount" resultType="Integer">
 		SELECT COUNT(*)
 		FROM sell
@@ -25,64 +22,62 @@
 	
 	<!-- 매출 3순위 -->
 	<select id="selectTopSaleList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT
-			m.manager_brandname,
-			SUM(sd.sell_amount)   AS sellCount,
-			COUNT(sd.sell_amount) AS orderCount,
-			f.brand_follower,
-			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
-		FROM
-			manager m
-		LEFT JOIN
-			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
-		ON
-			m.manager_idx = f.rf_manager_idx
-		LEFT JOIN
-			item i
-		ON
-			i.re_manager_idx = m.manager_idx
-		INNER JOIN
-			sell_detail sd
-		ON
-			i.item_idx = sd.rf_item_idx
-		GROUP BY
-			m.manager_idx
-		LIMIT 3;
+		SELECT	m.manager_brandname
+		 	,	SUM(sd.sell_amount)   AS sellCount
+		 	,	COUNT(sd.sell_amount) AS orderCount
+		 	,	IFNULL(f.brand_follower, 0) AS brand_follower
+		 	,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
+		 	,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		  FROM
+				manager m
+		  LEFT JOIN
+				(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+			ON
+				m.manager_idx = f.rf_manager_idx
+		  LEFT JOIN
+				item i
+			ON
+				i.re_manager_idx = m.manager_idx
+		 INNER JOIN
+				sell_detail sd
+			ON
+				i.item_idx = sd.rf_item_idx
+		 GROUP BY
+				m.manager_idx
+		 LIMIT 3;
 	</select>
 	
 	<!-- 매출 랭킹 -->
 	<select id="selectRanking" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT
-			m.manager_brandname,
-			SUM(sd.sell_amount)   AS sellCount,
-			COUNT(sd.sell_amount) AS orderCount,
-			f.brand_follower,
-			SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-			RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
-		FROM
-			manager m
-		LEFT JOIN
-			(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
-		ON
-			m.manager_idx = f.rf_manager_idx
-		LEFT JOIN
-			item i
-		ON
-			i.re_manager_idx = m.manager_idx
-		INNER JOIN
-			sell_detail sd
-		ON
-			i.item_idx = sd.rf_item_idx
-		GROUP BY
-			m.manager_idx;
+		SELECT	m.manager_brandname
+			,	SUM(sd.sell_amount)   AS sellCount
+			,	COUNT(sd.sell_amount) AS orderCount
+			,	IFNULL(f.brand_follower, 0) AS brand_follower
+			,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
+			,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		  FROM
+				manager m
+		  LEFT JOIN
+				(SELECT rf_manager_idx, COUNT(*) AS brand_follower FROM follow GROUP BY rf_manager_idx) AS f 
+			ON
+				m.manager_idx = f.rf_manager_idx
+		  LEFT JOIN
+				item i
+			ON
+				i.re_manager_idx = m.manager_idx
+		 INNER JOIN
+				sell_detail sd
+			ON
+				i.item_idx = sd.rf_item_idx
+		 GROUP BY
+				m.manager_idx;
 	</select>
 	
 	<!-- 기업 별점 순위 -->
 	<select id="selectStarRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
 			m.manager_brandname,
-		    f.brand_follower,
+		    IFNULL(f.brand_follower, 0) AS brand_follower,
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    truncate(bs.board_star_score,1) AS star_score,
@@ -137,7 +132,7 @@
 	<select id="selectFollowerRankingList" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		SELECT
 			m.manager_brandname,
-		    f.brand_follower,
+		    IFNULL(f.brand_follower, 0) AS brand_follower,
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    ROUND(bs.board_star_score,1) AS star_score,
@@ -188,8 +183,80 @@
 			m.manager_idx;
 	</select>
 	
-
-
+<!-- ==결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====-->
+	
+	<!-- 결제취소요청 목록 -->
+	<select id="selectCancelRequestList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_cancel_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_cancel_status = '취소요청';
+	</select>
+	
+	<!-- 결제취소승인 목록 -->
+	<select id="selectCancelSuccessList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_cancel_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_cancel_status = '취소승인' AND s.sell_pay_status = '결제취소'
+	</select>
+	
+	<!-- 결제취소반려 목록 -->
+	<select id="selectCancelReturnList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT 
+				m.member_id
+			,	s.sell_idx
+		    ,	s.sell_total_price
+		    ,	s.sell_cancel_status
+		    ,	s.sell_pay_status
+		    ,	s.sell_pay_date
+		    ,	s.sell_order_number
+		 FROM	sell s 
+		 LEFT JOIN member m
+		   ON	s.rf_member_idx = m.member_idx
+		WHERE	s.sell_cancel_status = '취소반려' AND s.sell_pay_status = '결제완료'
+	</select>
+	<!-- 결제취소 승인 -->
+	<update id="updateStatusApproval">
+		UPDATE 		sell s 
+		  LEFT JOIN sell_detail sd 
+		    ON		s.sell_idx = sd.rf_sell_idx
+		   SET 		s.sell_cancel_status 	  =	'취소승인'
+		   	   ,	s.sell_pay_status = '결제취소'
+		   	   ,	s.sell_status = '주문취소'
+		   	   ,	sd.sell_del_yn ='Y'
+		 WHERE
+		 			s.sell_idx = #{sell_idx};
+	</update>
+	
+	<!-- 결제취소로 되돌리기 -->
+	<update id="updateStatusRequest">
+		UPDATE 		sell s 
+		  LEFT JOIN sell_detail sd 
+		    ON		s.sell_idx = sd.rf_sell_idx
+		   SET 		s.sell_cancel_status =	'취소요청'
+		   	   ,	s.sell_pay_status = '결제완료'
+		   	   ,	s.sell_status = '주문완료'
+		   	   ,	sd.sell_del_yn ='N'
+		 WHERE
+		 			s.sell_idx = #{sell_idx};
+	</update>
 
 
 <!-- 아래부터 페이지 기능 -->

@@ -19,24 +19,13 @@
 		JOIN manager m ON m.manager_idx = i.re_manager_idx 
 		JOIN member r ON r.member_idx = c.rf_member_idx
         JOIN file_item f ON f.file_item_idx = i.item_idx
-		WHERE r.member_id = #{member_id};
+		WHERE r.member_id = #{member_id}
 	</select>
 
-	
-	<!-- 상품구매 목록 갯수 -->
-	<select id="selectSellListCount" resultType="integer">
-		 select count(*)
-			from sell
-		    where RF_MEMBER_IDX = (select member_idx
-									from member
-                            		where member_id = #{member_id})
-	</select>
-	
-	
 	<!-- 주문하기 -->
 	<!-- 아래코드 작동은 됨 -->
 	<insert id="insertOrder">
-		<selectKey keyProperty="cart_amount" resultType="string" order="BEFORE">
+		<selectKey keyProperty="sell_amount" resultType="string" order="BEFORE">
 			SELECT 
 					sum(cart_amount)
 			  FROM
@@ -52,7 +41,7 @@
 			 		 		(SELECT MAX(sell_idx) FROM sell s), 0
 			 		 		) + 1, 									  <!-- sell_idx -->
 			 		 #{member_idx}, 								  <!-- rf_member_idx -->
-			 		 #{cart_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
+			 		 #{sell_amount},								  <!-- sell_amount--> <!-- 장바구니에서 불러오기 -->
 			 		 #{sell.sell_usecoin},							  <!-- sell_use_coin -->
 			 		 #{sell_total_price},							  <!-- sell_total_price -->
 			 		 '주문완료',									  <!-- sell_status --> <!-- 결제하고 나면 update 구문써서 바꿔주기 -->
@@ -64,49 +53,140 @@
 			 		 #{sell.sell_pay_type},							  <!-- sell_pay_type --> <!-- 주문시 디폴트로 무통장입금 걸어놓고 카드 결제 버튼 클릭시 update 구문써서 '카드결제' 바꿔주기 -->
 			 		 '결제대기중',									  <!-- sell_pay_status --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
 			 		 '',											  <!-- sell_pay_date --> <!-- 카드 결제시 update 구문써서 바꿔주기 -->
-			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s), 8, 0)) <!-- sell_order_number -->
+			 		CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '-', LPAD((SELECT IFNULL(MAX(CAST(SUBSTR(SELL_ORDER_NUMBER, 10) as unsigned)), 0) + 1 FROM sell s), 8, 0)), <!-- sell_order_number -->
+			 		''
 			 	)			
 	</insert>
+	
+	<!-- 주문상세(sell_detail)에 데이터 넣기 -->
+	<insert id="insertOrderDetail">
+		<selectKey keyProperty="rf_sell_idx" order="BEFORE" resultType="string">
+			SELECT
+					MAX(sell_idx)
+		  	  FROM
+		  	  		sell
+		  	 WHERE
+		  	 		rf_member_idx = #{member_idx}
+		  ORDER BY
+		  			sell_idx desc
+		  	 LIMIT
+		  	 		1
+		</selectKey>
+		
+		INSERT INTO 
+					 sell_detail
+			VALUES(
+			 		  IFNULL(
+				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0
+				 		 		) + 1, 
+					  #{rf_sell_idx},
+					  #{rf_item_idx},
+					  #{sell_amount},
+					  'N',
+					  'N'	  		 			
+			)
+	</insert>
+	
 	
 	
 	<!-- 주문내역 불러오기 -->
 	<select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		 SELECT  
-		 		 *
-		   FROM
-		  		 sell s
-      LEFT JOIN 
-      			 member m
-        	 ON 
-        	 	 s.rf_member_idx = m.member_idx
-		  WHERE 
-		  		 m.member_id = #{member_id}
-       ORDER BY 
-       			 s.sell_idx DESC
-          LIMIT 
-          		 1
+			SELECT 
+					s.sell_idx,
+			        s.rf_member_idx,
+			        s.sell_amount,
+			        s.sell_usecoin,
+			        s.sell_total_price,
+			        s.sell_status,
+			        s.sell_postcode,
+			        s.sell_address,
+			        s.sell_phone,
+			        s.sell_receiver,
+			        s.sell_date,
+			        s.sell_pay_type,
+			        s.sell_pay_status,
+			        s.sell_pay_date,
+			        s.sell_order_number,
+			        m.member_email
+	       	 FROM 
+	       	 		sell s
+	    LEFT JOIN 
+	        		member m
+	           ON 
+	           		s.rf_member_idx = m.member_idx
+	        WHERE 
+	        		m.member_id = #{member_id}
+	     ORDER BY 
+	     			s.sell_idx DESC
+	        LIMIT 
+	        		1
+	
+	
+<!-- 		 SELECT   -->
+<!-- 		 		 * -->
+<!-- 		   FROM -->
+<!-- 		  		 sell s -->
+<!--       LEFT JOIN  -->
+<!--       			 member m -->
+<!--         	 ON  -->
+<!--         	 	 s.rf_member_idx = m.member_idx -->
+<!-- 		  WHERE  -->
+<!-- 		  		 m.member_id = #{member_id} -->
+<!--        ORDER BY  -->
+<!--        			 s.sell_idx DESC -->
+<!--           LIMIT  -->
+<!--           		 1 -->
 	</select>
 	
-	<!--  -->
-<!-- 	<insert id="insertOrderDetail"> -->
-<!-- 		INSERT INTO  -->
-<!-- 					 sell_detail -->
-<!-- 			VALUES( -->
-<!-- 				 <foreach collection="cartList" item="cart"> -->
-<!-- 					  IFNULL( -->
-<!-- 				 		 		(SELECT MAX(sell_detail_idx) FROM sell_detail s), 0 -->
-<!-- 				 		 		) + 1, -->
-<!-- 			 		  #{sell_idx},	 -->
-<!-- 					  #{cart.rf_item_idx}, -->
-<!-- 					  #{cart.cart_amount}, -->
-<!-- 					  'N' -->
-<!-- 		 		 </foreach> -->
-		 		 	  		 			
-<!-- 			) -->
-<!-- 	</insert> -->
-
-
-
+	
+	<!-- 주문 상세내역 불러오기 -->
+	<select id="selectOrderDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		 SELECT  
+		 		 i.item_idx,
+		 		 i.item_name,
+		 		 i.item_price,
+		 		 m.manager_brandname,
+		 		 d.sell_amount,
+		 		 f.file1
+		   FROM
+		  		 sell_detail d
+	  LEFT JOIN		 
+				 item i
+		     ON
+		  		 d.rf_item_idx = i.item_idx
+		   JOIN 		 
+		  		 manager m
+		  	 ON
+		  	 	 i.re_manager_idx = m.manager_idx	 
+	  	   JOIN
+	  	   		 file_item f
+	  	   	 ON
+	  	   	 	 f.rf_item_idx = i.item_idx
+		  WHERE
+		  		 rf_sell_idx = #{sell_idx} 		 
+	</select>
+	
+	<!-- 카드 결제 -->
+	<update id="updateCardOrder">
+		UPDATE 
+				sell
+		   SET
+		   		sell_status = '배송준비중',
+				sell_pay_status = '결제완료',
+				sell_pay_date = now()
+		 WHERE
+		 		sell_idx = #{sell_idx}			
+	</update>
+	
+	<!-- 주문 취소 요청 -->
+	<update id="updateCancelOrder">
+		UPDATE 
+				sell
+		   SET
+		   		sell_cancel_status = '취소요청'		
+		 WHERE
+		 		sell_idx = #{sell_idx}	
+	</update>
 
 
 
@@ -151,7 +231,7 @@
 	
 	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-           select  	 s.SELL_DETAIL_IDX 
+         select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
 			        ,i.ITEM_NAME 
 			        ,i.ITEM_PRICE
@@ -161,6 +241,8 @@
 					,s.SELL_AMOUNT
 			        ,m.MANAGER_BRANDNAME
 			        ,l.sell_idx
+			        ,l.SELL_PAY_STATUS
+                    ,s.SELL_REVIEW_STATUS
 			from sell_detail s 
 				join item i 
 					on s.RF_ITEM_IDX = i.item_idx
@@ -173,7 +255,8 @@
 			    where l.RF_MEMBER_IDX =(select member_idx
 									from member
                             		where member_id = #{member_id})
-                      and s.SELL_REVIEW_STATUS="N";
+                      and s.SELL_REVIEW_STATUS="N"
+                      and l.SELL_PAY_STATUS ="결제완료"
 	</select>
 	
 	
@@ -203,6 +286,7 @@
 	</select>
 	
 
+	
 	<!-- 마이페이지 // 내 주문목록 리스트들 불러오기 -->
 	<select id="selectMyBuyList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		SELECT * 
@@ -213,6 +297,16 @@
 			</if>
 			ORDER BY sell_date DESC
 			LIMIT #{startRow}, #{listLimit} 
+	</select>
+	
+	
+	<!-- 상품구매 목록 갯수 -->
+	<select id="selectSellListCount" resultType="integer">
+		 select count(*)
+			from sell
+		    where RF_MEMBER_IDX = (select member_idx
+									from member
+                            		where member_id = #{member_id})
 	</select>
 	
 	
@@ -247,6 +341,40 @@
 					sell_date BETWEEN #{date1} AND DATE_ADD(#{date2}, INTERVAL 1 DAY)
 	</select>
 	
+		<!-- 마이페이지 // 내주문목록 주문별 상세내용 -->
+	<select id="getMyBuyListDetail" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		SELECT * 
+			FROM sell 
+			WHERE rf_member_idx = #{member_idx} 
+				  AND 
+				  sell_order_number = #{sell_order_number};
+	
+	</select>
+	
+	<!-- 마이페이지 // 내주문목록 아이템리스트 출력 -->
+	<select id="getMyBuyItemList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		SELECT d.sell_amount,       	
+		       i.item_name,
+		       i.item_price,
+		       i.item_idx,
+		       i.item_category,
+		       m.manager_brandname,
+		       f.file1
+		  FROM sell_detail d
+		  LEFT JOIN sell s
+		  ON 
+		  			d.RF_SELL_IDX = s.sell_idx
+	      LEFT JOIN item i 
+	      ON 
+	      			d.rf_item_idx = i.item_idx
+	      LEFT JOIN manager m
+	      ON 
+	      			i.RE_MANAGER_IDX = m.MANAGER_IDX
+	      LEFT JOIN file_item f 
+	      ON 
+	      			i.item_idx = f.rf_item_idx
+	      WHERE 	s.sell_order_number = #{sell_order_number}
+	</select>
 	
 	
 	

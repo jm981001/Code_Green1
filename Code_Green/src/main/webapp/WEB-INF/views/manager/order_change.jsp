@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +18,8 @@
     <link href="apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
     <link href="favicon.png" rel="icon">
-    <title>레시피관리-베지터틀</title>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <title>주문관리(배송상태변경)-베지터틀</title>
+     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/bootstrap/css/bootstrap.min.css">
@@ -27,33 +28,9 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
-    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
-    <script type="text/javascript">
-       function recipe_delete(value) {
-          let delete_confirm = confirm('삭제하시겠습니까? 삭제하면 복구가 불가능합니다.');
-          
-          if(delete_confirm){
-             $.ajax({
-               url: "recipeboard_deletePro.bo",
-               type: "POST",
-               data: {
-                  board_idx: value
-               },
-               success: function(){
-                  alert("삭제가 완료되었습니다.");
-                  location.href = "recipeboard_list";
-               },
-               fail: function () {
-                  alert("삭제가 실패되었습니다. 다시 시도해 주세요.");
-               }
-            });
-          } 
-      }
-    </script>
 </head>
-
 <body>
-     <header class="header--mobile">
+ <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
         </div>
@@ -65,102 +42,125 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
-     
+   
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3>레시피관리</h3>
+                    <h3>상태변경</h3>
                 </div>
-                <div class="header__center">
-                </div>
-                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"onclick="href=/Code_Green"></i></a></div>
+                
+                
+                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
-                    <div class="ps-section__actions"><a class="ps-btn success" href="recipeboard_write?manager_id=${sessionScope.sId }"><i class="icon icon-plus mr-2"></i>레시피등록</a></div>
-                <div class="ps-section__header simple">
+            
+                <div class="ps-section__actions"><a class="ps-btn success" href="orders"><i class="icon icon-plus mr-2"></i>주문관리</a><a class="ps-btn ps-btn--gray" href="order_detail"><i class="icon icon-download2 mr-2"></i>주문상세조회</a></div>
+                
+                <div class="ps-section__header">
+              
+            
                     <div class="ps-section__filter">
-                        <form class="ps-form--filter" action="recipeboard_list" method="get">
+                        <form class="ps-form--filter" action="orders" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-                                    <select class="ps-select"name="searchType">
-                                       <option value="board_idx">글번호</option>
-                                        <option value="board_subject">제목</option>
-                                        <option value="item_name">사용한상품</option>
-                                        <option value="board_date">작성일</option>
-                                        <option value="board_readcount">조회수</option>
+                                       <select class="ps-select" name="searchType">
+                                        <option value="sell_status">주문상태</option>
+                                        <option value="item_name">주문상품</option>
+                                        <option value="sell_pay_status">결제여부</option>
                                     </select>
                                 </div>
-                            </div>
+                                </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="keyword" placeholder="Search..." />
+                                    <input class="form-control" type="text"name="keyword" placeholder="Search..." />
                                 </div>
                             <div class="ps-form__right">
-                                <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
+                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button>
                             </div>
                         </form>
-                </div>
                     </div>
+                    
+               <br>
+                    <div class="ps-section__search">
+              
+                    </div>
+                </div>
                 <div class="ps-section__content">
                     <div class="table-responsive">
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                   
-                                   <th>글번호</th>
-                                      <th>제목</th>
-                                     <th>사용한상품</th>
-                                    <th>작성일</th>
-                                    <th>조회수</th>
-                                   
+                                    <th>주문번호</th>
+                                    <th>회원번호</th>
+                                    <th>주문상품</th>
+                                    <th>상품가격</th>
+                                    <th>주문수량</th>
+                                    <th>총금액</th>
+                                    <th>주문상태</th>
+                                    <th>주문날짜</th>
+                                    <th>결제여부</th>
+                                    <th>결제일</th>
+                                    <th>상품브랜드</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                            
-                              <c:forEach var="recipeList" items="${recipeList }">
-                                <tr>
-                                   <td>${recipeList.board_idx }</td>
-                                    <td>
-                                    	<a href="recipe_detail.bo?board_idx=${recipeList.board_idx }&id=${sessionScope.sId}">
-                                    		<strong>${recipeList.board_subject }</strong>
-                                    	</a>
-                                    </td>
-                                    <td>${recipeList.item_name }</td>
-                                    <td>${recipeList.board_date }</td>
-                                    <td>${recipeList.board_readcount }</td>
-                                    <td>
+                     <c:forEach var="order" items="${orderList}" >
+						    <tr>
+						     <td>${order.sell_idx}</td>
+						     <td onclick="location.href='order_detail?item_name=${order.item_name}'"><strong>${order.rf_member_idx}</strong></td>
+						     <td>${order.item_name }</td>
+						     
+						     
+<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_date }" pattern="yyyyMMdd" /> --%>
+<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
+		                      
+						     <td>${order.item_price}</td>
+						     <td>${order.sell_amount}</td>
+						     <td>${order.sell_total_price}</td>
+						     <td>${order.sell_status}</td>
+						     <td>${order.sell_date }</td>
+						     <td>${order.sell_pay_status}</td>
+						     <td>${order.sell_pay_date}</td>
+						     
+<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_pay_date }" pattern="yyyyMMdd" /> --%>
+<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
+						     
+						     
+						     <td>${order.manager_brandname}</td>
+						     <td>
                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="recipeboard_modify?manager_id=${sessionScope.sId }&board_idx=${recipeList.board_idx}">수정</a>
-                                            <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">삭제</a>
+                                            <a class="dropdown-item" href="recipeboard_modify?manager_id=${sessionScope.sId }&board_idx=${recipeList.board_idx}">변경</a>
+                                            <a class="dropdown-item" onclick="recipe_delete(${recipeList.board_idx })">취소</a>
 
                                         </div>
                                         </div>
                                     </td>
-                                </tr>
-                               </c:forEach>
-                            </tbody>
-                        </table>
+						    </tr>     
+                            
+					</c:forEach>
+						</tbody>
+						</table>
+             
                     </div>
                 </div>
-                            
-                              <div class="ps-section__footer">
-                   <!-- 페이징 버튼들 시작 -->
+                   <div class="ps-section__footer">
+                         <!-- 페이징 버튼들 시작 -->
                                <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
                                 <div class="ps-pagination">
                                     <ul class="pagination">
                                        
-                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="recipeboard_list?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+                                        <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="orders?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
                                         <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
                                            <c:choose>
                                               <c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-                                              <c:otherwise><li><a href="recipeboard_list?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
+                                              <c:otherwise><li><a href="orders?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
                                            </c:choose>
                                         </c:forEach>
-                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="recipeboard_list?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+                                        <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="orders?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
                                     </ul>
                                 </div>
               <!-- 페이징 버튼들 끝 -->
-
                 </div>
             </section>
         </div>
@@ -172,7 +172,7 @@
     <script src="/Code_Green/resources/plugins_manager/select2/dist/js/select2.full.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
-    <!-- custom code-->
+    <!-- custom c/Code_Green/resourcese-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>
 

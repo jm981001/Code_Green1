@@ -557,6 +557,35 @@
 	</if>                                  
 
     </select>
+    
+    	<!--주문 상세 조회 -->
+	<select id="selectOrderInfo" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	       SELECT * FROM    
+	       
+	         sell_detail d
+		         left join sell s
+		         on s.sell_idx = d.rf_sell_idx
+		            left join item i 
+		               on d.RF_ITEM_IDX = i.item_idx
+		             left join file_item f 
+		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
+
+		            left join manager m
+		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
+		            
+		             where i.RE_MANAGER_IDX =(select manager_idx
+		                           from manager
+		                                  where manager_id = #{sId})
+			 
+	</select> 
+	
+    
+    
+    
+    
+    
+    
+    
 
 
 <!-- 매출 3순위 -->
@@ -641,6 +670,68 @@
 	ON i.re_manager_idx = m.manager_idx
 	where m.manager_id=#{sId};
 </select>
+   
+   
+   
+   <!-- 매출순위 더보기 -->
+   <select id="getTop10" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+       select    i.item_idx, 
+               i.re_manager_idx,
+               i.item_name,
+               i.item_info,
+               i.item_packing, 
+               i.item_category, 
+               i.item_price,
+               i.item_sale, 
+               i.item_stock, 
+               i.item_status,  
+               i.item_readcount,  
+               i.item_date, 
+               m.manager_brandname,
+               ifnull(round(truncate( a.board_star_score,1),0),0) AS score,
+               ifnull(truncate( a.board_star_score,1),0) AS board_star_score,
+                   ifnull(s.count,0) as count,
+                   RANK() OVER (ORDER BY count DESC , i.item_idx asc) AS ranking,
+                   ifnull(b.review,0)as review,
+                   ifnull(h.heart,0)as heart
+                   
+            FROM item i 
+             JOIN manager m 
+                     ON i.re_manager_idx =  m.manager_idx
+               LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+                         , avg(s.board_star_score) as board_star_score
+                       FROM board b join board_star s on b.board_idx = s.rf_board_idx
+                      group by b.BOARD_ITEM_IDX) a 
+                   ON i.item_idx = a.BOARD_ITEM_IDX 
+            LEFT JOIN (select RF_ITEM_IDX,  count(*) as count 
+                     from sell_detail
+                     group by RF_ITEM_IDX) s
+               ON s.RF_ITEM_IDX = i.item_idx
+            LEFT JOIN  (select *, count(*) as review 
+                        from board b 
+                           left join item i 
+                              on b.board_item_idx = i.item_idx
+                        where i.re_manager_idx=(select manager_idx 
+                                             from manager
+                                             where manager_id = #{sId})
+                        group by b.board_item_idx) b
+                   ON b.board_item_idx = i.item_idx
+         left join ( select *, count(*)+100 as heart 
+                  from heart h 
+                     left join item i 
+                        on h.rf_item_idx = i.item_idx
+                  where i.re_manager_idx=(select manager_idx 
+                                       from manager
+                                       where manager_id = #{sId})
+                                       group by h.rf_item_idx) h
+                  on h.rf_item_idx = i.item_idx
+          where i.re_manager_idx = (select manager_idx 
+                              from manager
+                              where manager_id = #{sId})
+          ORDER BY count desc 
+             limit 10
+
+    </select>
    
    
    
