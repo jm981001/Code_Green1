@@ -31,6 +31,26 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/vendor.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
+    <script type="text/javascript">
+function addHeart(item_idx) {
+	let manager_brandname = $("#manager_brandname_"+item_idx).val();
+	let item_category = $("#item_category_"+item_idx).val();
+	$.ajax({
+		type : 'get',
+		url : 'addHeart',
+		data: {
+			'item_idx' 		: item_idx,
+			'member_idx'		: ${sessionScope.sIdx},
+			'member_id'		: '${sessionScope.sId}',
+			'manager_brandname'	: manager_brandname,
+			'item_category' :item_category,
+		},
+		success : function (data) {
+			alert(data)
+		}
+	});
+}
+	</script>
 <script type="text/javascript">
 	function addCart(item_idx) {
 		let cart_total = $("#cart_total_"+item_idx).val();
@@ -115,12 +135,12 @@
 														<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
 														<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
 														<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+                                                        <input type="hidden" id="item_category_${item.item_idx}" name="item_category_${item.item_idx}" value="${item.item_category}" >                     
+                                                        
+                                                        
                                                         <ul class="ps-product__actions">
-                                                        	
-                                                        	
-                                                        	<!-- 장바구니 및 찜 -->
 															<li><a data-toggle="tooltip" data-placement="top" title="Add To Cart" onclick="addCart('${item.item_idx}')"><i class="icon-bag2" ></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                            <li><a data-toggle="tooltip" data-placement="top" title="Add to Whishlist" onclick="addHeart('${item.item_idx}')"><i class="icon-heart"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     
