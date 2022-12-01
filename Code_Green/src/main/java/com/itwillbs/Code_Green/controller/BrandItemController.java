@@ -2,6 +2,8 @@ package com.itwillbs.Code_Green.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,13 +37,15 @@ public class BrandItemController {
 	// 브랜드별 개별브랜드 선택시 출력
 	@GetMapping(value = "/GetBrandItemList.br")
 	public String getBrandItemList(@RequestParam(defaultValue = "1") int pageNum, 
-									@RequestParam(defaultValue = "0") int manager_idx, Model model) {
+									@RequestParam(defaultValue = "0") int manager_idx, 
+									 HttpSession session, Model model) {
 		
-		// 페이징 처리를 위한 계산 작업
-		int listLimit = 15; // 한 페이지 당 표시할 게시물 목록 갯수 
-		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
-		
-		// 조회 시작 게시물 번호(행 번호) 계산
+		int member_idx = 0;
+ 		if(session.getAttribute("sCode")==null && session.getAttribute("sId")!=null && session.getAttribute("sIdx")!=null) {
+			member_idx = (int) session.getAttribute("sIdx");
+		}
+		int listLimit = 15; 
+		int pageListLimit = 10; 
 		int startRow = (pageNum - 1) * listLimit;
 		
 		// 개별브랜드 아이템리스트 출력
@@ -58,21 +62,33 @@ public class BrandItemController {
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
 		
-		// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
-		// 끝 페이지 번호를 최대 페이지 번호로 교체
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
-		// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
+		String followCheckRevertResult = "";
+		String heartStatus = "";
+		int status = 0;
+		if(member_idx != 0) {
+			status = service.brandFollowCheck(manager_idx,member_idx);
+		}
+		if(status>0) {
+			followCheckRevertResult = "Unfollow";
+			heartStatus ="fheart.png";
+		} else {
+			followCheckRevertResult = "Follow";
+			heartStatus ="eheart.png";
+		}
 		
 		model.addAttribute("brandItemList", brandItemList);
 		model.addAttribute("brandList", brandList);
 		model.addAttribute("brandDetail", brandDetail);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("followCheckRevertResult", followCheckRevertResult);
+		model.addAttribute("heartStatus", heartStatus);
 		
 		return "item/brand_inner";
 	}
@@ -83,7 +99,6 @@ public class BrandItemController {
 	@GetMapping(value = "/GetWholeItemList.br")
 	public String getWholeItemList(@RequestParam(defaultValue = "1") int pageNum, Model model) {
 		
-		// 페이징 처리를 위한 계산 작업
 		int listLimit = 15; // 한 페이지 당 표시할 게시물 목록 갯수 
 		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
 		
@@ -100,13 +115,10 @@ public class BrandItemController {
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;
 		
-		// 만약, 끝 페이지 번호(endPage)가 최대 페이지 번호(maxPage)보다 클 경우 
-		// 끝 페이지 번호를 최대 페이지 번호로 교체
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
-		// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
 		
@@ -123,19 +135,21 @@ public class BrandItemController {
 	// 브랜드 팔로우 하트랑 유무체크후 팔로or언팔하기
 	@ResponseBody
 	@PostMapping(value = "/followBrandCheck.me")
-	public int followBrandCheck(@RequestParam("manager_idx") int manager_idx, @RequestParam("member_idx") int member_idx) {
+	public String followBrandCheck(@RequestParam("manager_idx") int manager_idx, 
+									@RequestParam("member_idx") int member_idx,
+									Model model) {
 		System.out.println("팔로우브랜드체크 : 매니저는 " + manager_idx + "멤버는 " + member_idx);
-		int result = 0;
+		String result = "";
 		
 		int status = service.brandFollowCheck(manager_idx,member_idx);
 		if(status == 0) {
 			// 팔로우 insert
 			service.brandGoFollow(manager_idx,member_idx);
-			result = 1;
+			result = "1";
 		} else {
 			// 언팔로우 delete
 			service.brandUnFollow(manager_idx,member_idx);
-			result = 2;
+			result = "2";
 		}
 		
 		return result;
@@ -146,10 +160,15 @@ public class BrandItemController {
 	// 브랜드 팔로우 유무체크
 	@ResponseBody
 	@PostMapping(value = "/FollowCheck.me")
-	public int brandFollowCheck(@RequestParam("manager_idx") int manager_idx, @RequestParam("member_idx") int member_idx) {
-		System.out.println("팔로우유무 : 매니저는 " + manager_idx + "멤버는 " + member_idx);
+	public String brandFollowCheck(@RequestParam("manager_idx") int manager_idx, @RequestParam("member_idx") int member_idx) {
+		
+		String result = "";
 		int status = service.brandFollowCheck(manager_idx,member_idx);
-		return status;
+		System.out.println("팔로우유무 : 매니저는 " + manager_idx + "멤버는 " + member_idx + ", status = " + status);
+		if(status>0) {
+			result += 1;
+		}
+		return result;
 	}
 	
 }

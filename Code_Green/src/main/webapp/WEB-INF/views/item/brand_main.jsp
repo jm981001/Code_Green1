@@ -36,15 +36,15 @@
 	    height: 25px;
 	    position: absolute;
 	    top: 19px;
-	    left: 154px;
+	    left: 233px;
 	}
 
-	.heart_icon_brand_b {
+	#heart_icon_brand_b {
 		width: 25px;
 	    height: 25px;
 	    position: absolute;
 	    top: 19px;
-	    left: 154px;
+	    left: 233px;
 	}
 
 	.brandlist-ul {
@@ -99,7 +99,8 @@
 </style>
 <script>
 	let pageNum = 1;
-
+	let brandIndex = "";
+	
 	// 입점브랜드 목록 토글버튼 
 	function togglefun(text){
 		var target = document.querySelector('#listlist');
@@ -112,11 +113,12 @@
 		}
 	}
 	
-	// '브랜드별' 메뉴클릭> 페이지로딩시 첫화면
+	
 	$(function(){
 		console.log("onload");
 		goWholeList();
 		
+		// 전체보기 무한스크롤
 		$(window).scroll(function() {
 			let scrollTop = $(window).scrollTop(); // 스크롤바의 현재 위치
 			let windowHeight = $(window).height(); // 문서가 표시되는 창의 높이
@@ -126,7 +128,38 @@
 				goWholeList();
 			}
 		});
+		
+		// 브랜드이름 체크박스 이벤트
+		$('input[type=checkbox]').click(function() {
+			if($(this).is(":checked")){
+				brandIndex += $(this).attr('id')+"/";
+			} else {
+				let delIndex = $(this).attr('id')+"/";
+				brandIndex = brandIndex.replace(delIndex, '');
+			}
+// 			getList();
+			console.log(brandIndex);
+		});
+		
+		
 	});
+	
+	// 멀티체크나 정렬카테고리 들고 갈 함수
+	function getList(){
+		$.ajax({
+			url:"",
+			type:"post",
+			data:{ brandIndex: brandIndex },
+			dataType:"json",
+// 			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			success:function(data){
+				let results = "";
+				let total = 0;
+				// 여기 출력하는 애들 전부 뽑는작업
+				
+			}
+		})
+	}
 	
 	// 브랜드별 전체브랜드 아이템 출력 
 	function goWholeList(){
@@ -142,6 +175,8 @@
 	
 	// 브랜드별 개별브랜드 아이템 출력 
 	function goBrandList(manager_idx){
+		console.log("아이디 : " + typeof('${sessionScope.sId}'));
+		console.log("인덱스 : " + typeof('${sessionScope.sIdx}'));
 		$.ajax({
 			url:"GetBrandItemList.br?pageNum=&manager_idx=" + manager_idx,
 			type:"get",
@@ -154,6 +189,7 @@
 	// 팔로우 버튼 클릭시 회원비회원 구분 & 브랜드 구분
 	function followCheck(manager_idx){
 		console.log("팔로우버튼클릭 브랜드번호 : " + manager_idx);
+		
 		if(${sessionScope.sId == null}){
 			alert("로그인 후 사용가능합니다!");
 			
@@ -169,43 +205,78 @@
 					member_idx : '${sessionScope.sIdx}'
 				},
 				success: function(result){
-					
 					if(result>1){
-						$(".heart_icon_brand2 img").attr("src", "/Code_Green/resources/img/forzero/eheart.png");
+						$("#heart_icon_brand_b img").attr("src", "/Code_Green/resources/img/forzero/eheart.png");
+						$("#fStatus").html("Follow");
 						alert("팔로우가 취소되었습니다.");
 						
 					} else {
-						$(".heart_icon_brand2 img").attr("src", "/Code_Green/resources/img/forzero/fheart.png");
-						alert("팔로우가 성공적으로 되었습니다!");
+						console.log($("#fStatus").val());
+						$("#heart_icon_brand_b img").attr("src", "/Code_Green/resources/img/forzero/fheart.png");
+						$("#fStatus").html("Unfollow");
+						alert("팔로우했습니다!");
 					}
 				}
 			})
 		}
 	};
 	
-	// 회원의 클릭한 브랜드 팔로우 유무 체크 후 하트상태띄우기
-	function followOrNotCheck(manager_idx){
-		console.log("팔로우유무 브랜드번호 : " + manager_idx);
-		if(${sessionScope.sId != null }){
-			$.ajax({
-				url:"FollowCheck.me",
-				type:"post",
-				data:{
-					manager_idx : manager_idx,
-					member_idx : '${sessionScope.sIdx}'
-				},
-				success: function(status){
-					if(status>0){
-						$(".heart_icon_brand2 img").attr("src","/Code_Green/resources/img/forzero/fheart.png");
-					} else {
-						$(".heart_icon_brand2 img").attr("src", "/Code_Green/resources/img/forzero/eheart.png");
-					}
-				}
-			})
-		};
-	};
+
 	
-	
+// ================================= 찜하니/장바구니 기능 ===================================
+	function addHeart(item_idx) {
+		if(${not empty sessionScope.sCode || empty sessionScope.sIdx}){
+			alert("관리자는 사용할 수 없는 기능입니다 :)");
+		} else {
+		   member_idx = '${sessionScope.sIdx}';
+		   let manager_brandname = $("#manager_brandname_"+item_idx).val();
+		   let item_category = $("#item_category_"+item_idx).val();
+		   $.ajax({
+		      type : 'get',
+		      url : 'addHeart',
+		      data: {
+		         'item_idx'       : item_idx,
+		         'member_idx'      : member_idx,
+		         'member_id'      : '${sessionScope.sId}',
+		         'manager_brandname'   : manager_brandname,
+		         'item_category' :item_category
+		      },
+		      success : function (data) {
+		         alert(data)
+		      }
+		   });
+		}
+	}
+		
+	  function addCart(item_idx) {
+		  if(${not empty sessionScope.sCode || empty sessionScope.sIdx}){
+			  alert("관리자는 사용할 수 없는 기능입니다 :)");
+			} else {
+			  member_idx = '${sessionScope.sIdx}';
+		      let cart_total = $("#cart_total_"+item_idx).val();
+		      let item_name = $("#item_name_"+item_idx).val();
+		      let manager_brandname = $("#manager_brandname_"+item_idx).val();
+		      let file1 = $("#file1_"+item_idx).val();
+		      
+		      $.ajax({
+		         type : 'get',
+		         url : 'addCart',
+		         data: {
+		            'rf_item_idx'       : item_idx,
+		            'rf_member_idx'      : member_idx,
+		            'cart_amount'      : 1,
+		            'cart_total'      : cart_total,
+		            'item_name'         : item_name,
+		            'manager_brandname'   : manager_brandname,
+		            'file1'            : file1,
+		         },
+		         success : function (data) {
+		            alert('장바구니에 담았습니다.')
+		         }
+		      });
+			}
+	   }
+
 </script>
 <body>
     
@@ -237,15 +308,14 @@
                 </div>
                 
        <!-- ============================================================ 브랜드리스트 박스공간 끝 ====================================================================== -->         
-              <div class="ps-section__wrapper">
+             <div class="ps-section__wrapper">
 					           
              <div class="ps-section__left">
                   <aside class="widget widget--vendor">
                             <h3 class="widget-title" id="brandNameBar">브랜드별 상품</h3>
                             <div class="brandfollowbtn">
-	                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_m">
-								<%--  팔로확인 할때 ${brandItemList.manager_idx }, ${sessionScope.sId} 가져가야함 --%>
 	                            <a class="ps-block__inquiry" href="#" onclick="followCheck(0); return false;">Follow</a>
+	                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_m">
                             </div>
                             <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
@@ -259,27 +329,30 @@
 		                           </div>
 		                    	</div>
 		                    </div>
-	<!-- =========================================== 사이드바 시작 ======================================================== -->
-
+<!-- =========================================== 브랜드별 리스트 사이드바 시작 ======================================================== -->
 					<aside class="widget widget_shop">
 		                <h4 class="widget-title">BY BRANDS</h4>
 		                <figure class="ps-custom-scrollbar" data-height="250">
+		                
 		                  <c:forEach var="brand" items="${brandList }" >
-		                  <!-- 체크박스 -->
+		                  <!-- 브랜드 체크박스 시작 -->
 		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="m-brand-${brand.manager_idx }" name="${brand.manager_idx }" />
-		                        <label for="m-brand-${brand.manager_idx }">${brand.manager_brandname } 
+		                        <input class="form-control" type="checkbox" id="${brand.manager_idx}" name="brandIndex" value="${brand.manager_idx}"/>
+		                        <label for="${brand.manager_idx }">${brand.manager_brandname } 
 		                        <c:choose>
 		                        	<c:when test="${not empty brand.brand_itemCnt }">
-		                        	(${brand.brand_itemCnt })</label></c:when>
+		                        	(${brand.brand_itemCnt })</label>
+		                        	</c:when>
 		                        	<c:otherwise>(0)</label></c:otherwise>
 		                     	</c:choose>
 		                    </div>
+		                   <!-- 브랜드 체크박스 끝 -->
 		                   </c:forEach>
+		                   
 		                </figure>
 					</aside>
- 	<!-- =========================================== 사이드바 끝======================================================== -->	
-					
+<!-- =========================================== 브랜드별 리스트 사이드바 끝======================================================== -->	
+					 
                  </aside>
              </div>
          			<div class="ps-section__right">

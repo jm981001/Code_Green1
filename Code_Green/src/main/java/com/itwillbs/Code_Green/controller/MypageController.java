@@ -55,8 +55,7 @@ public class MypageController {
 			String sId = (String)session.getAttribute("sId");
 			int sIdx = (int) session.getAttribute("sIdx");
 			
-			
-			if(sId == null || sId.equals("")) {
+			if(sId == null || sId.equals("") || session.getAttribute("sCode")!=null) {
 				model.addAttribute("msg", "잘못된 접근입니다!");
 				return "member/fail_back";
 			} else {
@@ -236,10 +235,10 @@ public class MypageController {
 		
 		//적립금 목록 갯수
 		int listCount = Cservice.getCoinListCount(member_id);
-		System.out.println(listCount);
+		
 		//적립금 총금액
 		List<CoinVO> TotalCoin = Cservice.getTotalCoin(member_id);
-		System.out.println(TotalCoin);
+		
 		int maxPage = (int)Math.ceil((double)listCount / listLimit);
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
 		int endPage = startPage + pageListLimit - 1;

@@ -6607,7 +6607,7 @@ textarea.form-control {
 .brandfollowbtn .ps-block__inquiry {
   position: absolute;
   top: 15px;
-  right: 8px;
+  right: 26px;
   padding: 5px 10px;
   border-radius: 4px;
   background-color: #d6f1b5;
@@ -8566,7 +8566,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .ps-product .ps-product__content.hover {
   display: block;
   position: absolute;
-  top: 100%;
+/*   top: 100%; */
   right: -1px;
   width: calc(100% + 2px);
   padding: 0 20px 20px;
