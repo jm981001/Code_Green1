@@ -229,7 +229,7 @@
 	
 	<!-- 마이페이지 리뷰 가능상품 목록 -->
 	<select id="getSellDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
-                     select  	 s.SELL_DETAIL_IDX 
+         select  	 s.SELL_DETAIL_IDX 
 					,s.RF_SELL_IDX 
 			        ,i.ITEM_NAME 
 			        ,i.ITEM_PRICE
