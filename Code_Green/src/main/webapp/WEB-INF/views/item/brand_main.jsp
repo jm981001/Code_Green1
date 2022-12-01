@@ -96,6 +96,11 @@
 	    padding-bottom: 10px;
 	
 	}
+	
+	.ps-product .ps-product__rating span{
+		font-size: 80%;
+		margin-left: 0px;
+	}
 </style>
 <script>
 	let pageNum = 1;
@@ -320,7 +325,7 @@
                             <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
 		                     	<!-- 브랜드별 로고띄우기 -->
-	                     		   <img src="<%=request.getContextPath() %>/resources/img/winkya.jpg">
+	                     		   <img src="<%=request.getContextPath() %>/resources/img/turtle-icon.png">
 		                           <div class="brand_info">
 		                           		브랜드별 상품을<br>
 		                           		편리하게 둘러보세요!<br><br>
