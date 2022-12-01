@@ -232,6 +232,8 @@
 					,s.SELL_AMOUNT
 			        ,m.MANAGER_BRANDNAME
 			        ,l.sell_idx
+			        ,l.SELL_PAY_STATUS
+                    ,s.SELL_REVIEW_STATUS
 			from sell_detail s 
 				join item i 
 					on s.RF_ITEM_IDX = i.item_idx
@@ -245,6 +247,7 @@
 									from member
                             		where member_id = #{member_id})
                       and s.SELL_REVIEW_STATUS="N"
+                      and l.SELL_PAY_STATUS ="결제완료"
 	</select>
 	
 	

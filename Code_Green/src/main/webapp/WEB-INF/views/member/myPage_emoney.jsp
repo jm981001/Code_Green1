@@ -58,10 +58,10 @@
                                 <c:forEach var="coin" items="${TotalCoin }">
                                 <table class="table ps-table" >
                                 	<tr>
-                                		<td align="center" height="80">충전한 적립금</td>
-                                		<td align="center"  style="border-left: none;">1000 원</td>
-                                		<td align="center">총 적립금</td>
+                                		<td align="center" height="80"> </td>
+                                		<td align="center"  style="border-left: none;">총 적립금</td>
                                 		<td align="center">${coin.total } 원</td>
+                                		<td align="center"></td>
                                 	</tr>
                                 </table>
                                 </c:forEach>

@@ -726,6 +726,7 @@
 			    ON h.rf_member_idx = m.member_idx
 			 WHERE m.member_id = #{member_id}
 	</select>
+	
 	<!-- 	작성 가능 후기 갯수-->
 	<select id="getReviewListCount" resultType="integer">
 			SELECT count(*)
@@ -736,6 +737,7 @@
 					on s.RF_MEMBER_IDX = m.MEMBER_IDX
 			 WHERE m.member_id =#{member_id}
 					and d.SELL_REVIEW_STATUS = "N"
+					and s.SELL_PAY_STATUS ="결제완료"
 	</select>	
 	
 <!-- 	마이페이지 찜한상품 삭제 -->
@@ -893,5 +895,6 @@
 		where d.RF_ITEM_IDX=${item_idx} 
 			and s.RF_MEMBER_IDX=${sIdx}
 			and d.SELL_REVIEW_STATUS='N'  
+			and s.SELL_PAY_STATUS ="결제완료"
 	</select> 
 </mapper>
