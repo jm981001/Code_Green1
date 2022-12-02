@@ -96,14 +96,13 @@ h5{
 	<div class="ps-page--my-account">
 		<div class="ps-my-account">
 			<div class="container">
-									<div class="field memberType" align="center">
-										<b>구분</b>
-										<div>
-											<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
-											<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
-											<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
-										</div>
-									</div>
+				<div class="field memberType" align="center" style="position: fixed; margin-left: 495px; margin-top: 310px;">
+					<div>
+						<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
+						<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
+						<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
+					</div>
+				</div>
 				<div id="memberDiv">
 					<form class="ps-form--account ps-tab-root"
 						action="MemberLoginPro.me" method="post">
