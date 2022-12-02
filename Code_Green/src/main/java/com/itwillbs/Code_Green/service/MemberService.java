@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.Code_Green.mapper.MemberMapper;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
@@ -47,8 +48,8 @@ public class MemberService {
 	}
 
 	//회원 가입시 기본 적립금 지급 
-	public void setCoin(int member_idx) {
-		mapper.setCoin(member_idx);
+	public int setCoin(CoinVO coin) {
+		return mapper.setCoin(coin);
 	}
 	public String checkDel(String member_id) {
 		return mapper.checkDel(member_id);

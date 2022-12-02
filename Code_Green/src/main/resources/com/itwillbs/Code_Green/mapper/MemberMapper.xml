@@ -30,13 +30,31 @@
 
 
 	<!-- 회원가입시 기본 적립금 지급 -->
-	<update id="setCoin">
-		UPDATE coin
-			SET 
-				coin_add = 3000
-			WHERE
-				rf_member_idx = #{member_idx}
-	</update>
+	<insert id="setCoin">
+		<selectKey keyProperty="coin_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(coin_idx) FROM coin
+		</selectKey>
+		INSERT 
+			INTO coin
+			VALUES (
+					 #{coin_idx} + 1
+					, (select member_idx
+									from member
+                            		where member_id = #{member_id})
+					,"회원가입 축하금 3000원"
+					,"1000"
+					,"0"
+					,"0"
+					,(SELECT c.coin_total as total
+						 FROM coin c
+							left join member m
+								on c.rf_member_idx = m.member_idx
+						 WHERE
+							  m.member_id = #{member_id}
+                              order by coin_idx desc limit 1)+1000
+					,date_format(now(),'%Y%m%d')
+					)
+	</insert>
 	
 	<!-- 탈퇴여부 -->
 	<select id="checkDel" resultType="string">

@@ -83,6 +83,14 @@
 	
 	</select>
 	
+	<select id="sameItem" resultType="integer">
+		select 
+			count(rf_item_idx) 
+				from cart
+				where rf_member_idx = #{member_idx}
+	
+	</select>
+	
 	<select id="getCartCount" resultType="integer">
 		SELECT count(cart_idx)
 			 FROM cart c

@@ -22,6 +22,7 @@ public interface CartMapper {
 	public int updateCart(CartVO vo);
 	// 6. 장바구니 수
 	public int cartCount(@Param("member_idx")int member_idx);
+	public int sameItem(@Param("member_idx")int member_idx);
 	
 	public int getCartCount(@Param("member_idx")int member_idx);
 

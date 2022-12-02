@@ -18,6 +18,7 @@ import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MailSendService;
 import com.itwillbs.Code_Green.service.MemberService;
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 
 @Controller
@@ -102,7 +103,7 @@ public class MemberController {
 	// "/MemberJoinPro.me" 요청에 대해 비즈니스 로직 처리할 joinPro() 메서드 정의 - POST
 	// => 파라미터 : 회원 가입 정보(MemberVO), Model 객체
 	@PostMapping(value = "/MemberJoinPro.me")
-	public String joinMemberPro(@ModelAttribute MemberVO member, Model model, @RequestParam String member_id) {
+	public String joinMemberPro(@ModelAttribute MemberVO member, Model model, @RequestParam String member_id,@ModelAttribute CoinVO coin) {
 
 		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------
 
@@ -118,8 +119,9 @@ public class MemberController {
 		if (insertCount > 0) { // 가입 성공
 			System.out.println("가입 성공!");
 			// 가입 성공시 기본적립금 적립
-//			MemberVO getMem = service.getMemberInfo(member.getMember_id());
-//			service.setCoin(getMem);
+			MemberVO getMem = service.getMemberInfo(member.getMember_id());
+//			int coinCount= service.setCoin(coin);
+//			model.addAttribute("coinCount", coinCount);
 //			
 			return "redirect:/join_result";
 		} else { // 가입 실패

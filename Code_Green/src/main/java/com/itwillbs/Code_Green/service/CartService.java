@@ -42,6 +42,10 @@ public class CartService {
 	public int cartCount(int member_idx) {
 		return mapper.cartCount(member_idx);
 	}
+	// 상품 중복체크
+	public int sameItem(int member_idx) {
+		return mapper.sameItem(member_idx);
+	}
 	public int getCartCount(int member_idx) {
 		return mapper.getCartCount(member_idx);
 	}

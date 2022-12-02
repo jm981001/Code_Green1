@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.SellVO;
@@ -31,7 +32,7 @@ public interface MemberMapper {
 	public int idCheck(String member_id);
 	
 	// 회원 가입시 기본 적립금 추가
-	public void setCoin(int member_idx);
+	public int setCoin(CoinVO coin);
 
 	// 탈퇴 여부 확인
 	public String checkDel(String member_id);

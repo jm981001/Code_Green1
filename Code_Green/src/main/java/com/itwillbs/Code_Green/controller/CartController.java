@@ -1,6 +1,5 @@
 package com.itwillbs.Code_Green.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,14 @@ public class CartController {
 	@GetMapping(value = "/addCart")
 	public String addCart(@ModelAttribute CartVO cart, HttpSession session, Model model) {
 		String sId = (String) session.getAttribute("sId");
+		int sIdx = (Integer) session.getAttribute("sIdx");
+
+//		int checkSameItem = service.sameItem(sIdx);
+//		if (checkSameItem > 0) {
+//			System.out.println("이미 있는데용");
+//			model.addAttribute("msg", "이미 담았어요");
+//			return "member/fail_back";
+//		} else
 
 		if (sId == null) {
 			model.addAttribute("msg", "회원만 이용 가능합니다!");
