@@ -69,16 +69,9 @@
 
         
 <!-- 적립금 사용 및 결제 금액 계산-->
-        $(function() {
-        	coin();
-        	orderCheck();
- 		});
-        
         let sell_total_price;
         
         function coin(){
-        	$(".sell_coin_use_btn").on("click",function(){
-        		
         		<!-- 적립금 사용 -->
         		let sell_coin_total = $('.sell_coin_total').val();
         		let sell_use_coin = $('.sell_use_coin').val();
@@ -106,29 +99,29 @@
      			<!-- 전체 결제 금액 = 전체 상품 금액 - 적립금 사용 + 배송비 -->
         		sell_total_price = sell_item_total_price2 - sell_use_coin2 + sell_shipping_fee2;
         		$(".sell_total_price").html(sell_total_price);
-        		
-        	});
         }	
         	
         	function orderCheck() {
-        		$("#orderBtn").on("click",function(){
         		
-					let result = confirm('주문하시겠습니까?');
-					
-					if(result){
-						let subForm = document.getElementById('orderList');
-		        		
-		        		let input = document.createElement('input');
-		        		
-		        		input.type   = 'hidden';
-		        		
-		        		input.name  = 'sell_total_price';
-		        		
-		        		input.value  = sell_total_price;
-		        		
-		        		subForm.appendChild(input);	
-					}
-        		});	
+				let result = confirm('주문하시겠습니까? 결제 페이지로 이동합니다.');
+				
+				if(result){
+					let subForm = document.getElementById('orderList');
+	        		
+	        		let input = document.createElement('input');
+	        		
+	        		input.type   = 'hidden';
+	        		
+	        		input.name  = 'sell_total_price';
+	        		
+	        		input.value  = sell_total_price;
+	        		
+	        		subForm.appendChild(input);	
+				} else {
+					alert('주문 실패하였습니다. 다시 시도해 주세요.');
+					return false;
+				}	
+			
 			} 
         	
     </script>
@@ -171,7 +164,7 @@
                                         
                                         
 	                                     <!-- 기존 주소 -->
-	                                 <form action="payment_success?member_id=${sessionScope.sId }" method="post" id="orderList" name="orderList">
+	                                 <form action="payment_success?member_id=${sessionScope.sId }" method="post" id="orderList" name="orderList" onsubmit="return orderCheck()">
 	                                 	<input type="hidden" name="member_idx" value="${coin.rf_member_idx }">
 	                                 	<input type="hidden" name="shipping_fee" value=${shipping_fee }>
 	                                 	<input type="hidden" name="sell_item_total_price" value="${cart_total }">
@@ -230,7 +223,7 @@
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 												 사용할 적립금
 		                                        	<input type="text" name="sell_usecoin" class="sell_use_coin" style="color: #5fa30f;" required="required">
-		                                        	<input type="button" value="사용" class="sell_coin_use_btn">
+		                                        	<input type="button" value="사용" class="sell_coin_use_btn" onclick="coin()">
 	                                        	</span>
 	                                        	<span style="padding: 0 40px; margin: 0 20px;">
 		                                        	 남은 적립금
