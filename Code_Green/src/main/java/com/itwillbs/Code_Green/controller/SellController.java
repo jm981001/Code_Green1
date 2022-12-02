@@ -69,7 +69,7 @@ public class SellController {
 	
 
 	// 주문완료
-	@PostMapping(value = "payment_success")
+	@PostMapping(value = "/payment_success")
 	public String payment_success(@RequestParam String member_id, @ModelAttribute SellVO sell, 
 								  @RequestParam int member_idx, @RequestParam int sell_total_price,
 								  @RequestParam int sell_item_total_price, @RequestParam int shipping_fee,
@@ -116,7 +116,7 @@ public class SellController {
 	}	
 	
 	// 결제(카드)
-	@PostMapping(value = "payment_success_card")
+	@PostMapping(value = "/payment_success_card")
 	public void payment_success_card(@RequestParam int sell_idx) {
 		
 		int cardOrderModifyCount = sell_service.modifyCardOrder(sell_idx);
@@ -148,7 +148,7 @@ public class SellController {
 	}
 	
 	// 결제완료(카드) 페이지
-	@GetMapping(value = "payment_success_card_thanks")
+	@GetMapping(value = "/payment_success_card_thanks")
 	public String payment_success_card_thanks(@RequestParam String member_id, Model model) {
 		
 		System.out.println(member_id);
