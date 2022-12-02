@@ -266,9 +266,9 @@ function getGraph(){
 			            // ⑥dataset값(Array)
 			            data: brandtotal,
 			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
-			            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			            backgroundColor: 'rgba(209, 178, 13, 0.2)',
 			            // ⑧dataset의 선 색(rgba값을 String으로 표현)
-			            borderColor: 'rgba(255, 99, 132, 1)',
+			            borderColor: 'rgba(205, 25, 13, 1)',
 			            // ⑨dataset의 선 두께(Number)
 			            borderWidth: 1
 			        }]
