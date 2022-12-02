@@ -657,6 +657,34 @@
 
     </select>
    
+   
+       
+    	<!--재고 상세 조회 -->
+	<select id="selectStockInfo" resultType="com.itwillbs.Code_Green.vo.SellVO">
+	       SELECT * FROM    
+	       
+	         sell_detail d
+		         left join sell s
+		         on s.sell_idx = d.rf_sell_idx
+		            left join item i 
+		               on d.RF_ITEM_IDX = i.item_idx
+		             left join file_item f 
+		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
+
+		            left join manager m
+		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
+		            
+		             where i.RE_MANAGER_IDX =(select manager_idx
+		                           from manager
+		                                  where manager_id = #{sId})
+			 
+	</select> 
+   
+   
+   
+   
+   
+   
     
 
 

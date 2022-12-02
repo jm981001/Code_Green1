@@ -48,7 +48,7 @@
                 <div class="header__center">
                     <form class="ps-form--search-bar" action="sales_management" method="get">
 <!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-                        <button><i class="icon-magnifier"></i></button>
+<!--                         <button><i class="icon-magnifier"></i></button> -->
                     </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
@@ -94,46 +94,46 @@
                             <br>
                             
                             
-                              <div class="ps-card">
-                        <div class="ps-card__header">
-                         <td><a href="orders.jsp"><strong><h4>매출상세</h4></strong></a></td>
+<!--                               <div class="ps-card"> -->
+<!--                         <div class="ps-card__header"> -->
+<!--                          <td><a href="orders.jsp"><strong><h4>매출상세</h4></strong></a></td> -->
                             
-                        </div>
-                        <div class="ps-card__content">
-                            <div class="table-responsive">
-                                <table class="table ps-table">
-                                    <thead>
-                                       <tr>
-                                    <th>상품번호</th>
-                                    <th>날짜</th>
-                                    <th>상품명</th>
-                                    <th>결제</th>
-                                    <th>주문상태</th>
-                                    <th>총금액</th>
-                                    <th></th>
-                                </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                          <tr>
-                                    <td>#A580</td>
-                                    <td><strong> Aug, 15, 2020</strong></td>
-                                    <td><a href="order-detail.html"><strong>Unero Black Military</strong></a></td>
-                                    <td><span class="ps-badge success">결제</span>
-                                    </td>
-                                    <td><span class="ps-fullfillment success">배송</span>
-                                    </td>
-                                    <td><strong>$56.00</strong></td>
-                                    <td>
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
+<!--                         </div> -->
+<!--                         <div class="ps-card__content"> -->
+<!--                             <div class="table-responsive"> -->
+<!--                                 <table class="table ps-table"> -->
+<!--                                     <thead> -->
+<!--                                        <tr> -->
+<!--                                     <th>상품번호</th> -->
+<!--                                     <th>날짜</th> -->
+<!--                                     <th>상품명</th> -->
+<!--                                     <th>결제</th> -->
+<!--                                     <th>주문상태</th> -->
+<!--                                     <th>총금액</th> -->
+<!--                                     <th></th> -->
+<!--                                 </tr> -->
+<!--                                     </thead> -->
+<!--                                     <tbody> -->
+<!--                                       <tr> -->
+<!--                                           <tr> -->
+<!--                                     <td>#A580</td> -->
+<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
+<!--                                     <td><a href="order-detail.html"><strong>Unero Black Military</strong></a></td> -->
+<!--                                     <td><span class="ps-badge success">결제</span> -->
+<!--                                     </td> -->
+<!--                                     <td><span class="ps-fullfillment success">배송</span> -->
+<!--                                     </td> -->
+<!--                                     <td><strong>$56.00</strong></td> -->
+<!--                                     <td> -->
+<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
+<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
+<!--                                         </div> -->
+<!--                                     </td> -->
+<!--                                 </tr> -->
 
-                            </tbody>
-                        </table>
-                    </div>
+<!--                             </tbody> -->
+<!--                         </table> -->
+<!--                     </div> -->
                 
 
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

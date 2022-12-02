@@ -877,6 +877,25 @@ public class ManagerController {
 		}
 		
 		
+		//------------ 재고 등록 상세 조회-------------------------------------------	
+		@GetMapping(value = "/stock_detail")
+		public String stock_detail( Model model, HttpSession session, int item_idx) {
+			
+			String sId = (String)session.getAttribute("sId");
+			
+			System.out.println("item_idx : " + item_idx  );
+			
+		
+			ItemVO StockInfo = service.getStockInfo(item_idx);
+			System.out.println("재고 상세 : " + StockInfo);
+			
+			model.addAttribute("StockInfo", StockInfo);
+			
+			return "manager/stock_detail";
+		}
+		
+		
+		
 
 	//------------ 문의 글 목록 불러오기(페이징, 검색기능추가)-------------------------------------------	
 	

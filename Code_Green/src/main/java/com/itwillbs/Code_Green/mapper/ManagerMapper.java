@@ -127,6 +127,8 @@ public interface ManagerMapper {
 
 	 //매출순위 더보기  
 	public List<ItemVO> getTop10(String sId);
+
+	public ItemVO selectStockInfo(int item_idx);
 	
 
 
