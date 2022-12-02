@@ -136,7 +136,7 @@
                                 <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총매출</p>
-                                    <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><i class="icon-arrow-up"></i><span></span></small></h4>
+                                    <h4><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"><span></span></small></h4>
 
                                 </div>
                             </div>
@@ -144,14 +144,14 @@
                                 <div class="ps-block__left"><span><i class="icon-cart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>총주문수</p>
-                                     <h4>${orderTotal.orderCount }<small class="asc"><i class="icon-arrow-up"></i></small></h4>
+                                     <h4>${orderTotal.orderCount }<small class="asc"></small></h4>
                                 </div>
                             </div>
                             <div class="ps-block--stat green">
                                 <div class="ps-block__left"><span><i class="icon-heart"></i></span></div>
                                 <div class="ps-block__content">
                                     <p>팔로우 수 </p>
-                                    <h4>${follow }<small class="desc"><i class="icon-arrow-up"></i><span></span></small></h4>
+                                    <h4>${follow }<small class="desc"><span></span></small></h4>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
              
              new Chart(document.getElementById('myChart'), {
                  // ①차트의 종류(String)
-                 type: 'bar',
+                 type: 'line',
                  // ②차트의 데이터(Object)
                  data: {
                      // ③x축에 들어갈 이름들(Array)
