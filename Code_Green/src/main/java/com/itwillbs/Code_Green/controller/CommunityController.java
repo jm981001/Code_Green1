@@ -45,7 +45,6 @@ public class CommunityController {
 
 		
 		
-		
 	//------------ 커뮤니티 메인(커뮤니티 글목록) 페이지 -------------------------------------------
 	@GetMapping(value = "/CommunityList.bo")	
 	public String list(
@@ -130,7 +129,8 @@ public class CommunityController {
 	
 	//------------ 커뮤니티 새글 작성 로직 -------------------------------------------
 	@PostMapping(value = "/CommunityWritePro.bo")
-	public String communityWritePro(@ModelAttribute BoardVO board,@ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
+	public String communityWritePro(@ModelAttribute BoardVO board,
+									@ModelAttribute File_boardVO fileBoard, Model model, HttpSession session) {
 		// 가상 업로드 경로에 대한 실제 업로드 경로 알아내기
 		// => 단, request 객체에 getServletContext() 메서드 대신, session 객체로 동일한 작업 수행
 		//    (request 객체에 해당 메서드 없음)
@@ -165,19 +165,19 @@ public class CommunityController {
 		
 		// ========================================================
 		
-		if(!originalFileName1.equals("")) {
+		if(originalFileName1!=null) {
 			fileBoard.setFile1(uuid + "_" + originalFileName1);
-//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName1);
+			System.out.println("업로드 될 파일명1 : " + uuid + "_" + originalFileName1);
 		}
 
-		if(!originalFileName2.equals("")) {
+		if(originalFileName2!=null) {
 			fileBoard.setFile2(uuid + "_" + originalFileName2);
-//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName2);
+			System.out.println("업로드 될 파일명2 : " + uuid + "_" + originalFileName2);
 		}
 		
-		if(!originalFileName3.equals("")) {
+		if(originalFileName3!=null) {
 			fileBoard.setFile3(uuid + "_" + originalFileName3);
-//			System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName3);
+			System.out.println("업로드 될 파일명3 : " + uuid + "_" + originalFileName3);
 		}
 		
 		// ===========================================================
@@ -186,12 +186,12 @@ public class CommunityController {
 		
 		// 사진파일이 하나도 등록안될경우 + 사진등록 될 경우 
 		int file_insertCount = 0;
-		if(!(originalFileName1.equals("") 
-				&& originalFileName2.equals("") 
-				&& originalFileName3.equals(""))){
+		if(!(originalFileName1==null
+				&& originalFileName2==null 
+				&& originalFileName3==null)){
 			file_insertCount = service.writeCommunityFile(fileBoard);
 		}
-		
+		System.out.println("file_insertCount: " + file_insertCount);
 		if(insertCount > 0) {
 			if(file_insertCount > 0) {
 				try {
@@ -213,13 +213,13 @@ public class CommunityController {
 				return "redirect:/CommunityList.bo";
 			} else {
 				model.addAttribute("msg", "파일 업로드 실패!");
-				return "member/fail_back";
+				return "member/fail_back3";
 			}
 			
 		} else {
 			
 			model.addAttribute("msg", "글 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
-			return "member/fail_back";
+			return "member/fail_back3";
 		}
 	} 
 	
@@ -270,7 +270,7 @@ public class CommunityController {
 		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
 		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
 		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
-		if(!mFile1.getOriginalFilename().equals("")) {
+		if(mFile1.getOriginalFilename()!=null) {
 			String originalFileName = mFile1.getOriginalFilename();
 			System.out.println("파일명1 : " + originalFileName);
 			
@@ -283,7 +283,7 @@ public class CommunityController {
 			isNewFile1 = true;
 		} 
 		
-		if(!mFile2.getOriginalFilename().equals("")) {
+		if(mFile2.getOriginalFilename()!=null) {
 			String originalFileName = mFile2.getOriginalFilename();
 			System.out.println("파일명2 : " + originalFileName);
 			
@@ -296,7 +296,7 @@ public class CommunityController {
 			isNewFile2 = true;
 		}	
 		
-		if(!mFile3.getOriginalFilename().equals("")) {
+		if(mFile3.getOriginalFilename()!=null) {
 			String originalFileName = mFile3.getOriginalFilename();
 			System.out.println("파일명3 : " + originalFileName);
 			
@@ -317,7 +317,7 @@ public class CommunityController {
 		if(updateFileCount == 0) {
 			
 			model.addAttribute("msg","파일수정 실패");
-			return "member/fail_back";
+			return "member/fail_back3";
 			
 		} else {
 			if(isNewFile1) {
@@ -383,14 +383,11 @@ public class CommunityController {
 		System.out.println(board);
 		if(updateCount == 0) {
 			model.addAttribute("msg", "글 수정 실패");
-			return "member/fail_back";
+			return "member/fail_back3";
 		}
 		
 		return "redirect:/CommunityDetail.bo?board_idx=" + board.getBoard_idx() + "&pageNum=" + pageNum;
 	}
-
-	
-	
 	
 	//------------ 커뮤니티 글 삭제 페이지------------------------------------------- 
 	@GetMapping(value = "/CommunityDelete.bo")
@@ -416,19 +413,22 @@ public class CommunityController {
 			String saveDir = session.getServletContext().getRealPath(uploadDir);
 			System.out.println("실제 업로드 경로 : " + saveDir);
 			
-			if(!realFile1.equals("N")) {
+			if(realFile1!=null) {
+				System.out.println("여긴 리얼파일1 안");
 				File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
 				if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
 					f1.delete();
 				}
-			}
-			if(!realFile2.equals("N")) {
+			} 
+			if(realFile2!=null) {
+				System.out.println("여긴 리얼파일2 안");
 				File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
 				if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
 					f2.delete();
 				}
 			}
-			if(!realFile3.equals("N")) {
+			if(realFile3!=null) {
+				System.out.println("여긴 리얼파일3 안");
 				File f3 = new File(saveDir, realFile3); // 실제 경로를 갖는 File 객체 생성
 				if(f3.exists()) { // 해당 경로에 파일이 존재할 경우
 					f3.delete();
@@ -440,7 +440,7 @@ public class CommunityController {
 			
 		} else {
 			model.addAttribute("msg", "글 삭제 실패!<br>다시 확인해주세요");
-			return "member/fail_back";
+			return "member/fail_back3";
 		}
 		
 	}
@@ -456,7 +456,7 @@ public class CommunityController {
 		if(reportCount == 0) {
 			
 			model.addAttribute("msg", "신고글 제출 실패!<br>확인 후 다시 시도해주세요.");
-			return "member/fail_back";
+			return "member/fail_back3";
 			
 		} else {
 			

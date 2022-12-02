@@ -346,16 +346,9 @@
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
                         	<p>${cBoard.board_content }
-                        	<c:if test="${cBoard.file1 ne ''}">
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file1}" style="max-width:90%">
-                        	</c:if>
-                        	<c:if test="${cBoard.file2 ne ''}">
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file2}" style="max-width:90%">
-                        	</c:if>
-                        	<c:if test="${cBoard.file3 ne ''}">
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file3}" style="max-width:90%">
-                        	</c:if>
-                        	
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file1}" style="max-width:90%"  onerror="this.style.display='none'">
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file2}" style="max-width:90%"  onerror="this.style.display='none'">
+                        		<img src="/Code_Green/resources/commUpload/${cBoard.file3}" style="max-width:90%"  onerror="this.style.display='none'">
                         </div>
 
 
