@@ -306,9 +306,17 @@ function addHeart(item_idx) {
 <!--                                     <p>Brand:<a href="shop-default.html">Son</a></p> -->
                                     <div class="ps-product__rating" >
                                         <select class="ps-rating" data-read-only="true">
+                                        	<c:if test="${item.score == 0}">
+                                                  <option value="0"></option>
+                                                  <option value="2"></option>
+                                                  <option value="2"></option>
+                                                  <option value="2"></option>
+                                                  <option value="2"></option>
+                                                  <option value="2"></option>
+	                                         </c:if>
        										 <c:forEach var="i" begin="1" end="5">
-                                             
                                              	<c:choose>
+                                             		<c:when test="${item.score == 0}"></c:when>
                                              		<c:when test="${i <= item.score}">
                                              			<option value="1">${i }</option>
                                              		</c:when>
@@ -316,7 +324,6 @@ function addHeart(item_idx) {
                                              			<option value="2">${i }</option>
                                              		</c:otherwise>
                                              	</c:choose>
-                                             
                                              </c:forEach>
                                         </select><span>(${item.count } review)</span>
                                     </div>
@@ -426,9 +433,20 @@ function addHeart(item_idx) {
 
                                                     <h3>${item.board_star_score }</h3>
                                                     <select class="ps-rating" data-read-only="true">
+	                                                    <c:if test="${item.score == 0}">
+	                                                    	<option value="0"></option>
+	                                                    	<option value="2"></option>
+	                                                    	<option value="2"></option>
+	                                                    	<option value="2"></option>
+	                                                    	<option value="2"></option>
+	                                                    	<option value="2"></option>
+	                                                    </c:if>
+	                                                    
                                                     <c:forEach var="i" begin="1" end="5">
-                                                    
                                                     	<c:choose>
+		                                                    <c:when test="${item.score == 0}">
+		                                                    
+		                                                    </c:when>
                                                     		<c:when test="${i <= item.score}">
                                                     			<option value="1">${i }</option>
                                                     		</c:when>
@@ -486,11 +504,14 @@ function addHeart(item_idx) {
 												        </thead>
 												  </table>
 												  
-												  
+
 												  
 												  
 <!-------------------------------------------리뷰) 최근등록순 정렬------------------------------------------->
 												  <table border="1" class="recruit" id="itemList">
+													<c:if test="${empty itemList }">
+		                                            	<tr><td colspan="3">따끈따끈한 첫 후기를 기다리고있어요.</td></tr>
+		                                            </c:if>
 												        <c:forEach var="board" items="${itemList }">
 													        <tbody>  
 													            <tr class="item">  
@@ -541,7 +562,9 @@ function addHeart(item_idx) {
 
 <!-------------------------------------------리뷰) 별점 높은 순 정렬------------------------------------------->												    
 											<table border="1" class="recruit" id="goodList">
-
+													<c:if test="${empty goodList }">
+		                                            	<tr><td colspan="3">따끈따끈한 첫 후기를 기다리고있어요.</td></tr>
+		                                            </c:if>
 												        <c:forEach var="board" items="${goodList }">
 													        <tbody>  
 													            <tr class="item">  
@@ -590,6 +613,9 @@ function addHeart(item_idx) {
 												    
 <!-------------------------------------------리뷰) 추천 많은 순 정렬------------------------------------------->
 												  <table border="1" class="recruit" id="bestList">
+												  	<c:if test="${empty bestList }">
+		                                            	<tr><td colspan="3">따끈따끈한 첫 후기를 기다리고있어요.</td></tr>
+		                                            </c:if>
 												        <c:forEach var="board" items="${bestList }">
 													        <tbody>  
 													            <tr class="item">  
@@ -638,6 +664,9 @@ function addHeart(item_idx) {
 												    									    
 <!-------------------------------------------리뷰) 최근등록순 정렬------------------------------------------->
 												  <table border="1" class="recruit" id="worstList">
+												  	<c:if test="${empty worstList }">
+		                                            	<tr><td colspan="3">따끈따끈한 첫 후기를 기다리고있어요.</td></tr>
+		                                            </c:if>
 												        <c:forEach var="board" items="${worstList }">
 													        <tbody>  
 													            <tr class="item">  
@@ -1073,11 +1102,25 @@ function addHeart(item_idx) {
                                 <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
+                                           <c:if test="${item.score == 0}">
+                                                 	<option value="0"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+	                                        </c:if>
+                                        	<c:forEach var="i" begin="1" end="5">
+                                             	<c:choose>
+                                             		<c:when test="${item.score == 0}"></c:when>
+                                             		<c:when test="${i <= item.score}">
+                                             			<option value="1">${i }</option>
+                                             		</c:when>
+                                             		<c:otherwise>
+                                             			<option value="2">${i }</option>
+                                             		</c:otherwise>
+                                             	</c:choose>
+						                    </c:forEach>
                                         </select><span>${item.board_star_score }</span>
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>
@@ -1122,11 +1165,25 @@ function addHeart(item_idx) {
                                 <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
                                     <div class="ps-product__rating">
                                         <select class="ps-rating" data-read-only="true">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="2">5</option>
+                                       	   <c:if test="${item.score == 0}">
+                                                 	<option value="0"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+                                                 	<option value="2"></option>
+	                                        </c:if>
+                                        	<c:forEach var="i" begin="1" end="5">
+                                             	<c:choose>
+                                             		<c:when test="${item.score == 0}"></c:when>
+                                             		<c:when test="${i <= item.score}">
+                                             			<option value="1">${i }</option>
+                                             		</c:when>
+                                             		<c:otherwise>
+                                             			<option value="2">${i }</option>
+                                             		</c:otherwise>
+                                             	</c:choose>
+						                    </c:forEach>
                                         </select><span>${item.board_star_score }</span>
                                     </div>
                                    <h4 class="ps-product__price">${item.item_price }원</h4>

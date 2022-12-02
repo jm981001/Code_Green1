@@ -150,8 +150,17 @@ function addHeart(item_idx) {
                                                             <!--  *별점 카운트 하기  -->
                                                             <div class="ps-product__rating">
                                                                 <select class="ps-rating" data-read-only="true">
+			                                                       <c:if test="${item.score == 0}">
+				                                                    	<option value="0"></option>
+				                                                    	<option value="2"></option>
+				                                                    	<option value="2"></option>
+				                                                    	<option value="2"></option>
+				                                                    	<option value="2"></option>
+				                                                    	<option value="2"></option>
+				                                                    </c:if>
 			              										 	<c:forEach var="i" begin="1" end="5">
 						                                             	<c:choose>
+			              										 			<c:when test="${item.score == 0}"></c:when>
 						                                             		<c:when test="${i <= item.score}">
 						                                             			<option value="1">${i }</option>
 						                                             		</c:when>
@@ -161,7 +170,6 @@ function addHeart(item_idx) {
 						                                             	</c:choose>
 						                                             </c:forEach>
                                                                 </select><span>${item.board_star_score }</span>
-                                                               
                                                             </div>
                                                             
                                                             <!-- 가격 -->
