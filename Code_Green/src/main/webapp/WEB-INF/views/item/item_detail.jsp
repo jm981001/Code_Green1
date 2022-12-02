@@ -147,9 +147,9 @@
 	$(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 			$("#wishBtn").click(function(){
-				if(${sessionScope.sId == null}){
+				if(${sessionScope.sId == null || not empty sessionScope.sCode || empty sessionScope.sIdx}){
 					
-					alert("로그인 후 사용가능합니다!!");
+					alert("회원만 사용가능한 기능입니다.");
 					
 				} else {
 					
