@@ -76,7 +76,6 @@
                             </div>
                         </form>
                     </div>
-                    
                     <br>
                     <div class="ps-section__search">
                   </div>

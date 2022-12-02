@@ -65,7 +65,6 @@
 <%--                  <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }"> --%>
 <%--                  <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }"> --%>
 
- 
        <table class="table ps-table">
               
                     <h2>재고상세보기</h2>

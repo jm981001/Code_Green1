@@ -195,6 +195,7 @@ public class ManagerService {
 	public List<ItemVO> getTop10(String sId) {
 		return mapper.getTop10(sId);
 	}
+	//재고상세조회
 	public ItemVO getStockInfo(int item_idx) {
 		return mapper.selectStockInfo(item_idx);
 	}
