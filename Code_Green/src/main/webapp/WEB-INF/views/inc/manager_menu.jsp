@@ -45,7 +45,7 @@
 
                             
                         </div>
-                        <div class="ps-block__action"><a href=""><i class="icon-exit"></i></a></div>
+                        <div class="ps-block__action"><a href="main"><i class="icon-exit"></i></a></div>
                     </div>
                     <div class="ps-block--earning-count"><small></small>
 <%--                         <h3><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /></h3> --%>

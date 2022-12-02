@@ -1413,6 +1413,21 @@ public class ManagerController {
 					
 					String sId = (String)session.getAttribute("sId");
 					
+					//총매출
+					ManagerVO salesTotal = service.getSalesTotal(sId);
+					//한달매출
+					ManagerVO salesMonth = service.getSalesMonth(sId);
+					//일주일매출
+					ManagerVO salesWeek = service.getSalesWeek(sId);
+					//하루매출
+					ManagerVO salesday = service.getSalesDay(sId);
+					//수수료
+					SellVO  commission = service.getCommission(sId);
+					//순수익
+					SellVO  net = service.getNet(sId);
+					
+					
+					
 					
 					
 					

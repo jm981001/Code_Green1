@@ -83,6 +83,8 @@
                                     <th>이번달매출</th><br>
                                     <th>이번주매출</th><br>
                                     <th>오늘매출</th><br>
+                                    <th>수수료</th><br>
+                                    <th>순수익</th><br>
                                     </table>
 <!--                                     <th><input type="button"value="오늘매출"></th> -->
                                     
@@ -93,46 +95,25 @@
                             <tbody>
                             <br>
                             
-<!--                               <div class="ps-card"> -->
-<!--                         <div class="ps-card__header"> -->
-<!--                          <td><a href="orders.jsp"><strong><h4>매출상세</h4></strong></a></td> -->
-                            
-<!--                         </div> -->
-<!--                         <div class="ps-card__content"> -->
-<!--                             <div class="table-responsive"> -->
-<!--                                 <table class="table ps-table"> -->
-<!--                                     <thead> -->
-<!--                                        <tr> -->
-<!--                                     <th>상품번호</th> -->
-<!--                                     <th>날짜</th> -->
-<!--                                     <th>상품명</th> -->
-<!--                                     <th>결제</th> -->
-<!--                                     <th>주문상태</th> -->
-<!--                                     <th>총금액</th> -->
-<!--                                     <th></th> -->
-<!--                                 </tr> -->
-<!--                                     </thead> -->
-<!--                                     <tbody> -->
-<!--                                       <tr> -->
-<!--                                           <tr> -->
-<!--                                     <td>#A580</td> -->
-<!--                                     <td><strong> Aug, 15, 2020</strong></td> -->
-<!--                                     <td><a href="order-detail.html"><strong>Unero Black Military</strong></a></td> -->
-<!--                                     <td><span class="ps-badge success">결제</span> -->
-<!--                                     </td> -->
-<!--                                     <td><span class="ps-fullfillment success">배송</span> -->
-<!--                                     </td> -->
-<!--                                     <td><strong>$56.00</strong></td> -->
-<!--                                     <td> -->
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<!--                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div> -->
-<!--                                         </div> -->
-<!--                                     </td> -->
-<!--                                 </tr> -->
+  								<tr>
+                                	<td>${Total.brandtotal }</td>
+                                	<td>${ItemInfo.item_name }</td>
+                                    <td>${ItemInfo.item_info }</td>
+                                    <td>${ItemInfo.item_stock }</td>
+                                    <td>${ItemInfo.item_price }</td>
+                                    <td>${ItemInfo.item_category }</td>
+                                    <td>${ItemInfo.item_packing }</td>
+                                    <td>${ItemInfo.item_date}</td>
+                                 </tr> 
+                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
+                                        </div>
+                                    </td>
+                                </tr>
 
-<!--                             </tbody> -->
-<!--                         </table> -->
-<!--                     </div> -->
+                            </tbody>
+                        </table>
+                    </div>
                 
 
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

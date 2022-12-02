@@ -744,7 +744,7 @@
                               where manager_id = #{sId})
           ORDER BY count desc 
              limit 3
-
+ 
     </select>
 
 
@@ -790,7 +790,7 @@
                ifnull(round(truncate( a.board_star_score,1),0),0) AS score,
                ifnull(truncate( a.board_star_score,1),0) AS board_star_score,
                    ifnull(s.count,0) as count,
-                   RANK() OVER (ORDER BY count DESC , i.item_idx asc) AS ranking,
+<!--                    RANK() OVER (ORDER BY count DESC , i.item_idx asc) AS ranking, -->
                    ifnull(b.review,0)as review,
                    ifnull(h.heart,0)as heart
                    
@@ -832,6 +832,69 @@
 
     </select>
    
+		<!--정산 총매출 -->
+		<select id="selectSalesTotal" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+	SELECT  
+			COUNT(sd.sell_amount) AS TotalCount,
+			sum((i.item_price * sd.sell_amount)) as brandtotal
+	FROM sell_detail sd LEFT JOIN item i
+	ON sd.rf_item_idx = i.item_idx
+	LEFT JOIN manager m
+	ON i.re_manager_idx = m.manager_idx
+	where m.manager_id=#{sId};
+		
+		</select>
+		<!--정산 한달매출 -->
+		<select id="selectSalesMonth" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+	
+		</select>
+		<!--정산 일주일매출 -->
+		<select id="selectSalesWeek" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		
+		</select>
+		<!--정산 하루매출 -->
+		<select id="selectSalesDay" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+		SELECT s.sell_date,
+		       s.sell_total_price,
+		       i.item_name,
+		       m.manager_brandname
+		 FROM sell_detail d
+		 LEFT JOIN   sell s
+		  on s.sell_idx = d.rf_sell_idx
+		            left join item i 
+		               on d.RF_ITEM_IDX = i.item_idx
+		             left join file_item f 
+		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
+
+		            left join manager m
+		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
+		            GROUP BY 1
+		            ORDER BY 1;
+		            
+		             where i.RE_MANAGER_IDX =(select manager_idx
+		                           from manager
+		                                  where manager_id = #{sId})
+		                                  
+		                                  
+		  SELECT DATE(`sell_date`) AS `date`, 
+		       sum(`value`)
+		  FROM test_st
+		 GROUP BY `date`;                               
+		       
+		
+		     
+		</select>
+		<!--정산 수수료 -->
+		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		
+		</select>
+		<!--정산 순수익 -->
+		<select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		
+		</select>
+		
+		
+		
    
    
 

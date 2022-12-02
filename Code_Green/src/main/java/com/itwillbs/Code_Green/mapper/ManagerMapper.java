@@ -127,8 +127,21 @@ public interface ManagerMapper {
 
 	 //매출순위 더보기  
 	public List<ItemVO> getTop10(String sId);
-//재고상세 조회
+    //재고상세 조회
 	public ItemVO selectStockInfo(int item_idx);
+	
+	//총매출
+	public ManagerVO selectSalesTotal(String sId);
+	//한달매출
+	public ManagerVO selectSalesMonth(String sId);
+	//일주일매출
+	public ManagerVO selectSalesWeek(String sId);
+	//하루매출
+	public ManagerVO selectSalesDay(String sId);
+	//수수료
+	public SellVO selectCommission(String sId);
+	//순수익
+	public SellVO selectNet(String sId);
 	
 
 
