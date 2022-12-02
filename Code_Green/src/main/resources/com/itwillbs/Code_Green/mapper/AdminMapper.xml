@@ -32,8 +32,7 @@
 		 	,	SUM(sd.sell_amount)   AS sellCount
 		 	,	COUNT(sd.sell_amount) AS orderCount
 		 	,	IFNULL(f.brand_follower, 0) AS brand_follower
-		 	,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
-		 	,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+		 	,	SUM(i.item_price * sd.sell_amount) AS brandtotal
 		  FROM
 				manager m
 		  LEFT JOIN
@@ -59,8 +58,7 @@
 			,	SUM(sd.sell_amount)   AS sellCount
 			,	COUNT(sd.sell_amount) AS orderCount
 			,	IFNULL(f.brand_follower, 0) AS brand_follower
-			,	SUM((i.item_price * sd.sell_amount)) AS brandtotal
-			,	RANK() OVER (ORDER BY SUM((i.item_price * sd.sell_amount)) DESC) AS ranking
+			,	SUM(i.item_price * sd.sell_amount) AS brandtotal
 		  FROM
 				manager m
 		  LEFT JOIN
@@ -87,8 +85,7 @@
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    truncate(bs.board_star_score,1) AS star_score,
-		    SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-		    DENSE_RANK() OVER (ORDER BY truncate(bs.board_star_score, 1) DESC) AS ranking
+		    SUM(i.item_price * sd.sell_amount) AS brandtotal,
 		FROM
 			manager m
 		LEFT JOIN
@@ -142,8 +139,7 @@
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    ROUND(bs.board_star_score,1) AS star_score,
-		    SUM((i.item_price * sd.sell_amount)) AS brandtotal,
-		    DENSE_RANK() OVER (ORDER BY f.brand_follower DESC) AS ranking
+		    SUM(i.item_price * sd.sell_amount) AS brandtotal,
 		FROM
 			manager m
 		LEFT JOIN
