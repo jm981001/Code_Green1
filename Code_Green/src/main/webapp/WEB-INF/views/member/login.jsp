@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
 	String clientId = "ilgdXbcRH89unvY3t9Dz";//애플리케이션 클라이언트 아이디값";
-	String redirectURI = URLEncoder.encode("http://localhost:8081/Code_Green/member/callback", "UTF-8");
+	String redirectURI = URLEncoder.encode("http://itwillbs17.cafe24.com/Code_Green/member/callback", "UTF-8");
 	SecureRandom random = new SecureRandom();
 	//String state = new BigInteger(130, random).toString();
 	String state = session.getAttribute("oauth_state").toString();
@@ -96,7 +96,14 @@ h5{
 	<div class="ps-page--my-account">
 		<div class="ps-my-account">
 			<div class="container">
-
+									<div class="field memberType" align="center">
+										<b>구분</b>
+										<div>
+											<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
+											<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
+											<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
+										</div>
+									</div>
 				<div id="memberDiv">
 					<form class="ps-form--account ps-tab-root"
 						action="MemberLoginPro.me" method="post">
@@ -112,14 +119,7 @@ h5{
 							<div class="ps-tab active" id="sign-in">
 								<div class="ps-form__content">
 									<h5>회원계정으로 로그인하세요</h5>
-									<div class="field memberType">
-										<b>구분</b>
-										<div>
-											<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
-											<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
-											<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
-										</div>
-									</div>
+									
 									<div class="form-group">
 										<input class="form-control" type="text" name="member_id" placeholder="아이디를 입력하세요">
 									</div>
@@ -167,20 +167,6 @@ h5{
 							<div class="ps-tab active" id="sign-in">
 								<div class="ps-form__content">
 									<h5>기업 계정으로 로그인하세요</h5>
-									<div class="field memberType">
-										<b>구분</b>
-										<div>
-											<label>
-												<input type="radio" name="memberType" id="memberLogin" onchange="setDisplay()">개인회원
-											</label>
-											<label>
-												<input type="radio" name="memberType" id="managerLogin" checked onchange="setDisplay()">기업회원
-											</label>
-											<label>
-												<input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자
-											</label>
-										</div>
-									</div>
 									<div class="form-group">
 										<input class="form-control" type="text" name="manager_id" placeholder="아이디를 입력하세요">
 									</div>
@@ -224,20 +210,6 @@ h5{
 							<div class="ps-tab active" id="sign-in">
 								<div class="ps-form__content">
 									<h5>관리자 계정으로 로그인하세요</h5>
-									<div class="field memberType">
-										<b>구분</b>
-										<div>
-											<label>
-												<input type="radio" name="memberType" id="memberLogin" onchange="setDisplay()">개인회원
-											</label>
-											<label>
-												<input type="radio" name="memberType" id="companyLogin" onchange="setDisplay()">기업회원
-											</label>
-											<label>
-												<input type="radio" name="memberType" id="adminLogin" checked onchange="setDisplay()">관리자
-											</label>
-										</div>
-									</div>
 									<div class="form-group">
 										<input class="form-control" type="text" name="admin_id" placeholder="아이디를 입력하세요">
 									</div>
@@ -262,6 +234,7 @@ h5{
 												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
 										</a>
 								</div>
+							</div>
 							</div>
 						</div>
 					</form>
