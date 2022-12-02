@@ -114,7 +114,7 @@
                      <form action="ad_Answer" method="get">
                      	<input type="hidden" id="qna_idx" name="qna_idx" value="${oneQnaInfo.qna_idx }">
                      	<textarea id="summernote" name="qna_answer" ></textarea>
-                      		<div style="margin-left: 1100px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>답변하기</strong></button></div>
+                      		<div align="right"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>답변하기</strong></button></div>
                      </form>
                     </div>
                 </div>

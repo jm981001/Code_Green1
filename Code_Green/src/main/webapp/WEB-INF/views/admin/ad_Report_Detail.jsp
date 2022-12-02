@@ -38,7 +38,15 @@
 <!--   글쓰기 게시판 API 
 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API-->    
     
-    
+<script type="text/javascript">
+	function confirmDelete(bidx, ridx) {
+		let result = confirm("원본글을 삭제처리하시겠습니까?");
+		
+		if(result){
+			location.href = "ad_RemoveOriginboard?board_idx=" + bidx + "&report_idx" + ridx;
+		}
+	}
+</script>    
 </head>
 
 <body>
@@ -127,8 +135,8 @@
 				    </tr>
 				  </tbody>
 				</table>
-                     <div style="margin-left: 1080px">
-                     <button type="button" onclick="location.href='ad_RemoveOriginboard?board_idx=${originBoard.board_idx }&report_idx=${reportInfo.report_idx }'" class="btn btn-info" style="font-size: 13px">
+                     <div align="right" style="margin-top: 100px">
+                     <button type="button" onclick="confirmDelete('${originBoard.board_idx }','${reportInfo.report_idx }')" class="btn btn-info" style="font-size: 13px">
                      <strong>삭제하기</strong></button></div>
                     
                        

@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
+<script type="text/javascript">
+function logout() {
+    let result = confirm("로그아웃 하시겠습니까?");
+    
+    if(result) {
+       location.href = "MemberLogout.me";
+    }
+ }
+</script>
 </head>
 <body>
 
@@ -13,11 +22,11 @@
             <div class="ps-sidebar">
                 <div class="ps-sidebar__top">
                     <div class="ps-block--user-wellcome">
-                        <div class="ps-block__left"><img src="/Code_Green/resources/img/users/admin.jpg" alt="" /></div>
+                        <div class="ps-block__left"><img src="/Code_Green/resources/img/turtleinthebowl.png" width="70" height="70"></div>
                         <div class="ps-block__right">
                             <p>여기는<a href="#">총관리자</a></p>
                         </div>
-                        <div class="ps-block__action"><a href="main"><i class="icon-exit"></i></a></div>
+                        <div class="ps-block__action"><a href="javascript:logout()"><i class="icon-exit"></i></a></div>
                     </div>
                     <div class="ps-block--earning-count"><small>총매출</small>
                         <h3><fmt:formatNumber value="${sessionScope.total }" pattern="#,###원"/></h3>

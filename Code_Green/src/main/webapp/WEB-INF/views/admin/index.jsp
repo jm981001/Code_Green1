@@ -31,9 +31,7 @@
 <!-- 차트 API -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
    
-
 </head>
-
 <body>
 
 	<!-- 세션 아이디가 null 일 경우 메인페이지로 돌려보내기 -->
@@ -266,9 +264,9 @@ function getGraph(){
 			            // ⑥dataset값(Array)
 			            data: brandtotal,
 			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
-			            backgroundColor: 'rgba(209, 178, 13, 0.2)',
+			            backgroundColor: 'rgba(209, 978, 13, 0.2)',
 			            // ⑧dataset의 선 색(rgba값을 String으로 표현)
-			            borderColor: 'rgba(205, 25, 13, 1)',
+			            borderColor: 'rgba(205, 150, 13, 1)',
 			            // ⑨dataset의 선 두께(Number)
 			            borderWidth: 1
 			        }]

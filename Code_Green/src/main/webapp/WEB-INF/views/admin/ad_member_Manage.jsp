@@ -60,7 +60,7 @@
                     <p>Membership Management</p>
                 </div>
 
-                <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 
-                       <div class="ps-section__footer" align="right">
+                       <div align="right" style="margin-top: 50px">
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">

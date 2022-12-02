@@ -126,7 +126,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="ps-section__footer">
+                <div align="right" style="margin-top: 50px">
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">

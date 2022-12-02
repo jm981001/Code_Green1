@@ -105,9 +105,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin-left: 1050px"><button type="button" onclick="location.href='ad_Notice_Write'" class="btn btn-info" style="font-size: 13px"><strong>공지작성</strong></button></div>
+                    <div align="right"><button type="button" onclick="location.href='ad_Notice_Write'" class="btn btn-info" style="font-size: 13px"><strong>공지작성</strong></button></div>
                 </div>
-                <div class="ps-section__footer">
+                <div align="right" style="margin-top: 50px">
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">
