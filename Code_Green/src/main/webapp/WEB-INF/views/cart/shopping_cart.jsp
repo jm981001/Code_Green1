@@ -105,10 +105,12 @@
 			<div class="ps-section__header">
 				<h1>Cart</h1>
 			</div>
+			<div align="center">
 			<c:if test="${empty cartList }">
 							<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
 							<h3>텅~</h3>
 					   	</c:if>
+					  </div>
 			<div class="ps-section__content">
 			
 				<div class="table-responsive">
