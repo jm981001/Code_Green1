@@ -44,7 +44,195 @@
 
 
 <title>회원가입 - 베지터틀</title>
-<style type="text/css">
+
+</head>
+<body>
+	<!-- 헤더 삽입 -->
+	<jsp:include page="../inc/top.jsp"></jsp:include>
+	<!-- 헤더 삽입 -->
+
+
+	<div class="ps-vendor-dashboard">
+		<div class="container">
+			<div class="ps-section__header">
+				<h3>회원가입</h3>
+			</div>
+		</div>
+	</div>
+
+	<!-- ----------------------------------바디 시작------------------------------------  -->
+	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup_member" onsubmit="return checkForm()">
+		<!--------------------------------개인----------------------------------->
+		<div class="member">
+			<div class="field memberType">
+				<b>구분</b>
+				<div>
+					<label><input type="radio" name="memberType"id="memberJoin" checked onchange="setDisplay()">개인</label>
+					<label><input type="radio" name="memberType" id="companyJoin" onchange="setDisplay()">기업</label>
+				</div>
+			</div>
+
+			<div id="memberDiv">
+				
+				<div class="field">
+					<b>아이디</b>
+					<span class="placehold-text">
+					<input type="text" name="member_id" id="member_id" onkeyup="checkId(this.value)" maxlength='20' required="required" placeholder="8-16자리 영문자,숫자,특수문자 조합">
+					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					</span>
+				</div>
+				
+				<div class="field">
+					<b>비밀번호</b>
+					<input type="password" name="member_pass" class="userpw" id="member_pass" onkeyup="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='20'>
+					<span id="checkPasswdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+				</div>
+				
+				<div class="field">
+					<b>이름</b>
+					<input type="text" name="member_name" onkeyup="checkName(this.value)" id="member_name" maxlength='10' required="required"> 
+					<span id="checkNameResult" style="color: red"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+				</div>
+				
+				<div class="form-group email-form">
+					<label for="email">이메일</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일">
+<!-- 						<select class="form-control" name="userEmail2" id="userEmail2"> -->
+<!-- 							<option>@naver.com</option> -->
+<!-- 							<option>@daum.net</option> -->
+<!-- 							<option>@gmail.com</option> -->
+<!-- 							<option>@hanmail.com</option> -->
+<!-- 							<option>@yahoo.co.kr</option> -->
+<!-- 						</select> -->
+					</div>
+					
+						<div class="input-group-addon">
+							<button type="button" class="btn btn-primary" id="mail-Check-Btn" style="background-color:#5fa30f">본인인증</button>
+						</div>
+						<div class="mail-check-box">
+							<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
+						</div>
+						<span id="mail-check-warn"></span>
+					</div>
+					<div class="field post-code">
+						<b>주소</b>
+						<div>
+							<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호" maxlength='6' required="required">
+							<input type="button" value="주소검색" onclick="Me_execDaumPostcode()" required="required">
+						</div>
+						<input type="text" name="member_address" id="member_address" placeholder="주소" maxlength='100' required="required">
+					</div>
+
+				<div class="field tel-number">
+						<b>전화</b>
+						<div>
+							<input type="tel" placeholder="전화번호 입력" name="member_phone" id="member_phone" maxlength='11' required="required">
+						</div>
+					</div>
+					<input type="submit" value="가입하기">
+				</div>
+			</div>
+	</form>
+	<!--------------------------------개인----------------------------------->
+
+
+	<!--------------------------------기업----------------------------------->
+
+	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkFormM()" enctype="multipart/form-data">
+		<div class="member">
+			<div id="companyDiv">
+				<div class="field">
+					<b>아이디</b> <span class="placehold-text">
+					<input type="text" id="manager_id" name="manager_id" maxlength='16' onkeyup="checkIdM(this.value)" required="required"></span>
+					<span id="checkIdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+				</div>
+				<div class="field">
+					<b>비밀번호</b> 
+					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onkeyup="checkPasswdM(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
+					<span id="checkPasswdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+				</div>
+				
+				<div class="field">
+					<b>기업관리자 이름</b> 
+					<input type="text" id="name" name="manager_name" maxlength="10" onkeyup="checkNameM(this.value)" required="required">
+					<span id="checkNameResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+				</div>
+
+				<div class="field">
+					<div>
+						<b>브랜드 이름</b>
+						<input type="text" id="manager_brandname" name="manager_brandname" maxlength="20" required="required">
+						<b>로고</b>
+						<input type="file" name="file" required="required" style="background-color: white; padding: 0px" /> 
+					</div>
+				</div>
+				<div class="field">
+					<div>
+						<b>브랜드 소개</b>
+						<textarea id="manager_info" name="manager_info" maxlength="1000" required="required"></textarea>
+					</div>
+				</div>
+				<div class="field">
+					<b>사업자번호</b>
+					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20" required="required">
+				</div>
+
+				<div class="form-group email-form">
+					<label for="email">이메일</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일">
+<!-- 						<select class="form-control" name="userEmail4" id="userEmail4"> -->
+<!-- 							<option>@naver.com</option> -->
+<!-- 							<option>@daum.net</option> -->
+<!-- 							<option>@gmail.com</option> -->
+<!-- 							<option>@hanmail.com</option> -->
+<!-- 							<option>@yahoo.co.kr</option> -->
+<!-- 						</select> -->
+					</div>
+						<div class="input-group-addon">
+							<button type="button" class="btn btn-primary" id="mail-Check-BtnM" style="background-color:#5fa30f">본인인증</button>
+						</div>
+						<div class="mail-check-boxM">
+							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
+						</div>
+						<span id="mail-check-warnM"></span>
+					</div>
+				<div class="field post-code">
+						<b>주소</b>
+						<div>
+							<input type="text" name="manager_postcode" id="manager_postcode"
+								placeholder="우편번호" maxlength='6' required="required"> <input
+								type="button" value="주소검색" onclick="Ma_execDaumPostcode()">
+						</div>
+						<input type="text" name="manager_address" id="manager_address"
+							placeholder="주소" maxlength='100' required="required">
+					</div>
+				<div class="field tel-number">
+					<b>전화</b>
+					<div>
+						<input type="tel" placeholder="전화번호 입력" id="manager_phone" name="manager_phone" maxlength="11" required="required">
+					</div>
+				</div>
+				<input type="submit" value="가입하기">
+			</div>
+		</div>
+	</form>
+	<!--------------------------------기업----------------------------------->
+
+
+	<!------------------------------------바디 끝--------------------------------------  -->
+
+
+	<!-- 푸터 삽입 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!-- 푸터 삽입 -->
+	
+	
+	<!-- 주소 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="/Code_Green/resources/js/checkJoin.js"></script>
+	<style type="text/css">
 * {
 	box-sizing: border-box;
 	outline: none;
@@ -205,192 +393,5 @@ button {
 	background-color: white;
 }
 </style>
-</head>
-<body>
-	<!-- 헤더 삽입 -->
-	<jsp:include page="../inc/top.jsp"></jsp:include>
-	<!-- 헤더 삽입 -->
-
-
-	<div class="ps-vendor-dashboard">
-		<div class="container">
-			<div class="ps-section__header">
-				<h3>회원가입</h3>
-			</div>
-		</div>
-	</div>
-
-	<!-- ----------------------------------바디 시작------------------------------------  -->
-	<form action="MemberJoinPro.me" method="post" name="joinForm" id="signup_member" onsubmit="return checkForm()">
-		<!--------------------------------개인----------------------------------->
-		<div class="member">
-			<div class="field memberType">
-				<b>구분</b>
-				<div>
-					<label><input type="radio" name="memberType"id="memberJoin" checked onchange="setDisplay()">개인</label>
-					<label><input type="radio" name="memberType" id="companyJoin" onchange="setDisplay()">기업</label>
-				</div>
-			</div>
-
-			<div id="memberDiv">
-				
-				<div class="field">
-					<b>아이디</b>
-					<span class="placehold-text">
-					<input type="text" name="member_id" id="member_id" onchange="checkId(this.value)" maxlength='20' required="required" placeholder="8-16자리 영문자,숫자,특수문자 조합">
-					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-					</span>
-				</div>
-				
-				<div class="field">
-					<b>비밀번호</b>
-					<input type="password" name="member_pass" class="userpw" id="member_pass" onchange="checkPasswd(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='20'>
-					<span id="checkPasswdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-				</div>
-				
-				<div class="field">
-					<b>이름</b>
-					<input type="text" name="member_name" onchange="checkName(this.value)" id="member_name" maxlength='10' required="required"> 
-					<span id="checkNameResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-				</div>
-				
-				<div class="form-group email-form">
-					<label for="email">이메일</label>
-					<div class="input-group">
-						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일">
-<!-- 						<select class="form-control" name="userEmail2" id="userEmail2"> -->
-<!-- 							<option>@naver.com</option> -->
-<!-- 							<option>@daum.net</option> -->
-<!-- 							<option>@gmail.com</option> -->
-<!-- 							<option>@hanmail.com</option> -->
-<!-- 							<option>@yahoo.co.kr</option> -->
-<!-- 						</select> -->
-					</div>
-					
-						<div class="input-group-addon">
-							<button type="button" class="btn btn-primary" id="mail-Check-Btn" style="background-color:#5fa30f">본인인증</button>
-						</div>
-						<div class="mail-check-box">
-							<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
-						</div>
-						<span id="mail-check-warn"></span>
-					</div>
-					<div class="field post-code">
-						<b>주소</b>
-						<div>
-							<input type="text" name="member_postcode" id="member_postcode" placeholder="우편번호" maxlength='6' required="required">
-							<input type="button" value="주소검색" onclick="Me_execDaumPostcode()" required="required">
-						</div>
-						<input type="text" name="member_address" id="member_address" placeholder="주소" maxlength='100' required="required">
-					</div>
-
-				<div class="field tel-number">
-						<b>전화</b>
-						<div>
-							<input type="tel" placeholder="전화번호 입력" name="member_phone" id="member_phone" maxlength='11' required="required">
-						</div>
-					</div>
-					<input type="submit" value="가입하기">
-				</div>
-			</div>
-	</form>
-	<!--------------------------------개인----------------------------------->
-
-
-	<!--------------------------------기업----------------------------------->
-
-	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkFormM()" enctype="multipart/form-data">
-		<div class="member">
-			<div id="companyDiv">
-				<div class="field">
-					<b>아이디</b> <span class="placehold-text">
-					<input type="text" id="manager_id" name="manager_id" maxlength='16' onchange="checkIdM(this.value)" required="required"></span>
-					<span id="checkIdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-				</div>
-				<div class="field">
-					<b>비밀번호</b> 
-					<input type="password" name="manager_pass" class="userpw" id="manager_pass" onchange="checkPasswdM(this.value)" required="required" size="20" placeholder="8-20자리 영문자,숫자,특수문자 조합" maxlength='19' required="required">
-					<span id="checkPasswdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-				</div>
-				
-				<div class="field">
-					<b>기업관리자 이름</b> 
-					<input type="text" id="name" name="manager_name" maxlength="10" onchange="checkNameM(this.value)" required="required">
-					<span id="checkNameResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-				</div>
-
-				<div class="field">
-					<div>
-						<b>브랜드 이름</b>
-						<input type="text" id="manager_brandname" name="manager_brandname" maxlength="20" required="required">
-						<b>로고</b>
-						<input type="file" name="file" required="required" style="background-color: white; padding: 0px" /> 
-					</div>
-				</div>
-				<div class="field">
-					<div>
-						<b>브랜드 소개</b>
-						<textarea id="manager_info" name="manager_info" maxlength="1000" required="required"></textarea>
-					</div>
-				</div>
-				<div class="field">
-					<b>사업자번호</b>
-					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20" required="required">
-				</div>
-
-				<div class="form-group email-form">
-					<label for="email">이메일</label>
-					<div class="input-group">
-						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일">
-<!-- 						<select class="form-control" name="userEmail4" id="userEmail4"> -->
-<!-- 							<option>@naver.com</option> -->
-<!-- 							<option>@daum.net</option> -->
-<!-- 							<option>@gmail.com</option> -->
-<!-- 							<option>@hanmail.com</option> -->
-<!-- 							<option>@yahoo.co.kr</option> -->
-<!-- 						</select> -->
-					</div>
-						<div class="input-group-addon">
-							<button type="button" class="btn btn-primary" id="mail-Check-BtnM" style="background-color:#5fa30f">본인인증</button>
-						</div>
-						<div class="mail-check-boxM">
-							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
-						</div>
-						<span id="mail-check-warnM"></span>
-					</div>
-				<div class="field post-code">
-						<b>주소</b>
-						<div>
-							<input type="text" name="manager_postcode" id="manager_postcode"
-								placeholder="우편번호" maxlength='6' required="required"> <input
-								type="button" value="주소검색" onclick="Ma_execDaumPostcode()">
-						</div>
-						<input type="text" name="manager_address" id="manager_address"
-							placeholder="주소" maxlength='100' required="required">
-					</div>
-				<div class="field tel-number">
-					<b>전화</b>
-					<div>
-						<input type="tel" placeholder="전화번호 입력" id="manager_phone" name="manager_phone" maxlength="11" required="required">
-					</div>
-				</div>
-				<input type="submit" value="가입하기">
-			</div>
-		</div>
-	</form>
-	<!--------------------------------기업----------------------------------->
-
-
-	<!------------------------------------바디 끝--------------------------------------  -->
-
-
-	<!-- 푸터 삽입 -->
-	<jsp:include page="../inc/footer.jsp"></jsp:include>
-	<!-- 푸터 삽입 -->
-	
-	
-	<!-- 주소 api -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript" src="/Code_Green/resources/js/checkJoin.js"></script>
 </body>
 </html>
