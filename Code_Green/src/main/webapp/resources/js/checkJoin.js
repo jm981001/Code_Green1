@@ -111,11 +111,11 @@ $(document).ready(function(){
 	function checkId(id) {
 		let regex = /^[a-z]+[a-z0-9]{5,19}$/g;
 		if(!regex.exec(id)) {
-			$("#checkIdResult").html("6 ~ 20자리 영문자, 숫자");
+			$("#checkIdResult").html("6 ~ 20자리 영문자, 숫자만 사용 가능합니다");
 			$("#checkIdResult").css("color", "red");
 			checkIdResult = false;
 		} else {
-			$("#checkIdResult").html("사용 가능한 아이디!");
+			$("#checkIdResult").html("사용 가능한 아이디 입니다");
 			$("#checkIdResult").css("color", "green");
 			checkIdResult = true;
 		}
@@ -129,7 +129,7 @@ $(document).ready(function(){
 			$("#member_name").select();
 			checkNameResult = false;
 		} else {
-			$("#checkNameResult").html("사용가능");
+			$("#checkNameResult").html("사용 가능한 이름입니다");
 			$("#checkNameResult").css("color", "green");
 			checkNameResult = true;
 		}

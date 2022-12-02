@@ -57,13 +57,13 @@
 								</div>
 								<div class="ps-form__content">
 									<div class="form-group">
-										<label>이름</label> <input class="form-control" name="member_name" type="text" value="${member.member_name} ">
+										<label>이름</label> <input class="form-control" name="member_name" type="text" value="${member.member_name}" readonly="readonly">
 									</div>
 									<div class="row">
 										
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label>아이디</label> <input class="form-control" type="text" name="member_id" value="${member.member_id}">
+												<label>아이디</label> <input class="form-control" type="text" name="member_id" value="${member.member_id}" readonly="readonly">
 											</div>
 										</div>
 <!-- 										<div class="col-sm-6"> -->

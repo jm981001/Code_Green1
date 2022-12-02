@@ -61,7 +61,12 @@
                                             	<tr><td colspan="5">현재 찜한 상품이 없습니다.</td></tr>
                                             </c:if>
 										   <c:forEach var="item" items="${WishList }">
-										
+											 <!-- 장바구니 담을 정보 -->
+											<input type="hidden" id="cart_total_${item.item_idx}" name="cart_total_${item.item_idx}" value="${item.item_price}">
+											<input type="hidden" id="item_name_${item.item_idx}" name="item_name_${item.item_idx}" value="${item.item_name}" >
+											<input type="hidden" id="item_file1_${item.item_idx}" name="item_file1_${item.item_idx}" value="${item.file1}" >
+											<input type="hidden" id="manager_brandname_${item.item_idx}" name="manager_brandname_${item.item_idx}" value="${item.manager_brandname}" >
+				                                                 <input type="hidden" id="item_category_${item.item_idx}" name="item_category_${item.item_idx}" value="${item.item_category}" >
 											<tr>
 												<td data-label="Remove"><a href="deleteWish?member_id=${sessionScope.sId}&heart_idx=${item.heart_idx}&member_idx=${item.member_idx}"><i
 														class="icon-cross"></i></a></td>
@@ -81,7 +86,7 @@
 												<td class="price" data-label="Price"> </td>
 												<td data-label="Status"><span
 													class="ps-tag ps-tag--in-stock"> </span></td>
-												<td data-label="action"><a class="ps-btn" href="#">담기</a></td>
+												<td data-label="action"><a class="ps-btn" onclick="addCart('${item.item_idx}')">담기</a></td>
 											</tr>
 											
 										</c:forEach>
@@ -147,5 +152,31 @@
 	<script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
 	<!-- custom scripts-->
 	<script src="/Code_Green/resources/js/main.js"></script>
+	<script type="text/javascript">
+		function addCart(item_idx) {
+			let cart_total = $("#cart_total_"+item_idx).val();
+			let	item_name = $("#item_name_"+item_idx).val();
+			let manager_brandname = $("#manager_brandname_"+item_idx).val();
+			let file1 = $("#file1_"+item_idx).val();
+			
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					'rf_item_idx' 		: item_idx,
+					'rf_member_idx'		: ${sessionScope.sIdx},
+					'cart_amount'		: 1,
+					'cart_total'		: cart_total,
+					'item_name'			: item_name,
+					'manager_brandname'	: manager_brandname,
+					'file1'				: file1,
+				},
+				success : function (cartCount) {
+					alert('장바구니에 담았습니다.')
+					$('#cartCount i').html(cartCount);
+				}
+			});
+		}
+	</script>
 </body>
 </html>
