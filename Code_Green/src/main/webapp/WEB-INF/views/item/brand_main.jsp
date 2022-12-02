@@ -16,6 +16,7 @@
 	<title>브랜드별 - 베지터틀</title>
 	<script src="/Code_Green/resources/plugins/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
@@ -104,8 +105,8 @@
 </style>
 <script>
 	let pageNum = 1;
-	let brandIndex = "";
-	
+	let checkArray = "";
+	let ordering = "";
 	// 입점브랜드 목록 토글버튼 
 	function togglefun(text){
 		var target = document.querySelector('#listlist');
@@ -123,52 +124,54 @@
 		console.log("onload");
 		goWholeList();
 		
+		
 		// 전체보기 무한스크롤
 		$(window).scroll(function() {
-			let scrollTop = $(window).scrollTop(); // 스크롤바의 현재 위치
-			let windowHeight = $(window).height(); // 문서가 표시되는 창의 높이
-			let documentHeight = $(document).height(); // 문서 전체 높이
+			let scrollTop = $(window).scrollTop(); 
+			let windowHeight = $(window).height(); 
+			let documentHeight = $(document).height(); 
 			if(scrollTop + windowHeight + 1 >= documentHeight) {
 				pageNum++;
 				goWholeList();
 			}
 		});
 		
+		
 		// 브랜드이름 체크박스 이벤트
 		$('input[type=checkbox]').click(function() {
 			if($(this).is(":checked")){
-				brandIndex += $(this).attr('id')+"/";
+				checkArray += $(this).attr('id')+"/";
 			} else {
-				let delIndex = $(this).attr('id')+"/";
-				brandIndex = brandIndex.replace(delIndex, '');
+				checkArray = checkArray.replace($(this).attr('id')+"/", '');
 			}
-// 			getList();
-			console.log(brandIndex);
+			
+			getList();
+			console.log(checkArray);
 		});
-		
-		
 	});
 	
 	// 멀티체크나 정렬카테고리 들고 갈 함수
-	function getList(){
-		$.ajax({
-			url:"",
-			type:"post",
-			data:{ brandIndex: brandIndex },
-			dataType:"json",
-// 			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-			success:function(data){
-				let results = "";
-				let total = 0;
-				// 여기 출력하는 애들 전부 뽑는작업
-				
-			}
-		})
-	}
+	function getList(ordering){
+			console.log("getList()정렬: " + ordering); 
+			console.log("getList()checkArray : " + checkArray);
+			$.ajax({
+				url:"ListListing.br?pageNum="+ pageNum,
+				type:"get",
+				data:{ 
+					brandsIndex: checkArray,
+					ordering: ordering
+				},
+				success:function(data){
+					console.log("getList()결과 : " +data); 
+					$(".append_here").html(data);		
+	// 				$(".append_here").append(data);    // 멀티체크+무한스크롤....스크롤하려면 append해야하는데..근데 갈아끼워야하고...?
+				}
+			})
+		}
+	
 	
 	// 브랜드별 전체브랜드 아이템 출력 
 	function goWholeList(){
-		console.log("goWholeList");
 		$.ajax({
 			url:"GetWholeItemList.br?pageNum=" + pageNum,
 			type:"get",
@@ -176,15 +179,17 @@
 				$(".append_here").append(data);
 			}
 		});
+		
 	}
-	
+
 	// 브랜드별 개별브랜드 아이템 출력 
-	function goBrandList(manager_idx){
-		console.log("아이디 : " + typeof('${sessionScope.sId}'));
-		console.log("인덱스 : " + typeof('${sessionScope.sIdx}'));
+	function goBrandList(manager_idx,ordering){
 		$.ajax({
 			url:"GetBrandItemList.br?pageNum=&manager_idx=" + manager_idx,
 			type:"get",
+			data: {
+				ordering : ordering
+			},
 			success:function(data){
 				$(".ps-section__wrapper").html(data);
 			}
@@ -211,15 +216,16 @@
 				},
 				success: function(result){
 					if(result>1){
-						$("#heart_icon_brand_b img").attr("src", "/Code_Green/resources/img/forzero/eheart.png");
+						$("#heart_icon_brand_b img").prop("src", "/Code_Green/resources/img/forzero/eheart.png");
 						$("#fStatus").html("Follow");
 						alert("팔로우가 취소되었습니다.");
-						
+						goBrandList(manager_idx);
 					} else {
 						console.log($("#fStatus").val());
-						$("#heart_icon_brand_b img").attr("src", "/Code_Green/resources/img/forzero/fheart.png");
+						$("#heart_icon_brand_b img").prop("src", "/Code_Green/resources/img/forzero/fheart.png");
 						$("#fStatus").html("Unfollow");
 						alert("팔로우했습니다!");
+						goBrandList(manager_idx);			
 					}
 				}
 			})
@@ -293,56 +299,50 @@
     
     
     <div class="ps-page--single ps-page--vendor">
-    <!-- ============================================================ 브랜드리스트 박스공간 시작 ====================================================================== -->         
+ <!-- ============================================================ 브랜드리스트 박스공간 시작 ====================================================================== -->         
         <section class="ps-store-list">
             <div class="container">
-					 <!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-<!--                 <aside class="ps-block--store-banner"> -->
-<!--                     <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/forzero/lettuce.jpg"> -->
-<!--                     </div> -->
-<!--                 </aside> -->
-                
-                <input type="button" id="brandlist-header" value="입점브랜드 목록 ▼" onclick="togglefun(this.value)">
-                <div id="listlist">
-                	<ul class="brandlist-ul">
-               			<li class="brandlist-li"><a href="BrandMain.br"><strong>전체보기</strong></a></li>
-	                	<c:forEach var="brand" items="${brandList }">
-               			<li class="brandlist-li"><a href="#" onclick="goBrandList('${brand.manager_idx}');return false;">${brand.manager_brandname }</a></li>
-               			</c:forEach>
-                	</ul>
-                </div>
-                
-       <!-- ============================================================ 브랜드리스트 박스공간 끝 ====================================================================== -->         
+              <input type="button" id="brandlist-header" value="입점브랜드 목록 ▼" onclick="togglefun(this.value)">
+              <div id="listlist">
+              	<ul class="brandlist-ul">
+             		<li class="brandlist-li">
+             			<a href="BrandMain.br"><strong>전체보기</strong></a>
+             		</li>
+               		<c:forEach var="brand" items="${brandList }">
+             		<li class="brandlist-li">
+             			<a href="javascript:void(0);" onclick="goBrandList('${brand.manager_idx}')">${brand.manager_brandname }</a>
+             		</li>
+             		</c:forEach>
+              	</ul>
+              </div>
+<!-- ============================================================ 브랜드리스트 박스공간 끝 ====================================================================== -->         
              <div class="ps-section__wrapper">
-					           
              <div class="ps-section__left">
                   <aside class="widget widget--vendor">
-                            <h3 class="widget-title" id="brandNameBar">브랜드별 상품</h3>
-                            <div class="brandfollowbtn">
-	                            <a class="ps-block__inquiry" href="#" onclick="followCheck(0); return false;">Follow</a>
-	                            <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_m">
-                            </div>
-                            <div class="ps-block__user" >
-		                     	<div class="ps-block__user-avatar">
-		                     	<!-- 브랜드별 로고띄우기 -->
-	                     		   <img src="<%=request.getContextPath() %>/resources/img/turtle-icon.png">
-		                           <div class="brand_info">
-		                           		브랜드별 상품을<br>
-		                           		편리하게 둘러보세요!<br><br>
-		                           		<small>상단의 원하는 브랜드명을 선택하거나,<br>
-		                           		하단의 원하는 브랜드만 <br>선택하여 보실 수 있습니다:)</small>
-		                           </div>
-		                    	</div>
-		                    </div>
+                    <h3 class="widget-title" id="brandNameBar">브랜드별 상품</h3>
+                      <div class="brandfollowbtn">
+                         <a class="ps-block__inquiry" href="#" onclick="followCheck(0); return false;">Follow</a>
+                         <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_m">
+                      </div>
+                      <div class="ps-block__user" >
+		                 <div class="ps-block__user-avatar">
+		                 <!-- 브랜드별 로고띄우기 -->
+	                     	<img src="<%=request.getContextPath() %>/resources/img/turtle-icon.png">
+		                       <div class="brand_info">
+                           		브랜드별 상품을<br>편리하게 둘러보세요!<br><br>
+                           		<small>상단의 원하는 브랜드명을 선택하거나,<br>
+                           		하단의 원하는 브랜드만 <br>선택하여 보실 수 있습니다:)</small>
+		                        </div>
+		                   </div>
+		              </div>
 <!-- =========================================== 브랜드별 리스트 사이드바 시작 ======================================================== -->
-					<aside class="widget widget_shop">
+					  <aside class="widget widget_shop">
 		                <h4 class="widget-title">BY BRANDS</h4>
 		                <figure class="ps-custom-scrollbar" data-height="250">
-		                
 		                  <c:forEach var="brand" items="${brandList }" >
 		                  <!-- 브랜드 체크박스 시작 -->
 		                    <div class="ps-checkbox">
-		                        <input class="form-control" type="checkbox" id="${brand.manager_idx}" name="brandIndex" value="${brand.manager_idx}"/>
+		                        <input class="form-control" type="checkbox" id="${brand.manager_idx}" name="brandsIndex" value="${brand.manager_idx}"/>
 		                        <label for="${brand.manager_idx }">${brand.manager_brandname } 
 		                        <c:choose>
 		                        	<c:when test="${not empty brand.brand_itemCnt }">
@@ -353,53 +353,44 @@
 		                    </div>
 		                   <!-- 브랜드 체크박스 끝 -->
 		                   </c:forEach>
-		                   
 		                </figure>
 					</aside>
 <!-- =========================================== 브랜드별 리스트 사이드바 끝======================================================== -->	
-					 
                  </aside>
              </div>
-         			<div class="ps-section__right">
-           
-          <!-- 상품리스트 헤더  -->
-                    
-                        <div class="ps-shopping ps-tab-root">
-                            <div class="ps-shopping__header">
-                                <p><strong> 전체상품 </strong></p>
-                               <div id="orderbylist"><a href="#">최근순</a>  |  <a href="#">판매량순</a></div>
-                            </div>
-           <!-- =========================================== 상품리스트 시작=====================================================-->
-           <!-- ===================================== 상품 1개당 ================================================== --> 
-                    <div class="ps-tabs">
-                        <div class="ps-tab active" id="tab-1">
-                            <div class="ps-shopping-product">
-                                <div class="row">
-                                
-                                    <div class="append_here"></div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>
-                                                  
-              
-              
-              </div>
+         	 <div class="ps-section__right">
+          	 <!-- 상품리스트 헤더  -->
+                <div class="ps-shopping ps-tab-root">
+                   <div class="ps-shopping__header">
+                      <p><strong> 전체상품 </strong></p>
+                       <div id="orderbylist">
+                         <a href="javascript:void(0);" onclick="getList('recent')">최근순</a>  |  
+                         <a href="javascript:void(0);" onclick="getList('lowest_price')">낮은가격순</a> | 
+                 	   	   <a href="javascript:void(0);" onclick="getList('highest_price')">높은가격순</a>
+                       </div>
+                   </div>
+		           <div class="ps-tabs">
+		              <div class="ps-tab active" id="tab-1">
+		                 <div class="ps-shopping-product">
+		                    <div class="row">
+	                           <div class="append_here"></div>
+	                        </div>
+		                 </div>
+		              </div>
+		           </div>
+                 </div>
+               </div>
             </div>
-        </section>
+         </div>
+       </section>
 	</div>
+    
+    
+    <!-- 푸터 삽입 -->
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	<!-- 푸터 삽입 -->
    
     
-   
- 
-	    <!-- 푸터 삽입 -->
-		<jsp:include page="../inc/footer.jsp"></jsp:include>
-		<!-- 푸터 삽입 -->
-   
-    
-   
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins/owl-carousel/owl.carousel.min.js"></script>
@@ -415,7 +406,6 @@
     <script src="/Code_Green/resources/plugins/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
     <script src="/Code_Green/resources/plugins/select2/dist/js/select2.full.min.js"></script>
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
-    <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
 </body>
 </html>

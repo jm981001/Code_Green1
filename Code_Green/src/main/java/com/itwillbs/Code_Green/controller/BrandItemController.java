@@ -1,7 +1,9 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,8 @@ public class BrandItemController {
 	// 브랜드별 개별브랜드 선택시 출력
 	@GetMapping(value = "/GetBrandItemList.br")
 	public String getBrandItemList(@RequestParam(defaultValue = "1") int pageNum, 
-									@RequestParam(defaultValue = "0") int manager_idx, 
+									@RequestParam(defaultValue = "0") int manager_idx,
+									@RequestParam(defaultValue = "") String ordering,
 									 HttpSession session, Model model) {
 		
 		int member_idx = 0;
@@ -49,7 +52,7 @@ public class BrandItemController {
 		int startRow = (pageNum - 1) * listLimit;
 		
 		// 개별브랜드 아이템리스트 출력
-		List<ItemVO> brandItemList = service.selectBrandItemList(manager_idx,startRow,listLimit);
+		List<ItemVO> brandItemList = service.selectBrandItemList(manager_idx,ordering,startRow,listLimit);
 		
 		// 전체브랜드 아이템수 카운트
 		int listCount = service.getBrandListCount(manager_idx);
@@ -97,16 +100,17 @@ public class BrandItemController {
 	
 	// 브랜드별 전체보기 리스트 출력
 	@GetMapping(value = "/GetWholeItemList.br")
-	public String getWholeItemList(@RequestParam(defaultValue = "1") int pageNum, Model model) {
+	public String getWholeItemList(@RequestParam(defaultValue = "1") int pageNum, 
+									@RequestParam(defaultValue = "") String ordering,Model model) {
 		
 		int listLimit = 15; // 한 페이지 당 표시할 게시물 목록 갯수 
 		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
 		
 		// 조회 시작 게시물 번호(행 번호) 계산
 		int startRow = (pageNum - 1) * listLimit;
-		
+		System.out.println("오더링 : " + ordering);
 		// 전체 브랜드아이템목록 출력
-		List<ItemVO> brandItemList = service.selectBrandItemList(0,startRow,listLimit);
+		List<ItemVO> brandItemList = service.selectBrandItemList(0, ordering, startRow,listLimit);
 		
 		// 전체브랜드 아이템수 카운트
 		int listCount = service.getBrandListCount(0);
@@ -138,7 +142,6 @@ public class BrandItemController {
 	public String followBrandCheck(@RequestParam("manager_idx") int manager_idx, 
 									@RequestParam("member_idx") int member_idx,
 									Model model) {
-		System.out.println("팔로우브랜드체크 : 매니저는 " + manager_idx + "멤버는 " + member_idx);
 		String result = "";
 		
 		int status = service.brandFollowCheck(manager_idx,member_idx);
@@ -164,11 +167,67 @@ public class BrandItemController {
 		
 		String result = "";
 		int status = service.brandFollowCheck(manager_idx,member_idx);
-		System.out.println("팔로우유무 : 매니저는 " + manager_idx + "멤버는 " + member_idx + ", status = " + status);
 		if(status>0) {
 			result += 1;
 		}
 		return result;
 	}
+	
+	
+	// 리스트 리스팅(+무한스크롤 같이)
+//	@ResponseBody
+	@GetMapping(value = "/ListListing.br")
+	public String listListing(@RequestParam(defaultValue = "1") int pageNum,
+							@RequestParam(defaultValue = "") String ordering, 
+							@RequestParam String brandsIndex, Model model) {
+		
+		System.out.println("리스트리스팅 컨트롤러 들어왔음!");
+		System.out.println("brandsIndex : " + brandsIndex);
+		String[] splitBrands = brandsIndex.split("/");
+		
+		List<String> brands = new ArrayList<String>();
+		
+		for(String brandIndex : splitBrands) {
+			System.out.println("분리한것들: " + brandIndex);
+			brands.add(brandIndex);
+			brands.removeIf((str) -> str == null || str.equals(""));
+		}
+		System.out.println("brand사이즈 : " + brands.size());
+		System.out.println("ListListing 분류오더링 : " + ordering);
+		
+		int listLimit = 15; 
+		int pageListLimit = 10;
+		int startRow = (pageNum - 1) * listLimit;
+		
+		List<ItemVO> brandItemList = service.selectBrandItemListListing(brands,ordering,startRow,listLimit);
+		System.out.println("ListListing brandItemList결과값 : " + brandItemList.toString());
+		
+		int listCount = service.getBrandListListingCount(brands);
+		
+		int maxPage = (int)Math.ceil((double)listCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("brandItemList", brandItemList);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "item/brand_whole";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

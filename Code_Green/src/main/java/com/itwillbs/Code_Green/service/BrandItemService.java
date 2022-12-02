@@ -26,8 +26,8 @@ public class BrandItemService {
 	}
 	
 	// 브랜드별 아이템리스트 출력
-	public List<ItemVO> selectBrandItemList(int manager_idx, int startRow, int listLimit) {
-		return mapper.selectBrandItemList(manager_idx, startRow, listLimit);
+	public List<ItemVO> selectBrandItemList(int manager_idx, String ordering, int startRow, int listLimit) {
+		return mapper.selectBrandItemList(manager_idx, ordering, startRow, listLimit);
 	}
 	
 	// 브랜드별 정보 및 아이템수 출력
@@ -48,6 +48,16 @@ public class BrandItemService {
 	// 전체브랜드아이템 갯수 카운트 
 	public int getBrandListCount(int manager_idx) {
 		return mapper.selectBrandListCount(manager_idx);
+	}
+
+	// 멀티체크 리스팅 아이템리스트 출력 ( + 정렬 ) 
+	public List<ItemVO> selectBrandItemListListing(List<String> brands, String ordering, int startRow, int listLimit) {
+		return mapper.selectBrandItemListListing(brands,ordering,startRow,listLimit);
+	}
+	
+	// 멀티체크 리스팅 아이템리스트카운트
+	public int getBrandListListingCount(List<String> brands) {
+		return mapper.selectBrandItemListListingCount(brands);
 	}
 	
 	

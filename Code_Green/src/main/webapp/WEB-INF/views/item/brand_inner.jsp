@@ -9,7 +9,7 @@
 	                           
 	                           	<c:if test="${not empty sessionScope.sId && sessionScope.sId ne 'admin' && empty sessionScope.sCode}">
 	                            <div class="brandfollowbtn">
-		                            <a class="ps-block__inquiry" href="#" onclick="followCheck(${brandDetail.manager_idx}); return false;"><span id="fStatus">${followCheckRevertResult}</span></a>
+		                            <a class="ps-block__inquiry" href="javascript:void(0);" onclick="followCheck(${brandDetail.manager_idx});"><span id="fStatus">${followCheckRevertResult}</span></a>
 		                            <img src="/Code_Green/resources/img/forzero/${heartStatus}" id="heart_icon_brand_b">
 	                            </div>
 	                            </c:if>
@@ -24,7 +24,7 @@
 			                           		<small>지금 이 브랜드를<br>
 			                           			${brandDetail.brand_follower}명이 팔로하고 있습니다!</small>
 			                           		</c:when>
-			                           		<c:when test="${brandDetail.brand_follower == 0 }">
+			                           		<c:when test="${brandDetail.brand_follower eq 0 || empty brandDetail.brand_follower}">
 				                           		<small>아직 아무도 팔로하고있지 않습니다!<br>
 				                           		첫 단골이 되어보세요:) </small>
 			                           		</c:when>
@@ -44,7 +44,11 @@
                <div class="ps-shopping ps-tab-root">
                    <div class="ps-shopping__header">
                        <p>총<strong> ${brandDetail.brand_itemCnt } </strong> 개의 상품 </p>
-                      <div id="orderbylist"><a href="#">최근순</a>  |  <a href="#">판매량순</a></div>
+                      <div id="orderbylist">
+	                      <a href="javascript:void(0);" onclick="goBrandList(${brandDetail.manager_idx},'recent')">최근순</a>  |
+	                      <a href="javascript:void(0);" onclick="goBrandList(${brandDetail.manager_idx},'lowest_price')">낮은가격순</a> | 
+	                      <a href="javascript:void(0);" onclick="goBrandList(${brandDetail.manager_idx},'highest_price')">높은가격순</a>
+                      </div>
                    </div>
            <!-- =========================================== 상품리스트 시작=====================================================-->
            <!-- ===================================== 상품 1개당 ================================================== --> 
@@ -84,7 +88,7 @@
 <%-- 			                                             	</c:choose> --%>
 <%-- 			                                             </c:forEach> --%>
 <!--                                                       </select> -->
-                                                      <span>리뷰평점(${brand.board_star_score })</span>
+                                                      <span><i class="fi fi-sr-star"></i>리뷰평점(${brand.board_star_score })</span>
                                                     </div>
                                                   <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>
@@ -102,14 +106,14 @@
 		 		 		<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 		                  <div class="ps-pagination">
 		                      <ul class="pagination">
-		                          <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum - 1}&manager_idx=${brand.item_idx}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+		                          <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum - 1}&manager_idx=${brandDetail.manager_idx}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 		                          <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 		                          	<c:choose>
-		                          		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-		                          		<c:otherwise><li><a href="GetBrandItemList.br?pageNum=${i }&manager_idx=${brand.item_idx}">${i }</a></li></c:otherwise>
+		                          		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
+		                          		<c:otherwise><li><a href="GetBrandItemList.br?pageNum=${i }&manager_idx=${brandDetail.manager_idx}">${i }</a></li></c:otherwise>
 		                          	</c:choose>
 		                          </c:forEach>
-		                          <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum + 1}&manager_idx=${brand.item_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+		                          <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="GetBrandItemList.br?pageNum=${pageInfo.pageNum + 1}&manager_idx=${brandDetail.manager_idx}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
 		                      </ul>
 		                  </div>
                     <!-- 페이징 버튼들 끝 -->  

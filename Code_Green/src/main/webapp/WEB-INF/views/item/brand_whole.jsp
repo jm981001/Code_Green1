@@ -32,7 +32,7 @@
 <%-- 			                                             	</c:choose> --%>
 <%-- 			                                             </c:forEach> --%>
 <!--                                                       </select> -->
-                                                      <span>리뷰평점(${brand.board_star_score })</span>
+                                                      <span><i class="fi fi-sr-star"></i>리뷰평점(${brand.board_star_score })</span>
                                                     </div>
                                                   <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>

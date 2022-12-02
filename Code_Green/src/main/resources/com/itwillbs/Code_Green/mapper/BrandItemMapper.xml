@@ -89,12 +89,20 @@
 				 	AND i.re_manager_idx = #{manager_idx}
 				 </if>
 			 ORDER BY 
-			 	<if test="manager_idx==0">
-			 		rand()
-			 	</if>
-			 	<if test="manager_idx!=0">
-			 		i.item_idx DESC
-			 	</if>
+			 	<choose>
+				 	<when test="ordering.equals('recent')">
+				 		i.item_idx DESC
+				 	</when>
+				 	<when test="ordering.equals('lowest_price')">
+				 		ABS(i.item_price) ASC
+				 	</when>
+				 	<when test="ordering.equals('highest_price')">
+				 		ABS(i.item_price) DESC
+				 	</when>
+				 	<otherwise>
+				 		rand()
+				 	</otherwise>
+				 </choose>
 			 LIMIT #{startRow}, #{listLimit}
 	</select>
 	
@@ -140,19 +148,76 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<!-- 멀티체크 리스팅 아이템리스트 출력 ( + 정렬 )  -->
+	<select id="selectBrandItemListListing" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+	SELECT     i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_info,
+			   i.item_packing, 
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_stock, 
+			   i.item_status,  
+			   i.item_readcount,  
+			   i.item_date, 
+			   f.file1,
+			   m.manager_brandname,
+			   m.manager_original_file,
+			   round(truncate( a.board_star_score,1),0) AS score,
+			   truncate( a.board_star_score,1) AS board_star_score,
+                  cnt.brand_itemCnt 
+				FROM item i 
+	           	LEFT JOIN file_item f 
+	             		ON i.item_idx = f.rf_item_idx 
+			 	JOIN manager m 
+	              		ON i.re_manager_idx =  m.manager_idx
+	           	LEFT JOIN (SELECT b.BOARD_ITEM_IDX
+							    , avg(s.board_star_score) AS board_star_score
+						  	FROM board b join board_star s ON b.board_idx = s.rf_board_idx
+						 	GROUP BY b.BOARD_ITEM_IDX) a 
+	               	ON i.item_idx = a.BOARD_ITEM_IDX 
+				LEFT JOIN (select re_manager_idx, count(*) AS brand_itemCnt FROM item GROUP BY re_manager_idx ) AS cnt
+					ON m.manager_idx = cnt.RE_MANAGER_IDX
+			 WHERE f.file1 NOT LIKE '%상세%' 
+				 <if test="brands.size != 0">
+				 	AND i.re_manager_idx IN 
+				 	<foreach collection="brands" item="manager_idx" open="(" close=")" separator=",">
+						#{manager_idx}				 	
+				 	</foreach>
+				 </if>
+			ORDER BY
+				 <choose>
+				 	<when test="ordering.equals('recent')">
+				 		i.item_idx DESC
+				 	</when>
+				 	<when test="ordering.equals('lowest_price')">
+				 		ABS(i.item_price) ASC
+				 	</when>
+				 	<when test="ordering.equals('highest_price')">
+				 		ABS(i.item_price) DESC
+				 	</when>
+				 	<otherwise>
+				 		rand()
+				 	</otherwise>
+				 </choose>
+			 LIMIT #{startRow}, #{listLimit}
+	</select>
+	
+	
+	<!-- 멀티체크 리스팅 아이템리스트카운트 -->
+	<select id="selectBrandItemListListingCount" resultType="integer">
+		SELECT count(*) 
+			FROM item
+				WHERE 1=1
+			<if test="brands.size != 0">
+				 	AND re_manager_idx IN 
+				 	<foreach collection="brands" item="manager_idx" open="(" close=")" separator=",">
+						#{manager_idx}				 	
+				 	</foreach>
+			</if>
+	</select>
+	
 
 </mapper>
