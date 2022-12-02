@@ -124,7 +124,7 @@ h5{
 										<input class="form-control" type="text" name="member_id" placeholder="아이디를 입력하세요">
 									</div>
 									<div class="form-group form-forgot">
-										<input class="form-control" type="text" name="member_pass" placeholder="비밀번호를 입력하세요">
+										<input class="form-control" type="password" name="member_pass" placeholder="비밀번호를 입력하세요">
 									</div>
 									<div class="form-group submtit">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
@@ -185,7 +185,7 @@ h5{
 										<input class="form-control" type="text" name="manager_id" placeholder="아이디를 입력하세요">
 									</div>
 									<div class="form-group form-forgot">
-										<input class="form-control" type="text" name="manager_pass" placeholder="비밀번호를 입력하세요">
+										<input class="form-control" type="password" name="manager_pass" placeholder="비밀번호를 입력하세요">
 									</div>
 									<div class="form-group submtit">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
@@ -200,7 +200,9 @@ h5{
 										<div id="naver_id_login" style="text-align: center">
 											<a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 										</div>
-										<button class="ps-btn ps-btn--fullwidth" style="background-color: #fae100">카카오 로그인</button>
+										<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdb4f4f86451a44ecba533649bd1755c&redirect_uri=http://localhost:8081/kakao&response_type=code">
+												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
+											</a>
 									</div>
 								</div>
 							</div>
@@ -240,7 +242,7 @@ h5{
 										<input class="form-control" type="text" name="admin_id" placeholder="아이디를 입력하세요">
 									</div>
 									<div class="form-group form-forgot">
-										<input class="form-control" type="text" name="admin_pass" placeholder="비밀번호를 입력하세요">
+										<input class="form-control" type="password" name="admin_pass" placeholder="비밀번호를 입력하세요">
 									</div>
 									<div class="form-group submtit">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
@@ -256,8 +258,9 @@ h5{
 											<a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 										</div>
 
-										<button class="ps-btn ps-btn--fullwidth" style="background-color: #fae100">카카오 로그인</button>
-									</div>
+										<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdb4f4f86451a44ecba533649bd1755c&redirect_uri=http://localhost:8081/kakao&response_type=code">
+												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
+										</a>
 								</div>
 							</div>
 						</div>

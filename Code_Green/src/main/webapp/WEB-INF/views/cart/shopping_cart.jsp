@@ -100,15 +100,21 @@
 
 
 
-	<div class="ps-section--shopping ps-shopping-cart">
+	<div class="ps-section--shopping ps-shopping-cart" name="cartDiv">
 		<div class="container">
 			<div class="ps-section__header">
 				<h1>Cart</h1>
 			</div>
+			<c:if test="${empty cartList }">
+							<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
+							<h3>텅~</h3>
+					   	</c:if>
 			<div class="ps-section__content">
+			
 				<div class="table-responsive">
-				
-				
+<!-- 					<div align="center"> -->
+						
+<!-- 				   </div> -->
 						<table class="table ps-table--shopping-cart ps-table--responsive" style="text-align: center;">
 							<thead>
 								<tr>
@@ -119,6 +125,7 @@
 									<th></th>
 								</tr>
 							</thead>
+							
 							<c:forEach var="row" items="${cartList}" varStatus="i">
 								<input type="hidden" name="cart_idx" value="${row.cart_idx}">
 								<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
