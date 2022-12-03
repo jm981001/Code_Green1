@@ -29,11 +29,16 @@ public class ManagerVO {
 	private int 		ranking;	//순위
 	private String		brand_follower;//브랜드 팔로워 수
 	private String star_score;
+	private int 		salesMonth;	//한달매출
+	private int 		salesWeek;	//일주일매출
+	private int 		salesday;	//하루매출
+	private int 		salesTotal;	//총매출
 	
 	
 	public ManagerVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public int getManager_idx() {
 		return manager_idx;
@@ -234,6 +239,38 @@ public class ManagerVO {
 	public void setStar_score(String star_score) {
 		this.star_score = star_score;
 	}
+	public int getSalesMonth() {
+		return salesMonth;
+	}
+
+	public void setSalesMonth(int salesMonth) {
+		this.salesMonth = salesMonth;
+	}
+
+	public int getSalesWeek() {
+		return salesWeek;
+	}
+
+	public void setSalesWeek(int salesWeek) {
+		this.salesWeek = salesWeek;
+	}
+
+	public int getSalesday() {
+		return salesday;
+	}
+
+	public void setSalesday(int salesday) {
+		this.salesday = salesday;
+	}
+
+	public int getSalesTotal() {
+		return salesTotal;
+	}
+
+	public void setSalesTotal(int salesTotal) {
+		this.salesTotal = salesTotal;
+	}
+	
 	
 
 	public ManagerVO(int manager_idx, String manager_id, String manager_pass, String manager_name,
@@ -241,7 +278,9 @@ public class ManagerVO {
 			String manager_email, String manager_email_auth, String manager_postcode, String manager_address,
 			String manager_adminauth, String manager_realfile, String manager_original_file, String manager_del_yn,
 			String manager_date, MultipartFile file, String brand_itemCnt, int sellCount, int orderCount,
-			int brandtotal, int ranking, String brand_follower, String star_score) {
+			int brandtotal, int ranking, String brand_follower, String star_score,int salesMonth,int salesWeek,
+			int salesday,int salesTotal) {
+		
 		super();
 		this.manager_idx = manager_idx;
 		this.manager_id = manager_id;
@@ -268,7 +307,13 @@ public class ManagerVO {
 		this.ranking = ranking;
 		this.brand_follower = brand_follower;
 		this.star_score = star_score;
+	    this.salesMonth = salesMonth;
+	    this.salesWeek = salesWeek;
+	    this.salesday= salesday;
+	    this.salesTotal = salesTotal;
+	    
 	}
+
 
 	@Override
 	public String toString() {
@@ -283,7 +328,7 @@ public class ManagerVO {
 				+ ", sellCount=" + sellCount + ", orderCount=" + orderCount + ", brandtotal=" + brandtotal
 				+ ", ranking=" + ranking + ", brand_follower=" + brand_follower + ", star_score=" + star_score + "]";
 	}
-	
+
 	
 	
 	

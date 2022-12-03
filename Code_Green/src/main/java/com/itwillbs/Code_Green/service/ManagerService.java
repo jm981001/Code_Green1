@@ -204,30 +204,30 @@ public class ManagerService {
 		return mapper.selectStockInfo(item_idx);
 	}
 	//총매출
-	public ManagerVO getSalesTotal(String sId) {
-		return mapper.selectSalesTotal(sId);
-	}
-	//한달매출
-	public ManagerVO getSalesMonth(String sId) {
-		return mapper.selectSalesMonth(sId);
-	}
-	//일주일매출
-	public ManagerVO getSalesWeek(String sId) {
-		return mapper.selectSalesWeek(sId);
-	}
-	//하루매출
-	public ManagerVO getSalesDay(String sId ) {
-		return mapper.selectSalesDay(sId);
-	}
-	//수수료
-	public SellVO getCommission(String sId) {
-		return mapper.selectCommission(sId);
-	}
-	//순수익
-	public SellVO getNet(String sId) {
-		return mapper.selectNet(sId);
-	}
-	
+		public List<ManagerVO> getSalesTotal(String sId) {
+			return mapper.selectSalesTotal(sId);
+		}
+		//한달매출
+		public List<ManagerVO> getSalesMonth(String sId) {
+			return mapper.selectSalesMonth(sId);
+		}
+		//일주일매출
+		public List<ManagerVO> getSalesWeek(String sId) {
+			return mapper.selectSalesWeek(sId);
+		}
+		//하루매출
+		public List<ManagerVO> getSalesDay(String sId ) {
+			return mapper.selectSalesDay(sId);
+		}
+		//수수료
+		public SellVO getCommission(String sId) {
+			return mapper.selectCommission(sId);
+		}
+		//순수익
+		public SellVO getNet(String sId) {
+			return mapper.selectNet(sId);
+		}
+		
 	
 	   
 

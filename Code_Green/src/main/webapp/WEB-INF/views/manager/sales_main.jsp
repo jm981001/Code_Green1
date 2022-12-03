@@ -90,11 +90,11 @@
                         
                         <thead>
                         <tr>
-                        <h4><td>총 매출</td></h4>
+                        <h3><td><strong>총 매출</strong></td></h3>
                         
-                        <td><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###" /><small class="asc"></i><span></span></small></td>
+                        <td><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
                         
-                        <h4><td>총 주문수</td></h4>
+                        <h3><td><strong>총 주문수</strong></td></h3>
                         <td>${orderTotal.orderCount }<small class="asc"></i></small></td>
                      
                         </tr>

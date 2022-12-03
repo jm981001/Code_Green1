@@ -1417,36 +1417,41 @@ public class ManagerController {
 
 
 		
-	      	//------------정산-------------------------------------------
-				@RequestMapping(value = "sales_management", method = RequestMethod.GET)
-				
-				
-				public String sales_management(Model Model, HttpSession session ) {
-					
-					String sId = (String)session.getAttribute("sId");
-					
-					//총매출
-					ManagerVO salesTotal = service.getSalesTotal(sId);
-					//한달매출
-					ManagerVO salesMonth = service.getSalesMonth(sId);
-					//일주일매출
-					ManagerVO salesWeek = service.getSalesWeek(sId);
-					//하루매출
-					ManagerVO salesday = service.getSalesDay(sId);
-					//수수료
-					SellVO  commission = service.getCommission(sId);
-					//순수익
-					SellVO  net = service.getNet(sId);
+	    		
+		      	//------------정산 목록-------------------------------------------
+					@GetMapping(value = "sales_management")
 					
 					
+					public String sales_list(Model Model, HttpSession session ) {
+						
+						String sId = (String)session.getAttribute("sId");
+//						
+						
+						//총매출
+						List<ManagerVO> salesTotal = service.getSalesTotal(sId);
+						//한달매출
+						List<ManagerVO> salesMonth = service.getSalesMonth(sId);
+						//일주일매출
+						List<ManagerVO> salesWeek = service.getSalesWeek(sId);
+						//하루매출
+						List<ManagerVO> salesday = service.getSalesDay(sId);
+						//수수료
+//						SellVO  commission = service.getCommission(sId);
+						//순수익
+//						SellVO  net = service.getNet(sId);
+						
+						 Model.addAttribute("salesTotal", salesTotal);
+						 Model.addAttribute("salesMonth", salesMonth);
+						 Model.addAttribute("salesWeek", salesWeek);
+						 Model.addAttribute("salesday", salesday);
+						
+						
+						
+						
+						return "manager/sales_management";
+					}
 					
-					
-					
-					
-					return "manager/sales_management";
-				}
-				
-	
+		
 
 }
 

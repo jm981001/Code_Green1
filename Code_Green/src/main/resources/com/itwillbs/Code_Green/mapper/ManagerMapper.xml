@@ -28,10 +28,7 @@
 					date_format(now(),'%Y%m%d%T')<!--	MANAGER_DATE VARCHAR(14) NOT NULL 				-->
 					)
 	</insert>
-	<!-- 아이디 중복검사 -->
-  	<select id="idCheck" resultType="int">
-  		SELECT COUNT(manager_id) FROM manager WHERE manager_id= #{manager_id}
-  	</select>
+
 
 <!-- 
 	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때
@@ -835,6 +832,7 @@
 
     </select>
    
+	 
 		<!--정산 총매출 -->
 		<select id="selectSalesTotal" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 	SELECT  
@@ -849,52 +847,80 @@
 		</select>
 		<!--정산 한달매출 -->
 		<select id="selectSalesMonth" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
+<!-- 		 날짜형식 2022-10형식으로 출력 -->
+<!-- 		 SELECT SUBSTR(sell_date,1,7) MM, -->
+<!-- 		      sum((i.item_price * sd.sell_amount)) as brandtotal -->
+<!-- 		   FROM sell_detail sd LEFT JOIN item i -->
+<!-- 		   ON sd.rf_item_idx = i.item_idx -->
+<!-- 		   LEFT JOIN   sell s -->
+<!-- 		    on s.sell_idx = sd.rf_sell_idx -->
+<!-- 		   LEFT JOIN manager m -->
+<!-- 		   ON i.re_manager_idx = m.manager_idx -->
+<!-- 		 where m.manager_id=#{sId} -->
+<!-- 		   GROUP -->
+<!-- 		   BY 1 -->
+<!-- 		   ORDER  -->
+<!-- 		   BY 1;   -->
+<!-- 	  달만 출력되는 형식 -->
+	  SELECT MONTH(sell_date) AS MONTH,
+	      sum((i.item_price * sd.sell_amount)) as monthtotal
+		   FROM sell_detail sd LEFT JOIN item i
+		   ON sd.rf_item_idx = i.item_idx
+		   LEFT JOIN   sell s
+		    on s.sell_idx = sd.rf_sell_idx
+		   LEFT JOIN manager m
+		   ON i.re_manager_idx = m.manager_idx
+		   where m.manager_id=#{sId}
+		   GROUP BY MONTH;  
+
+	
 	
 		</select>
 		<!--정산 일주일매출 -->
 		<select id="selectSalesWeek" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		
+			 SELECT DATE_FORMAT(DATE_SUB(sell_date, INTERVAL (DAYOFWEEK(sell_date)-1) DAY), '%Y/%m/%d') as start,
+			       DATE_FORMAT(DATE_SUB(sell_date, INTERVAL (DAYOFWEEK(sell_date)-7) DAY), '%Y/%m/%d') as end,
+			       DATE_FORMAT(sell_date, '%Y%U') AS WEEK, 
+				  sum((i.item_price * sd.sell_amount)) as weektotal
+				   FROM sell_detail sd LEFT JOIN item i
+				   ON sd.rf_item_idx = i.item_idx
+				   LEFT JOIN   sell s
+				    on s.sell_idx = sd.rf_sell_idx
+				   LEFT JOIN manager m
+				   ON i.re_manager_idx = m.manager_idx
+				   where m.manager_id=#{sId}
+				   GROUP BY WEEK;     
+			 
+			   
+			   
 		</select>
+		
+		
 		<!--정산 하루매출 -->
 		<select id="selectSalesDay" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-		SELECT s.sell_date,
-		       s.sell_total_price,
-		       i.item_name,
-		       m.manager_brandname
-		 FROM sell_detail d
-		 LEFT JOIN   sell s
-		  on s.sell_idx = d.rf_sell_idx
-		            left join item i 
-		               on d.RF_ITEM_IDX = i.item_idx
-		             left join file_item f 
-		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
-
-		            left join manager m
-		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
-		            GROUP BY 1
-		            ORDER BY 1;
-		            
-		             where i.RE_MANAGER_IDX =(select manager_idx
-		                           from manager
-		                                  where manager_id = #{sId})
-		                                  
-		                                  
-		  SELECT DATE(`sell_date`) AS `date`, 
-		       sum(`value`)
-		  FROM test_st
-		 GROUP BY `date`;                               
-		       
+	    SELECT DAY(sell_date) AS DAY,
+	       sum((i.item_price * sd.sell_amount)) as daytotal
+		   FROM sell_detail sd LEFT JOIN item i
+		   ON sd.rf_item_idx = i.item_idx
+		   LEFT JOIN   sell s
+		    on s.sell_idx = sd.rf_sell_idx
+		   LEFT JOIN manager m
+		   ON i.re_manager_idx = m.manager_idx
+		   where m.manager_id=#{sId}
+		   GROUP BY DAY;
 		
 		     
 		</select>
 		<!--정산 수수료 -->
-		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		
-		</select>
+<!-- 		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO"> -->
+<!-- 		SUM(sell_total_price) * 0.1 AS net -->
+<!-- 		  FROM sell -->
+<!-- 		</select> -->
 		<!--정산 순수익 -->
-		<select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO">
+<!-- 		<select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO"> -->
 		
-		</select>
+<!-- 		</select> -->
 		
 		
 		

@@ -119,18 +119,6 @@
                 </div>
                <div class="ps-section__right">
                     <section class="ps-card ps-card--statics">
-<!--                         <div class="ps-card__header"> -->
-<!--                             <h4>Statics</h4> -->
-<!--                             <div class="ps-card__sortby"><i class="icon-calendar-empty"></i> -->
-<!--                                 <div class="form-group--select"> -->
-<!--                                     <select class="form-control"> -->
-<!--                                         <option value="1">Last 30 days</option> -->
-<!--                                         <option value="2">Last 90 days</option> -->
-<!--                                         <option value="3">Last 180 days</option> -->
-<!--                                     </select><i class="icon-chevron-down"></i> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
                        <div class="ps-card__content">
                            <div class="ps-block--stat yellow">
                                 <div class="ps-block__left"><span><i class="icon-percent-circle"></i></span></div>

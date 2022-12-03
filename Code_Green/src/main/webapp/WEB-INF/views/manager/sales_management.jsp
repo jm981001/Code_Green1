@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.itwillbs.Code_Green.vo.PageInfo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,16 +44,15 @@
     <main class="ps-main">
     
      <jsp:include page="../inc/manager_menu.jsp"></jsp:include>
+     
+     
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>정산페이지</h3>
-<!--                     <p>Martfury Categories</p> -->
                 </div>
                 <div class="header__center">
                     <form class="ps-form--search-bar" action="sales_management" method="get">
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
                     </form>
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
@@ -65,56 +69,80 @@
                         <br>
                             <h4>매출 집계</h4>
                         </div>
-                    
-                    
-                     <div class="ps-card__content">
-                       <div class="table-responsive">
-                        <table class="table ps-table">
-                            <thead>
-                                  <label for="date">날짜를 선택하세요:
+                      <div class="options_area">
+								<select name="searchDate" onchange="searchByDate(this.value)" required >    
+									<option value="">기간조회</option>    
+									<option value="3">3개월</option>    
+									<option value="6">6개월</option>    
+									<option value="9">9개월</option>    
+								</select>
+								<input type="button" name="searchDateSet" id="dateSet" value="+상세조회">
+								</div>
+								<div class="dateDiv" style="display: none;">
+									<form action="myBuyListbySelect.my"  id="dates" method="get">
+										<input type="date" name="date1" required="required"> - <input type="date" name="date2" required="required">
+										<input type="submit" id="dateSet" value="검색" >
+										<input type="reset" id="dateSet" value="초기화" >
+									</form>
+								</div>
+                       
+                    <table class="table ps-table">
+                          <thead>
+                             <label for="date">날짜를 선택하세요:
 							  		<input type="date"
 							         id="date"
 							         max="2077-06-20"
 							         min="2077-06-05"
 							         value="2077-06-15">
-							</label>
-                                <tr>
-                                   
-                                    <th>이번달매출</th><br>
+                              <tr>
+                                   <th>총매출</th><br>
+                                   <th>이번달매출</th><br>
                                     <th>이번주매출</th><br>
                                     <th>오늘매출</th><br>
                                     <th>수수료</th><br>
                                     <th>순수익</th><br>
-                                    </table>
-<!--                                     <th><input type="button"value="오늘매출"></th> -->
-                                    
-                                    <th></th>
-                              
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <br>
-                            
-  								<tr>
-                                	<td>${Total.brandtotal }</td>
-                                	<td>${ItemInfo.item_name }</td>
-                                    <td>${ItemInfo.item_info }</td>
-                                    <td>${ItemInfo.item_stock }</td>
-                                    <td>${ItemInfo.item_price }</td>
-                                    <td>${ItemInfo.item_category }</td>
-                                    <td>${ItemInfo.item_packing }</td>
-                                    <td>${ItemInfo.item_date}</td>
-                                 </tr> 
-                                        <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Delete</a></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                
+                              </tr>
+                          </thead>
+                          <tbody>
+                      
+                          
+                              <c:forEach var="salesList" items="${salesList }">
+                              <tr>
+                              	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+        					<td>
+        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
+        					</td>
+                                  <td>
+                                     <div class="ps-product--cart">
+<%--                                           <div class="ps-product__content"><a href="myPage_buyList.jsp">${salesList.sell_order_number }</a></div> --%>
+                                      </div>
+                                  </td>
+                                  <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4>
+                                  <td><fmt:formatNumber value="${salesList.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesday}" pattern="#,###원" /><small class="asc"></small></td>
+                             
+                              </c:forEach>
+                          </tbody>
+                      </table>
+                      
+                   <!-- 페이징 버튼들 시작 -->
+<%-- 					 <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
+<!-- 					       <div class="ps-pagination"> -->
+<!-- 					           <ul class="pagination"> -->
+<%-- 					               <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="sales_management?pageNum=${pageInfo.pageNum - 1}&period=${period}&date1=&date2="><%}%><i class="icon-chevron-left"></i>Prev</a></li> --%>
+<%-- 					               <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
+<%-- 					               	<c:choose> --%>
+<%-- 					               		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when> --%>
+<%-- 					               		<c:otherwise><li><a href="sales_management?pageNum=${i }&period=${period}&date1=&date2=">${i }</a></li></c:otherwise> --%>
+<%-- 					               	</c:choose> --%>
+<%-- 					               </c:forEach> --%>
+<%-- 					               <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="sales_management?pageNum=${pageInfo.pageNum + 1}&period=${period}&date1=&date2="><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
+<!-- 					           </ul> -->
+<!-- 					       </div> -->
+		      		 <!-- 페이징 버튼들 끝 -->  
 
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>
