@@ -303,6 +303,7 @@
 	
 	
 	<!-- //////////////메인 페이지/////////////// -->
+	<!-- 메인 페이지 내 레시피리스트 -->
 	<select id="selectMainRecipe" resultType="com.itwillbs.Code_Green.vo.BoardVO">
 		SELECT
 				b.board_idx,

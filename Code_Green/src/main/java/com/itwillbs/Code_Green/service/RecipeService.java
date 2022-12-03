@@ -110,7 +110,7 @@ public class RecipeService {
 	
 	
 	//-----------------메인 페이지-------------------
-	// 메인 페이지 내 레시피
+	// 메인 페이지 내 레시피리스트
 	public List<BoardVO> getMainRecipe() {
 		return mapper.selectMainRecipe();
 	}

@@ -41,7 +41,7 @@ public class HomeController {
 		//내 취향을 잘 아는 상품들 (좋아요 많은 상품 30개 중에 랜덤 7개)
 		List<ItemVO> mainList3 = service.mainList3();
 		
-		// 레시피
+		// 레시피 리스트
 		List<BoardVO> recipeList = recipe_service.getMainRecipe();
 		
 		model.addAttribute("mainList1", mainList1);

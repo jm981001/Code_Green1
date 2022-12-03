@@ -70,7 +70,7 @@ public interface RecipeMapper {
    
    
    //-------------메인 페이지------------------
-   // 메인 페이지 내 레시피
+   // 메인 페이지 내 레시피리스트
    List<BoardVO> selectMainRecipe();
 	   
 	   
