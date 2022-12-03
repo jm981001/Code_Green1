@@ -361,7 +361,8 @@
 		       i.item_idx,
 		       i.item_category,
 		       m.manager_brandname,
-		       f.file1
+		       f.file1,
+		       (d.sell_amount*i.item_price) as addItemPrice
 		  FROM sell_detail d
 		  LEFT JOIN sell s
 		  ON 

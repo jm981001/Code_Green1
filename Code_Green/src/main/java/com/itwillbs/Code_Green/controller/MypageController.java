@@ -368,6 +368,9 @@ public class MypageController {
 		SellVO buyDetail = Sservice.getMyBuyListDetail(member_idx,sell_order_number);
 		List<SellVO> MyBuyItemList = Sservice.getMyBuyItemList(sell_order_number);
 		
+		
+		
+		
 		model.addAttribute("buyDetail", buyDetail);
 		model.addAttribute("MyBuyItemList", MyBuyItemList);
 		

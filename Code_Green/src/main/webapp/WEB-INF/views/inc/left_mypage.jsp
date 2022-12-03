@@ -45,7 +45,7 @@
 										<li><a href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i>찜한 상품</a></li>
 										<li><a href="myPageFollowingList.my"><i class="icon-star"></i>팔로우 브랜드</a></li>
 										<li><a href="myPageEmoney.my?member_id=${sessionScope.sId}"><i class="icon-list"></i>적립금내역</a></li>
-										<li><a href="myBuyList.my"><i class="icon-papers"></i>주문목록</a></li>
+										<li><a href="myBuyList.my"><i class="icon-papers"></i>주문내역</a></li>
 										<li><a href="myPageReview.my?member_id=${sessionScope.sId}"><i class="icon-papers"></i>상품후기</a></li>
 										<li><a href="myPageQnaList.bo"><i class="icon-question"></i>1:1 문의</a></li>
 										<li><a href="myPageBoard.my?member_id=${sessionScope.sId} "><i class="icon-pen"></i>나의 글</a></li>

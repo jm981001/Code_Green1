@@ -14,7 +14,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
-    <title>주문상세내역 - 베지터틀</title>
+    <title>마이페이지 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
@@ -29,46 +29,47 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
     
-    <style type="text/css">
+<style type="text/css">
     	#orderCancel{
-			margin-top: 80px;
+			margin-top: 50px;
 		    background: #5fa30f;
 		    border: none;
-		    border-radius: 3px;
+		    border-radius: 39px;
 		    color: white;
 		    width: 100px;
-		    height: 50px;
+		    height: 34px;
     	}
-    
-    </style>
-    
-    <script type="text/javascript">
-    	function myOrderCancel() {
-			
-			let cancelAuth = confirm('주문 취소 하시겠습니까? 취소하면 복구할 수 없는 점 참고 바랍니다.');
-			
-			if(cancelAuth){
-				
-				if('${buyDetail.sell_cancel_status}' == '취소요청') {
-					alert('이미 취소한 주문입니다.');
-				} else {
-					$.ajax({
-						type : 'POST',
-						url : 'payment_cancel',
-						data: {
-							sell_idx : ${buyDetail.sell_idx }
-						}
-					});
-					
-					alert('주문취소 완료되었습니다. 관리자에게 취소요청이 되었습니다.');
-				}
-				
+    	
+    	#orderInfo_table{
+    		border: none;
+    		width: 100%;
+    		margin-bottom: 30px;
+    	}
+    	
+    	#orderInfo_table th{
+    		font-weight: bold;
+    		padding-top: 10px;
+    	}
+</style>
+<script type="text/javascript">
+   	function myOrderCancel() {
+		let cancelAuth = confirm('주문 취소 하시겠습니까? 취소하면 복구할 수 없는 점 참고 바랍니다.');
+		if(cancelAuth){
+			if('${buyDetail.sell_cancel_status}' == '취소요청') {
+				alert('이미 취소한 주문입니다.');
+			} else {
+				$.ajax({
+					type : 'POST',
+					url : 'payment_cancel',
+					data: {
+						sell_idx : ${buyDetail.sell_idx }
+					}
+				});
+				alert('주문취소 완료되었습니다.\n관리자에게 취소요청이 되었습니다.');
 			}
-			
 		}
-    
-    </script>    
-        
+	}
+</script>    
 </head>
 <body>
 
@@ -83,7 +84,6 @@
 				<div class="row">
 					<jsp:include page="../inc/left_mypage.jsp"></jsp:include>
 
-
  <!-- ==========주문정보=========================================================================================================     -->                          
                     <div class="col-lg-8">
                         <div class="ps-section__right">
@@ -91,36 +91,49 @@
                                 <div class="ps-section__header">
                                     <h3>주문상세내역</h3>
                                 </div>
-                                
                                 <div class = "orderInfo_table">
-	                                <table border="1">
+	                                <table id="orderInfo_table">
 	                                	<tr>
-	                                		<td colspan="2">주문번호</td>
+	                                		<th>주문번호</th>
+	                                		<th>주문날짜</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td colspan="2">123456-789456</td>
+	                                		<td>${buyDetail.sell_order_number}</td>
+	                                		<fmt:parseDate var="dateString" value="${buyDetail.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+	                                		<td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>주문상태</td>
-	                                		<td>결제방법</td>
+	                                		<th>주문상태</th>
+	                                		<th>결제방법</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>결제완료</td>
-	                                		<td>카카오페이</td>
+	                                		<td>${buyDetail.sell_status}</td>
+	                                		<td>${buyDetail.sell_pay_type}</td>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>받는사람</td>
-	                                		<td>연락처</td>
+	                                		<th>받는사람</th>
+	                                		<th>연락처</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>김지영</td>
-	                                		<td>01062522047</td>
+	                                		<td>${buyDetail.sell_receiver}</td>
+	                                		<td>${buyDetail.sell_phone}</td>
 	                                	</tr>
 	                               		<tr>
-	                                		<td colspan="2">배송지</td>
+	                                		<th colspan="2">배송지</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td colspan="2">동구범천로 112, 98-2</td>
+	                                		<td colspan="2">${buyDetail.sell_address}</td>
+	                                	</tr>
+	                               		<tr>
+	                                		<th colspan="2" style="color:#b3b3b3;">취소요청</th>
+	                                	</tr>
+	                                	<tr>
+	                                		<td colspan="2">
+		                                		<c:if test="${not empty buyDetail.sell_cancel_status}">
+		                                		${buyDetail.sell_cancel_status}
+		                                		</c:if>
+		                                		<c:if test="${empty buyDetail.sell_cancel_status}">-</c:if>
+	                                		</td>
 	                                	</tr>
 	                                </table>
                                 </div>
@@ -140,9 +153,9 @@
                                                     <td>
                                                         <div class="ps-product--cart">
                                                             <div class="ps-product__thumbnail">
-                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&item_category=${itemList.item_category}"><img src="/Code_Green/resources/item/${itemList.file1 }"></a></div>
+                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&manager_brandname=${itemList.manager_brandname}&item_category=${itemList.item_category}"><img src="/Code_Green/resources/item/${itemList.file1 }"></a></div>
                                                             <div class="ps-product__content">
-                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&item_category=${itemList.item_category}">${itemList.item_name }</a>
+                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&manager_brandname=${itemList.manager_brandname}&item_category=${itemList.item_category}">${itemList.item_name }</a>
                                                                 <p><strong>${itemList.manager_brandname }</strong></p>
                                                             </div>
                                                         </div>
@@ -152,13 +165,15 @@
                                                     <td><span>${itemList.item_price }*${itemList.sell_amount }</span></td>
                                                 </tr>
                                                 </c:forEach>
-                                                
                                                 <!-- 총금액 및 배송비 출력 칸  -->
                                                 <tr>
                                                 	<td colspan="4">배송비 = 0원</td>
                                                 </tr>
                                                 <tr>
-                                               		<td colspan="4">배송비 0원  +  주문금액 54000원 = 총 ${buyDetail.sell_total_price}원</td>
+                                                	<td colspan="4">적립금사용 = ${buyDetail.sell_usecoin}원</td>
+                                                </tr>
+                                                <tr>
+                                               		<td colspan="4">배송비 0원  -  적립금 ${buyDetail.sell_usecoin}원 + 주문금액 54000원 = 총 ${buyDetail.sell_total_price}원</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -171,7 +186,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
         

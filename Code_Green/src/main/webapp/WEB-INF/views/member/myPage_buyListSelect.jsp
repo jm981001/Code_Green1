@@ -15,7 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
-    <title>나의 주문목록 - 베지터틀</title>
+    <title>마이페이지 - 베지터틀</title>
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">

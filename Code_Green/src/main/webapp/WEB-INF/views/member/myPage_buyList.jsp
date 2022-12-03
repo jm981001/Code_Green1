@@ -15,7 +15,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="icon" href="/Code_Green/resources/img/favicon.png">
-    <title>나의 주문목록 - 베지터틀</title>
+    <title>마이페이지 - 베지터틀</title>
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
@@ -111,7 +111,7 @@
                     <div class="col-lg-8">
                         <div class="ps-section__right">
                            <h3 style="display:inline;">주문내역</h3>
-                           &nbsp;&nbsp; 최대 지난 1년간의 주문내역을 확인할 수 있어요<br>
+                           &nbsp;&nbsp; 구매하신 내역을 확인할 수 있습니다<br>
                            <div class="options_area">
 								<select name="searchDate" onchange="searchByDate(this.value)" required >    
 									<option value="">기간조회</option>    

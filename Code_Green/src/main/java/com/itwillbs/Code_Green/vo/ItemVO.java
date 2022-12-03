@@ -40,6 +40,7 @@ public class ItemVO {
    private MultipartFile file_1;
    private MultipartFile file_2;
    private String sell_amount;			// 주문목록상세볼때 아이템별 수량출력
+   private String addItemPrice;			// 주문목록상세볼때 아이템별 수량*금액
    
    public String getReview() {
       return review;
