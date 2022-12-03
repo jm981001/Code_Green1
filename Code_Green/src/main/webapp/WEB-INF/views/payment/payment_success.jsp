@@ -35,36 +35,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
    	<style type="text/css">
    		
-   		.accordion{
-			width: 1000px;
-			margin-top: 60px;   		
-   		}
-   	
-   		.accordion-button{
-   			font-size: 15px; 
-   			color: #669900;
-   		}
-   	
-   		#orderList{
-   			border: border: 1px solid #E4E4E4;
-   			width: 970px;
-/*    			height: 500px; */
-   		}
-   		
-   		#orderList th{
-   			border: 1px solid #E4E4E4;
-   			color: #669900;
-   			text-align: center;
-   			font-size: 15px;
-   			
-   		} 
-   		
-   		#orderList td{
-	   		border: 1px solid #E4E4E4;
-	   		text-align: center;
-	   		
-   		}
-   		
    		#cardOrderBtn{
    			width: 870px;
    			margin-top: 100px;
@@ -166,9 +136,9 @@
                                  <figure class="ps-block--invoice">
 <!--                                      <figcaption>Shipping Fee</figcaption> -->
                                      <div class="ps-block__content">
-                                         <p>Item Total: ${item_total_price }</p>
-                                         <p>Shipping Fee: + ${shipping_fee }</p>
-                                         <p>Use Coin: - ${orderList.sell_usecoin }</p>
+                                         <p>Item Total: ${item_total_price }원</p>
+                                         <p>Shipping Fee: + ${shipping_fee }원</p>
+                                         <p>Use Coin: - ${orderList.sell_usecoin }원</p>
                                      </div>
                                  </figure>
                              </div>
@@ -176,7 +146,7 @@
                                  <figure class="ps-block--invoice">
 <!--                                      <figcaption>Payment</figcaption> -->
                                      <div class="ps-block__content">
-                                         <p>Total: ${orderList.sell_total_price }</p>
+                                         <p>Total: ${orderList.sell_total_price }원</p>
                                          <p>Payment Method: ${orderList.sell_pay_type }</p>
                                      </div>
                                  </figure>
@@ -203,9 +173,9 @@
                                                  </div>
                                              </div>
                                          </td>
-                                         <td><span>${orderDetailList.item_price }</span></td>
-                                         <td><span>${orderDetailList.sell_amount }</span></td>
-                                         <td><span><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount}"/></span></td>
+                                         <td><span>${orderDetailList.item_price }원</span></td>
+                                         <td><span>${orderDetailList.sell_amount }개</span></td>
+                                         <td><span><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount}"/>원</span></td>
                                      </tr>
                                    </c:forEach>  
                                  </tbody>

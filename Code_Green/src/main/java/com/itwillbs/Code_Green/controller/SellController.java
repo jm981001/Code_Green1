@@ -84,7 +84,7 @@ public class SellController {
 
 	// 주문완료
 	@ResponseBody
-	@PostMapping(value = "payment_success")
+	@PostMapping(value = "/payment_success")
 	public String payment_success(HttpSession session,
 								 @RequestParam(name = "member_idx", value = "member_idx", required = false, defaultValue = "1") int member_idx,
 								 @RequestParam(name = "member_name", value = "member_name", required = false) String member_name,
@@ -136,6 +136,9 @@ public class SellController {
 			
 			int insertOrderDetailCount = sell_service.insertOrderDetail(rf_item_idx, sell_amount, member_idx);
 		}
+		
+		// 주문 후 장바구니 비우기
+		int deleteCartCount = cart_service.afterOrderDeleteCart(member_idx);
 		
 		return "redirect:/payment_success_cardPayForm";
 	}	
@@ -211,7 +214,7 @@ public class SellController {
 	}
 	
 	// 주문 취소 요청
-	@PostMapping(value = "payment_cancel")
+	@PostMapping(value = "/payment_cancel")
 	public void payment_cancel(@RequestParam int sell_idx) {
 		
 		// 주문 취소 요청

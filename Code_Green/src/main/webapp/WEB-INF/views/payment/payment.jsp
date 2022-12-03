@@ -50,19 +50,19 @@
 	function coinUse() {
 		
 		let coin_total = ${coin.coin_total};
-		coin_use = $('.coin_use').val();
+		coin_use = $(".coin_use").val();
 		
 		let coin_remain = coin_total - coin_use;
 		
 		if(coin_remain >= 0){
-			$('.coin_remain').html(coin_remain);
-		 	$('.coin_use').html(coin_use);
+			$(".coin_remain").html(coin_remain + "원");
+		 	$(".coin_use").html(coin_use + "원");
 		} else {
 			alert("사용할 적립금은 보유 적립금보다 적거나 같아야 합니다.");
 		} 
 		
 		let sell_total_price = ${map.sumM} + ${map.fee} - coin_use;
-		$('.sell_total_price').html(sell_total_price);
+		$(".sell_total_price").html(sell_total_price + "원");
 	
 // 		return coin_use;
 	}
@@ -75,29 +75,29 @@
 	
 		if(result){
 			$.ajax({
-				type : 'POST',
-				url : 'payment_success',
+				type : "POST",
+				url : "payment_success",
 				data :{
 					member_idx : member_idx,
-					member_name : '${memberInfo.member_name }',
-					member_phone : '${memberInfo.member_phone }',
-					member_address : '${memberInfo.member_address }',
-					member_postcode : '${memberInfo.member_postcode }',
+					member_name : "${memberInfo.member_name }",
+					member_phone : "${memberInfo.member_phone }",
+					member_address : "${memberInfo.member_address }",
+					member_postcode : "${memberInfo.member_postcode }",
 					item_total_price : item_total_price,
 					shipping_fee : ${map.fee},
 					sell_usecoin : coin_use
 				},
 				success : function(data) {
-					alert('주문이 완료되었습니다.');
+					alert("주문이 완료되었습니다.");
 					
-					location.href = 'payment_success_cardPayForm?member_id=${sessionScope.sId}'; 
+					location.href = "payment_success_cardPayForm?member_id=${sessionScope.sId}"; 
 				},
 				fail : function(data2) {
-					alert('주문이 실패되었습니다. 다시 시도해 주세요.');
+					alert("주문이 실패되었습니다. 다시 시도해 주세요.");
 				}
 			}); 
 		} else {
-			alert('주문이 실패 되었습니다. 다시 시도해 주세요.');
+			alert("주문이 실패 되었습니다. 다시 시도해 주세요.");
 		}
 	}	
 
@@ -136,11 +136,11 @@
                                         </div>
                                         <h4>Shipping_fee</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Shipping_fee</small><strong>${map.fee}</strong></figure>
+                                            <figure><small>Shipping_fee</small><strong>${map.fee}원</strong></figure>
                                         </div>
                                         <h4>Coin</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Coin_total</small><strong>${coin.coin_total }</strong></figure>
+                                            <figure><small>Coin_total</small><strong>${coin.coin_total }원</strong></figure>
                                             <figure><small>Coin_use</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
                                             <figure><small>Coin_remain</small><strong><span class="coin_remain"></span></strong></figure>
                                             
@@ -156,21 +156,21 @@
                                             </figure>
                                             <c:forEach var="cart" items="${cartList }">
                                             <figure class="ps-block__items">
-                                            	<a href="#"><strong>${cart.item_name }</strong><span><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/></span></a>
-                                            	<a href="#"><strong>${cart.manager_brandname }</strong><span>${cart.cart_amount }개 * <small>${cart.item_price }</small></span></a>
+                                            	<a href="#"><strong>${cart.item_name }</strong><span><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/>원</span></a>
+                                            	<a href="#"><strong>${cart.manager_brandname }</strong><span>${cart.cart_amount }개 * <small>${cart.item_price }원</small></span></a>
                                             </figure>
                                             </c:forEach>
                                             <figure>
-                                                <figcaption><strong>Subtotal</strong>${map.sumM }</figcaption>
+                                                <figcaption><strong>Subtotal</strong>${map.sumM }원</figcaption>
                                             </figure>
                                             <figure>
-                                                <figcaption><strong>Shipping</strong>${map.fee}</figcaption>
+                                                <figcaption><strong>Shipping</strong>${map.fee}원</figcaption>
                                             </figure>
                                             <figure>
                                                 <figcaption><strong>Coin</strong><span class="coin_use"></span></figcaption>
                                             </figure>
                                             <figure class="ps-block__total">
-                                                <h3>Total<strong><span class="sell_total_price"><fmt:formatNumber value="${map.sumM + map.fee}"/></span></strong></h3>
+                                                <h3>Total<strong><span class="sell_total_price"><fmt:formatNumber value="${map.sumM + map.fee}"/>원</span></strong></h3>
                                             </figure>
                                         </div>
                                     </div>

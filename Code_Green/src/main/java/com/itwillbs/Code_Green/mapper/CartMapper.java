@@ -25,6 +25,8 @@ public interface CartMapper {
 	public int sameItem(@Param("member_idx")int member_idx);
 	
 	public int getCartCount(@Param("member_idx")int member_idx);
+	// 주문 후 장바구니 내 상품 삭제
+	public int afterOrderDeleteCart(int member_idx);
 
 	
 	

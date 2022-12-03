@@ -99,15 +99,21 @@
 			 WHERE m.member_idx = #{member_idx};
 	</select>
 	
-	
-	
-	
-	
 	<update id="updateCart">
 		UPDATE cart SET cart_amount = #{cart_amount} where cart_idx = #{cart_idx} 
 	<!-- UPDATE tbl_cart	SET amount = amount + #{amount}  -->
 	<!-- WHERE user_id= #{userId} AND product_id = #{productId} -->
 	</update>
+	
+	
+	<!-- 주문 후 장바구니 내 상품 삭제 -->
+	<delete id="afterOrderDeleteCart">
+		DELETE FROM cart WHERE rf_member_idx = #{member_idx};
+	</delete>
+	
+	
+	
+	
 	
 	
 </mapper>

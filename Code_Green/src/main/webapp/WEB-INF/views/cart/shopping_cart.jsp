@@ -74,6 +74,7 @@
 			}
 		});
 	}
+	
 </script>
 </head>
 
@@ -100,130 +101,133 @@
 
 
 
-	<div class="ps-section--shopping ps-shopping-cart" name="cartDiv">
+	<div class="ps-section--shopping ps-shopping-cart" name="cartDiv" id="cartYes">
 		<div class="container">
 			<div class="ps-section__header">
 				<h1>Cart</h1>
 			</div>
-			<div align="center">
-			<c:if test="${empty cartList }">
-							<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
-							<h3>텅~</h3>
-					   	</c:if>
-					  </div>
-			<div class="ps-section__content">
-			
-				<div class="table-responsive">
-<!-- 					<div align="center"> -->
+			<c:choose>
+				<c:when test="${empty cartList }">
+					<div align="center" style="margin: 100px 0 300px 0;">
+						<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
+						<h3>현재 장바구니 내 상품이 없습니다.</h3>
+					</div>	
+				</c:when>
+				<c:when test="${not empty cartList }">
+				<div class="ps-section__content">
+					<div class="table-responsive">
 						
-<!-- 				   </div> -->
-						<table class="table ps-table--shopping-cart ps-table--responsive" style="text-align: center;">
-							<thead>
+	<!-- 					<div align="center"> -->
+	<!-- 				   </div> -->
+							<table class="table ps-table--shopping-cart ps-table--responsive" style="text-align: center;">
+								<thead>
+									<tr>
+										<th>상품명</th>
+										<th>가격</th>
+										<th>수량</th>
+										<th>총 금액</th>
+										<th></th>
+									</tr>
+								</thead>
+								
+								<c:forEach var="row" items="${cartList}" varStatus="i">
+									<input type="hidden" name="cart_idx" value="${row.cart_idx}">
+									<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
+									<input type="hidden" name="cart_amount"value="${row.cart_amount}">
 								<tr>
-									<th>상품명</th>
-									<th>가격</th>
-									<th>수량</th>
-									<th>총 금액</th>
-									<th></th>
+									<td data-label="Product">
+										<div class="ps-product--cart">
+											<div class="ps-product__thumbnail">
+												<a href="product-default.html"><img
+													src="/Code_Green/resources/item/${row.file1 }"></a>
+											</div>
+											<div class="ps-product__content" style="text-align: left;">
+												<a href="product-default.html">${row.item_name}</a>
+	
+												<p>
+													<strong> ${row.manager_brandname }</strong>
+												</p>
+	
+											</div>
+										</div>
+									</td>
+									<td class="price" data-label="Price"><fmt:formatNumber value="${row.item_price}" pattern="#,###"/> 원</td>
+	
+									<!-- 수량조절 -->
+									<td data-label="Quantity">
+										<div class="form-group--number">
+											<button type="button" class="up">+</button><!-- 수량 증가 버튼 -->
+											<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
+											<input class="form-control" type="text" id="quan_${row.cart_idx}" name="qu"
+												placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1"><!-- 수량 -->
+										</div> 
+										<button type="button" class="quantity_modify_btn" onclick="updateCart('${row.cart_idx}')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
+									
+									
+										<!-- 수량 조정 form -->
+									<form action="updateCart" method="get" class="quantity_update_form">
+										<input type="hidden" name="cart_idx" class="update_cart_idx">
+										<input type="hidden" name="item_amount" class="update_item_amount">
+										<input type="hidden" name="member_id" value="${sessionScope.sId }">
+									</form>	
+	
+									</td>
+									<td data-label="Total"><fmt:formatNumber value="${row.cart_total*row.cart_amount }" pattern="#,###"/>
+										원</td>
+									<td>
+										<button type="button" id="delBtn" onclick="deleteItem('${row.cart_idx}')" style="border: none;">삭제</button>
+									</td>
 								</tr>
-							</thead>
-							
-							<c:forEach var="row" items="${cartList}" varStatus="i">
-								<input type="hidden" name="cart_idx" value="${row.cart_idx}">
-								<input type="hidden" name="rf_item_idx"value="${row.rf_item_idx}">
-								<input type="hidden" name="cart_amount"value="${row.cart_amount}">
-							<tr>
-								<td data-label="Product">
-									<div class="ps-product--cart">
-										<div class="ps-product__thumbnail">
-											<a href="product-default.html"><img
-												src="/Code_Green/resources/item/${row.file1 }"></a>
-										</div>
-										<div class="ps-product__content" style="text-align: left;">
-											<a href="product-default.html">${row.item_name}</a>
-
-											<p>
-												<strong> ${row.manager_brandname }</strong>
-											</p>
-
-										</div>
-									</div>
-								</td>
-								<td class="price" data-label="Price"><fmt:formatNumber value="${row.item_price}" pattern="#,###"/> 원</td>
-
-								<!-- 수량조절 -->
-								<td data-label="Quantity">
-									<div class="form-group--number">
-										<button type="button" class="up">+</button><!-- 수량 증가 버튼 -->
-										<button type="button" class="down">-</button><!-- 수량 감소 버튼 -->
-										<input class="form-control" type="text" id="quan_${row.cart_idx}" name="qu"
-											placeholder="1" name="cart_amount" value="${row.cart_amount}" min="1"><!-- 수량 -->
-									</div> 
-									<button type="button" class="quantity_modify_btn" onclick="updateCart('${row.cart_idx}')" data-cart_idx="${row.cart_idx}" style="border: none;">변경</button>
-								
-								
-									<!-- 수량 조정 form -->
-								<form action="updateCart" method="get" class="quantity_update_form">
-									<input type="hidden" name="cart_idx" class="update_cart_idx">
-									<input type="hidden" name="item_amount" class="update_item_amount">
-									<input type="hidden" name="member_id" value="${sessionScope.sId }">
-								</form>	
-
-								</td>
-								<td data-label="Total"><fmt:formatNumber value="${row.cart_total*row.cart_amount }" pattern="#,###"/>
-									원</td>
-								<td>
-									<button type="button" id="delBtn" onclick="deleteItem('${row.cart_idx}')" style="border: none;">삭제</button>
-								</td>
-							</tr>
-						</c:forEach>
-						</table><!-- class="table ps-table--shopping-cart ps-table--responsive"> -->
-				</div><!--<div class="table-responsive"> -->
-
-<!-- 				<div class="ps-section__cart-actions"> -->
-<!-- 				<button class="ps-btn" id="btnList">돌아가기</button> -->
-<!-- 				<button class="ps-btn" id="btnRefresh">새로고침</button> -->
-
-<!-- 				</div> -->
-
-			</div>
-
-			<!-- 수량 조정 form -->
-			<form action="/update" method="get" class="quantity_update_form">
-				<input type="hidden" name="cart_idx" class="update_cart_idx">
-				<input type="hidden" name="cart_amount" class="update_cart_amount">
-			</form>	
-
-			<!-- 합계 부분 -->
-			<div class="ps-section__footer" style="margin: 100px 0;">
-				<div class="row"></div>
-				<div class="ps-block--shopping-total" style="width: 100%">
-
-					<div class="ps-block__header">
-						<p>
-							소계 <span><fmt:formatNumber value="${map.sumM}" pattern="#,###"/> 원</span>
-						</p>
-					</div>
-					<div class="ps-block__content">
-						
-						<ul class="ps-block__product">
-							<li>
-								<h3 style="color: #666;">
-									배송비 <span class="ps-block__shipping"><fmt:formatNumber value="${map.fee}" pattern="#,###"/> 원</span>
-								</h3>
-							</li>
-						</ul>
-						
-						<h3 style="color: #666;">
-							총 주문 금액 <span class="ps-block__shipping"><fmt:formatNumber value="${map.allSum}" pattern="#,###"/> 원</span>
-						</h3>
-					</div>
+							</c:forEach>
+							</table><!-- class="table ps-table--shopping-cart ps-table--responsive"> -->
+					</div><!--<div class="table-responsive"> -->
+	
+	<!-- 				<div class="ps-section__cart-actions"> -->
+	<!-- 				<button class="ps-btn" id="btnList">돌아가기</button> -->
+	<!-- 				<button class="ps-btn" id="btnRefresh">새로고침</button> -->
+	
+	<!-- 				</div> -->
+	
 				</div>
-				  <div class="form-group submit" align="right" style="margin-top: 80px;">
-				  	<a class="ps-btn ps-btn--fullwidth" style="width: auto"
-					href="payment?member_id=${sessionScope.sId }&cart_total=${map.sumM }&shipping_fee=${map.fee}">주문하기</a>
-                  </div>
-			</div>
+	
+				<!-- 수량 조정 form -->
+				<form action="/update" method="get" class="quantity_update_form">
+					<input type="hidden" name="cart_idx" class="update_cart_idx">
+					<input type="hidden" name="cart_amount" class="update_cart_amount">
+				</form>	
+	
+				<!-- 합계 부분 -->
+				<div class="ps-section__footer" style="margin: 100px 0;">
+					<div class="row"></div>
+					<div class="ps-block--shopping-total" style="width: 100%">
+	
+						<div class="ps-block__header">
+							<p>
+								소계 <span><fmt:formatNumber value="${map.sumM}" pattern="#,###"/> 원</span>
+							</p>
+						</div>
+						<div class="ps-block__content">
+							
+							<ul class="ps-block__product">
+								<li>
+									<h3 style="color: #666;">
+										배송비 <span class="ps-block__shipping"><fmt:formatNumber value="${map.fee}" pattern="#,###"/> 원</span>
+									</h3>
+								</li>
+							</ul>
+							
+							<h3 style="color: #666;">
+								총 주문 금액 <span class="ps-block__shipping"><fmt:formatNumber value="${map.allSum}" pattern="#,###"/> 원</span>
+							</h3>
+						</div>
+					</div>
+					<div class="form-group submit" align="right" style="margin-top: 80px;">
+				  		<a class="ps-btn ps-btn--fullwidth" style="width: auto"
+						href="payment?member_id=${sessionScope.sId }">주문하기</a>
+                	</div>
+				</div>
+			 	</c:when>
+		 </c:choose>	
 		</div>
 	</div>
 

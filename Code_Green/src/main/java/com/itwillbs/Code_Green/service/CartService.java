@@ -49,6 +49,10 @@ public class CartService {
 	public int getCartCount(int member_idx) {
 		return mapper.getCartCount(member_idx);
 	}
+	// 주문 후 장바구니 내 상품 삭제
+	public int afterOrderDeleteCart(int member_idx) {
+		return mapper.afterOrderDeleteCart(member_idx);
+	}
 
 	
 	
