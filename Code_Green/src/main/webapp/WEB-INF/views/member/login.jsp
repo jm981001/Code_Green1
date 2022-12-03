@@ -97,7 +97,7 @@ h5{
 		<div class="ps-my-account">
 			<div class="container">
 				<div class="field memberType" align="center" style="position: absolute;; margin-left: 495px; margin-top: 409px;">
-					<div>
+					<div style="margin: 20px 0;">
 						<label><input type="radio" name="memberType" id="memberLogin" checked onchange="setDisplay()">개인회원</label>
 						<label><input type="radio" name="memberType" id="managerLogin" onchange="setDisplay()">기업회원</label>
 						<label><input type="radio" name="memberType" id="adminLogin" onchange="setDisplay()">관리자</label>
@@ -125,7 +125,7 @@ h5{
 									<div class="form-group form-forgot">
 										<input class="form-control" type="password" name="member_pass" placeholder="비밀번호를 입력하세요">
 									</div>
-									<div class="form-group submtit">
+									<div class="form-group submtit" style="margin-top: 60px;">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
 									</div>
 								</div>
@@ -136,13 +136,13 @@ h5{
 									<div class="form-group submtit">
 										<!-- 네이버 로그인 버튼(이미지) -->
 										<div id="naver_id_login" style="text-align: center">
-											<a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+											<a href="<%=apiURL%>"><img width="370" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 										</div>
 
 										<!-- 카카오 로그인 버튼(이미지) -->
 										<div class="kakaoLogin">
 											<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdb4f4f86451a44ecba533649bd1755c&redirect_uri=http://localhost:8081/kakao&response_type=code">
-												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
+												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 370px;"/>
 											</a>
 										</div>
 									</div>
@@ -172,7 +172,7 @@ h5{
 									<div class="form-group form-forgot">
 										<input class="form-control" type="password" name="manager_pass" placeholder="비밀번호를 입력하세요">
 									</div>
-									<div class="form-group submtit">
+									<div class="form-group submtit" style="margin-top: 60px;">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
 									</div>
 								</div>
@@ -183,10 +183,10 @@ h5{
 									<div class="form-group submtit">
 										<!--                                 네이버 로그인 버튼(이미지) -->
 										<div id="naver_id_login" style="text-align: center">
-											<a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+											<a href="<%=apiURL%>"><img width="370" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 										</div>
 										<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdb4f4f86451a44ecba533649bd1755c&redirect_uri=http://localhost:8081/kakao&response_type=code">
-												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
+												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 370px;"/>
 											</a>
 									</div>
 								</div>
@@ -215,7 +215,7 @@ h5{
 									<div class="form-group form-forgot">
 										<input class="form-control" type="password" name="admin_pass" placeholder="비밀번호를 입력하세요">
 									</div>
-									<div class="form-group submtit">
+									<div class="form-group submtit" style="margin-top: 60px;">
 										<button class="ps-btn ps-btn--fullwidth">로그인</button>
 									</div>
 								</div>
@@ -226,11 +226,11 @@ h5{
 									<div class="form-group submtit">
 										<!--                                 네이버 로그인 버튼(이미지) -->
 										<div id="naver_id_login" style="text-align: center">
-											<a href="<%=apiURL%>"><img width="360" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+											<a href="<%=apiURL%>"><img width="370" height="55" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 										</div>
 
 										<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdb4f4f86451a44ecba533649bd1755c&redirect_uri=http://localhost:8081/kakao&response_type=code">
-												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 365px;"/>
+												<img src="/Code_Green/resources/img/kakao_login.png" style="width: 370px;"/>
 										</a>
 								</div>
 							</div>
