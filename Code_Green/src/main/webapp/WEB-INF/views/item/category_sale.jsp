@@ -182,10 +182,10 @@ function addHeart(item_idx) {
                                                             </div>
                                                             
                                                             <!-- 가격 -->
-                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                            <p class="ps-product__price sale">${item.item_price }원 </p>
                                                         </div>
                                                         <div class="ps-product__content hover"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}">${item.item_name }</a>
-                                                            <p class="ps-product__price sale">${item.item_price } <del>${item.item_price } </del></p>
+                                                            <p class="ps-product__price sale">${item.item_price }원</p>
                                                         </div>
                                                     </div>
                                                 </div>
