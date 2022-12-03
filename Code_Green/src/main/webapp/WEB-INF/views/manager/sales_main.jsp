@@ -61,12 +61,6 @@
                         <form class="ps-form--filter" action="products" method="get">
                             <div class="ps-form__left">
                                 <div class="form-group">
-<!--                                     <select class="ps-select" name="searchType"> -->
-<!-- 										<option value="item_name">상품명</option> -->
-<!--                                         <option value="item_category">상품카테고리</option> -->
-<!--                                         <option value="item_packing">포장분류</option> -->
-<!--                                         <option value="item_stock">재고유무</option> -->
-<!--                                     </select> -->
                                     </div>
                                     </div>
                                 <div class="form-group">

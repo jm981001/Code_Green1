@@ -32,6 +32,32 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
 <body>
+<script>
+	$(function(){
+		$("#dateSet").click(function(){
+			let status = document.querySelector(".dateDiv").style.display;
+			if(status == 'none'){
+				$(".dateDiv").show();
+			} else {
+				$(".dateDiv").hide();
+			}
+			
+		});
+	});
+	
+	function searchByDate(period){
+		$.ajax({
+			url:"sales_management",
+			type:"get",
+			data:{ period : period },
+			success: function(data){
+				$(".table_salesList").html(data);
+			}
+		});
+	};
+
+	
+</script>
      <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
@@ -51,6 +77,8 @@
                 <div class="header__left">
                     <h3>정산페이지</h3>
                 </div>
+                
+                
                 <div class="header__center">
                     <form class="ps-form--search-bar" action="sales_management" method="get">
                     </form>
@@ -72,14 +100,14 @@
                       <div class="options_area">
 								<select name="searchDate" onchange="searchByDate(this.value)" required >    
 									<option value="">기간조회</option>    
-									<option value="3">3개월</option>    
+									<option value="1">1개월</option>    
+									<option value="2">2개월</option>    
 									<option value="6">6개월</option>    
-									<option value="9">9개월</option>    
 								</select>
 								<input type="button" name="searchDateSet" id="dateSet" value="+상세조회">
 								</div>
 								<div class="dateDiv" style="display: none;">
-									<form action="myBuyListbySelect.my"  id="dates" method="get">
+									<form action="sales_management"  id="dates" method="get">
 										<input type="date" name="date1" required="required"> - <input type="date" name="date2" required="required">
 										<input type="submit" id="dateSet" value="검색" >
 										<input type="reset" id="dateSet" value="초기화" >
@@ -95,26 +123,54 @@
 							         min="2077-06-05"
 							         value="2077-06-15">
                               <tr>
-                                   <th>총매출</th><br>
-                                   <th>이번달매출</th><br>
-                                    <th>이번주매출</th><br>
-                                    <th>오늘매출</th><br>
-                                    <th>수수료</th><br>
-                                    <th>순수익</th><br>
+<!--                                    <th>총매출</th><br> -->
+<!--                                    <th>이번달매출</th><br> -->
+<!--                                     <th>이번주매출</th><br> -->
+<!--                                     <th>오늘매출</th><br> -->
+<!--                                     <th>순수익</th><br> -->
                               </tr>
                           </thead>
                           <tbody>
-                      
-                          
-                              <c:forEach var="salesList" items="${salesList }">
+                        <tr>
+                           <h3><td><strong>총 매출</strong></td></h3>
+                           <td><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></td>
+                        </tr>
+                           <tr>       
+                          <h3><td><strong>총 매출</strong></td></h3>
+                           <td><fmt:formatNumber value="${salesList.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                </tr>
+                                <tr>
+                                <h3><td><strong>총 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  </tr>
+                                  <tr>    
+                                  <h3><td><strong>월별 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
+                                  </tr>
+                                  <tr>
+                                  <h3><td><strong>주별 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
+                                 </tr>
+                                 <tr>
+                                  <h3><td><strong>일별 매출</strong></td></h3>
+                        <td><fmt:formatNumber value="${salesList.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                                  </tr>
+                                  <tr>
+                                  <h3><td><strong>순수익</strong></td></h3>
+                                  <td><fmt:formatNumber value="${sellTotal.net}" pattern="#,###원" /><small class="asc"></small></td> 
+                              </tr>
+                              
+                              
                               <tr>
+                              <c:forEach var="salesList" items="${salesList }">
+                               <tr>
                               	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
         					<td>
         					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
         					</td>
                                   <td>
                                      <div class="ps-product--cart">
-<%--                                           <div class="ps-product__content"><a href="myPage_buyList.jsp">${salesList.sell_order_number }</a></div> --%>
+                                          <div class="ps-product__content"><a href="myPage_buyList.jsp">${salesList.sell_order_number }</a></div>
                                       </div>
                                   </td>
                                   <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4>
@@ -122,7 +178,7 @@
                                   <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
                                   <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
                                   <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
-                                  <td><fmt:formatNumber value="${salesList.salesday}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${commission.net}" pattern="#,###원" /><small class="asc"></small></td>
                              
                               </c:forEach>
                           </tbody>

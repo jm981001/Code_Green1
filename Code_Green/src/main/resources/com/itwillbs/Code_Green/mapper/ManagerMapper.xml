@@ -913,10 +913,20 @@
 		     
 		</select>
 		<!--정산 수수료 -->
-<!-- 		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO"> -->
-<!-- 		SUM(sell_total_price) * 0.1 AS net -->
-<!-- 		  FROM sell -->
-<!-- 		</select> -->
+		
+		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
+		 SELECT SUM(sell_total_price) AS brandtotal,
+                SUM(sell_total_price) * 0.1 AS net
+	           FROM sell_detail sd LEFT JOIN item i
+		        ON sd.rf_item_idx = i.item_idx
+		        LEFT JOIN   sell s
+		        ON s.sell_idx = sd.rf_sell_idx
+		        LEFT JOIN manager m
+		        ON i.re_manager_idx = m.manager_idx
+        	    WHERE m.manager_id=#{sId};
+		   
+		</select>
+		
 		<!--정산 순수익 -->
 <!-- 		<select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO"> -->
 		

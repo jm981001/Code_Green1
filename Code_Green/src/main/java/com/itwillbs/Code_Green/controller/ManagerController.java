@@ -1435,8 +1435,8 @@ public class ManagerController {
 						List<ManagerVO> salesWeek = service.getSalesWeek(sId);
 						//하루매출
 						List<ManagerVO> salesday = service.getSalesDay(sId);
-						//수수료
-//						SellVO  commission = service.getCommission(sId);
+						//수수료, 순수익
+						SellVO  commission = service.getCommission(sId);
 						//순수익
 //						SellVO  net = service.getNet(sId);
 						
@@ -1444,6 +1444,7 @@ public class ManagerController {
 						 Model.addAttribute("salesMonth", salesMonth);
 						 Model.addAttribute("salesWeek", salesWeek);
 						 Model.addAttribute("salesday", salesday);
+						 Model.addAttribute("commission", commission.getNet());
 						
 						
 						
