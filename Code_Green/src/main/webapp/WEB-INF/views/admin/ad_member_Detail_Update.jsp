@@ -47,9 +47,14 @@
     }
   </style>
 
-    
+<script type="text/javascript">
+	function back() {
+		// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
+		// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
+		history.back();
+	}
+</script>    
 </head>
-
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -72,7 +77,7 @@
                 </div>
                 <div class="header__center">
                 </div>
-                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_member_Manage"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
   

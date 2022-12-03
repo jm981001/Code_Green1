@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +66,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_Board_Review"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -95,7 +95,8 @@
 				    	<td scope="row">작성자</td>
 				    	<td>${reviewDetail.board_id }</td>
 				    	<td>작성일</td>
-				    	<td>${reviewDetail.board_date }</td>
+				    	<fmt:parseDate var="dateString" value="${reviewDetail.board_date }" pattern="yyyyMMdd" />	
+                     	<td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
 				    </tr>
 				    <tr>
 				    	<td scope="row" rowspan="2">상품명</td>

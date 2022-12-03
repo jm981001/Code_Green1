@@ -35,7 +35,7 @@ function logout() {
                 <div class="ps-sidebar__content">
                     <div class="ps-sidebar__center">
                         <ul class="menu">
-                            <li><a href="index"><i class="icon-home"></i>매출현황조회</a></li>
+                            <li><a href="AdminMain.me"><i class="icon-home"></i>매출현황조회</a></li>
                             <li><a href="ad_Cancel_Order"><i class="icon-papers"></i>결제취소관리</a></li>
                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li>
                             <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li>

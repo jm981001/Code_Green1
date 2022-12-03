@@ -17,7 +17,7 @@
     <title>공지작성 - 베지터틀</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Font/demo-files/demo.css">
+    <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/owl-carousel/assets/owl.carousel.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/select2/dist/css/select2.min.css">
@@ -66,7 +66,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_Notice"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -94,7 +94,7 @@
 		            	<input type="hidden" id="board_id" name="board_id" value="${sessionScope.sId }">
 		          	</div> 
                      	<textarea id="summernote" name="board_content"></textarea>
-                      		<div style="margin-left: 1250px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
+                      		<div align="right" style="margin-top: 30px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
                      
                      </form>
                        

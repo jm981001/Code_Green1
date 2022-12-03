@@ -67,7 +67,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_Notice"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -83,7 +83,7 @@
 <!--   <tbody>  가운데 정렬 넣음   <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음  <tbody>  가운데 정렬 넣음-->
 
 
-				 <div style="margin-left: 800px" ></div>                   
+				 <div ></div>                   
 			 <table class="table table-bordered" style="text-align: center;">
 				  <thead>
 				    <tr>
@@ -115,7 +115,7 @@
 				  </tbody>
 				</table>
                     </div>
-                      	<div style="margin-left: 1270px"><button type="button" onclick="location.href='ad_Notice_Update?board_idx=${noticeDetail.board_idx }'" class="btn btn-info" style="font-size: 13px"><strong>수정하기</strong></button></div>
+                      	<div align="right" ><button type="button" onclick="location.href='ad_Notice_Update?board_idx=${noticeDetail.board_idx }'" class="btn btn-info" style="font-size: 13px"><strong>수정하기</strong></button></div>
                 </div>
             </section>
         </div>

@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    <script type="text/javascript">
+	function confirmDelete(idx, type) {
+		
+		let result = confirm("게시글을 삭제하시겠습니까?");
+		
+		if(result) {
+			location.href="ad_BoardRemove?board_idx="+ idx + "&board_type=" + type;
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -112,7 +122,8 @@
                                     <td>${rList.board_readcount }</td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_BoardRemove?board_idx=${rList.board_idx }&board_type=${rList.board_type}">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="confirmDelete('${rList.board_idx }','${rList.board_type }')">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>

@@ -36,6 +36,18 @@
     	flex-basis: 130%;
     	}
     </style>
+    <script type="text/javascript">
+	function confirmDelete(idx, id) {
+		
+		let result = confirm("문의글을 삭제하시겠습니까?");
+		
+		if(result) {
+			location.href="ad_oneQnaDelete?idx=" + idx + "&id=" + id;
+			location.reload="ad_One_Answer";
+			
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -55,7 +67,7 @@
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
-                    <h3><a href="ad_One_Board">1:1 문의</a> | <a href="ad_One_Answer">답변완료</a> |<a href="ad_Item_Qna">상품문의</a></h3>
+                    <h3><a href="ad_One_Board">1:1 문의</a> | <a href="ad_One_Answer">답변완료</a></h3>
                     <p>Board Manager</p>
                 </div>
                 <div class="header__center">
@@ -118,7 +130,8 @@
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_oneQnaDelete?idx=${qAList.qna_idx }&id=${qAList.qna_id }">삭제하기</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="confirmDelete('${qAlist.qna_idx }','${qAlist.qna_id }')">삭제하기</a></div>
                                         </div>
                                     </td>
                                 </tr>

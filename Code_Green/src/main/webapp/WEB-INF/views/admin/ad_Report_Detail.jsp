@@ -37,7 +37,13 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!--   글쓰기 게시판 API 
 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API 글쓰기 게시판 API-->    
-    
+ 
+ 
+ <style type="text/css">
+ #btn{
+		display: block;
+	}
+ </style>   
 <script type="text/javascript">
 	function confirmDelete(bidx, ridx) {
 		let result = confirm("원본글을 삭제처리하시겠습니까?");
@@ -45,6 +51,14 @@
 		if(result){
 			location.href = "ad_RemoveOriginboard?board_idx=" + bidx + "&report_idx" + ridx;
 		}
+	}
+	
+	window.onload = function(){
+		let idx = '${originBoard.board_idx }';
+
+		if(!idx) {
+			document.getElementById("btn").style.display = "none";
+		}	
 	}
 </script>    
 </head>
@@ -75,7 +89,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" onclick="history.back()"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -136,7 +150,7 @@
 				  </tbody>
 				</table>
                      <div align="right" style="margin-top: 100px">
-                     <button type="button" onclick="confirmDelete('${originBoard.board_idx }','${reportInfo.report_idx }')" class="btn btn-info" style="font-size: 13px">
+                     <button type="button" id="btn" onclick="confirmDelete('${originBoard.board_idx }','${reportInfo.report_idx }')" class="btn btn-info" style="font-size: 13px">
                      <strong>삭제하기</strong></button></div>
                     
                        

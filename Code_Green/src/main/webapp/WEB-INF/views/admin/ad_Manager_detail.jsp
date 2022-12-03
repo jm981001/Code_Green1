@@ -68,6 +68,24 @@ window.onload = function(){
 		document.getElementById("btn1").style.display = "block";
 	}	
 }
+
+function confirmAuth(id) {
+
+	let result = confirm("가입을 승인하시겠습니까?");
+	
+	if(result) {
+		location.href="ad_AdminAuth?manager_id=" + id;
+	}
+}
+
+function list(auth){
+
+	if(auth == "N") {
+		location.href="ad_Manager_auth";
+	} else {
+		location.href="ad_Manager_manage";
+	}
+}
 </script>
     
 </head>
@@ -93,7 +111,7 @@ window.onload = function(){
                 </div>
                 <div class="header__center">
                 </div>
-                <div class="header__right"><a class="header__site-link" href="#"><span>브랜드페이지로 이동하기(나중에 링크걸기)</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" onclick="list('${manager.manager_adminauth }')"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             
 <!--    상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회 상세정보조회-->
@@ -174,7 +192,7 @@ window.onload = function(){
 			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
 			          
-			          <button id="btn1" name="auth" onclick="location.href='ad_AdminAuth?manager_id=${manager.manager_id }'" class="btn btn-primary btn-lg btn-block" type="button" >가입승인하기</button>
+			          <button id="btn1" name="auth" onclick="location.href='confirmAuth(${manager.manager_id })'" class="btn btn-primary btn-lg btn-block" type="button" >가입승인하기</button>
 
 			        </form>
 			      </div>

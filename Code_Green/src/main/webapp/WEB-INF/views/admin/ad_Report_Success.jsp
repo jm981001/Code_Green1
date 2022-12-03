@@ -27,7 +27,20 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_admin/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
     
-    
+    <script type="text/javascript">
+    function confirmDelete(idx) {
+
+    	let result = confirm("신고글을 삭제하시겠습니까?");
+    	
+    	if(result) {
+    		location.href="ad_ReportRemove?report_idx=" + idx;
+    		
+    		
+    	}
+    	alert("삭제가 완료되었습니다");
+    	history.go(0);
+    }
+    </script>
 </head>
 <body>
     <header class="header--mobile">
@@ -109,7 +122,8 @@
                                     </td>
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="ad_ReportRemove?report_idx=${sList.report_idx }">삭제</a></div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item"  onclick="confirmDelete('${sList.report_idx }')" >신고글 삭제</a></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -119,7 +133,7 @@
                         </table>
                     </div>
                 </div>
-               <div class="ps-section__footer">
+               <div align="right" style="margin-top: 50px">
                    <!-- 페이징 버튼들 시작 -->
 				                   <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 				                    <div class="ps-pagination">

@@ -27,9 +27,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
     
     
-    
     <style>
-
 
     .input-form {
       max-width: 680px;
@@ -46,10 +44,7 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
   </style>
-
-    
 </head>
-
 <body>
     <header class="header--mobile">
         <div class="header__left">
@@ -72,7 +67,7 @@
                 </div>
                 <div class="header__center">
                 </div>
-                <div class="header__right"><a class="header__site-link" href="#"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_member_Manage"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
   

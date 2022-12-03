@@ -93,7 +93,7 @@
 <!--                         <button><i class="icon-magnifier"></i></button> -->
 <!--                     </form> -->
                 </div>
-                <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
+                <div class="header__right"><a class="header__site-link" href="ad_One_Answer"><span>목록으로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-items-listing">
                 <div class="ps-section__header simple">
@@ -142,12 +142,12 @@
 				  </tbody>
 				</table>
                 	<hr>
-                    	<div style="margin-left: 1200px"><button type="button" id="show" class="btn btn-info" style="font-size: 13px"><strong>수정하기</strong></button></div>                     
+                    	<div align="right" style="margin-top: 50px"><button type="button" id="show" class="btn btn-info" style="font-size: 13px"><strong>수정하기</strong></button></div>                     
                      		<form action="ad_AnswerModifiy" method="get" id="modifiyForm">
                      			<input type="hidden" id="qna_idx" name="qna_idx" value="${oneQnaInfo.qna_idx }">
                      			<input type="hidden" id="qna_id" name="qna_id" value="${oneQnaInfo.qna_id }">
                      				<textarea id="summernote" name="qna_answer" ></textarea>
-                      		<div style="margin-left: 1200px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
+                      		<div align="right" style="margin-top: 50px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
                     		</form>
                     </div>
                 </div>
