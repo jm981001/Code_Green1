@@ -125,7 +125,7 @@
 				   <div class="image-box">
 					 <c:forEach var="recipe" items="${recipeList }">				    
 				      <div>
-				      	<a href="recipe_detail.bo?board_idx=${recipe.board_idx }&id=${sessionScope.sId}">
+				      	<a href="recipe_detail.bo?board_idx=${recipe.board_idx }">
 				      		<img src="/Code_Green/resources/recUpload/${recipe.file1 }">
 				      	</a>	
 				      	</div>

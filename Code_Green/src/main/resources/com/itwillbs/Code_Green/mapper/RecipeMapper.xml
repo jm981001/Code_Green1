@@ -300,4 +300,24 @@
 		 WHERE  
 		 		rf_board_idx = #{board_idx} 	    
 	</delete>
+	
+	
+	<!-- //////////////메인 페이지/////////////// -->
+	<select id="selectMainRecipe" resultType="com.itwillbs.Code_Green.vo.BoardVO">
+		SELECT
+				b.board_idx,
+				b.board_subject,
+				b.board_content,
+				f.file1
+		  FROM 
+				board b
+	 LEFT JOIN
+	 			file_board f
+	 	    ON		
+	 			b.board_idx = f.rf_board_idx
+	 	 WHERE
+	 	 		b.board_type = '레시피'		
+	  ORDER BY
+			    rand()					
+	</select>
 </mapper>

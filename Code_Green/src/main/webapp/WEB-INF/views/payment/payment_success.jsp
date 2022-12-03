@@ -138,7 +138,7 @@
                                      <div class="ps-block__content">
                                          <p>Item Total: ${item_total_price }원</p>
                                          <p>Shipping Fee: + ${shipping_fee }원</p>
-                                         <p>Use Coin: - ${orderList.sell_usecoin }원</p>
+                                         <p>Coin Use: - ${orderList.sell_usecoin }원</p>
                                      </div>
                                  </figure>
                              </div>

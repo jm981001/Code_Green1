@@ -134,15 +134,15 @@
                                                 <p>${memberInfo.member_postcode }</p><a href="#">Change</a>
                                             </figure>
                                         </div>
-                                        <h4>Shipping_fee</h4>
+                                        <h4>Shipping Fee</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Shipping_fee</small><strong>${map.fee}원</strong></figure>
+                                            <figure><small>Shipping Fee</small><strong>${map.fee}원</strong></figure>
                                         </div>
                                         <h4>Coin</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Coin_total</small><strong>${coin.coin_total }원</strong></figure>
-                                            <figure><small>Coin_use</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
-                                            <figure><small>Coin_remain</small><strong><span class="coin_remain"></span></strong></figure>
+                                            <figure><small>Coin Total</small><strong>${coin.coin_total }원</strong></figure>
+                                            <figure><small>Coin Use</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
+                                            <figure><small>Coin Remain</small><strong><span class="coin_remain"></span></strong></figure>
                                             
                                         </div>
                                         <button class="ps-btn ps-btn--fullwidth"  type="button" onclick="orderGo()">ORDER</button>

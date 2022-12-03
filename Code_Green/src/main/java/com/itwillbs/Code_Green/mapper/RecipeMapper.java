@@ -66,6 +66,12 @@ public interface RecipeMapper {
 
    // 레시피 조회수 증가
    void updateReadcount(int board_idx);
+
+   
+   
+   //-------------메인 페이지------------------
+   // 메인 페이지 내 레시피
+   List<BoardVO> selectMainRecipe();
 	   
 	   
 

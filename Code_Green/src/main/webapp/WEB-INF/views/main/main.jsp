@@ -422,31 +422,19 @@ function addHeart(item_idx) {
                     <h3>이달의 레시피</h3>
                     <div class="ps-section__nav"><a class="ps-carousel__prev" href=".ps-carousel--testimonials"><i class="icon-chevron-left"></i></a><a class="ps-carousel__next" href=".ps-carousel--testimonials"><i class="icon-chevron-right"></i></a></div>
                 </div>
-                <div class="ps-section__content">
-                    <div class="ps-carousel--testimonials owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="10000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="2" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="2" data-owl-duration="1000" data-owl-mousedrag="on">
-                        <div class="ps-block--testimonial">
-                            <div class="ps-block__header"><img src="/Code_Green/resources/img/users/1.jpg" alt=""></div>
-                            <div class="ps-block__content"><i class="icon-quote-close"></i>
-                                <h4>두부강정 샐러드<span>두부를 구워 야채와 가볍게 즐길수있는 요리</span></h4>
-                                <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
-                            </div>
-                        </div>
-                        <div class="ps-block--testimonial">
-                            <div class="ps-block__header"><img src="/Code_Green/resources/img/users/2.png" alt=""></div>
-                            <div class="ps-block__content"><i class="icon-quote-close"></i>
-                                <h4>새콤달콤 버섯탕수<span>아이들도 좋아하는 바삭하게 튀긴 버섯요리</span></h4>
-                                <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
-                            </div>
-                        </div>
-                        <div class="ps-block--testimonial">
-                            <div class="ps-block__header"><img src="/Code_Green/resources/img/users/3.jpg" alt=""></div>
-                            <div class="ps-block__content"><i class="icon-quote-close"></i>
-                                <h4>콩고기 두루치기 <span>매콤한 맛이 그리울때 쉽고 간단하게 만드는 요리</span></h4>
-                                <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	                <div class="ps-section__content">
+	                    <div class="ps-carousel--testimonials owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="10000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="2" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="2" data-owl-duration="1000" data-owl-mousedrag="on">
+	                        <c:forEach var="recipe" items="${recipeList }">
+		                        <div class="ps-block--testimonial">
+		                            <div class="ps-block__header"><a href="recipe_detail.bo?board_idx=${recipe.board_idx}"><img src="/Code_Green/resources/recUpload/${recipe.file1 }" alt=""></a></div>
+		                            <div class="ps-block__content"><i class="icon-quote-close"></i>
+		                                <h4><a href="recipe_detail.bo?board_idx=${recipe.board_idx}">${recipe.board_subject }</a></h4>
+		                                <p><a href="recipe_detail.bo?board_idx=${recipe.board_idx}">${recipe.board_content }</a></p>
+		                            </div>
+		                        </div>
+	                        </c:forEach>
+	                    </div>
+	                </div>
             </div>
         </div>
         <!-- ---------------------------------------------------------- 레시피 넣을 자리 끝 ---------------------------------------------------------- -->
