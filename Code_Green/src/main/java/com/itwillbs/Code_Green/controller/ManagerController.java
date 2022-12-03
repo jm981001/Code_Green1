@@ -1425,7 +1425,6 @@ public class ManagerController {
 					public String sales_list(Model Model, HttpSession session ) {
 						
 						String sId = (String)session.getAttribute("sId");
-//						
 						
 						//총매출
 						List<ManagerVO> salesTotal = service.getSalesTotal(sId);

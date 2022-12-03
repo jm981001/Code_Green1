@@ -112,9 +112,6 @@
                         </div>
                     </div>
                     
-   <!-- 정민수정-->                 
-                    
-                    
                     
                 </div>
                <div class="ps-section__right">

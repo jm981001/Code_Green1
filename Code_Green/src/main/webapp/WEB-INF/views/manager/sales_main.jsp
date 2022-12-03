@@ -81,7 +81,6 @@
                 <div class="ps-section__content">
                     <div class="table-responsive">
                         <table class="table ps-table">
-                        
                         <thead>
                         <tr>
                         <h3><td><strong>총 매출</strong></td></h3>

@@ -912,7 +912,7 @@
 		
 		     
 		</select>
-		<!--정산 수수료 -->
+		<!--정산 순수익 -->
 		
 		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
 		 SELECT SUM(sell_total_price) AS brandtotal,
@@ -927,10 +927,7 @@
 		   
 		</select>
 		
-		<!--정산 순수익 -->
-<!-- 		<select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO"> -->
-		
-<!-- 		</select> -->
+
 		
 		
 		

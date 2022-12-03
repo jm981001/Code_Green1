@@ -140,10 +140,10 @@ public interface ManagerMapper {
 	public List<ManagerVO> selectSalesWeek(String sId);
 	//하루매출
 	public List<ManagerVO> selectSalesDay(String sId);
-	//수수료
+	//순수익
 	public SellVO selectCommission(String sId);
 	//순수익
-	public SellVO selectNet(String sId);
+//	public SellVO selectNet(String sId);
 	
 	
 	
