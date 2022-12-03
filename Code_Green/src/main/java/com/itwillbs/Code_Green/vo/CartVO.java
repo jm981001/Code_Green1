@@ -10,6 +10,7 @@ public class CartVO {
 	private String item_price;
 	private String manager_brandname;
 	private String file1;
+	private String item_category;
 	
 	public int getCart_idx() {
 		return cart_idx;
@@ -65,11 +66,18 @@ public class CartVO {
 	public void setFile1(String file1) {
 		this.file1 = file1;
 	}
+	public String getItem_category() {
+		return item_category;
+	}
+	public void setItem_category(String item_category) {
+		this.item_category = item_category;
+	}
 	@Override
 	public String toString() {
 		return "CartVO [cart_idx=" + cart_idx + ", rf_item_idx=" + rf_item_idx + ", rf_member_idx=" + rf_member_idx
 				+ ", cart_amount=" + cart_amount + ", cart_total=" + cart_total + ", item_name=" + item_name
-				+ ", item_price=" + item_price + ", manager_brandname=" + manager_brandname + ", file1=" + file1 + "]";
+				+ ", item_price=" + item_price + ", manager_brandname=" + manager_brandname + ", file1=" + file1
+				+ ", item_category=" + item_category + "]";
 	}
 	
 

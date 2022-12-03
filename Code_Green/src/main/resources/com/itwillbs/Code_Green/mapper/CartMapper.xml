@@ -27,6 +27,7 @@
 		SELECT 
 			i.item_name,
 			i.item_price,
+			i.item_category,
 			m.manager_brandname,
 			c.cart_amount,
 			c.cart_total,

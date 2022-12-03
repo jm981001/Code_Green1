@@ -138,11 +138,12 @@
 									<td data-label="Product">
 										<div class="ps-product--cart">
 											<div class="ps-product__thumbnail">
-												<a href="product-default.html"><img
-													src="/Code_Green/resources/item/${row.file1 }"></a>
+												<a href="ItemDetail.bo?item_idx=${row.rf_item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${row.manager_brandname}&item_category=${row.item_category}">
+			                            		<img src="/Code_Green/resources/item/${row.file1 }">
+			                            	</a>
 											</div>
 											<div class="ps-product__content" style="text-align: left;">
-												<a href="product-default.html">${row.item_name}</a>
+												<a href="ItemDetail.bo?item_idx=${row.rf_item_idx}&pageNum=${pageInfo.pageNum}&manager_brandname=${row.manager_brandname}&item_category=${row.item_category}">${row.item_name}</a>
 	
 												<p>
 													<strong> ${row.manager_brandname }</strong>
