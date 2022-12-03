@@ -76,8 +76,9 @@
 				
 				<div class="field">
 					<b>아이디</b>
+					<input type="text" name="member_id" id="member_id" onkeyup="checkId(this.value)" maxlength='20' required="required" placeholder="8-16자리 영문자,숫자,특수문자 조합" style="width: 300px;">
+					<input type="button" onclick="dupId()" value="중복체크" style="width: 80px; position: absolute;">
 					<span class="placehold-text">
-					<input type="text" name="member_id" id="member_id" onkeyup="checkId(this.value)" maxlength='20' required="required" placeholder="8-16자리 영문자,숫자,특수문자 조합">
 					<span id="checkIdResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 					</span>
 				</div>
@@ -141,11 +142,14 @@
 
 	<form action="ManagerJoinPro.me" method="post" name="joinForm" id="signup_company" onsubmit="return checkFormM()" enctype="multipart/form-data">
 		<div class="member">
-			<div id="companyDiv">
+			<div id="companyDiv" style="margin-top: -45px">
 				<div class="field">
 					<b>아이디</b> <span class="placehold-text">
-					<input type="text" id="manager_id" name="manager_id" maxlength='16' onkeyup="checkIdM(this.value)" required="required"></span>
+					<span class="placehold-text">
+					<input type="text" id="manager_id" name="manager_id" maxlength='16' onkeyup="checkIdM(this.value)" required="required" style="width: 300px;"></span>
+					<input type="button" onclick="dupIdM()" value="중복체크" style="width: 80px; position: absolute; margin: -48px 300px;">
 					<span id="checkIdResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+					</span>
 				</div>
 				<div class="field">
 					<b>비밀번호</b> 

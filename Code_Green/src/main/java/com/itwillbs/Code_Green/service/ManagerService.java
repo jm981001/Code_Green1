@@ -23,6 +23,10 @@ public class ManagerService {
 	public int joinManager(ManagerVO manager) {
 		return mapper.insertManager(manager);
 	}
+//	아이디 중복
+	public int idCheck(String manager_id) {
+		return mapper.idCheck(manager_id);
+	}
 //	로그인
 	// BCryptPasswordEncoder 활용한 로그인을 위해 패스워드 조회 - getPasswd()
 	// => 파라미터 : 아이디, 리턴타입 : String
@@ -223,6 +227,7 @@ public class ManagerService {
 	public SellVO getNet(String sId) {
 		return mapper.selectNet(sId);
 	}
+	
 	
 	   
 

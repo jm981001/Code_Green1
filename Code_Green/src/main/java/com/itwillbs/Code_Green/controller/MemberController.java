@@ -99,7 +99,15 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
-
+	//아이디 중복체크
+	@ResponseBody
+	@PostMapping(value = "idCheck")
+	public int idCheck(@RequestParam("member_id") String member_id,@ModelAttribute MemberVO member) {
+		int memberCheck = service.idCheck(member_id);
+//		System.out.println("memberCheck"+memberCheck);
+		
+		return memberCheck;
+	}
 	// "/MemberJoinPro.me" 요청에 대해 비즈니스 로직 처리할 joinPro() 메서드 정의 - POST
 	// => 파라미터 : 회원 가입 정보(MemberVO), Model 객체
 	@PostMapping(value = "/MemberJoinPro.me")
@@ -113,7 +121,7 @@ public class MemberController {
 		String securePasswd = encoder.encode(member.getMember_pass());
 		// 3. MemberVO 객체의 패스워드에 암호문 저장
 		member.setMember_pass(securePasswd);
-
+		
 		int insertCount = service.joinMember(member);
 
 		if (insertCount > 0) { // 가입 성공

@@ -28,7 +28,10 @@
 					date_format(now(),'%Y%m%d%T')<!--	MANAGER_DATE VARCHAR(14) NOT NULL 				-->
 					)
 	</insert>
-
+	<!-- 아이디 중복검사 -->
+  	<select id="idCheck" resultType="int">
+  		SELECT COUNT(manager_id) FROM manager WHERE manager_id= #{manager_id}
+  	</select>
 
 <!-- 
 	BCryptPasswordEncoder 객체를 활용하여 로그인을 수행할 때

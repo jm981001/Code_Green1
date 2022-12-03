@@ -107,6 +107,7 @@ $(document).ready(function(){
 // member 정규식-----------------------------------------------------------------------------------
 	var checkNameResult = false, checkIdResult = false, checkPasswdResult = false;
 	var checkNameResultM = false, checkIdResultM = false, checkPasswdResultM = false;
+	var dupIdResult = false; var dupIdResultM = false;
 
 	function checkId(id) {
 		let regex = /^[a-z]+[a-z0-9]{5,19}$/g;
@@ -115,10 +116,13 @@ $(document).ready(function(){
 			$("#checkIdResult").css("color", "red");
 			checkIdResult = false;
 		} else {
-			$("#checkIdResult").html("사용 가능한 아이디 입니다");
-			$("#checkIdResult").css("color", "green");
+			$("#checkIdResult").html("ID 중복을 확인하세요");
+			$("#checkIdResult").css("color", "#c26607");
 			checkIdResult = true;
 		}
+		
+		
+		
 	}
 
 	function checkName(name) {
@@ -234,8 +238,8 @@ $(document).ready(function(){
 			$("#checkIdResultM").css("color", "red");
 			checkIdResultM = false;
 		} else {
-			$("#checkIdResultM").html("사용 가능한 아이디 입니다");
-			$("#checkIdResultM").css("color", "green");
+			$("#checkIdResultM").html("ID 중복을 확인하세요");
+			$("#checkIdResultM").css("color", "#c26607");
 			checkIdResultM = true;
 		}
 	}
@@ -340,3 +344,56 @@ $(document).ready(function(){
 		return true;
 		
 	}
+
+//회원 중복아이디 조회
+function dupId() {
+	var member_id = $('#member_id').val(); //id값이 "member_id"인 입력란의 값을 저장
+	$.ajax({
+		url: 'idCheck', //Controller에서 요청 받을 주소
+		type: 'post', //POST 방식으로 전달
+		data: { member_id : member_id },
+		success: function(memberCheck) { //컨트롤러에서 넘어온 checkCount값을 받는다 
+			if (memberCheck == 0) { //memberCheck가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+				$("#checkIdResult").html("사용 가능한 아이디 입니다");
+				$("#checkIdResult").css("color", "blue");
+				dupIdResult = true;
+				
+			} else { // memberCheck가 1일 경우 -> 이미 존재하는 아이디
+				alert("이미 존재하는 아이디 입니다");
+				alert("아이디를 다시 입력해주세요");
+				$('#member_id').val('');
+				dupIdResult = false;
+			}
+		},
+		error: function() {
+			alert("에러입니다");
+		}
+	});
+};
+
+//매니저 중복아이디 조회
+function dupIdM() {
+	var manager_id = $('#manager_id').val(); //id값이 "manager_id"인 입력란의 값을 저장
+	$.ajax({
+		url: 'idCheckM', //Controller에서 요청 받을 주소
+		type: 'post', //POST 방식으로 전달
+		data: { manager_id : manager_id },
+		success: function(managerCheck) { //컨트롤러에서 넘어온 checkCount값을 받는다 
+			if (managerCheck == 0) { //managerCheck가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+				$("#checkIdResultM").html("사용 가능한 아이디 입니다");
+				$("#checkIdResultM").css("color", "blue");
+				dupIdResultM = true;
+				
+			} else { // memberCheck가 1일 경우 -> 이미 존재하는 아이디
+				alert("이미 존재하는 아이디 입니다");
+				alert("아이디를 다시 입력해주세요");
+				$('#manager_id').val('');
+				dupIdResultM = false;
+			}
+		},
+		error: function() {
+			alert("에러입니다");
+		}
+	});
+};
+	

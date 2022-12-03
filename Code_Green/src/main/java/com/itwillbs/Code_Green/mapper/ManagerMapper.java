@@ -16,6 +16,8 @@ public interface ManagerMapper {
 	// 1. 기업 가입에 필요한 insertManager() 메서드 정의
 	// => 파라미터 : ManagerVO 객체(member), 리턴타입 : int
 	public int insertManager(ManagerVO manager);
+	// 1.5 아이디 중복체크
+	public int idCheck(String manager_id);
 	
 	// 2. 로그인에 필요한 selectPasswd() 메서드 정의
 	// => 파라미터 : String manager_id, 리턴타입 : String
@@ -142,6 +144,8 @@ public interface ManagerMapper {
 	public SellVO selectCommission(String sId);
 	//순수익
 	public SellVO selectNet(String sId);
+
+	
 	
 
 

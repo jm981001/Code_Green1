@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.Code_Green.service.ManagerService;
@@ -30,6 +31,7 @@ import com.itwillbs.Code_Green.vo.File_ItemVO;
 import com.itwillbs.Code_Green.vo.File_boardVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
+import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.SellVO;
@@ -80,6 +82,16 @@ public class ManagerController {
 
 	}
 
+	//아이디 중복
+	@ResponseBody
+	@PostMapping(value = "idCheckM")
+	public int idCheckM(@RequestParam("manager_id") String manager_id,@ModelAttribute ManagerVO manager) {
+		int managerCheck = service.idCheck(manager_id);
+//		System.out.println("managerCheck"+managerCheck);
+		
+		return managerCheck;
+	}
+	
 	@PostMapping(value = "/ManagerJoinPro.me")
 	public String joinManagerPro(@ModelAttribute ManagerVO manager, Model model, HttpSession session) {
 		
