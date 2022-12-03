@@ -2,14 +2,12 @@ package com.itwillbs.Code_Green.service;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.Code_Green.mapper.SellMapper;
 import com.itwillbs.Code_Green.vo.CartVO;
-import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 @Service
@@ -24,8 +22,10 @@ public class SellService {
 	}
 	
 	// 주문(sell)에 데이터 넣기
-	public int insertOrder(String member_id, int member_idx, SellVO sell, int sell_total_price) {
-		return sell_mapper.insertOrder(member_id, member_idx, sell, sell_total_price);
+	public int insertOrder(String member_id, int member_idx, 
+						   String member_name, String member_phone, String member_address, 
+						   String member_postcode, String sell_usecoin, int sell_total_price) {
+		return sell_mapper.insertOrder(member_id, member_idx, member_name, member_phone, member_address, member_postcode, sell_usecoin, sell_total_price);
 	}
 	
 	// 주문(sell_detail) 상세에 데이터 넣기

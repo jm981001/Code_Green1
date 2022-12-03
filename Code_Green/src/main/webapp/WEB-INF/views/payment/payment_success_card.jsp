@@ -49,11 +49,19 @@
             </div>
         </div>
         <section class="ps-section--account">
-            <div class="container">
+            <div class="container" style="text-align: center;">
                 <div class="ps-block--payment-success">
+                	<img src="/Code_Green/resources/img/recipe/turtle-icon.png">
                     <h3>결제가 완료 되었습니다 !</h3>
-                    <p>베지터틀을 이용해 주셔서 감사합니다. 자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
+                    <p>베지터틀을 이용해 주셔서 감사합니다. </p>
+                    <p>자세한 주문 내역을 확인하시려면<a href="myBuyList.my"> 마이 페이지</a>에서 확인 하실 수 있습니다.</p>
                 </div>
+                <br>
+                <h2 style="color: #669900;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+ 				 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+				</svg></h2>
+                <h4><a href="category_all">베지터틀의 상품을 더 보고 싶다면?</a></h4>
+                <h4><a href="/Code_Green">베지터틀 홈페이지로 가고싶다면?</a></h4>
 			</div>    
 		</section>
 	</main>

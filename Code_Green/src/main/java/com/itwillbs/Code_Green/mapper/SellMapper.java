@@ -1,12 +1,10 @@
 package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.Code_Green.vo.CartVO;
-import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface SellMapper {
@@ -15,7 +13,10 @@ public interface SellMapper {
 	List<CartVO> selectCart(String member_id);
 
 	// 주문하기
-	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, @Param("sell")SellVO sell, @Param("sell_total_price")int sell_total_price);
+	int insertOrder(@Param("member_id")String member_id, @Param("member_idx")int member_idx, 
+					@Param("member_name")String member_name, @Param("member_phone")String member_phone, 
+				    @Param("member_address")String member_address, @Param("member_postcode")String member_postcode, 
+				    @Param("sell_usecoin")String sell_usecoin, @Param("sell_total_price")int sell_total_price);
 
 	// 주문(sell_detail) 상세에 데이터 넣기
 	int insertOrderDetail(@Param("rf_item_idx")int rf_item_idx, @Param("sell_amount")int sell_amount, @Param("member_idx")int member_idx);

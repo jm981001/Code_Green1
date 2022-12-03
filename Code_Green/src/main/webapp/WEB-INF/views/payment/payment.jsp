@@ -31,8 +31,7 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_payment.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_main.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
-    <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
-    
+
     
 <!-- 기존 주소 클릭시 변경 주소 숨김 / 변경 주소 클릭시 기존 주소 숨김-->
     <style type="text/css">
@@ -44,282 +43,150 @@
 <!-- 주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
-    
+<script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script>
-<!-- 기존 주소 / 변경 주소 -->
-        function setDisplay(){    
-        	if($('input:radio[id=basic_address]').is(':checked')){
-        		$('#newDiv').hide(); 
-            	$('#basicDiv').show();
-        	} else {
-        		$('#basicDiv').hide(); 
-            	$('#newDiv').show();
-			}
-        }
-        
-<!-- 다음 주소 api -->
-        function execDaumPostcode() {
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    document.getElementById("postcode").value = data.zonecode; // 우편번호
-                    document.getElementById("address").value = data.roadAddress; // 주소(도로명 주소)
-                }
-            }).open();
-        }
+	let coin_use;
 
-        
-<!-- 적립금 사용 및 결제 금액 계산-->
-        let sell_total_price;
-        
-        function coin(){
-        		<!-- 적립금 사용 -->
-        		let sell_coin_total = $('.sell_coin_total').val();
-        		let sell_use_coin = $('.sell_use_coin').val();
-        		
-        		let sell_coin_total2 = parseInt(sell_coin_total, 10);
-        		let sell_use_coin2 = parseInt(sell_use_coin, 10);
-        		
-        		let sell_coin_remaining = sell_coin_total2 - sell_use_coin2;
-        		
-        		if(sell_coin_remaining >= 0){
-				 	$(".sell_coin_remain").html(sell_coin_remaining); 
-				 	$(".sell_use_coin").html(sell_use_coin2);
-        		} else {
-        			alert("사용할 적립금은 보유 적립금보다 적거나 같아야 합니다.");
-        		}
-        		
-        		<!-- 전체 상품 금액 -->
-        		let sell_item_total_price = $('.sell_item_total_price').val();
-        		let sell_item_total_price2 = parseInt(sell_item_total_price, 10);
-        		
-        		<!-- 배송비 -->
-     			let sell_shipping_fee = $('.sell_shipping_fee').val();
-     			let sell_shipping_fee2 = parseInt(sell_shipping_fee, 10);
-        		
-     			<!-- 전체 결제 금액 = 전체 상품 금액 - 적립금 사용 + 배송비 -->
-        		sell_total_price = sell_item_total_price2 - sell_use_coin2 + sell_shipping_fee2;
-        		$(".sell_total_price").html(sell_total_price);
-        }	
-        	
-        	function orderCheck() {
-        		
-				let result = confirm('주문하시겠습니까? 결제 페이지로 이동합니다.');
-				
-				if(result){
-					let subForm = document.getElementById('orderList');
-	        		
-	        		let input = document.createElement('input');
-	        		
-	        		input.type   = 'hidden';
-	        		
-	        		input.name  = 'sell_total_price';
-	        		
-	        		input.value  = sell_total_price;
-	        		
-	        		subForm.appendChild(input);	
-				} else {
-					alert('주문 실패하였습니다. 다시 시도해 주세요.');
-					return false;
-				}	
-			
-			} 
-        	
-    </script>
+	function coinUse() {
+		
+		let coin_total = ${coin.coin_total};
+		coin_use = $('.coin_use').val();
+		
+		let coin_remain = coin_total - coin_use;
+		
+		if(coin_remain >= 0){
+			$('.coin_remain').html(coin_remain);
+		 	$('.coin_use').html(coin_use);
+		} else {
+			alert("사용할 적립금은 보유 적립금보다 적거나 같아야 합니다.");
+		} 
+		
+		let sell_total_price = ${map.sumM} + ${map.fee} - coin_use;
+		$('.sell_total_price').html(sell_total_price);
+	
+// 		return coin_use;
+	}
+	
+	function orderGo() {
+		let result = confirm("주문하시겠습니까? 확인을 클릭하시면 주문 완료 및 결제 페이지로 이동합니다.")
+		
+		let member_idx = ${memberInfo.member_idx }
+		let item_total_price = ${map.sumM}
+	
+		if(result){
+			$.ajax({
+				type : 'POST',
+				url : 'payment_success',
+				data :{
+					member_idx : member_idx,
+					member_name : '${memberInfo.member_name }',
+					member_phone : '${memberInfo.member_phone }',
+					member_address : '${memberInfo.member_address }',
+					member_postcode : '${memberInfo.member_postcode }',
+					item_total_price : item_total_price,
+					shipping_fee : ${map.fee},
+					sell_usecoin : coin_use
+				},
+				success : function(data) {
+					alert('주문이 완료되었습니다.');
+					
+					location.href = 'payment_success_cardPayForm?member_id=${sessionScope.sId}'; 
+				},
+				fail : function(data2) {
+					alert('주문이 실패되었습니다. 다시 시도해 주세요.');
+				}
+			}); 
+		} else {
+			alert('주문이 실패 되었습니다. 다시 시도해 주세요.');
+		}
+	}	
+
+</script>
+ 
 </head>
 
 <body>
  	
  	<jsp:include page="../inc/top.jsp"></jsp:include>
  	
-    <main class="ps-page--my-account">
-        <div class="ps-breadcrumb">
+    <section class="ps-section--account ps-checkout">
             <div class="container">
-                <ul class="breadcrumb">
-                    <li><a href="/Code_Green">Home</a></li>
-                    <li>주문</li>
-                </ul>
-            </div>
-        </div>
-        <section class="ps-section--account ps-checkout">
-            <div class="container">
-                <div class="ps-section__header" style="text-align: center;">
-                    <h3>ORDER</h3>
+                <div class="ps-section__header">
+                    <h3>Payment</h3>
                 </div>
-                <div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="basic_address" checked onchange="setDisplay()">
-				  <label class="form-check-label" for="flexRadioDefault1">
-				    기존 주소
-				  </label>
-				</div>
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="flexRadioDefault" id="new_address" onchange="setDisplay()">
-				  <label class="form-check-label" for="flexRadioDefault2">
-				    변경 주소
-				  </label>
-				</div>
                 <div class="ps-section__content">
+<!--                     <form class="ps-form--checkout" action="index.html" method="get"> -->
                         <div class="ps-form__content">
                             <div class="row">
-                                <div class="ps-block--shipping">
-                                        
-                                        
-	                                     <!-- 기존 주소 -->
-	                                 <form action="payment_success?member_id=${sessionScope.sId }" method="post" id="orderList" name="orderList" onsubmit="return orderCheck()">
-	                                 	<input type="hidden" name="member_idx" value="${coin.rf_member_idx }">
-	                                 	<input type="hidden" name="shipping_fee" value=${shipping_fee }>
-	                                 	<input type="hidden" name="sell_item_total_price" value="${cart_total }">
-	                                 	<div class="ps-block__panel" id="basicDiv" style="width: 1200px;">
-	                                  		<div class="mb-3">
-												<label for="formGroupExampleInput" class="form-label">이름</label>
-												<input type="text" class="form-control" id="sell_receiver" name="sell_receiver" value="${memberInfo.member_name }" readonly="readonly">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">연락처</label>
-												<input type="text" class="form-control" id="sell_phone" name="sell_phone" value="${memberInfo.member_phone }" readonly="readonly">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">우편번호</label>
-												<input type="text" class="form-control" id="sell_postcode" name="sell_postcode" value="${memberInfo.member_postcode }" readonly="readonly">
-											</div>
-											<div class="mb-3">
-												<label for="formGroupExampleInput2" class="form-label">배송지 주소</label>
-												<input type="text" class="form-control" id="sell_address" name="sell_address" value="${memberInfo.member_address }" readonly="readonly">
-											</div>
-	                                    </div>
-	                                     	
-	                                     	
-<!-- 	                                 변경 주소 	 -->
-<!-- 										<div class="ps-block__panel" id="newDiv" style="width: 1200px;"> -->
-<!-- 	                                      	<div class="mb-3"> -->
-<!-- 												<label for="formGroupExampleInput" class="form-label">이름</label> -->
-<!-- 												<input type="text" class="form-control" name="sell_receiver" placeholder="받는 분의 이름을 입력하세요."> -->
-<!-- 											</div> -->
-<!-- 											<div class="mb-3"> -->
-<!-- 												<label for="formGroupExampleInput2" class="form-label">연락처</label> -->
-<!-- 												<input type="text" class="form-control" name="sell_phone" placeholder="받는 분의 연락처를 입력하세요."> -->
-<!-- 											</div> -->
-<!-- 											<div class="mb-3"> -->
-<!-- 												<label for="formGroupExampleInput2" class="form-label">우편번호</label> -->
-<!-- 												<input type="button" value="주소 검색" onclick="execDaumPostcode()"> -->
-<!-- 												<input type="text" class="form-control" id="postcode" name="sell_postcode" placeholder="받는 분의 우편번호를 입력하세요."> -->
-<!-- 											</div> -->
-<!-- 											<div class="mb-3"> -->
-<!-- 												<label for="formGroupExampleInput2" class="form-label">배송지 주소</label> -->
-<!-- 												<input type="text" class="form-control" id="address" name="sell_address" placeholder="받는 분의 주소를 입력하세요.(주소 검색 클릭 후 상세 주소까지 입력해주세요.)"> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-										
-										
-										
-										<!-- 공통 -->
-										
-										<!-- 적립금 -->
-										<div class="ps-block--checkout-order">
-	                                        <div class="ps-block__content">
-	                                        	<span style="padding: 0 40px; margin: 0 20px;">
-		                                        	보유 적립금
-		                                        	<input type="text" value="${coin.coin_total }" class="sell_coin_total" style="color: #5fa30f;" readonly="readonly">
-	                                        	</span>
-	                                        	<span style="padding: 0 40px; margin: 0 20px;">
-												 사용할 적립금
-		                                        	<input type="text" name="sell_usecoin" class="sell_use_coin" style="color: #5fa30f;" required="required">
-		                                        	<input type="button" value="사용" class="sell_coin_use_btn" onclick="coin()">
-	                                        	</span>
-	                                        	<span style="padding: 0 40px; margin: 0 20px;">
-		                                        	 남은 적립금
-		                                        	 <span class="sell_coin_remain" style="padding: 50px; color : #5fa30f;"></span>
-	                                        	</span>
-	                                        </div>
-	                                       </div>
-		                                     
-	                                     
-	                                      <!-- 주문 내역 -->
-		                                  <!-- cart에서 넘어온거 뿌리기 -->
-		                                    <div class="ps-block--checkout-order">
-		                                        <div class="ps-block__content">
-		                                           <table class="orderList">
-		                                           	 	<tr>
-			                                           		<td></td><!-- 파일 -->
-<!-- 			                                           		<td>상품 번호</td> -->
-			                                           		<td>브랜드명</td>
-			                                           		<td>상품명</td>
-			                                           		<td>가격</td>
-			                                           		<td>주문 갯수</td>
-			                                           		<td>상품 총 금액</td>
-			                                           	</tr>
-			                                          <c:forEach var="cart" items="${cartList }"> 	
-			                                           	<tr>
-			                                           		<td>
-			                                           			<img src="/Code_Green/resources/item/${cart.file1 }">
-			                                           		</td>
-<!-- 			                                           		<td> -->
-<%-- 			                                           			<input type="text" name="item_idx" value="${cart.rf_item_idx }"> --%>
-<!-- 			                                           		</td> -->
-			                                           		<td>${cart.manager_brandname }</td>
-			                                           		<td>${cart.item_name }</td>
-			                                           		<td>${cart.item_price }</td>
-			                                           		<td >${cart.cart_amount }</td>
-			                                           		<td><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/></td>
-			                                           	</tr>
-			                                         </c:forEach> 
-			                                         	<tr>
-			                                           		<td>주문 총 금액</td>
-			                                           		<td colspan="6">
-			                                           			<input type="text" value="${cart_total }" class="sell_item_total_price" readonly="readonly">
-			                                           		</td>
-				                                        </tr>	
-				                                         <tr>
-			                                           		<td>배송비</td>
-			                                           		<td colspan="6">
-			                                           			<input type="text" value="${shipping_fee }" class="sell_shipping_fee" readonly="readonly">
-			                                           		</td>
-				                                        </tr>	
-				                                         <tr>
-			                                           		<td>사용한 적립금</td>
-			                                           		<td colspan="6" class="sell_use_coin">
-			                                           		</td>
-				                                        </tr>	
-				                                         <tr>
-			                                           		<td>결제 금액</td>
-			                                           		<td colspan="6">
-			                                           			<span class="sell_total_price"></span>
-			                                           		</td>
-			                                        	</tr>	
-			                                        </table>
-			                                     </div>
-			                                 </div>
-			                                 <div class="ps-block--checkout-order">
-		                                        <div class="ps-block__content">
-		                                        	<div style="padding: 0 40px; margin: 0 20px; text-align: center;">
-<!-- 				                                        <input type="radio" name="sell_pay_type" value="무통장입금">무통장입금 -->
-				                                        <input type="radio" name="sell_pay_type" value="카드결제">카드결제
-		                                        	</div>
-		                                        </div>
-		                                       </div> 
-			                                  
-			                                  
-			                                  <!-- 주문하기 버튼 -->
-			                                 <div class="ps-block--payment-method" style="background: white">
-			                                     <div class="ps-tabs">
-		                                            <div class="ps-tab active" id="account">
-		                                                 <div class="form-group submit">
-		                                                       <input type="submit" class="ps-btn ps-btn--fullwidth" id="orderBtn" value="주문하기">
-		                                                 </div>
-		                                           </div>
-			                                    </div>
-		                                	</div>   
-		                           		</form>
-							         </div>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-    		</section>
+                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                                    <div class="ps-block--shipping">
+                                        <div class="ps-block__panel">
+                                            <figure><small>name</small>
+                                                <p>${memberInfo.member_name }</p><a href="#">Change</a>
+                                            </figure>
+                                            <figure><small>phone</small>
+                                                <p>${memberInfo.member_phone }</p><a href="#">Change</a>
+                                            </figure>
+                                            <figure><small>phone</small>
+                                                <p>${memberInfo.member_address }</p><a href="#">Change</a>
+                                            </figure>
+                                            <figure><small>postcode</small>
+                                                <p>${memberInfo.member_postcode }</p><a href="#">Change</a>
+                                            </figure>
+                                        </div>
+                                        <h4>Shipping_fee</h4>
+                                        <div class="ps-block__panel">
+                                            <figure><small>Shipping_fee</small><strong>${map.fee}</strong></figure>
+                                        </div>
+                                        <h4>Coin</h4>
+                                        <div class="ps-block__panel">
+                                            <figure><small>Coin_total</small><strong>${coin.coin_total }</strong></figure>
+                                            <figure><small>Coin_use</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
+                                            <figure><small>Coin_remain</small><strong><span class="coin_remain"></span></strong></figure>
+                                            
+                                        </div>
+                                        <button class="ps-btn ps-btn--fullwidth"  type="button" onclick="orderGo()">ORDER</button>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                                    <div class="ps-block--checkout-order">
+                                        <div class="ps-block__content">
+                                            <figure>
+                                                <figcaption><strong>Product</strong><strong>Total</strong></figcaption>
+                                            </figure>
+                                            <c:forEach var="cart" items="${cartList }">
+                                            <figure class="ps-block__items">
+                                            	<a href="#"><strong>${cart.item_name }</strong><span><fmt:formatNumber value="${cart.cart_total*cart.cart_amount }"/></span></a>
+                                            	<a href="#"><strong>${cart.manager_brandname }</strong><span>${cart.cart_amount }개 * <small>${cart.item_price }</small></span></a>
+                                            </figure>
+                                            </c:forEach>
+                                            <figure>
+                                                <figcaption><strong>Subtotal</strong>${map.sumM }</figcaption>
+                                            </figure>
+                                            <figure>
+                                                <figcaption><strong>Shipping</strong>${map.fee}</figcaption>
+                                            </figure>
+                                            <figure>
+                                                <figcaption><strong>Coin</strong><span class="coin_use"></span></figcaption>
+                                            </figure>
+                                            <figure class="ps-block__total">
+                                                <h3>Total<strong><span class="sell_total_price"><fmt:formatNumber value="${map.sumM + map.fee}"/></span></strong></h3>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                     </form> -->
+                </div>
+            </div>
+        </section>
     
 </main>
    
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
-   
+          
+
     <script src="/Code_Green/resources/plugins/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
     <script src="/Code_Green/resources/plugins/popper.min.js"></script>
