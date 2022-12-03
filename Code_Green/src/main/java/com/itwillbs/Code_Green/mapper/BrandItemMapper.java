@@ -13,7 +13,10 @@ public interface BrandItemMapper {
 	List<ManagerVO> selectBrandList();
 
 	// 브랜드별 아이템리스트 출력
-	List<ItemVO> selectBrandItemList(@Param("manager_idx")int manager_idx,@Param("ordering") String ordering, @Param("startRow") int startRow,@Param("listLimit") int listLimit);
+	List<ItemVO> selectBrandItemList(@Param("manager_idx")int manager_idx,@Param("ordering") String ordering);
+	
+	// 개별브랜드 아이템리스트별 카운트
+	int selectBrandItemListCount(int manager_idx);
 	
 	// 브랜드별 정보 및 아이템수 출력
 	ManagerVO selectBrandDetail(int manager_idx);
@@ -31,10 +34,9 @@ public interface BrandItemMapper {
 	int selectBrandListCount(@Param("manager_idx") int manager_idx);
 
 	// 멀티체크 리스팅 아이템리스트 출력 ( + 정렬 ) 
-	List<ItemVO> selectBrandItemListListing(@Param("brands")List<String> brands,@Param("ordering") String ordering,@Param("startRow") int startRow,@Param("listLimit") int listLimit);
+	List<ItemVO> selectBrandItemListListing(@Param("brands")List<String> brands,@Param("ordering") String ordering);
 
-	// 멀티체크 리스팅 아이템리스트카운트
-	int selectBrandItemListListingCount(@Param("brands")List<String> brands);
+	
 
 	
 	

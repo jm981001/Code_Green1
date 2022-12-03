@@ -6,19 +6,17 @@
                   <aside class="widget widget--vendor">
                            
                             <h3 class="widget-title" id="brandNameBar">${ brandDetail.manager_brandname}</h3>
-	                           
-	                           	<c:if test="${not empty sessionScope.sId && sessionScope.sId ne 'admin' && empty sessionScope.sCode}">
-	                            <div class="brandfollowbtn">
-		                            <a class="ps-block__inquiry" href="javascript:void(0);" onclick="followCheck(${brandDetail.manager_idx});"><span id="fStatus">${followCheckRevertResult}</span></a>
-		                            <img src="/Code_Green/resources/img/forzero/${heartStatus}" id="heart_icon_brand_b">
-	                            </div>
-	                            </c:if>
+                           	<c:if test="${not empty sessionScope.sId && sessionScope.sId ne 'admin' && empty sessionScope.sCode}">
+                            <div class="brandfollowbtn">
+	                            <a class="ps-block__inquiry" href="javascript:void(0);" onclick="followCheck(${brandDetail.manager_idx});"><span id="fStatus">${followCheckRevertResult}</span></a>
+	                            <img src="/Code_Green/resources/img/forzero/${heartStatus}" id="heart_icon_brand_b">
+                            </div>
+                            </c:if>
                             <div class="ps-block__user" >
 		                     	<div class="ps-block__user-avatar">
 		                     	<!-- 브랜드별 로고띄우기 -->
 	                     		   <img src="<%=request.getContextPath() %>/resources/img/brand_logo/${ brandDetail.manager_original_file}" width="250px" height="200px">
-		                           <div class="brand_info">
-		                           		${ brandDetail.manager_info}<br>
+		                           		<div id="followInfo">
 		                           		<c:choose>
 			                           		<c:when test="${ brandDetail.brand_follower gt 0}"> 
 			                           		<small>지금 이 브랜드를<br>
@@ -29,11 +27,14 @@
 				                           		첫 단골이 되어보세요:) </small>
 			                           		</c:when>
 		                           		</c:choose>
-		                           </div>
+			                           	</div>
+			                           <div class="brand_info">
+			                           		${ brandDetail.manager_info}<br>
+			                           </div>
 		                    	</div>
 		                    </div>
-	<!-- =========================================== 사이드바 시작 ======================================================== -->
- 	<!-- =========================================== 사이드바 끝======================================================== -->	
+<!-- =========================================== 사이드바 시작 ======================================================== -->
+<!-- =========================================== 사이드바 끝======================================================== -->	
                  </aside>
              </div>
          	 <div class="ps-section__right">
@@ -50,8 +51,8 @@
 	                      <a href="javascript:void(0);" onclick="goBrandList(${brandDetail.manager_idx},'highest_price')">높은가격순</a>
                       </div>
                    </div>
-           <!-- =========================================== 상품리스트 시작=====================================================-->
-           <!-- ===================================== 상품 1개당 ================================================== --> 
+<!-- =========================================== 상품리스트 시작=====================================================-->
+<!-- ===================================== 상품 1개당 ================================================== --> 
                     <div class="ps-tabs">
                         <div class="ps-tab active" id="tab-1">
                             <div class="ps-shopping-product">
@@ -76,19 +77,14 @@
                                            <div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.manager_brandname }</a>
                                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
                                                     <div class="ps-product__rating">
-<!--                                                    	 <select class="ps-rating" data-read-only="true"> -->
-<%--                                                         <c:forEach var="i" begin="1" end="5"> --%>
-<%-- 			                                             	<c:choose> --%>
-<%-- 			                                             		<c:when test="${i <= brand.score}"> --%>
-<%-- 			                                             			<option value="1">${i }</option> --%>
-<%-- 			                                             		</c:when> --%>
-<%-- 			                                             		<c:otherwise> --%>
-<%-- 			                                             			<option value="2">${i }</option> --%>
-<%-- 			                                             		</c:otherwise> --%>
-<%-- 			                                             	</c:choose> --%>
-<%-- 			                                             </c:forEach> --%>
-<!--                                                       </select> -->
-                                                      <span><i class="fi fi-sr-star"></i>리뷰평점(${brand.board_star_score })</span>
+                                                    <c:if test="${not empty brand.board_star_score}">
+                                                      	<span><i class="fi fi-sr-star"></i>
+                                                      	리뷰평점(${brand.board_star_score })</span>
+                                                      </c:if>
+                                                      <c:if test="${empty brand.board_star_score}">
+                                                      	<span><i class="fi fi-sr-star"></i>
+                                                      	리뷰평점(후기없음)</span>
+                                                      </c:if>
                                                     </div>
                                                   <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>
@@ -102,7 +98,7 @@
                                </c:forEach>     
                                 </div>
                             </div>
-                             <!-- 페이징 버튼들 시작 -->
+                    <!-- 페이징 버튼들 시작 -->
 		 		 		<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
 		                  <div class="ps-pagination">
 		                      <ul class="pagination">
@@ -117,11 +113,10 @@
 		                      </ul>
 		                  </div>
                     <!-- 페이징 버튼들 끝 -->  
-                            
-                                </div>
-                           </div>
-                       </div>
-					</div>
+                </div>
+              </div>
+            </div>
+		</div>
 					
 					
-		<!-- =========================================== 상품리스트 끝=====================================================-->
+<!-- =========================================== 상품리스트 끝=====================================================-->

@@ -11,6 +11,7 @@ import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ManagerVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 @Service
@@ -92,6 +93,16 @@ public class MemberService {
 	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
 	public int memberDelete(MemberVO member) {
 		return mapper.memberDelete(member);
+	}
+	
+	// 마이페이지 - 신고내역 목록
+	public List<ReportVO> getReportList(int startRow, int listLimit, String member_id) {
+		return mapper.selectReportList(startRow, listLimit, member_id);
+	}
+
+	// 마이페이지 - 신고내역 목록갯수 카운트
+	public int getReportListCount(String member_id) {
+		return mapper.selectReportListCount(member_id);
 	}
 
 

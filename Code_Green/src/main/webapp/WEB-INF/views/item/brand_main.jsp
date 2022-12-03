@@ -102,11 +102,18 @@
 		font-size: 80%;
 		margin-left: 0px;
 	}
+	
+	#followInfo {
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 15px;
+	}
 </style>
 <script>
 	let pageNum = 1;
 	let checkArray = "";
 	let ordering = "";
+	
 	// 입점브랜드 목록 토글버튼 
 	function togglefun(text){
 		var target = document.querySelector('#listlist');
@@ -120,22 +127,17 @@
 	}
 	
 	
+	function twoWay(ordering){
+		if(checkArray==''||checkArray==null){
+			goWholeList(ordering);
+		}else {
+			getList(ordering);
+		}
+	}
+	
+	
 	$(function(){
-		console.log("onload");
-		goWholeList();
-		
-		
-		// 전체보기 무한스크롤
-		$(window).scroll(function() {
-			let scrollTop = $(window).scrollTop(); 
-			let windowHeight = $(window).height(); 
-			let documentHeight = $(document).height(); 
-			if(scrollTop + windowHeight + 1 >= documentHeight) {
-				pageNum++;
-				goWholeList();
-			}
-		});
-		
+		goWholeList(ordering);
 		
 		// 브랜드이름 체크박스 이벤트
 		$('input[type=checkbox]').click(function() {
@@ -155,28 +157,30 @@
 			console.log("getList()정렬: " + ordering); 
 			console.log("getList()checkArray : " + checkArray);
 			$.ajax({
-				url:"ListListing.br?pageNum="+ pageNum,
+				url:"ListListing.br",
 				type:"get",
 				data:{ 
 					brandsIndex: checkArray,
 					ordering: ordering
 				},
 				success:function(data){
-					console.log("getList()결과 : " +data); 
-					$(".append_here").html(data);		
-	// 				$(".append_here").append(data);    // 멀티체크+무한스크롤....스크롤하려면 append해야하는데..근데 갈아끼워야하고...?
+					$(".append_here").html(data);  
 				}
 			})
 		}
 	
 	
 	// 브랜드별 전체브랜드 아이템 출력 
-	function goWholeList(){
+	function goWholeList(ordering){
+		ordering = ordering;
 		$.ajax({
-			url:"GetWholeItemList.br?pageNum=" + pageNum,
+			url:"GetWholeItemList.br",
 			type:"get",
+			data:{ 
+				ordering : ordering
+			},
 			success:function(data){
-				$(".append_here").append(data);
+				$(".append_here").html(data);
 			}
 		});
 		
@@ -185,7 +189,7 @@
 	// 브랜드별 개별브랜드 아이템 출력 
 	function goBrandList(manager_idx,ordering){
 		$.ajax({
-			url:"GetBrandItemList.br?pageNum=&manager_idx=" + manager_idx,
+			url:"GetBrandItemList.br?manager_idx=" + manager_idx,
 			type:"get",
 			data: {
 				ordering : ordering
@@ -364,9 +368,9 @@
                    <div class="ps-shopping__header">
                       <p><strong> 전체상품 </strong></p>
                        <div id="orderbylist">
-                         <a href="javascript:void(0);" onclick="getList('recent')">최근순</a>  |  
-                         <a href="javascript:void(0);" onclick="getList('lowest_price')">낮은가격순</a> | 
-                 	   	   <a href="javascript:void(0);" onclick="getList('highest_price')">높은가격순</a>
+                         <a href="javascript:void(0);" onclick="twoWay('recent')">최근순</a>  |  
+                         <a href="javascript:void(0);" onclick="twoWay('lowest_price')">낮은가격순</a> | 
+                 	   	   <a href="javascript:void(0);" onclick="twoWay('highest_price')">높은가격순</a>
                        </div>
                    </div>
 		           <div class="ps-tabs">

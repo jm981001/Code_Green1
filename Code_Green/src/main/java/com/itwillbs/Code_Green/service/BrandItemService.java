@@ -26,15 +26,22 @@ public class BrandItemService {
 	}
 	
 	// 브랜드별 아이템리스트 출력
-	public List<ItemVO> selectBrandItemList(int manager_idx, String ordering, int startRow, int listLimit) {
-		return mapper.selectBrandItemList(manager_idx, ordering, startRow, listLimit);
+	public List<ItemVO> selectBrandItemList(int manager_idx, String ordering) {
+		return mapper.selectBrandItemList(manager_idx, ordering);
 	}
+	
+	// 개별브랜드 아이템리스트별 카운트
+	public int selectBrandItemListCount(int manager_idx) {
+		return mapper.selectBrandItemListCount(manager_idx);
+	}
+	
 	
 	// 브랜드별 정보 및 아이템수 출력
 	public ManagerVO selectBrandDetail(int manager_idx) {
 		return mapper.selectBrandDetail(manager_idx);
 	}
-
+	
+	
 	// 팔로우하기
 	public int brandGoFollow(int manager_idx, int member_idx) {
 		return mapper.insertFollow(manager_idx, member_idx);
@@ -51,14 +58,12 @@ public class BrandItemService {
 	}
 
 	// 멀티체크 리스팅 아이템리스트 출력 ( + 정렬 ) 
-	public List<ItemVO> selectBrandItemListListing(List<String> brands, String ordering, int startRow, int listLimit) {
-		return mapper.selectBrandItemListListing(brands,ordering,startRow,listLimit);
+	public List<ItemVO> selectBrandItemListListing(List<String> brands, String ordering) {
+		return mapper.selectBrandItemListListing(brands,ordering);
 	}
+
 	
-	// 멀티체크 리스팅 아이템리스트카운트
-	public int getBrandListListingCount(List<String> brands) {
-		return mapper.selectBrandItemListListingCount(brands);
-	}
+	
 	
 	
 }

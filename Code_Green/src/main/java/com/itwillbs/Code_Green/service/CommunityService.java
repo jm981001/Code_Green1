@@ -115,12 +115,6 @@ public class CommunityService {
 		return mapper.selectBoardModify(board);
 	}
 	
-//	// 글 수정폼 페이지에 파일 데이터 가져오기
-//	public File_boardVO getFile(int board_idx) {
-//		return mapper.selectFileModify(board_idx);
-//	}
-	
-	
 	// 커뮤니티 게시글 삭제 전 실제 파일명 조회 1  
 	public String getRealFile1(int board_idx) {
 		return mapper.selectRealFile1(board_idx);
@@ -150,6 +144,7 @@ public class CommunityService {
 	public int modifyBoard(BoardVO board) {
 		return mapper.updateBoard(board);
 	}
+	
 
 	
 

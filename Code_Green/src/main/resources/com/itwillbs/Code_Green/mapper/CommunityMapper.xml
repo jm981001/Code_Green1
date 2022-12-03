@@ -144,9 +144,9 @@
 			INTO file_board
 			VALUES (
 				#{file_board_idx} + 1,
-				IFNULL(#{file1},''),
-				IFNULL(#{file2},''), 
-				IFNULL(#{file3},''), 
+				#{file1},
+				#{file2},
+				#{file3},
 				(SELECT MAX(board_idx) FROM board)
 			)
 	</insert>
@@ -222,8 +222,6 @@
 		WHERE board_type = '커뮤' AND board_idx = #{board_idx};
 	</select>
 	
-	
-		
 	<!-- 글 수정 => 파일 업데이트  -->	
 	<update id="updateFile">
 		UPDATE file_board
@@ -307,7 +305,7 @@
 					#{report_content}, 
 					#{reporter}, 
 					'처리대기', 				
-					date_format(now(),'%Y%m%d%T'))
+					now())
 					
 	</insert>
 	

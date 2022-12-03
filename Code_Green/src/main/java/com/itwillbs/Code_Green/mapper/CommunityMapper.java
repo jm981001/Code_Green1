@@ -90,7 +90,7 @@ public interface CommunityMapper {
 
 	// 글 수정하기 -> 글수정
 	int updateBoard(BoardVO board);
-	
+
 	
 
 

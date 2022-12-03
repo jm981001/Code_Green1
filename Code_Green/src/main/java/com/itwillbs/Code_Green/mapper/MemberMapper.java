@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface MemberMapper {
@@ -63,6 +64,12 @@ public interface MemberMapper {
 
 	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
 	public int memberDelete(MemberVO member);
+	
+	// 마이페이지 - 신고내역 목록
+	public List<ReportVO> selectReportList(@Param("startRow")int startRow,@Param("listLimit") int listLimit,@Param("member_id") String member_id);
+
+	// 마이페이지 - 신고내역 목록갯수 카운트
+	public int selectReportListCount(String member_id);
 
 	
 

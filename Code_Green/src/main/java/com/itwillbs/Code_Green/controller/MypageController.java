@@ -28,6 +28,7 @@ import com.itwillbs.Code_Green.vo.ItemVO;
 import com.itwillbs.Code_Green.vo.MemberVO;
 import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
+import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
 
 
@@ -532,7 +533,6 @@ public class MypageController {
 		
 		int listLimit = 8; 
 		int pageListLimit = 8; 
-		
 		int startRow = (pageNum - 1) * listLimit;
 		
 		// 1:1 문의내역 목록
@@ -642,8 +642,42 @@ public class MypageController {
 			return "member/myPage_board";
 		}
 		
-		
 	
+	//------------ 마이페이지 신고목록 페이지 -------------------------------------------
+	@GetMapping(value = "/myPageReportList.my")
+	public String myPageReportList(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
+		String member_id = (String) session.getAttribute("sId");
+		if(member_id==null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "member/fail_back";
+		}
+		
+		int listLimit = 10; 
+		int pageListLimit = 10; 
+		int startRow = (pageNum - 1) * listLimit;
+		
+		// 신고내역 목록 
+		List<ReportVO> reportList = Mservice.getReportList(startRow, listLimit, member_id);
+		
+		// 신고내역 목록 갯수
+		int reportListCount = Mservice.getReportListCount(member_id);
+		
+		int maxPage = (int)Math.ceil((double)reportListCount / listLimit);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pageInfo = new PageInfo(
+				pageNum, listLimit, reportListCount, pageListLimit, maxPage, startPage, endPage);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("reportList", reportList);
+		
+		
+		return "member/myPage_reportList";
+	}
 	
 	//------------마이페이지 개인정보 수정페이지-------------------------------------------
 	@GetMapping(value = "myPage_userInfo")

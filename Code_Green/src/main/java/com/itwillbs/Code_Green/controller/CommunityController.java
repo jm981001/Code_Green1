@@ -150,60 +150,30 @@ public class CommunityController {
 		// => 복수개의 파일이 각각 다른 name 속성으로 전달된 경우
 		// => 각각의 MultipartFile 객체를 통해 getFile() 메서드 호출
 //				MultipartFile mFile = board.getFile();
-		
-		String uuid = UUID.randomUUID().toString();
-		
-	
 		MultipartFile mFile1 = fileBoard.getFile_1();
 		MultipartFile mFile2 = fileBoard.getFile_2();
 		MultipartFile mFile3 = fileBoard.getFile_3();
 		
+		String uuid = UUID.randomUUID().toString();
+
 		String originalFileName1 = mFile1.getOriginalFilename();
 		String originalFileName2 = mFile2.getOriginalFilename();
 		String originalFileName3 = mFile3.getOriginalFilename();
 
 		
-		// ========================================================
-		
-		if(originalFileName1!=null) {
-			fileBoard.setFile1(uuid + "_" + originalFileName1);
-			System.out.println("업로드 될 파일명1 : " + uuid + "_" + originalFileName1);
-		}
-
-		if(originalFileName2!=null) {
-			fileBoard.setFile2(uuid + "_" + originalFileName2);
-			System.out.println("업로드 될 파일명2 : " + uuid + "_" + originalFileName2);
-		}
-		
-		if(originalFileName3!=null) {
-			fileBoard.setFile3(uuid + "_" + originalFileName3);
-			System.out.println("업로드 될 파일명3 : " + uuid + "_" + originalFileName3);
-		}
-		
-		// ===========================================================
+		fileBoard.setFile1(uuid + "_" + originalFileName1);
+		fileBoard.setFile2(uuid + "_" + originalFileName2);
+		fileBoard.setFile3(uuid + "_" + originalFileName3);
+// ========================================================
 
 		int insertCount = service.writeCommunityBoard(board);
-		
-		// 사진파일이 하나도 등록안될경우 + 사진등록 될 경우 
-		int file_insertCount = 0;
-		if(!(originalFileName1==null
-				&& originalFileName2==null 
-				&& originalFileName3==null)){
-			file_insertCount = service.writeCommunityFile(fileBoard);
-		}
-		System.out.println("file_insertCount: " + file_insertCount);
+		int file_insertCount = service.writeCommunityFile(fileBoard);
 		if(insertCount > 0) {
 			if(file_insertCount > 0) {
 				try {
-					if(fileBoard.getFile1() != null) {
 						mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
-					}
-					if(fileBoard.getFile2() != null) {
 						mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
-					}
-					if(fileBoard.getFile3() != null) {
 						mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
-					}
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -215,9 +185,7 @@ public class CommunityController {
 				model.addAttribute("msg", "파일 업로드 실패!");
 				return "member/fail_back3";
 			}
-			
 		} else {
-			
 			model.addAttribute("msg", "글 등록에 실패하였습니다. \n 다시한번 시도해주세요.");
 			return "member/fail_back3";
 		}
@@ -242,13 +210,13 @@ public class CommunityController {
 									 HttpSession session,
 									 @RequestParam(defaultValue = "1") int pageNum,
 									 Model model) {
-		
+
 		// 기존 실제파일명을 변수에 저장 ( 새파일 업로드시 삭제필요 )
 		String oldRealFile1 = fileBoard.getFile1();
 		String oldRealFile2 = fileBoard.getFile2();
 		String oldRealFile3 = fileBoard.getFile3();
 		
-		String uuid = UUID.randomUUID().toString();
+		
 		String uploadDir = "/resources/commUpload";	// 가상의 업로드 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
 		
@@ -264,123 +232,94 @@ public class CommunityController {
 		MultipartFile mFile2 = fileBoard.getFile_2();
 		MultipartFile mFile3 = fileBoard.getFile_3();
 		
-		// 새 파일 업로드 여부 판별 저장 변수 선언(true : 새 파일 업로드)
-		boolean isNewFile1 = false, isNewFile2 = false, isNewFile3 = false; 
-		
-		// MultipartFile 객체의 원본 파일명이 널스트링("") 인지 판별
-		// => 주의! 새 파일 업로드 여부와 관계없이 MultipartFile 객체는 항상 생성됨(null 판별 불가)
-		// => 또한, 원본 파일명이 널스트링일 경우에는 기존 파일명이 이미 VO 객체에 저장되어 있음
-		if(mFile1.getOriginalFilename()!=null) {
-			String originalFileName = mFile1.getOriginalFilename();
-			System.out.println("파일명1 : " + originalFileName);
+		String uuid = UUID.randomUUID().toString();
+		boolean isNewFile1 = false;
+		if(!mFile1.getOriginalFilename().equals("")) {
 			
-			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
-			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
-			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
-			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-			fileBoard.setFile1(uuid + "_" + originalFileName);
-			// 새 파일 업로드 표시
+			String originalFileName1 = mFile1.getOriginalFilename();
+			fileBoard.setFile1(uuid + "_" + originalFileName1);
 			isNewFile1 = true;
-		} 
-		
-		if(mFile2.getOriginalFilename()!=null) {
-			String originalFileName = mFile2.getOriginalFilename();
-			System.out.println("파일명2 : " + originalFileName);
-			
-			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
-			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
-			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
-			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-			fileBoard.setFile2(uuid + "_" + originalFileName);
-			// 새 파일 업로드 표시
-			isNewFile2 = true;
-		}	
-		
-		if(mFile3.getOriginalFilename()!=null) {
-			String originalFileName = mFile3.getOriginalFilename();
-			System.out.println("파일명3 : " + originalFileName);
-			
-			// BoardVO 객체에 원본 파일명과 업로드 될 파일명 저장
-			// => 단, uuid 를 결합한 파일명을 사용할 경우 원본 파일명과 실제 파일명을 구분할 필요 없이
-			//    하나의 컬럼에 저장해두고, 원본 파일명이 필요할 경우 "_" 를 구분자로 지정하여
-			//    문자열을 분리하면 두번째 파라미터가 원본 파일명이 된다!
-			fileBoard.setFile3(uuid + "_" + originalFileName);
-			// 새 파일 업로드 표시
-			isNewFile3 = true;
-		} 
-		
-		
-		// ==================== 덮어쓰기 과정시작 =========================
-		// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
-		int updateFileCount = service.modifyFile(fileBoard);
-		
-		if(updateFileCount == 0) {
-			
-			model.addAttribute("msg","파일수정 실패");
-			return "member/fail_back3";
-			
-		} else {
-			if(isNewFile1) {
-				try {
-					mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
-
-					File f1_1 = new File(saveDir, oldRealFile1); 
-//					System.out.println("File f1_1 = new File(saveDir, oldRealFile1);  -> "+ f1_1);
-					if(f1_1.exists()) {
-						f1_1.delete();
-					}
-					
-				} catch (IllegalStateException e) {
-					System.out.println("IllegalStateException");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("IOException");
-					e.printStackTrace();
-				}
-			}
-			
-			if(isNewFile2) {
-				try {
-					mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
-					File f2_2 = new File(saveDir, oldRealFile2); 
-//					System.out.println("File f2_2 = new File(saveDir, oldRealFile1);  -> "+ f2_2);
-					if(f2_2.exists()) {
-						f2_2.delete();
-					}
-					
-				} catch (IllegalStateException e) {
-					System.out.println("IllegalStateException");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("IOException");
-					e.printStackTrace();
-				}
-			}
-			
-			if(isNewFile3) {
-				try {
-					mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
-					File f3_3 = new File(saveDir, oldRealFile3); 
-//					System.out.println("File f3_3 = new File(saveDir, oldRealFile1);  -> "+ f3_3);
-					if(f3_3.exists()) {
-						f3_3.delete();
-					}
-				} catch (IllegalStateException e) {
-					System.out.println("IllegalStateException");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("IOException");
-					e.printStackTrace();
-				}
-			}
 		}
 		
+		boolean isNewFile2 = false;
+		if(!mFile2.getOriginalFilename().equals("")) {
+			
+			String originalFileName2 = mFile2.getOriginalFilename();
+			fileBoard.setFile2(uuid + "_" + originalFileName2);
+			isNewFile2 = true;
+		}		
+
+		boolean isNewFile3 = false;
+		if(!mFile3.getOriginalFilename().equals("")) {
+			
+			String originalFileName3 = mFile3.getOriginalFilename();
+			fileBoard.setFile3(uuid + "_" + originalFileName3);
+			isNewFile3 = true;
+		}		
+		// ==================== 덮어쓰기 과정시작 =========================
+		// 새 파일 선택 여부와 관계없이 공통으로 수정 작업 요청
+		 	int updateFileCount = service.modifyFile(fileBoard);
+			if(updateFileCount == 0) {
+				
+				model.addAttribute("msg","파일수정 실패");
+				return "member/fail_back3";
+				
+			} else {
+				if(isNewFile1) {
+					try {
+						mFile1.transferTo(new File(saveDir, fileBoard.getFile1()));
+						File f1_1 = new File(saveDir, oldRealFile1); 
+						if(f1_1.exists()) {
+							f1_1.delete();
+						}
+						
+					} catch (IllegalStateException e) {
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					}
+				}
+				
+				if(isNewFile2) {
+					try {
+						mFile2.transferTo(new File(saveDir, fileBoard.getFile2()));
+						File f2_2 = new File(saveDir, oldRealFile2); 
+						if(f2_2.exists()) {
+							f2_2.delete();
+						}
+						
+					} catch (IllegalStateException e) {
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					}
+				}
+				
+				if(isNewFile3) {
+					try {
+						mFile3.transferTo(new File(saveDir, fileBoard.getFile3()));
+						File f3_3 = new File(saveDir, oldRealFile3); 
+						if(f3_3.exists()) {
+							f3_3.delete();
+						}
+					} catch (IllegalStateException e) {
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					}
+				}
+			}
+//		 }
 		// ========================= 글 수정 ===============================
 		
 		int updateCount = service.modifyBoard(board);
 		model.addAttribute("pageNum", pageNum);
-		System.out.println(updateCount);
-		System.out.println(board);
 		if(updateCount == 0) {
 			model.addAttribute("msg", "글 수정 실패");
 			return "member/fail_back3";

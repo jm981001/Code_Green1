@@ -20,19 +20,14 @@
                                         	<div class="ps-product__container"><a class="ps-product__vendor" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.manager_brandname }</a>
                                                <div class="ps-product__content"><a class="ps-product__title" href="ItemDetail.bo?item_idx=${brand.item_idx}&manager_brandname=${brand.manager_brandname}&item_category=${brand.item_category}">${brand.item_name }</a>
                                                     <div class="ps-product__rating">
-<!--                                                    	 <select class="ps-rating" data-read-only="true"> -->
-<%--                                                         <c:forEach var="i" begin="1" end="5"> --%>
-<%-- 			                                             	<c:choose> --%>
-<%-- 			                                             		<c:when test="${i <= brand.score}"> --%>
-<%-- 			                                             			<option value="1">${i }</option> --%>
-<%-- 			                                             		</c:when> --%>
-<%-- 			                                             		<c:otherwise> --%>
-<%-- 			                                             			<option value="2">${i }</option> --%>
-<%-- 			                                             		</c:otherwise> --%>
-<%-- 			                                             	</c:choose> --%>
-<%-- 			                                             </c:forEach> --%>
-<!--                                                       </select> -->
-                                                      <span><i class="fi fi-sr-star"></i>리뷰평점(${brand.board_star_score })</span>
+                                                      <c:if test="${not empty brand.board_star_score }">
+                                                      	<span><i class="fi fi-sr-star"></i>
+                                                      	리뷰평점(${brand.board_star_score })</span>
+                                                      </c:if>
+                                                      <c:if test="${empty brand.board_star_score }">
+                                                      	<span><i class="fi fi-sr-star"></i>
+                                                      	리뷰평점(후기없음)</span>
+                                                      </c:if>
                                                     </div>
                                                   <h4 class="ps-product__price">${brand.item_price }원</h4>
                                                 </div>

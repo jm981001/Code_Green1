@@ -80,6 +80,17 @@
 		});
 	};
 
+	function check(){
+		let date1 = $("#date1").val();
+		let date2 = $("#date2").val();
+		if(date1>date2){
+			alert("날짜설정을 다시 확인해주세요!");
+			document.getElementById("date1").focus();
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 </script>
 <body>
@@ -104,15 +115,15 @@
                            <div class="options_area">
 								<select name="searchDate" onchange="searchByDate(this.value)" required >    
 									<option value="">기간조회</option>    
+									<option value="1">1개월</option>    
 									<option value="3">3개월</option>    
 									<option value="6">6개월</option>    
-									<option value="9">9개월</option>    
 								</select>
 								<input type="button" name="searchDateSet" id="dateSet" value="+상세조회">
 								</div>
 								<div class="dateDiv" style="display: none;">
-									<form action="myBuyListbySelect.my"  id="dates" method="get">
-										<input type="date" name="date1" required="required"> - <input type="date" name="date2" required="required">
+									<form action="myBuyListbySelect.my"  id="dates" method="get" onsubmit="return check()">
+										<input type="date" name="date1" id="date1" required="required"> - <input type="date" name="date2" id="date2" required="required">
 										<input type="submit" id="dateSet" value="검색" >
 										<input type="reset" id="dateSet" value="초기화" >
 									</form>

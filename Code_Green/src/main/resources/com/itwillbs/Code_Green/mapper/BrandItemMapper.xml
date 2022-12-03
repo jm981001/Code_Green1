@@ -103,16 +103,14 @@
 				 		rand()
 				 	</otherwise>
 				 </choose>
-			 LIMIT #{startRow}, #{listLimit}
 	</select>
 	
-	<!-- 브랜드별 아이템 수 카운트 -->
-	<select id="selectBrandListCount" resultType="integer">
+	
+	<!-- 개별브랜드 아이템 갯수 카운트 -->
+	<select id="selectBrandItemListCount" resultType="integer">
 		SELECT count(*) 
 			FROM item
-			<if test="manager_idx!=0">
 				WHERE re_manager_idx = #{manager_idx}
-			</if>	
 	</select>
 
 
@@ -202,22 +200,10 @@
 				 		rand()
 				 	</otherwise>
 				 </choose>
-			 LIMIT #{startRow}, #{listLimit}
 	</select>
 	
 	
-	<!-- 멀티체크 리스팅 아이템리스트카운트 -->
-	<select id="selectBrandItemListListingCount" resultType="integer">
-		SELECT count(*) 
-			FROM item
-				WHERE 1=1
-			<if test="brands.size != 0">
-				 	AND re_manager_idx IN 
-				 	<foreach collection="brands" item="manager_idx" open="(" close=")" separator=",">
-						#{manager_idx}				 	
-				 	</foreach>
-			</if>
-	</select>
+	
 	
 
 </mapper>

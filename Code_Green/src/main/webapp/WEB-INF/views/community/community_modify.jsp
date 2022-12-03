@@ -36,28 +36,6 @@
   	.ck-editor__editable { height: 300px; }  
    	.ck-content { font-size: 12px; }  
 </style>
-<script>
-// 	function deleteOriginalFile(fileName){
-// 		let conDelete = alert("기존 파일을 삭제하시겠습니까?\n삭제 후 취소할수 없습니다.");
-		
-// 		if(conDelete){
-// 			$.ajax({
-// 				url:"FindModifyFile.bo",
-// 				type:"POST",
-// 				// 이거 파일이름...어떻게 하드코딩으로 말고 구분할수있을까 
-// 				data: {
-// 					file1 : fileName
-// 				},
-// 				success:function(msg){
-// 				// 삭제하고 돌아오면 파일.val ""으로 비워주기 
-// 					$("#" + fileName).val="";
-// 					alert(msg);
-// 				}
-// 			}) 
-// 		}
-// 	}
-
-</script>
 <body>
     
     <!-- 헤더 삽입 -->
@@ -115,8 +93,7 @@
 	                                   <!-- 파일 업로드 부분 -->
 	                                    <tr>
 	                                    	<td colspan="2"><input type="file" id="file_1" name="file_1">
-	                                    	<c:if test="${board.file1 ne '' }">(기존파일:<span id="here"></span>)
-<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile1('${board.file1}')" width="22px" > --%>
+	                                    	<c:if test="${board.file1 ne ''}">(기존파일:<span id="here"></span>)
 		                                   		 <script>
 										       		let name = '${board.file1}';
 										       		let result = name.split('_');
@@ -127,8 +104,7 @@
 	                                    </tr>
 	                                    <tr>
 	                                    	<td colspan="2"><input type="file" id="file_2" name="file_2">
-	                                    	<c:if test="${board.file2 ne '' }">(기존파일:<span id="here2">${board.file2 }</span>)
-<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile2('${board.file2}')" width="22px" > --%>
+	                                    	<c:if test="${board.file2 ne ''}">(기존파일:<span id="here2">${board.file2 }</span>)
 	                                    		 <script>
 										       		let name2 = '${board.file2}';
 										       		let result2 = name2.split('_');
@@ -139,8 +115,7 @@
 	                                    </tr>
 	                                    <tr>
 	                                    	<td colspan="2"><input type="file" id="file_3" name="file_3">
-	                                    	<c:if test="${board.file3 ne '' }">(기존파일:<span id="here3">${board.file3 }</span>)
-<%-- 	                                    	<img src="<%=request.getContextPath() %>/resources/img/close.png" onclick="deleteOriginalFile3('${board.file3}')" width="22px" > --%>
+	                                    	<c:if test="${board.file3 ne ''}">(기존파일:<span id="here3">${board.file3 }</span>)
 	                                    		<script>
 										       		let name3 = '${board.file3}';
 										       		let result3 = name3.split('_');

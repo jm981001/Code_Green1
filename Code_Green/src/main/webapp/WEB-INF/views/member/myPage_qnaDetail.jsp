@@ -16,8 +16,8 @@
 <meta name="description" content="">
 <link rel="icon" href="/Code_Green/resources/img/favicon.png">
 <title>마이페이지 - 베지터틀</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
+<script src="/Code_Green/resources/plugins/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/Code_Green/resources/fonts/Linearicons/Linearicons/Font/demo-files/demo.css">
 <link rel="stylesheet" href="/Code_Green/resources/plugins/bootstrap/css/bootstrap.min.css">
@@ -122,6 +122,9 @@
 		}
 	}
 
+	$( document ).ready(function() {
+		history.replaceState({}, null, location.pathname);
+	});
 </script>
 <body>
 
@@ -217,7 +220,7 @@
 	<!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->
 
 
-	<script src="/Code_Green/resources/plugins/jquery.min.js"></script>
+	
 	<script src="/Code_Green/resources/plugins/nouislider/nouislider.min.js"></script>
 	<script src="/Code_Green/resources/plugins/popper.min.js"></script>
 	<script src="/Code_Green/resources/plugins/owl-carousel/owl.carousel.min.js"></script>
