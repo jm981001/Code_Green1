@@ -1,8 +1,6 @@
 package com.itwillbs.Code_Green.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
@@ -26,7 +22,6 @@ import com.itwillbs.Code_Green.service.QnaService;
 import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.BoardVO;
-import com.itwillbs.Code_Green.vo.CartVO;
 import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
@@ -35,7 +30,6 @@ import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
-
 
 @Controller
 public class MypageController {
@@ -52,8 +46,6 @@ public class MypageController {
 	private CoinService Cservice;
 	@Autowired
 	private SellService Sservice;
-	@Autowired
-	private CartService Tservice;
 	
 	//====================================== 마이페이지 메인 ========================================== 
 		@GetMapping(value = "/MemberInfo.me")
@@ -365,22 +357,7 @@ public class MypageController {
 		return "member/myPage_buyListSelect";
 	}
 	
-	
 	//====================================== 마이페이지 주문상세내역 ========================================== 
-//	@GetMapping(value = "/myBuyListDetail.my")
-//	public String myBuyListDetail(String sell_order_number, Model model, HttpSession session) {
-//		
-//		int member_idx = (int)session.getAttribute("sIdx");
-//		SellVO buyDetail = Sservice.getMyBuyListDetail(member_idx,sell_order_number);
-//		List<SellVO> MyBuyItemList = Sservice.getMyBuyItemList(sell_order_number);
-//		
-//		model.addAttribute("buyDetail", buyDetail);
-//		model.addAttribute("MyBuyItemList", MyBuyItemList);
-//		
-//		return "member/myPage_buyListDetail";
-//	}
-	
-	
 	@GetMapping(value = "/myBuyListDetail.my") 
 	public String payment_success_cardPayForm(String sell_order_number, Model model, HttpSession session) {
 		
@@ -414,47 +391,6 @@ public class MypageController {
 	
 	
 	
-	//------------마이페이지 상품후기-------------------------------------------
-//	@GetMapping(value = "/myPageReview.my")
-//	public String myPageReview(
-//			@RequestParam(defaultValue = "1") int pageNum, Model model
-//			,@RequestParam String member_id) {
-//		
-//		int listLimit = 10; 
-//		int pageListLimit = 10; 
-//		
-//		int startRow = (pageNum - 1) * listLimit;
-//		
-//		//상품구매 목록
-//		List<SellVO> sellList = Sservice.getReviewList(startRow, listLimit,member_id);
-//		
-//		//상품구매 목록 갯수
-//		int listCount = Sservice.getSellListCount();
-//		
-//
-//		
-//		int maxPage = (int)Math.ceil((double)listCount / listLimit);
-//		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-//		int endPage = startPage + pageListLimit - 1;
-//		
-//		if(endPage > maxPage) {
-//			endPage = maxPage;
-//		}
-//		
-//		PageInfo pageInfo = new PageInfo(
-//				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-//		
-//		
-//		model.addAttribute("pageInfo", pageInfo);
-//		model.addAttribute("sellList", sellList);
-//		model.addAttribute("listCount", listCount);
-//		model.addAttribute("member_id", member_id);
-//		
-//		
-//		
-//		return "member/myPage_review";
-//	}
-//	
 	
 	//------------마이페이지 리뷰 가능상품-------------------------------------------
 			@GetMapping(value = "/myPageReview.my")
@@ -526,7 +462,7 @@ public class MypageController {
 		}
 	
 	//====================================== 마이페이지 1:1 문의내역 ========================================== 
-	@GetMapping(value = "/myPageQnaList.bo")
+	@GetMapping(value = "/myPageQnaList.my")
 	public String myPageQnaMtmList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "") String qna_status, Model model,HttpSession session) {
 		
 		String qna_id = (String)session.getAttribute("sId");

@@ -65,27 +65,22 @@
 	
 </style>
 <body>
-
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
-
-	<!-- ==========왼쪽 사이드바=========================================================================================================     -->
+<!-- ==========왼쪽 사이드바=========================================================================================================     -->
 	<main class="ps-page--my-account">
 		<section class="ps-section--account">
 			<div class="container">
 				<div class="row">
 					<jsp:include page="../inc/left_mypage.jsp"></jsp:include>
-
 <!-- ==========Q&A=========================================================================================================     -->
 					<div class="col-lg-8">
                         <div class="ps-section__right">
                             <div class="ps-section--account-setting--mpmain">
-                            
                                 <div class="ps-section__header">
                                     <h3>마이페이지</h3>
                                 </div>
-                                
                                 <div class="ps-section__content">
                                 	<!-- 그리드 시작 -->
                                     <div id="listlist">
@@ -109,10 +104,10 @@
                 	 						<!-- 주문내역 -->
                 	 						 <c:choose>
                                               	<c:when test="${empty myCountInfo.order_count || myCountInfo.order_count eq ''}">
-                                              		<li class="brandlist-li"><a href="myPage_buyList">0건</a></li>
+                                              		<li class="brandlist-li"><a href="myBuyList.my">0건</a></li>
                                               	</c:when>
                                               	<c:otherwise>
-                                              		<li class="brandlist-li"><a href="myPage_buyList">${myCountInfo.order_count}건</a></li>
+                                              		<li class="brandlist-li"><a href="myBuyList.my">${myCountInfo.order_count}건</a></li>
                                               	</c:otherwise>
                                              </c:choose>
                                              
@@ -129,22 +124,19 @@
 		                	 						</li>
                                              	</c:otherwise>	
 											</c:choose>
-											                	 						
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-edit"></i><br>작성글</li>
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-shop"></i><br>팔로우</li>
                 	 						<li class="brandlist-li-head"><i class="fi fi-rr-question-square"></i><br>1:1문의글</li>
-                	 						
-                	 						
                 	 						<!-- 작성글 -->
                 	 						<c:choose>
                 	 							<c:when test="${empty myCountInfo.board_count}">
                 	 								<li class="brandlist-li">
-                	 									<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">0개</a>
+                	 									<a href="myPageBoard.my?member_id=${sessionScope.sId} ">0개</a>
                 	 								</li>
                 	 							</c:when>
                 	 							<c:otherwise>
 		                	 						<li class="brandlist-li">
-		                	 							<a href="myPageBoard.bo?member_id=${sessionScope.sId} ">${myCountInfo.board_count }개</a>
+		                	 							<a href="myPageBoard.my?member_id=${sessionScope.sId} ">${myCountInfo.board_count }개</a>
 		                	 						</li>
                 	 							</c:otherwise>
                 	 						</c:choose>
@@ -166,18 +158,17 @@
                 	 						<!-- 1:1문의글-->
                 	 						<c:choose>
 	                	 						<c:when test="${empty myCountInfo.qna_count}">
-	                	 							<li class="brandlist-li"><a href="myPageQnaList.bo">0개</a></li>
+	                	 							<li class="brandlist-li"><a href="myPageQnaList.my">0개</a></li>
 	                	 						</c:when>
 	                	 						<c:otherwise>
 		                	 						<li class="brandlist-li">
-		                	 							<a href="myPageQnaList.bo">${myCountInfo.qna_count }개</a>
+		                	 							<a href="myPageQnaList.my">${myCountInfo.qna_count }개</a>
 		                	 						</li>
 	                	 						</c:otherwise>
                 	 						</c:choose>
                 						</ul>
                                     </div>
                                     <!-- 그리드 끝 -->
-                                    
                                     <div class="ps-section--account-setting">
                                     	<br>
                                     	<h4>최근주문목록</h4>
@@ -266,7 +257,6 @@
 	<script src="/Code_Green/resources/plugins/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
 	<script src="/Code_Green/resources/plugins/select2/dist/js/select2.full.min.js"></script>
 	<script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
-	<!-- custom scripts-->
 	<script src="/Code_Green/resources/js/main.js"></script>
 </body>
 </html>

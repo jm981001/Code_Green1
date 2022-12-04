@@ -153,7 +153,6 @@ public class BrandItemController {
 	
 	
 	// 멀티체크
-//	@ResponseBody
 	@GetMapping(value = "/ListListing.br")
 	public String listListing(@RequestParam(defaultValue = "") String ordering, 
 							@RequestParam String brandsIndex, Model model) {
@@ -179,12 +178,6 @@ public class BrandItemController {
 		return "item/brand_whole";
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

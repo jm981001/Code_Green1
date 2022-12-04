@@ -47,7 +47,7 @@
 										<li><a href="myPageEmoney.my?member_id=${sessionScope.sId}"><i class="icon-list"></i>적립금내역</a></li>
 										<li><a href="myBuyList.my"><i class="icon-papers"></i>주문내역</a></li>
 										<li><a href="myPageReview.my?member_id=${sessionScope.sId}"><i class="icon-papers"></i>상품후기</a></li>
-										<li><a href="myPageQnaList.bo"><i class="icon-question"></i>1:1 문의</a></li>
+										<li><a href="myPageQnaList.my"><i class="icon-question"></i>1:1 문의</a></li>
 										<li><a href="myPageBoard.my?member_id=${sessionScope.sId} "><i class="icon-pen"></i>나의 글</a></li>
 										<li><a href="myPageReportList.my"><i class="icon-alarm"></i>신고내역</a></li>
 										<li><a href="myPage_userInfo"><i class="icon-user"></i>개인정보 수정</a></li>
