@@ -192,7 +192,7 @@ function list(auth){
 			            <input type="text" class="form-control" id="address2" value="${manager.manager_address }" readonly="readonly">
 			          </div>
 			          
-			          <button id="btn1" name="auth" onclick="location.href='confirmAuth(${manager.manager_id })'" class="btn btn-primary btn-lg btn-block" type="button" >가입승인하기</button>
+			          <button id="btn1" name="auth" onclick="confirmAuth('${manager.manager_id }')" class="btn btn-primary btn-lg btn-block" type="button" >가입승인하기</button>
 
 			        </form>
 			      </div>

@@ -45,8 +45,8 @@ function logout() {
                             <li><a href="ad_Report_Management"><i class="icon-papers"></i>신고글 관리</a></li>
                         </ul>
                     </div>
-                    <div class="ps-sidebar__footer">
-                        <div class="ps-copyright"><img src="/Code_Green/resources/img/logo.png" alt="">
+                    <div class="ps-sidebar__footer" >
+                        <div class="ps-copyright" style="margin-right: 100px"><img src="" alt="" >
                             <p>&copy;2022 VEGETURTLE:CODE-GREEN TEAM FROM ITWILL-BUSAN.<br/> All rights reversed.</p>
                         </div>`
                     </div>

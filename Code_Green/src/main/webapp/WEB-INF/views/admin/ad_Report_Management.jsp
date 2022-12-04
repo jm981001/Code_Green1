@@ -111,7 +111,7 @@
                                 	<td>${rList.report_idx }</td>
                                     <td onclick="location.href='ad_Report_Detail?report_idx=${rList.report_idx }'"><strong>${rList.report_content }</strong></td>
                                     <td>${rList.reporter }</td>
-                                    <fmt:parseDate var="dateString" value="${rList.report_date }" pattern="yyyyMMddHH:mm:ss" />	
+                                    <fmt:parseDate var="dateString" value="${rList.report_date }" pattern="yyyy-MM-ddHH:mm:ss" />	
                                     <td><fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd"/></td>
                                     <td><button class="btn btn-info" style="font-size: 13px"><strong>${rList.report_status }</strong></button>
                                     </td>

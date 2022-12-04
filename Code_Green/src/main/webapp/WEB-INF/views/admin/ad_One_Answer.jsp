@@ -46,6 +46,9 @@
 			location.reload="ad_One_Answer";
 			
 		}
+		location.href = "ad_One_Answer";
+		alert("삭제가 완료되었습니다");
+    	history.go(0);
 	}
 </script>
 </head>

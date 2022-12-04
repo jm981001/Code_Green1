@@ -43,8 +43,7 @@ public interface AdminMapper {
 	//기업 팔로워 순위
 	public List<ManagerVO> selectFollowerRankingList();
 	
-	//신고글 처리반려 
-	public int updateReportReturn(int report_idx);
+	
 
 	
 	
@@ -71,6 +70,7 @@ public interface AdminMapper {
 	
 	//=== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ====== 기업관리 ===
 	
+	
 	//기업목록 갯수(승인완료) 조회
 	public int selectManagerListCount(
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
@@ -96,7 +96,8 @@ public interface AdminMapper {
 	public int deleteManager(String id);
 	
 	
-	//=== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ====== 게시판(1:1문의 | 상품문의)관리 ===
+	
+	//=== 1:1문의 관리 ====== 1:1문의 관리 ====== 1:1문의 관리 ====== 1:1문의 관리 ====== 1:1문의 관리 === 1:1문의 관리 ===
 	
 	
 	
@@ -122,34 +123,13 @@ public interface AdminMapper {
 	public List<QnaVO> selectOneQnaAnswerList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
 			@Param("searchType") String searchType,@Param("keyword") String keyword);
-
-	//상품문의(답변대기) 갯수 조회
-	public int selectItemQnaListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
-	
-	//상품문의(답변대기) 목록 조회
-	public List<QnaVO> selectItemQnaList(
-			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
-			@Param("searchType") String searchType,@Param("keyword") String keyword);
-	
-	//상품문의(답변대기) 상세조회
-	public QnaVO selectItemQnaInfo(@Param("qna_idx") int qna_idx,@Param("id") String id);
-
-	
-	//상품문의(답변완료) 갯수 조회
-	public int selectItemAnswerListCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
-	
-	
-	//상품문의(답변완료) 목록 조회
-	public List<QnaVO> selectItemAnswerList(
-			@Param("startRow") int startRow, @Param("listLimit") int listLimit,
-			@Param("searchType") String searchType,@Param("keyword") String keyword);
 	
 	
 	//1:1 문의 상세내용
 	public QnaVO selectOneQnaInFo(@Param("qna_idx") int qna_idx, @Param("id") String id);
 
 	//1:1 문의글 삭제
-	public int deleteOneQnaBoard(@Param("idx") String idx, @Param("id") String id);
+	public int deleteOneQnaBoard(@Param("idx") int idx, @Param("id") String id);
 
 	
 	
@@ -201,7 +181,7 @@ public interface AdminMapper {
 	public BoardVO selectRecipeDetail(String board_idx);
 
 	
-	//게시판 삭제
+	//게시글 삭제
 	public int deleteBoard(int board_idx);
 	
 	
@@ -237,6 +217,9 @@ public interface AdminMapper {
 	
 	//신고된 원본글 상세조회!
 	public BoardVO selectOriginBoard(int board_idx);
+	
+	//신고글 처리반려 
+	public int updateReportReturn(int report_idx);
 
 	//신고글 삭제(리포터)
 	public int deleteReport(int report_idx);
