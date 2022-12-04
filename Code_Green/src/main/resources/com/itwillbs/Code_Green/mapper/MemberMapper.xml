@@ -91,6 +91,7 @@
 		SET 
 			member_id = #{member_id},
 			member_name = #{member_name},
+			member_pass = #{member_pass},
 		    member_phone = #{member_phone},
  	        member_email = #{member_email}, 
 			member_postcode = #{member_postcode}, 

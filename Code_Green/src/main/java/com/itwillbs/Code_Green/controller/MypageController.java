@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -657,32 +658,36 @@ public class MypageController {
 	@GetMapping(value = "myPage_userInfo")
 	public String myPage_userInfo(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		String sId = (String) session.getAttribute("sId");
-		
+		// 멤버 정보 불러오기
 		MemberVO memberInfo = Mservice.getMemberInfo(sId);
 		model.addAttribute("member", memberInfo);
 		
 		return "member/myPage_userInfo";
 		
 	}
-	
-	//------------마이페이지 개인정보 수정-------------------------------------------
+
+	// ------------마이페이지 개인정보 수정-------------------------------------------
 	@PostMapping(value = "myPage_userInfo_Update")
 	public String myPage_userInfo_Update(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		String sId = (String) session.getAttribute("sId");
 		int idx = (int) session.getAttribute("sIdx");
-		
-		System.out.println("member"+member);
-		MemberVO memberInfo = Mservice.getMemberInfo(sId);		
-		
-		
+
+		System.out.println("member" + member);
+		MemberVO memberInfo = Mservice.getMemberInfo(sId);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		// BCryptPasswordEncoder 객체의 encode() 메서드를 호출하여 해싱 결과 리턴
+		String securePasswd = encoder.encode(member.getMember_pass());
+		// MemberVO 객체의 패스워드에 암호문 저장
+		member.setMember_pass(securePasswd);
+
 		int updateCount = Mservice.modifyMemberInfo(member);
-		if(updateCount > 0) {
+		if (updateCount > 0) {
 			model.addAttribute("member", memberInfo);
 			return "redirect:/myPage_userInfo";
 		} else {
 //		
-		model.addAttribute("msg", "수정 실패");	
-		return "member/fail_back";
+			model.addAttribute("msg", "수정 실패");
+			return "member/fail_back";
 		}
 	}
 	

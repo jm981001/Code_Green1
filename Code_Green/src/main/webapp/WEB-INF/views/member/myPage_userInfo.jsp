@@ -66,11 +66,11 @@
 												<label>아이디</label> <input class="form-control" type="text" name="member_id" value="${member.member_id}" readonly="readonly">
 											</div>
 										</div>
-<!-- 										<div class="col-sm-6"> -->
-<!-- 											<div class="form-group"> -->
-<!-- 												<label>패스워드</label> <input class="form-control" type="text" name="member_pass" value="***********" readonly="readonly"> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>패스워드</label> <input class="form-control" type="password" name="member_pass" value="${member.member_pass}">
+											</div>
+										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>전화번호</label> <input class="form-control" type="text" name="member_phone" value="${member.member_phone}">
