@@ -98,8 +98,8 @@
 	                                		<th>주문날짜</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>${buyDetail.sell_order_number}</td>
-	                                		<fmt:parseDate var="dateString" value="${buyDetail.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+	                                		<td>${orderList.sell_order_number }</td>
+	                                		<fmt:parseDate var="dateString" value="${orderList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
 	                                		<td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 	                                	</tr>
 	                                	<tr>
@@ -107,32 +107,32 @@
 	                                		<th>결제방법</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>${buyDetail.sell_status}</td>
-	                                		<td>${buyDetail.sell_pay_type}</td>
+	                                		<td>${orderList.sell_status}</td>
+	                                		<td>${orderList.sell_pay_type}</td>
 	                                	</tr>
 	                                	<tr>
 	                                		<th>받는사람</th>
 	                                		<th>연락처</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td>${buyDetail.sell_receiver}</td>
-	                                		<td>${buyDetail.sell_phone}</td>
+	                                		<td>${orderList.sell_receiver}</td>
+	                                		<td>${orderList.sell_phone}</td>
 	                                	</tr>
 	                               		<tr>
 	                                		<th colspan="2">배송지</th>
 	                                	</tr>
 	                                	<tr>
-	                                		<td colspan="2">${buyDetail.sell_address}</td>
+	                                		<td colspan="2">${orderList.sell_address}</td>
 	                                	</tr>
 	                               		<tr>
 	                                		<th colspan="2" style="color:#b3b3b3;">취소요청</th>
 	                                	</tr>
 	                                	<tr>
 	                                		<td colspan="2">
-		                                		<c:if test="${not empty buyDetail.sell_cancel_status}">
-		                                		${buyDetail.sell_cancel_status}
+		                                		<c:if test="${not empty orderList.sell_cancel_status}">
+		                                		${orderList.sell_cancel_status}
 		                                		</c:if>
-		                                		<c:if test="${empty buyDetail.sell_cancel_status}">-</c:if>
+		                                		<c:if test="${empty orderList.sell_cancel_status}">-</c:if>
 	                                		</td>
 	                                	</tr>
 	                                </table>
@@ -148,32 +148,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            	<c:forEach var="itemList" items="${MyBuyItemList }">
+                                            	<c:forEach var="orderDetailList" items="${orderDetailList }">
                                                 <tr>
                                                     <td>
                                                         <div class="ps-product--cart">
                                                             <div class="ps-product__thumbnail">
-                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&manager_brandname=${itemList.manager_brandname}&item_category=${itemList.item_category}"><img src="/Code_Green/resources/item/${itemList.file1 }"></a></div>
+                                                            <a href="ItemDetail.bo?item_idx=${orderDetailList.item_idx}&manager_brandname=${orderDetailList.manager_brandname}&item_category=${itemList.item_category}"><img src="/Code_Green/resources/item/${orderDetailList.file1 }"></a></div>
                                                             <div class="ps-product__content">
-                                                            <a href="ItemDetail.bo?item_idx=${itemList.item_idx}&manager_brandname=${itemList.manager_brandname}&item_category=${itemList.item_category}">${itemList.item_name }</a>
-                                                                <p><strong>${itemList.manager_brandname }</strong></p>
+                                                            <a href="ItemDetail.bo?item_idx=${orderDetailList.item_idx}&manager_brandname=${orderDetailList.manager_brandname}&item_category=${orderDetailList.item_category}">${orderDetailList.item_name }</a>
+                                                                <p><strong>${orderDetailList.manager_brandname }</strong></p>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><span>${itemList.item_price }</span></td>
-                                                    <td>${itemList.sell_amount }</td>
-                                                    <td><span>${itemList.item_price }*${itemList.sell_amount }</span></td>
+                                                    
+                                                    <td><span><fmt:formatNumber value="${orderDetailList.item_price }" pattern="#,###"/>원</span></td>
+                                                    <td>${orderDetailList.sell_amount }</td>
+                                                    <td><span><fmt:formatNumber value="${orderDetailList.item_price * orderDetailList.sell_amount }" pattern="#,###"/>원</span></td>
                                                 </tr>
                                                 </c:forEach>
                                                 <!-- 총금액 및 배송비 출력 칸  -->
                                                 <tr>
-                                                	<td colspan="4">배송비 = 0원</td>
+                                                	<td colspan="4">배송비 = <fmt:formatNumber value="${shipping_fee }" pattern="#,###"/>원</td>
                                                 </tr>
                                                 <tr>
-                                                	<td colspan="4">적립금사용 = ${buyDetail.sell_usecoin}원</td>
+                                                	<td colspan="4">적립금사용 = <fmt:formatNumber value="${orderList.sell_usecoin }" pattern="#,###"/>원</td>
                                                 </tr>
                                                 <tr>
-                                               		<td colspan="4">배송비 0원  -  적립금 ${buyDetail.sell_usecoin}원 + 주문금액 54000원 = 총 ${buyDetail.sell_total_price}원</td>
+                                               		<td colspan="4">
+                                               		주문금액 <fmt:formatNumber value="${item_total_price }" pattern="#,###"/>원 
+                                               		+ 배송비 <fmt:formatNumber value="${shipping_fee }" pattern="#,###"/>원   
+                                               		- 적립금 <fmt:formatNumber value="${orderList.sell_usecoin }" pattern="#,###"/>원 
+                                               		= 총 <fmt:formatNumber value="${orderList.sell_total_price }" pattern="#,###"/>원</td>
                                                 </tr>
                                             </tbody>
                                         </table>

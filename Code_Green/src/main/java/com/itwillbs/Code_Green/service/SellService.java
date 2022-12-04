@@ -103,9 +103,14 @@ public class SellService {
 		return sell_mapper.getMyBuyItemList(sell_order_number);
 	}
 
-	// 주문 취소 요청
+	// 마이페이지 - 주문 취소 요청
 	public int modifyCancelOrder(int sell_idx) {
 		return sell_mapper.updateCancelOrder(sell_idx);
+	}
+	
+	// 마이페이지 - 주문상세목록위한 리스트불러오기
+	public SellVO getMyOrderDetailList(String sell_order_number) {
+		return sell_mapper.getMyOrderDetailList(sell_order_number);
 	}
 
 

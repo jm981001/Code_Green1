@@ -153,7 +153,7 @@
                                   </td>
                                   <td>${buyList.sell_amount }건</td>
                                   <td>${buyList.sell_pay_type }</td>
-                                  <td>${buyList.sell_total_price }원</td>
+                                  <td><fmt:formatNumber value="${buyList.sell_total_price }" pattern="#,###"/>원</td>
                                   <td>${buyList.sell_status }</td>
                               </tr>
                               </c:forEach>

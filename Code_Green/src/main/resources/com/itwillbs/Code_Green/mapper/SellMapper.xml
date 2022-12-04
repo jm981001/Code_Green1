@@ -145,6 +145,7 @@
 		 		 i.item_idx,
 		 		 i.item_name,
 		 		 i.item_price,
+		 		 i.item_category,
 		 		 m.manager_brandname,
 		 		 d.sell_amount,
 		 		 f.file1
@@ -379,6 +380,34 @@
 	      WHERE 	s.sell_order_number = #{sell_order_number}
 	</select>
 	
+	<!-- 마이페이지 // 주문상세목록위한 리스트불러오기 -->
+	<select id="getMyOrderDetailList" resultType="com.itwillbs.Code_Green.vo.SellVO">
+			SELECT 
+					s.sell_idx,
+			        s.rf_member_idx,
+			        s.sell_amount,
+			        s.sell_usecoin,
+			        s.sell_total_price,
+			        s.sell_status,
+			        s.sell_postcode,
+			        s.sell_address,
+			        s.sell_phone,
+			        s.sell_receiver,
+			        s.sell_date,
+			        s.sell_pay_type,
+			        s.sell_pay_status,
+			        s.sell_pay_date,
+			        s.sell_order_number,
+			        s.sell_cancel_status,
+			        m.member_email
+	       	 FROM 
+	       	 		sell s
+	    LEFT JOIN 
+	        		member m
+	           ON 
+	           		s.rf_member_idx = m.member_idx
+	        WHERE 
+	        		s.sell_order_number = #{sell_order_number}
 	
-	
+	</select>
 </mapper>

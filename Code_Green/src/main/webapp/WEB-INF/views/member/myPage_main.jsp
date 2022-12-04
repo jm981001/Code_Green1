@@ -214,7 +214,7 @@
                                                     </td>
                                                     <td><span>${list.sell_amount }건</span></td>
                                                     <td>${list.sell_pay_type }</td>
-                                                    <td><span>${list.sell_total_price }원</span></td>
+                                                    <td><span><fmt:formatNumber value="${list.sell_total_price}" pattern="#,###"/>원</span></td>
                                                     <td>${list.sell_status }</td>
                                                 </tr>
                                                </c:forEach> 

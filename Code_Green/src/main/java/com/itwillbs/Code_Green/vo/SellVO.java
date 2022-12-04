@@ -31,7 +31,6 @@ public class SellVO {
 	private String file1; // 상품사진
 	private String member_email; // 카드결제시 필요한 이메일
 	
-	
 	private int total;//총매출
 	private int sell_count;//총주문수
 	private int brandtotal;

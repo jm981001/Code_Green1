@@ -69,6 +69,9 @@ public interface SellMapper {
 	// 주문 취소 요청
 	int updateCancelOrder(int sell_idx);
 
+	// 마이페이지 - 주문상세목록위한 리스트불러오기
+	SellVO getMyOrderDetailList(String sell_order_number);
+
 		
 	
 }

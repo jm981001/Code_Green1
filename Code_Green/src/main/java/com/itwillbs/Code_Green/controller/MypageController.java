@@ -1,6 +1,8 @@
 package com.itwillbs.Code_Green.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.itwillbs.Code_Green.service.CartService;
 import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MemberService;
@@ -22,6 +26,7 @@ import com.itwillbs.Code_Green.service.QnaService;
 import com.itwillbs.Code_Green.service.ReviewService;
 import com.itwillbs.Code_Green.service.SellService;
 import com.itwillbs.Code_Green.vo.BoardVO;
+import com.itwillbs.Code_Green.vo.CartVO;
 import com.itwillbs.Code_Green.vo.CoinVO;
 import com.itwillbs.Code_Green.vo.FollowVO;
 import com.itwillbs.Code_Green.vo.ItemVO;
@@ -47,7 +52,8 @@ public class MypageController {
 	private CoinService Cservice;
 	@Autowired
 	private SellService Sservice;
-	
+	@Autowired
+	private CartService Tservice;
 	
 	//====================================== 마이페이지 메인 ========================================== 
 		@GetMapping(value = "/MemberInfo.me")
@@ -361,18 +367,47 @@ public class MypageController {
 	
 	
 	//====================================== 마이페이지 주문상세내역 ========================================== 
-	@GetMapping(value = "/myBuyListDetail.my")
-	public String myBuyListDetail(String sell_order_number, Model model, HttpSession session) {
+//	@GetMapping(value = "/myBuyListDetail.my")
+//	public String myBuyListDetail(String sell_order_number, Model model, HttpSession session) {
+//		
+//		int member_idx = (int)session.getAttribute("sIdx");
+//		SellVO buyDetail = Sservice.getMyBuyListDetail(member_idx,sell_order_number);
+//		List<SellVO> MyBuyItemList = Sservice.getMyBuyItemList(sell_order_number);
+//		
+//		model.addAttribute("buyDetail", buyDetail);
+//		model.addAttribute("MyBuyItemList", MyBuyItemList);
+//		
+//		return "member/myPage_buyListDetail";
+//	}
+	
+	
+	@GetMapping(value = "/myBuyListDetail.my") 
+	public String payment_success_cardPayForm(String sell_order_number, Model model, HttpSession session) {
 		
-		int member_idx = (int)session.getAttribute("sIdx");
-		SellVO buyDetail = Sservice.getMyBuyListDetail(member_idx,sell_order_number);
-		List<SellVO> MyBuyItemList = Sservice.getMyBuyItemList(sell_order_number);
+		// 주문내역 불러오기
+		SellVO orderList = Sservice.getMyOrderDetailList(sell_order_number);
 		
+		// 주문 상세내역 불러오기
+		List<SellVO> orderDetailList = Sservice.getOrderDetailList(orderList.getSell_idx());
 		
+		// 전체 상품 가격
+		int item_price = 0;
+		int item_amount = 0;
+		int item_total_price = 0;
 		
+		for(int i = 0; i < orderDetailList.size(); i++) {
+			item_price = Integer.parseInt(orderDetailList.get(i).getItem_price());
+			item_amount = Integer.parseInt(orderDetailList.get(i).getSell_amount());
+			item_total_price += item_price * item_amount;
+		}
 		
-		model.addAttribute("buyDetail", buyDetail);
-		model.addAttribute("MyBuyItemList", MyBuyItemList);
+		// 배송비
+		int shipping_fee = (item_total_price >= 50000 ? 0 : 2500);
+		
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("orderDetailList" , orderDetailList);
+		model.addAttribute("item_total_price" , item_total_price);
+		model.addAttribute("shipping_fee", shipping_fee);
 		
 		return "member/myPage_buyListDetail";
 	}
