@@ -751,18 +751,41 @@ public class ManagerController {
 		return "manager/order_detail";
 	}
 
-	// ------------주문 관리(주문 상태 변경)----------------------------------------
+	// ------------주문 수정 - 원본글 불러오기------------------------------------------
 
-	// ------------재고 관리(재고 상태 변경)----------------------------------------
+	@GetMapping(value = "/order_modify")
+	public String order_modify(Model model, HttpSession session,
+			@RequestParam(name = "item_idx", required = false) String item_idx) {
 
-//		@RequestMapping(value = "stock", method = RequestMethod.GET)
-//			public String stock() {
-//			
-//			
-//			
-//			return "manager/stock";
-//		}
-//		
+		String sId = (String) session.getAttribute("sId");
+
+		List<SellVO> orderInfo = service.getOrderInfo(sId);
+		System.out.println("번호:" + item_idx);
+
+		model.addAttribute("orderInfo", orderInfo);
+		model.addAttribute("item_idx", item_idx);
+
+		return "manager/product_modify";
+	}
+	
+	// ========================= 주문  내용 수정 ===============================
+	@PostMapping(value = "order_modifyPro.bo")
+		public String edit_order(@ModelAttribute ItemVO item, Model model,HttpSession session) {
+				
+			int updateCount = service.modifyOrder(item);
+
+			System.out.println(updateCount);
+
+			if (updateCount == 0) {
+				model.addAttribute("msg", "주문수정이 되지 않았습니다.<br>다시 시도해 주세요.");
+				return "manager/mn_fail_back";
+			}
+
+			return "redirect:/orders?item_idx=" + item_idx;
+		}
+	
+	
+
 
 	// ------------재고 목록 조회(페이징처리같이)-------------------------------------------
 	@GetMapping(value = "/stock")
@@ -838,6 +861,41 @@ public class ManagerController {
 		return "manager/stock_detail";
 	}
 
+	
+	// ------------재고 수정(원본글 불러오기)----------------------------------------
+	
+	@GetMapping(value = "/stock_modify")
+	public String stock_modify(Model model, HttpSession session,
+			@RequestParam(name = "item_idx", required = false) String item_idx) {
+
+		int itemModify_idx = Integer.parseInt(item_idx);
+
+		ItemVO stock = service.getStock(itemModify_idx);
+		System.out.println("번호:" + item_idx);
+
+		model.addAttribute("stock", stock);
+		model.addAttribute("item_idx", item_idx);
+
+		return "manager/stock_modify";
+	}
+
+	// ========================= 재고 글 내용 수정 ===============================
+	@PostMapping(value = "stock_modifyPro.bo")
+		public String edit_stock( Model model,HttpSession session) {
+				
+			int updateCount = service.modifystock(item_idx);
+
+			System.out.println(updateCount);
+
+			if (updateCount == 0) {
+				model.addAttribute("msg", "재고 수정이 되지 않았습니다.<br>다시 시도해 주세요.");
+				return "manager/mn_fail_back";
+			}
+
+			return "redirect:/stock?item_idx=" + item_idx;
+		}
+	
+	
 	// ------------ 문의 글 목록 불러오기(페이징,
 	// 검색기능추가)-------------------------------------------
 
@@ -1104,7 +1162,7 @@ public class ManagerController {
 		}
 	}
 
-	// 레시피 수정 - 원본글 불러오기
+	// 레시피 수정 - 원본 글 불러오기
 	@GetMapping(value = "/recipeboard_modify")
 	public String recipe_modify(@RequestParam int board_idx, Model model) {
 

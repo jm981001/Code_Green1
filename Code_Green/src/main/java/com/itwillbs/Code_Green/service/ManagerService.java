@@ -135,6 +135,23 @@ public class ManagerService {
 		return mapper.selectStockListCount(searchType, keyword,id);
 		}
 	
+	//재고상세조회
+		public ItemVO getStockInfo(int item_idx) {
+			return mapper.selectStockInfo(item_idx);
+		}
+		// 재고 원본 글 불러오기
+		public ItemVO getStock(int itemModify_idx) {
+			return mapper.selectstock(itemModify_idx);
+		}
+
+	
+		//재고 수정
+		public int modifystock(Object item_idx) {
+			return mapper.updateStockModify(item_idx);
+		}
+		
+	
+	
 	//------------------------------문의 글 관리---------------------------------
 	
 //	 문의 목록
@@ -175,10 +192,12 @@ public class ManagerService {
 	public List<SellVO> getOrderInfo(String sId) {
 		return mapper.selectOrderInfo(sId);
 	}
+	//주문 수정
+	public int modifyOrder(ItemVO item) {
+		return mapper.updateOrders(item);
+	}
 	
 	
-	//배송 상태 변경
-	//배송관리 
 	
 	
 	
@@ -203,10 +222,7 @@ public class ManagerService {
 	public List<ItemVO> getTop10(String sId) {
 		return mapper.getTop10(sId);
 	}
-	//재고상세조회
-	public ItemVO getStockInfo(int item_idx) {
-		return mapper.selectStockInfo(item_idx);
-	}
+	
 	//총매출
 		public List<ManagerVO> getSalesTotal(String sId, String period) {
 			return mapper.selectSalesTotal(sId,period);
@@ -231,6 +247,7 @@ public class ManagerService {
 		public SellVO getNet(String sId) {
 			return mapper.selectNet(sId);
 		}
+		
 		
 		
 	

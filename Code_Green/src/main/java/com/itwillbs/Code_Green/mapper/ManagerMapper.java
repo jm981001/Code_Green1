@@ -87,6 +87,15 @@ public interface ManagerMapper {
 	// 재고 갯수 조회
 		public int selectStockListCount(@Param("searchType") String searchType,@Param("keyword")  String keyword,@Param("id") String id);
 	
+	//재고 상세 조회
+		public ItemVO selectStockInfo(int item_idx);
+	
+	//재고 상세보기 원글 불러오기 
+		public ItemVO selectstock(int itemModify_idx);	
+	//재고 수정
+		public int updateStockModify(Object item_idx);
+		
+		
 	//문의글 목록 조회
 	public List<QnaVO> selectQnaBoardList(
 			@Param("startRow") int startRow, @Param("listLimit") int listLimit, 
@@ -113,6 +122,8 @@ public interface ManagerMapper {
 	 
 	 //주문 상세 조회  
 	 public List<SellVO> selectOrderInfo(String sId);
+	 //주문 수정
+	 public int updateOrders(ItemVO item);
 	 
 	//총매출
 	public SellVO selectTotalMoney();
@@ -131,9 +142,7 @@ public interface ManagerMapper {
 
 	 //매출순위 더보기  
 	public List<ItemVO> getTop10(String sId);
-    //재고상세 조회
-	public ItemVO selectStockInfo(int item_idx);
-	
+    
 	//총매출
 	public List<ManagerVO> selectSalesTotal(@Param("sId")String sId, @Param("period")String period);
 	//한달매출
@@ -146,6 +155,9 @@ public interface ManagerMapper {
 	public SellVO selectCommission(@Param("sId")String sId, @Param("period")String period);
 	//순수익
 	public SellVO selectNet(String sId);
+	
+	
+	
 	
 	
 	

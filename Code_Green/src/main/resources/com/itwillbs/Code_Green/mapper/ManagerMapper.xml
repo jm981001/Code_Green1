@@ -174,8 +174,7 @@
 						
 		 WHERE i.item_idx=#{item.itemModify_idx}
 	
-<!-- 	     ORDER BY i.item_idx DESC -->
-<!-- 	        LIMIT #{startRow}, #{listLimit} -->
+
 	</select>
 	
    <!-- 상품 목록 갯수 조회 -->
@@ -588,6 +587,22 @@
 			 
 	</select> 
 	
+	
+	<!-- 주문 수정  -->
+		<update id="updateOrders">
+		UPDATE
+			    item
+		   SET
+				item_name = #{item_name},
+				item_price = #{item_price},
+				item_packing = #{item_packing},
+				item_category = #{item_category},
+				item_info = #{item_info},
+				item_stock = #{item_stock},
+				item_status = #{item_status}
+			 WHERE 
+		 	    item_idx = #{item_idx}
+	</update>
     
     	<!--재고  목록 조회 -->
 	<select id="selectStockList" resultType="com.itwillbs.Code_Green.vo.ItemVO">
@@ -665,30 +680,60 @@
 			
 
     </select>
+    
+    	<!-- 재고 목록(글) 조회 -->
+	<select id="selectstock" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+		select i.item_idx, 
+			   i.re_manager_idx,
+			   i.item_name,
+			   i.item_info,
+			   i.item_packing, 
+			   i.item_category, 
+			   i.item_price,
+			   i.item_sale, 
+			   i.item_stock, 
+			   i.item_status,  
+			   i.item_readcount,  
+			   i.item_date,
+			   m.manager_brandname,
+			  
+			  
+		 FROM item i  JOIN manager m  ON i.re_manager_idx= m. manager_idx 
+		  LEFT JOIN 	
+				file_item f 
+			ON  
+				i.item_idx = f.rf_item_idx
+						
+		 WHERE i.item_idx=#{item.itemModify_idx}
+	
+	
+
+	</select>
    
        
     	<!--재고 상세 조회 -->
-	<select id="selectStockInfo" resultType="com.itwillbs.Code_Green.vo.SellVO">
-	       SELECT * FROM    
-	       
-	         sell_detail d
-		         left join sell s
-		         on s.sell_idx = d.rf_sell_idx
-		            left join item i 
-		               on d.RF_ITEM_IDX = i.item_idx
-		             left join file_item f 
-		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
-
-		            left join manager m
-		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
-		            
-		             where i.RE_MANAGER_IDX =(select manager_idx
-		                           from manager
-		                                  where manager_id = #{sId})
+	<select id="selectStockInfo" resultType="com.itwillbs.Code_Green.vo.ItemVO">
+	      	SELECT * FROM item
+		WHERE  
+			 item_idx=#{item_idx} 
 			 
 	</select> 
    
-   
+   	<!-- 재고 수정 (글) -->
+		<update id="updateStockModify">
+		UPDATE
+			    item
+		   SET
+				item_name = #{item_name},
+				item_price = #{item_price},
+				item_packing = #{item_packing},
+				item_category = #{item_category},
+				item_info = #{item_info},
+				item_stock = #{item_stock},
+				item_status = #{item_status}
+			 WHERE 
+		 	    item_idx = #{item_idx}
+	</update>
    
    
    

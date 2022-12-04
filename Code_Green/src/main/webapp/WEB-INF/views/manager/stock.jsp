@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+
+
 </head>
 
 <body>
@@ -101,8 +103,6 @@
 						     <td>${stock.item_info}</td>
 						     <td>${stock.item_stock}</td>
 						     <td>${stock.item_price}</td>
-						        <td>
-                                    </td>
 						    </tr>     
 					</c:forEach>
 						</tbody>

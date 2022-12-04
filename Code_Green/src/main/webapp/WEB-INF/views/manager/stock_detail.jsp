@@ -50,28 +50,18 @@
                 <div class="header__left">
                     <h3>재고조회</h3>
                 </div>
-<!--                 <div class="header__center"> -->
-<!--                     <form class="ps-form--search-bar" action="index method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
-<!--                 </div> -->
+
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
   		<form class="ps-form--search-bar" action="stock_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
-<%--                  <input type="hidden" id="item_idx" name="item_idx" value="${ItemInfo.item_idx }"> --%>
-<%--                  <input type="hidden" id="manager_id" name="manager_id" value="${ItemInfo.manager_id }"> --%>
 
        <table class="table ps-table">
               
                     <h2>재고상세보기</h2>
                     <hr>
-                 <div class="ps-section__content">
-                    <div class="table-responsive">
-                        <table class="table ps-table">
                             <thead>
                                 <tr>
                                     <th>상품번호</th>
@@ -83,17 +73,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-      						<c:forEach var="stock" items="${stockList}" >
+      						
 						    <tr>
-						     <td>${stock.item_idx}</td>
-						     <td onclick="location.href='stock_detail?item_idx=${stock.item_idx}'"><strong>${stock.item_name }</strong></td>
-						     <td>${stock.item_info}</td>
-						     <td>${stock.item_stock}</td>
-						     <td>${stock.item_price}</td>
+						     <td>${StockInfo.item_idx}</td>
+						     <td onclick="location.href='stock_modify?item_idx=${StockInfo.item_idx}'"><strong>${StockInfo.item_name }</strong></td>
+						     <td>${StockInfo.item_info}</td>
+						     <td>${StockInfo.item_stock}</td>
+						     <td>${StockInfo.item_price}</td>
 						        <td>
                                     </td>
 						    </tr>     
-						</c:forEach>
                     </tbody>
                     </table>
                     </form>
@@ -103,20 +92,12 @@
 
                                 	
  				
-<!--  				<table class="table ps-table"> -->
-<!--                        <thead> -->
-<!--                                 <tr> -->
-<!--                                 	<th>상품썸네일</th> -->
-<!--                                 	<th>상품상세이미지</th> -->
-<!--                                 </tr> -->
            <table class="item_image"id="itemImage">
          		<div class="ps-form__submit text-center">
 
                             
-                         <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
-<%--                          <a href= "product_delete?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">삭제1</button></a> --%>
-                         <button class="ps-btn success"type="submit"onclick="product_delete(${ItemInfo.item_idx })">삭제</button>
-<%--                          <a class="dropdown-item" onclick="product_delete(${recipeList.board_idx })">삭제</a> --%>
+                         <a href= "stock_modify?item_idx=${StockInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
+<%--                          <button class="ps-btn success"type="submit"onclick="product_delete(${StockInfo.item_idx })">삭제</button> --%>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </table>
                     

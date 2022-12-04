@@ -118,15 +118,10 @@
 						     <td>${order.sell_pay_status}</td>
 						     <td>${order.sell_pay_date}</td>
 						     
-<%-- 						      <fmt:parseDate var="dateString" value="${order.sell_pay_date }" pattern="yyyyMMdd" /> --%>
-<%-- 		                      <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td> --%>
 						     
 						     
 						     <td>${order.manager_brandname}</td>
 						      <td>
-<!--                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a> -->
-<%--                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="order_detail?sell_idx=${order.sell_idx }">주문상태변경</a></div> --%>
-<!--                                         </div> -->
                                     </td>
 						    </tr>     
                             

@@ -82,15 +82,15 @@
                             <tbody>
 						    <tr>
 						     <td>${order.sell_order_number}</td>
-						     <td>${order.rf_member_idx}</td>
-						     <td>${order.item_name }</td>
-						     <td>${order.item_price}</td>
-						     <td>${order.sell_amount}</td>
-						     <td>${order.sell_total_price}</td>
-						     <td>${order.sell_status}</td>
-						     <td>${order.sell_date }</td>
-						     <td>${order.sell_pay_status}</td>
-						     <td>${order.sell_pay_date}</td>
+						     <td>${orderInfo.rf_member_idx}</td>
+						     <td>${orderInfo.item_name }</td>
+						     <td>${orderInfo.item_price}</td>
+						     <td>${orderInfo.sell_amount}</td>
+						     <td>${orderInfo.sell_total_price}</td>
+						     <td>${orderInfo.sell_status}</td>
+						     <td>${orderInfo.sell_date }</td>
+						     <td>${orderInfo.sell_pay_status}</td>
+						     <td>${orderInfo.sell_pay_date}</td>
 						     <td>
                                       
                                     </td>
@@ -105,8 +105,8 @@
          		<div class="ps-form__submit text-center">
 
 
-                         <a href= "stock?item_idx=${order.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
-                         <button class="ps-btn success"type="submit"onclick="order_change=${ItemInfo.item_idx }">주문상태변경</button>
+                         <a href= "stock?item_idx=${orderInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
+                         <button class="ps-btn success"type="submit"onclick="order_ㅡmodify=${orderInfo.item_idx }">주문상태변경</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
                     </table>
