@@ -4131,6 +4131,8 @@ textarea.form-control {
   z-index: 1;
   background-color: #ffffff;
   padding: 0 40px;
+  border-radius: 25px;
+  margin-right: 60px;
 }
 
 .ps-block--testimonial .ps-block__header {
@@ -16028,7 +16030,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .header .header__top .ps-container, .header .header__top .container {
   display: flex;
   flex-flow: row nowrap;
-  margin-left: 300px;
 }
 
 /* 지영 */
@@ -17775,8 +17776,9 @@ html .bg--parallax {
   background-position: 50% 50%;
 }
 
+/* 지영 */
 .bg--cover {
-  background-position: 50% 50% !important;
+/*   background-position: 50% 50% !important; */
   background-size: cover !important;
 }
 

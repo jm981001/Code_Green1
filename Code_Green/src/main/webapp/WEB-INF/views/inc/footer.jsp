@@ -6,15 +6,13 @@
                 <div class="ps-footer__content">
                     <div class="row">
                         <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                            <div class="row">
+                            <div class="row" style="display: flex; justify-content: center;">
                                 <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6 col-6 ">
-                                	
                                     <aside class="widget widget_footer">
-                                        <h4 class="widget-title">베지터틀은?</h4>
+                                        <h4 class="widget-title">베지터틀</h4>
                                         <ul class="ps-list--link">
                                             <li><a href="our-press.html">회사소개</a></li>
                                             <li><a href="my-account.html">임원소개</a></li>
-                                            <li><a href="shop.html">회사위치</a></li>
                                         </ul>
                                     </aside>
                                 </div>
@@ -24,18 +22,12 @@
                                         <h4 class="widget-title">고객센터</h4>
                                         <ul class="ps-list--link">
                                             <li><a href="WriteQna.bo">1:1 문의</a></li>
-                                            <li><a href="affilate.html">Q & A</a></li>
-                                            <li><a href="shipping.html">실시간 채팅</a></li>
                                         </ul>
                                     </aside>
                                 </div>
                             </div>
                         </div>
 								<!--임시 -->
-                               <a href="index">전체관리자</a>
-                               <hr>
-                               <a href="manager_index">기업관리자</a>
-                               <hr>
                                <a href="r">룰렛</a>
                     </div>
                 </div>

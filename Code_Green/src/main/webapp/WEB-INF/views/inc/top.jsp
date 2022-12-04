@@ -55,12 +55,12 @@
                 
                 
                 <!-- 서치박스 -->
-                <div class="header__center">
-                    <form class="ps-form--quick-search" action="#" method="get">
-                        <input class="form-control" type="text" placeholder=".............">
-                        <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> <!-- 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
-                    </form>
-                </div>
+<!--                 <div class="header__center"> -->
+<!--                     <form class="ps-form--quick-search" action="#" method="get"> -->
+<!--                         <input class="form-control" type="text" placeholder="............."> -->
+<!--                         <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
+<!--                     </form> -->
+<!--                 </div> -->
             <div class="header__right">
                     <div class="header__actions">
                     	<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>

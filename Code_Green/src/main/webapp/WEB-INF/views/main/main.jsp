@@ -133,30 +133,29 @@ function addHeart(item_idx) {
 <body>
     
     
-    <!-- 헤더 삽입 -->
-    <jsp:include page="../inc/top.jsp"></jsp:include>
-    <!-- 헤더 삽입 -->
+<!-- 헤더 삽입 -->
+<jsp:include page="../inc/top.jsp"></jsp:include>
+<!-- 헤더 삽입 -->
     
     
-    <!-- 바디시작 -->
+<!-- 바디시작 -->
+<!-- =================================================================== 배너 자리 =============================================================================== -->
     <div id="homepage-9">
         <div class="ps-home-banner">
             <div class="ps-carousel--nav-inside owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
                 <div class="ps-banner--organic" data-background="/Code_Green/resources/img/slider/home-9/1.jpg"><img src="/Code_Green/resources/img/slider/home-9/1.jpg">
                     <div class="ps-banner__content">
-                        <h4>이 주의 캠페인</h4>
                         <h3>지구를 살리는데에 <br /> 여러분도 동참하세요! <br /> 10월25일까지<strong>40% 할인</strong></h3><a class="ps-btn" href="#">자세히</a>
                     </div>
                 </div>
                 <div class="ps-banner--organic" data-background="/Code_Green/resources/img/slider/home-9/2.jpg"><img src="/Code_Green/resources/img/slider/home-9/2.jpg">
                     <div class="ps-banner__content">
-                        <h4>이 주의 프로모션</h4>
                         <h3>신선한 야채와 <br /> 과일 정기구독<br /> 회원가입시<strong>첫 박스는 무료</strong></h3><a class="ps-btn" href="#">자세히</a>
                     </div>
                 </div>
             </div>
         </div>
-        
+<!-- =================================================================== 배너 자리 =============================================================================== -->       
         
         <div class="ps-site-features">
             <div class="container">
@@ -192,7 +191,7 @@ function addHeart(item_idx) {
                 </div>
             </div>
         </div>
-        <!-- ---------------------------------------------- 새롭게 만나는 상품들------------------------------------------------------------------- -->
+<!-- ---------------------------------------------- 새롭게 만나는 상품들------------------------------------------------------------------- -->
            <div class="ps-product-list ps-product-list--2">
             <div class="container">
                 <div class="ps-section__header">
@@ -247,17 +246,13 @@ function addHeart(item_idx) {
                             </div>
                         </div>
                         </c:forEach>
-                        
-                        
-                        
                     </div>
                 </div>
             </div>
         </div>
         
-         <!-- ---------------------------------------------- 새롭게 만나는 상품들 끝------------------------------------------------------------------- -->
-         
-        <!-- ---------------------------------------------- 고객님들의 혼자알기 아까운 상품들 ------------------------------------------------------------------- -->
+<!-- ---------------------------------------------- 새롭게 만나는 상품들 끝------------------------------------------------------------------- -->
+<!-- ---------------------------------------------- 고객님들의 혼자알기 아까운 상품들 ------------------------------------------------------------------- -->
            <div class="ps-product-list ps-product-list--2">
             <div class="container">
                 <div class="ps-section__header">
@@ -316,42 +311,8 @@ function addHeart(item_idx) {
             </div>
         </div>
         
-         <!-- ---------------------------------------------- 고객님들의 혼자알기 아까운 상품들-------------------------------------------------------- -->
-        
-        <!-- -------------------------------------------------------이미지배너2개자리 끝 --------------------------------------------------------- -->
-        <div class="ps-home-promotion">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 "><a class="ps-collection" href="#"><img src="/Code_Green/resources/img/promotions/home-9/2.jpg" alt=""></a>
-                    </div>
-                    
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 " data-background="/Code_Green/resources/img/promotions/home-9/1.jpg">
-                    	<!-- 이메일 구독폼 시작-->
-                       
-                            <aside class="widget widget_newletters">
-                                <h3 class="widget-title">소식지 구독</h3>
-                               	<h5> 비건마켓의 알아두면 좋은 소식들을 구독하고 싶으신가요?</h5>
-                               	<h5> 음식뿐만 아니라 환경을 위해 실천하면 좋은 일들도,</h5>
-                               	<h5> 지역을 살리는 농산물에 대한 이야기들도 들으실 수 있어요</h5>
-                                <form class="ps-form--newletter" action="#" method="get">
-                                    <div class="form-group--nest">
-                                        <input class="form-control" type="text" placeholder="Email Address" />
-                                        <button class="ps-btn">subscribe</button>
-                                    </div>
-                                </form>
-                            </aside>
-                       
-                        <!-- 이메일 구독폼 끝-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <!-- -------------------------------------------------------이미지배너2개자리 끝 --------------------------------------------------------- -->
-        
-         <!-- ---------------------------------------------- 내 취향을 잘 아는 상품들 ------------------------------------------------------------------- -->
+<!-- ---------------------------------------------- 고객님들의 혼자알기 아까운 상품들-------------------------------------------------------- -->
+<!-- ---------------------------------------------- 내 취향을 잘 아는 상품들 ------------------------------------------------------------------- -->
            <div class="ps-product-list ps-product-list--2">
             <div class="container">
                 <div class="ps-section__header">
@@ -412,11 +373,9 @@ function addHeart(item_idx) {
             </div>
         </div>
         
-         <!-- ---------------------------------------------- 내 취향을 잘 아는 상품들 끝------------------------------------------------------------------- -->
-         
-        
-       <!-- ---------------------------------------------------------- 레시피 넣을 자리 시작---------------------------------------------------------- -->
-        <div class="ps-client-say bg--cover" data-background="/Code_Green/resources/img/bg/testimonial-organic.jpg">
+<!-- ---------------------------------------------- 내 취향을 잘 아는 상품들 끝------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------- 레시피 넣을 자리 시작---------------------------------------------------------- -->
+        <div class="ps-client-say bg--cover" data-background="/Code_Green/resources/img/recipeBg.jpg">
             <div class="container">
                 <div class="ps-section__header">
                     <h3>이달의 레시피</h3>
@@ -437,8 +396,8 @@ function addHeart(item_idx) {
 	              </div>
             </div>
         </div>
-        <!-- ---------------------------------------------------------- 레시피 넣을 자리 끝 ---------------------------------------------------------- -->
-        <!-- ---------------------------------------------------------- 푸터푸터 ---------------------------------------------------------- -->
+<!-- ---------------------------------------------------------- 레시피 넣을 자리 끝 ---------------------------------------------------------- -->
+		<!-- ---------------------------------------------------------- 푸터푸터 ---------------------------------------------------------- -->
      	<jsp:include page="../inc/footer.jsp"></jsp:include>
     	<!-- ---------------------------------------------------------- 푸터푸터 끝 ---------------------------------------------------------- -->
     </div>
