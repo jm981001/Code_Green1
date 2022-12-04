@@ -21,7 +21,14 @@ private static Logger LOGGER = LoggerFactory.getLogger(ExpectionController.class
         return "Error/404";
     }
     
-    
+//  LOGGER.warn("========== ERROR 400 PAGE ==========");
+@GetMapping("/error400")
+public String Error400(HttpServletResponse res, Model model) {
+  model.addAttribute("code", "ERROR_500");
+  return "Error/400";
+}
+
+
 //        LOGGER.warn("========== ERROR 500 PAGE ==========");
     @GetMapping("/error500")
     public String Error500(HttpServletResponse res, Model model) {
