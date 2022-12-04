@@ -130,7 +130,7 @@ h5{
 									</div>
 								</div>
 								<h5>
-									<a href="find_id_form">아이디 / 비밀번호 찾기</a>
+									<a href="find_id">아이디</a> / <a href="find_pass">비밀번호 찾기</a>
 								</h5>
 								<div class="ps-form__footer">
 									<div class="form-group submtit">

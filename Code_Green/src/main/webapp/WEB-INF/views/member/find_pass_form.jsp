@@ -17,7 +17,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : 'get',
-			url : 'idFindMail?email='+eamil,
+			url : 'passFindMail?email='+eamil,
 			success : function (data) {
 				console.log("data : " +  data);
 				code =data;
@@ -35,7 +35,7 @@ alert("${msg}");
 		<div class="w3-container w3-card-4">
 			<form action="idFintMail" method="get">
 				<div class="w3-center w3-large w3-margin-top">
-					<h3>아이디 찾기</h3>
+					<h3>패스워드 찾기</h3>
 				</div>
 				<div id="wrap">
 					<div>

@@ -145,17 +145,17 @@ public class MemberController {
 			MemberVO getMem = service.getMemberInfo(member.getMember_id());
 			int idx = getMem.getMember_idx();
 			model.addAttribute("getMem", getMem);
-//			
+			
 //			CoinVO getCoin = coinService.getCoin(getMem.getMember_id());
-//			System.out.println("getCoin : " + getCoin);
-//			
+//			System.out.println("getCoin : " + getCoin);  //null
+			
 //			coin = coinService.getCoin(member_id);
-//			System.out.println("coin : " + coin);
+//			System.out.println("coin : " + coin); //null
 			
 //			int coinCount= service.addCoin(coin);
 //			System.out.println("coinCount  :" + coinCount);
 //			model.addAttribute("coinCount", coinCount);
-//			
+			
 			return "redirect:/join_result";
 		} else { // 가입 실패
 			model.addAttribute("msg", "가입 실패!");
@@ -195,13 +195,20 @@ public class MemberController {
 	}
 
 	// 아이디 찾는 폼
-	@GetMapping(value = "/find_id_form")
+	@GetMapping(value = "/find_id")
 	public String find_id_form() {
 		return "member/find_id_form";
 	}
 
+	// 패스워드 찾는 폼
+	@GetMapping(value = "/find_pass")
+	public String find_pass_form() {
+		return "member/find_pass_form";
+	}
+
+
 	// 아이디 찾는 이메일
-	@GetMapping("/idFintMail")
+	@GetMapping("/idFindMail")
 	public String findIdMailCheck(String email, Model model) {
 		System.out.println("아이디 찾기 이메일 요청이 들어옴!");
 		System.out.println("아이디 찾을 이메일 : " + email);
