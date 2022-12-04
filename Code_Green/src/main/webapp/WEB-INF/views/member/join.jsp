@@ -99,6 +99,8 @@
 					<label for="email">이메일</label>
 					<div class="input-group">
 						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일">
+						<span id="checkMailResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+						<input type="button" onclick="dupMail()" value="중복체크">
 <!-- 						<select class="form-control" name="userEmail2" id="userEmail2"> -->
 <!-- 							<option>@naver.com</option> -->
 <!-- 							<option>@daum.net</option> -->
@@ -186,6 +188,8 @@
 					<label for="email">이메일</label>
 					<div class="input-group">
 						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일">
+						<span id="checkMailResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+						<input type="button" onclick="dupMailM()" value="중복체크">
 <!-- 						<select class="form-control" name="userEmail4" id="userEmail4"> -->
 <!-- 							<option>@naver.com</option> -->
 <!-- 							<option>@daum.net</option> -->

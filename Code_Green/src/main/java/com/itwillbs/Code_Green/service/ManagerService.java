@@ -25,7 +25,11 @@ public class ManagerService {
 	}
 //	아이디 중복
 	public int idCheck(String manager_id) {
-		return mapper.idCheck(manager_id);
+		return mapper.idCheckM(manager_id);
+	}
+//	이메일 중복
+	public int mailCheck(String manager_id) {
+		return mapper.mailCheckM(manager_id);
 	}
 //	로그인
 	// BCryptPasswordEncoder 활용한 로그인을 위해 패스워드 조회 - getPasswd()
@@ -227,6 +231,7 @@ public class ManagerService {
 		public SellVO getNet(String sId) {
 			return mapper.selectNet(sId);
 		}
+		
 		
 	
 	   

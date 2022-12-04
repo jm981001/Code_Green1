@@ -52,12 +52,16 @@ public class MemberService {
 	public int setCoin(CoinVO coin) {
 		return mapper.setCoin(coin);
 	}
+	// 탈퇴 유무 확인
 	public String checkDel(String member_id) {
 		return mapper.checkDel(member_id);
 	}
 	//아이디 중복체크
 	public int idCheck(String member_id) {
 		return mapper.idCheck(member_id);
+	}
+	public int mailCheck(String member_email) {
+		return mapper.mailCheck(member_email);
 	}
 	
 	
@@ -104,6 +108,8 @@ public class MemberService {
 	public int getReportListCount(String member_id) {
 		return mapper.selectReportListCount(member_id);
 	}
+
+	
 
 
 	

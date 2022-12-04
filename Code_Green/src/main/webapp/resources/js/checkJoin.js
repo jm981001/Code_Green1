@@ -359,14 +359,41 @@ function dupId() {
 				dupIdResult = true;
 				
 			} else { // memberCheck가 1일 경우 -> 이미 존재하는 아이디
-				alert("이미 존재하는 아이디 입니다");
-				alert("아이디를 다시 입력해주세요");
-				$('#member_id').val('');
+				$("#checkIdResult").html("이미 존재하는 아이디 입니다");
+				$("#checkIdResult").css("color", "red");
+//				alert("이미 존재하는 아이디 입니다");
+//				alert("아이디를 다시 입력해주세요");
+				$('#member_id').val('').focus();
 				dupIdResult = false;
 			}
 		},
 		error: function() {
 			alert("에러입니다");
+		}
+	});
+};
+//회원 중복 메일 조회
+function dupMail() {
+	var member_email = $('#member_email').val(); //id값이 "member_email"인 입력란의 값을 저장
+	$.ajax({
+		url: 'mailCheck', //Controller에서 요청 받을 주소
+		type: 'post', //POST 방식으로 전달
+		data: { member_email : member_email },
+		success: function(mailCheck) { //컨트롤러에서 넘어온 checkCount값을 받는다 
+			if (mailCheck == 0) { //mailCheck가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+				$("#checkMailResult").html("사용 가능한 이메일 입니다");
+				$("#checkMailResult").css("color", "blue");
+				dupMailResult = true;
+				
+			} else { // mailCheck가 1일 경우 -> 이미 존재하는 아이디
+				alert("이미 존재하는 이메일 입니다");
+				alert("이메일 다시 입력해주세요");
+				$('#member_email').val('');
+				dupMailResult = false;
+			}
+		},
+		error: function() {
+			alert("실패");
 		}
 	});
 };
@@ -385,14 +412,43 @@ function dupIdM() {
 				dupIdResultM = true;
 				
 			} else { // memberCheck가 1일 경우 -> 이미 존재하는 아이디
-				alert("이미 존재하는 아이디 입니다");
-				alert("아이디를 다시 입력해주세요");
-				$('#manager_id').val('');
+				$("#checkIdResultM").html("이미 존재하는 아이디 입니다");
+				$("#checkIdResultM").css("color", "red");
+//				alert("이미 존재하는 아이디 입니다");
+//				alert("아이디를 다시 입력해주세요");
+				$('#manager_id').val('').focus();
 				dupIdResultM = false;
 			}
 		},
 		error: function() {
 			alert("에러입니다");
+		}
+	});
+};
+//기업 중복 메일 조회
+function dupMailM() {
+	var manager_email = $('#manager_email').val(); //id값이 "member_email"인 입력란의 값을 저장
+	$.ajax({
+		url: 'mailCheckM', //Controller에서 요청 받을 주소
+		type: 'post', //POST 방식으로 전달
+		data: { manager_email : manager_email },
+		success: function(mailCheckM) { //컨트롤러에서 넘어온 checkCount값을 받는다 
+			if (mailCheckM == 0) { //managerCheck가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+				$("#checkMailResultM").html("사용 가능한 이메일 입니다");
+				$("#checkMailResultM").css("color", "blue");
+				dupMailResultM = true;
+				
+			} else { // memberCheck가 1일 경우 -> 이미 존재하는 아이디
+				$("#checkMailResultM").html("이미 존재하는 이메일 입니다");
+				$("#checkMailResultM").css("color", "red");
+//				alert("이미 존재하는 아이디 입니다");
+//				alert("아이디를 다시 입력해주세요");
+				$('#manager_id').val('').focus();
+				dupMailResultM = false;
+			}
+		},
+		error: function() {
+			alert("실패");
 		}
 	});
 };

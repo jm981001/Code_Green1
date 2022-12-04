@@ -47,7 +47,7 @@ public class CartController {
 
 			if (insertCount > 0) {
 //				System.out.println((int)session.getAttribute("cartCount") +1);
-				session.setAttribute("cartCount", (int) session.getAttribute("cartCount") + 1);
+				session.setAttribute("cartCount", (int) session.getAttribute("cartCount") + 1);// 장바구니 숫자 표시 조정
 				return session.getAttribute("cartCount") + ""; // 데이터만 전달 나머진 뷰페이지
 			} else {
 				model.addAttribute("msg", "담기 실패!");
@@ -71,15 +71,15 @@ public class CartController {
 			mav.setViewName("redirect:/login");
 			return mav;
 		} else {
-			if (cartList.size() == 0) {
+			if (cartList.size() == 0) {// 장바구니 비었을때 이동
 				mav.setViewName("cart/shopping_cart");
 				return mav;
 			}
 			Map<String, Object> map = new HashMap<String, Object>();
 
-			String sumMoney = service.sumMoney(cartList.get(0).getRf_member_idx());
+			String sumMoney = service.sumMoney(cartList.get(0).getRf_member_idx());// 장바구니 전체 금액
 
-			int sumM = (int) (Double.parseDouble(sumMoney));
+			int sumM = (int) (Double.parseDouble(sumMoney));// 장바구니 전체 금액
 			int fee = (sumM >= 50000 ? 0 : 2500); // 5만원 기준으로 배송비 측정
 
 			model.addAttribute("cartList", cartList);
@@ -108,7 +108,7 @@ public class CartController {
 
 		int del = service.deleteCart(cart_idx);
 		if (del > 0) {
-			session.setAttribute("cartCount", (int) session.getAttribute("cartCount") - 1);
+			session.setAttribute("cartCount", (int) session.getAttribute("cartCount") - 1);// 장바구니 숫자 표시 조정
 			return session.getAttribute("cartCount") + ""; // 데이터만 전달 나머진 뷰페이지
 		} else {
 			model.addAttribute("msg", "삭제 실패!");

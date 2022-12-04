@@ -31,6 +31,9 @@ public interface MemberMapper {
 
 	//아이디 중복체크 
 	public int idCheck(String member_id);
+	//메일 중복체크
+	public int mailCheck(String member_email);
+
 	
 	// 회원 가입시 기본 적립금 추가
 	public int setCoin(CoinVO coin);
@@ -70,6 +73,7 @@ public interface MemberMapper {
 
 	// 마이페이지 - 신고내역 목록갯수 카운트
 	public int selectReportListCount(String member_id);
+
 
 	
 

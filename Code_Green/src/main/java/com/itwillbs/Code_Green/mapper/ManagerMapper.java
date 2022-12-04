@@ -13,17 +13,19 @@ import com.itwillbs.Code_Green.vo.SellVO;
 
 public interface ManagerMapper {
 
-	// 1. 기업 가입에 필요한 insertManager() 메서드 정의
+	// 기업 가입에 필요한 insertManager() 메서드 정의
 	// => 파라미터 : ManagerVO 객체(member), 리턴타입 : int
 	public int insertManager(ManagerVO manager);
-	// 1.5 아이디 중복체크
-	public int idCheck(String manager_id);
+	// 아이디 중복체크
+	public int idCheckM(String manager_id);
+	// 메일 중복체크
+	public int mailCheckM(String manager_id);
 	
-	// 2. 로그인에 필요한 selectPasswd() 메서드 정의
+	// 로그인에 필요한 selectPasswd() 메서드 정의
 	// => 파라미터 : String manager_id, 리턴타입 : String
 	public String selectPasswd(String manager_id);
 
-	// 3. 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
+	// 브랜드 정보 조회에 필요한 selectManagerInfo() 메서드 정의
 	// => 파라미터 : 아이디, 리턴타입 : ManagerVO
 	public ManagerVO selectManagerInfo(String manager_id);
     
@@ -144,6 +146,7 @@ public interface ManagerMapper {
 	public SellVO selectCommission(@Param("sId")String sId, @Param("period")String period);
 	//순수익
 	public SellVO selectNet(String sId);
+	
 	
 	
 	

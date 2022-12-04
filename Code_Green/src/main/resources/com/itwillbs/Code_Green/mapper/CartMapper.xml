@@ -5,7 +5,7 @@
 <!-- 		SELECT MAX(cart_idx) FROM cart -->
 <!-- </selectKey> -->
 
-	<!-- 1. 장바구니 추가 -->
+	<!--  장바구니 추가 -->
 	<insert id="insertCart">
 		<selectKey keyProperty="cart_idx" resultType="integer" order="BEFORE">
 			SELECT MAX(cart_idx) FROM cart
@@ -22,7 +22,7 @@
 				ON DUPLICATE KEY UPDATE  cart_amount= cart_amount + 1 
 	</insert>
 	
-	<!-- 2. 장바구니 목록 -->
+	<!--  장바구니 목록 -->
 	<select id="selectCart" resultType="com.itwillbs.Code_Green.vo.CartVO">
 		SELECT 
 			i.item_name,
@@ -45,6 +45,7 @@
 	
 	</select>
 	
+	<!-- 장바구니 번호 가져오기 -->
 	<select id="getCartIdx">
 		SELECT
 			c.cart_idx
@@ -55,18 +56,18 @@
 	</select>
 	
 
-	<!-- 3. 장바구니 삭제 -->
+	<!-- 장바구니 삭제 -->
 	<delete id="deleteCart">
 		DELETE FROM cart WHERE cart_idx = #{cart_idx}
-	</delete>
+	</delete> 
 	
-	<!-- 4. 장바구니 수정 -->
+	<!-- 장바구니 수정 -->
 	<update id="modifyCart">
 		update cart set cart_amount = #{cart_amount} where cart_idx = #{cart_idx}
 	</update>
 	
 	
-	<!--  5. 장바구니 금액 합계 -->
+	<!--  장바구니 금액 합계 -->
 	<select id="sumMoney"  resultType="String">
 		SELECT SUM(item_price * cart_amount) total
 		FROM 
@@ -75,7 +76,7 @@
 		  c.rf_item_idx = i.item_idx AND c.rf_member_idx = #{member_idx}
 	</select>
 	
-	<!-- 7.장바구니 수-->
+	<!-- 장바구니 수-->
 	<select id="cartCount" resultType="integer">
 		select 
 			count(cart_idx) 
@@ -84,6 +85,7 @@
 	
 	</select>
 	
+	<!-- 장바구니 중복확인 -->
 	<select id="sameItem" resultType="integer">
 		select 
 			count(rf_item_idx) 
@@ -92,6 +94,7 @@
 	
 	</select>
 	
+	<!-- 장바구니 수 -->
 	<select id="getCartCount" resultType="integer">
 		SELECT count(cart_idx)
 			 FROM cart c
@@ -100,6 +103,7 @@
 			 WHERE m.member_idx = #{member_idx};
 	</select>
 	
+	<!-- 장바구니 수정 -->
 	<update id="updateCart">
 		UPDATE cart SET cart_amount = #{cart_amount} where cart_idx = #{cart_idx} 
 	<!-- UPDATE tbl_cart	SET amount = amount + #{amount}  -->

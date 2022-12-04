@@ -99,19 +99,30 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
-	//아이디 중복체크
+
+	// 아이디 중복체크
 	@ResponseBody
 	@PostMapping(value = "idCheck")
-	public int idCheck(@RequestParam("member_id") String member_id,@ModelAttribute MemberVO member) {
+	public int idCheck(@RequestParam("member_id") String member_id, @ModelAttribute MemberVO member) {
 		int memberCheck = service.idCheck(member_id);
 //		System.out.println("memberCheck"+memberCheck);
-		
+
 		return memberCheck;
 	}
+	// 메일 중복체크
+	@ResponseBody
+	@PostMapping(value = "mailCheck")
+	public int mailCheck(@RequestParam("member_email") String member_email, @ModelAttribute MemberVO member) {
+		int mailCheck = service.mailCheck(member_email);
+
+		return mailCheck;
+	}
+
 	// "/MemberJoinPro.me" 요청에 대해 비즈니스 로직 처리할 joinPro() 메서드 정의 - POST
 	// => 파라미터 : 회원 가입 정보(MemberVO), Model 객체
 	@PostMapping(value = "/MemberJoinPro.me")
-	public String joinMemberPro(@ModelAttribute MemberVO member, Model model, @RequestParam String member_id,@ModelAttribute CoinVO coin) {
+	public String joinMemberPro(@ModelAttribute MemberVO member, Model model, @RequestParam String member_id,
+			@ModelAttribute CoinVO coin) {
 
 		// ------------------ BCryptPasswordEncoder 활용한 해싱 ----------------------
 
@@ -121,7 +132,7 @@ public class MemberController {
 		String securePasswd = encoder.encode(member.getMember_pass());
 		// 3. MemberVO 객체의 패스워드에 암호문 저장
 		member.setMember_pass(securePasswd);
-		
+
 		int insertCount = service.joinMember(member);
 
 		if (insertCount > 0) { // 가입 성공
@@ -158,8 +169,7 @@ public class MemberController {
 
 		}
 	}
-	
-	
+
 	// 이메일 인증
 	@GetMapping("/mailCheck")
 	@ResponseBody
@@ -195,9 +205,9 @@ public class MemberController {
 		return "member/find_result";
 	}
 
-	//회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
+	// 회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
 	@GetMapping("/memberDelete.me")
-	public String memberDelete(@ModelAttribute MemberVO member, Model model ,HttpSession session) {
+	public String memberDelete(@ModelAttribute MemberVO member, Model model, HttpSession session) {
 		int updateCount = service.memberDelete(member);
 		if (updateCount == 0) {
 			model.addAttribute("msg", "탈퇴실패");
