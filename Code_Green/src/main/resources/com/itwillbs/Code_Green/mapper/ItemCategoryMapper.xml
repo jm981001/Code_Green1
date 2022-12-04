@@ -32,13 +32,14 @@
 						                           ON b.board_idx = s.rf_board_idx
 						 	    GROUP BY b.board_item_idx) AS a 
                 		    ON i.item_idx = a.board_item_idx
+            WHERE 1=1   		    
        <if test="!keyword.equals('')">                         
 		<choose>                                            
 			<when test="searchType.equals('item_name')">     
-			 WHERE i.item_name LIKE '%${keyword}%'            
+			  AND i.item_name LIKE '%${keyword}%'            
 			</when>                                        
 			<when test="searchType.equals('brand_name')">     
-			 WHERE m.manager_brandname LIKE '%${keyword}%'  
+			  AND m.manager_brandname LIKE '%${keyword}%'  
 			</when>                                          
 		</choose>                                            
 	  </if>
@@ -46,9 +47,6 @@
            	   AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY i.item_date DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-	
-		 
 	</select>
 
 	<!-- 유제품/음료 카테고리 -->
