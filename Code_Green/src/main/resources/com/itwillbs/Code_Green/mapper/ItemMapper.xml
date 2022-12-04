@@ -58,9 +58,13 @@
 				   ifnull( round(truncate( a.board_star_score,1),0),0) AS score,
 				   ifnull( truncate( a.board_star_score,1),0) AS board_star_score,
                    ifnull(s.count,0)
-				FROM (select *
-						from item
-						order by item_idx  desc
+				FROM (select i.*
+						from item i 
+                        left join manager m
+                        on i.re_manager_idx = m.manager_idx
+                        where i.item_stock not in ("0")
+							and m.MANAGER_DEL_YN not in ("Y")
+						order by i.item_idx  desc
 						limit 24) i 
             	LEFT JOIN file_item f 
               		ON i.item_idx = f.rf_item_idx 
@@ -77,7 +81,7 @@
 			 WHERE f.file1 NOT LIKE '%상세%'
 			 	and i.item_stock not in ("0")
                 and m.MANAGER_DEL_YN not in ("Y")
-			ORDER BY s.count desc ,i.item_idx desc 
+			ORDER BY s.count desc ,i.item_idx desc
 	</select>
 
 	<!-- 신상품리스트 가격 낮은순 -->
@@ -98,9 +102,13 @@
 				   m.manager_brandname,
 				   ifnull( round(truncate( a.board_star_score,1),0),0) AS score,
 				   ifnull( truncate( a.board_star_score,1),0) AS board_star_score
-				FROM (select *
-						from item
-						order by item_idx  desc
+				FROM (select i.*
+						from item i 
+                        left join manager m
+                        on i.re_manager_idx = m.manager_idx
+                        where i.item_stock not in ("0")
+							and m.MANAGER_DEL_YN not in ("Y")
+						order by i.item_idx  desc
 						limit 24) i 
             	LEFT JOIN file_item f 
               		ON i.item_idx = f.rf_item_idx 
@@ -119,13 +127,13 @@
 	
 		<!-- 신상품리스트 가격 높은순 -->
 	<select id="selectItemList_ex" resultType="com.itwillbs.Code_Green.vo.ItemVO">
-    	 select    i.item_idx, 
+		select    i.item_idx, 
 				   i.re_manager_idx,
 				   i.item_name,
 				   i.item_info,
 				   i.item_packing, 
 				   i.item_category, 
-				   i.item_price, 
+				   i.item_price,
 				   i.item_sale, 
 				   i.item_stock, 
 				   i.item_status,  
@@ -134,11 +142,33 @@
 				   f.file1,
 				   m.manager_brandname,
 				   ifnull( round(truncate( a.board_star_score,1),0),0) AS score,
-				   ifnull( truncate( a.board_star_score,1),0) AS board_star_score
-				FROM (select *
-						from item
-						order by item_idx  desc
-						limit 24) i 
+				   ifnull( truncate( a.board_star_score,1),0) AS board_star_score,
+				   ifnull((select count(*) 
+						from heart 
+						where rf_item_idx =  i.item_idx),0) as count
+				FROM (select i.item_idx,
+							 i.RE_MANAGER_IDX,
+						     i.item_name,
+						     i.item_info,
+						     i.item_packing, 
+						     i.item_category, 
+						     i.item_price,
+						     i.item_sale, 
+						     i.item_stock, 
+						     i.item_status,  
+						     i.item_readcount,  
+						     i.item_date, 
+							 count(*) as count
+								 from item  i 
+								 	 left join heart h 
+										 on i.ITEM_IDX = h.RF_ITEM_IDX
+									 left join manager m
+										on i.re_manager_idx = m.manager_idx
+									where i.item_stock not in ("0")
+									and m.MANAGER_DEL_YN not in ("Y")
+								 group by i.ITEM_IDX
+								 order by count desc
+								 limit 24) i 
             	LEFT JOIN file_item f 
               		ON i.item_idx = f.rf_item_idx 
 			 	JOIN manager m 
@@ -151,7 +181,7 @@
 			 WHERE f.file1 NOT LIKE '%상세%'
 			 	and i.item_stock not in ("0")
                 and m.MANAGER_DEL_YN not in ("Y")
-			ORDER BY CAST(i.item_price AS UNSIGNED)  desc
+			 ORDER BY count desc
 	</select>
 	
 	<!-- 베스트리스트-->
@@ -188,8 +218,13 @@
 						     i.item_readcount,  
 						     i.item_date, 
 							 count(*) as count
-								 from item  i left join heart h 
-									 on i.ITEM_IDX = h.RF_ITEM_IDX
+								 from item  i 
+								 	 left join heart h 
+										 on i.ITEM_IDX = h.RF_ITEM_IDX
+									 left join manager m
+										on i.re_manager_idx = m.manager_idx
+									where i.item_stock not in ("0")
+									and m.MANAGER_DEL_YN not in ("Y")
 								 group by i.ITEM_IDX
 								 order by count desc
 								 limit 24) i 
@@ -240,8 +275,13 @@
 						     i.item_readcount,  
 						     i.item_date, 
 							 count(*) as count
-						 from item  i left join heart h 
-						 on i.ITEM_IDX = h.RF_ITEM_IDX
+						 from item  i 
+						 	 left join heart h 
+								 on i.ITEM_IDX = h.RF_ITEM_IDX
+							 left join manager m
+								on i.re_manager_idx = m.manager_idx
+							where i.item_stock not in ("0")
+							and m.MANAGER_DEL_YN not in ("Y")
 						 group by i.ITEM_IDX
 						 order by count desc
 						 limit 24) i 
@@ -295,8 +335,13 @@
 						     i.item_readcount,  
 						     i.item_date, 
 							 count(*) as count
-						 from item  i left join heart h 
-						 on i.ITEM_IDX = h.RF_ITEM_IDX
+						 from item  i 
+						 	 left join heart h 
+								 on i.ITEM_IDX = h.RF_ITEM_IDX
+							 left join manager m
+								on i.re_manager_idx = m.manager_idx
+							where i.item_stock not in ("0")
+							and m.MANAGER_DEL_YN not in ("Y")
 						 group by i.ITEM_IDX
 						 order by count desc
 						 limit 24) i 
@@ -346,8 +391,13 @@
 						     i.item_readcount,  
 						     i.item_date, 
 							 count(*) as count
-						 from item  i left join heart h 
-						 on i.ITEM_IDX = h.RF_ITEM_IDX
+						 from item  i 
+						 	 left join heart h 
+								 on i.ITEM_IDX = h.RF_ITEM_IDX
+							 left join manager m
+								on i.re_manager_idx = m.manager_idx
+							where i.item_stock not in ("0")
+							and m.MANAGER_DEL_YN not in ("Y")
 						 group by i.ITEM_IDX
 						 order by count desc
 						 limit 24) i 
@@ -496,7 +546,10 @@
 			                from board_best
 			                group by RF_BOARD_IDX) v 
                   on b.board_idx = v.RF_BOARD_IDX
+               left join member m 
+					on b.board_id = m.member_id
             WHERE  board_item_idx = #{item_idx}
+            	and m.member_del_yn = "N"
 			ORDER BY b.board_date  desc ,b.board_idx  desc
 			LIMIT #{startRow}, #{listLimit}  
    </select>
@@ -521,7 +574,10 @@
 			                from board_best
 			                group by RF_BOARD_IDX) v 
                   on b.board_idx = v.RF_BOARD_IDX
+               left join member m 
+					on b.board_id = m.member_id
             WHERE  board_item_idx = #{item_idx}
+            	and m.member_del_yn = "N"
 			ORDER BY s.board_star_score  desc ,b.board_idx  desc
 			LIMIT #{startRow}, #{listLimit}   
    </select>
@@ -547,7 +603,10 @@
 			                from board_best
 			                group by RF_BOARD_IDX) v 
                     on b.board_idx = v.RF_BOARD_IDX			   	
+               left join member m 
+					on b.board_id = m.member_id
             WHERE  board_item_idx = #{item_idx}
+            	and m.member_del_yn = "N"
 			ORDER BY s.board_star_score  desc ,b.board_idx  desc
 			LIMIT #{startRow}, #{listLimit}   
    </select>
@@ -572,7 +631,10 @@
 			                from board_best
 			                group by RF_BOARD_IDX) v 
                     on b.board_idx = v.RF_BOARD_IDX					   
+               left join member m 
+					on b.board_id = m.member_id
             WHERE  board_item_idx = #{item_idx}
+            	and m.member_del_yn = "N"
 			ORDER BY s.board_star_score  ASC ,b.board_idx  desc
 			LIMIT #{startRow}, #{listLimit}     
    </select>
@@ -580,20 +642,25 @@
 	
 	<!-- 상품 후기 갯수-->
 	<select id="selectReviewListCount" resultType="integer">
-		SELECT 
+             SELECT 
 				COUNT(*) 
-				FROM board
+				FROM board b
+			   left join member m 
+					on b.board_id = m.member_id
 				WHERE
-					board_item_idx = #{item_idx}
+					board_item_idx =  #{item_idx}
+					and m.member_del_yn = "N"
 	</select>
 	
 <!-- 	상품 문의 갯수 조회 -->
 	<select id="selectQnaListCount" resultType="integer">
-		SELECT 
-				COUNT(*) 
-				FROM qna
+		SELECT  COUNT(*) 
+				FROM qna q			   
+					left join member m 
+					on q.qna_id = m.member_id
 				WHERE
-					qna_item_idx = #{item_idx}
+					q.qna_item_idx = #{item_idx}
+                     and m.member_del_yn = "N"
 	</select>
 	
 	<!-- 전체 상품 갯수 조회(검색 기능 추가 아직) -->
@@ -640,11 +707,11 @@
 	</select>
 	
 	
-	
+	  
 	
 <!-- 	상품 문의 리스트 -->
 	<select id="selectQna" resultType="com.itwillbs.Code_Green.vo.QnaVO">
-         		SELECT   q.QNA_IDX
+              SELECT     q.QNA_IDX
 						,q.QNA_ITEM_IDX
 						,q.QNA_TYPE
 						,q.QNA_CATEGORY
@@ -662,9 +729,12 @@
 						on q.qna_item_idx = i.item_idx
                     left join manager m 
 						on m.manager_idx = i.re_manager_idx
+					left join member me 
+					on q.qna_id = me.member_id
 				WHERE
-					q.qna_item_idx = #{item_idx}
-				ORDER BY q.qna_idx DESC 
+					q.qna_item_idx =  #{item_idx}
+                   and me.member_del_yn = "N"
+				ORDER BY q.qna_idx DESC
 				LIMIT #{Qna_startRow}, #{Qna_listLimit}   
 	</select>
 	

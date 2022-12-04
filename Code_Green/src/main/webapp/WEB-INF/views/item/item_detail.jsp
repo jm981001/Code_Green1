@@ -361,8 +361,8 @@ function addHeart(item_idx) {
                             <ul class="ps-tab-list">
                                 <li class="active"><a href="#tab-1">상품설명</a></li>
                                 <li><a href="#tab-2">상세정보</a></li>
-                                <li><a href="#tab-3">후기 ${item.count }</a></li><!--tab-3-1은 작성폼 -->
-                                <li><a href="#tab-4">문의</a></li> <!--tab-4-1은 작성폼 -->
+                                <li><a href="#tab-3">후기 ${listCount}</a></li><!--tab-3-1은 작성폼 -->
+                                <li><a href="#tab-4">문의 ${Qna_listCount }</a></li> <!--tab-4-1은 작성폼 -->
                             </ul>
                             <div class="ps-tabs">
                             
@@ -933,8 +933,12 @@ function addHeart(item_idx) {
 												       				 <td colspan="4"><br>
 													            		${qna.qna_content }
 													            		<br><br><br>
-													            		(관리자 답글) 
+												            			<c:if test="${qna.qna_answer ne 'N' }" >
 													            		${qna.qna_answer }
+													            		</c:if>
+												            			<c:if test="${qna.qna_answer eq 'N' }" >
+													            		답변 대기중입니다.
+													            		</c:if>
 													                    <br><br><br>
 													                  <div align="right"><br><br>
 													                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
@@ -943,7 +947,6 @@ function addHeart(item_idx) {
 																	  </c:if>
 																	 </div>
 													                </td>    
-												                    
 												                </c:when>
 												                <c:otherwise>
 												                	 <td colspan="4"><br><br><br> 비밀글은 작성자와 관리자만 볼 수 있습니다.<br><br><br></td>
@@ -956,9 +959,12 @@ function addHeart(item_idx) {
 												            		${qna.qna_content }
 												            		<br><br><br>
 												            			<c:if test="${qna.qna_answer ne 'N' }" >
-													            		(관리자 답글) 
 													            		${qna.qna_answer }
 													            		</c:if>
+												            			<c:if test="${qna.qna_answer eq 'N' }" >
+													            		답변 대기중입니다.
+													            		</c:if>
+													            		
 												                    <br><br><br>
 												                  <div align="right"><br><br>
 												                  <c:if test="${qna.qna_id eq sessionScope.sId || qna.qna_id eq 'admin' }">
