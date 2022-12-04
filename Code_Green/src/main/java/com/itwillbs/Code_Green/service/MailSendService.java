@@ -78,7 +78,6 @@ public class MailSendService {
 	public String idFindEmail(String email) {
 		System.out.println(email);
 		MemberVO member = mService.getMemberEmail(email);
-
 		String id = member.getMember_id();
 		String setFrom = "CodeGreen@gmail.com";
 		String toMail = email;

@@ -200,30 +200,49 @@ public class MemberController {
 		return "member/find_id_form";
 	}
 
-	// 패스워드 찾는 폼
-	@GetMapping(value = "/find_pass")
-	public String find_pass_form() {
-		return "member/find_pass_form";
-	}
-
-
 	// 아이디 찾는 이메일
 	@GetMapping("/idFindMail")
 	public String findIdMailCheck(String email, Model model) {
 		System.out.println("아이디 찾기 이메일 요청이 들어옴!");
 		System.out.println("아이디 찾을 이메일 : " + email);
-		String emai1l = mailService.idFindEmail(email);
-		if (emai1l == null) {
+		String emailResult = mailService.idFindEmail(email);
+		if (emailResult == null) {
+			System.out.println("없는 이메일");
 			model.addAttribute("msg", "실패");
 			return "member/fail_back";
 		}
-		return "redirect:/find_result";
+		return "redirect:/find_id_pro";
+	}
+	// 아이디 찾기 결과
+	@GetMapping(value = "/find_id_pro")
+	public String find_id_result() {
+		return "member/find_id_result";
 	}
 
-	// 아이디 찾기 결과
-	@GetMapping(value = "/find_result")
-	public String find_result() {
-		return "member/find_result";
+	
+	// 패스워드 찾는 폼
+	@GetMapping(value = "/find_pass")
+	public String find_pass_form() {
+		return "member/find_pass_form";
+	}
+	
+	// 아이디 찾는 이메일
+	@GetMapping("/passFindMail")
+	public String findPassMailCheck(String email, Model model) {
+		System.out.println("패스워드 찾기 이메일 요청이 들어옴!");
+		System.out.println("패스워드 찾을 이메일 : " + email);
+		String emailResult = mailService.passFindEmail(email);
+		if (emailResult == null) {
+			model.addAttribute("msg", "실패");
+			return "member/fail_back";
+		}
+		return "redirect:/find_pass_result";
+	}
+	
+	// 패스워드 찾기 결과
+	@GetMapping(value = "/find_pass_result")
+	public String find_pass_result() {
+		return "member/find_pass_result";
 	}
 
 	// 회원 탈퇴처리 (사실은 update 구문으로 삭제한 회원으로 처리됨)
