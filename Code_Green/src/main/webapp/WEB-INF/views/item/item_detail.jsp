@@ -516,19 +516,30 @@ function addHeart(item_idx) {
 													        <tbody>  
 													            <tr class="item">  
 													                <td width="70%">${board.board_subject }
-														                 <div class="ps-product" style="float:left;">
+ 																		<div class="ps-product" style="float:left;">
 				                                                            <div class="ps-product__rating" style="float:left;">
 				                                                                <select class="ps-rating" data-read-only="true">
-							              										 	<c:forEach var="i" begin="1" end="5">
-										                                             	<c:choose>
-										                                             		<c:when test="${i <= board.board_star_score}">
-										                                             			<option value="1">${i }</option>
-										                                             		</c:when>
-										                                             		<c:otherwise>
-										                                             			<option value="2">${i }</option>
-										                                             		</c:otherwise>
-										                                             	</c:choose>
-										                                             </c:forEach>
+								                                                    <c:if test="${board.board_star_score == 0}">
+								                                                    	<option value="0"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    </c:if>
+								                                                    
+								                                                    <c:forEach var="i" begin="1" end="5">
+								                                                    	<c:choose>
+										                                                    <c:when test="${board.board_star_score == 0}"></c:when>
+								                                                    		<c:when test="${i <= board.board_star_score}">
+								                                                    			<option value="1">${i }</option>
+								                                                    		</c:when>
+								                                                    		<c:otherwise>
+								                                                    			<option value="2">${i }</option>
+								                                                    		</c:otherwise>
+								                                                    	</c:choose>
+								                                                    
+								                                                    </c:forEach>
 				                                                                </select>
 				                                                            </div>
 			                                                            </div>
@@ -572,16 +583,27 @@ function addHeart(item_idx) {
  																		<div class="ps-product" style="float:left;">
 				                                                            <div class="ps-product__rating" style="float:left;">
 				                                                                <select class="ps-rating" data-read-only="true">
-							              										 	<c:forEach var="i" begin="1" end="5">
-										                                             	<c:choose>
-										                                             		<c:when test="${i <= board.board_star_score}">
-										                                             			<option value="1">${i }</option>
-										                                             		</c:when>
-										                                             		<c:otherwise>
-										                                             			<option value="2">${i }</option>
-										                                             		</c:otherwise>
-										                                             	</c:choose>
-										                                             </c:forEach>
+								                                                    <c:if test="${board.board_star_score == 0}">
+								                                                    	<option value="0"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    </c:if>
+								                                                    
+								                                                    <c:forEach var="i" begin="1" end="5">
+								                                                    	<c:choose>
+										                                                    <c:when test="${board.board_star_score == 0}"></c:when>
+								                                                    		<c:when test="${i <= board.board_star_score}">
+								                                                    			<option value="1">${i }</option>
+								                                                    		</c:when>
+								                                                    		<c:otherwise>
+								                                                    			<option value="2">${i }</option>
+								                                                    		</c:otherwise>
+								                                                    	</c:choose>
+								                                                    
+								                                                    </c:forEach>
 				                                                                </select>
 				                                                            </div>
 			                                                            </div>
@@ -623,16 +645,27 @@ function addHeart(item_idx) {
 																		 <div class="ps-product" style="float:left;">
 				                                                            <div class="ps-product__rating" style="float:left;">
 				                                                                <select class="ps-rating" data-read-only="true">
-							              										 	<c:forEach var="i" begin="1" end="5">
-										                                             	<c:choose>
-										                                             		<c:when test="${i <= board.board_star_score}">
-										                                             			<option value="1">${i }</option>
-										                                             		</c:when>
-										                                             		<c:otherwise>
-										                                             			<option value="2">${i }</option>
-										                                             		</c:otherwise>
-										                                             	</c:choose>
-										                                             </c:forEach>
+								                                                    <c:if test="${board.board_star_score == 0}">
+								                                                    	<option value="0"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    </c:if>
+								                                                    
+								                                                    <c:forEach var="i" begin="1" end="5">
+								                                                    	<c:choose>
+										                                                    <c:when test="${board.board_star_score == 0}"></c:when>
+								                                                    		<c:when test="${i <= board.board_star_score}">
+								                                                    			<option value="1">${i }</option>
+								                                                    		</c:when>
+								                                                    		<c:otherwise>
+								                                                    			<option value="2">${i }</option>
+								                                                    		</c:otherwise>
+								                                                    	</c:choose>
+								                                                    
+								                                                    </c:forEach>
 				                                                                </select>
 				                                                            </div>
 			                                                            </div>
@@ -674,16 +707,27 @@ function addHeart(item_idx) {
  																		<div class="ps-product" style="float:left;">
 				                                                            <div class="ps-product__rating" style="float:left;">
 				                                                                <select class="ps-rating" data-read-only="true">
-							              										 	<c:forEach var="i" begin="1" end="5">
-										                                             	<c:choose>
-										                                             		<c:when test="${i <= board.board_star_score}">
-										                                             			<option value="1">${i }</option>
-										                                             		</c:when>
-										                                             		<c:otherwise>
-										                                             			<option value="2">${i }</option>
-										                                             		</c:otherwise>
-										                                             	</c:choose>
-										                                             </c:forEach>
+								                                                    <c:if test="${board.board_star_score == 0}">
+								                                                    	<option value="0"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    	<option value="2"></option>
+								                                                    </c:if>
+								                                                    
+								                                                    <c:forEach var="i" begin="1" end="5">
+								                                                    	<c:choose>
+										                                                    <c:when test="${board.board_star_score == 0}"></c:when>
+								                                                    		<c:when test="${i <= board.board_star_score}">
+								                                                    			<option value="1">${i }</option>
+								                                                    		</c:when>
+								                                                    		<c:otherwise>
+								                                                    			<option value="2">${i }</option>
+								                                                    		</c:otherwise>
+								                                                    	</c:choose>
+								                                                    
+								                                                    </c:forEach>
 				                                                                </select>
 				                                                            </div>
 			                                                            </div>
@@ -750,25 +794,17 @@ function addHeart(item_idx) {
 								                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href='ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum-1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"' ><%}%>Prev<i class="icon-chevron-left"></i></a></li>
 								                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href='ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum+1}&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}"' ><%}%>Next<i class="icon-chevron-right"></i></a></li>
 								                        </ul>
-								                    </div>
-		                  					<script type="text/javascript">
-// 						                    	function changePageUp() {
-// 							                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// // 								                    		location.href = "#tab-3";
-// 							                    	}
-// 						                    	function changePageDown() {
-// 						                    		location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum="+${pageInfo.pageNum+1}+"&Qna_pageNum=${Qna_pageInfo.qna_pageNum}&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// // 								                    		location.href = "#tab-3";
-// 						                    	}
-		                  					
-		                  					</script>
+								                    </div><br>
 								                    <!-- 페이징 버튼들 끝 -->
 				                                    
 													<!--리뷰작성 버튼 -->
 												   <c:if test="${reviewBtn ne 0 }">
+												   
 												   <div align="right">
 							                            <ul class="ps-tab-list" >
-							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성${reviewBtn }</a></li>
+							                            <li>※작성 가능한 리뷰 개수는 ${reviewBtn }개입니다.</li>
+							                                <li ><a href="#tab-3-1" class="ps-btn" style="color: white ">리뷰작성</a></li>
+							                            
 							                            </ul>
 						                            </div> 
 						                            </c:if>
@@ -994,16 +1030,14 @@ function addHeart(item_idx) {
 				                    <script type="text/javascript">
 										   function changeQnaPageUp() {
 										      location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&Qna_pageNum="+${Qna_pageInfo.qna_pageNum+1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-		// 								      location.href = "#tab-3";
 										   }
 								           function changeQnaPageDown() {
 								              location.href = "ItemDetail.bo?item_idx=${item.item_idx}&pageNum=${pageInfo.pageNum}&Qna_pageNum="+${Qna_pageInfo.qna_pageNum-1}+"&manager_brandname=${item.manager_brandname}&item_category=${item.item_category}&sort=${sort}";
-// 								               location.href = "#tab-3";
 								           }
 								                    	
 								    </script>
 				                  
-								                    <!-- 페이징 버튼들 끝 -->
+								    <!-- 페이징 버튼들 끝 -->
 								    
 								    <!-- 문의작성 버튼 -->
 								   
@@ -1020,8 +1054,6 @@ function addHeart(item_idx) {
 							</div>
   								<script type="text/javascript">
 									function qnaDelete(qna_idx) {
-										// confirm() 함수를 사용하여 "삭제하시겠습니까?" 메세지로 확인받아 result 변수에 저장 후
-										// result 변수값이 true 일 경우 MemberDelete.me 서블릿 주소 요청(파라미터로 id 전달)
 										let result = confirm("삭제하시겠습니까잉?");
 										
 										if(result) {

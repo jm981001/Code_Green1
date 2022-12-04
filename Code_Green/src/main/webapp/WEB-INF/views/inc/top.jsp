@@ -24,9 +24,9 @@
 
 </style>
     <header class="header header--organic" data-sticky="true">
-        <div class="header__top">
+        <div class="header__top" >
         
-             <div class="ps-block--user-header">
+             <div class="ps-block--user-header" >
  				<c:choose>
             	<c:when test="${empty sessionScope.sId }">
                 <a href="join" style="color:green; font-weight: bold;">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="login">로그인</a>
@@ -49,7 +49,8 @@
                </div>
                           
             <div class="container">
-                <div class="header__left">
+            <div class="header__right"></div>
+                <div class="header__right">
                    <a class="ps-logo" href="/Code_Green"><img src="/Code_Green/resources/img/한글베지터틀.png" width="230" height="100"></a>
                 </div>
                 
@@ -62,7 +63,7 @@
 <!--                     </form> -->
 <!--                 </div> -->
             <div class="header__right">
-                    <div class="header__actions">
+                    <div class="header__actions" >
                     	<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
                         	<div class="ps-cart--mini">
                         	<a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i>

@@ -35,7 +35,8 @@
     <jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- 헤더 삽입 -->
                                     
-<!-- ==========상품후기 작성=========================================================================================================     -->	<div class="ps-page--product">
+<!-- ==========상품후기 작성=========================================================================================================     -->	
+<div class="ps-page--product">
 		<div class="ps-container">
 			<div class="ps-page__container">
 				<div class="row">
@@ -67,6 +68,12 @@
 							</div>
 							<div align="right">
 								<div class="form-group submit">
+								<c:if test="${qna.qna_pass eq 'N' || qna.qna_pass eq null || qna.qna_pass eq '' }" >
+								비밀글<input type="checkbox" id="qna_pass" name="qna_pass" value="Y" />
+								</c:if>
+								<c:if test="${qna.qna_pass eq 'Y'  }" >
+								비밀글<input type="checkbox" id="qna_pass" name="qna_pass" value="Y" checked/>
+								</c:if>
 									<button class="ps-btn" type="submit">Submit Review</button>
 									<br>
 									<br>

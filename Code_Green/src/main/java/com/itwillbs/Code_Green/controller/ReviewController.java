@@ -38,7 +38,7 @@ public class ReviewController {
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		System.out.println("실제 업로드 경로 : " + saveDir);
+//		System.out.println("실제 업로드 경로 : " + saveDir);
 		
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
 		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
@@ -54,7 +54,7 @@ public class ReviewController {
 		String originalFileName = mFile.getOriginalFilename();
 		String originalFileName2 = mFile2.getOriginalFilename();
 		String uuid = UUID.randomUUID().toString();
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+//		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
 		
 		file.setFile1(uuid + "1_" + originalFileName);
 		file.setFile2(uuid + "2_" + originalFileName2);
@@ -107,7 +107,7 @@ public class ReviewController {
 		String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 		// => webapp/resources 폴더 내에 upload 폴더 생성 필요
 		String saveDir = session.getServletContext().getRealPath(uploadDir);
-		System.out.println("실제 업로드 경로 : " + saveDir);
+//		System.out.println("실제 업로드 경로 : " + saveDir);
 		
 		File f = new File(saveDir); // 실제 경로를 갖는 File 객체 생성
 		// 만약, 해당 경로 상에 디렉토리(폴더)가 존재하지 않을 경우 생성
@@ -123,7 +123,7 @@ public class ReviewController {
 		String originalFileName = mFile.getOriginalFilename();
 		String originalFileName2 = mFile2.getOriginalFilename();
 		String uuid = UUID.randomUUID().toString();
-		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
+//		System.out.println("업로드 될 파일명 : " + uuid + "_" + originalFileName);
 		
 		file.setFile1(uuid + "1_" + originalFileName);
 		file.setFile2(uuid + "2_" + originalFileName2);
@@ -231,7 +231,6 @@ public class ReviewController {
 		
 		//------------파일 수정-------------------------------------------
 		int updateFile = service.modifyFile(file);
-		System.out.println("updateFile -> " + updateFile);
 		
 		if(updateFile== 0) {
 			model.addAttribute("msg", "파일수정 실패!");
@@ -242,7 +241,6 @@ public class ReviewController {
 					mFile.transferTo(new File(saveDir, file.getFile1()));
 					
 					File f2 = new File(saveDir, oldRealFile1); 
-					System.out.println("File f2 = new File(saveDir, oldRealFile1);  -> "+ f2);
 					if(f2.exists()) {
 						f2.delete();
 					}
@@ -299,8 +297,6 @@ public class ReviewController {
 		//글 삭제 전 실제 업로드된 파일 삭제작업
 		String realFile1 = service.getRealFile1(board_idx);
 		String realFile2 = service.getRealFile2(board_idx);
-		System.out.println("realFile1 -> "+realFile1);
-		System.out.println("realFile2 -> "+realFile2);
 		
 		int deleteFileCount = service.removeFile(board_idx);
 		int deleteCount = service.removeReview(board_idx);

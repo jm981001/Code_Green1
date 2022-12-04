@@ -3788,14 +3788,16 @@ textarea.form-control {
   }
 }
 
-/* 지영 */
+/* 지영  1205 정민수정*/
 .ps-block--user-header {
 /*   display: flex; */
 /*   flex-flow: row nowrap; */
 /*   text-align: left; */
-  position: absolute;
-  right: 440px;
-  top: 20px;
+  
+    display: flex;
+  align-items: right;
+  justify-content: center;
+  margin-left: 900px;
 }
 
 .ps-block--user-header .ps-block__left {
@@ -16016,7 +16018,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 /* 지영 */
 .header .header__right {
-  max-width: 200px;
+  max-width: 1000px;
+  align-items: center;
 }
 
 /* 지영 */
