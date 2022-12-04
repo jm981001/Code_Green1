@@ -41,7 +41,9 @@
 			 WHERE m.manager_brandname LIKE '%${keyword}%'  
 			</when>                                          
 		</choose>                                            
-	  </if>                                                         
+	  </if>
+	  		   AND i.item_stock not in ("0")
+           	   AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY i.item_date DESC) AS c
              LIMIT #{startRow}, #{listLimit}
 	
@@ -267,7 +269,9 @@
 						                           ON b.board_idx = s.rf_board_idx
 						 	    GROUP BY b.board_item_idx) AS a 
                 		    ON i.item_idx = a.board_item_idx
-             WHERE i.item_price &lt; 5000                                                        
+             WHERE i.item_price &lt; 5000
+               AND i.item_stock not in ("0")
+           	   AND m.manager_del_yn not in ("Y")                                                         
 		  ORDER BY i.item_date DESC) AS c
 		  
 	</select>
@@ -913,8 +917,8 @@
 			</when>                                          
 		</choose>                                            
 	  </if>
-	  		  AND i.item_stock not in ("0")
-              AND m.manager_del_yn not in ("Y")                                                          
+	  		   AND i.item_stock not in ("0")
+               AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
 	
@@ -973,8 +977,8 @@
 			</when>                                          
 		</choose>                                            
 	  </if>
-	  		  AND i.item_stock not in ("0")
-              AND m.manager_del_yn not in ("Y")                                                          
+	  		   AND i.item_stock not in ("0")
+               AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
 	
