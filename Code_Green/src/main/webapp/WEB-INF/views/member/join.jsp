@@ -91,16 +91,15 @@
 				
 				<div class="field">
 					<b>이름</b>
-					<input type="text" name="member_name" onkeyup="checkName(this.value)" id="member_name" maxlength='10' required="required"> 
+					<input type="text" name="member_name" onkeyup="checkName(this.value)" id="member_name" maxlength='5' required="required"> 
 					<span id="checkNameResult" style="color: red"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 				
 				<div class="form-group email-form">
 					<label for="email">이메일</label>
 					<div class="input-group">
-						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일">
-						<span id="checkMailResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-						<input type="button" onclick="dupMail()" value="중복체크">
+						<input type="text" class="form-control" name="member_email" id="member_email" placeholder="이메일" style="height: 43px; background-color: white;">
+						<input type="button" onclick="dupMail()" value="중복체크" style="width: 80px">
 <!-- 						<select class="form-control" name="userEmail2" id="userEmail2"> -->
 <!-- 							<option>@naver.com</option> -->
 <!-- 							<option>@daum.net</option> -->
@@ -109,12 +108,15 @@
 <!-- 							<option>@yahoo.co.kr</option> -->
 <!-- 						</select> -->
 					</div>
+						<span class="placehold-text">
+							<span id="checkMailResult"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+						</span>
 					
 						<div class="input-group-addon">
 							<button type="button" class="btn btn-primary" id="mail-Check-Btn" style="background-color:#5fa30f">본인인증</button>
 						</div>
 						<div class="mail-check-box">
-							<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
+							<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required" style="height: 43px; background-color: white;">
 						</div>
 						<span id="mail-check-warn"></span>
 					</div>
@@ -161,7 +163,7 @@
 				
 				<div class="field">
 					<b>기업관리자 이름</b> 
-					<input type="text" id="name" name="manager_name" maxlength="10" onkeyup="checkNameM(this.value)" required="required">
+					<input type="text" id="name" name="manager_name" maxlength="5" onkeyup="checkNameM(this.value)" required="required">
 					<span id="checkNameResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
 				</div>
 
@@ -176,7 +178,7 @@
 				<div class="field">
 					<div>
 						<b>브랜드 소개</b>
-						<textarea id="manager_info" name="manager_info" maxlength="1000" required="required"></textarea>
+						<textarea id="manager_info" name="manager_info" maxlength="1000" required="required" style="width: 380px"></textarea>
 					</div>
 				</div>
 				<div class="field">
@@ -184,12 +186,11 @@
 					<input type="text" name="manager_storecode" id="manager_storecode" maxlength="20" required="required">
 				</div>
 
-				<div class="form-group email-form">
+				<div class="form-group email-form" style="width:300px;">
 					<label for="email">이메일</label>
 					<div class="input-group">
-						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일">
-						<span id="checkMailResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
-						<input type="button" onclick="dupMailM()" value="중복체크">
+						<input type="text" class="form-control" name="manager_email" id="manager_email" placeholder="이메일" style="width:300px; height: 43px; background-color: white;">
+						<input type="button" onclick="dupMailM()" value="중복체크" style="width: 80px; position: absolute; margin: 0px 300px;">
 <!-- 						<select class="form-control" name="userEmail4" id="userEmail4"> -->
 <!-- 							<option>@naver.com</option> -->
 <!-- 							<option>@daum.net</option> -->
@@ -198,11 +199,14 @@
 <!-- 							<option>@yahoo.co.kr</option> -->
 <!-- 						</select> -->
 					</div>
+						<span class="placehold-text">
+							<span id="checkMailResultM"><!-- 자바스크립트에 의해 메세지가 표시될 공간 --></span>
+						</span>
 						<div class="input-group-addon">
 							<button type="button" class="btn btn-primary" id="mail-Check-BtnM" style="background-color:#5fa30f">본인인증</button>
 						</div>
 						<div class="mail-check-boxM">
-							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required">
+							<input class="form-control mail-check-inputM" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6" required="required" style="height:43px; width: 380px; background-color: white;">
 						</div>
 						<span id="mail-check-warnM"></span>
 					</div>
@@ -213,8 +217,7 @@
 								placeholder="우편번호" maxlength='6' required="required"> <input
 								type="button" value="주소검색" onclick="Ma_execDaumPostcode()">
 						</div>
-						<input type="text" name="manager_address" id="manager_address"
-							placeholder="주소" maxlength='100' required="required">
+						<input type="text" name="manager_address" id="manager_address" placeholder="주소" maxlength='100' required="required">
 					</div>
 				<div class="field tel-number">
 					<b>전화</b>

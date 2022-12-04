@@ -53,7 +53,7 @@ $(document).ready(function(){
 	        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
 	        checkEmailAuth = true;
 		}else{
-			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!');
 			$resultMsg.css('color','red');
 			checkEmailAuth = false;
 		}
@@ -93,7 +93,7 @@ $(document).ready(function(){
 	        $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
 	        checkEmailAuthM = true;
 		}else{
-			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!');
 			$resultMsg.css('color','red');
 			checkEmailAuthM = false;
 		}
@@ -107,7 +107,7 @@ $(document).ready(function(){
 // member 정규식-----------------------------------------------------------------------------------
 	var checkNameResult = false, checkIdResult = false, checkPasswdResult = false;
 	var checkNameResultM = false, checkIdResultM = false, checkPasswdResultM = false;
-	var dupIdResult = false; var dupIdResultM = false;
+	var dupIdResult = false; var dupIdResultM = false; dupMailResultM = false; dupMailResult = false;
 
 	function checkId(id) {
 		let regex = /^[a-z]+[a-z0-9]{5,19}$/g;
@@ -129,7 +129,7 @@ $(document).ready(function(){
 		let regex = /^[가-힣]{1,10}$/; //2,10
 		if(!regex.exec(name)) {
 			$("#checkNameResult").html("이름이 올바르지 않습니다!");
-			$("#checkIdResult").css("color", "red");
+			$("#checkNameResult").css("color", "red");
 			$("#member_name").select();
 			checkNameResult = false;
 		} else {
@@ -223,7 +223,17 @@ $(document).ready(function(){
 			alert("이메일 인증번호가 일치하지 않습니다");
 			$(".mail-check-box").select();
 			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
+		} else if(!dupIdResult) {
+			alert("아이디 중복을 확인하여 주세요");
+			$("#member_id").select();
+			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
+		} else if(!dupMailResult) {
+			alert("이메일 중복을 확인하여 주세요");
+			$("#member_email").select();
+			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
 		}
+		
+		
 		
 		return true;
 		
@@ -248,7 +258,7 @@ $(document).ready(function(){
 		let regex = /^[가-힣]{1,10}$/; //2,10
 		if(!regex.exec(name)) {
 			$("#checkNameResultM").html("이름이 올바르지 않습니다");
-			$("#checkIdResultM").css("color", "red");
+			$("#checkNameResultM").css("color", "red");
 			$("#manager_name").select();
 			checkNameResultM = false;
 		} else {
@@ -338,6 +348,14 @@ $(document).ready(function(){
 		} else if(!checkEmailAuthM) {
 			$(".mail-check-boxM").select();
 			alert("이메일 인증번호가 일치하지 않습니다");
+			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
+		} else if(!dupIdResultM) {
+			$("#manager_id").select();
+			alert("아이디 중복을 확인하여 주세요");
+			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
+		} else if(!dupMailResultM) {
+			$("#manager_email").select();
+			alert("이메일 중복을 확인하여 주세요");
 			return false; // 현재 폼의 submit 동작을 중단하기 위해 false 리턴
 		}
 		

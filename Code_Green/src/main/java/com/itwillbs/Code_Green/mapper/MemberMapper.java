@@ -25,10 +25,10 @@ public interface MemberMapper {
 	// 멤버 수정
 	public int modifyMemberInfo(MemberVO member);	
 	
-	// 회원 가입에 필요한 insertMember() 메서드 정의
-	// => 파라미터 : MemberVO 객체(member), 리턴타입 : int
+	// 회원 가입
 	public int insertMember(MemberVO member);
-
+	// 가입시 적립금 적립
+	public int insertCoin(CoinVO coin);
 	//아이디 중복체크 
 	public int idCheck(String member_id);
 	//메일 중복체크
@@ -73,6 +73,8 @@ public interface MemberMapper {
 
 	// 마이페이지 - 신고내역 목록갯수 카운트
 	public int selectReportListCount(String member_id);
+
+
 
 
 	

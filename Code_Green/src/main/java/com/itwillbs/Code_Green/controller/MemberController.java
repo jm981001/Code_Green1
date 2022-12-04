@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.Code_Green.service.CartService;
+import com.itwillbs.Code_Green.service.CoinService;
 import com.itwillbs.Code_Green.service.ItemService;
 import com.itwillbs.Code_Green.service.MailSendService;
 import com.itwillbs.Code_Green.service.MemberService;
@@ -24,6 +25,8 @@ import com.itwillbs.Code_Green.vo.MemberVO;
 @Controller
 public class MemberController {
 	@Autowired
+	private CoinService coinService;
+	@Autowired
 	private MailSendService mailService;
 	@Autowired
 	private MemberService service;
@@ -31,6 +34,7 @@ public class MemberController {
 	private ItemService Iservice;
 	@Autowired
 	private CartService cartService;
+	
 
 	// "/MemberLoginPro.me" 요청에 대해 비즈니스 로직 처리 - POST
 	@PostMapping(value = "/MemberLoginPro.me")
@@ -139,7 +143,17 @@ public class MemberController {
 			System.out.println("가입 성공!");
 			// 가입 성공시 기본적립금 적립
 			MemberVO getMem = service.getMemberInfo(member.getMember_id());
-//			int coinCount= service.setCoin(coin);
+//			int idx = getMem.getMember_idx();
+//			model.addAttribute("getMem", getMem);
+			
+//			CoinVO getCoin = coinService.getCoin(getMem.getMember_id());
+//			System.out.println("getCoin : " + getCoin);
+//			
+//			coin = coinService.getCoin(member_id);
+//			System.out.println("coin : " + coin);
+//			
+//			int coinCount= service.addCoin(coin);
+//			System.out.println("coinCount  :" + coinCount);
 //			model.addAttribute("coinCount", coinCount);
 //			
 			return "redirect:/join_result";

@@ -47,6 +47,11 @@ public class MemberService {
 	public int joinMember(MemberVO member) {
 		return mapper.insertMember(member);
 	}
+	// 가입시 적립금 적립
+	public int addCoin(CoinVO coin) {
+		return mapper.insertCoin(coin);
+	}
+
 
 	//회원 가입시 기본 적립금 지급 
 	public int setCoin(CoinVO coin) {
@@ -108,6 +113,7 @@ public class MemberService {
 	public int getReportListCount(String member_id) {
 		return mapper.selectReportListCount(member_id);
 	}
+
 
 	
 

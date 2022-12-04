@@ -22,6 +22,26 @@
 				date_format(now(),'%Y%m%d%T')<!--MEMBER_DATE VARCHAR(14) NOT NULL	 		-->
 				)
 	</insert>
+	<!-- 가입 적립금-->
+	<insert id="insertCoin">
+		<selectKey keyProperty="coin_idx" resultType="integer" order="BEFORE">
+			SELECT MAX(coin_idx) FROM coin
+		</selectKey>
+		INSERT 
+			INTO coin
+			VALUES (
+					 #{coin_idx} + 1
+					, (select rf_member_idx
+									from member
+                            		where member_id = #{member_id})
+					,"회원가입 축하금 (3000원)"
+					,"3000"
+					,"0"
+					,"0"
+					,"3000"
+					,date_format(now(),'%Y%m%d')
+					)
+	</insert>
 
 	<!-- 아이디 중복검사 -->
   	<select id="idCheck" resultType="int">
