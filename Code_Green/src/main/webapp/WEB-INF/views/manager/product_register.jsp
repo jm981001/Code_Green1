@@ -213,7 +213,7 @@
                                                     <option value="재입고">재입고</option>
                                                     <option value="품절">품절</option>
                                                     <option value="판매중">판매중</option>
-                                                    <option value="판매중지">판매중지</option>
+<!--                                                     <option value="판매중지">판매중지</option> -->
                                                 </select>
                                             </div>
                                         </div>

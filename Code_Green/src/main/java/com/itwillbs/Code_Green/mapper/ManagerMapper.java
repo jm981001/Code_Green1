@@ -133,17 +133,17 @@ public interface ManagerMapper {
 	public ItemVO selectStockInfo(int item_idx);
 	
 	//총매출
-	public List<ManagerVO> selectSalesTotal(String sId);
+	public List<ManagerVO> selectSalesTotal(@Param("sId")String sId, @Param("period")String period);
 	//한달매출
-	public List<ManagerVO> selectSalesMonth(String sId);
+	public List<ManagerVO> selectSalesMonth(@Param("sId")String sId, @Param("period")String period);
 	//일주일매출
-	public List<ManagerVO> selectSalesWeek(String sId);
+	public List<ManagerVO> selectSalesWeek(@Param("sId")String sId, @Param("period")String period);
 	//하루매출
-	public List<ManagerVO> selectSalesDay(String sId);
+	public List<ManagerVO> selectSalesDay(@Param("sId")String sId, @Param("period")String period);
 	//순수익
-	public SellVO selectCommission(String sId);
+	public SellVO selectCommission(@Param("sId")String sId, @Param("period")String period);
 	//순수익
-//	public SellVO selectNet(String sId);
+	public SellVO selectNet(String sId);
 	
 	
 	

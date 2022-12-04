@@ -133,61 +133,57 @@
                           </thead>
                           <tbody>
                         <tr>
-<!--                            <h3><td><strong>총 매출</strong></td></h3> -->
-<%--                            <td><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                         </tr> -->
-<!--                            <tr>        -->
-<!--                           <h3><td><strong>총 매출</strong></td></h3> -->
-<%--                            <td><fmt:formatNumber value="${salesTotal.salesTotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                 </tr> -->
+                           <h3><td><strong>총 매출</strong></td></h3>
+                           <td><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></td>
+                        </tr>
                            <tr>       
                           <h3><td><strong>총 매출</strong></td></h3>
-                           <td><c:if test="${not empty salesTotal.salesTotal}"> ${salesTotal.salesTotal}</c:if></td>
+                           <td><fmt:formatNumber value="${salesTotal.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
                                 </tr>
-<!--                                 <tr> -->
-<!--                                <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${salesTotal.brandtotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                   </tr> -->
-<!--                                   <tr>     -->
-<!--                                   <h3><td><strong>월별 매출</strong></td></h3> -->
-<%--                                   <td><fmt:formatNumber value="${salesMonth.salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                   </tr> -->
-<!--                                   <tr> -->
-<!--                                   <h3><td><strong>주별 매출</strong></td></h3> -->
-<%--                                   <td><fmt:formatNumber value="${salesWeek.salesWeek}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                  </tr> -->
-<!--                                  <tr> -->
-<!--                                   <h3><td><strong>일별 매출</strong></td></h3> -->
-<%--                         <td><fmt:formatNumber value="${salesday.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td> --%>
-<!--                                   </tr> -->
-<!--                                   <tr> -->
-<!--                                   <h3><td><strong>순수익</strong></td></h3> -->
-<%--                                   <td><fmt:formatNumber value="${sellTotal.net}" pattern="#,###원" /><small class="asc"></small></td>  --%>
-<!--                               </tr> -->
+                                <tr>
+                                <h3><td><strong>총 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesTotal.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  </tr>
+                                  <tr>    
+                                  <h3><td><strong>월별 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesMonth.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
+                                  </tr>
+                                  <tr>
+                                  <h3><td><strong>주별 매출</strong></td></h3>
+                                  <td><fmt:formatNumber value="${salesWeek.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
+                                 </tr>
+                                 <tr>
+                                  <h3><td><strong>일별 매출</strong></td></h3>
+                        <td><fmt:formatNumber value="${salesday.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                                  </tr>
+                                  <tr>
+                                  <h3><td><strong>순수익</strong></td></h3>
+                                  <td><fmt:formatNumber value="${sellTotal.net}" pattern="#,###원" /><small class="asc"></small></td> 
+                              </tr>
                               
                               
-<!--                               <tr> -->
-<%--                               <c:forEach var="salesList" items="${salesList }"> --%>
-<!--                                <tr> -->
-<%--                               	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
-<!--         					<td> -->
-<%--         					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span> --%>
-<!--         					</td> -->
-<!--                                   <td> -->
-<!--                                      <div class="ps-product--cart"> -->
-<%--                                           <div class="ps-product__content"><a href="sales_management">${salesList.sell_order_number }</a></div> --%>
-<!--                                       </div> -->
-<!--                                   </td> -->
-<%--                                   <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesTotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${commission.net}" pattern="#,###원" /><small class="asc"></small></td> --%>
+                              <tr>
+                              <c:forEach var="salesList" items="${salesList }">
+                               <tr>
+                              	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+        					<td>
+        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
+        					</td>
+                                  <td>
+                                     <div class="ps-product--cart">
+                                          <div class="ps-product__content"><a href="myPage_buyList.jsp">${salesList.sell_order_number }</a></div>
+                                      </div>
+                                  </td>
+                                  <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4>
+                                  <td><fmt:formatNumber value="${salesList.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${commission.net}" pattern="#,###원" /><small class="asc"></small></td>
                              
-<%--                               </c:forEach> --%>
-<!--                           </tbody> -->
-<!--                       </table> -->
+                              </c:forEach>
+                          </tbody>
+                      </table>
                       
                    <!-- 페이징 버튼들 시작 -->
 <%-- 					 <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>

@@ -117,6 +117,7 @@
                                     <th>상품명</th>
                                     <th>상품소개</th>
                                     <th>재고</th>
+                                    <th>재고여부</th>
                                     <th>가격 </th>
                                     <th>상품분류</th>
                                     <th>등록일</th>
@@ -133,6 +134,7 @@
 						     <td onclick="location.href='products_detail?item_idx=${item.item_idx}'"><strong>${item.item_name }</strong></td>
 						     <td>${item.item_info}</td>
 						     <td>${item.item_stock}</td>
+						     <td>${item.item_status}</td>
 						     <td>${item.item_price}</td>
 						     <td>${item.item_category}</td>
 						     <td>${item.item_date}</td>

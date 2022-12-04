@@ -1422,28 +1422,36 @@ public class ManagerController {
 					@GetMapping(value = "sales_management")
 					
 					
-					public String sales_list(Model Model, HttpSession session ) {
+					public String sales_list(@RequestParam(defaultValue = "")String period,Model Model, HttpSession session ) {
 						
 						String sId = (String)session.getAttribute("sId");
 						
 						//총매출
-						List<ManagerVO> salesTotal = service.getSalesTotal(sId);
+						List<ManagerVO> salesTotal = service.getSalesTotal(sId, period);
 						//한달매출
-						List<ManagerVO> salesMonth = service.getSalesMonth(sId);
+						List<ManagerVO> salesMonth = service.getSalesMonth(sId, period);
 						//일주일매출
-						List<ManagerVO> salesWeek = service.getSalesWeek(sId);
+						List<ManagerVO> salesWeek = service.getSalesWeek(sId ,period);
 						//하루매출
-						List<ManagerVO> salesday = service.getSalesDay(sId);
+						List<ManagerVO> salesday = service.getSalesDay(sId, period);
 						//수수료, 순수익
-						SellVO  commission = service.getCommission(sId);
+						SellVO  commission = service.getCommission(sId, period);
 						//순수익
 //						SellVO  net = service.getNet(sId);
+						
 						
 						 Model.addAttribute("salesTotal", salesTotal);
 						 Model.addAttribute("salesMonth", salesMonth);
 						 Model.addAttribute("salesWeek", salesWeek);
 						 Model.addAttribute("salesday", salesday);
 						 Model.addAttribute("commission", commission.getNet());
+						 Model.addAttribute("period", period);
+						 
+						 System.out.println("이게뭐여: " + salesTotal);
+						 System.out.println(salesMonth);
+						 System.out.println(salesWeek);
+						 System.out.println(salesday);
+						 System.out.println(commission.getNet());
 						
 						
 						
