@@ -155,6 +155,7 @@ public class ItemController {
 		model.addAttribute("itemList6", itemList6);
 		model.addAttribute("sameBrand", sameBrand);
 		model.addAttribute("reviewBtn", reviewBtn);
+		model.addAttribute("listCount", listCount);
 		
 		return "item/item_detail";
 	}
