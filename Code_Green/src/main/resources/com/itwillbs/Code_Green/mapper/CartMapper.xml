@@ -5,8 +5,7 @@
 <!-- 		SELECT MAX(cart_idx) FROM cart -->
 <!-- </selectKey> -->
 
-	
-	   <!--  장바구니 추가 -->
+   <!--  장바구니 추가 -->
    <insert id="insertCart">
             INSERT INTO cart
             VALUES(
