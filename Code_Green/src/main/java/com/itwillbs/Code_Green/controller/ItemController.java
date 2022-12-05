@@ -141,7 +141,9 @@ public class ItemController {
 		//상품구매 유무 (리뷰 버튼)
 		int reviewBtn = service.reviewBtn(sIdx,item_idx);
 		
-		
+		//좋아요 유무
+		int checkWish1 = service.checkWish1(sIdx,item_idx );
+//		System.out.println(checkWish1);
 		model.addAttribute("sort", sort);
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("goodList", goodList);
@@ -156,6 +158,7 @@ public class ItemController {
 		model.addAttribute("sameBrand", sameBrand);
 		model.addAttribute("reviewBtn", reviewBtn);
 		model.addAttribute("listCount", listCount);
+		model.addAttribute("checkWish1", checkWish1);
 		
 		return "item/item_detail";
 	}

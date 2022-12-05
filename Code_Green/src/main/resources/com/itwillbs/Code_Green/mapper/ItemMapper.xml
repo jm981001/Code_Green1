@@ -993,4 +993,10 @@
 	</update>
 	
 	
+	<select id="checkWish1" resultType="integer">
+        SELECT count(*)   
+        FROM heart
+        WHERE RF_ITEM_IDX = #{item_idx}
+              and RF_MEMBER_IDX = #{sIdx}
+	</select>
 </mapper>
