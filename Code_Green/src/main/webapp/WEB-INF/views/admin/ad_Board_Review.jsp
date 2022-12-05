@@ -34,6 +34,7 @@
 		if(result) {
 			location.href="ad_BoardRemove?board_idx="+ idx + "&board_type=" + type;
 		}
+		history.back();
 	}
 </script>
 </head>

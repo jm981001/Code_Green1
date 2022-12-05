@@ -25,7 +25,6 @@ import com.itwillbs.Code_Green.vo.PageInfo;
 import com.itwillbs.Code_Green.vo.QnaVO;
 import com.itwillbs.Code_Green.vo.ReportVO;
 import com.itwillbs.Code_Green.vo.SellVO;
-import com.itwillbs.Code_Green.vo.TotalVO;
 
 @Controller
 public class AdminController {
