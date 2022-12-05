@@ -117,12 +117,6 @@
                                             <input type="text" class="form-control" id="manager_id"name="manager_id"value="${brandInfo.manager_id }"readonly="readonly" />
                                         </div>
                                     </div>
-<!--                                     <div class="col-sm-6"> -->
-<!--                                         <div class="form-group"> -->
-<!--                                             <label>기업비밀번호</label> -->
-<%--                                             <input type="text"class="form-control" id="manager_pass" name="manager_pass"value="${brandInfo.manager_pass}"readonly="readonly"/> --%>
-<!--                                         </div> -->
-<!--                                     </div> -->
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>사업자번호</label>

@@ -121,7 +121,7 @@ public interface ManagerMapper {
 			 @Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
 	 
 	 //주문 상세 조회  
-	 public SellVO selectOrderInfo(@Param("sId")String sId, @Param("sell_order_number")String sell_order_number);
+	 public List<SellVO> selectOrderInfo(@Param("sId")String sId, @Param("sell_order_number")String sell_order_number);
 	 //주문 수정
 	 public int updateOrders(ItemVO item);
 	 

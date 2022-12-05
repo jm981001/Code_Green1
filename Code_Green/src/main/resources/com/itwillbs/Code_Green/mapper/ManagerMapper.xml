@@ -461,51 +461,64 @@
    <select id="selectOrderList" resultType="com.itwillbs.Code_Green.vo.SellVO">
 
 
-         SELECT     
-                  s.SELL_IDX
-                  ,s.RF_MEMBER_IDX
-                     ,s.SELL_AMOUNT
-                     ,s.SELL_USECOIN
-                     ,s.SELL_TOTAL_PRICE
-                     ,s.SELL_STATUS
-                     ,s.SELL_POSTCODE
-                     ,s.SELL_ADDRESS
-                     ,s.SELL_PHONE 
-                  ,s.SELL_RECEIVER 
+<!--          SELECT      -->
+<!--                   s.SELL_IDX -->
+<!--                   ,s.RF_MEMBER_IDX -->
+<!--                      ,s.SELL_AMOUNT -->
+<!--                      ,s.SELL_USECOIN -->
+<!--                      ,s.SELL_TOTAL_PRICE -->
+<!--                      ,s.SELL_STATUS -->
+<!--                      ,s.SELL_POSTCODE -->
+<!--                      ,s.SELL_ADDRESS -->
+<!--                      ,s.SELL_PHONE  -->
+<!--                   ,s.SELL_RECEIVER  -->
                 
-                  ,s.SELL_DATE 
-                  ,s.SELL_PAY_TYPE 
-                  ,s.SELL_PAY_STATUS 
-                  ,s.SELL_PAY_DATE 
-                  ,s.SELL_ORDER_NUMBER
+<!--                   ,s.SELL_DATE  -->
+<!--                   ,s.SELL_PAY_TYPE  -->
+<!--                   ,s.SELL_PAY_STATUS  -->
+<!--                   ,s.SELL_PAY_DATE  -->
+<!--                   ,s.SELL_ORDER_NUMBER -->
                   
-                  ,d.SELL_DETAIL_IDX
-                  ,d.RF_SELL_IDX
-                  ,d.RF_ITEM_IDX
-                  ,d.SELL_AMOUNT
-                  ,d.SELL_REVIEW_STATUS
-                   ,f.FILE1
-                       ,i.ITEM_NAME 
-                       ,i.ITEM_PRICE
-                       ,i.ITEM_IDX
-                       ,i.ITEM_CATEGORY
-                       ,m.MANAGER_BRANDNAME
+<!--                   ,d.SELL_DETAIL_IDX -->
+<!--                   ,d.RF_SELL_IDX -->
+<!--                   ,d.RF_ITEM_IDX -->
+<!--                   ,d.SELL_AMOUNT -->
+<!--                   ,d.SELL_REVIEW_STATUS -->
+<!--                    ,f.FILE1 -->
+<!--                        ,i.ITEM_NAME  -->
+<!--                        ,i.ITEM_PRICE -->
+<!--                        ,i.ITEM_IDX -->
+<!--                        ,i.ITEM_CATEGORY -->
+<!--                        ,m.MANAGER_BRANDNAME -->
                        
-               from sell_detail d
-               left join sell s
-               on s.sell_idx = d.rf_sell_idx
-                  left join item i 
-                     on d.RF_ITEM_IDX = i.item_idx
-                   left join file_item f 
-                     on d.RF_ITEM_IDX = f.RF_ITEM_IDX
-<!--                   left join sell l -->
-<!--                      on s.rf_sell_idx = l.sell_idx -->
-                  left join manager m
-                     on m.MANAGER_IDX = i.RE_MANAGER_IDX
+<!--                from sell_detail d -->
+<!--                left join sell s -->
+<!--                on s.sell_idx = d.rf_sell_idx -->
+<!--                   left join item i  -->
+<!--                      on d.RF_ITEM_IDX = i.item_idx -->
+<!--                    left join file_item f  -->
+<!--                      on d.RF_ITEM_IDX = f.RF_ITEM_IDX -->
+<!--                   left join sell l --> 
+<!--                       on s.rf_sell_idx = l.sell_idx --> 
+<!--                   left join manager m -->
+<!--                      on m.MANAGER_IDX = i.RE_MANAGER_IDX -->
                   
-                   where i.RE_MANAGER_IDX =(select manager_idx
-                                 from manager
-                                        where manager_id = #{id})
+<!--                    where i.RE_MANAGER_IDX =(select manager_idx -->
+<!--                                  from manager -->
+<!--                                         where manager_id = #{id}) -->
+                                        
+                  select * from sell s 
+		left join sell_detail d
+         on s.sell_idx = d.rf_sell_idx
+		left join item i 
+          on d.rf_item_idx = i.item_idx
+		left join manager m 
+         on m.manager_idx = i.re_manager_idx
+         where m.manager_id = #{id}
+                                        
+                                        
+                                        
+                                        
                                         
          <if test="!keyword.equals('')">
             <!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
@@ -526,6 +539,9 @@
           LIMIT  #{startRow}, #{listLimit}  
 
    </select>   
+   
+   
+   
 
 <!-- 주문 목록 갯수 조회 -->
    
@@ -568,22 +584,23 @@
     
        <!--주문 상세 조회 -->
    <select id="selectOrderInfo" resultType="com.itwillbs.Code_Green.vo.SellVO">
-        SELECT * FROM   
-            sell_detail d
-               left join sell s
-               on s.sell_idx = d.rf_sell_idx
-                  left join item i 
-                     on d.RF_ITEM_IDX = i.item_idx
-                   left join file_item f 
-                     on d.RF_ITEM_IDX = f.RF_ITEM_IDX
-                  left join manager m
-                     on m.MANAGER_IDX = i.RE_MANAGER_IDX
-                   where i.RE_MANAGER_IDX =(select manager_idx
-                                    from manager
-                                    where manager_id = #{sId})
-                     and s.sell_order_number = #{sell_order_number};
-          
-   </select> 
+       SELECT * FROM   
+	         sell_detail d
+		         left join sell s
+		         on s.sell_idx = d.rf_sell_idx
+		            left join item i 
+		               on d.RF_ITEM_IDX = i.item_idx
+		             left join file_item f 
+		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
+		            left join manager m
+		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
+		             where i.RE_MANAGER_IDX =(select manager_idx
+												from manager
+												where manager_id = #{sId})
+							and s.sell_order_number = #{sell_order_number}
+						
+			 
+	</select> 
 
    
    <!-- 주문 수정  -->

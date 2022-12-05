@@ -396,7 +396,8 @@ public class ManagerController {
 
 //		product_registerPro.bo
 	// ------------상품 등록-------------------------------------------
-	@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
+//	@RequestMapping(value = "product_registerPro.bo", method = RequestMethod.POST)
+	@PostMapping(value = "product_registerPro.bo")
 	public String product_registerPro(@ModelAttribute ItemVO item, @ModelAttribute File_ItemVO fileItem, Model model,
 			HttpSession session) {
 
@@ -743,7 +744,7 @@ public class ManagerController {
 	public String order_detail(Model model, HttpSession session,@RequestParam String sell_order_number) {
 		String sId = (String) session.getAttribute("sId");
 
-		SellVO orderInfo = service.getOrderInfo(sId,sell_order_number);
+		List<SellVO> orderInfo = service.getOrderInfo(sId,sell_order_number);
 		System.out.println("주문 상세 : " + orderInfo);
 
 		model.addAttribute("orderInfo", orderInfo);
@@ -759,7 +760,7 @@ public class ManagerController {
 
 		String sId = (String) session.getAttribute("sId");
 
-		SellVO orderInfo = service.getOrderInfo(sId ,sell_order_number);
+		List<SellVO> orderInfo = service.getOrderInfo(sId ,sell_order_number);
 		System.out.println("번호:" + item_idx);
 
 		model.addAttribute("orderInfo", orderInfo);

@@ -189,7 +189,7 @@ public class ManagerService {
 		return mapper.selectOrderListCount(searchType,keyword,id);
 	}
 	//주문 상세 조회
-	public SellVO getOrderInfo(String sId, String sell_order_number) {
+	public List<SellVO> getOrderInfo(String sId, String sell_order_number) {
 		return mapper.selectOrderInfo(sId,sell_order_number);
 	}
 	//주문 수정

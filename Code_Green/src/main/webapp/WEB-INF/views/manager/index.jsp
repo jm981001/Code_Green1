@@ -52,7 +52,6 @@
             <header class="header--dashboard">
                 <div class="header__left">
                     <h3>매출현황</h3>
-<!--                     <p>Sales Status</p> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -68,7 +67,6 @@
                         </div>
                         
 <!-- 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트 도넛차트-->
-				<!-- 정민수정-->
                <br>
                     </div>
                     <div class="ps-card">

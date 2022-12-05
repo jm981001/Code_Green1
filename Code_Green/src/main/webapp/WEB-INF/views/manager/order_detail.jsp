@@ -79,6 +79,7 @@
                             </thead>
                             <tbody>
 						    <tr>
+						     <c:forEach var="orderInfo" items="${orderInfo }">
 						     <td>${orderInfo.sell_order_number}</td>
 						     <td>${orderInfo.rf_member_idx}</td>
 						     <td>${orderInfo.item_name }</td>
@@ -89,9 +90,8 @@
 						     <td>${orderInfo.sell_date }</td>
 						     <td>${orderInfo.sell_pay_status}</td>
 						     <td>${orderInfo.sell_pay_date}</td>
-						     <td>
-                                      
-                                    </td>
+						     <td>${orderInfo.manager_brandname}</td>
+						   </c:forEach>
 						    </tr>     
                             
 						</tbody>
@@ -103,7 +103,6 @@
          		<div class="ps-form__submit text-center">
 
 
-<%--                          <a href= "stock?item_idx=${orderInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a> --%>
                          <button class="ps-btn success"type="submit"onclick="order_modify=${orderInfo.item_idx }">주문상태변경</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
