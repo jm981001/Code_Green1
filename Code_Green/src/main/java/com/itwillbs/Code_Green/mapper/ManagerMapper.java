@@ -91,7 +91,7 @@ public interface ManagerMapper {
 		public ItemVO selectStockInfo(int item_idx);
 	
 	//재고 상세보기 원글 불러오기 
-		public ItemVO selectstock(int itemModify_idx);	
+		public ItemVO selectstock(int item_idx);	
 	//재고 수정
 		public int updateStockModify(Object item_idx);
 		
@@ -121,7 +121,7 @@ public interface ManagerMapper {
 			 @Param("searchType") String searchType,@Param("keyword")  String keyword, @Param("id") String id);
 	 
 	 //주문 상세 조회  
-	 public List<SellVO> selectOrderInfo(String sId);
+	 public SellVO selectOrderInfo(@Param("sId")String sId, @Param("sell_order_number")String sell_order_number);
 	 //주문 수정
 	 public int updateOrders(ItemVO item);
 	 

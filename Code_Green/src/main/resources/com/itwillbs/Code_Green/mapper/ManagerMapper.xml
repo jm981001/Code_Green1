@@ -568,8 +568,7 @@
     
     	<!--주문 상세 조회 -->
 	<select id="selectOrderInfo" resultType="com.itwillbs.Code_Green.vo.SellVO">
-	       SELECT * FROM    
-	       
+        SELECT * FROM   
 	         sell_detail d
 		         left join sell s
 		         on s.sell_idx = d.rf_sell_idx
@@ -577,16 +576,15 @@
 		               on d.RF_ITEM_IDX = i.item_idx
 		             left join file_item f 
 		               on d.RF_ITEM_IDX = f.RF_ITEM_IDX
-
 		            left join manager m
 		               on m.MANAGER_IDX = i.RE_MANAGER_IDX
-		            
 		             where i.RE_MANAGER_IDX =(select manager_idx
-		                           from manager
-		                                  where manager_id = #{sId})
+												from manager
+												where manager_id = #{sId})
+							and s.sell_order_number = #{sell_order_number};
 			 
 	</select> 
-	
+
 	
 	<!-- 주문 수정  -->
 		<update id="updateOrders">
@@ -695,8 +693,7 @@
 			   i.item_status,  
 			   i.item_readcount,  
 			   i.item_date,
-			   m.manager_brandname,
-			  
+			   m.manager_brandname
 			  
 		 FROM item i  JOIN manager m  ON i.re_manager_idx= m. manager_idx 
 		  LEFT JOIN 	
@@ -704,7 +701,7 @@
 			ON  
 				i.item_idx = f.rf_item_idx
 						
-		 WHERE i.item_idx=#{item.itemModify_idx}
+		 WHERE i.item_idx=#{item_idx}
 	
 	
 

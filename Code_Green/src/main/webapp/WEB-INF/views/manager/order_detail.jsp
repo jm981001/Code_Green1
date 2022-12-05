@@ -81,7 +81,7 @@
                             </thead>
                             <tbody>
 						    <tr>
-						     <td>${order.sell_order_number}</td>
+						     <td>${orderInfo.sell_order_number}</td>
 						     <td>${orderInfo.rf_member_idx}</td>
 						     <td>${orderInfo.item_name }</td>
 						     <td>${orderInfo.item_price}</td>

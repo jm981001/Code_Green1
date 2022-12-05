@@ -140,8 +140,8 @@ public class ManagerService {
 			return mapper.selectStockInfo(item_idx);
 		}
 		// 재고 원본 글 불러오기
-		public ItemVO getStock(int itemModify_idx) {
-			return mapper.selectstock(itemModify_idx);
+		public ItemVO getStock(int item_idx) {
+			return mapper.selectstock(item_idx);
 		}
 
 	
@@ -189,8 +189,8 @@ public class ManagerService {
 		return mapper.selectOrderListCount(searchType,keyword,id);
 	}
 	//주문 상세 조회
-	public List<SellVO> getOrderInfo(String sId) {
-		return mapper.selectOrderInfo(sId);
+	public SellVO getOrderInfo(String sId, String sell_order_number) {
+		return mapper.selectOrderInfo(sId,sell_order_number);
 	}
 	//주문 수정
 	public int modifyOrder(ItemVO item) {

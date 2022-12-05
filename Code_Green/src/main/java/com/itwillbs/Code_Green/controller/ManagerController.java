@@ -740,10 +740,10 @@ public class ManagerController {
 
 	// ------------주문 상세----------------------------------------
 	@RequestMapping(value = "order_detail", method = RequestMethod.GET)
-	public String order_detail(Model model, HttpSession session) {
+	public String order_detail(Model model, HttpSession session,@RequestParam String sell_order_number) {
 		String sId = (String) session.getAttribute("sId");
 
-		List<SellVO> orderInfo = service.getOrderInfo(sId);
+		SellVO orderInfo = service.getOrderInfo(sId,sell_order_number);
 		System.out.println("주문 상세 : " + orderInfo);
 
 		model.addAttribute("orderInfo", orderInfo);
@@ -755,11 +755,11 @@ public class ManagerController {
 
 	@GetMapping(value = "/order_modify")
 	public String order_modify(Model model, HttpSession session,
-			@RequestParam(name = "item_idx", required = false) String item_idx) {
+			@RequestParam(name = "item_idx", required = false) String item_idx,@RequestParam String sell_order_number) {
 
 		String sId = (String) session.getAttribute("sId");
 
-		List<SellVO> orderInfo = service.getOrderInfo(sId);
+		SellVO orderInfo = service.getOrderInfo(sId ,sell_order_number);
 		System.out.println("번호:" + item_idx);
 
 		model.addAttribute("orderInfo", orderInfo);
@@ -866,11 +866,10 @@ public class ManagerController {
 	
 	@GetMapping(value = "/stock_modify")
 	public String stock_modify(Model model, HttpSession session,
-			@RequestParam(name = "item_idx", required = false) String item_idx) {
+			@RequestParam int item_idx) {
 
-		int itemModify_idx = Integer.parseInt(item_idx);
 
-		ItemVO stock = service.getStock(itemModify_idx);
+		ItemVO stock = service.getStock(item_idx);
 		System.out.println("번호:" + item_idx);
 
 		model.addAttribute("stock", stock);

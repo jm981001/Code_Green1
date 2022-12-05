@@ -554,7 +554,7 @@ function addHeart(item_idx) {
 													                	<br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br><br><br>${board.board_content }<br><br><br>
+																			<br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
 																		    <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
@@ -618,7 +618,7 @@ function addHeart(item_idx) {
 													                	 <br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																			<br><br><br><br>${board.board_content }<br><br><br>
+																			<br><br><br>${board.board_content }<br><br><br>
 																			
 																		 <div align="right">
 																		  <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
@@ -680,7 +680,7 @@ function addHeart(item_idx) {
 													                	 <br><br>
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																		 <br><br><br><br>${board.board_content }<br><br><br>
+																		 <br><br><br>${board.board_content }<br><br><br>
 																			
 																		<div align="right">
 																		 <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
@@ -695,7 +695,7 @@ function addHeart(item_idx) {
 												        </c:forEach>
 												    </table>  			
 												    									    
-<!-------------------------------------------리뷰) 최근등록순 정렬------------------------------------------->
+<!-------------------------------------------리뷰) 별점 낮은순 정렬------------------------------------------->
 												  <table border="1" class="recruit" id="worstList">
 												  	<c:if test="${empty worstList }">
 		                                            	<tr><td colspan="3">따끈따끈한 첫 후기를 기다리고있어요.</td></tr>
@@ -742,7 +742,7 @@ function addHeart(item_idx) {
 													                	 <br><br>  
 													                     <img  src="/Code_Green/resources/commUpload/${board.file1}" style="width:400px; height:400px;" onerror="this.style.display='none'">
 													                     <img  src="/Code_Green/resources/commUpload/${board.file2}" style="width:400px; height:400px;" onerror="this.style.display='none'">
-																		 <br><br><br><br>${board.board_content }<br><br>
+																		 <br><br><br>${board.board_content }<br><br>
 																			
 																		<div align="right">
 																		 <input type="button"  class="ps-btn-best_jm"  onclick="best('${item.item_idx }','${board.board_idx }','${param.item_category}','${param.manager_brandname }','${sessionScope.sId }')">${board.best_count }
