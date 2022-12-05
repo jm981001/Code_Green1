@@ -161,7 +161,7 @@
 			    s.order_count
 			FROM member m
 			LEFT JOIN 
-					(SELECT rf_member_idx, coin_total FROM coin ORDER BY coin_idx DESC limit 1) AS c
+					(SELECT rf_member_idx, coin_total FROM coin WHERE rf_member_idx = #{member_idx} ORDER BY coin_idx DESC limit 1) AS c
 			ON m.member_idx = c.rf_member_idx
 			LEFT JOIN 
 					(SELECT rf_member_idx, count(*) AS heart_count FROM heart GROUP BY rf_member_idx) AS h
