@@ -126,7 +126,7 @@
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                   <th>Top</th>
+<!--                                    <th>Top</th> -->
                                    <th>브랜드명</th>
                                    <th>매출</th>
                                    <th>팔로워</th>
@@ -138,7 +138,7 @@
                             <tbody>
                            <c:forEach var="rank" items="${ranking }">
                                <tr>
-                                   <td>${rank.ranking }위</td>
+<%--                                    <td>${rank.ranking }위</td> --%>
                                    <td><strong>${rank.manager_brandname }</strong></td>
                                    <td><a href="order-detail.html"><strong><fmt:formatNumber value="${rank.brandtotal }" pattern="#,###원"/></strong></a></td>
                                    <td><span class="ps-badge success">${rank.brand_follower }명</span>
@@ -161,7 +161,7 @@
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                   <th>Top</th>
+<!--                                    <th>Top</th> -->
                                    <th>브랜드명</th>
                                    <th>별점</th>
                                    <th>매출</th>
@@ -173,7 +173,7 @@
                             <tbody>
                            <c:forEach var="star" items="${starRanking }">
                                <tr>
-                                   <td>${star.ranking }위</td>
+<%--                                    <td>${star.ranking }위</td> --%>
                                    <td><strong>${star.manager_brandname }</strong></td>
                                    <td>${star.star_score }</td>
                                    <td><a href="order-detail.html"><strong><fmt:formatNumber value="${star.brandtotal }" pattern="#,###원"/></strong></a></td>
@@ -192,7 +192,7 @@
                         <table class="table ps-table">
                             <thead>
                                 <tr>
-                                   <th>Top</th>
+<!--                                    <th>Top</th> -->
                                    <th>브랜드명</th>
                                    <th>팔로워</th>
                                    <th>매출</th>
@@ -204,11 +204,10 @@
                             <tbody>
                            <c:forEach var="follower" items="${followerRanking }">
                                <tr>
-                                   <td>${follower.ranking }위</td>
+<%--                                    <td>${follower.ranking }위</td> --%>
                                    <td><strong>${follower.manager_brandname }</strong></td>
                                    <td><span class="ps-badge success">${follower.brand_follower }명</span>
                                    <td><a href="order-detail.html"><strong><fmt:formatNumber value="${follower.brandtotal }" pattern="#,###원"/></strong></a></td>
-                                   </td>
                                    <td><span>${follower.orderCount }건</span>
                                    </td>
                                    <td><strong>${follower.sellCount }건</strong></td>
