@@ -139,6 +139,7 @@ public class SellController {
 		
 		// 주문 후 장바구니 비우기
 		int deleteCartCount = cart_service.afterOrderDeleteCart(member_idx);
+		session.setAttribute("cartCount", 0);//
 		
 		return "redirect:/payment_success_cardPayForm";
 	}	
