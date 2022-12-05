@@ -38,9 +38,24 @@ public class ManagerVO {
 	private String         DAY;
 	private String         start;
 	private String         end;
+	private String         sum;
 	
 	
 	
+
+
+
+	public String getSum() {
+		return sum;
+	}
+
+
+
+
+	public void setSum(String sum) {
+		this.sum = sum;
+	}
+
 
 
 
