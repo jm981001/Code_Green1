@@ -120,7 +120,7 @@ public class QnaController {
 			model.addAttribute("msg", "문의글 작성에 실패했습니다. 다시 시도해주세요.");
 			return "member/fail_back";
 		} else {
-			return "redirect:/myPageQnaList.bo";
+			return "redirect:/myPageQnaList.my";
 		}
 		
 	}
