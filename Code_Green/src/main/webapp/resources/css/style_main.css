@@ -3788,16 +3788,17 @@ textarea.form-control {
   }
 }
 
-/* 지영  1205 정민수정*/
+/* 지영  1205 정민수정 지영수정*/
 .ps-block--user-header {
 /*   display: flex; */
 /*   flex-flow: row nowrap; */
 /*   text-align: left; */
   
-    display: flex;
+  display: flex;
   align-items: right;
   justify-content: center;
   margin-left: 900px;
+  margin-right: 55px;
 }
 
 .ps-block--user-header .ps-block__left {

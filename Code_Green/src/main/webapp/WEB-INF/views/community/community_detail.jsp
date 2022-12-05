@@ -336,7 +336,6 @@
 		                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
 	                            / ${cBoard.board_id }
 	                            / 조회수 ${cBoard.board_readcount }
-<%-- 	                            / 댓글(${cBoard.reply_cnt })  --%>
 	                            / 댓글(<span class="reply_count"></span>) 
 	                            / 추천수 <span class="bestcnt_count"></span>
                             </p>
@@ -412,15 +411,10 @@
 <!--                     </div> -->
 	                    <div class="ps-block__content" id="replyList"></div>
                 </div>
-                
-                
 	         </div>
              <!-- ========================================= 댓글 영역 끝 ========================================= -->
-                        
-                        
-                    </div>
-                </div>
-                
+             </div>
+             </div>
                 <!-- 오른쪽 메뉴 시작  -->
                 <div class="ps-blog__right">
                     <aside class="widget widget--blog widget--recent-post">
@@ -439,7 +433,6 @@
                 
             </div>
         </div>
-        
     </div>
     
     <!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->
@@ -471,7 +464,5 @@
     <script src="/Code_Green/resources/plugins/gmap3.min.js"></script>
     <!-- custom scripts-->
     <script src="/Code_Green/resources/js/main.js"></script>
-   ﻿
 </body>
-
 </html>
