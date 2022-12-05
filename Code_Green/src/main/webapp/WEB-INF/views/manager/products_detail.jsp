@@ -132,11 +132,11 @@
                          <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">상품수정</button></a>
                          <button class="ps-btn success"type="submit"onclick="product_delete(${ItemInfo.item_idx })">삭제</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
+
                     </table>
                     
                     </div>
                     
-
        
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

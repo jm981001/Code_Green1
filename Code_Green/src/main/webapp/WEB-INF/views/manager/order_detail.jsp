@@ -49,8 +49,6 @@
                 <div class="header__left">
                     <h3>주문조회</h3>
                 </div>
-                
-                
                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
 
@@ -105,14 +103,13 @@
          		<div class="ps-form__submit text-center">
 
 
-                         <a href= "stock?item_idx=${orderInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
-                         <button class="ps-btn success"type="submit"onclick="order_ㅡmodify=${orderInfo.item_idx }">주문상태변경</button>
+<%--                          <a href= "stock?item_idx=${orderInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a> --%>
+                         <button class="ps-btn success"type="submit"onclick="order_modify=${orderInfo.item_idx }">주문상태변경</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
                     </table>
                     
                     </div>
-                
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

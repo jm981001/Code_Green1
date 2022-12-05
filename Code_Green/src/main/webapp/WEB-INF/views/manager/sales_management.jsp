@@ -132,78 +132,62 @@
                               </tr>
                           </thead>
                           <tbody>
-                        <tr>
+<!--                         <tr> -->
 <!--                            <h3><td><strong>총 매출</strong></td></h3> -->
 <%--                            <td><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></td> --%>
 <!--                         </tr> -->
-<!--                            <tr>        -->
-<!--                           <h3><td><strong>총 매출</strong></td></h3> -->
-<%--                            <td><fmt:formatNumber value="${salesTotal.salesTotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                 </tr> -->
                            <tr>       
-                          <h3><td><strong>총 매출</strong></td></h3>
-                           <td><c:if test="${not empty salesTotal.salesTotal}"> ${salesTotal.salesTotal}</c:if></td>
+<!--                           <td><h3><strong>총 매출</strong></h3></td> -->
+<%--                            <td>${salesTotal.salesTotal}</td> --%>
                                 </tr>
+                           <tr>       
+<!--                            <td><h3><strong>총 매출</strong></h3></td> -->
+<%--                            <td><c:if test="${not empty salesTotal.salesTotal}"> ${salesTotal.salesTotal}</c:if></td> --%>
+<!--                                 </tr> -->
 <!--                                 <tr> -->
 <!--                                <td><h3><strong>총 매출</strong></h3></td> -->
 <%--                                   <td><fmt:formatNumber value="${salesTotal.brandtotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
 <!--                                   </tr> -->
 <!--                                   <tr>     -->
-<!--                                   <h3><td><strong>월별 매출</strong></td></h3> -->
+<!--                                   <td><h3><strong>월별 매출</strong></h3></td> -->
 <%--                                   <td><fmt:formatNumber value="${salesMonth.salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
 <!--                                   </tr> -->
 <!--                                   <tr> -->
-<!--                                   <h3><td><strong>주별 매출</strong></td></h3> -->
+<!--                                   <td><h3><strong>주별 매출</strong></h3></td> -->
 <%--                                   <td><fmt:formatNumber value="${salesWeek.salesWeek}" pattern="#,###원" /><small class="asc"></small></td> --%>
 <!--                                  </tr> -->
 <!--                                  <tr> -->
-<!--                                   <h3><td><strong>일별 매출</strong></td></h3> -->
-<%--                         <td><fmt:formatNumber value="${salesday.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td> --%>
+<!--                                   <td><h3><strong>일별 매출</strong></h3></td> -->
+<%--                                  <td><fmt:formatNumber value="${salesday.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td> --%>
 <!--                                   </tr> -->
 <!--                                   <tr> -->
-<!--                                   <h3><td><strong>순수익</strong></td></h3> -->
+<!--                                  <td><h3><strong>순수익</strong></h3></td> -->
 <%--                                   <td><fmt:formatNumber value="${sellTotal.net}" pattern="#,###원" /><small class="asc"></small></td>  --%>
 <!--                               </tr> -->
                               
-                              
-<!--                               <tr> -->
-<%--                               <c:forEach var="salesList" items="${salesList }"> --%>
-<!--                                <tr> -->
-<%--                               	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
-<!--         					<td> -->
-<%--         					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span> --%>
-<!--         					</td> -->
-<!--                                   <td> -->
-<!--                                      <div class="ps-product--cart"> -->
-<%--                                           <div class="ps-product__content"><a href="sales_management">${salesList.sell_order_number }</a></div> --%>
-<!--                                       </div> -->
-<!--                                   </td> -->
-<%--                                   <h4><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></h4> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesTotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<%--                                   <td><fmt:formatNumber value="${commission.net}" pattern="#,###원" /><small class="asc"></small></td> --%>
+                              <tr>
+                              <c:forEach var="salesList" items="${salesList }">
+                               <tr>
+                              	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
+        					<td>
+        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
+        					</td>
+                                  <td>
+                                     <div class="ps-product--cart">
+                                          <div class="ps-product__content"><a href="sales_management">${salesList.sell_order_number }</a></div>
+                                      </div>
+                                  </td>
+                                  <td><fmt:formatNumber value="${salesTotal.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
+                                  <td><fmt:formatNumber value="${salesList.commission.net}" pattern="#,###원" /><small class="asc"></small></td>
                              
-<%--                               </c:forEach> --%>
-<!--                           </tbody> -->
-<!--                       </table> -->
+                              </c:forEach>
+                          </tbody>
+                      </table>
                       
-                   <!-- 페이징 버튼들 시작 -->
-<%-- 					 <%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %> --%>
-<!-- 					       <div class="ps-pagination"> -->
-<!-- 					           <ul class="pagination"> -->
-<%-- 					               <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="sales_management?pageNum=${pageInfo.pageNum - 1}&period=${period}&date1=&date2="><%}%><i class="icon-chevron-left"></i>Prev</a></li> --%>
-<%-- 					               <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }"> --%>
-<%-- 					               	<c:choose> --%>
-<%-- 					               		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when> --%>
-<%-- 					               		<c:otherwise><li><a href="sales_management?pageNum=${i }&period=${period}&date1=&date2=">${i }</a></li></c:otherwise> --%>
-<%-- 					               	</c:choose> --%>
-<%-- 					               </c:forEach> --%>
-<%-- 					               <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="sales_management?pageNum=${pageInfo.pageNum + 1}&period=${period}&date1=&date2="><%}%>Next<i class="icon-chevron-right"></i></a></li> --%>
-<!-- 					           </ul> -->
-<!-- 					       </div> -->
-		      		 <!-- 페이징 버튼들 끝 -->  
+
 
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

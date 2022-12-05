@@ -169,7 +169,7 @@
                                             </label>
                                            
                                    <div class="form-group">
-                                    <select class="ps-select"onchange="addProduct(this.value)" >
+                                    <select class="ps-select"onchange="addProduct(this.value)"checked >
                                         <option value="포장상태">포장상태</option>
                                         <option value="냉장">냉장</option>
                                         <option value="냉동">냉동</option>
@@ -182,7 +182,7 @@
                                             <label>상품카테고리<sup>*</sup>
                                             </label>
                                      <div class="form-group">
-                                    <select class="ps-select"onchange="addCategory(this.value)">
+                                    <select class="ps-select"onchange="addCategory(this.value)"checked>
                                         <option value="상품카테고리">상품카테고리</option>
                                         <option value="특가상품">특가상품</option>
                                         <option value="과일/채소">과일/채소</option>
@@ -191,6 +191,7 @@
                                         <option value="해산물">해산물</option>
                                         <option value="간식류">간식류</option>
                                     </select>
+                                </div>
                                 </div>
    
                                 </figure>
@@ -205,12 +206,10 @@
                                           </div>  
 	                                        <td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${products.file1 }</td>
                                          <div class="form-group--nest">
-                                          
                                           <label>상품 상세이미지<sup>*</sup></label>
                                           </div>
                                         <td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${products.file2 }</td>
                                         </div>
-                                       
                                         <div class="form-group">
                                             <label>상품 설명<sup>*</sup></label>
                                             <input class="form-control" type="text"name="item_info" value="${products.item_info }" />
@@ -226,7 +225,7 @@
                                             </label>
                                             <div class="form-group__content">
                                             
-                                                <select class="ps-select" onchange="changeStatus(this.value)" >
+                                                <select class="ps-select" onchange="changeStatus(this.value)" checked>
                                                     <option value="재고상태">재고상태</option>
                                                     <option value="재입고">재입고</option>
                                                     <option value="품절">품절</option>
@@ -267,22 +266,3 @@
 
 </html>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                        
-</body>
-
-</html>

@@ -139,9 +139,8 @@
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
             <section class="ps-new-item">
-                <form action="product_modifyPro.bo?item_idx=${products.item_idx}" method="post"enctype="multipart/form-data" id="sub_form">
-                	<input type="hidden" name="file1" value="${products.file1}">  
-	                <input type="hidden" name="file2" value="${products.file2}">  
+  		<form class="ps-form--search-bar" action="order_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
+                
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -149,96 +148,48 @@
                                     <figcaption>기본정보</figcaption>
 
                                         <div class="form-group">
-                                            <label>상품명<sup>*</sup>
+                                            <label>주문번호<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" id="item_name" name="item_name"value="${products.item_name}" />
+                                            <input class="form-control" type="text" id="sell_order_number" name="sell_order_number"value="${orderInfo.sell_order_number}" />
                                         </div>
                                         <div class="form-group">
-                                            <label>정상가격<sup>*</sup>
+                                            <label>주문상품<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" id="item_price" name="item_price"value="${products.item_price}" />
+                                            <input class="form-control" type="text" id="item_name" name="item_name"value="${orderInfo.item_name }" />
                                         </div>
 									
  										<div class="form-group">
-                                            <label>할인가격<sup>*</sup>
+                                            <label>총금액<sup>*</sup>
                                             </label>
-                                            <input class="form-control" type="text" id="item_sale" name="item_sale"value="${products.item_sale}"value="0" />
+                                            <input class="form-control" type="text" id="sell_total_price" name="sell_total_price"value="${orderInfo.sell_total_price}"/>
                                         </div>                                             
-                                        <div class="form-group">
-                                            <label>포장상태<sup>*</sup>
+                                  <div class="form-group">
+                                            <label>결제여부<sup>*</sup>
                                             </label>
-                                           
-                                   <div class="form-group">
-                                    <select class="ps-select"onchange="addProduct(this.value)" >
-                                        <option value="포장상태">포장상태</option>
-                                        <option value="냉장">냉장</option>
-                                        <option value="냉동">냉동</option>
-                                        <option value="실온">실온</option>
-                                    </select>
-                                </div>
-                                 </div>
-<!--                                  </div> -->
-                                         <div class="form-group">
-                                            <label>상품카테고리<sup>*</sup>
+                                            <input class="form-control" type="text" id="sell_pay_status" name="sell_pay_status"value="${orderInfo.sell_pay_status}"/>
+                                        </div>   
+                                          <div class="form-group">
+                                            <label>결제일<sup>*</sup>
                                             </label>
-                                     <div class="form-group">
-                                    <select class="ps-select"onchange="addCategory(this.value)">
-                                        <option value="상품카테고리">상품카테고리</option>
-                                        <option value="특가상품">특가상품</option>
-                                        <option value="과일/채소">과일/채소</option>
-                                        <option value="유제품/음료">유제품/음료</option>
-                                        <option value="냉동/간편 식품">냉동/간편 식품</option>
-                                        <option value="해산물">해산물</option>
-                                        <option value="간식류">간식류</option>
-                                    </select>
-                                </div>
-   
-                                </figure>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                            <input class="form-control" type="text" id="sell_pay_date" name="sell_pay_date"value="${orderInfo.sell_pay_date}"/>
+                                        </div>   
+                       
                                 <figure class="ps-block--form-box">
-                                    <figcaption>상품 이미지</figcaption>
-                                    <div class="ps-block__content">
-                                        <div class="form-group">
-                                         <div class="form-group--nest">
-                                            <label>상품 썸네일<sup>*</sup></label>
-                                          </div>  
-	                                        <td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${products.file1 }</td>
-                                         <div class="form-group--nest">
-                                          
-                                          <label>상품 상세이미지<sup>*</sup></label>
-                                          </div>
-                                        <td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${products.file2 }</td>
-                                        </div>
-                                       
-                                        <div class="form-group">
-                                            <label>상품 설명<sup>*</sup></label>
-                                            <input class="form-control" type="text"name="item_info" value="${products.item_info }" />
-                                        </div>
-                                    </div>
-                                </figure>
-                                <figure class="ps-block--form-box">
-                                    <figcaption>재고</figcaption>
+                                    <figcaption>주문</figcaption>
                                     <div class="ps-block__content">
                                       
                                         <div class="form-group form-group--select">
-                                            <label>재고상태
+                                            <label>주문상태
                                             </label>
                                             <div class="form-group__content">
                                             
                                                 <select class="ps-select" onchange="changeStatus(this.value)" >
-                                                    <option value="재고상태">재고상태</option>
-                                                    <option value="재입고">재입고</option>
-                                                    <option value="품절">품절</option>
-                                                    <option value="판매중">판매중</option>
-<!--                                                     <option value="판매중지">판매중지</option> -->
+                                                    <option value="재고상태">주문상태</option>
+                                                    <option value="주문완료">주문완료</option>
+                                                    <option value="배송준비중">배송준비중</option>
+                                                    <option value="배송완료">배송완료</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                            <div class="form-group">
-                                            <label>재고수량<sup>*</sup>
-                                            </label>
-                                            <input class="form-control" type="text"name="item_stock" value="${products.item_stock }"/>
                                         </div>
                                     </div>
                                 </figure>
@@ -247,7 +198,7 @@
                         </div>
                     </div>
                    <div class="ps-form__submit text-center	">
-                    <button class="ps-btn"type="submit"value="수정">상품수정</button>
+                    <button class="ps-btn"type="submit"value="수정">주문상태변경</button>
 
                     </div>
                 </form>
@@ -267,22 +218,3 @@
 
 </html>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                        
-</body>
-
-</html>

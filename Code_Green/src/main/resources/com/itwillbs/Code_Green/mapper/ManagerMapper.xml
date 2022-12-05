@@ -888,44 +888,36 @@
 		<select id="selectSalesTotal" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 	SELECT  
 			COUNT(sd.sell_amount) AS TotalCount,
-			sum((i.item_price * sd.sell_amount)) as salesTotal
+			sum(i.item_price * sd.sell_amount) as salesTotal
 	FROM sell_detail sd LEFT JOIN item i
 	ON sd.rf_item_idx = i.item_idx
 	LEFT JOIN manager m
 	ON i.re_manager_idx = m.manager_idx
-	where m.manager_id=#{sId};
+	where m.manager_id=#{sId}
+	
+	
 		
 		</select>
 		<!--정산 한달매출 -->
 		<select id="selectSalesMonth" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
-<!-- 		 날짜형식 2022-10형식으로 출력 -->
-<!-- 		 SELECT SUBSTR(sell_date,1,7) MM, -->
-<!-- 		      sum((i.item_price * sd.sell_amount)) as brandtotal -->
-<!-- 		   FROM sell_detail sd LEFT JOIN item i -->
-<!-- 		   ON sd.rf_item_idx = i.item_idx -->
-<!-- 		   LEFT JOIN   sell s -->
-<!-- 		    on s.sell_idx = sd.rf_sell_idx -->
-<!-- 		   LEFT JOIN manager m -->
-<!-- 		   ON i.re_manager_idx = m.manager_idx -->
-<!-- 		 where m.manager_id=#{sId} -->
-<!-- 		   GROUP -->
-<!-- 		   BY 1 -->
-<!-- 		   ORDER  -->
-<!-- 		   BY 1;   -->
-<!-- 	  달만 출력되는 형식 -->
-	  SELECT MONTH(s.sell_date) AS MONTH,
-	      sum((i.item_price * sd.sell_amount)) as salesMonth
-		   FROM sell_detail sd LEFT JOIN item i
-		   ON sd.rf_item_idx = i.item_idx
-		   LEFT JOIN   sell s
-		    on s.sell_idx = sd.rf_sell_idx
-		   LEFT JOIN manager m
-		   ON i.re_manager_idx = m.manager_idx
-		   where m.manager_id=#{sId}
-		  	<if test="!period.equals('')">
-				 AND TIMESTAMPDIFF(month , sysdate(), SELL_DATE)>-#{period}
-			</if>
-<!-- 		   GROUP BY MONTH;   -->
+		 SELECT
+		   date_format(s.sell_date, '%y/%m') salesMonth,
+		   sum(i.ITEM_PRICE * sd.SELL_AMOUNT)
+		FROM
+		   sell s,
+		   item i,
+		   manager m,
+		   sell_detail sd
+		WHERE
+		   sd.rf_item_idx = i.item_idx
+		   AND s.sell_idx = sd.rf_sell_idx
+		   AND i.re_manager_idx = m.manager_idx
+		   AND m.manager_id = #{manager_id}
+		GROUP BY
+		   date_format(s.sell_date, '%y/%m')
+		ORDER BY
+		   salesMonth
+
 
 	
 	
@@ -933,63 +925,63 @@
 		<!--정산 일주일매출 -->
 		<select id="selectSalesWeek" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		
-	  SELECT s.sell_date,
-	      sum((i.item_price * sd.sell_amount)) as salesWeek
-		   FROM sell_detail sd LEFT JOIN item i
-		   ON sd.rf_item_idx = i.item_idx
-		   LEFT JOIN   sell s
-		    on s.sell_idx = sd.rf_sell_idx
-		   LEFT JOIN manager m
-		   ON i.re_manager_idx = m.manager_idx
-		   where m.manager_id=#{sId}
-           AND TIMESTAMPDIFF(week , sysdate(), s.SELL_DATE)>-#{period}
-			   
+			SELECT
+			   date_format(s.sell_date, '%y/%v') salesWeek,
+			   sum(i.ITEM_PRICE * sd.SELL_AMOUNT)
+			FROM
+			   sell s,
+			   item i,
+			   manager m,
+			   sell_detail sd
+			WHERE
+			   sd.rf_item_idx = i.item_idx
+			   AND s.sell_idx = sd.rf_sell_idx
+			   AND i.re_manager_idx = m.manager_idx
+			   AND m.manager_id = #{manager_id}
+			GROUP BY
+			   date_format(s.sell_date, '%y/%v')
+			ORDER BY
+			   salesWeek;
+						   
 		</select>
 		
 		
 		<!--정산 하루매출 -->
 		<select id="selectSalesDay" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 	
-		
-		  SELECT s.sell_date AS DAY,
-      sum((i.item_price * sd.sell_amount)) as salesday
-	   FROM sell_detail sd LEFT JOIN item i
-	   ON sd.rf_item_idx = i.item_idx
-	   LEFT JOIN   sell s
-	   on s.sell_idx = sd.rf_sell_idx
-	   LEFT JOIN manager m
-	   ON i.re_manager_idx = m.manager_idx
-	   where m.manager_id=#{sId}
-       AND s.sell_date BETWEEN #{period} AND DATE_ADD(#{period}, INTERVAL 1 DAY)
-		
-		
-		
-		
-		
-		
+					
+			SELECT
+			   date_format(s.sell_date, '%y/%m/%d') salesday,
+			   sum(i.ITEM_PRICE * sd.SELL_AMOUNT)
+			FROM
+			   sell s,
+			   item i,
+			   manager m,
+			   sell_detail sd
+			WHERE
+			   sd.rf_item_idx = i.item_idx
+			   AND s.sell_idx = sd.rf_sell_idx
+			   AND i.re_manager_idx = m.manager_idx
+			   AND m.manager_id = #{manager_id}
+			GROUP BY
+			   date_format(s.sell_date, '%y/%m/%d')
+			ORDER BY
+			   salesday;
 		
 		     
 		</select>
 		<!--정산 순수익 -->
 		
 		<select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
-		 SELECT SUM(sell_total_price) AS brandtotal,
-                SUM(sell_total_price) * 0.1 AS net
-	           FROM sell_detail sd LEFT JOIN item i
-		        ON sd.rf_item_idx = i.item_idx
-		        LEFT JOIN   sell s
-		        ON s.sell_idx = sd.rf_sell_idx
-		        LEFT JOIN manager m
-		        ON i.re_manager_idx = m.manager_idx
-        	    WHERE m.manager_id=#{sId};
+			SELECT 	SUM(i.item_price * sd.sell_amount) as salesTotal
+            ,  SUM(i.item_price * sd.sell_amount) * 0.1 AS net
+	FROM sell_detail sd LEFT JOIN item i
+	ON sd.rf_item_idx = i.item_idx
+	LEFT JOIN manager m
+	ON i.re_manager_idx = m.manager_idx
+	where m.manager_id=#{manager_id}  
 		   
 		</select>
 		
-
-		
-		
-		
-   
-   
 
 </mapper>

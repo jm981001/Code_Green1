@@ -224,29 +224,30 @@ public class ManagerService {
 	}
 	
 	//총매출
-		public List<ManagerVO> getSalesTotal(String sId, String period) {
-			return mapper.selectSalesTotal(sId,period);
+		public ManagerVO getSalesTotal(String sId) {
+			return mapper.selectSalesTotal(sId);
 		}
 		//한달매출
-		public List<ManagerVO> getSalesMonth(String sId, String period) {
-			return mapper.selectSalesMonth(sId,period);
+		public List<ManagerVO> getSalesMonth(String sId) {
+			return mapper.selectSalesMonth(sId);
 		}
 		//일주일매출
-		public List<ManagerVO> getSalesWeek(String sId, String period) {
-			return mapper.selectSalesWeek(sId,period);
+		public List<ManagerVO> getSalesWeek(String sId) {
+			return mapper.selectSalesWeek(sId);
 		}
 		//하루매출
-		public List<ManagerVO> getSalesDay(String sId, String period) {
-			return mapper.selectSalesDay(sId,period);
+		public List<ManagerVO> getSalesDay(String sId) {
+			return mapper.selectSalesDay(sId);
 		}
 		//수수료
-		public SellVO getCommission(String sId, String period) {
-			return mapper.selectCommission(sId,period);
+		public SellVO getCommission(String sId) {
+			return mapper.selectCommission(sId);
 		}
 		//순수익
 		public SellVO getNet(String sId) {
 			return mapper.selectNet(sId);
 		}
+		
 		
 		
 		
