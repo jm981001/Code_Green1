@@ -143,18 +143,19 @@ public class MemberController {
 			System.out.println("가입 성공!");
 			// 가입 성공시 기본적립금 적립
 			MemberVO getMem = service.getMemberInfo(member.getMember_id());
-			int idx = getMem.getMember_idx();
-			model.addAttribute("getMem", getMem);
+			System.out.println("getMem"+getMem);
+
+			int coinCount= service.addCoin(coin);
+			System.out.println("coinCount : " + coinCount);
+			System.out.println("coin : " + coin); //null
+
+			coin = coinService.getCoin(member_id);
 			
-//			CoinVO getCoin = coinService.getCoin(getMem.getMember_id());
-//			System.out.println("getCoin : " + getCoin);  //null
+			CoinVO getCoin = coinService.getCoin(getMem.getMember_id());
+			System.out.println("getMem.getMember_id(): "+getMem.getMember_id());
 			
-//			coin = coinService.getCoin(member_id);
-//			System.out.println("coin : " + coin); //null
+			System.out.println("getCoin : " + getCoin);  //null
 			
-//			int coinCount= service.addCoin(coin);
-//			System.out.println("coinCount  :" + coinCount);
-//			model.addAttribute("coinCount", coinCount);
 			
 			return "redirect:/join_result";
 		} else { // 가입 실패
