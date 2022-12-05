@@ -52,7 +52,6 @@
         <div class="header__center"><a class="ps-logo" href="#"><img src="img/logo.png" alt=""></a></div>
         <div class="header__right"><a class="header__site-link" href="#"><i class="icon-exit-right"></i></a></div>
     </header>
-   
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
     

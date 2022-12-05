@@ -735,7 +735,6 @@ public class ManagerController {
 		model.addAttribute("keyword", keyword);
 		System.out.println("주문목록" + orderList);
 //			System.out.println("페이징" + pageinfo);
-
 		return "manager/orders";
 	}
 

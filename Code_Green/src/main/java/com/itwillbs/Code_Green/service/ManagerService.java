@@ -200,7 +200,6 @@ public class ManagerService {
 	
 	
 	
-	
 	//총주문수
 	public int getTotalsellCount() {
 		return mapper.selectTotalsellCount();

@@ -56,7 +56,6 @@
   		<div class="header__center">
   		<form class="ps-form--search-bar" action="order_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
 
- 
        <table class="table ps-table">
               
                     <h2>주문상세보기</h2>

@@ -41,7 +41,6 @@ public class ManagerVO {
 	private String         sum;
 	
 	
-	
 	public ManagerVO() {
 		super();
 		// TODO Auto-generated constructor stub

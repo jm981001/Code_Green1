@@ -84,14 +84,12 @@
  		<div class="ps-main__wrapper">
   		<div class="header__center">
   		<form class="ps-form--search-bar" action="products_detail?id=${sessionScope.sId}"  method="get"name="detailForm">
-
  
        <table class="table ps-table">
               
                     <h2>상품상세보기</h2>
                     <hr>
                        <thead>
-                       
                                 <tr>
                                 	<th>상품번호</th>
                                 	<th>상품명</th>

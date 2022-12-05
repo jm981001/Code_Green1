@@ -517,8 +517,7 @@
          where m.manager_id = #{id}
                                         
                                         
-                                        
-                                        
+<!--         수정해야함                                 -->
                                         
          <if test="!keyword.equals('')">
             <!-- 2. 검색타입(search)에 따른 WHERE 변경 -->
