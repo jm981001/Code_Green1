@@ -74,6 +74,19 @@
    	 background-color: #FAFAFA;
     }  
     
+    	.heart_icon_brand_m {
+		width: 30px;
+	    height: 30px;
+	    top: 19px;
+	    left: 233px;
+	}
+
+	.heart_icon_brand_b {
+		width: 30px;
+	    height: 30px;
+	    top: 19px;
+	    left: 233px;
+	}
    </style>  
    
  	<style type="text/css">
@@ -137,20 +150,33 @@
 				}
 			});
 		});	
+		$(function(){
+			$("#aa").click(function(){
+				
+				if(${sessionScope.sId == null}){
+					alert("로그인 후 사용가능합니다!");
+					return history.back();
+				}
+			});
+		});	
+		
 		$(function(){$("#cartBtn").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 		$(function(){$("#relB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 		$(function(){$("#sameB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 	</script>
 	
 	<script type="text/javascript">
+	
+	
+	
 // 	추천기능
 	$(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#wishBtn").click(function(){
+			$("#wishBtn").click(heartAjax);
+			heartAjax();
+			function heartAjax (){
 				if(${sessionScope.sId == null || not empty sessionScope.sCode || empty sessionScope.sIdx}){
-					
-					alert("회원만 사용가능한 기능입니다.");
-					
+					$('#aa').html("<img src='/Code_Green/resources/img/heart2.png' class='heart_icon_brand_b'>");
 				} else {
 					
 					$.ajax({
@@ -164,12 +190,15 @@
 							item_category: '${item.item_category}'
 							
 						},
-						success: function(){
+						success: function(data){
+							$('#aa').html("<img src='/Code_Green/resources/img/heart" + data + ".png' class='heart_icon_brand_b'>");
 							wish_count();
+							
+							
 						},
 					})
 				}	
-			});
+			}
 			
 // 			// 게시글 추천수
 			function wish_count(){
@@ -353,7 +382,7 @@ function addHeart(item_idx) {
                                     </figure>
                                     
                                     <a class="ps-btn ps-btn--black" id="cartBtn">Add to cart</a>
-                                      <div class="ps-product__actions" id="wishBtn"><i class="icon-heart" style="font-size:40px "></i><span class="wish_count"></span></div>
+                                        <div class="ps-product__actions" id="wishBtn"><span id='aa'></span><span class="wish_count"></span></div>
                                 </div>
                             </div>
                         </div>

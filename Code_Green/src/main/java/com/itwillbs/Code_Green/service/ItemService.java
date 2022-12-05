@@ -172,8 +172,12 @@ public class ItemService {
 
 	// 취소 승인시 재고 추가
 	public int modifyItemNumber2(int item_idx2, int sell_amount2) {
-		// TODO Auto-generated method stub
 		return mapper.updateItemNumber2(item_idx2, sell_amount2);
+	}
+
+
+	public int checkWish1(int sIdx, int item_idx) {
+		return mapper.checkWish1(sIdx,item_idx);
 	}
 
 
