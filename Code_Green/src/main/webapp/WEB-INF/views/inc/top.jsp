@@ -24,71 +24,82 @@
 
 </style>
     <header class="header header--organic" data-sticky="true">
-        <div class="header__top" >
-        
-             <div class="ps-block--user-header" >
- 				<c:choose>
-            	<c:when test="${empty sessionScope.sId }">
-                <a href="join" style="color:green; font-weight: bold;">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="login">로그인</a>
-              	</c:when>
-               
-                 <c:when test="${sessionScope.sId eq 'admin' }">
-                 <a href="MemberInfo.me?member_id=${sessionScope.sId }" style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()">Logout</a>   
+	<div class="header__top">
+
+		<div class="ps-block--user-header">
+			<c:choose>
+				<c:when test="${empty sessionScope.sId }">
+					<a href="join" style="color: green; font-weight: bold;">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="login">로그인</a>
+				</c:when>
+
+				<c:when test="${sessionScope.sId eq 'admin' }">
+					<a href="MemberInfo.me?member_id=${sessionScope.sId }"
+						style="color: green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="javascript:logout()">Logout</a>   
                  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="AdminMain.me">관리자페이지</a>
-                 </c:when>
-                    
-                 <c:when test="${not empty sessionScope.sCode}">
-                 <a href="brand_mypage?manager_id=${sessionScope.sId }"  style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()">Logout</a>
-                 &nbsp;&nbsp;|&nbsp;&nbsp;<a href="ManagerInfo.me?manager_id=${sessionScope.sId }">기업관리자페이지</a>
-                 </c:when>
-                    
-                 <c:otherwise>
-                 <a href="MemberInfo.me" style="color:green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()"> Logout</a>
-                 </c:otherwise>
-               </c:choose>
-               </div>
-                          
-            <div class="container">
-            <div class="header__right"></div>
-                <div class="header__right">
-                   <a class="ps-logo" href="/Code_Green"><img src="/Code_Green/resources/img/한글베지터틀.png" width="230" height="100"></a>
-                </div>
-                
-                
-                <!-- 서치박스 -->
-<!--                 <div class="header__center"> -->
-<!--                     <form class="ps-form--quick-search" action="#" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="............."> -->
-<!--                         <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
-<!--                     </form> -->
-<!--                 </div> -->
-            <div class="header__right">
-                    <div class="header__actions" >
-                    	<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
-                        	<div class="ps-cart--mini">
-                        	<a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i>
-                        	<span id="cartCount">
-	                          	<c:if test="${sessionScope.sId eq '' || sessionScope.sId eq null || cartCount eq '' || cartCount eq null}">
-	                          	</c:if>
-	                          	<i>${cartCount }</i>
-                          	</span></a>
-                        	</div>
-                        <c:if test="${not empty sessionScope.sId}">
-                        <a class="header__extra" href="MemberInfo.me"><i class="icon-user"></i></a></c:if>
-                        <c:if test="${empty sessionScope.sId }">
-                         <a class="header__extra" href="login"><i class="icon-user"></i></a></c:if>
-                         
-                         
-                         
-                         
-                         
-      				</div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!-- -----------------------------------------여기가 웹시작임----------------------------------------------------- -->
+				</c:when>
+
+				<c:when test="${not empty sessionScope.sCode}">
+					<a href="brand_mypage?manager_id=${sessionScope.sId }"
+						style="color: green;">${sessionScope.sId}님 </a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="javascript:logout()">Logout</a>
+                 &nbsp;&nbsp;|&nbsp;&nbsp;<a
+						href="ManagerInfo.me?manager_id=${sessionScope.sId }">기업관리자페이지</a>
+				</c:when>
+
+				<c:otherwise>
+					<a href="MemberInfo.me" style="color: green;">${sessionScope.sId}님
+					</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:logout()"> Logout</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+		<div class="container">
+			<div class="header__right"></div>
+			<div class="header__right">
+				<a class="ps-logo" href="/Code_Green"><img
+					src="/Code_Green/resources/img/한글베지터틀.png" width="230" height="100"></a>
+			</div>
+
+
+			<!-- 서치박스 -->
+			<!--                 <div class="header__center"> -->
+			<!--                     <form class="ps-form--quick-search" action="#" method="get"> -->
+			<!--                         <input class="form-control" type="text" placeholder="............."> -->
+			<!--                         <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
+			<!--                     </form> -->
+			<!--                 </div> -->
+			<div class="header__right">
+				<div class="header__actions">
+					<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
+					<div class="ps-cart--mini">
+						<a class="header__extra" href="cart?member_id=${sessionScope.sId }"><i class="icon-bag2"></i> 
+							<c:choose>
+								<c:when test="${sessionScope.sId eq '' || sessionScope.sId eq null ||cartCount eq '' || cartCount eq null }"></c:when>
+									<c:otherwise>
+										<span id="cartCount"> 
+											<i>${cartCount }</i>
+										</span>
+									</c:otherwise>
+							</c:choose>
+						</a>
+					</div>
+					<c:if test="${not empty sessionScope.sId}">
+						<a class="header__extra" href="MemberInfo.me"><i
+							class="icon-user"></i></a>
+					</c:if>
+					<c:if test="${empty sessionScope.sId }">
+						<a class="header__extra" href="login"><i class="icon-user"></i></a>
+					</c:if>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- -----------------------------------------여기가 웹시작임----------------------------------------------------- -->
         <nav class="navigation">
             <div class="container">
                 <div class="navigation__left">
