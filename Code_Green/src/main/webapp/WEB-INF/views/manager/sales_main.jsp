@@ -54,7 +54,6 @@
             </header>
             <section class="ps-items-listing">
    
-<%--                  <div class="ps-section__actions"><a class="ps-btn success" href="product_register?manager_id=${sessionScope.sId}"><i class="icon icon-plus mr-2"></i>새 상품 등록</a></div> --%>
                 
                 <div class="ps-section__header">
                     <div class="ps-section__filter">
@@ -64,11 +63,9 @@
                                     </div>
                                     </div>
                                 <div class="form-group">
-<!--                                  <input class="form-control" type="text" name="keyword" placeholder="Search..." /> -->
                                 </div>
                                     
                             <div class="ps-form__right">
-<!--                                 <button class="ps-btn ps-btn--gray"><i class="icon icon-funnel mr-2"></i>Filter</button> -->
                             </div>
                         </form>
                     </div>
@@ -83,25 +80,25 @@
                         <table class="table ps-table">
                         <thead>
                         <tr>
-                        <h3><td><strong>총 매출</strong></td></h3>
+                        <td><strong>총 매출</strong></td>
                         
                         <td><fmt:formatNumber value="${orderTotal.brandtotal }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
                         
-                        <h3><td><strong>총 주문수</strong></td></h3>
-                        <td>${orderTotal.orderCount }<small class="asc"></i></small></td>
+                        <td><strong>총 주문수</strong></td>
+                        <td>${orderTotal.orderCount }<small class="asc"></small></td>
                      
                         </tr>
                         </thead>
                         </table>
                         </div>
-                        
+  <!--   브랜드별 매출순위--><!--   브랜드별 매출순위--><!--   브랜드별 매출순위--><!--   브랜드별 매출순위-->                      
                          <div class="table-responsive">
                         <table class="table ps-table">
                             <thead>
                             <br>
                             <h4> 상품 순위</h4>
                                         <tr>
-                                            <th>Top</th>
+<!--                                             <th>Top</th> -->
                                             <th>상품명</th>
                                             <th>후기</th>
                                             <th>좋아요</th>
@@ -112,7 +109,7 @@
                                     <tbody>
                                     <c:forEach var="top" items="${top3 }">
                                         <tr>
-                                            <td>${top.ranking }위</td>
+<%--                                             <td>${top.ranking }위</td> --%>
                                             <td><strong>${top.item_name}</strong></td>
                                             <td><a href=""><strong>${top.review}개</strong></a></td>
                                             <td><span><strong>${top.heart }개</strong></span></td>
@@ -121,18 +118,15 @@
                                         </tr>
                                         </c:forEach>
                                         
-                                       
-                                        
-                                        
-<!--   위는 브랜드별 매출 순위   위는 브랜드별 매출 순위    위는 브랜드별 매출 순위  위는 브랜드별 매출 순위 -->
+<!--   브랜드별 매출순위--><!--   브랜드별 매출순위--><!--   브랜드별 매출순위--><!--   브랜드별 매출순위-->
                                         
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-            </section>
-        </div>
+<!--             </section> -->
+<!--         </div> -->
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>

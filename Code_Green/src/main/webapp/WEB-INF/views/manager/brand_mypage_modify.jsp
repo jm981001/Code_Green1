@@ -63,21 +63,15 @@
 						  <img src="/Code_Green/resources/bmnUpload/${brandInfo.manager_original_file }" alt="${brandInfo.manager_original_file }" />
 						  <div class="card-body">
 						    <p class="card-text">${brandInfo.manager_original_file }</p>
-                                    </div>
-                                    </div>
-                                    </div>
-						    
-						    
-						 
+                          </div>
+                        </div>
+                 </div>
                         <div class="ps-card__content">
-<!--                             <form class="ps-form--account-settings" action="brand_mypage_modifyPro.bo" method="get" enctype="multipart/form-data"> -->
                             	<form action="brand_mypage_modifyPro.bo" method="post" name="brand_mypage_modify" enctype="multipart/form-data">
                           		<input type="hidden" name="manager_realfile" value="${brandInfo.manager_realfile }" />
 								<input type="hidden" name="manager_original_file" value="${brandInfo.manager_original_file }" />
 				               
 				                	<input type="file" class="파일선택" name="file">
-                                
-                                
                                 
                                 <div class="row">	
                                     <div class="col-sm-6">
@@ -86,6 +80,7 @@
                                             <input type="text"class="form-control" id="manager_idx"name="manager_idx"value="${brandInfo.manager_idx}"readonly="readonly"/>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>가입날짜</label>
@@ -154,7 +149,8 @@
                                             <label>기업 상세정보 </label>
                                             <input type="text"class="form-control" id="manager_info" name="manager_info"value="${brandInfo.manager_info }"/>
                                         </div>
-
+									</div>
+								</div>
                                 <div class="ps-form__submit text-center	">
                                     <button class="ps-btn success" type="submit"id="submitBtn">수정하기</button>
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>

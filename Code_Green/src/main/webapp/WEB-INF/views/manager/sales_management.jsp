@@ -32,32 +32,8 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
 </head>
 <body>
-<script>
-	$(function(){
-		$("#dateSet").click(function(){
-			let status = document.querySelector(".dateDiv").style.display;
-			if(status == 'none'){
-				$(".dateDiv").show();
-			} else {
-				$(".dateDiv").hide();
-			}
-			
-		});
-	});
-	
-	function searchByDate(period){
-		$.ajax({
-			url:"sales_management",
-			type:"get",
-			data:{ period : period },
-			success: function(data){
-				$(".table_salesList").html(data);
-			}
-		});
-	};
 
-	
-</script>
+   
      <header class="header--mobile">
         <div class="header__left">
             <button class="ps-drawer-toggle"><i class="icon icon-menu"></i></button><img src="" alt="">
@@ -78,123 +54,116 @@
                     <h3>정산페이지</h3>
                 </div>
                 
-                
-                <div class="header__center">
-                    <form class="ps-form--search-bar" action="sales_management" method="get">
-                    </form>
-                </div>
-                <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
+               <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
-            <section class="ps-dashboard ps-items-listing">
-                <div class="ps-section__left">
+            <section class="ps-items-listing">
+   
+                
+                <div class="ps-section__header">
+                    <div class="ps-section__filter">
+                        <form class="ps-form--filter" action="products" method="get">
+                            <div class="ps-form__left">
+                                <div class="form-group">
+                                    </div>
+                                    </div>
+                                <div class="form-group">
+                                </div>
+                                    
+                            <div class="ps-form__right">
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <br>
+                    <div class="ps-section__search">
+              
+                    </div>
+                </div>
+                <div class="ps-section__content">
                     <div class="table-responsive">
-                    
-
-                    
-                    
-                      <div class="ps-card"> 
-                        <div class="ps-card__header">
-                        <br>
-                            <h4>매출 집계</h4>
+                        <table class="table ps-table">
+                        <thead>
+                        <tr>
+                        <td><strong>총 매출</strong></td>
+                        
+                        <td><fmt:formatNumber value="${orderTotal.brandtotal  }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                        
+                        <td><strong>순수익</strong></td>
+                        <td><fmt:formatNumber value="${salesTotal}" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                     
+                        </tr>
+                        </thead>
+                        </table>
                         </div>
-                      <div class="options_area">
-								<select name="searchDate" onchange="searchByDate(this.value)" required >    
-									<option value="">기간조회</option>    
-									<option value="1">1개월</option>    
-									<option value="2">2개월</option>    
-									<option value="6">6개월</option>    
-								</select>
-								<input type="button" name="searchDateSet" id="dateSet" value="+상세조회">
-								</div>
-								<div class="dateDiv" style="display: none;">
-									<form action="sales_management"  id="dates" method=get>
-										<input type="date" name="date1" required="required"> - <input type="date" name="date2" required="required">
-										<input type="submit" id="dateSet" value="검색" >
-										<input type="reset" id="dateSet" value="초기화" >
-									</form>
-								</div>
-                       
+            
+            
                     <table class="table ps-table">
-                          <thead>
-                             <label for="date">날짜를 선택하세요:
-							  		<input type="date"
-							         id="date"
-							         max="2077-06-20"
-							         min="2077-06-05"
-							         value="2077-06-15">
-                              <tr>
-                              
-                                   <th>총매출</th><br>
-                                   <th>이번달매출</th><br>
-                                    <th>이번주매출</th><br>
-                                    <th>오늘매출</th><br>
-                                    <th>순수익</th><br>
-                              </tr>
-                          </thead>
-                          <tbody>
-<!--                         <tr> -->
-<!--                            <h3><td><strong>총 매출</strong></td></h3> -->
-<%--                            <td><fmt:formatNumber value="${sellTotal.total }" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                         </tr> -->
-                           <tr>       
-<!--                           <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                            <td>${salesTotal}</td> --%>
-                                </tr>
-                           <tr>       
-<!--                            <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                            <td><c:if test="${not empty salesTotal}"> ${salesTotal}</c:if></td> --%>
-<!--                                 </tr> -->
-<!--                                 <tr> -->
-<!--                                <td><h3><strong>총 매출</strong></h3></td> -->
-                                  <td><fmt:formatNumber value="${salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
-<!--                                   </tr> -->
-<!--                                   <tr>     -->
-<!--                                   <td><h3><strong>월별 매출</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
-									<c:forEach var="salesMonth" items="${salesMonth }">
-									<td>${salesMonth.salesMonth }</td>  
-									<td>${salesMonth.sum }</td>  
-									</c:forEach>
+<!--                      <thead> -->
+                    				 <br>
 
+                                        <tr>
+                                            <td>매출기간</td>
+                                            <td>금액</td>
+                                       
+                                    </thead>
+                                    <tbody>
+                     
+                     <h4>한달매출</h4>
+                           <c:forEach var="salesMonth" items="${salesMonth }">
+                               <tr>
+                                 <td>${salesMonth.salesMonth }</td>  
+                                 <td>${salesMonth.sum }원</td>  
+                                      </tr>
+                           </c:forEach>
+               </table>
+                    <table class="table ps-table">
+                    	        <br>
 
-<!--                                   </tr> -->
-<!--                                   <tr> -->
-<!--                                   <td><h3><strong>주별 매출</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${salesWeek.salesWeek}" pattern="#,###원" /><small class="asc"></small></td> --%>
-<!--                                  </tr> -->
-<!--                                  <tr> -->
-<!--                                   <td><h3><strong>일별 매출</strong></h3></td> -->
-<%--                                  <td><fmt:formatNumber value="${salesday.salesday }" pattern="#,###원" /><small class="asc"></i><span></span></small></td> --%>
-<!--                                   </tr> -->
-<!--                                   <tr> -->
-<!--                                  <td><h3><strong>순수익</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${sellTotal.net}" pattern="#,###원" /><small class="asc"></small></td>  --%>
-<!--                               </tr> -->
-                              
-                              <tr>
-                              <c:forEach var="salesList" items="${salesList }">
-<!--                                <tr> -->
-<%--                               	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
-<!--         					<td> -->
-<%--         					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span> --%>
-<!--         					</td> -->
-                                  <td>
-                                     <div class="ps-product--cart">
-                                          <div class="ps-product__content"><a href="sales_management">${salesList.sell_order_number }</a></div>
-                                      </div>
-                                  </td>
-                                  <td><fmt:formatNumber value="${salesTotal.salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
-                                  <td><fmt:formatNumber value="${salesList.brandtotal}" pattern="#,###원" /><small class="asc"></small></td>
-                                  <td><fmt:formatNumber value="${salesList.salesMonth}" pattern="#,###원" /><small class="asc"></small></td>
-                                  <td><fmt:formatNumber value="${salesList.salesWeek}" pattern="#,###원" /><small class="asc"></small></td>
-                                  <td><fmt:formatNumber value="${salesList.commission.net}" pattern="#,###원" /><small class="asc"></small></td>
-                             
-                              </c:forEach>
-                          </tbody>
-                      </table>
+                                        <tr>
+                                            <td>매출기간</td>
+                                            <td>금액</td>
+                                       
+                                    </thead>
+                                    <tbody>
+                     <h4>하루 매출</h4>
+                           <c:forEach var="salesday" items="${salesday }">
+                               <tr>
+                                 <td>${salesday.salesday }</td>  
+                                 <td>${salesday.sum }원</td>  
+                                      </tr>
+                           </c:forEach>
+               </table>         
+               
+                    <table class="table ps-table">
+                    	 <br>
+
+                                        <tr>
+                                            <td>매출기간</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>금액</td>
+                                       
+                                    </thead>
+                                    <tbody>
+                     <h4>일주일 매출</h4>
+                           <c:forEach var="salesWeek" items="${salesWeek }">
+                               <tr>
+                                 <td>${salesWeek.start }</td>
+                                 <td> ~~~ </td>
+<!--                                  <td>부터</td> -->
+                                 <td>${salesWeek.end }</td> 
+<!--                                  <td>까지</td> -->
+                                 
+<%--                                  <td>${salesWeek.salesWeek }</td>   --%>
+                                 <td>${salesWeek.sum }원</td>  
+                                      </tr>
+                           </c:forEach>
+               </table>         
+  
                       
 
-
+</div>
+</main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/popper.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/bootstrap/js/bootstrap.min.js"></script>

@@ -68,12 +68,8 @@
                     <section class="ps-card">
                         <div class="ps-card__header">
                             <h4>${brandInfo.manager_id }님의 페이지</h4>
-                            
-
                             <hr>
                             <br>
-                            
-                            
                           <div class="card" style="width: 18rem;">
 						  <img src="/Code_Green/resources/img/brand_logo/${brandInfo.manager_realfile }" alt="${brandInfo.manager_realfile }" />
 						  <div class="card-body">
@@ -83,9 +79,6 @@
 						  </div>
 						</div>
                         </div>
-
-						    
-						 
                         <div class="ps-card__content">
                             <form class="ps-form--account-settings" action="brand_mypage_delete?id=${sessionScope.sId}" method="get"name="deleteForm">
                                 <div class="row">
@@ -95,6 +88,7 @@
                                             <input type="text"class="form-control" id="manager_idx"name="manager_idx"value="${brandInfo.manager_idx}"readonly="readonly"/>
                                         </div>
                                     </div>
+                                </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>가입날짜</label>
@@ -165,7 +159,6 @@
                                         </div>
 
                                 <div class="ps-form__submit text-center	">
-<%--                                     <button class="ps-btn success" type="submit"id="submitBtn"onclick="confirmDelete('${manager.manager_id}&manager_idx=${param.manager_idx }')">탈퇴하기</button> --%>
 									<input type="button" value="탈퇴" onclick="confirmDelete('${manager.manager_id}')">
                                     <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                                 </div>
