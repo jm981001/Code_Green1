@@ -32,7 +32,6 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
 <style>
-	/* 하 지금 이것도안되네 갑자기...왜이러냐 진짜.....내꺼....ㅠ */
 	.ps-table--vendor tbody #admintr{
 		background-color: #fcfdf3;
 		font-weight: bold;
@@ -68,25 +67,18 @@
             </div>
         </div>
     </div>
-    
-    
     <div class="ps-vendor-dashboard">
         <div class="container">
             <div class="ps-section__header">
                 <h3>Community</h3>
                 <p>지구와 환경을 위한 발걸음, 여러분의 실천들을 공유해주세요.<br>함께하면 더욱 즐겁게 멀리 갈 수 있습니다.</p>
-                
             </div>
             <div class="ps-section__content">
                 <ul class="ps-section__links">
                     <li><a href="welcome_vegun">어서와,비건은 처음이지?</a></li>
                     <li class="active"><a href="CommunityList.bo">커뮤니티</a></li>
-                    <li><a href="#">캠페인</a></li>
                 </ul>
                 <div class="ps-block--vendor-dashboard">
-<!--                     <div class="ps-block__header"> -->
-<!--                         <h3>게시판</h3> -->
-<!--                     </div> -->
                     	<div class="ps-block__content">
 		                        <div class="table-responsive">
 		                            <table class="table ps-table ps-table--vendor">
@@ -101,7 +93,7 @@
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
-		                               	 <c:forEach var="board" items="${communityList }">
+		                               	<c:forEach var="board" items="${communityList }">
 		                               	<c:choose>
 		                               		<c:when test="${board.board_id eq 'admin' }"><tr id="admintr"></c:when>
 		                               		<c:otherwise><tr></c:otherwise>
@@ -125,17 +117,10 @@
 		                                        <td>${board.best_cnt }</td>
 		                                        <td>${board.board_readcount }</td>
 		                                    </tr>
-		                                   
 		                                 </c:forEach>
 		                                </tbody>
 		                            </table>
 		                        </div>
-                        
-                         
-                         
-                         
-                      
-                       
                         
                   <!-- 검색 부분  -->
                     <div id="widget-search-select-together">
@@ -163,11 +148,10 @@
    		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
                     <div class="ps-pagination">
                         <ul class="pagination">
-                           
                             <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="CommunityList.bo?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
                             <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
                             	<c:choose>
-                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
                             		<c:otherwise><li><a href="CommunityList.bo?pageNum=${i }&searchType=${searchType }&keyword=${keyword}">${i }</a></li></c:otherwise>
                             	</c:choose>
                             </c:forEach>
@@ -175,17 +159,10 @@
                         </ul>
                     </div>
                     <!-- 페이징 버튼들 끝 -->
-                                    
                     </div>
                 </div>
-                
             </div>
         </div>
-    
-   
-            
-        
-        
     </div>
 
     <!-- 푸터 삽입 -->

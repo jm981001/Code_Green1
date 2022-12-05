@@ -23,18 +23,18 @@
                               <c:forEach var="buyList" items="${buyList }">
                               <tr>
                               	<fmt:parseDate var="dateString" value="${buyList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
-        					<td>
-        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
-        					</td>
-                                  <td>
-                                     <div class="ps-product--cart">
-                                          <div class="ps-product__content"><a href="myPage_buyList.jsp">${buyList.sell_order_number }</a></div>
-                                      </div>
-                                  </td>
-                                  <td>${buyList.sell_amount }건</td>
-                                  <td>${buyList.sell_pay_type }</td>
-                                  <td><fmt:formatNumber value="${buyList.sell_total_price }" pattern="#,###"/>원</td>
-                                  <td>${buyList.sell_status }</td>
+	        					<td>
+	        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
+	        					</td>
+                                <td>
+                                   <div class="ps-product--cart">
+                                        <div class="ps-product__content"><a href="myPage_buyList.jsp">${buyList.sell_order_number }</a></div>
+                                    </div>
+                                </td>
+                                <td>${buyList.sell_amount }건</td>
+                                <td>${buyList.sell_pay_type }</td>
+                                <td><fmt:formatNumber value="${buyList.sell_total_price }" pattern="#,###"/>원</td>
+                                <td>${buyList.sell_status }</td>
                               </tr>
                               </c:forEach>
                           </tbody>
@@ -47,7 +47,7 @@
 					               <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myBuyList.my?pageNum=${pageInfo.pageNum - 1}&period=${period}&date1=&date2="><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 					               <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 					               	<c:choose>
-					               		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+					               		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
 					               		<c:otherwise><li><a href="myBuyList.my?pageNum=${i }&period=${period}&date1=&date2=">${i }</a></li></c:otherwise>
 					               	</c:choose>
 					               </c:forEach>

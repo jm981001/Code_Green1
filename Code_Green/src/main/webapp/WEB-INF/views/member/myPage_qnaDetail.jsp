@@ -170,7 +170,6 @@
 					                                    	<td>${mtmDetail.qna_content}</td>
 					                                    </tr>
 					                            	</table>
-															
 				                     			 	
 				                     			 	<table class="table ps-table ps-table--vendor">
 				                     			 	<tr>
@@ -188,7 +187,7 @@
 				                     			 	</tr>
 				                     			 	</table>
 				                       		   </div>
-				                        	</div>
+			                        		</div>
 				                   		  </div>
                    						</div>
                            			 </div>
@@ -196,9 +195,8 @@
                             </div>
                         </div>
                      </div>
-                  </div> 
+                 </div> 
 <!-- ==========Q&A 끝=========================================================================================================     -->					
-					
 				</div>
 			</div>
 		</section>

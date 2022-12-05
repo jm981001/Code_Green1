@@ -79,71 +79,68 @@
 					<div class="col-lg-8">
                        <div class="ps-section__right">
                             <div class="ps-section--account-setting">
-                            
                                 <div class="ps-section__header">
                                     <h3>신고내역</h3>
                                 </div>
-                               
-                                <div class="ps-section__content">
-                                    <div class="table-responsive">
-                                    	<div class="ps-section__right">
-										
-										<div class="table_qnaList">
-                                        <table class="table ps-table ps-table--notification">
-                                            <thead>
-                                                <tr>
-                                                    <th>신고글</th>
-                                                    <th>신고사유</th>
-                                                    <th>신고일</th>
-                                                    <th>처리상태</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <c:if test="${empty reportList }">
-                                            	<td colspan="4">신고내역이 없습니다.</td>
-                                            </c:if>
-                                            	<c:forEach var="reportList" items="${reportList }">
-                                                <tr>
-                                                    <td width="20%">${reportList.report_subject }</td>
-                                                    <td width="50%">${reportList.report_content }</td>
-                                                    <fmt:parseDate var="dateString" value="${reportList.report_date}" pattern="yyyy-MM-dd" />
-                                                    <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
-                                                    <c:if test="${reportList.report_status eq '처리대기' }">
-                                                    	<td><span class="status_wait">처리대기</span></td>
-                                                    </c:if>
-                                                    <c:if test="${reportList.report_status eq '처리반려' }">
-                                                    	<td><span class="status_reject">처리반려</span></td>
-                                                    </c:if>
-                                                    <c:if test="${reportList.report_status eq '처리완료' }">
-                                                    	<td><span class="status_complete">처리완료</span></td>
-                                                    </c:if>
-                                                </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                           
-                            <!-- 페이징 버튼들 시작 -->
-		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-		                    <div class="ps-pagination">
-		                        <ul class="pagination">
-		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageReportList.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-		                            	<c:choose>
-		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-		                            		<c:otherwise><li><a href="myPageReportList.bo?pageNum=${i }">${i }</a></li></c:otherwise>
-		                            	</c:choose>
-		                            </c:forEach>
-		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageReportList.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-		                        </ul>
-		                    </div>
-		                    <!-- 페이징 버튼들 끝 -->  
-                            </div>
-                          </div>
-                         </div>
-                        </div>
-                      </div>
-                    </div>
-                 </div> 
+                                	<div class="ps-section__content">
+                                    	<div class="table-responsive">
+                                    		<div class="ps-section__right">
+												<div class="table_qnaList">
+		                                        <table class="table ps-table ps-table--notification">
+		                                            <thead>
+		                                                <tr>
+		                                                    <th>신고글</th>
+		                                                    <th>신고사유</th>
+		                                                    <th>신고일</th>
+		                                                    <th>처리상태</th>
+		                                                </tr>
+		                                            </thead>
+		                                            <tbody>
+		                                            <c:if test="${empty reportList }">
+		                                            	<td colspan="4">신고내역이 없습니다.</td>
+		                                            </c:if>
+		                                            	<c:forEach var="reportList" items="${reportList }">
+		                                                <tr>
+		                                                    <td width="20%">${reportList.report_subject }</td>
+		                                                    <td width="50%">${reportList.report_content }</td>
+		                                                    <fmt:parseDate var="dateString" value="${reportList.report_date}" pattern="yyyy-MM-dd" />
+		                                                    <td><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd" /></td>
+		                                                    <c:if test="${reportList.report_status eq '처리대기' }">
+		                                                    	<td><span class="status_wait">처리대기</span></td>
+		                                                    </c:if>
+		                                                    <c:if test="${reportList.report_status eq '처리반려' }">
+		                                                    	<td><span class="status_reject">처리반려</span></td>
+		                                                    </c:if>
+		                                                    <c:if test="${reportList.report_status eq '처리완료' }">
+		                                                    	<td><span class="status_complete">처리완료</span></td>
+		                                                    </c:if>
+		                                                </tr>
+		                                                </c:forEach>
+		                                            </tbody>
+		                                        </table>
+		                           
+					                            <!-- 페이징 버튼들 시작 -->
+							   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+							                    <div class="ps-pagination">
+							                        <ul class="pagination">
+							                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageReportList.bo?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+							                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+							                            	<c:choose>
+							                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
+							                            		<c:otherwise><li><a href="myPageReportList.bo?pageNum=${i }">${i }</a></li></c:otherwise>
+							                            	</c:choose>
+							                            </c:forEach>
+							                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageReportList.bo?pageNum=${pageInfo.pageNum + 1}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+							                        </ul>
+							                    </div>
+							                    <!-- 페이징 버튼들 끝 -->  
+		                            		</div>
+                          				</div>
+                       				</div>
+                        		</div>
+                   			</div>
+                    	</div>
+                 	</div> 
 <!-- ========== 목록 끝=========================================================================================================     -->					
 				</div>
 			</div>

@@ -177,7 +177,7 @@
 					                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myBuyList.my?pageNum=${pageInfo.pageNum - 1}&period=${period}&date1=&date2="><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 					                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 					                            	<c:choose>
-					                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+					                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
 					                            		<c:otherwise><li><a href="myBuyList.my?pageNum=${i }&period=${period}&date1=&date2=">${i }</a></li></c:otherwise>
 					                            	</c:choose>
 					                            </c:forEach>
@@ -186,8 +186,6 @@
 					                    </div>
 					                    <!-- 페이징 버튼들 끝 -->  
 			                         </div>
-                                    	
-                                    	
                                     </div>
                                  </div>
                         	</div>

@@ -325,7 +325,7 @@
                   <aside class="widget widget--vendor">
                     <h3 class="widget-title" id="brandNameBar">브랜드별 상품</h3>
                       <div class="brandfollowbtn">
-                         <a class="ps-block__inquiry" href="#" onclick="followCheck(0); return false;">Follow</a>
+                         <a class="ps-block__inquiry" href="javascript:void(0);" onclick="followCheck(0); return false;">Follow</a>
                          <img src="/Code_Green/resources/img/forzero/eheart.png" class="heart_icon_brand_m">
                       </div>
                       <div class="ps-block__user" >

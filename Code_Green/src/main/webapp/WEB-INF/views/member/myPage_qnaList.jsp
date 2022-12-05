@@ -118,11 +118,9 @@
 					<div class="col-lg-8">
                        <div class="ps-section__right">
                             <div class="ps-section--account-setting">
-                            
                                 <div class="ps-section__header">
                                     <h3>1:1 문의</h3>
                                 </div>
-                               
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
                                     	<div class="ps-section__right">
@@ -131,7 +129,6 @@
 											<input type="button" class="statusBtn1" id="qna_status" value="답변대기" onclick="goGetList(this.value)">
 											<input type="button" class="statusBtn2" id="qna_status" value="답변완료" onclick="goGetList(this.value)">
 										</div>
-										
 										<div class="table_qnaList">
                                         <table class="table ps-table ps-table--notification">
                                             <thead>
@@ -146,7 +143,6 @@
                                             <c:if test="${empty mantomanList }">
                                             	<td colspan="4">문의내역이 없습니다.</td>
                                             </c:if>
-                                            
                                             	<c:forEach var="mtmList" items="${mantomanList }">
                                                 <tr>
                                                     <td>${mtmList.qna_category }</td>
@@ -163,36 +159,29 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                           
-                            <!-- 페이징 버튼들 시작 -->
-		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-		                    <div class="ps-pagination">
-		                        <ul class="pagination">
-		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageQnaList.my?pageNum=${pageInfo.pageNum - 1}&qna_status=${qna_status}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-		                            	<c:choose>
-		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
-		                            		<c:otherwise><li><a href="myPageQnaList.my?pageNum=${i }&qna_status=${qna_status}">${i }</a></li></c:otherwise>
-		                            	</c:choose>
-		                            </c:forEach>
-		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageQnaList.my?pageNum=${pageInfo.pageNum + 1}&qna_status=${qna_status}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-		                        </ul>
-		                    </div>
-		                    <!-- 페이징 버튼들 끝 -->  
-                                       
+			                            <!-- 페이징 버튼들 시작 -->
+					   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+					                    <div class="ps-pagination">
+					                        <ul class="pagination">
+					                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageQnaList.my?pageNum=${pageInfo.pageNum - 1}&qna_status=${qna_status}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+					                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+					                            	<c:choose>
+					                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
+					                            		<c:otherwise><li><a href="myPageQnaList.my?pageNum=${i }&qna_status=${qna_status}">${i }</a></li></c:otherwise>
+					                            	</c:choose>
+					                            </c:forEach>
+					                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a href="myPageQnaList.my?pageNum=${pageInfo.pageNum + 1}&qna_status=${qna_status}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+					                        </ul>
+					                    </div>
+					                    <!-- 페이징 버튼들 끝 -->  
                                         </div>
-                                        
                                     </div>
                                 </div>
-                              
-                                
-                                
                             </div>
                         </div>
                      </div>
                   </div> 
 <!-- ==========Q&A 끝=========================================================================================================     -->					
-					
 				</div>
 			</div>
 		</section>

@@ -414,7 +414,7 @@
 	                        <div class="widget__content">
 		                        <a href="/Code_Green"><i class="fi fi-rr-home"></i> 메인 홈</a>
 		                        <a href="CommunityList.bo"><i class="fi fi-rr-list"></i> 목록 보기</a>
-		                        <a href="#" onclick="writeNew();"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
+		                        <a href="javascript:void(0);" onclick="writeNew();"><i class="fi fi-rr-edit"></i> 새글 쓰기</a>
 		                        <c:if test="${cBoard.board_id eq sessionScope.sId || sessionScope.sId eq 'admin'}">
 			                        <a href="CommunityModify.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }"><i class="fi fi-rr-scissors"></i> 글 수정</a>
 			                        <a href="CommunityDelete.bo?board_idx=${cBoard.board_idx }&pageNum=${param.pageNum }" onclick="return deleteCheck();"><i class="fi fi-rr-cross-circle"></i> 글 삭제</a>

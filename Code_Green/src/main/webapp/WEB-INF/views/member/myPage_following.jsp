@@ -86,7 +86,6 @@
                             <div class="ps-section--account-setting">
                                 <div class="ps-section__header">
                                     <h3><i class="icon-star"></i> 팔로우 브랜드</h3>
-                                   
                                 </div>
                                 <div class="ps-section__content">
                                     <div class="table-responsive">
@@ -122,7 +121,7 @@
 			                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a href="myPageFollowingList.my?pageNum=${pageInfo.pageNum - 1}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
 			                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 			                            	<c:choose>
-			                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="#">${i }</a></li></c:when>
+			                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a href="javascript:void(0);">${i }</a></li></c:when>
 			                            		<c:otherwise><li><a href="myPageFollowingList.my?pageNum=${i }">${i }</a></li></c:otherwise>
 			                            	</c:choose>
 			                            </c:forEach>
