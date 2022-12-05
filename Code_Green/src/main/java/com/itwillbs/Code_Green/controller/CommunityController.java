@@ -90,8 +90,6 @@ public class CommunityController {
 		// 페이징 처리 정보를 저장하는 PageInfo 클래스 인스턴스 생성 및 데이터 저장
 		PageInfo pageInfo = new PageInfo(
 				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-//				System.out.println(pageInfo);
-		// --------------------------------------------------------------------------------
 		// 게시물 목록(boardList) 과 페이징 처리 정보(pageInfo)를 Model 객체에 저장
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("pageInfo", pageInfo);
@@ -106,15 +104,15 @@ public class CommunityController {
 	
 	//------------ 커뮤니티 글 상세보기 페이지 -------------------------------------------
 	@GetMapping(value = "/CommunityDetail.bo")
-	public String communityDetail(@RequestParam int board_idx,Model model) {
-		// service 객체의 increaseReadcount() 메서드 호출하여 게시물 조회 증가
-		service.increaseReadcount(board_idx);
-		
-		// service 객체의 getBoardDetail() 메서드를 호출하여 게시물 상세정보 조회 
-		// => 파라미터 : 글번호, 리턴타입 : BoardVO(board)
+	public String communityDetail(@RequestParam("board_idx") int board_idx,
+								 @RequestParam("board_id") String board_id, Model model, HttpSession session) {
+		String sId = (String) session.getAttribute("sId");
+
+		// 게시물 조회수 증가
+		if(!sId.equals(board_id)) {
+			service.increaseReadcount(board_idx);
+		}
 		BoardVO cBoard = service.getBoardDetail(board_idx);
-		
-		// Model 객체에 BoardVO 객체 추가
 		model.addAttribute("cBoard", cBoard);
 	
 		return "community/community_detail";
@@ -336,38 +334,29 @@ public class CommunityController {
 		String realFile1 = service.getRealFile1(board_idx);
 		String realFile2 = service.getRealFile2(board_idx);
 		String realFile3 = service.getRealFile3(board_idx);
-		System.out.println("realFile1 -> "+realFile1);
-		System.out.println("realFile2 -> "+realFile2);
-		System.out.println("realFile2 -> "+realFile3);
 		
 		int deleteCount = service.removeBoard(board_idx);
 		int deleteFileCount = service.removeFile(board_idx);
-		System.out.println("deleteCount 갯수 -> "+deleteCount);
-		System.out.println("deleteFileCount 갯수 -> "+deleteFileCount);
 		// ----------------------------------------------------------
 		
 		if(deleteCount > 0) {
 			String uploadDir = "/resources/commUpload"; // 가상의 업로드 경로
 			// => webapp/resources 폴더 내에 upload 폴더 생성 필요
 			String saveDir = session.getServletContext().getRealPath(uploadDir);
-			System.out.println("실제 업로드 경로 : " + saveDir);
 			
 			if(realFile1!=null) {
-				System.out.println("여긴 리얼파일1 안");
 				File f1 = new File(saveDir, realFile1); // 실제 경로를 갖는 File 객체 생성
 				if(f1.exists()) { // 해당 경로에 파일이 존재할 경우
 					f1.delete();
 				}
 			} 
 			if(realFile2!=null) {
-				System.out.println("여긴 리얼파일2 안");
 				File f2 = new File(saveDir, realFile2); // 실제 경로를 갖는 File 객체 생성
 				if(f2.exists()) { // 해당 경로에 파일이 존재할 경우
 					f2.delete();
 				}
 			}
 			if(realFile3!=null) {
-				System.out.println("여긴 리얼파일3 안");
 				File f3 = new File(saveDir, realFile3); // 실제 경로를 갖는 File 객체 생성
 				if(f3.exists()) { // 해당 경로에 파일이 존재할 경우
 					f3.delete();
@@ -411,8 +400,6 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/BestCountUpdate.bo")
 	public void bestCountUpdate(@RequestParam int rf_board_idx,@RequestParam String member_id, Model model, HttpServletResponse response) {
-		System.out.println(rf_board_idx);
-		System.out.println(member_id);
 		
 		// 가져온 아이디와 보드넘버로 board_best테이블에 존재유무 판단하기
 		int existCount = service.selectBoardBest(rf_board_idx,member_id);
@@ -420,20 +407,14 @@ public class CommunityController {
 
 		
 		if(existCount > 0) { // 판단해서 있으면 삭제하기
-			
 			int resultDeleteCount = service.deleteBoardBest(rf_board_idx,member_id);
 			if(resultDeleteCount > 0) {
-//				model.addAttribute("msg", "추천이 취소되었습니다!");
 				msg = "추천이 취소되었습니다!";
 			}
 		} else {	// 판단해서 없으면 추가하기
-			
 			int resultInsertCount = service.insertBoardBest(rf_board_idx,member_id);
-			
 			if(resultInsertCount > 0) {
-//				model.addAttribute("msg", "추천했습니다!!");
 				msg = "추천했습니다!";
-
 			}
 		}
 		
@@ -443,9 +424,6 @@ public class CommunityController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		model.addAttribute("msg", msg);
-//		System.out.println(msg);
-//		return "community/msg_back";
 		
 	}
 	
@@ -455,7 +433,6 @@ public class CommunityController {
 	public int bestBoardCounting(int rf_board_idx) {
 		
 		int count = service.countBoardBest(rf_board_idx);
-//		System.out.println(count);
 		return count;
 	}
 		
@@ -476,11 +453,6 @@ public class CommunityController {
 			@RequestParam int reply_bo_ref, 
 			@RequestParam String reply_id,
 			@RequestParam String reply_content){
-		
-		System.out.println(reply_bo_ref);
-		System.out.println(reply_id);
-		System.out.println(reply_content);
-		
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -503,16 +475,13 @@ public class CommunityController {
 	@ResponseBody
 	@PostMapping("/reReplyWrite.re")
 	public void reReplyWrite(@ModelAttribute ReplyVO reply, Model model) {
-		System.out.println("대댓내용 : " + reply);
 		
 		// 순서번호(reply_re_seq) 조정 
 		service.increaseReplyReSeq(reply);
-		System.out.println("순서번호 조정후 : " + reply);
 		
 		
 		// 대댓글 등록
 		int reResultCount = service.writeReReply(reply);
-		System.out.println("대댓등록 후 결과 : " + reply);
 		
 		String msg = "";
 		if(reResultCount > 0) {
@@ -520,7 +489,6 @@ public class CommunityController {
 		} else {
 			msg += "답댓글작성 실패";
 		}
-//		System.out.println(msg);	// 확인용
 		
 	}
 	
@@ -531,7 +499,6 @@ public class CommunityController {
 	public List<ReplyVO> replyList(@RequestParam int reply_bo_ref){
 		
 		List<ReplyVO> replyList = service.replyList(reply_bo_ref);
-		System.out.println(replyList);
 		return replyList;
 	}
 	

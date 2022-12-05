@@ -56,6 +56,11 @@
 	</update>
 	
 	
+	
+	
+	
+	
+	
 	<!-- 1:1 문의 목록출력 - 첫메인 , 답변대기, 답변완료 별 -->
 	<select id="selectMantomanList" resultType="com.itwillbs.Code_Green.vo.QnaVO">
 		SELECT *

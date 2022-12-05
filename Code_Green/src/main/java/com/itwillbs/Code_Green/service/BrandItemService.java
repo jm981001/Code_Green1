@@ -30,17 +30,10 @@ public class BrandItemService {
 		return mapper.selectBrandItemList(manager_idx, ordering);
 	}
 	
-	// 개별브랜드 아이템리스트별 카운트
-	public int selectBrandItemListCount(int manager_idx) {
-		return mapper.selectBrandItemListCount(manager_idx);
-	}
-	
-	
 	// 브랜드별 정보 및 아이템수 출력
 	public ManagerVO selectBrandDetail(int manager_idx) {
 		return mapper.selectBrandDetail(manager_idx);
 	}
-	
 	
 	// 팔로우하기
 	public int brandGoFollow(int manager_idx, int member_idx) {

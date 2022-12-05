@@ -201,7 +201,6 @@ public class MypageController {
 	public String unFollowBrand(@RequestParam int rf_member_idx, @RequestParam int rf_manager_idx) {
 		
 		int unFollowResult = Mservice.deleteFollow(rf_member_idx,rf_manager_idx);
-		System.out.println(unFollowResult);
 		
 		String msg = "";
 		if(unFollowResult > 0) {
@@ -299,7 +298,6 @@ public class MypageController {
 			@RequestParam(defaultValue = "") String period, Model model, HttpSession session) {
 		
 		int member_idx = (int)session.getAttribute("sIdx");
-		System.out.println(member_idx + ", " + period);
 		int listLimit = 8; 
 		int pageListLimit = 8; 
 		int startRow = (pageNum - 1) * listLimit;
@@ -331,7 +329,6 @@ public class MypageController {
 			@RequestParam(defaultValue = "")String date1,@RequestParam(defaultValue = "") String date2, Model model, HttpSession session) {
 		
 		int member_idx = (int)session.getAttribute("sIdx");
-		System.out.println(member_idx + ", " + date1 + ", " + date2);
 		int listLimit = 8; 
 		int pageListLimit = 8; 
 		int startRow = (pageNum - 1) * listLimit;
@@ -618,7 +615,7 @@ public class MypageController {
 		}
 		
 	
-	//------------ 마이페이지 신고목록 페이지 -------------------------------------------
+	//====================================== 마이페이지 신고목록  ========================================== 
 	@GetMapping(value = "/myPageReportList.my")
 	public String myPageReportList(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
 		String member_id = (String) session.getAttribute("sId");

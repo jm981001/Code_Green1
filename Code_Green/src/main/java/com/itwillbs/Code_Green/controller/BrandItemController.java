@@ -51,24 +51,8 @@ public class BrandItemController {
 		// 개별브랜드 아이템리스트 출력
 		List<ItemVO> brandItemList = service.selectBrandItemList(manager_idx,ordering);
 		
-		//개별브랜드 아이템리스트 카운트 
-		int listCount = service.selectBrandItemListCount(manager_idx);
 		
-		int listLimit = 15; // 한 페이지 당 표시할 게시물 목록 갯수 
-		int pageListLimit = 10; // 한 페이지 당 표시할 페이지 목록 갯수
-		int startRow = (pageNum - 1) * listLimit;
-		int maxPage = (int)Math.ceil((double)listCount / listLimit);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pageInfo = new PageInfo(
-				pageNum, listLimit, listCount, pageListLimit, maxPage, startPage, endPage);
-		
-		// 왼쪽 사이드바 브랜드목록&브랜드별아이템수 출력
+		// 좌측 사이드바 브랜드목록&브랜드별아이템수 출력
 		List<ManagerVO> brandList = service.selectBrandList();
 		ManagerVO brandDetail = service.selectBrandDetail(manager_idx);
 		
@@ -89,7 +73,6 @@ public class BrandItemController {
 		model.addAttribute("brandItemList", brandItemList);
 		model.addAttribute("brandList", brandList);
 		model.addAttribute("brandDetail", brandDetail);
-		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("followCheckRevertResult", followCheckRevertResult);
 		model.addAttribute("heartStatus", heartStatus);
 		
@@ -157,22 +140,16 @@ public class BrandItemController {
 	public String listListing(@RequestParam(defaultValue = "") String ordering, 
 							@RequestParam String brandsIndex, Model model) {
 		
-		System.out.println("리스트리스팅 컨트롤러 들어왔음!");
-		System.out.println("brandsIndex : " + brandsIndex);
 		String[] splitBrands = brandsIndex.split("/");
 		
 		List<String> brands = new ArrayList<String>();
 		
 		for(String brandIndex : splitBrands) {
-			System.out.println("분리한것들: " + brandIndex);
 			brands.add(brandIndex);
 			brands.removeIf((str) -> str == null || str.equals(""));
 		}
-		System.out.println("brand사이즈 : " + brands.size());
-		System.out.println("ListListing 분류오더링 : " + ordering);
 		
 		List<ItemVO> brandItemList = service.selectBrandItemListListing(brands,ordering);
-		
 		model.addAttribute("brandItemList", brandItemList);
 		
 		return "item/brand_whole";

@@ -15,9 +15,6 @@ public interface BrandItemMapper {
 	// 브랜드별 아이템리스트 출력
 	List<ItemVO> selectBrandItemList(@Param("manager_idx")int manager_idx,@Param("ordering") String ordering);
 	
-	// 개별브랜드 아이템리스트별 카운트
-	int selectBrandItemListCount(int manager_idx);
-	
 	// 브랜드별 정보 및 아이템수 출력
 	ManagerVO selectBrandDetail(int manager_idx);
 	

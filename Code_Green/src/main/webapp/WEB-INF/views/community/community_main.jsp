@@ -104,10 +104,10 @@
 		                                        	<!-- 댓글수가 0보다 크면 제목에 댓글수 함께 표시 -->
 		                                        	<c:choose>
 		                                        	<c:when test="${board.reply_cnt gt 0}">
-		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject } (${board.reply_cnt })</a>
+		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}&board_id=${board.board_id}">${board.board_subject } (${board.reply_cnt })</a>
 		                                        	</c:when>
 		                                        	<c:otherwise>
-		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}">${board.board_subject }</a>
+		                                        		<a href="CommunityDetail.bo?board_idx=${board.board_idx }&pageNum=${pageInfo.pageNum}&board_id=${board.board_id}">${board.board_subject }</a>
 		                                        	</c:otherwise>
 		                                        	</c:choose>
 		                                        </td>
