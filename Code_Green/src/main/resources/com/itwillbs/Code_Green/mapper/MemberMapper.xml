@@ -31,7 +31,7 @@
 			INTO coin
 			VALUES (
 					 #{coin_idx} + 1
-					, (select rf_member_idx
+					, (select member_idx
 									from member
                             		where member_id = #{member_id})
 					,"회원가입 축하금 (3000원)"
