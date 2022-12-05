@@ -52,7 +52,6 @@
 			border: 1px solid silver;
 		}
 	
-	
 		.cf-filter{
 			margin-bottom: 70px;
 		}
@@ -184,8 +183,7 @@
 				    <!-- 페이징 버튼들 끝 -->	
 			   	</div>
 		   	</div>
-
-</section>
+	</section>
 
 
 

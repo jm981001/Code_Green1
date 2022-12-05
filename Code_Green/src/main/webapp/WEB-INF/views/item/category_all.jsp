@@ -43,54 +43,8 @@
     		display: none;
     	}
     </style>
-    <script type="text/javascript">
-function addHeart(item_idx) {
-	let manager_brandname = $("#manager_brandname_"+item_idx).val();
-	let item_category = $("#item_category_"+item_idx).val();
-	$.ajax({
-		type : 'get',
-		url : 'addHeart',
-		data: {
-			'item_idx' 		: item_idx,
-			'member_idx'		: ${sessionScope.sIdx},
-			'member_id'		: '${sessionScope.sId}',
-			'manager_brandname'	: manager_brandname,
-			'item_category' :item_category,
-		},
-		success : function (data) {
-			alert(data)
-		}
-	});
-}
-	</script>
-	
-    <script type="text/javascript">
-		function addCart(item_idx) {
-			let cart_total = $("#cart_total_"+item_idx).val();
-			let	item_name = $("#item_name_"+item_idx).val();
-			let manager_brandname = $("#manager_brandname_"+item_idx).val();
-			let file1 = $("#file1_"+item_idx).val();
-			
-			$.ajax({
-				type : 'get',
-				url : 'addCart',
-				data: {
-					'rf_item_idx' 		: item_idx,
-					'rf_member_idx'		: ${sessionScope.sIdx},
-					'cart_amount'		: 1,
-					'cart_total'		: cart_total,
-					'item_name'			: item_name,
-					'manager_brandname'	: manager_brandname,
-					'file1'				: file1,
-				},
-				success : function (cartCount) {
-					alert('장바구니에 담았습니다.')
-					$('#cartCount i').html(cartCount);
-				}
-			});
-		}
-	</script>
-    <script type="text/javascript">
+    
+     <script type="text/javascript">
     
     	window.onload = function(){
     		
@@ -128,45 +82,58 @@ function addHeart(item_idx) {
 	    		$('#expensiveAllItemList').show();
 			}
     	};
-    	
-//     	function cheapPageNum() {
 
-//     		var tmp = $("#cheapPageNum").attr("href");
-    		
-//     		window.location.href = tmp + "&value=" + value;
-// 		}
-
-// 		function cheapPageNum() {
-// 			window.onload = function () {
-// 				$(sortItemList).val('selected');
-// 				$("#form-select").val().attr("selected","selected");
-// 			}
-// 		}
-    	
     </script>
     
-<!--     <script type="text/javascript"> 
- 		function cheapPageNum() {
- 			var tmp = $("#cheapPageNum").attr("href");
+    <script type="text/javascript">
+		function addHeart(item_idx) {
+			let manager_brandname = $("#manager_brandname_"+item_idx).val();
+			let item_category = $("#item_category_"+item_idx).val();
+			$.ajax({
+				type : 'get',
+				url : 'addHeart',
+				data: {
+					'item_idx' 		: item_idx,
+					'member_idx'		: ${sessionScope.sIdx},
+					'member_id'		: '${sessionScope.sId}',
+					'manager_brandname'	: manager_brandname,
+					'item_category' :item_category,
+				},
+				success : function (data) {
+					alert(data)
+				}
+			});
+		}
+		
+	</script>
+	
+    <script type="text/javascript">
+		function addCart(item_idx) {
+			let cart_total = $("#cart_total_"+item_idx).val();
+			let	item_name = $("#item_name_"+item_idx).val();
+			let manager_brandname = $("#manager_brandname_"+item_idx).val();
+			let file1 = $("#file1_"+item_idx).val();
 			
- 		}
- </script> -->
-<!--
- <script th:inline="javascript">    
-    화면 전환 후 select box 고정
-    var selectedYear = [[${selectedYear}]]; // 화면전환 하면서 값을 받아온다
-    
-    if(selectedYear == 2018){
-        $('#2018').attr('selected','selected');
-    } else if(selectedYear == 2017){
-        $('#2017').attr('selected','selected');
-    } else{
-        $('#2019').attr('selected','selected');
-    }
-</script>-->
-
-    
-    
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					'rf_item_idx' 		: item_idx,
+					'rf_member_idx'		: ${sessionScope.sIdx},
+					'cart_amount'		: 1,
+					'cart_total'		: cart_total,
+					'item_name'			: item_name,
+					'manager_brandname'	: manager_brandname,
+					'file1'				: file1,
+				},
+				success : function (cartCount) {
+					alert('장바구니에 담았습니다.')
+					$('#cartCount i').html(cartCount);
+				}
+			});
+		}
+		
+	</script>
 </head>
 <body>
     
@@ -582,28 +549,28 @@ function addHeart(item_idx) {
                                       
 
                    
-                    <!-- 페이징 버튼들 시작 -->
-   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
-                    <div class="ps-pagination">
-                        <ul class="pagination">
-                           
-                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href="category_all?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
-                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-                            	<c:choose>
-                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a class="pageLink" href="#">${i }</a></li></c:when>
-                            		<c:otherwise><li><a class="pageLink" href="category_all?pageNum=${i }&searchType=${searchType }&keyword=${keyword}&sort=${sort}">${i }</a></li></c:otherwise>
-                            	</c:choose>
-                            </c:forEach>
-                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href="category_all?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- 페이징 버튼들 끝 -->
+		                    <!-- 페이징 버튼들 시작 -->
+		   		 			<%PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo"); %>
+		                    <div class="ps-pagination">
+		                        <ul class="pagination">
+		                           
+		                            <li><%if(pageInfo.getPageNum() > pageInfo.getStartPage()) {%><a class="pageLink" href="category_all?pageNum=${pageInfo.pageNum - 1}&searchType=${searchType }&keyword=${keyword}&sort=${sort}"><%}%><i class="icon-chevron-left"></i>Prev</a></li>
+		                            <c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		                            	<c:choose>
+		                            		<c:when test="${i eq pageInfo.pageNum }"><li class="active"><a class="pageLink" href="#">${i }</a></li></c:when>
+		                            		<c:otherwise><li><a class="pageLink" href="category_all?pageNum=${i }&searchType=${searchType }&keyword=${keyword}&sort=${sort}">${i }</a></li></c:otherwise>
+		                            	</c:choose>
+		                            </c:forEach>
+		                            <li><%if(pageInfo.getPageNum() < pageInfo.getMaxPage()) {%><a class="pageLink" href="category_all?pageNum=${pageInfo.pageNum + 1}&searchType=${searchType }&keyword=${keyword}&sort=${sort}"><%}%>Next<i class="icon-chevron-right"></i></a></li>
+		                        </ul>
+		                    </div>
+		                    <!-- 페이징 버튼들 끝 -->
                                 
-                           </div>
-                       </div>
-                    </div>
-       		 </section>
-		</div>
+		                  </div>
+		              </div>
+		           </div>
+			 	</section>
+			</div>
 
 	
 	

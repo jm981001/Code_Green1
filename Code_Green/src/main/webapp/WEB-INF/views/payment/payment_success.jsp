@@ -118,36 +118,33 @@
              <div class="ps-section__right">
                  <div class="ps-section--account-setting">
                      <div class="ps-section__header" style="margin-top: 80px;">
-                         <h3><strong>OrderNumber ${orderList.sell_order_number }</strong></h3>
+                         <h3><strong>주문 번호 ${orderList.sell_order_number }</strong></h3>
                      </div>
                      <div class="ps-section__content">
                          <div class="row">
                              <div class="col-md-4 col-12">
                                  <figure class="ps-block--invoice">
-<!--                                      <figcaption>Address</figcaption> -->
                                      <div class="ps-block__content">
-                                         <p>Receiver: ${orderList.sell_receiver }</p>
-                                         <p>Address: ${orderList.sell_postcode} / ${orderList.sell_address }</p>
-                                         <p>Phone: ${orderList.sell_phone }</p>
+                                         <p>주문자 : ${orderList.sell_receiver }</p>
+                                         <p>주소 : ${orderList.sell_postcode} / ${orderList.sell_address }</p>
+                                         <p>휴대폰 번호: ${orderList.sell_phone }</p>
                                      </div>
                                  </figure>
                              </div>
                              <div class="col-md-4 col-12">
                                  <figure class="ps-block--invoice">
-<!--                                      <figcaption>Shipping Fee</figcaption> -->
                                      <div class="ps-block__content">
-                                         <p>Item Total: ${item_total_price }원</p>
-                                         <p>Shipping Fee: + ${shipping_fee }원</p>
-                                         <p>Coin Use: - ${orderList.sell_usecoin }원</p>
+                                         <p>전체 상품 금액 : ${item_total_price }원</p>
+                                         <p>배송비 : + ${shipping_fee }원</p>
+                                         <p>사용한 적립금 : - ${orderList.sell_usecoin }원</p>
                                      </div>
                                  </figure>
                              </div>
                              <div class="col-md-4 col-12">
                                  <figure class="ps-block--invoice">
-<!--                                      <figcaption>Payment</figcaption> -->
                                      <div class="ps-block__content">
-                                         <p>Total: ${orderList.sell_total_price }원</p>
-                                         <p>Payment Method: ${orderList.sell_pay_type }</p>
+                                         <p  style="color: #669900"><strong>결제 금액 : ${orderList.sell_total_price }원</strong></p>
+                                         <p>지불 방법: ${orderList.sell_pay_type }</p>
                                      </div>
                                  </figure>
                              </div>
@@ -156,10 +153,10 @@
                              <table class="table ps-table" style="margin-top: 30px;">
                                  <thead>
                                      <tr>
-                                         <th>Product</th>
-                                         <th>Price</th>
-                                         <th>Quantity</th>
-                                         <th>Amount</th>
+                                         <th><strong>상품</strong></th>
+                                         <th><strong>금액</strong></th>
+                                         <th><strong>수량</strong></th>
+                                         <th><strong>상품 금액</strong></th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -169,7 +166,7 @@
                                              <div class="ps-product--cart">
                                                  <div class="ps-product__thumbnail"><img src="/Code_Green/resources/item/${orderDetailList.file1 }"></div>
                                                  <div class="ps-product__content" style="text-align: left;">${orderDetailList.item_name }
-                                                     <p>Sold By:<strong> ${orderDetailList.manager_brandname }</strong></p>
+                                                     <p>판매자 :<strong> ${orderDetailList.manager_brandname }</strong></p>
                                                  </div>
                                              </div>
                                          </td>

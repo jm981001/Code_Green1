@@ -63,8 +63,6 @@
 		
 		let sell_total_price = ${map.sumM} + ${map.fee} - coin_use;
 		$(".sell_total_price").html(sell_total_price + "원");
-	
-// 		return coin_use;
 	}
 	
 	function orderGo() {
@@ -102,9 +100,7 @@
 	}	
 
 </script>
- 
 </head>
-
 <body>
  	
  	<jsp:include page="../inc/top.jsp"></jsp:include>
@@ -121,28 +117,28 @@
                                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
                                     <div class="ps-block--shipping">
                                         <div class="ps-block__panel">
-                                            <figure><small>name</small>
-                                                <p>${memberInfo.member_name }</p><a href="#">Change</a>
+                                            <figure><small>이름</small>
+                                                <p>${memberInfo.member_name }</p>
                                             </figure>
-                                            <figure><small>phone</small>
-                                                <p>${memberInfo.member_phone }</p><a href="#">Change</a>
+                                            <figure><small>휴대폰 번호</small>
+                                                <p>${memberInfo.member_phone }</p>
                                             </figure>
-                                            <figure><small>phone</small>
-                                                <p>${memberInfo.member_address }</p><a href="#">Change</a>
+                                            <figure><small>주소</small>
+                                                <p>${memberInfo.member_address }</p>
                                             </figure>
-                                            <figure><small>postcode</small>
-                                                <p>${memberInfo.member_postcode }</p><a href="#">Change</a>
+                                            <figure><small>우편번호</small>
+                                                <p>${memberInfo.member_postcode }</p>
                                             </figure>
                                         </div>
-                                        <h4>Shipping Fee</h4>
+                                        <h4>배송비</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Shipping Fee</small><strong>${map.fee}원</strong></figure>
+                                            <figure><small>배송비</small><strong>${map.fee}원</strong></figure>
                                         </div>
                                         <h4>Coin</h4>
                                         <div class="ps-block__panel">
-                                            <figure><small>Coin Total</small><strong>${coin.coin_total }원</strong></figure>
-                                            <figure><small>Coin Use</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
-                                            <figure><small>Coin Remain</small><strong><span class="coin_remain"></span></strong></figure>
+                                            <figure><small>전체 적립금</small><strong>${coin.coin_total }원</strong></figure>
+                                            <figure><small>사용한 적립금</small><input type="text" class="coin_use"> <input type="button" value="USE" onclick="coinUse()" style="float: right;"></figure>
+                                            <figure><small>남은 적립금</small><strong><span class="coin_remain"></span></strong></figure>
                                             
                                         </div>
                                         <button class="ps-btn ps-btn--fullwidth"  type="button" onclick="orderGo()">ORDER</button>
@@ -152,7 +148,7 @@
                                     <div class="ps-block--checkout-order">
                                         <div class="ps-block__content">
                                             <figure>
-                                                <figcaption><strong>Product</strong><strong>Total</strong></figcaption>
+                                                <figcaption><strong>주문 내역</strong><strong>금액</strong></figcaption>
                                             </figure>
                                             <c:forEach var="cart" items="${cartList }">
                                             <figure class="ps-block__items">
@@ -161,16 +157,16 @@
                                             </figure>
                                             </c:forEach>
                                             <figure>
-                                                <figcaption><strong>Subtotal</strong>${map.sumM }원</figcaption>
+                                                <figcaption><strong>전체 상품 금액</strong>${map.sumM }원</figcaption>
                                             </figure>
                                             <figure>
-                                                <figcaption><strong>Shipping</strong>${map.fee}원</figcaption>
+                                                <figcaption><strong>배송비</strong>${map.fee}원</figcaption>
                                             </figure>
                                             <figure>
-                                                <figcaption><strong>Coin</strong><span class="coin_use"></span></figcaption>
+                                                <figcaption><strong>사용한 적립금</strong><span class="coin_use"></span></figcaption>
                                             </figure>
                                             <figure class="ps-block__total">
-                                                <h3>Total<strong><span class="sell_total_price"><fmt:formatNumber value="${map.sumM + map.fee}"/>원</span></strong></h3>
+                                                <h3>주문 금액<strong><span class="sell_total_price"><fmt:formatNumber value="${map.sumM + map.fee}"/>원</span></strong></h3>
                                             </figure>
                                         </div>
                                     </div>
@@ -181,8 +177,6 @@
                 </div>
             </div>
         </section>
-    
-</main>
    
    	<jsp:include page="../inc/footer.jsp"></jsp:include>
           

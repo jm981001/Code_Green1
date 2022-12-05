@@ -63,7 +63,7 @@ public class SellController {
 		int sumM = (int) (Double.parseDouble(sumMoney));
 		int fee = (sumM >= 50000 ? 0 : 2500); // 5만원 기준으로 배송비 측정
 
-		model.addAttribute("cartList", cartList);
+		model.addAttribute("cartList", cartList); // 장바구니 상품 저장
 		map.put("cartList", cartList); // 장바구니 정보를 map에 저장
 		map.put("count", cartList.size()); // 장바구니 상품의 유무
 		map.put("sumM", sumM); // 장바구니 전체 금액
@@ -183,6 +183,7 @@ public class SellController {
 	@PostMapping(value = "/payment_success_card")
 	public void payment_success_card(@RequestParam int sell_idx) {
 		
+		// 카드 결제 완료시 카드 결제일, 주문 상태 등 변경
 		int cardOrderModifyCount = sell_service.modifyCardOrder(sell_idx);
 		
 		// 주문시 재고 차감

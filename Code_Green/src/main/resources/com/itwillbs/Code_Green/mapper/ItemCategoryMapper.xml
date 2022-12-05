@@ -502,20 +502,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 높은 가격순(전체 상품) -->
@@ -560,20 +546,6 @@
             	AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 낮은 가격순(유제품/음료) -->
@@ -619,21 +591,6 @@
                AND m.manager_del_yn not in ("Y")                                                         
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "유제품/음료" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 높은 가격순(유제품/음료) -->
@@ -679,21 +636,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "유제품/음료" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 낮은 가격순(해산물) -->
@@ -739,21 +681,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "해산물" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>	
 	
 	<!-- 높은 가격순(해산물) -->
@@ -799,21 +726,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-		
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "해산물" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>	
 	
 	<!-- 낮은 가격순(과일/채소) -->
@@ -859,21 +771,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "과일/채소" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>	
 		
 	<!-- 높은 가격순(과일/채소) -->
@@ -919,21 +816,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "과일/채소" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 낮은 가격순(냉동/간편식품) -->
@@ -979,21 +861,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "냉동/간편식품" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 높은 가격순(냉동/간편식품) -->
@@ -1039,21 +906,6 @@
               AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "냉동/간편식품" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 낮은 가격순(간식류) -->
@@ -1099,21 +951,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED)) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "간식류" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED)) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>
 	
 	<!-- 높은 가격순(간식류) -->
@@ -1159,21 +996,6 @@
                AND m.manager_del_yn not in ("Y")                                                          
 		  ORDER BY CAST(i.item_price AS UNSIGNED) DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		 FROM( -->
-<!-- 		SELECT i.item_idx,  -->
-<!-- 			   i.item_name, -->
-<!-- 			   i.item_category,  -->
-<!-- 			   i.item_price, -->
-<!-- 			   i.item_sale, -->
-<!-- 			   m.manager_brandname,  -->
-<!-- 			   f.file1 -->
-<!-- 	 	  FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		  JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!-- 		 WHERE i.item_category = "간식류" -->
-<!-- 	  ORDER BY CAST(item_price AS UNSIGNED) DESC) AS c -->
-<!-- 	     LIMIT #{startRow}, #{listLimit}    -->
 	</select>		
 	
 	
@@ -1223,24 +1045,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기'  -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 	
 	<!-- 후기 많은순(유제품/음료) -->
@@ -1290,24 +1094,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기' AND i.item_category = '유제품/음료' -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 	
 	<!-- 후기 많은순(해산물) -->
@@ -1357,24 +1143,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기' AND i.item_category = '해산물' -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 	
 	<!-- 후기 많은순(과일/채소) -->
@@ -1424,24 +1192,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기' AND i.item_category = '과일/채소' -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 	
 	<!-- 후기 많은순(냉동/간편식품) -->
@@ -1491,24 +1241,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기' AND i.item_category = '냉동/간편식품' -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 	
 	<!-- 후기 많은순(간식류) -->
@@ -1558,24 +1290,6 @@
 	      GROUP BY a.board_item_idx                                                         
 		  ORDER BY a.board_review DESC) AS c
              LIMIT #{startRow}, #{listLimit}
-	
-<!-- 		SELECT *  -->
-<!-- 		  FROM( -->
-<!-- 		 SELECT i.item_idx,  -->
-<!-- 		 	    i.item_name, -->
-<!-- 			    i.item_category,  -->
-<!-- 			    i.item_price, -->
-<!-- 			    i.item_sale, -->
-<!--                 m.manager_brandname, -->
-<!-- 			    f.file1, -->
-<!--                 count(b.board_item_idx) as count -->
-<!-- 		   FROM item i LEFT JOIN file_item f ON i.item_idx = f.rf_item_idx  -->
-<!-- 		   JOIN manager m ON i.re_manager_idx =  m.manager_idx -->
-<!--            JOIN board b ON i.item_idx = b.board_item_idx -->
-<!-- 		  WHERE b.board_type = '후기' AND i.item_category = '간식류' -->
-<!-- 	   GROUP BY board_item_idx  -->
-<!--        ORDER BY item_date DESC, count DESC) AS c	 -->
-<!-- 	 	   LIMIT #{startRow}, #{listLimit}  -->
 	</select>
 		
 </mapper>

@@ -32,51 +32,52 @@
     <link rel="stylesheet" href="/Code_Green/resources/css/organic.css">
 </head>
     <script type="text/javascript">
-function addHeart(item_idx) {
-	let manager_brandname = $("#manager_brandname_"+item_idx).val();
-	let item_category = $("#item_category_"+item_idx).val();
-	$.ajax({
-		type : 'get',
-		url : 'addHeart',
-		data: {
-			'item_idx' 		: item_idx,
-			'member_idx'		: ${sessionScope.sIdx},
-			'member_id'		: '${sessionScope.sId}',
-			'manager_brandname'	: manager_brandname,
-			'item_category' :item_category,
-		},
-		success : function (data) {
-			alert(data)
+		function addHeart(item_idx) {
+			let manager_brandname = $("#manager_brandname_"+item_idx).val();
+			let item_category = $("#item_category_"+item_idx).val();
+			$.ajax({
+				type : 'get',
+				url : 'addHeart',
+				data: {
+					'item_idx' 		: item_idx,
+					'member_idx'		: ${sessionScope.sIdx},
+					'member_id'		: '${sessionScope.sId}',
+					'manager_brandname'	: manager_brandname,
+					'item_category' :item_category,
+				},
+				success : function (data) {
+					alert(data)
+				}
+			});
 		}
-	});
-}
 	</script>
-<script type="text/javascript">
-	function addCart(item_idx) {
-		let cart_total = $("#cart_total_"+item_idx).val();
-		let	item_name = $("#item_name_"+item_idx).val();
-		let manager_brandname = $("#manager_brandname_"+item_idx).val();
-		let file1 = $("#file1_"+item_idx).val();
-		
-		$.ajax({
-			type : 'get',
-			url : 'addCart',
-			data: {
-				'rf_item_idx' 		: item_idx,
-				'rf_member_idx'		: ${sessionScope.sIdx},
-				'cart_amount'		: 1,
-				'cart_total'		: cart_total,
-				'item_name'			: item_name,
-				'manager_brandname'	: manager_brandname,
-				'file1'				: file1,
-			},
-			success : function (cartCount) {
-				alert('장바구니에 담았습니다.')
-				$('#cartCount i').html(cartCount);
-			}
-		});
-	}
-</script>
+	
+	<script type="text/javascript">
+		function addCart(item_idx) {
+			let cart_total = $("#cart_total_"+item_idx).val();
+			let	item_name = $("#item_name_"+item_idx).val();
+			let manager_brandname = $("#manager_brandname_"+item_idx).val();
+			let file1 = $("#file1_"+item_idx).val();
+			
+			$.ajax({
+				type : 'get',
+				url : 'addCart',
+				data: {
+					'rf_item_idx' 		: item_idx,
+					'rf_member_idx'		: ${sessionScope.sIdx},
+					'cart_amount'		: 1,
+					'cart_total'		: cart_total,
+					'item_name'			: item_name,
+					'manager_brandname'	: manager_brandname,
+					'file1'				: file1,
+				},
+				success : function (cartCount) {
+					alert('장바구니에 담았습니다.')
+					$('#cartCount i').html(cartCount);
+				}
+			});
+		}
+	</script>
 <body>
     
     
@@ -194,23 +195,6 @@ function addHeart(item_idx) {
                                              </c:forEach>	
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
-                                   <!-- 페이징 버튼들 시작 -->
-                                   <!-- 
-                                   *5000원 이하 상품 목록 - 페이징x
-                                    -->
-<!--                                     <div class="ps-pagination"> -->
-<!--                                         <ul class="pagination"> -->
-<!--                                             <li class="active"><a href="#">1</a></li> -->
-<!--                                             <li><a href="#">2</a></li> -->
-<!--                                             <li><a href="#">3</a></li> -->
-<!--                                             <li><a href="#">Next<i class="icon-chevron-right"></i></a></li> -->
-<!--                                         </ul> -->
-<!--                                     </div> -->
-                                    <!-- 페이징 버튼들 끝 -->
-                                    
                                 </div>
                            </div>
                        </div>
