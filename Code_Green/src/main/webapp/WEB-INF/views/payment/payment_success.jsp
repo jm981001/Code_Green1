@@ -127,7 +127,7 @@
                                      <div class="ps-block__content">
                                          <p>주문자 : ${orderList.sell_receiver }</p>
                                          <p>주소 : ${orderList.sell_postcode} / ${orderList.sell_address }</p>
-                                         <p>휴대폰 번호: ${orderList.sell_phone }</p>
+                                         <p>휴대폰 번호 : ${orderList.sell_phone }</p>
                                      </div>
                                  </figure>
                              </div>
@@ -144,7 +144,7 @@
                                  <figure class="ps-block--invoice">
                                      <div class="ps-block__content">
                                          <p  style="color: #669900"><strong>결제 금액 : ${orderList.sell_total_price }원</strong></p>
-                                         <p>지불 방법: ${orderList.sell_pay_type }</p>
+                                         <p>지불 방법 : ${orderList.sell_pay_type }</p>
                                      </div>
                                  </figure>
                              </div>
