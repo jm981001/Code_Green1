@@ -325,96 +325,89 @@
             <div class="ps-blog--sidebar">
                 <div class="ps-blog__left">
                     <div class="ps-post--detail sidebar">
-                    
                         <!-- 블로그 헤더 시작  -->
                         <div class="ps-post__header">
                         	<div class="colorheaderhead">
                             <h2>${cBoard.board_subject }</h2>
-                            <p>
-	                            [${cBoard.board_category }] 
-	                    		<fmt:parseDate var="dateString" value="${cBoard.board_date}" pattern="yyyyMMdd" />
-		                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
-	                            / ${cBoard.board_id }
-	                            / 조회수 ${cBoard.board_readcount }
-	                            / 댓글(<span class="reply_count"></span>) 
-	                            / 추천수 <span class="bestcnt_count"></span>
-                            </p>
+	                            <p>
+		                            [${cBoard.board_category }] 
+		                    		<fmt:parseDate var="dateString" value="${cBoard.board_date}" pattern="yyyyMMdd" />
+			                        / <fmt:formatDate value="${dateString }" pattern="yyyy.MM.dd" />
+		                            / ${cBoard.board_id }
+		                            / 조회수 ${cBoard.board_readcount }
+		                            / 댓글(<span class="reply_count"></span>) 
+		                            / 추천수 <span class="bestcnt_count"></span>
+	                            </p>
                             </div>
                         </div>
                         <!-- 블로그 헤더 끝  -->
                         <!-- 블로그 본문 시작  -->
                         <div class="ps-post__content">
-                        	<p>${cBoard.board_content }
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file1}" style="max-width:90%"  onerror="this.style.display='none'">
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file2}" style="max-width:90%"  onerror="this.style.display='none'">
-                        		<img src="/Code_Green/resources/commUpload/${cBoard.file3}" style="max-width:90%"  onerror="this.style.display='none'">
+                        	<p>${cBoard.board_content }</p>
+	                       		<img src="/Code_Green/resources/commUpload/${cBoard.file1}" style="max-width:90%"  onerror="this.style.display='none'">
+	                       		<img src="/Code_Green/resources/commUpload/${cBoard.file2}" style="max-width:90%"  onerror="this.style.display='none'">
+	                       		<img src="/Code_Green/resources/commUpload/${cBoard.file3}" style="max-width:90%"  onerror="this.style.display='none'">
                         </div>
 
 
-			   <!-- 신고하기 / 추천하기 버튼 시작 -->
-				
-				<div class="form-group-comm">
-					<button class="ps-btn-report" onclick="checkReport()">신고</button>
-						<div id="modal">
-						   <div class="modal_content">
-						   	  <button type="button" id="modal_close_btn">X</button><br>
-						   	   <h3>신고하기</h3>
-						   	  <form action="ReportBoard.re" method="post" onsubmit="checkS()">
-						   	  	<input type="hidden" value="${cBoard.board_idx }" name="board_idx" id="board_idx">
-						   	  	<input type="hidden" value="${param.pageNum }" name="pageNum" id="pageNum">
-						   	  	<table>
-						   	  		<tr>
-						   	  			<td>게시판</td>
-						   	  			<td><input type="text" value="커뮤니티" disabled="disabled" ></td>
-						   	  		</tr>
-						   	  		<tr>
-						   	  			<td>신고글</td>
-						   	  			<td><input type="text" value="${cBoard.board_subject }" name="report_subject" readonly="readonly"></td>
-						   	  		</tr>
-						   	  		<tr>
-						   	  			<td>신고자</td>
-						   	  			<td><input type="text" value="${sessionScope.sId }" name="reporter"  readonly="readonly"></td>
-						   	  		</tr>
-						   	  		<tr>
-						   	  			<td>신고사유</td>
-						   	  			<td><textarea name="report_content" id="report_content" cols="30" rows="3" placeholder="신고사유를 입력해주세요."></textarea></td>
-						   	  		</tr>
-						   	  		<tr>
-						   	  			<td colspan="2"><input type="submit" value="신고서 제출"></td>
-						   	  		</tr>
-							   	  </table>
-						   	  </form>
-						   </div>	
-						</div>
-                    <button class="ps-btn-best" id="bestcnt_update">추천 <span class="bestcnt_count"></span></button>
-                </div>
-			   <!-- 신고하기 / 추천하기 버튼 끝 -->
-			   <!-- ========================================= 댓글 영역 시작 ========================================= -->
-			   
-               <div class="ps-post-comments">
-			   <!-- 댓글쓰기 영역 -->
-	                    <h4>댓글 쓰기</h4>
-	                    <div class="form-group">
-	                        <textarea id="reply_content" class="form-control" rows="3" placeholder="댓글을 입력하세요" required="required"></textarea>
-	                    </div>
-	                    <div class="form-group submit">
-	                        <button type="button" class="ps-btn" id="replyWrite"> 댓글쓰기</button>
-	                    </div>
-	            <!-- 댓글쓰기 영역 -->
-                <h4> 댓글(<span class="reply_count"></span>) </h4>
-       
-          
-                
-                <div class="ps-block--comment">
-<!--                     <div class="ps-block__thumbnail"> -->
-<!--                     	<img src="/Code_Green/resources/img/turtle4searchbox.png" width="25px" height="25px"/> -->
-<!--                     </div> -->
-	                    <div class="ps-block__content" id="replyList"></div>
-                </div>
-	         </div>
+					   <!-- 신고하기 / 추천하기 버튼 시작 -->
+						
+						<div class="form-group-comm">
+							<button class="ps-btn-report" onclick="checkReport()">신고</button>
+								<div id="modal">
+								   <div class="modal_content">
+								   	  <button type="button" id="modal_close_btn">X</button><br>
+								   	   <h3>신고하기</h3>
+								   	  <form action="ReportBoard.re" method="post" onsubmit="checkS()">
+								   	  	<input type="hidden" value="${cBoard.board_idx }" name="board_idx" id="board_idx">
+								   	  	<input type="hidden" value="${param.pageNum }" name="pageNum" id="pageNum">
+								   	  	<table>
+								   	  		<tr>
+								   	  			<td>게시판</td>
+								   	  			<td><input type="text" value="커뮤니티" disabled="disabled" ></td>
+								   	  		</tr>
+								   	  		<tr>
+								   	  			<td>신고글</td>
+								   	  			<td><input type="text" value="${cBoard.board_subject }" name="report_subject" readonly="readonly"></td>
+								   	  		</tr>
+								   	  		<tr>
+								   	  			<td>신고자</td>
+								   	  			<td><input type="text" value="${sessionScope.sId }" name="reporter"  readonly="readonly"></td>
+								   	  		</tr>
+								   	  		<tr>
+								   	  			<td>신고사유</td>
+								   	  			<td><textarea name="report_content" id="report_content" cols="30" rows="3" placeholder="신고사유를 입력해주세요."></textarea></td>
+								   	  		</tr>
+								   	  		<tr>
+								   	  			<td colspan="2"><input type="submit" value="신고서 제출"></td>
+								   	  		</tr>
+									   	  </table>
+								   	  </form>
+								   </div>	
+								</div>
+		                    <button class="ps-btn-best" id="bestcnt_update">추천 <span class="bestcnt_count"></span></button>
+		                </div>
+					   <!-- 신고하기 / 추천하기 버튼 끝 -->
+					   <!-- ========================================= 댓글 영역 시작 ========================================= -->
+		               <div class="ps-post-comments">
+					   <!-- 댓글쓰기 영역 -->
+			                    <h4>댓글 쓰기</h4>
+			                    <div class="form-group">
+			                        <textarea id="reply_content" class="form-control" rows="3" placeholder="댓글을 입력하세요" required="required"></textarea>
+			                    </div>
+			                    <div class="form-group submit">
+			                        <button type="button" class="ps-btn" id="replyWrite"> 댓글쓰기</button>
+			                    </div>
+			            <!-- 댓글쓰기 영역 -->
+		                <h4> 댓글(<span class="reply_count"></span>) </h4>
+		       
+		                <div class="ps-block--comment">
+			            	<div class="ps-block__content" id="replyList"></div>
+		                </div>
+	         			</div>
              <!-- ========================================= 댓글 영역 끝 ========================================= -->
-             </div>
-             </div>
+             		</div>
+             	</div>
                 <!-- 오른쪽 메뉴 시작  -->
                 <div class="ps-blog__right">
                     <aside class="widget widget--blog widget--recent-post">
@@ -430,11 +423,9 @@
                     </aside>
                 </div>
                 <!-- 오른쪽 메뉴 끝  -->
-                
             </div>
         </div>
     </div>
-    
     <!-- 맨위로 올라가는 화살표버튼! 지우지마세요! -->
 	<div id="back2top">
 		<i class="icon icon-arrow-up"></i>
