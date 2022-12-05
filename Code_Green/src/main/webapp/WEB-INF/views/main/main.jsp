@@ -143,12 +143,12 @@ function addHeart(item_idx) {
     <div id="homepage-9">
         <div class="ps-home-banner">
             <div class="ps-carousel--nav-inside owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
-                <div class="ps-banner--organic" data-background="/Code_Green/resources/img/slider/home-9/1.jpg"><img src="/Code_Green/resources/img/slider/home-9/1.jpg">
+                <div class="ps-banner--organic" data-background="/Code_Green/resources/img/jajaja.jpg"><img src="/Code_Green/resources/img/jajaja.jpg">
                     <div class="ps-banner__content">
                         <h3>지구를 살리는데에 <br /> 여러분도 동참하세요! <br /> 10월25일까지<strong>40% 할인</strong></h3><a class="ps-btn" href="#">자세히</a>
                     </div>
                 </div>
-                <div class="ps-banner--organic" data-background="/Code_Green/resources/img/slider/home-9/2.jpg"><img src="/Code_Green/resources/img/slider/home-9/2.jpg">
+                <div class="ps-banner--organic" data-background="/Code_Green/resources/img/tomato.jpg"><img src="/Code_Green/resources/img/tomato.jpg">
                     <div class="ps-banner__content">
                         <h3>신선한 야채와 <br /> 과일 정기구독<br /> 회원가입시<strong>첫 박스는 무료</strong></h3><a class="ps-btn" href="#">자세히</a>
                     </div>
