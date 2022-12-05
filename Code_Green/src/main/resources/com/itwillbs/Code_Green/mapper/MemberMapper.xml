@@ -78,6 +78,7 @@
 		WHERE member_id=#{member_id}
 	</select>
 
+	<!-- 이메일 조회 -->
 	<select id="selectMemberEmail"
 		resultType="com.itwillbs.Code_Green.vo.MemberVO">
 		SELECT * FROM member

@@ -90,20 +90,26 @@ public class MailSendService {
 		return "msg";
 		
 	}
-	// 패스워드 찾아주는 이메일 양식
-		public String passFindEmail(String email) {
-			System.out.println(email);
-			MemberVO member = mService.getMemberEmail(email);
-
+	// 패스워드 변경용 인증메일 양식
+		public int passFindEmail(String email) {
+			makeRandomNumber();
 			String setFrom = "CodeGreen@gmail.com";
 			String toMail = email;
-			String title = "회원님의 임시 패스워드 입니다."; // 이메일 제목
+			String title = "패스워드 이메일 입니다."; // 이메일 제목
 			String content = "" + // html 형식으로 작성 !
-					"<br><br>" + "임시 패스워드는 " +code+ " 입니다."; // 이메일 내용 삽입
-			
+					"<br><br>" + "패스워드는 " + authNumber + " 입니다." + "<br>" + "해당 패스워드를 입력해주세요."; // 이메일 내용 삽입
+			MemberVO member = mService.getMemberEmail(email);
+			System.out.println("member"+member);
+			if(member ==null) {
+				System.out.print("등록되지 않은 이메일입니다.");
+				System.out.close();
+			}
+			member.setMember_pass(authNumber+"");
+			System.out.println("authNumber"+authNumber+"");
+			int updateCount =  mService.modifyMemberInfo(member);
+			System.out.println("updateCount"+updateCount);
 			mailSend(setFrom, toMail, title, content);
-			System.out.println("getId"+member.getMember_id());
-			return "msg";
+			return updateCount;
 			
 		}
 

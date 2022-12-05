@@ -13,9 +13,12 @@
 	border: 1px solid #dadada;
 }
 .welcome{
-	width: 200px;
-	margin: auto;
-	padding: 40px
+	padding: 40px;
+	text-align: center;
+	padding: 40px; 
+	background-color: whitesmoke; 
+	margin-top: 100px; 
+	margin-bottom: 100px;
 }
 
 </style>
@@ -42,6 +45,7 @@
 	
 	<div class="welcome">	
 		<h4>환영합니다!</h4>
+		<h3>기본 적립금 3천원이 지급 되었습니다!</h3>
 		<input type="button" value="홈으로" onclick="location.href='./'" id="btn">
 		<input type="button" value="로그인" onclick="location.href='login'" id="btn">
 	</div>	
