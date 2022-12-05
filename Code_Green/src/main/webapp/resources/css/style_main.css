@@ -6576,6 +6576,7 @@ textarea.form-control {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .ps-block--store-banner .ps-block__content h3 {
@@ -7843,8 +7844,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 /* 지영 */
 .owl-carousel .owl-item img {
-  width: auto;
-  height: 360px;
+  width: 0px;
+  height: 400px;
 }
 
 .owl-carousel .ps-product {

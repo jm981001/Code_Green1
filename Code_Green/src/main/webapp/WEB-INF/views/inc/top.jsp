@@ -10,19 +10,6 @@
       }
    }
 </script>
-
-<style>
-   /*    거북스 넣어봤스...히히 */
-   .header--organic .ps-form--quick-search input::-webkit-input-placeholder{
-       background-image: url("/Code_Green/resources/img/turtle4searchbox.png");
-       background-repeat: no-repeat;
-       background-size: 27px 27px;
-       background-position:  40px center;
-       background-repeat: no-repeat;
-       text-indent: 0;
-   }
-
-</style>
     <header class="header header--organic" data-sticky="true">
 	<div class="header__top">
 
@@ -59,17 +46,8 @@
 			<div class="header__right"></div>
 			<div class="header__right">
 				<a class="ps-logo" href="/Code_Green"><img
-					src="/Code_Green/resources/img/한글베지터틀.png" width="230" height="100"></a>
+					src="/Code_Green/resources/img/logoturtle.jpg" width="230" height="100"></a>
 			</div>
-
-
-			<!-- 서치박스 -->
-			<!--                 <div class="header__center"> -->
-			<!--                     <form class="ps-form--quick-search" action="#" method="get"> -->
-			<!--                         <input class="form-control" type="text" placeholder="............."> -->
-			<!--                         <button id="submit"><img src="/Code_Green/resources/img/search.png" width="25px" height="25px"></button> 여기 단어대신에 그냥 아이콘(돋보기)넣어도 깔끔할듯 -->
-			<!--                     </form> -->
-			<!--                 </div> -->
 			<div class="header__right">
 				<div class="header__actions">
 					<a class="header__extra" href="myPageWishList.my?member_id=${sessionScope.sId }"><i class="icon-heart"></i></a>
@@ -123,7 +101,7 @@
                     <ul class="menu menu--organic">
                         <li class="menu-item-has-children has-mega-menu"><a href="ItemList.bo">신상품</a><span class="sub-toggle"></span> </li>                     
                         <li class="menu-item-has-children has-mega-menu"><a href="BestItemList.bo">베스트</a><span class="sub-toggle"></span></li>   
-                        <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun">어서와, 비건은 처음이지?</a></li>   
+                        <li class="menu-item-has-children has-mega-menu"><a href="welcome_vegun" style="color: green;">어서와, 비건은 처음이지?</a></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="BrandMain.br">브랜드별</a><span class="sub-toggle"></span></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="recipe_main.bo">레시피</a></li>   
                         <li class="menu-item-has-children has-mega-menu"><a href="CommunityList.bo">커뮤니티</a></li>   

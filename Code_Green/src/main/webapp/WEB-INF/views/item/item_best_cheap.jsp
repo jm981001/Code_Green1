@@ -92,7 +92,7 @@ function addHeart(item_idx) {
             <div class="container">
       			<aside class="ps-block--store-banner-newitemlist">
                 	<!-- 브랜드 정보 및 대표이미지 넣을 곳 -->
-                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/신상품샘플.jpg">
+                    <div class="ps-block__content bg--cover" data-background="/Code_Green/resources/img/best.jpg">
                     </div>
                 </aside>
                         <!-- ---------------------------------------------- 신상품------------------------------------------------------------------- -->

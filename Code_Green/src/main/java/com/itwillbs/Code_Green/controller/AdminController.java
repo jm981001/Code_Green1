@@ -1299,7 +1299,15 @@ public class AdminController {
 	
 		
 		
-		
+	@GetMapping(value = "/introduction")
+	public String introduction_our() {
+		return "inc/introduc";
+	}
+
+	@GetMapping(value = "/teamIntro")
+	public String our() {
+		return "inc/teamintro";
+	}
 		
 		
 	
