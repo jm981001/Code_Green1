@@ -138,19 +138,25 @@
 <!--                         </tr> -->
                            <tr>       
 <!--                           <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                            <td>${salesTotal.salesTotal}</td> --%>
+<%--                            <td>${salesTotal}</td> --%>
                                 </tr>
                            <tr>       
 <!--                            <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                            <td><c:if test="${not empty salesTotal.salesTotal}"> ${salesTotal.salesTotal}</c:if></td> --%>
+<%--                            <td><c:if test="${not empty salesTotal}"> ${salesTotal}</c:if></td> --%>
 <!--                                 </tr> -->
 <!--                                 <tr> -->
 <!--                                <td><h3><strong>총 매출</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${salesTotal.brandtotal}" pattern="#,###원" /><small class="asc"></small></td> --%>
+                                  <td><fmt:formatNumber value="${salesTotal}" pattern="#,###원" /><small class="asc"></small></td>
 <!--                                   </tr> -->
 <!--                                   <tr>     -->
 <!--                                   <td><h3><strong>월별 매출</strong></h3></td> -->
-<%--                                   <td><fmt:formatNumber value="${salesMonth.salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
+<%--                                   <td><fmt:formatNumber value="${salesMonth}" pattern="#,###원" /><small class="asc"></small></td> --%>
+									<c:forEach var="salesMonth" items="${salesMonth }">
+									<td>${salesMonth.salesMonth }</td>  
+									<td>${salesMonth.sum }</td>  
+									</c:forEach>
+
+
 <!--                                   </tr> -->
 <!--                                   <tr> -->
 <!--                                   <td><h3><strong>주별 매출</strong></h3></td> -->
@@ -167,11 +173,11 @@
                               
                               <tr>
                               <c:forEach var="salesList" items="${salesList }">
-                               <tr>
-                              	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" />
-        					<td>
-        					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span>
-        					</td>
+<!--                                <tr> -->
+<%--                               	<fmt:parseDate var="dateString" value="${salesList.sell_date }" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
+<!--         					<td> -->
+<%--         					<span><fmt:formatDate value="${dateString }" type="date" pattern="yyyy.MM.dd HH:mm:ss" /></span> --%>
+<!--         					</td> -->
                                   <td>
                                      <div class="ps-product--cart">
                                           <div class="ps-product__content"><a href="sales_management">${salesList.sell_order_number }</a></div>

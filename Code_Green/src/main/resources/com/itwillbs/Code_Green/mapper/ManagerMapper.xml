@@ -902,7 +902,7 @@
 		<select id="selectSalesMonth" resultType="com.itwillbs.Code_Green.vo.ManagerVO">
 		 SELECT
 		   date_format(s.sell_date, '%y/%m') salesMonth,
-		   sum(i.ITEM_PRICE * sd.SELL_AMOUNT)
+		   sum(i.ITEM_PRICE * sd.SELL_AMOUNT) as sum
 		FROM
 		   sell s,
 		   item i,
@@ -912,7 +912,7 @@
 		   sd.rf_item_idx = i.item_idx
 		   AND s.sell_idx = sd.rf_sell_idx
 		   AND i.re_manager_idx = m.manager_idx
-		   AND m.manager_id = #{manager_id}
+		   AND m.manager_id = #{sId}
 		GROUP BY
 		   date_format(s.sell_date, '%y/%m')
 		ORDER BY
