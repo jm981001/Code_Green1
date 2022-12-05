@@ -16000,6 +16000,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   align-items: center;
   justify-content: center;
   margin-left: 110px;
+  margin-right: 60px;
 }
 
 .header .header__actions > * {
