@@ -58,12 +58,14 @@ h3 {
  	<jsp:include page="../inc/top.jsp"></jsp:include>
  	<!-- 헤더 삽입 -->
 	<div
-		style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
+		style="background-color: #5fa30f; width: 100%; height: 50px; text-align: center; color: white;">
 		<h3>네이버 로그인 성공</h3>
 	</div>
 	<br>
-	<h2 style="text-align: center" id="name"></h2>
+	<h2 style="text-align: center; margin-bottom: 400px; margin-top: 50px " id="name"></h2>
 	<h4 style="text-align: center" id="email"></h4>
+	<div class="welcome" style="text-align: center;">	
+	</div>	
 	
 	<!-- 푸터 삽입 -->    
  	<jsp:include page="../inc/footer.jsp"></jsp:include>
