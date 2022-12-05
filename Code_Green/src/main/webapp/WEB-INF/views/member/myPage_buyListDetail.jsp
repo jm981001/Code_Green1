@@ -52,23 +52,23 @@
     	}
 </style>
 <script type="text/javascript">
-   	function myOrderCancel() {
-		let cancelAuth = confirm('주문 취소 하시겠습니까? 취소하면 복구할 수 없는 점 참고 바랍니다.');
-		if(cancelAuth){
-			if('${buyDetail.sell_cancel_status}' == '취소요청') {
-				alert('이미 취소한 주문입니다.');
-			} else {
-				$.ajax({
-					type : 'POST',
-					url : 'payment_cancel',
-					data: {
-						sell_idx : ${buyDetail.sell_idx }
-					}
-				});
-				alert('주문취소 완료되었습니다.\n관리자에게 취소요청이 되었습니다.');
-			}
-		}
-	}
+	function myOrderCancel() {
+	    let cancelAuth = confirm('주문 취소 하시겠습니까? 취소하면 복구할 수 없는 점 참고 바랍니다.');
+	    if(cancelAuth){
+	       if('${orderList.sell_cancel_status}' == '취소요청') {
+	          alert('이미 취소한 주문입니다.');
+	       } else {
+	          $.ajax({
+	             type : 'POST',
+	             url : 'payment_cancel',
+	             data: {
+	                sell_idx : ${orderList.sell_idx }
+	             }
+	          });
+	          alert('주문취소 완료되었습니다.\n관리자에게 취소요청이 되었습니다.');
+	       }
+	    }
+	 }
 </script>    
 </head>
 <body>
