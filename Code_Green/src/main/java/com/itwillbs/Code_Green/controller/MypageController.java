@@ -499,7 +499,9 @@ public class MypageController {
 	
 	//====================================== 마이페이지 1:1 문의내역 분류버튼 ========================================== 
 	@GetMapping(value = "/myPageQnaSelectList.bo")
-	public String myPageQnaMtmSelectList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "") String qna_status, Model model,HttpSession session) {
+	public String myPageQnaMtmSelectList(@RequestParam(defaultValue = "1") int pageNum,
+										@RequestParam(defaultValue = "") String qna_status, 
+										Model model,HttpSession session) {
 		
 		String qna_id = (String)session.getAttribute("sId");
 		
@@ -536,16 +538,20 @@ public class MypageController {
 	
 	//====================================== 마이페이지 1:1 문의글 개별내용확인 ========================================== 
 	@GetMapping(value = "/QnaMtmDetail.bo")
-	public String myPageQnaMtmDetail(@RequestParam int qna_idx,Model model) {
+	public String myPageQnaMtmDetail(@RequestParam int qna_idx,Model model,HttpSession session) {
 		
+		String sId = (String)session.getAttribute("sId");
 		QnaVO mtmDetail = Qservice.getMantomanDetail(qna_idx);
-		model.addAttribute("mtmDetail", mtmDetail);
 		
-		return "member/myPage_qnaDetail";
+		if(!sId.equals(mtmDetail.getQna_id())){
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "member/fail_back3";
+		}else {
+			model.addAttribute("mtmDetail", mtmDetail);
+			return "member/myPage_qnaDetail";
+		}
 	}
 
-	
-	
 	//====================================== 마이페이지 1:1 문의내역 삭제  ========================================== 
 	@GetMapping(value = "/DeleteMtmQna.bo")
 	public String myPageQnaMtmDelete(@RequestParam int qna_idx,Model model) {

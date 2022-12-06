@@ -122,9 +122,6 @@
 		}
 	}
 
-	$( document ).ready(function() {
-		history.replaceState({}, null, location.pathname);
-	});
 </script>
 <body>
 

@@ -32,7 +32,7 @@
 </head>
 <style>
 	.ps-table--vendor tbody #admintr{
-		background-color: #fcfdf3;
+		background-color: #e3ee7e;
 		font-weight: bold;
 	}
 	
@@ -53,7 +53,6 @@
 	});
 </script>
 <body>
-   
    
     <!-- 헤더 삽입 -->
     <jsp:include page="../inc/top.jsp"></jsp:include>
