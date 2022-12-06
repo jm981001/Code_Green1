@@ -232,8 +232,8 @@ public class MemberController {
 	public String findPassMailCheck(String email, Model model) {
 		System.out.println("패스워드 찾기 이메일 요청이 들어옴!");
 		System.out.println("패스워드 찾을 이메일 : " + email);
-		String emailResult = mailService.passFindEmail(email);
-		if (emailResult == null) {
+		int emailResultCount = mailService.passFindEmail(email);
+		if (emailResultCount == 0) {
 			model.addAttribute("msg", "실패");
 			return "member/fail_back";
 		}
