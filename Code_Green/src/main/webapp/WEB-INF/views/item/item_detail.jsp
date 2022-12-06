@@ -74,7 +74,7 @@
    	 background-color: #FAFAFA;
     }  
     
-    	.heart_icon_brand_m {
+    .heart_icon_brand_m {
 		width: 30px;
 	    height: 30px;
 	    top: 19px;
@@ -150,16 +150,7 @@
 				}
 			});
 		});	
-		$(function(){
-			$("#aa").click(function(){
-				
-				if(${sessionScope.sId == null}){
-					alert("로그인 후 사용가능합니다!");
-					return history.back();
-				}
-			});
-		});	
-		
+		$(function(){$("#aa").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});	
 		$(function(){$("#cartBtn").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 		$(function(){$("#relB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
 		$(function(){$("#sameB").click(function(){if(${sessionScope.sId == null}){alert("로그인 후 사용가능합니다!");}});});
@@ -172,51 +163,60 @@
 // 	추천기능
 	$(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#wishBtn").click(heartAjax);
-			heartAjax();
-			function heartAjax (){
-				if(${sessionScope.sId == null || not empty sessionScope.sCode || empty sessionScope.sIdx}){
-					$('#aa').html("<img src='/Code_Green/resources/img/heart2.png' class='heart_icon_brand_b'>");
-				} else {
-					
-					$.ajax({
-						url: "WishList.bo",
-						type: "GET",
-						data: {
-							member_id: '${sessionScope.sId}',
-							item_idx: ${item.item_idx},
-							pageNum: ${pageInfo.pageNum},
-							manager_brandname: '${item.manager_brandname}',
-							item_category: '${item.item_category}'
-							
-						},
-						success: function(data){
-							$('#aa').html("<img src='/Code_Green/resources/img/heart" + data + ".png' class='heart_icon_brand_b'>");
-							wish_count();
-							
-							
-						},
-					})
-				}	
-			}
 			
-// 			// 게시글 추천수
-			function wish_count(){
-				$.ajax({
-					url: "WishCount.bo",
-					type: "POST",
-					data:{
-						item_idx: ${item.item_idx}
-					},
-					success: function(count){
-						$(".wish_count").html(count);
-					},
-				})
-			};
-		
+			drawHeart();		
 			wish_count();
+			// 이벤트
+			$("#wishBtn").click(heartAjax);
+			
 	});
-	</script>
+	
+	function drawHeart(){
+		let data = ${checkWish1};
+		$('#aa').html("<img src='/Code_Green/resources/img/heart"+data+".png' class='heart_icon_brand_b'>");
+		
+	}
+	
+	function heartAjax (){
+		if(${sessionScope.sId == null || not empty sessionScope.sCode || empty sessionScope.sIdx}){
+			$('#aa').html("<img src='/Code_Green/resources/img/heart2.png' class='heart_icon_brand_b'>");
+		} else {
+			
+			$.ajax({
+				url: "WishList.bo",
+				type: "GET",
+				data: {
+					member_id: '${sessionScope.sId}',
+					item_idx: ${item.item_idx},
+					pageNum: ${pageInfo.pageNum},
+					manager_brandname: '${item.manager_brandname}',
+					item_category: '${item.item_category}'
+					
+				},
+				success: function(data){
+					$('#aa').html("<img src='/Code_Green/resources/img/heart" + data + ".png' class='heart_icon_brand_b'>");
+					wish_count();
+					
+					
+				},
+			})
+		}	
+	}
+	
+//		// 게시글 추천수
+	function wish_count(){
+		$.ajax({
+			url: "WishCount.bo",
+			type: "POST",
+			data:{
+				item_idx: ${item.item_idx}
+			},
+			success: function(count){
+				$(".wish_count").html(count);
+			},
+		})
+	};
+</script>
 	
 <script type="text/javascript">
 function addHeart(item_idx) {
