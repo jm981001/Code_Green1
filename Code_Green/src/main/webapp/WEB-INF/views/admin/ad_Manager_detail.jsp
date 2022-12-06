@@ -76,6 +76,8 @@ function confirmAuth(id) {
 	if(result) {
 		location.href="ad_AdminAuth?manager_id=" + id;
 	}
+	alert("승인이 완료되었습니다");
+	history.go(0);
 }
 
 function list(auth){

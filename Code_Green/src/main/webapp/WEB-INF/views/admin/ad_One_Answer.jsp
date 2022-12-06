@@ -89,7 +89,7 @@
                                     <select class="ps-select" name="searchType">
                                         <option value="category1">배송문의</option>
                                         <option value="category2">주문/결제/반품/교환문의</option>
-                                        <option value="category3">상품누락문의</option>
+                                        <option value="category3">상품문의</option>
                                         <option value="category4">이벤트/쿠폰/적립금문의</option>
                                         <option value="category5">기타문의</option>
                                     </select>

@@ -73,10 +73,6 @@ $(document).ready(function() {
                     <p>Notice Management</p>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something" /> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -102,7 +98,7 @@ $(document).ready(function() {
 		            	<input type="hidden" id="board_id" name="board_idx" value="${noticeDetail.board_idx }">
 		          	</div> 
                      	<textarea id="summernote" onload="${noticeDetail.board_subject }" name="board_content"></textarea>
-                      		<div style="margin-left: 1250px"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
+                      		<div align="right"><button type="submit" class="btn btn-info" style="font-size: 13px"><strong>등록하기</strong></button></div>
                      </form>
                     </div>
                 </div>

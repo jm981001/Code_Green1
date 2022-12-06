@@ -44,7 +44,7 @@
 
 }
 </style>
-<script type="text/javascript" src="jquery-3.6.1.js"></script>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#show').click(function(){
@@ -63,7 +63,7 @@
 		        lang : 'ko-KR'
 		  });
 		  // Summernote에 글 내용 추가하는 코드
-		  $("#summernote").summernote('code',  '${oneQnaInfo.qna_answer }');
+		  $("#summernote").summernote('code','${oneQnaInfo.qna_answer }');
 		});
 </script>    
 </head>

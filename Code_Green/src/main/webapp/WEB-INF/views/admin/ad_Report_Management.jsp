@@ -32,6 +32,16 @@
     		let result = confirm("신고글을 삭제하시겠습니까?");
     		if(result) {
     			location.href = "ad_ReportRemove?report_idx=" + idx;
+    			alert("신고글이 삭제되었습니다");
+    		}
+    		
+    	}
+    	
+    	function confirmReturn(idx) {
+    		let result = confirm("신고글을 반려하시겠습니까?");
+    		if(result) {
+    		location.href="ad_ReportReturn?report_idx=" + idx;
+    		alert("정상적으로 반려처리되었습니다");
     		}
     	}
     </script>
@@ -118,7 +128,7 @@
                                     <td>
                                         <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="ad_ReportReturn?report_idx=${rList.report_idx }">처리반려</a>
+                                            <a class="dropdown-item" onclick="confirmReturn('${rList.report_idx }')">처리반려</a>
                                             <a class="dropdown-item" onclick="confirmDelete('${rList.report_idx }')">신고글 삭제</a></div>
                                         </div>
                                     </td>

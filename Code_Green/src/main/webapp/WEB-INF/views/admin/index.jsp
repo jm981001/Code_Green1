@@ -52,42 +52,11 @@
     <div class="ps-site-overlay"></div>
     <main class="ps-main">
     
+<!-- top.jsp -->
+    
     <jsp:include page="../inc/ad_menu.jsp"></jsp:include>
     
-<!--         <div class="ps-main__sidebar"> -->
-<!--             <div class="ps-sidebar"> -->
-<!--                 <div class="ps-sidebar__top"> -->
-<!--                     <div class="ps-block--user-wellcome"> -->
-<!--                         <div class="ps-block__left"><img src="/Code_Green/resources/img/users/admin.jpg" alt="" /></div> -->
-<!--                         <div class="ps-block__right"> -->
-<!--                             <p>여기는<a href="#">총관리자</a></p> -->
-<!--                         </div> -->
-<!--                         <div class="ps-block__action"><a href="#"><i class="icon-exit"></i></a></div> -->
-<!--                     </div> -->
-<!--                     <div class="ps-block--earning-count"><small>총매출</small> -->
-<!--                         <h3>3조5억</h3> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--                 <div class="ps-sidebar__content"> -->
-<!--                     <div class="ps-sidebar__center"> -->
-<!--                         <ul class="menu"> -->
-<!--                             <li><a class="active" href="index"><i class="icon-home"></i>매출현황조회</a></li> -->
-<!--                             <li><a href="ad_member_Manage"><i class="icon-users2"></i>회원관리</a></li> -->
-<!--                             <li><a href="ad_Manager_manage"><i class="icon-users2"></i>기업관리</a></li> -->
-<!--                             <li><a href="ad_Notice"><i class="icon-users2"></i>공지 관리</a></li> -->
-<!--                             <li><a href="ad_Board_Management"><i class="icon-papers"></i>게시판 관리</a></li> -->
-<!--                             <li><a href="ad_One_Board"><i class="icon-papers"></i>문의글 관리</a></li> -->
-<!--                             <li><a href="ad_Report_Management"><i class="icon-papers"></i>신고글 관리</a></li> -->
-<!--                         </ul> -->
-<!--                     </div> -->
-<!--                     <div class="ps-sidebar__footer"> -->
-<!--                         <div class="ps-copyright"><img src="/Code_Green/resources/img/logo.png" alt=""> -->
-<!--                             <p>&copy;2022 최고의 비건마켓 어쩌구. <br/> All rights reversed.</p> -->
-<!--                         </div>` -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
+
         <div class="ps-main__wrapper">
             <header class="header--dashboard">
                 <div class="header__left">
@@ -95,10 +64,7 @@
                     <p>Sales Status</p>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="index.html" method="get"> -->
-<!--                         <input class="form-control" type="text" placeholder="Search something"> -->
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
+
                 </div>
                 <div class="header__right"><a class="header__site-link" href="main"><span>메인페이지로 돌아가기</span><i class="icon-exit-right"></i></a></div>
             </header>
@@ -111,7 +77,7 @@
                     </div>
                     <div class="ps-card">
                         <div class="ps-card__header">
-                        <br><!-- 여기 어케 수습점ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ -->
+                        <br>
                             <h4>브랜드별 매출 순위</h4>
                         </div>
                         <div class="ps-card__content">
@@ -119,7 +85,7 @@
                                 <table class="table ps-table">
                                     <thead>
                                         <tr>
-                                            <th>Top</th>
+<!--                                             <th>Top</th> -->
                                             <th>브랜드명</th>
                                             <th>매출</th>
                                             <th>팔로워</th>
@@ -131,7 +97,7 @@
                                     <tbody>
                                     <c:forEach var="top" items="${topSale }">
                                         <tr>
-                                            <td>${top.ranking }위</td>
+<%--                                             <td>${top.ranking }위</td> --%>
                                             <td><strong>${top.manager_brandname }</strong></td>
                                             <td><a href="order-detail.html"><strong><fmt:formatNumber value="${top.brandtotal }" pattern="#,###원"/></strong></a></td>
                                             <td><span class="ps-badge success">${top.brand_follower }명</span>
@@ -161,7 +127,7 @@
                     <section class="ps-card ps-card--statics">
                         <div class="ps-card__header">
                             <h4>Total</h4>
-                            <div class="ps-card__sortby"><!-- <i class="icon-calendar-empty"></i> -->
+                            <div class="ps-card__sortby">
 
                             </div>
                         </div>
@@ -251,33 +217,20 @@ function getGraph(){
 
 			
 			new Chart(document.getElementById('myChart'), {
-			    // ①차트의 종류(String)
 			    type: 'bar',
-			    // ②차트의 데이터(Object)
 			    data: {
-			        // ③x축에 들어갈 이름들(Array)
 			        labels: brandname,
-			        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
 			        datasets: [{
-			            // ⑤dataset의 이름(String)
 			            label: '# 브랜드별 차트',
-			            // ⑥dataset값(Array)
 			            data: brandtotal,
-			            // ⑦dataset의 배경색(rgba값을 String으로 표현)
 			            backgroundColor: 'rgba(209, 978, 13, 0.2)',
-			            // ⑧dataset의 선 색(rgba값을 String으로 표현)
 			            borderColor: 'rgba(205, 150, 13, 1)',
-			            // ⑨dataset의 선 두께(Number)
 			            borderWidth: 1
 			        }]
 			    },
-			    // ⑩차트의 설정(Object)
 			    options: {
-			        // ⑪축에 관한 설정(Object)
 			        scales: {
-			            // ⑫y축에 대한 설정(Object)
 			            y: {
-			                // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
 			                beginAtZero: true
 			            }
 			        }
