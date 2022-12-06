@@ -43,11 +43,10 @@
 		
 		if(result) {
 			location.href="ad_oneQnaDelete?idx=" + idx + "&id=" + id;
-			location.reload="ad_One_Answer";
 			
 		}
-		location.href = "ad_One_Answer";
 		alert("삭제가 완료되었습니다");
+		location.href = "ad_One_Answer";
     	history.go(0);
 	}
 </script>
