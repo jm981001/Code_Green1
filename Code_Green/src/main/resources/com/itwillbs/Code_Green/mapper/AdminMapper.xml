@@ -52,6 +52,8 @@
 				i.item_idx = sd.rf_item_idx
 		 GROUP BY
 				m.manager_idx
+		 ORDER BY
+				brandTotal DESC
 		 LIMIT 3;
 	</select>
 	
@@ -77,7 +79,9 @@
 			ON
 				i.item_idx = sd.rf_item_idx
 		 GROUP BY
-				m.manager_idx;
+				m.manager_idx
+		 ORDER BY
+				brandTotal DESC;
 	</select>
 	
 	<!-- 기업 별점 순위 -->
@@ -88,7 +92,7 @@
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    truncate(bs.board_star_score,1) AS star_score,
-		    SUM(i.item_price * sd.sell_amount) AS brandtotal,
+		    SUM(i.item_price * sd.sell_amount) AS brandtotal
 		FROM
 			manager m
 		LEFT JOIN
@@ -131,7 +135,9 @@
 		ON
 			bs.rf_board_idx = b.board_idx
 		GROUP BY
-			m.manager_idx;
+			m.manager_idx
+		ORDER BY
+			star_score DESC;
 	</select>
 	
 	<!-- 기업 팔로워 순위 -->
@@ -142,7 +148,7 @@
 		    SUM(sd.sell_amount) AS sellCount,
 		    COUNT(sd.sell_amount) AS orderCount,
 		    ROUND(bs.board_star_score,1) AS star_score,
-		    SUM(i.item_price * sd.sell_amount) AS brandtotal,
+		    SUM(i.item_price * sd.sell_amount) AS brandtotal
 		FROM
 			manager m
 		LEFT JOIN
@@ -185,7 +191,9 @@
 		ON
 			bs.rf_board_idx = b.board_idx
 		GROUP BY
-			m.manager_idx;
+			m.manager_idx
+		ORDER BY
+			brand_follower DESC;
 	</select>
 	
 <!-- ==결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====결제취소요청====-->
@@ -479,7 +487,7 @@
 						AND qna_category='주문/결제/반품/교환문의' AND qna_subject LIKE '%${keyword}%' 
 					</when>
 					<when test="searchType.equals('category3')">
-						AND qna_category='상품누락문의' AND qna_subject LIKE '%${keyword}%'
+						AND qna_category='상품문의' AND qna_subject LIKE '%${keyword}%'
 					</when>
 					<when test="searchType.equals('category4')">
 						AND qna_category='기타문의' AND qna_subject LIKE '%${keyword}%'
@@ -504,7 +512,7 @@
 					AND qna_category='주문/결제/반품/교환문의' AND qna_subject LIKE '%${keyword}%' 
 				</when>
 				<when test="searchType.equals('category3')">
-					AND qna_category='상품 누락 문의' AND qna_subject LIKE '%${keyword}%'
+					AND qna_category='상품문의' AND qna_subject LIKE '%${keyword}%'
 				</when>
 				<when test="searchType.equals('category4')">
 					AND qna_category='이벤트/쿠폰/적립금문의' AND qna_subject LIKE '%${keyword}%'
@@ -550,7 +558,7 @@
 						AND qna_category='주문/결제/반품/교환문의' AND qna_subject LIKE '%${keyword}%' 
 					</when>
 					<when test="searchType.equals('category3')">
-						AND qna_category='상품누락문의' AND qna_subject LIKE '%${keyword}%'
+						AND qna_category='상품문의' AND qna_subject LIKE '%${keyword}%'
 					</when>
 					<when test="searchType.equals('category4')">
 						AND qna_category='기타문의' AND qna_subject LIKE '%${keyword}%'
@@ -574,7 +582,7 @@
 					AND qna_category='주문/결제/반품/교환문의' AND qna_subject LIKE '%${keyword}%' 
 				</when>
 				<when test="searchType.equals('category3')">
-					AND qna_category='상품 누락 문의' AND qna_subject LIKE '%${keyword}%'
+					AND qna_category='상품문의' AND qna_subject LIKE '%${keyword}%'
 				</when>
 				<when test="searchType.equals('category4')">
 					AND qna_category='이벤트/쿠폰/적립금문의' AND qna_subject LIKE '%${keyword}%'
