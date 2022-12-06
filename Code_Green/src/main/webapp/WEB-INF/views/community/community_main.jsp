@@ -46,6 +46,11 @@
 			alert("로그인 후 사용가능합니다!");
 		}
  	};
+ 	
+ 	// 주소창 서블릿 주소 부분까지만 출력
+ 	$( document ).ready(function() {
+		history.replaceState({}, null, location.pathname);
+	});
 </script>
 <body>
    

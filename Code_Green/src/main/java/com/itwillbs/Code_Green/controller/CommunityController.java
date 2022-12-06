@@ -377,7 +377,8 @@ public class CommunityController {
 	//------------------- 커뮤니티 글 신고 기능 (신고테이블에 입력) ------------------------------------------- 
 		
 	@PostMapping(value = "/ReportBoard.re")	
-	public String reportBoard(@ModelAttribute ReportVO report,Model model,@RequestParam int pageNum) {
+	public String reportBoard(@ModelAttribute ReportVO report,Model model,
+							  @RequestParam int pageNum,@RequestParam String board_id) {
 		
 		int reportCount = service.reportBoard(report);
 		
@@ -388,11 +389,10 @@ public class CommunityController {
 			
 		} else {
 			
-			return "redirect:/CommunityDetail.bo?board_idx=" + report.getBoard_idx() + "&pageNum=" + pageNum;
-			
+			return "redirect:/CommunityDetail.bo?board_idx=" + report.getBoard_idx() 
+															 + "&pageNum=" + pageNum
+															 + "&board_id=" + board_id;
 		}
-		
-		
 	}
 	
 		

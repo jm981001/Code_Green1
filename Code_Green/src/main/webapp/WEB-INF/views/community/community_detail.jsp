@@ -361,6 +361,7 @@
 								   	  <form action="ReportBoard.re" method="post" onsubmit="checkS()">
 								   	  	<input type="hidden" value="${cBoard.board_idx }" name="board_idx" id="board_idx">
 								   	  	<input type="hidden" value="${param.pageNum }" name="pageNum" id="pageNum">
+								   	  	<input type="hidden" value="${cBoard.board_id }" name="board_id" id="board_id">
 								   	  	<table>
 								   	  		<tr>
 								   	  			<td>게시판</td>
