@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -95,20 +96,29 @@ public class MailSendService {
 			makeRandomNumber();
 			String setFrom = "CodeGreen@gmail.com";
 			String toMail = email;
-			String title = "패스워드 이메일 입니다."; // 이메일 제목
+			String title = "임시 패스워드 이메일 입니다."; // 이메일 제목
 			String content = "" + // html 형식으로 작성 !
-					"<br><br>" + "패스워드는 " + authNumber + " 입니다." + "<br>" + "해당 패스워드를 입력해주세요."; // 이메일 내용 삽입
+					"<br><br>" + "임시 패스워드는 " + authNumber + " 입니다." + "<br>" + "해당 패스워드를 입력해주세요."; // 이메일 내용 삽입
 			MemberVO member = mService.getMemberEmail(email);
 			System.out.println("member"+member);
 			if(member ==null) {
 				System.out.print("등록되지 않은 이메일입니다.");
 				System.out.close();
 			}
+			// 1. BCryptPasswordEncoder 객체 생성
 			member.setMember_pass(authNumber+"");
 			System.out.println("authNumber"+authNumber+"");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			// 2. BCryptPasswordEncoder 객체의 encode() 메서드를 호출하여 해싱 결과 리턴
+			String securePasswd = encoder.encode(member.getMember_pass());
+			// 3. MemberVO 객체의 패스워드에 암호문 저장
+			member.setMember_pass(securePasswd);
+			
+			
 			int updateCount =  mService.modifyMemberInfo(member);
 			System.out.println("updateCount"+updateCount);
 			mailSend(setFrom, toMail, title, content);
+			
 			return updateCount;
 			
 		}
