@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="/Code_Green/resources/img/favicon.png">
-<title>가입 완료 - 베지터틀</title>
+<title>아이디 찾기 - 베지터틀</title>
 <style type="text/css">
 #btn{
 	background-color: #2db400;

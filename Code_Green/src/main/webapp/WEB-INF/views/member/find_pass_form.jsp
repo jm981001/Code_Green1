@@ -28,7 +28,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-<title>패스워드 찾기</title>
+<title>패스워드 찾기 - 베지터틀</title>
 </head>
 <body>
 	<div class="w3-content w3-container w3-margin-top">

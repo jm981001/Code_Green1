@@ -132,7 +132,7 @@
 				<div class="field tel-number">
 						<b>전화</b>
 						<div>
-							<input type="tel" placeholder="전화번호 입력" name="member_phone" id="member_phone" maxlength='11' required="required">
+							<input type="tel" placeholder="숫자만 입력 가능합니다" name="member_phone" id="member_phone" maxlength='11' required="required" pattern="[0-9]+">
 						</div>
 					</div>
 					<input type="submit" value="가입하기">
@@ -222,7 +222,7 @@
 				<div class="field tel-number">
 					<b>전화</b>
 					<div>
-						<input type="tel" placeholder="전화번호 입력" id="manager_phone" name="manager_phone" maxlength="11" required="required">
+						<input type="tel" placeholder="숫자만 입력 가능합니다" id="manager_phone" name="manager_phone" maxlength="11" required="required" pattern="[0-9]+">
 					</div>
 				</div>
 				<input type="submit" value="가입하기">

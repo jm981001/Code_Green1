@@ -30,7 +30,7 @@
 // });
 // alert("${msg}");
 </script>
-<title>아이디 찾기</title>
+<title>아이디 찾기 - 베지터틀</title>
 </head>
 <body>
 	<div class="w3-content w3-container w3-margin-top">
