@@ -88,9 +88,14 @@
                         
                         <td><fmt:formatNumber value="${orderTotal.brandtotal  }" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
                         
-                        <td><strong>순수익</strong></td>
-                        <td><fmt:formatNumber value="${salesTotal}" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
-                     
+                        <td><strong>수수료</strong></td>
+                        <td><fmt:formatNumber value="${commission}" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                       <tr>
+                      
+                       <td><strong>순수익</strong></td>
+                        <td><fmt:formatNumber value="${Brand_net}" pattern="#,###원" /><small class="asc"></i><span></span></small></td>
+                     </tr>
+                     <tr>
                         </tr>
                         </thead>
                         </table>

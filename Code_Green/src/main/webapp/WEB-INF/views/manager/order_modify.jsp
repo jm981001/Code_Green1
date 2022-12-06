@@ -29,90 +29,23 @@
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script type="text/javascript">
 
-	function myItem(value) {
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_idx';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
 
+	
+	function selectedOption(){
+// 		debugger;
+	
+        var status = '${sell_status}'; 
+        
+		$("#status").val(status).prop("selected", true);
 	}
 	
-	
-
-
-	function addProduct(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_packing';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	function addCategory(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_category';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	function changeStatus(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_status';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	
+	$(document).ready(function (){
+		selectedOption();
+	});
 
 
 </script>
+
 
 </head>
 
@@ -183,7 +116,7 @@
                                             </label>
                                             <div class="form-group__content">
                                             
-                                                <select class="ps-select" onchange="changeStatus(this.value)" >
+                                                <select id= "status" name="sell_status" class="ps-select"  >
                                                     <option value="재고상태">주문상태</option>
                                                     <option value="주문완료">주문완료</option>
                                                     <option value="배송준비중">배송준비중</option>

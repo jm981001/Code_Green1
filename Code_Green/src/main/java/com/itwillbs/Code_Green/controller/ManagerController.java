@@ -3,6 +3,7 @@ package com.itwillbs.Code_Green.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -891,7 +892,9 @@ public class ManagerController {
 				return "manager/mn_fail_back";
 			}
 
-			return "redirect:/stock?item_idx=" + item_idx;
+//			return "redirect:/stock?item_idx=" + item_idx;
+			return "redirect:/products?item_idx=" + item_idx;
+
 		}
 	
 	
@@ -1356,6 +1359,7 @@ public class ManagerController {
 	}
 
 
+
 	// ------------정산 목록-------------------------------------------
 	@GetMapping(value = "sales_management")
 
@@ -1371,30 +1375,37 @@ public class ManagerController {
 		
 		// 일주일매출
 		List<ManagerVO> salesWeek = service.getSalesWeek(sId);
+		
 		// 하루매출
 		List<ManagerVO> salesday = service.getSalesDay(sId);
-		// 수수료, 순수익
+		
+		// 수수료
 		SellVO commission = service.getCommission(sId);
+		
 		// 순수익
-        //SellVO  net = service.getNet(sId);
-
+		System.out.println(sId);
+        SellVO  brand_net = service.getBrand_net(sId);
+//		Map<String, String> map = service.getBrand_net(sId);
+//		System.out.println(map);
+		
+        Model.addAttribute("orderTotal", orderTotal);
 		Model.addAttribute("salesTotal", salesTotal);
 		Model.addAttribute("salesMonth", salesMonth);
 		Model.addAttribute("salesWeek", salesWeek);
 		Model.addAttribute("salesday", salesday);
-		Model.addAttribute("salesTotal", commission.getNet());
-		Model.addAttribute("orderTotal", orderTotal);
+		Model.addAttribute("commission", commission.getNet());
+		Model.addAttribute("Brand_net", brand_net.getBrand_net());
 
 
 		System.out.println("총매출: " + salesTotal);
 		System.out.println("한달매출: " + salesMonth);
 		System.out.println("일주일매출: " + salesWeek);
 		System.out.println("하루매출: " + salesday);
-		System.out.println("순수익: " + commission.getNet());
+		System.out.println("수수료: " + commission.getNet());
+		System.out.println("순수익: " + brand_net.getBrand_net());
 
 		return "manager/sales_management";
 	}
-	
 	
 	
 	

@@ -131,6 +131,7 @@
                          <button class="ps-btn success"type="submit"onclick="product_delete(${ItemInfo.item_idx })">삭제</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
 
+
                     </table>
                     
                     </div>

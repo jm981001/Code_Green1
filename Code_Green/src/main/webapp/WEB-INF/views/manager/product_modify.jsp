@@ -29,87 +29,22 @@
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script type="text/javascript">
 
-	function myItem(value) {
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_idx';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
 
+	
+	function selectedOption(){
+// 		debugger;
+		var packing = '${products.item_packing}';
+        var category = '${products.item_category}'; 
+        var status = '${products.item_status}'; 
+        
+		$("#packing").val(packing).prop("selected", true);
+		$("#category").val(category).prop("selected", true);	
+		$("#status").val(status).prop("selected", true);	
 	}
 	
-	
-
-
-	function addProduct(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_packing';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	function addCategory(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_category';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	function changeStatus(value) {
-		
-		
-// 		alert(value);
-		
-		let subForm = document.getElementById('sub_form');
-		
-		let input = document.createElement('input');
-		
-		input.type   = 'hidden';
-		
-		input.name  = 'item_status';
-		
-		input.value  = value;
-		
-		subForm.appendChild(input);
-		
-
-	}
-	
-	
+	$(document).ready(function (){
+		selectedOption();
+	});
 
 
 </script>
@@ -169,7 +104,7 @@
                                             </label>
                                            
                                    <div class="form-group">
-                                    <select class="ps-select"onchange="addProduct(this.value)"checked >
+                                    <select id="packing" name="item_packing" class="ps-select" >
                                         <option value="포장상태">포장상태</option>
                                         <option value="냉장">냉장</option>
                                         <option value="냉동">냉동</option>
@@ -181,8 +116,9 @@
                                          <div class="form-group">
                                             <label>상품카테고리<sup>*</sup>
                                             </label>
+                                            
                                      <div class="form-group">
-                                    <select class="ps-select"onchange="addCategory(this.value)"checked>
+                                    <select id="category" name="item_category" class="ps-select" >
                                         <option value="상품카테고리">상품카테고리</option>
                                         <option value="특가상품">특가상품</option>
                                         <option value="과일/채소">과일/채소</option>
@@ -202,13 +138,13 @@
                                     <div class="ps-block__content">
                                         <div class="form-group">
                                          <div class="form-group--nest">
-                                            <label>상품 썸네일<sup>*</sup></label>
+                                             <label>상품 썸네일<sup>*</sup></label>
                                           </div>  
-	                                        <td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${products.file1 }</td>
+	                                         <td colspan="2"><input type="file" id="파일선택1" name="file_1">기존파일 : ${products.file1 }</td>
                                          <div class="form-group--nest">
                                           <label>상품 상세이미지<sup>*</sup></label>
                                           </div>
-                                        <td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${products.file2 }</td>
+                                            <td colspan="2"><input type="file" id="파일선택2" name="file_2">기존파일 : ${products.file2 }</td>
                                         </div>
                                         <div class="form-group">
                                             <label>상품 설명<sup>*</sup></label>
@@ -225,12 +161,11 @@
                                             </label>
                                             <div class="form-group__content">
                                             
-                                                <select class="ps-select" onchange="changeStatus(this.value)" checked>
+                                                <select id="status" name="item_status" class="ps-select" >
                                                     <option value="재고상태">재고상태</option>
                                                     <option value="재입고">재입고</option>
                                                     <option value="품절">품절</option>
                                                     <option value="판매중">판매중</option>
-<!--                                                     <option value="판매중지">판매중지</option> -->
                                                 </select>
                                             </div>
                                         </div>

@@ -96,9 +96,8 @@
          		<div class="ps-form__submit text-center">
 
                             
-                         <a href= "stock_modify?item_idx=${StockInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
-<%--                          <button class="ps-btn success"type="submit"onclick="product_delete(${StockInfo.item_idx })">삭제</button> --%>
-                          <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
+                       <a href= "product_modify?item_idx=${ItemInfo.item_idx}"> <button class="ps-btn success"type="submit">재고수정</button></a>
+                        <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </table>
                     
                     </div>

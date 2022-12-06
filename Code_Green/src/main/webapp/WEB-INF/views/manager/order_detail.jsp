@@ -61,6 +61,7 @@
                     <h2>주문상세보기</h2>
                     <hr>
                        <thead>
+                       <br>
                                 <tr>
                                     <th>주문번호</th>
                                     <th>회원번호</th>
@@ -77,8 +78,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+					<c:forEach var="orderInfo" items="${orderInfo }">
 						    <tr>
-						     <c:forEach var="orderInfo" items="${orderInfo }">
 						     <td>${orderInfo.sell_order_number}</td>
 						     <td>${orderInfo.rf_member_idx}</td>
 						     <td>${orderInfo.item_name }</td>
@@ -90,23 +91,23 @@
 						     <td>${orderInfo.sell_pay_status}</td>
 						     <td>${orderInfo.sell_pay_date}</td>
 						     <td>${orderInfo.manager_brandname}</td>
-						   </c:forEach>
+						         <td>
+                                   <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="qnaboard_delete?qna_idx=${order.qna_idx }">삭제</a></div>
+                                   </div>
+                                 </td>
 						    </tr>     
-                            
+					</c:forEach>
 						</tbody>
 						</table>
              
                     </div>
                 </div>
-                           <table class="item_image"id="itemImage">
          		<div class="ps-form__submit text-center">
-
 
                          <button class="ps-btn success"type="submit"onclick="order_modify=${orderInfo.item_idx }">주문상태변경</button>
                           <button class="ps-btn ps-btn--gray mr-3"onclick="history.back()">취소</button>
                     </div>
-                    </table>
-                    
                     </div>
     </main>
     <script src="/Code_Green/resources/plugins_manager/jquery.min.js"></script>

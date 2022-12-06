@@ -30,22 +30,22 @@
 <script type="text/javascript" src="/Code_Green/resources/js/jquery-3.6.1.js"> </script>
 <script type="text/javascript">
 
-	function myItem(value) {
+// 	function myItem(value) {
 		
-		let subForm = document.getElementById('sub_form');
+// 		let subForm = document.getElementById('sub_form');
 		
-		let input = document.createElement('input');
+// 		let input = document.createElement('input');
 		
-		input.type   = 'hidden';
+// 		input.type   = 'hidden';
 		
-		input.name  = 'item_idx';
+// 		input.name  = 'item_idx';
 		
-		input.value  = value;
+// 		input.value  = value;
 		
-		subForm.appendChild(input);
+// 		subForm.appendChild(input);
 		
 
-	}
+// 	}
 
 	
 
@@ -71,17 +71,12 @@
                     <h3>레시피수정</h3>
                 </div>
                 <div class="header__center">
-<!--                     <form class="ps-form--search-bar" action="recipeborad_modify" method="post" name="modifyForm"> -->
-<!-- <!--                         <input class="form-control" type="text" placeholder="Search something" /> --> 
-<!--                         <button><i class="icon-magnifier"></i></button> -->
-<!--                     </form> -->
                 </div>
                 <div class="header__right"><a class="header__site-link" href="/Code_Green"><span>메인페이지로 이동</span><i class="icon-exit-right"></i></a></div>
             </header>
 
  		<div class="ps-main__wrapper">
   		<div class="header__center">
-<!--   		<form class="ps-form--search-bar" action="index.html" method="get"> -->
 
  
                            <!-- 블로그 본문 시작  -->

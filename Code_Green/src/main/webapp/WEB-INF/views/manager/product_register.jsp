@@ -124,11 +124,6 @@
                                 <figure class="ps-block--form-box">
                                     <figcaption>기본정보</figcaption>
                                     <div class="ps-block__content">
-<!--                                         <div class="form-group"> -->
-<!--                                             <label>상품번호<sup>*</sup> -->
-<!--                                             </label> -->
-<!--                                             <input class="form-control" type="text" placeholder="상품명을 기재해주세요" /> -->
-<!--                                         </div> -->
                                         <div class="form-group">
                                             <label>상품명<sup>*</sup>
                                             </label>

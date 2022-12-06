@@ -28,6 +28,14 @@
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.css">
     <link rel="stylesheet" href="/Code_Green/resources/css/style_manager.css">
+    <script type="text/javascript">
+    	function shipping_success(value) {
+    		$("#sell_status").html(value);
+		}
+    
+    
+    </script>
+    
 </head>
 <body>
  <header class="header--mobile">
@@ -97,10 +105,10 @@
                                     <th>주문수량</th>
                                     <th>총금액</th>
                                     <th>주문상태</th>
-                                    <th>주문날짜</th>
+<!--                                     <th>주문날짜</th> -->
                                     <th>결제여부</th>
-                                    <th>결제일</th>
-                                    <th>상품브랜드</th>
+<!--                                     <th>결제일</th> -->
+<!--                                     <th>상품브랜드</th> -->
                                     <th></th>
                                 </tr>
                             </thead>
@@ -113,16 +121,16 @@
 						     <td>${order.item_price}</td>
 						     <td>${order.sell_amount}</td>
 						     <td>${order.sell_total_price}</td>
-						     <td>${order.sell_status}</td>
-						     <td>${order.sell_date }</td>
+						     <td id="sell_status">${order.sell_status}</td>
+<%-- 						     <td>${order.sell_date }</td> --%>
 						     <td>${order.sell_pay_status}</td>
-						     <td>${order.sell_pay_date}</td>
-						     
-						     
-						     
-						     <td>${order.manager_brandname}</td>
+<%-- 						     <td>${order.sell_pay_date}</td> --%>
+<%-- 						     <td>${order.manager_brandname}</td> --%>
 						      <td>
-                                    </td>
+                                   <div class="dropdown"><a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-ellipsis"></i></a>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" onclick="shipping_success()">배송완료</a></div>
+                                   </div>
+                                 </td>
 						    </tr>     
                             
 					</c:forEach>
@@ -158,7 +166,7 @@
     <script src="/Code_Green/resources/plugins_manager/jquery.matchHeight-min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/select2/dist/js/select2.full.min.js"></script>
     <script src="/Code_Green/resources/plugins_manager/summernote/summernote-bs4.min.js"></script>
-    <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script>
+<!--     <script src="/Code_Green/resources/plugins_manager/apexcharts-bundle/dist/apexcharts.min.js"></script> -->
     <!-- custom c/Code_Green/resourcese-->
     <script src="/Code_Green/resources/js/main_manager.js"></script>
 </body>

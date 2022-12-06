@@ -1023,7 +1023,7 @@
       
            
       </select>
-      <!--정산 순수익 -->
+      <!--정산 수수료 -->
       
       <select id="selectCommission" resultType="com.itwillbs.Code_Green.vo.SellVO">
          SELECT    SUM(i.item_price * sd.sell_amount) as salesTotal
@@ -1034,6 +1034,24 @@
    ON i.re_manager_idx = m.manager_idx
    where m.manager_id=#{sId}  
          
+      </select>
+      
+      
+   <!--정산 순수익 -->
+         
+      <select id="selectNet" resultType="com.itwillbs.Code_Green.vo.SellVO">
+<!--       <select id="selectNet" resultType="map"> -->
+  select brand_net.salesTotal - brand_net.net AS brand_net
+ 	from (
+    	SELECT   SUM(i.item_price * sd.sell_amount) as salesTotal
+			 ,  SUM(i.item_price * sd.sell_amount) * 0.1 AS net
+   		  FROM sell_detail sd 
+   		  LEFT JOIN item i
+   		    ON sd.rf_item_idx = i.item_idx
+   		  LEFT JOIN manager m
+   			ON i.re_manager_idx = m.manager_idx
+   		 where m.manager_id = #{sId}
+   	   ) brand_net  
       </select>
       
 

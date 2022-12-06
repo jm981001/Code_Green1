@@ -1,6 +1,7 @@
 package com.itwillbs.Code_Green.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -150,10 +151,11 @@ public interface ManagerMapper {
 	public List<ManagerVO> selectSalesWeek(String sId);
 	//하루매출
 	public List<ManagerVO> selectSalesDay(String sId);
-	//순수익
+	//수수료
 	public SellVO selectCommission(String sId);
 	//순수익
 	public SellVO selectNet(String sId);
+//	public Map<String, String> selectNet(String sId);
 	
 	
 	

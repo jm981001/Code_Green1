@@ -1,6 +1,7 @@
 package com.itwillbs.Code_Green.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -242,10 +243,19 @@ public class ManagerService {
 		public SellVO getCommission(String sId) {
 			return mapper.selectCommission(sId);
 		}
+		//
+//		public SellVO getNet(String sId) {
+//			return mapper.selectNet(sId);
+//		}
 		//순수익
-		public SellVO getNet(String sId) {
+		public SellVO getBrand_net(String sId) {
 			return mapper.selectNet(sId);
+			
 		}
+//		public Map<String, String> getBrand_net(String sId) {
+//			return mapper.selectNet(sId);
+//			
+//		}
 		
 		
 		
